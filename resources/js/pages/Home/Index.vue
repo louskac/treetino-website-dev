@@ -17,7 +17,7 @@
                         min-height: 100%;
                     "
                 >
-                    <source src="/video/hero-test-1.mp4" type="video/mp4" />
+                    <source src="/video/hero-test-2.mp4" type="video/mp4" />
                 </video>
             </div>
 
@@ -31,7 +31,7 @@
                         class="col-span-1 rounded-2xl bg-white/60 p-6 backdrop-blur-2xl transition-all lg:col-span-2 xl:col-span-1 dark:bg-black/60"
                     >
                         <div
-                            class="font-heading w-fit pb-6 text-7xl text-black transition-all dark:text-white"
+                            class="font-heading w-fit pb-6 text-6xl text-black transition-all dark:text-white"
                         >
                             Future of Energy <br />
                             Rooted in Sustainability
@@ -49,7 +49,7 @@
             ></div>
 
             <div
-                class="relative mx-auto px-6 py-12 sm:w-[500px] md:w-[700px] lg:w-[1400px]"
+                class="relative mx-auto px-6 py-12 sm:w-[500px] md:w-[700px] xl:w-[1400px]"
             >
                 <div class="grid grid-cols-3 gap-6">
                     <div class="">

@@ -1,6 +1,6 @@
 <template>
     <header class="absolute z-50 w-full">
-        <div class="mx-auto w-full sm:w-[500px] md:w-[700px] lg:w-[1400px] flex justify-between p-6">
+        <div class="mx-auto w-full sm:w-[500px] md:w-[700px] xl:w-[1400px] flex justify-between p-6">
             <div class="logo flex gap-3 text-white">Treetino</div>
 
             <div class="dark-switch my-auto text-white">
