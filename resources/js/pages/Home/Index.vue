@@ -22,7 +22,7 @@
             </div>
 
             <div
-                class="relative mx-auto flex h-full w-full flex-col border-r border-l border-r-white/20 border-l-white/20 sm:w-[500px] md:w-[700px] lg:w-[1400px]"
+                class="relative mx-auto flex h-full w-full flex-col border-r border-l border-r-white/20 border-l-white/20 sm:w-[500px] md:w-[700px] xl:w-[1400px]"
             >
                 <div
                     class="mt-auto grid p-6 pb-6 lg:grid-cols-3 xl:grid-cols-2"
@@ -45,7 +45,7 @@
 
         <section class="keypoints relative">
             <div
-                class="absolute left-1/2 h-full -translate-x-1/2 border-r border-l border-r-black/20 border-l-black/20 sm:w-[500px] md:w-[700px] lg:w-[1400px]"
+                class="absolute left-1/2 h-full -translate-x-1/2 border-r border-l border-r-black/20 border-l-black/20 sm:w-[500px] md:w-[700px] xl:w-[1400px]"
             ></div>
 
             <div
@@ -136,7 +136,7 @@
         </section>
 
         <section
-            class="claims relative mx-auto flex h-full w-full flex-col py-12 sm:w-[500px] md:w-[700px] lg:w-[1400px]"
+            class="claims relative mx-auto flex h-full w-full flex-col py-12 sm:w-[500px] md:w-[700px] xl:w-[1400px]"
         >
             <div class="aspect-3/1 overflow-hidden rounded-2xl">
                 <img
@@ -255,7 +255,7 @@
         </section>
 
         <section
-            class="relative mx-auto flex h-full w-full flex-col sm:w-[500px] md:w-[700px] lg:w-[1400px]"
+            class="relative mx-auto flex h-full w-full flex-col sm:w-[500px] md:w-[700px] xl:w-[1400px]"
         >
             <div class="my-12 grid w-full grid-cols-1 lg:grid-cols-3">
                 <div class="border-l-4 border-l-t-accent bg-zinc-50 p-6">T</div>
