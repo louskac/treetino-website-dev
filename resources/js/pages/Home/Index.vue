@@ -2,7 +2,7 @@
     <Head title="Home" />
 
     <DefaultLayout>
-        <section class="hero relative h-220 w-full">
+        <section class="hero relative h-220 w-full z-10">
             <div class="bg absolute top-0 h-full w-full bg-t-dark">
                 <video
                     ref="video"
@@ -52,32 +52,34 @@
                 class="relative mx-auto px-6 py-12 sm:w-[500px] md:w-[700px] xl:w-[1400px]"
             >
                 <div class="grid grid-cols-3 gap-6">
-                    <div class="">
-                        <div class="mt-26">
-                            <div
-                                class="w-full rounded-2xl border border-black/20 p-6 shadow-xl"
-                            >
-                                <div class="">
-                                    <Tree class="h-8 w-8" stroke-width="2" />
-                                </div>
-                                <h2 class="mt-2 text-4xl">
-                                    World-class design
-                                </h2>
-                                <p class="mt-2 mb-3">
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit. Integer at tortor est. Sed
-                                    malesuada at lorem id finibus. Sed mollis
-                                    sodales hendrerit. Etiam ut ligula at ante
-                                    laoreet blandit.
-                                </p>
-
-                                <p>
-                                    Vivamus at convallis quam. Etiam
-                                    pellentesque augue nec lectus pulvinar
-                                    accumsan. Duis volutpat ullamcorper
-                                    dignissim. Donec mattis, enim a malesuada
-                                </p>
+                    <div
+                        ref="leftCardEl"
+                        :style="{ transform: 'translateY(' + leftTranslateY + 'px)' }"
+                        class="mt-26"
+                    >
+                        <div
+                            class="w-full rounded-2xl border border-black/20 p-6 shadow-xl"
+                        >
+                            <div class="">
+                                <Tree class="h-8 w-8" stroke-width="2" />
                             </div>
+                            <h2 class="mt-2 text-4xl">
+                                World-class design
+                            </h2>
+                            <p class="mt-2 mb-3">
+                                Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit. Integer at tortor est. Sed
+                                malesuada at lorem id finibus. Sed mollis
+                                sodales hendrerit. Etiam ut ligula at ante
+                                laoreet blandit.
+                            </p>
+
+                            <p>
+                                Vivamus at convallis quam. Etiam
+                                pellentesque augue nec lectus pulvinar
+                                accumsan. Duis volutpat ullamcorper
+                                dignissim. Donec mattis, enim a malesuada
+                            </p>
                         </div>
                     </div>
 
@@ -103,32 +105,34 @@
                         </div>
                     </div>
 
-                    <div class="">
-                        <div class="mt-26">
-                            <div
-                                class="w-full rounded-2xl border border-black/20 p-6 shadow-xl"
-                            >
-                                <div class="">
-                                    <Tree class="h-8 w-8" stroke-width="2" />
-                                </div>
-                                <h2 class="mt-2 text-4xl">
-                                    U I U A A
-                                </h2>
-                                <p class="mt-2 mb-3">
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit. Integer at tortor est. Sed
-                                    malesuada at lorem id finibus. Sed mollis
-                                    sodales hendrerit. Etiam ut ligula at ante
-                                    laoreet blandit.
-                                </p>
-
-                                <p>
-                                    Vivamus at convallis quam. Etiam
-                                    pellentesque augue nec lectus pulvinar
-                                    accumsan. Duis volutpat ullamcorper
-                                    dignissim. Donec mattis, enim a malesuada
-                                </p>
+                    <div
+                        ref="rightCardEl"
+                        :style="{ transform: 'translateY(' + rightTranslateY + 'px)' }"
+                        class="mt-26"
+                    >
+                        <div
+                            class="w-full rounded-2xl border border-black/20 p-6 shadow-xl reveal reveal-right"
+                        >
+                            <div class="">
+                                <Tree class="h-8 w-8" stroke-width="2" />
                             </div>
+                            <h2 class="mt-2 text-4xl">
+                                U I U A A
+                            </h2>
+                            <p class="mt-2 mb-3">
+                                Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit. Integer at tortor est. Sed
+                                malesuada at lorem id finibus. Sed mollis
+                                sodales hendrerit. Etiam ut ligula at ante
+                                laoreet blandit.
+                            </p>
+
+                            <p>
+                                Vivamus at convallis quam. Etiam
+                                pellentesque augue nec lectus pulvinar
+                                accumsan. Duis volutpat ullamcorper
+                                dignissim. Donec mattis, enim a malesuada
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -277,8 +281,12 @@ import {
 import { Head } from '@inertiajs/vue3';
 import { ref, onMounted } from 'vue';
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
+import { useParallax } from '@/composables/useAnimations';
 
 const video = ref(null);
+
+const { el: leftCardEl, translateY: leftTranslateY } = useParallax(1);
+const { el: rightCardEl, translateY: rightTranslateY } = useParallax(1);
 
 onMounted(() => {
     video.value?.play();
