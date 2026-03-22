@@ -12,5 +12,5 @@
 import { Head } from '@inertiajs/vue3';
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
 import HomeHero from '@/custom/home/HomeHero.vue';
-import HomeCtaTop from './HomeCtaTop.vue';
+import HomeCtaTop from '@/custom/home/HomeCtaTop.vue';
 </script>
