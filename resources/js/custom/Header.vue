@@ -1,7 +1,11 @@
 <template>
     <header class="absolute z-50 w-full">
-        <div class="mx-auto w-full sm:w-[500px] md:w-[700px] xl:w-[1400px] flex justify-between p-6">
-            <div class="logo flex gap-3 text-white">Treetino</div>
+        <div
+            class="mx-auto flex w-full max-w-[1200px] justify-between p-6 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
+        >
+            <div class="logo flex gap-3 text-white">
+                <LogoType class="fill-current text-white dark:text-white" />
+            </div>
 
             <div class="dark-switch my-auto text-white">
                 <button
@@ -19,6 +23,7 @@
 <script setup lang="ts">
 import { SunLight, HalfMoon } from '@iconoir/vue';
 import { ref, onMounted } from 'vue';
+import LogoType from '@/custom/LogoType.vue';
 
 // 1. Track if we are currently dark
 const isDark = ref(false);
