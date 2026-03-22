@@ -52,7 +52,7 @@ Example:
 ### Main Container
 This class list is used in the first relatively positioned  `<div>` in the master `<section>` 
 
-`w-full max-w-[1200px] justify-between p-6 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]`
+`w-full max-w-[1200px] sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]`
 
 Optimized for ideal viewing on all devices:
 - Mobile Phones: 100% of allowed viewport width (avw)
