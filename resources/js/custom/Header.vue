@@ -1,7 +1,7 @@
 <template>
     <header class="absolute z-50 w-full">
         <div
-            class="mx-auto flex w-full max-w-[1200px] justify-between p-6 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
+            class="mx-auto flex w-full max-w-[1400px] justify-between p-6 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
         >
             <div class="logo flex gap-3 text-white">
                 <LogoType class="fill-current text-white dark:text-white" />
