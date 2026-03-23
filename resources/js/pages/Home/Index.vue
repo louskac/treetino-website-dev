@@ -94,19 +94,14 @@
             </div>
         </section>
 
-        <section class="config">
-            <div
-                class="relative mx-auto h-full w-full max-w-[1200px] p-6 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
-            >
-                Test
-            </div>
-        </section>
+        <DefaultConfig/>
     </DefaultLayout>
 </template>
 
 <script setup lang="ts">
 import { Head } from '@inertiajs/vue3';
 import { onMounted, ref } from 'vue';
+import DefaultConfig from '@/custom/config/DefaultConfig.vue';
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
 
 const video = ref(null);
