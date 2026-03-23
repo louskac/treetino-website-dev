@@ -9,21 +9,25 @@
         ></div>
 
         <div
-            class="relative mx-auto flex h-180 w-full max-w-[1400px] justify-end py-20 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
+            class="relative mx-auto flex h-200 w-full max-w-[1400px] justify-end py-20 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
         >
-            <div class="mt-auto flex flex-col gap-6 px-6">
-                <h2 class="text-right text-6xl">
-                    Turn your empty space <br />
-                    into an asset.
-                    <span class="text-t-blue">With Treetino</span>
-                </h2>
-                <div class="flex justify-end gap-3">
-                    <div class="">
-                        <ButtonPrimary>Předobjednat</ButtonPrimary>
-                    </div>
+            <div class="mt-auto relative">
+                <div class="flex flex-col gap-6 p-6 bg-black/5 mr-6 rounded-2xl border border-black/20 backdrop-blur-2xl">
+                    <h2 class="text-right text-6xl">
+                        Turn your empty space <br />
+                        into an asset.
+                        <span class="text-t-blue">With Treetino</span>
+                    </h2>
+                    <div class="flex justify-end gap-3 pb-3">
+                        <div class="">
+                            <ButtonPrimary>Předobjednat</ButtonPrimary>
+                        </div>
 
-                    <div class="">
-                        <ButtonSecondary>Objevit technologie</ButtonSecondary>
+                        <div class="">
+                            <ButtonSecondary
+                                >Objevit technologie</ButtonSecondary
+                            >
+                        </div>
                     </div>
                 </div>
             </div>
