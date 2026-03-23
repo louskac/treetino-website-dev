@@ -1,7 +1,7 @@
 <template>
     <section class="top-cta w-full">
         <div
-            class="relative mx-auto w-full max-w-[1200px] sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)] py-12"
+            class="relative mx-auto w-full max-w-[1200px] sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)] py-20"
         >
             <div class="flex flex-col gap-6 px-6">
                 <h2 class="text-center text-6xl">
