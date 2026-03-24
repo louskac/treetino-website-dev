@@ -99,6 +99,6 @@ import { Tree } from '@iconoir/vue';
 
 import { useParallax } from '@/composables/useAnimations';
 
-const { el: leftCardEl, translateY: leftTranslateY } = useParallax(0.5);
-const { el: rightCardEl, translateY: rightTranslateY } = useParallax(0.5);
+const { el: leftCardEl, translateY: leftTranslateY } = useParallax(0.3);
+const { el: rightCardEl, translateY: rightTranslateY } = useParallax(0.3);
 </script>
