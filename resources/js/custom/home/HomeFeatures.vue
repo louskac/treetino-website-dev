@@ -1,5 +1,5 @@
 <template>
-    <section ref="sectionRef" class="features-desktop relative" style="height: 300vh;">
+    <section ref="sectionRef" class="features-desktop relative" style="height: 240vh;">
         <div class="sticky top-0 h-screen w-full overflow-hidden">
             <div class="absolute right-0 h-full w-7/12 overflow-hidden">
                 <Transition name="features-fade" mode="out-in">
