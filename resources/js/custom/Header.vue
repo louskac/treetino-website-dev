@@ -39,7 +39,7 @@
                     </div>
 
                     <div class="my-auto hidden text-white md:block">
-                        <ButtonWhite>Preorder Now</ButtonWhite>
+                        <ButtonWhite variant="slim">Preorder Now</ButtonWhite>
                     </div>
                 </div>
             </div>
