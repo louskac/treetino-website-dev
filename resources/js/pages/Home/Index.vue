@@ -10,6 +10,8 @@
 
         <HomeInfo/>
 
+        <HomeNumbers/>
+
         <HomeCtaGeneric/>
 
         <DefaultConfig/>
@@ -25,4 +27,5 @@ import HomeFeatures from '@/custom/home/HomeFeatures.vue';
 import HomeHero from '@/custom/home/HomeHero.vue';
 import HomeInfo from '@/custom/home/HomeInfo.vue';
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
+import HomeNumbers from '@/custom/home/HomeNumbers.vue';
 </script>
