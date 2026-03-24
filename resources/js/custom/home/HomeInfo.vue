@@ -1,7 +1,7 @@
 <template>
     <section class="keypoints relative">
         <div
-            class="absolute left-1/2 h-full max-w-[1200px] -translate-x-1/2 border-r border-l border-r-black/20 border-l-black/20 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
+            class="absolute left-1/2 h-full max-w-[1400px] -translate-x-1/2 border-r border-l border-r-black/20 border-l-black/20 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)] dark:border-r-white/20 dark:border-l-white/20"
         ></div>
 
         <div
@@ -95,10 +95,10 @@
 </template>
 
 <script setup lang="ts">
-    import { Tree } from '@iconoir/vue';
+import { Tree } from '@iconoir/vue';
 
-    import { useParallax } from '@/composables/useAnimations';
+import { useParallax } from '@/composables/useAnimations';
 
-    const { el: leftCardEl, translateY: leftTranslateY } = useParallax(.5);
-    const { el: rightCardEl, translateY: rightTranslateY } = useParallax(.5);
+const { el: leftCardEl, translateY: leftTranslateY } = useParallax(0.5);
+const { el: rightCardEl, translateY: rightTranslateY } = useParallax(0.5);
 </script>

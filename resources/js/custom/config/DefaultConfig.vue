@@ -9,7 +9,7 @@ import ButtonPrimary from '@/custom/ButtonPrimary.vue';
         ></div>
 
         <div
-            class="relative mx-auto h-full w-full max-w-[1200px] px-6 py-20 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
+            class="relative mx-auto h-full w-full max-w-[1400px] px-6 py-20 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
         >
             <div class="pb-10 text-center text-6xl">
                 <h2>
@@ -104,7 +104,7 @@ import ButtonPrimary from '@/custom/ButtonPrimary.vue';
                             </div>
 
                             <div class="w-full">
-                                <ButtonPrimary>Test</ButtonPrimary>
+                                <ButtonPrimary class="w-full text-center">Odeslat Poptávku</ButtonPrimary>
                             </div>
                         </div>
                     </div>
