@@ -5,8 +5,10 @@
         <HomeHero/>
 
         <HomeCtaTop/>
-        
+
         <HomeFeatures/>
+
+        <HomeInfo/>
 
         <HomeCtaGeneric/>
 
@@ -17,9 +19,10 @@
 <script setup lang="ts">
 import { Head } from '@inertiajs/vue3';
 import DefaultConfig from '@/custom/config/DefaultConfig.vue';
-import DefaultLayout from '@/layouts/DefaultLayout.vue';
-import HomeHero from '@/custom/home/HomeHero.vue';
+import HomeCtaGeneric from '@/custom/home/HomeCtaGeneric.vue';
 import HomeCtaTop from '@/custom/home/HomeCtaTop.vue';
 import HomeFeatures from '@/custom/home/HomeFeatures.vue';
-import HomeCtaGeneric from '@/custom/home/HomeCtaGeneric.vue';
+import HomeHero from '@/custom/home/HomeHero.vue';
+import HomeInfo from '@/custom/home/HomeInfo.vue';
+import DefaultLayout from '@/layouts/DefaultLayout.vue';
 </script>
