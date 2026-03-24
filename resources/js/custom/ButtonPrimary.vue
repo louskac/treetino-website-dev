@@ -1,9 +1,10 @@
 <template>
-    <a class="px-5 py-3 bg-t-blue dark:bg-white text-white dark:text-t-blue rounded-2xl" href="">
-        <slot/>
+    <a
+        class="inline-block px-5 rounded-2xl bg-t-blue py-3 text-white dark:bg-white dark:text-t-blue"
+        href=""
+    >
+        <slot />
     </a>
 </template>
 
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>

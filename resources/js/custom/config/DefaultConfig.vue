@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import ButtonPrimary from '@/custom/ButtonPrimary.vue';
+</script>
 
 <template>
     <section class="config relative">
@@ -10,7 +12,10 @@
             class="relative mx-auto h-full w-full max-w-[1200px] px-6 py-20 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
         >
             <div class="pb-10 text-center text-6xl">
-                <h2>Configure <span class="text-t-blue dark:text-t-accent">Treetino</span></h2>
+                <h2>
+                    Configure
+                    <span class="text-t-blue dark:text-t-accent">Treetino</span>
+                </h2>
             </div>
 
             <div class="grid grid-cols-1 gap-6 xl:grid-cols-3">
@@ -82,16 +87,24 @@
                         class="flex h-full w-full flex-col rounded-2xl border p-6 shadow-xl"
                     >
                         <div class="mt-auto">
-                            <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
-                                <div class="">
-                                    <div class="">Expected ROI</div>
-                                    <div class="text-6xl">11 % p.a.</div>
-                                </div>
+                            <div class="mb-4">
+                                <div class="grid grid-cols-1 md:grid-cols-2">
+                                    <div class="">
+                                        <div class="">Expected ROI</div>
+                                        <div class="text-6xl">11 % p.a.</div>
+                                    </div>
 
-                                <div class="">
-                                    <div class="">Full Return</div>
-                                    <div class="text-6xl">10 years</div>
+                                    <div class="">
+                                        <div class="">
+                                            Full Investment Return
+                                        </div>
+                                        <div class="text-6xl">10 years</div>
+                                    </div>
                                 </div>
+                            </div>
+
+                            <div class="w-full">
+                                <ButtonPrimary>Test</ButtonPrimary>
                             </div>
                         </div>
                     </div>

@@ -50,7 +50,7 @@
 <script setup lang="ts">
 import { SunLight, HalfMoon, Menu } from '@iconoir/vue';
 import { ref, onMounted } from 'vue';
-import ButtonWhite from '@/custom/home/ButtonWhite.vue';
+import ButtonWhite from '@/custom/ButtonWhite.vue';
 import LogoType from '@/custom/LogoType.vue';
 
 // 1. Track if we are currently dark
