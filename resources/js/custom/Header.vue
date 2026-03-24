@@ -10,7 +10,7 @@
                     <LogoType class="fill-current text-white dark:text-white" />
                 </div>
 
-                <div class="flex gap-4">
+                <div class="flex gap-8">
                     <div class="my-auto flex gap-4">
                         <div class="dark-switch my-auto text-white flex">
                             <button
