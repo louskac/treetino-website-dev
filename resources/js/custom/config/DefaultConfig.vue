@@ -1,12 +1,16 @@
 <script setup lang="ts"></script>
 
 <template>
-    <section class="config">
+    <section class="config relative">
+        <div
+            class="absolute left-1/2 h-full max-w-[1400px] -translate-x-1/2 border-r border-l border-r-black/20 border-l-black/20 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)] dark:border-r-white/20 dark:border-l-white/20"
+        ></div>
+
         <div
             class="relative mx-auto h-full w-full max-w-[1200px] px-6 py-20 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
         >
             <div class="pb-10 text-center text-6xl">
-                <h2>Configure <span class="text-t-blue">Treetino</span></h2>
+                <h2>Configure <span class="text-t-blue dark:text-t-accent">Treetino</span></h2>
             </div>
 
             <div class="grid grid-cols-1 gap-6 xl:grid-cols-3">
