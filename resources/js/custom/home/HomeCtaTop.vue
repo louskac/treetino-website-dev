@@ -5,14 +5,16 @@
         ></div>
 
         <div
-            class="absolute left-1/2 h-full max-w-[1400px] -translate-x-1/2 border-r border-l border-r-white/20 border-l-white/20 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
+            class="absolute left-1/2 h-full max-w-[1400px] -translate-x-1/2 border-r border-l border-r-white/20 border-l-white/20 [mask-image:linear-gradient(to_bottom,black_0%,transparent_100%)] sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
         ></div>
 
         <div
             class="relative mx-auto flex h-200 w-full max-w-[1400px] justify-end py-20 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
         >
-            <div class="mt-auto relative">
-                <div class="flex flex-col gap-6 p-6 bg-black/5 dark:bg-white/5 mr-6 rounded-2xl border border-black/20 dark:border-white/20 backdrop-blur-2xl">
+            <div class="relative mt-auto">
+                <div
+                    class="mr-6 flex flex-col gap-6 rounded-2xl border border-black/20 bg-black/5 p-6 backdrop-blur-2xl dark:border-white/20 dark:bg-white/5"
+                >
                     <h2 class="text-right text-6xl">
                         Turn your empty space <br />
                         into an asset.
