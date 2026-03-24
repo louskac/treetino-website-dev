@@ -75,8 +75,22 @@
 
                 <div class="col-span-1 flex xl:col-span-2">
                     <div
-                        class="h-full w-full rounded-2xl border p-6 shadow-xl"
-                    ></div>
+                        class="flex h-full w-full flex-col rounded-2xl border p-6 shadow-xl"
+                    >
+                        <div class="mt-auto">
+                            <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
+                                <div class="">
+                                    <div class="">Expected ROI</div>
+                                    <div class="text-6xl">11 % p.a.</div>
+                                </div>
+
+                                <div class="">
+                                    <div class="">Full Return</div>
+                                    <div class="text-6xl">10 years</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
