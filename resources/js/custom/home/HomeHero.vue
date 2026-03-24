@@ -23,7 +23,7 @@
         ></div>
 
         <div
-            class="hidden sm:block absolute left-1/2 h-full max-w-[1400px] -translate-x-1/2 border-r border-l border-r-white/20 border-l-white/20 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
+            class="absolute left-1/2 hidden h-full max-w-[1400px] -translate-x-1/2 border-r border-l border-r-white/20 border-l-white/20 sm:block sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
         ></div>
 
         <div
@@ -32,17 +32,40 @@
             <div class="flex h-full w-full flex-col p-6 pb-12">
                 <div class="mt-auto text-white">
                     <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
-                        <div class="">
-                            <h1 class="text-6xl lg:text-8xl">
+                        <div class="mt-auto">
+                            <h1
+                                class="mb-6 text-6xl leading-13 lg:text-8xl lg:leading-20"
+                            >
                                 The Future <br />
                                 of Energy
                             </h1>
+                            <div class="flex gap-2">
+                                <div class="opacity-70">
+                                    <Leaf class="h-8 w-8 mt-0.5" stroke-width="1.5"/>
+                                </div>
+                                <div class="text-3xl opacity-70 leading-8">
+                                    Eco-Friendly <br />
+                                    with modern design
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="flex lg:justify-end">
+                        <div class="hidden lg:flex lg:justify-end">
                             <div class="mt-auto">
-                                <div class="p-4 rounded-2xl bg-black/40 backdrop-blur-2xl border border-white/30">
-                                    Poptat nezávaznou kalkulaci
+                                <div
+                                    class="w-100 rounded-2xl border border-blue-500/30 bg-black/40 p-6 backdrop-blur-2xl"
+                                >
+                                    <h2 class="mb-3 text-4xl">Treetino App</h2>
+                                    <div class="mb-4 text-sm opacity-70">
+                                        Install the Treetino App for the
+                                        Ultimate Control of your Products
+                                    </div>
+
+                                    <div class="">
+                                        <ButtonPrimary class="w-full"
+                                            >About the App</ButtonPrimary
+                                        >
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -54,7 +77,9 @@
 </template>
 
 <script setup lang="ts">
+import { Leaf } from '@iconoir/vue';
 import { ref, onMounted } from 'vue';
+import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 
 const video = ref<HTMLVideoElement | null>(null);
 
