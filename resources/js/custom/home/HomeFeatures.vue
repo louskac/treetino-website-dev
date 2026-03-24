@@ -15,7 +15,7 @@
             <div class="relative flex h-full w-1/2 flex-col">
                 <div class="relative h-full w-full">
                     <div
-                        class="absolute top-1/2 right-0 mx-auto my-auto h-110 max-w-[600px] -translate-y-1/2 sm:w-[260px] md:w-[350px] lg:w-[calc(100%-100px)] xl:w-[calc(100%-200px)] overflow-hidden"
+                        class="absolute top-1/2 right-0 mx-auto my-auto h-110 max-w-[600px] -translate-y-1/2 sm:w-[260px] md:w-[350px] lg:w-[calc(100%-100px)] xl:w-[calc(100%-200px)]"
                     >
                         <Transition name="card-slide" appear>
                             <div
@@ -133,7 +133,7 @@ onUnmounted(() => {
 
 /* Card slide-in */
 .card-slide-enter-active {
-    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.5s ease;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.5s ease;
 }
 .card-slide-enter-from {
     transform: translateX(-110%);
