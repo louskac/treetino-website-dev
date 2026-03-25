@@ -20,7 +20,7 @@
                         <Transition name="card-slide" appear>
                             <div
                                 v-if="cardVisible"
-                                class="h-full w-full bg-t-blue rounded-lg flex flex-col justify-center px-8 py-10"
+                                class="h-full w-full bg-t-blue rounded-2xl flex flex-col justify-center px-8 py-10"
                             >
                                 <Transition name="card-content" mode="out-in">
                                     <div :key="currentImageIndex" class="flex flex-col gap-4">
