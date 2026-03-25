@@ -1,5 +1,5 @@
 <template>
-    <section ref="sectionRef" class="features-desktop relative" style="height: 240vh;">
+    <section ref="sectionRef" class="features-desktop relative" style="height: 300vh;">
         <div class="sticky top-0 h-screen w-full overflow-hidden">
             <div class="absolute right-0 h-full w-7/12 overflow-hidden">
                 <Transition name="features-fade" mode="out-in">
@@ -67,18 +67,31 @@ const sectionRef = ref<HTMLElement | null>(null);
 const currentImageIndex = ref(0);
 const cardVisible = ref(false);
 
+const SCROLL_COOLDOWN = 600;
+
 let snapping = false;
 let hasSnapped = false;
+let scrollCooldown = false;
+let programmaticScroll = false;
+
+function isInStickyZone(): boolean {
+    const section = sectionRef.value;
+    if (!section) return false;
+    const rect = section.getBoundingClientRect();
+    const vh = window.innerHeight;
+    return rect.top <= 2 && rect.bottom >= vh - 2;
+}
 
 function handleScroll() {
+    if (programmaticScroll) return;
+
     const section = sectionRef.value;
     if (!section || snapping) return;
 
     const rect = section.getBoundingClientRect();
     const vh = window.innerHeight;
 
-    // Show card when section snaps in
-    if (rect.top <= 0 || hasSnapped) {
+    if (rect.top <= 0) {
         cardVisible.value = true;
     }
 
@@ -92,31 +105,77 @@ function handleScroll() {
         return;
     }
 
+    // Reset when above
     if (rect.top > vh / 2) {
         hasSnapped = false;
         cardVisible.value = false;
-    }
-
-    // Switching images
-    const sectionScrollSpace = section.offsetHeight - vh;
-    if (rect.top <= 0 && sectionScrollSpace > 0) {
-        const progress = Math.min(1, -rect.top / sectionScrollSpace);
-        if (progress < 1 / 3) {
-            currentImageIndex.value = 0;
-        } else if (progress < 2 / 3) {
-            currentImageIndex.value = 1;
-        } else {
-            currentImageIndex.value = 2;
-        }
+        currentImageIndex.value = 0;
     }
 }
 
+function handleWheel(e: WheelEvent) {
+    if (!isInStickyZone()) return;
+
+    const section = sectionRef.value!;
+    const direction = e.deltaY > 0 ? 1 : -1;
+    const nextIndex = currentImageIndex.value + direction;
+
+    // Scroll up from first slide is normal
+    if (nextIndex < 0) return;
+
+    e.preventDefault();
+
+    if (scrollCooldown) return;
+
+    // Exit after last slide
+    if (nextIndex >= images.length) {
+        scrollCooldown = true;
+        programmaticScroll = true;
+        const sectionScrollSpace = section.offsetHeight - window.innerHeight;
+        window.scrollTo({
+            top: section.offsetTop + sectionScrollSpace + 50,
+            behavior: 'smooth',
+        });
+        setTimeout(() => {
+            scrollCooldown = false;
+            programmaticScroll = false;
+        }, SCROLL_COOLDOWN);
+        return;
+    }
+
+    currentImageIndex.value = nextIndex;
+    scrollCooldown = true;
+    programmaticScroll = true;
+
+    const sectionScrollSpace = section.offsetHeight - window.innerHeight;
+    const targetScrollY = section.offsetTop + (nextIndex / (images.length - 1)) * sectionScrollSpace;
+    window.scrollTo({ top: targetScrollY, behavior: 'smooth' });
+
+    setTimeout(() => {
+        scrollCooldown = false;
+        programmaticScroll = false;
+    }, SCROLL_COOLDOWN);
+}
+
 onMounted(() => {
+    const section = sectionRef.value;
+    if (section) {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= 0) {
+            const sectionScrollSpace = section.offsetHeight - window.innerHeight;
+            const progress = Math.min(1, Math.max(0, -rect.top / sectionScrollSpace));
+            currentImageIndex.value = Math.min(images.length - 1, Math.floor(progress * images.length));
+            cardVisible.value = true;
+        }
+    }
+
     window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('wheel', handleWheel, { passive: false });
 });
 
 onUnmounted(() => {
     window.removeEventListener('scroll', handleScroll);
+    window.removeEventListener('wheel', handleWheel);
 });
 </script>
 
