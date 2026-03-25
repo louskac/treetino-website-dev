@@ -5,7 +5,7 @@
         ></div>
 
         <div
-            class="absolute left-1/2 h-full max-w-[1400px] -translate-x-1/2 border-r border-l border-r-white/20 border-l-white/20 [mask-image:linear-gradient(to_bottom,black_0%,transparent_100%)] sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
+            class="hidden sm:block absolute left-1/2 h-full max-w-[1400px] -translate-x-1/2 border-r border-l border-r-white/20 border-l-white/20 [mask-image:linear-gradient(to_bottom,black_0%,transparent_100%)] sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
         ></div>
 
         <div
@@ -13,20 +13,22 @@
         >
             <div class="relative mt-auto">
                 <div
-                    class="mr-6 flex flex-col gap-6 rounded-2xl border border-black/20 bg-black/5 p-6 backdrop-blur-2xl dark:border-white/20 dark:bg-white/5"
+                    class="mx-6 flex flex-col gap-6 rounded-2xl border border-black/20 bg-black/5 p-6 backdrop-blur-2xl dark:border-white/20 dark:bg-white/5"
                 >
-                    <h2 class="text-right text-6xl">
+                    <h2 class="text-right text-4xl md:text-6xl">
                         Turn your empty space <br />
                         into an asset.
                         <span class="text-t-blue">With Treetino</span>
                     </h2>
-                    <div class="flex justify-end gap-3 pb-3">
-                        <div class="">
-                            <ButtonPrimary>Předobjednat</ButtonPrimary>
+                    <div class="flex justify-end flex-col gap-3 sm:flex-row">
+                        <div class="w-full md:w-fit">
+                            <ButtonPrimary class="w-full text-center md:w-fit"
+                                >Předobjednat</ButtonPrimary
+                            >
                         </div>
 
-                        <div class="">
-                            <ButtonSecondary
+                        <div class="w-full md:w-fit">
+                            <ButtonSecondary class="w-full text-center md:w-fit"
                                 >Objevit technologie</ButtonSecondary
                             >
                         </div>
