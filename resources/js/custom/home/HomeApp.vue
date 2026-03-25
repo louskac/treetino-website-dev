@@ -10,8 +10,8 @@
             <div
                 class="grid grid-cols-1 gap-6 p-6 lg:grid-cols-2 xl:grid-cols-5 xl:gap-12"
             >
-                <div class="col-span-1 xl:col-span-2">
-                    <div class="relative w-full">
+                <div class="col-span-1 flex flex-col xl:col-span-2">
+                    <div class="relative my-auto w-full">
                         <div
                             class="relative mx-auto aspect-9/17.5 w-[65%] rounded-[3.4vw] bg-black p-2"
                         >
@@ -121,8 +121,10 @@
                             </p>
                         </div>
 
-                        <div class="mb-12 grid grid-cols-1 gap-6 lg:grid-cols-2">
-                            <div class="flex w-full gap-3">
+                        <div
+                            class="mb-12 grid grid-cols-1 gap-6 lg:grid-cols-2"
+                        >
+                            <div class="flex h-fit w-full gap-3">
                                 <div
                                     class="flex aspect-square h-12 w-12 rounded-xl bg-primary/5 text-t-blue dark:text-primary"
                                 >
@@ -133,7 +135,7 @@
                                 </div>
 
                                 <div class="my-auto">
-                                    <div class="tracking-tight">
+                                    <div class="mb-1 leading-5 tracking-tight">
                                         Live Energy Dashboard
                                     </div>
                                     <div
@@ -145,7 +147,7 @@
                                 </div>
                             </div>
 
-                            <div class="flex w-full gap-3">
+                            <div class="flex h-fit w-full gap-3">
                                 <div
                                     class="flex aspect-square h-12 w-12 rounded-xl bg-primary/5 text-t-blue dark:text-primary"
                                 >
@@ -156,7 +158,7 @@
                                 </div>
 
                                 <div class="my-auto">
-                                    <div class="tracking-tight">
+                                    <div class="mb-1 leading-5 tracking-tight">
                                         Weather Integration
                                     </div>
                                     <div
@@ -168,7 +170,7 @@
                                 </div>
                             </div>
 
-                            <div class="flex w-full gap-3">
+                            <div class="flex h-fit w-full gap-3">
                                 <div
                                     class="flex aspect-square h-12 w-12 rounded-xl bg-primary/5 text-t-blue dark:text-primary"
                                 >
@@ -179,7 +181,7 @@
                                 </div>
 
                                 <div class="my-auto">
-                                    <div class="tracking-tight">
+                                    <div class="mb-1 leading-5 tracking-tight">
                                         Light Show Control
                                     </div>
                                     <div
@@ -191,7 +193,7 @@
                                 </div>
                             </div>
 
-                            <div class="flex w-full gap-3">
+                            <div class="flex h-fit w-full gap-3">
                                 <div
                                     class="flex aspect-square h-12 w-12 rounded-xl bg-primary/5 text-t-blue dark:text-primary"
                                 >
@@ -202,7 +204,7 @@
                                 </div>
 
                                 <div class="my-auto">
-                                    <div class="tracking-tight">
+                                    <div class="mb-1 leading-5 tracking-tight">
                                         Historical Reports
                                     </div>
                                     <div
@@ -214,7 +216,7 @@
                                 </div>
                             </div>
 
-                            <div class="flex w-full gap-3">
+                            <div class="flex h-fit w-full gap-3">
                                 <div
                                     class="flex aspect-square h-12 w-12 rounded-xl bg-primary/5 text-t-blue dark:text-primary"
                                 >
@@ -225,7 +227,7 @@
                                 </div>
 
                                 <div class="my-auto">
-                                    <div class="tracking-tight">
+                                    <div class="mb-1 leading-5 tracking-tight">
                                         Smart Alerts
                                     </div>
                                     <div
@@ -237,7 +239,7 @@
                                 </div>
                             </div>
 
-                            <div class="flex w-full gap-3">
+                            <div class="flex h-fit w-full gap-3">
                                 <div
                                     class="flex aspect-square h-12 w-12 rounded-xl bg-primary/5 text-t-blue dark:text-primary"
                                 >
@@ -248,7 +250,7 @@
                                 </div>
 
                                 <div class="my-auto">
-                                    <div class="tracking-tight">
+                                    <div class="mb-1 leading-5 tracking-tight">
                                         Remote Configuration
                                     </div>
                                     <div
@@ -305,6 +307,62 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="mt-6 hidden text-xs opacity-70 lg:block">
+                            Projected availability Q4 2026. Pre-registration and
+                            beta is available for pre-ordered units
+                        </div>
+
+                        <div class="grid gap-3 lg:hidden">
+                            <div
+                                class="button-app flex gap-4 rounded-2xl bg-black p-4 text-white dark:bg-white dark:text-black"
+                            >
+                                <AppStore
+                                    class="my-auto h-8 w-8"
+                                    stroke-width="2"
+                                />
+
+                                <div class="my-auto">
+                                    <div
+                                        class="mb-0.5 text-xs leading-3 tracking-tight opacity-70"
+                                    >
+                                        Download on the
+                                    </div>
+                                    <div
+                                        class="leading-4 font-semibold tracking-tight"
+                                    >
+                                        App Store
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div
+                                class="button-app flex gap-4 rounded-2xl bg-black p-4 text-white dark:bg-white dark:text-black"
+                            >
+                                <DownloadCircle
+                                    class="my-auto h-8 w-8"
+                                    stroke-width="2"
+                                />
+
+                                <div class="my-auto">
+                                    <div
+                                        class="mb-0.5 text-xs leading-3 tracking-tight opacity-70"
+                                    >
+                                        Download on the
+                                    </div>
+                                    <div
+                                        class="leading-4 font-semibold tracking-tight"
+                                    >
+                                        Google Play Store
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 block text-xs opacity-70 lg:hidden text-center">
+                            Projected availability Q4 2026. Pre-registration and
+                            beta is available for pre-ordered units
                         </div>
                     </div>
                 </div>
