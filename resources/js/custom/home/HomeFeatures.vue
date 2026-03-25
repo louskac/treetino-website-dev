@@ -191,7 +191,8 @@ onUnmounted(() => {
 }
 
 /* Card slide-in */
-.card-slide-enter-active {
+.card-slide-enter-active,
+.card-slide-leave-active {
     transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.5s ease;
 }
 .card-slide-enter-from {
@@ -201,6 +202,15 @@ onUnmounted(() => {
 .card-slide-enter-to {
     transform: translateX(0%);
     opacity: 1;
+}
+
+.card-slide-leave-from {
+    transform: translateX(0%);
+    opacity: 1;
+}
+.card-slide-leave-to {
+    transform: translateX(-110%);
+    opacity: 0;
 }
 
 /* Card content */
