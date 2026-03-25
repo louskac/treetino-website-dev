@@ -8,6 +8,8 @@
 
         <HomeFeatures/>
 
+        <HomeApp/>
+
         <HomeInfo/>
 
         <HomeNumbers/>
@@ -28,4 +30,5 @@ import HomeHero from '@/custom/home/HomeHero.vue';
 import HomeInfo from '@/custom/home/HomeInfo.vue';
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
 import HomeNumbers from '@/custom/home/HomeNumbers.vue';
+import HomeApp from '@/custom/home/HomeApp.vue';
 </script>
