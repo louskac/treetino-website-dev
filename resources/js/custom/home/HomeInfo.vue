@@ -7,7 +7,72 @@
         <div
             class="relative mx-auto max-w-[1400px] py-20 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)] px-6"
         >
-            <div class="grid grid-cols-3 gap-6">
+            <div class="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div
+                    class="sm:col-span-2 w-full rounded-2xl border border-black bg-zinc-800 p-6 shadow-xl dark:border-white dark:bg-zinc-200"
+                >
+                    <p class="text-2xl text-secondary">
+                        In a world increasingly dependent on electricity,
+                        we're developing a new way to integrate sustainable
+                        power
+                    </p>
+                </div>
+
+                <div
+                    class="w-full flex flex-col rounded-2xl border border-black/20 p-6 shadow-xl"
+                >
+                    <div class="">
+                        <Tree class="h-8 w-8" stroke-width="2" />
+                    </div>
+                    <h2 class="mt-2 text-3xl sm:text-4xl">World-class design</h2>
+                    <p class="mt-2 mb-3">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing
+                        elit. Integer at tortor est. Sed malesuada at lorem
+                        id finibus. Sed mollis sodales hendrerit. Etiam ut
+                        ligula at ante laoreet blandit.
+                    </p>
+
+                    <p>
+                        Vivamus at convallis quam. Etiam pellentesque augue
+                        nec lectus pulvinar accumsan. Duis volutpat
+                        ullamcorper dignissim. Donec mattis, enim a
+                        malesuada
+                    </p>
+                </div>
+
+                <div
+                    class="reveal reveal-right w-full rounded-2xl border border-black/20 p-6 shadow-xl"
+                >
+                    <div class="">
+                        <Tree class="h-8 w-8" stroke-width="2" />
+                    </div>
+                    <h2 class="mt-2 text-3xl sm:text-4xl">U I U A A</h2>
+                    <p class="mt-2 mb-3">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing
+                        elit. Integer at tortor est. Sed malesuada at lorem
+                        id finibus. Sed mollis sodales hendrerit. Etiam ut
+                        ligula at ante laoreet blandit.
+                    </p>
+                    <p>
+                        Vivamus at convallis quam. Etiam pellentesque augue
+                        nec lectus pulvinar accumsan. Duis volutpat
+                        ullamcorper dignissim. Donec mattis, enim a
+                        malesuada
+                    </p>
+                </div>
+
+                <div
+                    class="sm:col-span-2 aspect-video overflow-hidden rounded-2xl shadow-xl"
+                >
+                    <img
+                        src="https://picsum.photos/600"
+                        class="h-full w-full object-cover"
+                        alt=""
+                    />
+                </div>
+            </div>
+
+            <div class="hidden lg:grid grid-cols-3 gap-6">
                 <div
                     ref="leftCardEl"
                     :style="{
