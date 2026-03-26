@@ -1,7 +1,7 @@
 <template>
     <section class="top-cta relative w-full">
         <div
-            class="absolute h-1/2 w-full bg-linear-to-b from-black to-transparent"
+            class="absolute h-1/3 md:h-1/2 w-full bg-linear-to-b from-black to-transparent"
         ></div>
 
         <div
@@ -9,7 +9,7 @@
         ></div>
 
         <div
-            class="relative mx-auto flex h-200 w-full max-w-[1400px] justify-end py-20 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
+            class="relative mx-auto flex h-150 md:h-200 w-full max-w-[1400px] justify-end py-20 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
         >
             <div class="relative mt-auto">
                 <div
