@@ -12,11 +12,10 @@
             >
                 <div class="col-span-1 flex flex-col xl:col-span-2">
                     <div class="relative my-auto w-full">
-                        <div
-                            class="relative mx-auto aspect-9/17.5 w-[65%] rounded-[3.4vw] bg-black p-2"
-                        >
+                        <div class="relative mx-auto w-[65%]">
+                            <!-- App screenshot positioned to show through the frame's screen area -->
                             <div
-                                class="relative h-full w-full overflow-clip rounded-[3vw] bg-white"
+                                class="absolute z-1 inset-x-[4%] top-[2%] bottom-[2%] overflow-hidden rounded-[6vw] sm:rounded-[5vw] md:rounded-[6vw] lg:rounded-[3vw] xl:rounded-[2vw]"
                             >
                                 <img
                                     class="h-full w-full object-cover"
@@ -24,14 +23,17 @@
                                     alt=""
                                 />
                             </div>
-                            <div
-                                class="absolute top-5 left-1/2 h-[4.5%] w-[40%] -translate-x-1/2 rounded-full bg-black"
-                            ></div>
+                            <!-- iPhone 17 frame overlay -->
+                            <img
+                                src="/img/iphone-17-frame.png"
+                                class="relative z-2 w-full"
+                                alt=""
+                            />
                         </div>
 
                         <!-- RIGHT CARD -->
                         <!-- Vignette -->
-                        <div class="absolute right-[5%] bottom-58 w-60 p-3">
+                        <div class="absolute z-3 right-[5%] bottom-58 w-60 p-3">
                             <div class="flex w-full gap-3">
                                 <div
                                     class="flex aspect-square w-12 rounded-xl bg-green-600 text-white"
@@ -41,7 +43,7 @@
 
                         <!-- Card -->
                         <div
-                            class="absolute right-[5%] bottom-58 w-60 rounded-2xl border border-black/20 bg-white/30 p-3 shadow-lg backdrop-blur-xl"
+                            class="absolute z-3 right-[5%] bottom-58 w-60 rounded-2xl border border-black/20 bg-white/30 p-3 shadow-lg backdrop-blur-xl"
                         >
                             <div class="flex w-full gap-3">
                                 <div
@@ -68,7 +70,7 @@
 
                         <!-- RIGHT CARD -->
                         <!-- Vignette -->
-                        <div class="absolute bottom-32 left-[5%] w-60 p-3">
+                        <div class="absolute z-3 bottom-32 left-[5%] w-60 p-3">
                             <div class="flex w-full gap-3">
                                 <div
                                     class="flex aspect-square w-12 rounded-xl bg-purple-700 text-white"
@@ -78,7 +80,7 @@
 
                         <!-- Card -->
                         <div
-                            class="absolute bottom-32 left-[5%] w-60 rounded-2xl border border-black/20 bg-white/30 p-3 shadow-lg backdrop-blur-xl"
+                            class="absolute z-3 bottom-32 left-[5%] w-60 rounded-2xl border border-black/20 bg-white/30 p-3 shadow-lg backdrop-blur-xl"
                         >
                             <div class="flex w-full gap-3">
                                 <div
