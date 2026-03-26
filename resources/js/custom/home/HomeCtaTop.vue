@@ -13,7 +13,7 @@
         >
             <div class="relative mt-auto">
                 <div
-                    class="mr-6 flex flex-col gap-6 rounded-2xl border border-black/20 bg-black/5 p-6 backdrop-blur-2xl dark:border-white/20 dark:bg-white/5"
+                    class="mx-6 flex flex-col gap-6 rounded-2xl border border-black/20 bg-black/5 p-6 backdrop-blur-2xl dark:border-white/20 dark:bg-white/5"
                 >
                     <h2 class="text-right text-6xl">
                         Turn your empty space <br />
