@@ -1,5 +1,78 @@
 <template>
-    <section ref="sectionRef" class="features-desktop relative" style="height: 300vh;">
+    <!-- Mobile vesion - carousel -->
+    <section class="lg:hidden py-16 overflow-hidden">
+        <div class="mx-auto max-w-lg px-6 sm:px-8">
+            <div
+                class="overflow-hidden rounded-3xl shadow-2xl"
+                @touchstart="onTouchStart"
+                @touchmove="onTouchMove"
+                @touchend="onTouchEnd"
+            >
+                <div
+                    class="flex transition-transform duration-500 ease-in-out will-change-transform"
+                    :style="{ transform: `translateX(-${carouselIndex * 100}%)` }"
+                >
+                    <div v-for="(slide, i) in slides" :key="i" class="min-w-full">
+                        <!-- Image fade -->
+                        <div class="relative h-60 sm:h-72 overflow-hidden">
+                            <img :src="images[i]" class="absolute inset-0 h-full w-full object-cover" alt="" />
+                            <div class="absolute inset-0 bg-linear-to-b from-black/10 via-transparent to-t-dark"></div>
+                        </div>
+                        <!-- Content -->
+                        <div class="relative h-full overflow-hidden bg-t-dark px-6 pb-8 pt-5">
+                            <div class="pointer-events-none absolute -top-10 right-6 h-36 w-36 rounded-full bg-t-accent/20 blur-3xl"></div>
+                            <!-- Icon and counter row -->
+                            <div class="relative z-10 mb-4 flex items-center justify-between">
+                                <div class="flex h-11 w-11 items-center justify-center rounded-xl border border-white/15 bg-white/10">
+                                    <component :is="slide.icon" class="h-5 w-5 text-white" stroke-width="1.5" />
+                                </div>
+                                <span class="text-xs font-medium tracking-widest text-white/30">
+                                    {{ String(i + 1).padStart(2, '0') }} / {{ String(slides.length).padStart(2, '0') }}
+                                </span>
+                            </div>
+                            <h2 class="relative z-10 text-2xl font-bold leading-tight text-white">{{ slide.title }}</h2>
+                            <p class="relative z-10 mt-2 mb-5 text-sm leading-relaxed text-white/60">{{ slide.text }}</p>
+                            <ButtonSecondary class="relative z-10">Předobjednat</ButtonSecondary>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dot indicators + arrow navigation -->
+            <div class="mt-5 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <button
+                        v-for="(_, i) in slides"
+                        :key="i"
+                        class="h-2 rounded-full transition-all duration-300 focus:outline-none"
+                        :class="i === carouselIndex ? 'w-6 bg-t-blue' : 'w-2 bg-foreground/20 hover:bg-foreground/40'"
+                        @click="carouselIndex = i"
+                    />
+                </div>
+                <div class="flex gap-2">
+                    <button
+                        @click="prevSlide"
+                        :disabled="carouselIndex === 0"
+                        class="flex h-9 w-9 items-center justify-center rounded-full border border-black/15 transition-opacity disabled:opacity-30 dark:border-white/15"
+                    >
+                        <NavArrowLeft class="h-4 w-4" stroke-width="2" />
+                    </button>
+                    <button
+                        @click="nextSlide"
+                        :disabled="carouselIndex === slides.length - 1"
+                        class="flex h-9 w-9 items-center justify-center rounded-full border border-black/15 transition-opacity disabled:opacity-30 dark:border-white/15"
+                    >
+                        <NavArrowRight class="h-4 w-4" stroke-width="2" />
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    
+    <!-- Desktop sticky scroll -->
+    <section ref="sectionRef" class="features-desktop relative hidden lg:block" style="height: 300vh;">
         <div class="sticky top-0 h-screen w-full overflow-hidden">
             <div class="absolute right-0 h-full w-7/12 overflow-hidden">
                 <Transition name="features-fade" mode="out-in">
@@ -15,7 +88,7 @@
             <div class="relative flex h-full w-1/2 flex-col">
                 <div class="relative h-full w-full">
                     <div
-                        class="absolute top-1/2 right-0 mx-auto my-auto h-110 max-w-[600px] -translate-y-1/2 sm:w-[260px] md:w-[350px] lg:w-[calc(100%-100px)] xl:w-[calc(100%-200px)]"
+                        class="absolute top-1/2 right-0 mx-auto my-auto h-100 2xl:h-110 max-w-[600px] -translate-y-1/2 sm:w-[260px] md:w-[350px] lg:w-[calc(100%-100px)] xl:w-[calc(100%-200px)]"
                     >
                         <Transition name="card-slide" appear>
                             <div
@@ -72,7 +145,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
-import { SunLight, Leaf, Tree } from '@iconoir/vue';
+import { SunLight, Leaf, Tree, NavArrowLeft, NavArrowRight } from '@iconoir/vue';
 import ButtonSecondary from '../ButtonSecondary.vue';
 
 const images = [
@@ -102,6 +175,20 @@ const slides = [
 const sectionRef = ref<HTMLElement | null>(null);
 const currentImageIndex = ref(0);
 const cardVisible = ref(false);
+const carouselIndex = ref(0);
+
+let touchStartX = 0;
+let touchDeltaX = 0;
+
+function prevSlide() { if (carouselIndex.value > 0) carouselIndex.value--; }
+function nextSlide() { if (carouselIndex.value < slides.length - 1) carouselIndex.value++; }
+function onTouchStart(e: TouchEvent) { touchStartX = e.touches[0].clientX; touchDeltaX = 0; }
+function onTouchMove(e: TouchEvent) { touchDeltaX = e.touches[0].clientX - touchStartX; }
+function onTouchEnd() {
+    if (touchDeltaX < -50) nextSlide();
+    else if (touchDeltaX > 50) prevSlide();
+    touchDeltaX = 0;
+}
 
 const SCROLL_COOLDOWN = 600;
 
@@ -119,6 +206,9 @@ function isInStickyZone(): boolean {
 }
 
 function handleScroll() {
+    if (window.innerWidth < 1280) {
+        return;
+    }
     if (programmaticScroll) return;
 
     const section = sectionRef.value;
@@ -150,6 +240,9 @@ function handleScroll() {
 }
 
 function handleWheel(e: WheelEvent) {
+    if (window.innerWidth < 1280) {
+        return;
+    }
     if (!isInStickyZone()) return;
 
     const section = sectionRef.value!;
