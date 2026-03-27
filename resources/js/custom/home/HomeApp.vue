@@ -15,7 +15,7 @@
                         <div class="relative mx-auto w-[65%]">
                             <!-- App screenshot positioned to show through the frame's screen area -->
                             <div
-                                class="absolute z-1 inset-x-[4%] top-[2%] bottom-[2%] overflow-hidden rounded-[6vw] sm:rounded-[5vw] md:rounded-[6vw] lg:rounded-[3vw] xl:rounded-[2vw]"
+                                class="absolute inset-x-[4%] top-[2%] bottom-[2%] z-1 overflow-hidden rounded-[6vw] sm:rounded-[5vw] md:rounded-[6vw] lg:rounded-[3vw] xl:rounded-[2vw]"
                             >
                                 <img
                                     class="h-full w-full object-cover"
@@ -33,7 +33,14 @@
 
                         <!-- RIGHT CARD -->
                         <!-- Vignette -->
-                        <div class="absolute z-3 right-[5%] bottom-58 w-60 p-3">
+                        <div
+                            class="absolute right-[5%] bottom-58 z-3 w-60 p-3"
+                            ref="rightVignette"
+                            :style="{
+                                transform:
+                                    'translateY(' + rightTranslateY + 'px)',
+                            }"
+                        >
                             <div class="flex w-full gap-3">
                                 <div
                                     class="flex aspect-square w-12 rounded-xl bg-green-600 text-white"
@@ -43,7 +50,12 @@
 
                         <!-- Card -->
                         <div
-                            class="absolute z-3 right-[5%] bottom-58 w-60 rounded-2xl border border-black/20 bg-white/30 p-3 shadow-lg backdrop-blur-xl"
+                            class="absolute right-[5%] bottom-58 z-3 w-60 rounded-2xl border border-black/20 bg-white/30 p-3 shadow-lg backdrop-blur-xl"
+                            ref="rightCard"
+                            :style="{
+                                transform:
+                                    'translateY(' + rightTranslateY + 'px)',
+                            }"
                         >
                             <div class="flex w-full gap-3">
                                 <div
@@ -70,7 +82,14 @@
 
                         <!-- RIGHT CARD -->
                         <!-- Vignette -->
-                        <div class="absolute z-3 bottom-32 left-[5%] w-60 p-3">
+                        <div
+                            class="absolute bottom-32 left-[5%] z-3 w-60 p-3"
+                            ref="leftVignette"
+                            :style="{
+                                transform:
+                                    'translateY(' + leftTranslateY + 'px)',
+                            }"
+                        >
                             <div class="flex w-full gap-3">
                                 <div
                                     class="flex aspect-square w-12 rounded-xl bg-purple-700 text-white"
@@ -80,7 +99,12 @@
 
                         <!-- Card -->
                         <div
-                            class="absolute z-3 bottom-32 left-[5%] w-60 rounded-2xl border border-black/20 bg-white/30 p-3 shadow-lg backdrop-blur-xl"
+                            class="absolute bottom-32 left-[5%] z-3 w-60 rounded-2xl border border-black/20 bg-white/30 p-3 shadow-lg backdrop-blur-xl"
+                            ref="leftCard"
+                            :style="{
+                                transform:
+                                    'translateY(' + leftTranslateY + 'px)',
+                            }"
                         >
                             <div class="flex w-full gap-3">
                                 <div
@@ -362,7 +386,9 @@
                             </div>
                         </div>
 
-                        <div class="mt-6 block text-xs opacity-70 lg:hidden text-center">
+                        <div
+                            class="mt-6 block text-center text-xs opacity-70 lg:hidden"
+                        >
                             Projected availability Q4 2026. Pre-registration and
                             beta is available for pre-ordered units
                         </div>
@@ -386,4 +412,8 @@ import {
     AppStore,
     DownloadCircle,
 } from '@iconoir/vue';
+import { useParallax } from '@/composables/useAnimations';
+
+const { el: leftCard, translateY: leftTranslateY } = useParallax(0.05);
+const { el: rightCard, translateY: rightTranslateY } = useParallax(0.1);
 </script>
