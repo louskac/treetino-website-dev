@@ -4,7 +4,7 @@
     <div class="md:flex md:h-screen md:overflow-hidden">
 
         <div
-            class="sticky top-0 h-[40vh] bg-white md:static md:h-auto md:w-4/5 flex items-center justify-center overflow-hidden"
+            class="sticky top-0 z-10 h-[40vh] bg-white md:static md:z-auto md:h-auto md:w-4/5 flex items-center justify-center overflow-hidden"
             @wheel.prevent="scrollConfigurator"
         >
             <img src="/img/features-2.png" class="max-h-full max-w-full object-contain">
