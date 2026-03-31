@@ -33,7 +33,7 @@
                     <ConfiguratorBatteryStep v-model="selectedBattery" />
                 </div>
                 <div class="border-t border-t-blue/10 dark:border-white/10 pt-7">
-                    <ConfiguratorAddonsStep v-model:ev-charger-count="evChargerCount" v-model:bike-charger-count="bikeChargerCount" />
+                    <ConfiguratorAddonsStep v-model:ev-charger-count="evChargerCount" v-model:bike-charger-requested="bikeChargerRequested" />
                 </div>
             </div>
         </div>
@@ -64,7 +64,7 @@ const selectedLeafColorId = ref('green');
 const selectedConnectivity = ref('none');
 const selectedBattery = ref('none');
 const evChargerCount = ref(0);
-const bikeChargerCount = ref(0);
+const bikeChargerRequested = ref(false);
 
 const selectedProduct = computed(() => products.find(p => p.id === selectedProductId.value)!);
 

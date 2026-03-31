@@ -30,25 +30,17 @@
             <div class="border-t border-black/8 dark:border-white/8 mx-3" />
 
             <!-- Bike Charger -->
-            <div class="py-3 px-3 rounded">
+            <button
+                class="py-3 px-3 rounded text-left transition-opacity duration-200 w-full"
+                :class="bikeEnabled ? 'opacity-100' : 'opacity-50 hover:opacity-70'"
+                @click="bikeEnabled = !bikeEnabled"
+            >
                 <div class="flex items-center justify-between mb-1">
                     <span class="text-sm text-black dark:text-white">Nabíjení pro elektrokola</span>
+                    <span class="text-xs text-black/60 dark:text-white/40">{{ bikeEnabled ? 'Přidáno' : 'Přidat' }}</span>
                 </div>
-                <p class="text-xs text-black/40 dark:text-white/40 leading-relaxed mb-3">Integrovaná nabíjecí stanice pro elektrokola s ochranou proti přebití.</p>
-                <div class="flex items-center gap-3">
-                    <button
-                        @click="bikeCount = Math.max(0, bikeCount - 1)"
-                        class="w-7 h-7 rounded-full border border-black/20 dark:border-white/20 flex items-center justify-center text-black dark:text-white transition-opacity hover:opacity-70 disabled:opacity-20"
-                        :disabled="bikeCount === 0"
-                    >-</button>
-                    <span class="text-sm font-semibold text-black dark:text-white w-4 text-center">{{ bikeCount }}</span>
-                    <button
-                        @click="bikeCount = Math.min(10, bikeCount + 1)"
-                        class="w-7 h-7 rounded-full border border-black/20 dark:border-white/20 flex items-center justify-center text-black dark:text-white transition-opacity hover:opacity-70"
-                    >+</button>
-                    <span class="text-xs text-black/40 dark:text-white/40 ml-1">ks</span>
-                </div>
-            </div>
+                <p class="text-xs text-black/40 dark:text-white/40 leading-relaxed">Integrovaná nabíjecí stanice pro elektrokola s ochranou proti přebití.</p>
+            </button>
 
         </div>
     </div>
@@ -56,5 +48,5 @@
 
 <script setup lang="ts">
 const evCount = defineModel<number>('evChargerCount', { default: 0 });
-const bikeCount = defineModel<number>('bikeChargerCount', { default: 0 });
+const bikeEnabled = defineModel<boolean>('bikeChargerRequested', { default: false });
 </script>
