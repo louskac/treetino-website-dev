@@ -32,6 +32,9 @@
                 <div class="border-t border-t-blue/10 dark:border-white/10 pt-7">
                     <ConfiguratorBatteryStep v-model="selectedBattery" />
                 </div>
+                <div class="border-t border-t-blue/10 dark:border-white/10 pt-7">
+                    <ConfiguratorAddonsStep v-model:ev-charger-count="evChargerCount" v-model:bike-charger-count="bikeChargerCount" />
+                </div>
             </div>
         </div>
 
@@ -47,6 +50,7 @@ import ConfiguratorColorStep from '@/custom/configurator/ConfiguratorColorStep.v
 import ConfiguratorLeafColorStep from '@/custom/configurator/ConfiguratorLeafColorStep.vue';
 import ConfiguratorConnectivityStep from '@/custom/configurator/ConfiguratorConnectivityStep.vue';
 import ConfiguratorBatteryStep from '@/custom/configurator/ConfiguratorBatteryStep.vue';
+import ConfiguratorAddonsStep from '@/custom/configurator/ConfiguratorAddonsStep.vue';
 
 const products = [
     { id: 'strom-v1', label: 'Strom V1', params: { power: '800 W',  dailyProduction: '3,2 kWh', roi: '7 let' } },
@@ -59,6 +63,8 @@ const selectedColorId = ref('white');
 const selectedLeafColorId = ref('green');
 const selectedConnectivity = ref('none');
 const selectedBattery = ref('none');
+const evChargerCount = ref(0);
+const bikeChargerCount = ref(0);
 
 const selectedProduct = computed(() => products.find(p => p.id === selectedProductId.value)!);
 
