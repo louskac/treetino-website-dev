@@ -1,7 +1,7 @@
 <template>
     <div>
         <p class="text-xs uppercase tracking-widest text-black/50 dark:text-white/50 mb-4">
-            01 — Barva konstrukce
+            02 — Barva listů
         </p>
         <div class="flex flex-col gap-1">
             <button
@@ -35,10 +35,9 @@ defineEmits<{
 }>();
 
 const colors = [
-    { id: 'white',  label: 'Bílá',          hex: '#F0F0F0', price: null,        isCustom: false },
-    { id: 'silver', label: 'Stříbrná',       hex: '#A8A9AD', price: '+2 900 Kč', isCustom: false },
-    { id: 'black',  label: 'Černá',          hex: '#1B1B1B', price: '+3 900 Kč', isCustom: false },
-    { id: 'green',  label: 'Lesní zelená',   hex: '#3A5F3A', price: '+4 500 Kč', isCustom: false },
-    { id: 'custom', label: 'Barva na míru',  hex: null,      price: 'Individuální', isCustom: true },
+    { id: 'green',       label: 'Zelená',       hex: '#4A7C3F', price: null,        isCustom: false },
+    { id: 'orange',      label: 'Oranžová', hex: '#C1541A', price: '+1 900 Kč', isCustom: false },
+    { id: 'golden',      label: 'Zlatá',         hex: '#C8A100', price: '+1 900 Kč', isCustom: false },
+    { id: 'custom',      label: 'Na míru',        hex: null,      price: 'Individuální', isCustom: true },
 ];
 </script>

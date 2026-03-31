@@ -23,6 +23,9 @@
                 <div class="border-t border-t-blue/10 dark:border-white/10 pt-7">
                     <ConfiguratorColorStep v-model="selectedColorId" />
                 </div>
+                <div class="border-t border-t-blue/10 dark:border-white/10 pt-7">
+                    <ConfiguratorLeafColorStep v-model="selectedLeafColorId" />
+                </div>
             </div>
         </div>
 
@@ -35,6 +38,7 @@ import { ref, computed } from 'vue';
 import ConfiguratorModelSelect from '@/custom/configurator/ConfiguratorModelSelect.vue';
 import ConfiguratorProductHeader from '@/custom/configurator/ConfiguratorProductHeader.vue';
 import ConfiguratorColorStep from '@/custom/configurator/ConfiguratorColorStep.vue';
+import ConfiguratorLeafColorStep from '@/custom/configurator/ConfiguratorLeafColorStep.vue';
 
 const products = [
     { id: 'strom-v1', label: 'Strom V1', params: { power: '800 W',  dailyProduction: '3,2 kWh', roi: '7 let' } },
@@ -44,6 +48,7 @@ const products = [
 
 const selectedProductId = ref('strom-v1');
 const selectedColorId = ref('white');
+const selectedLeafColorId = ref('green');
 
 const selectedProduct = computed(() => products.find(p => p.id === selectedProductId.value)!);
 
