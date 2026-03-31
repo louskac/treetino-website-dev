@@ -35,6 +35,9 @@
                 <div class="border-t border-t-blue/10 dark:border-white/10 pt-7">
                     <ConfiguratorAddonsStep v-model:ev-charger-count="evChargerCount" v-model:bike-charger-requested="bikeChargerRequested" />
                 </div>
+                <div class="border-t border-t-blue/10 dark:border-white/10 pt-7 pb-2">
+                    <ConfiguratorCheckout :base-price="basePrice" />
+                </div>
             </div>
         </div>
 
@@ -51,6 +54,7 @@ import ConfiguratorLeafColorStep from '@/custom/configurator/ConfiguratorLeafCol
 import ConfiguratorConnectivityStep from '@/custom/configurator/ConfiguratorConnectivityStep.vue';
 import ConfiguratorBatteryStep from '@/custom/configurator/ConfiguratorBatteryStep.vue';
 import ConfiguratorAddonsStep from '@/custom/configurator/ConfiguratorAddonsStep.vue';
+import ConfiguratorCheckout from '@/custom/configurator/ConfiguratorCheckout.vue';
 
 const products = [
     { id: 'strom-v1', label: 'Strom V1', params: { power: '800 W',  dailyProduction: '3,2 kWh', roi: '7 let' } },
@@ -67,6 +71,14 @@ const evChargerCount = ref(0);
 const bikeChargerRequested = ref(false);
 
 const selectedProduct = computed(() => products.find(p => p.id === selectedProductId.value)!);
+
+const BASE_PRICES: Record<string, number> = {
+    'strom-v1': 1250000,
+    'strom-v2': 3300000,
+    'turbina': 135000,
+};
+
+const basePrice = computed(() => BASE_PRICES[selectedProductId.value] ?? 0);
 
 const configuratorPanel = ref<HTMLElement | null>(null);
 
