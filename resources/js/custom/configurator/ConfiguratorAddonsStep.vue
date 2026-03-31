@@ -37,7 +37,12 @@
             >
                 <div class="flex items-center justify-between mb-1">
                     <span class="text-sm text-black dark:text-white">Nabíjení pro elektrokola</span>
-                    <span class="text-xs text-black/60 dark:text-white/40">{{ bikeEnabled ? 'Přidáno' : 'Přidat' }}</span>
+                    <span class="flex items-center gap-1.5 text-xs transition-colors duration-200"
+                        :class="bikeEnabled ? 'text-black dark:text-white font-medium' : 'text-black/40 dark:text-white/40'"
+                    >
+                        <CheckCircle v-if="bikeEnabled"/>
+                        {{ bikeEnabled ? 'Přidáno' : 'Přidat' }}
+                    </span>
                 </div>
                 <p class="text-xs text-black/40 dark:text-white/40 leading-relaxed">Integrovaná nabíjecí stanice pro elektrokola s ochranou proti přebití.</p>
             </button>
@@ -47,6 +52,8 @@
 </template>
 
 <script setup lang="ts">
+import CheckCircle from '../icons/CheckCircle.vue';
+
 const evCount = defineModel<number>('evChargerCount', { default: 0 });
 const bikeEnabled = defineModel<boolean>('bikeChargerRequested', { default: false });
 </script>
