@@ -46,7 +46,8 @@
 
 <script setup lang="ts">
 import { Head } from '@inertiajs/vue3';
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
+import { PRODUCTS, BASE_PRICES, ProductId } from '@/types/products';
 import ConfiguratorModelSelect from '@/custom/configurator/ConfiguratorModelSelect.vue';
 import ConfiguratorProductHeader from '@/custom/configurator/ConfiguratorProductHeader.vue';
 import ConfiguratorColorStep from '@/custom/configurator/ConfiguratorColorStep.vue';
@@ -56,13 +57,16 @@ import ConfiguratorBatteryStep from '@/custom/configurator/ConfiguratorBatterySt
 import ConfiguratorAddonsStep from '@/custom/configurator/ConfiguratorAddonsStep.vue';
 import ConfiguratorCheckout from '@/custom/configurator/ConfiguratorCheckout.vue';
 
-const products = [
-    { id: 'strom-v1', label: 'Strom V1', params: { power: '800 W',  dailyProduction: '3,2 kWh', roi: '7 let' } },
-    { id: 'strom-v2', label: 'Strom V2', params: { power: '1200 W', dailyProduction: '4,8 kWh', roi: '6 let' } },
-    { id: 'turbina',  label: 'Turbína',  params: { power: '600 W',  dailyProduction: '2,4 kWh', roi: '8 let' } },
-];
+const products = PRODUCTS;
 
-const selectedProductId = ref('strom-v1');
+const selectedProductId = ref<ProductId>(ProductId.StromV1);
+
+onMounted(() => {
+    const param = new URLSearchParams(window.location.search).get('product') as ProductId | null;
+    if (param && PRODUCTS.some(p => p.id === param)) {
+        selectedProductId.value = param;
+    }
+});
 const selectedColorId = ref('white');
 const selectedLeafColorId = ref('green');
 const selectedConnectivity = ref('none');
@@ -71,12 +75,6 @@ const evChargerCount = ref(0);
 const bikeChargerRequested = ref(false);
 
 const selectedProduct = computed(() => products.find(p => p.id === selectedProductId.value)!);
-
-const BASE_PRICES: Record<string, number> = {
-    'strom-v1': 1250000,
-    'strom-v2': 3300000,
-    'turbina': 135000,
-};
 
 const basePrice = computed(() => BASE_PRICES[selectedProductId.value] ?? 0);
 

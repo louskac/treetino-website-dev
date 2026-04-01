@@ -59,12 +59,12 @@
                 <!-- Products dropdown-->
                 <Transition name="dropdown">
                     <div v-if="activeDropdown === 'products'" class="mt-4 hidden gap-6 xl:flex">
-                        <div v-for="item in products" :key="item.name" class="flex flex-1 flex-col gap-2">
+                        <div v-for="item in products" :key="item.id" class="flex flex-1 flex-col gap-2">
                             <div class="h-36 rounded-xl bg-white/10"></div>
-                            <p class="text-sm font-medium text-white">{{ item.name }}</p>
+                            <p class="text-sm font-medium text-white">{{ item.label }}</p>
                             <div class="flex gap-2">
                                 <Link href="#" class="flex-1 rounded-lg border border-white/20 py-1.5 text-center text-xs text-white/80 transition-colors hover:text-white">Více informací</Link>
-                                <Link href="#" class="flex-1 rounded-lg bg-white py-1.5 text-center text-xs font-medium text-black transition-opacity hover:opacity-80">Objednat</Link>
+                                <Link :href="`/configurator?product=${item.id}`" class="flex-1 rounded-lg bg-white py-1.5 text-center text-xs font-medium text-black transition-opacity hover:opacity-80">Objednat</Link>
                             </div>
                         </div>
                     </div>
@@ -80,14 +80,11 @@ import { SunLight, HalfMoon, Menu } from '@iconoir/vue';
 import { ref, onMounted } from 'vue';
 import ButtonWhite from '@/custom/ButtonWhite.vue';
 import LogoType from '@/custom/LogoType.vue';
+import { PRODUCTS } from '@/types/products';
 
 const activeDropdown = ref<string | null>(null);
 
-const products = [
-    { name: 'Strom V1' },
-    { name: 'Strom V2' },
-    { name: 'Větrná turbína' },
-];
+const products = PRODUCTS;
 
 // 1. Track if we are currently dark
 const isDark = ref(false);
