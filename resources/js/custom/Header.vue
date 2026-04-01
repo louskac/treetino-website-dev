@@ -14,7 +14,7 @@
 
                     <nav class="my-auto hidden gap-6 xl:flex">
                         <Link href="#" class="text-sm text-white/80 transition-colors hover:text-white" @mouseenter="activeDropdown = 'products'">Produkty</Link>
-                        <Link href="#" class="text-sm text-white/80 transition-colors hover:text-white" @mouseenter="activeDropdown = null">Sdílení energie</Link>
+                        <!--<Link href="#" class="text-sm text-white/80 transition-colors hover:text-white" @mouseenter="activeDropdown = null">Sdílení energie</Link>-->
                         <Link href="#" class="text-sm text-white/80 transition-colors hover:text-white" @mouseenter="activeDropdown = null">Spolupráce</Link>
                         <Link href="#" class="text-sm text-white/80 transition-colors hover:text-white" @mouseenter="activeDropdown = null">Média</Link>
                         <Link href="#" class="text-sm text-white/80 transition-colors hover:text-white" @mouseenter="activeDropdown = null">Kontakty</Link>
