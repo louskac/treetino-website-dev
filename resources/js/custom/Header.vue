@@ -58,10 +58,15 @@
 
                 <!-- Products dropdown-->
                 <Transition name="dropdown">
-                    <div v-if="activeDropdown === 'products'" class="mt-4 hidden gap-4 xl:flex">
-                        <div class="h-32 flex-1 rounded-xl bg-white/10"></div>
-                        <div class="h-32 flex-1 rounded-xl bg-white/10"></div>
-                        <div class="h-32 flex-1 rounded-xl bg-white/10"></div>
+                    <div v-if="activeDropdown === 'products'" class="mt-4 hidden gap-6 xl:flex">
+                        <div v-for="item in products" :key="item.name" class="flex flex-1 flex-col gap-2">
+                            <div class="h-36 rounded-xl bg-white/10"></div>
+                            <p class="text-sm font-medium text-white">{{ item.name }}</p>
+                            <div class="flex gap-2">
+                                <Link href="#" class="flex-1 rounded-lg border border-white/20 py-1.5 text-center text-xs text-white/80 transition-colors hover:text-white">Více informací</Link>
+                                <Link href="#" class="flex-1 rounded-lg bg-white py-1.5 text-center text-xs font-medium text-black transition-opacity hover:opacity-80">Objednat</Link>
+                            </div>
+                        </div>
                     </div>
                 </Transition>
             </div>
@@ -77,6 +82,12 @@ import ButtonWhite from '@/custom/ButtonWhite.vue';
 import LogoType from '@/custom/LogoType.vue';
 
 const activeDropdown = ref<string | null>(null);
+
+const products = [
+    { name: 'Strom V1' },
+    { name: 'Strom V2' },
+    { name: 'Větrná turbína' },
+];
 
 // 1. Track if we are currently dark
 const isDark = ref(false);
