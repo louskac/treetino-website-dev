@@ -59,11 +59,13 @@
                 </div>
 
                 <!-- Products dropdown-->
-                <div v-if="activeDropdown === 'products'" class="mt-4 hidden gap-4 xl:flex">
-                    <div class="h-32 flex-1 rounded-xl bg-white/10"></div>
-                    <div class="h-32 flex-1 rounded-xl bg-white/10"></div>
-                    <div class="h-32 flex-1 rounded-xl bg-white/10"></div>
-                </div>
+                <Transition name="dropdown">
+                    <div v-if="activeDropdown === 'products'" class="mt-4 hidden gap-4 xl:flex">
+                        <div class="h-32 flex-1 rounded-xl bg-white/10"></div>
+                        <div class="h-32 flex-1 rounded-xl bg-white/10"></div>
+                        <div class="h-32 flex-1 rounded-xl bg-white/10"></div>
+                    </div>
+                </Transition>
             </div>
         </div>
     </header>
@@ -96,3 +98,23 @@ const toggleDark = () => {
     localStorage.setItem('appearance', isDark.value ? 'dark' : 'light');
 };
 </script>
+
+<style scoped>
+.dropdown-enter-active,
+.dropdown-leave-active {
+    transition:
+        max-height 0.35s ease,
+        opacity 0.35s ease;
+    overflow: hidden;
+}
+.dropdown-enter-from,
+.dropdown-leave-to {
+    max-height: 0;
+    opacity: 0;
+}
+.dropdown-enter-to,
+.dropdown-leave-from {
+    max-height: 200px;
+    opacity: 1;
+}
+</style>
