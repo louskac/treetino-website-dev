@@ -10,6 +10,14 @@
                     <LogoType class="fill-current text-white dark:text-white" />
                 </div>
 
+                <nav class="my-auto hidden gap-6 xl:flex">
+                    <Link href="#" class="text-sm text-white/80 transition-colors hover:text-white">Produkty</Link>
+                    <Link href="#" class="text-sm text-white/80 transition-colors hover:text-white">Sdílení energie</Link>
+                    <Link href="#" class="text-sm text-white/80 transition-colors hover:text-white">Spolupráce</Link>
+                    <Link href="#" class="text-sm text-white/80 transition-colors hover:text-white">Média</Link>
+                    <Link href="#" class="text-sm text-white/80 transition-colors hover:text-white">Kontakty</Link>
+                </nav>
+
                 <div class="flex gap-8">
                     <div class="my-auto flex gap-4">
                         <div class="dark-switch my-auto text-white flex">
@@ -30,7 +38,7 @@
                             </button>
                         </div>
 
-                        <div class="my-auto">
+                        <div class="my-auto xl:hidden">
                             <Menu
                                 class="h-4.5 w-4.5 text-white"
                                 stroke-width="2"
@@ -39,7 +47,9 @@
                     </div>
 
                     <div class="my-auto hidden text-white md:block">
-                        <ButtonWhite variant="slim">Preorder Now</ButtonWhite>
+                        <Link href="/configurator">
+                            <ButtonWhite variant="slim">Preorder Now</ButtonWhite>
+                        </Link>
                     </div>
                 </div>
             </div>
@@ -48,6 +58,7 @@
 </template>
 
 <script setup lang="ts">
+import { Link } from '@inertiajs/vue3';
 import { SunLight, HalfMoon, Menu } from '@iconoir/vue';
 import { ref, onMounted } from 'vue';
 import ButtonWhite from '@/custom/ButtonWhite.vue';
