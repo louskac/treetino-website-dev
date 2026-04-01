@@ -59,7 +59,7 @@ import ConfiguratorCheckout from '@/custom/configurator/ConfiguratorCheckout.vue
 
 const products = PRODUCTS;
 
-const selectedProductId = ref<ProductId>(ProductId.StromV1);
+const selectedProductId = ref<ProductId>(ProductId.StromV2);
 
 onMounted(() => {
     const param = new URLSearchParams(window.location.search).get('product') as ProductId | null;
