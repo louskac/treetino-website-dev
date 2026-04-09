@@ -1,122 +1,38 @@
 <template>
-    <!-- Mobile vesion - carousel -->
-    <section class="lg:hidden py-16 overflow-hidden">
-        <div class="mx-auto max-w-lg px-6 sm:px-8">
-            <div
-                class="overflow-hidden rounded-3xl shadow-2xl"
-                @touchstart="onTouchStart"
-                @touchmove="onTouchMove"
-                @touchend="onTouchEnd"
-            >
-                <div
-                    class="flex transition-transform duration-500 ease-in-out will-change-transform"
-                    :style="{ transform: `translateX(-${carouselIndex * 100}%)` }"
-                >
-                    <div v-for="(slide, i) in slides" :key="i" class="min-w-full">
-                        <!-- Image fade -->
-                        <div class="relative h-60 sm:h-72 overflow-hidden">
-                            <img :src="images[i]" class="absolute inset-0 h-full w-full object-cover" alt="" />
-                            <div class="absolute inset-0 bg-linear-to-b from-black/10 via-transparent to-t-dark"></div>
-                        </div>
-                        <!-- Content -->
-                        <div class="relative h-full overflow-hidden bg-t-dark px-6 pb-8 pt-5">
-                            <div class="pointer-events-none absolute -top-10 right-6 h-36 w-36 rounded-full bg-t-accent/20 blur-3xl"></div>
-                            <!-- Icon and counter row -->
-                            <div class="relative z-10 mb-4 flex items-center justify-between">
-                                <div class="flex h-11 w-11 items-center justify-center rounded-xl border border-white/15 bg-white/10">
-                                    <component :is="slide.icon" class="h-5 w-5 text-white" stroke-width="1.5" />
-                                </div>
-                                <span class="text-xs font-medium tracking-widest text-white/30">
-                                    {{ String(i + 1).padStart(2, '0') }} / {{ String(slides.length).padStart(2, '0') }}
-                                </span>
-                            </div>
-                            <h2 class="relative z-10 text-2xl font-bold leading-tight text-white">{{ slide.title }}</h2>
-                            <p class="relative z-10 mt-2 mb-5 text-sm leading-relaxed text-white/60">{{ slide.text }}</p>
-                            <ButtonSecondary class="relative z-10">Předobjednat</ButtonSecondary>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Dot indicators + arrow navigation -->
-            <div class="mt-5 flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                    <button
-                        v-for="(_, i) in slides"
-                        :key="i"
-                        class="h-2 rounded-full transition-all duration-300 focus:outline-none"
-                        :class="i === carouselIndex ? 'w-6 bg-t-blue' : 'w-2 bg-foreground/20 hover:bg-foreground/40'"
-                        @click="carouselIndex = i"
-                    />
-                </div>
-                <div class="flex gap-2">
-                    <button
-                        @click="prevSlide"
-                        :disabled="carouselIndex === 0"
-                        class="flex h-9 w-9 items-center justify-center rounded-full border border-black/15 transition-opacity disabled:opacity-30 dark:border-white/15"
-                    >
-                        <NavArrowLeft class="h-4 w-4" stroke-width="2" />
-                    </button>
-                    <button
-                        @click="nextSlide"
-                        :disabled="carouselIndex === slides.length - 1"
-                        class="flex h-9 w-9 items-center justify-center rounded-full border border-black/15 transition-opacity disabled:opacity-30 dark:border-white/15"
-                    >
-                        <NavArrowRight class="h-4 w-4" stroke-width="2" />
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    
-    <!-- Desktop sticky scroll -->
-    <section ref="sectionRef" class="features-desktop relative hidden lg:block" style="height: 300vh;">
+    <section ref="sectionRef" class="features-desktop relative" style="height: 400vh;">
         <div class="sticky top-0 h-screen w-full overflow-hidden">
-            <div class="absolute right-0 h-full w-7/12 overflow-hidden">
-                <Transition name="features-fade" mode="out-in">
-                    <img
-                        :key="currentImageIndex"
-                        class="h-full w-full object-cover"
-                        :src="images[currentImageIndex]"
-                        alt=""
-                    />
-                </Transition>
+            <div class="absolute inset-0 overflow-hidden lg:left-auto lg:right-0 lg:w-7/12">
+                <canvas ref="canvasRef" class="h-full w-full"></canvas>
+                <div class="absolute inset-0 bg-linear-to-b from-black/10 via-transparent to-black/70 lg:hidden"></div>
             </div>
 
-            <div class="relative flex h-full w-1/2 flex-col">
+            <div class="relative h-full w-full lg:w-1/2">
                 <div class="relative h-full w-full">
-                    <div
-                        class="absolute top-1/2 right-0 mx-auto my-auto h-100 2xl:h-110 max-w-[600px] -translate-y-1/2 sm:w-[260px] md:w-[350px] lg:w-[calc(100%-100px)] xl:w-[calc(100%-200px)]"
-                    >
+                    <div class="absolute inset-x-0 bottom-0 z-10 px-4 pb-6 sm:px-6 sm:pb-8 lg:inset-x-auto lg:top-1/2 lg:right-0 lg:mx-auto lg:my-auto lg:h-100 lg:max-w-150 lg:-translate-y-1/2 lg:px-0 lg:pb-0 lg:w-[calc(100%-100px)] xl:w-[calc(100%-200px)] 2xl:h-110">
                         <Transition name="card-slide" appear>
                             <div
                                 v-if="cardVisible"
-                                class="relative h-full w-full overflow-hidden rounded-2xl border border-white/10 bg-linear-to-br from-t-blue to-t-dark shadow-2xl flex flex-col"
+                                class="relative mx-auto flex h-80 w-full max-w-lg flex-col overflow-hidden rounded-2xl border border-white/10 bg-linear-to-br from-t-blue to-t-dark shadow-2xl lg:h-full lg:max-w-none"
                             >
-                                <div class="pointer-events-none absolute -top-14 -right-14 h-48 w-48 rounded-full bg-t-accent/25 blur-3xl"></div>
+                                <div class="pointer-events-none absolute -right-14 -top-14 h-48 w-48 rounded-full bg-t-accent/25 blur-3xl"></div>
                                 <div class="pointer-events-none absolute -bottom-14 -left-14 h-48 w-48 rounded-full bg-white/5 blur-3xl"></div>
 
-                                <!-- Top labels -->
-                                <div class="relative z-10 flex items-center justify-between px-8 pt-8">
+                                <div class="relative z-10 flex items-center justify-between px-6 pt-6 lg:px-8 lg:pt-8">
                                     <span class="text-xs font-semibold uppercase tracking-[0.2em] text-white/30">Funkce</span>
                                     <span class="text-xs font-medium tracking-widest text-white/30">
-                                        {{ String(currentImageIndex + 1).padStart(2, '0') }} / {{ String(slides.length).padStart(2, '0') }}
+                                        {{ String(currentSectionIndex + 1).padStart(2, '0') }} / {{ String(sections.length).padStart(2, '0') }}
                                     </span>
                                 </div>
 
                                 <Transition name="card-content" mode="out-in">
-                                    <div :key="currentImageIndex" class="relative z-10 flex flex-1 flex-col gap-5 px-8 py-6">
-                                        <!-- Icon badge -->
-                                        <div class="flex h-12 w-12 items-center justify-center rounded-xl border border-white/15 bg-white/10">
-                                            <component :is="slides[currentImageIndex].icon" class="h-6 w-6 text-white" stroke-width="1.5" />
+                                    <div :key="currentSectionIndex" class="relative z-10 flex flex-1 flex-col gap-4 px-6 py-5 lg:gap-5 lg:px-8 lg:py-6">
+                                        <div class="flex h-11 w-11 items-center justify-center rounded-xl border border-white/15 bg-white/10 lg:h-12 lg:w-12">
+                                            <component :is="sections[currentSectionIndex].icon" class="h-5 w-5 text-white lg:h-6 lg:w-6" stroke-width="1.5" />
                                         </div>
 
-                                        <!-- Text -->
                                         <div>
-                                            <h2 class="text-2xl font-bold leading-tight text-white">{{ slides[currentImageIndex].title }}</h2>
-                                            <p class="mt-3 text-base leading-relaxed text-white/65">{{ slides[currentImageIndex].text }}</p>
+                                            <h2 class="text-2xl font-bold leading-tight text-white">{{ sections[currentSectionIndex].title }}</h2>
+                                            <p class="mt-2 text-sm leading-relaxed text-white/65 lg:mt-3 lg:text-base">{{ sections[currentSectionIndex].text }}</p>
                                         </div>
 
                                         <div class="mt-auto">
@@ -125,13 +41,12 @@
                                     </div>
                                 </Transition>
 
-                                <!-- Bottom progress bars -->
-                                <div class="relative z-10 flex gap-1.5 px-8 pb-8">
+                                <div class="relative z-10 flex gap-1.5 px-6 pb-6 lg:px-8 lg:pb-8">
                                     <div
-                                        v-for="(_, i) in slides"
+                                        v-for="(_, i) in sections"
                                         :key="i"
                                         class="h-0.5 flex-1 rounded-full transition-all duration-500"
-                                        :class="i === currentImageIndex ? 'bg-white' : i < currentImageIndex ? 'bg-white/50' : 'bg-white/20'"
+                                        :class="i === currentSectionIndex ? 'bg-white' : i < currentSectionIndex ? 'bg-white/50' : 'bg-white/20'"
                                     ></div>
                                 </div>
                             </div>
@@ -144,17 +59,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
-import { SunLight, Leaf, Tree, NavArrowLeft, NavArrowRight } from '@iconoir/vue';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
+import { SunLight, Leaf, Tree, MultiplePages } from '@iconoir/vue';
 import ButtonSecondary from '../ButtonSecondary.vue';
 
-const images = [
-    '/img/features-1.png',
-    '/img/features-2.png',
-    '/img/features-3.png',
-];
+const TOTAL_FRAMES = 228;
+const FRAMES_PER_SECTION = 57;
 
-const slides = [
+const sections = [
     {
         icon: SunLight,
         title: 'Text 1',
@@ -170,155 +82,152 @@ const slides = [
         title: 'Text 3',
         text: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
     },
+    {
+        icon: MultiplePages,
+        title: 'Text 4',
+        text: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    },
 ];
 
 const sectionRef = ref<HTMLElement | null>(null);
-const currentImageIndex = ref(0);
+const canvasRef = ref<HTMLCanvasElement | null>(null);
+
+const currentFrameIndex = ref(0);
 const cardVisible = ref(false);
-const carouselIndex = ref(0);
 
-let touchStartX = 0;
-let touchDeltaX = 0;
+const currentSectionIndex = computed(() =>
+    Math.min(sections.length - 1, Math.floor(currentFrameIndex.value / FRAMES_PER_SECTION)),
+);
 
-function prevSlide() { if (carouselIndex.value > 0) carouselIndex.value--; }
-function nextSlide() { if (carouselIndex.value < slides.length - 1) carouselIndex.value++; }
-function onTouchStart(e: TouchEvent) { touchStartX = e.touches[0].clientX; touchDeltaX = 0; }
-function onTouchMove(e: TouchEvent) { touchDeltaX = e.touches[0].clientX - touchStartX; }
-function onTouchEnd() {
-    if (touchDeltaX < -50) nextSlide();
-    else if (touchDeltaX > 50) prevSlide();
-    touchDeltaX = 0;
+const imagePaths = Array.from(
+    { length: TOTAL_FRAMES },
+    (_, i) => `/img/features-frames/features_frame_${String(i + 1).padStart(4, '0')}.webp`,
+);
+
+// Image objects pre-instantiated at mount so the browser downloads all in parallel
+let imageElements: HTMLImageElement[] = [];
+
+// Lerp state - plain vars, not reactive (mutated 60 fps)
+let targetFrame = 0;
+let displayFrame = 0;
+let rafId: number | null = null;
+let lastDrawnIndex = -1;
+let isSnapping = false;
+let hasSnappedIntoSection = false;
+
+function clamp(value: number, min: number, max: number): number {
+    return Math.min(max, Math.max(min, value));
 }
 
-const SCROLL_COOLDOWN = 600;
+function drawCover(canvas: HTMLCanvasElement, image: HTMLImageElement): void {
+    const rect = canvas.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    const targetWidth = Math.max(1, Math.floor(rect.width * dpr));
+    const targetHeight = Math.max(1, Math.floor(rect.height * dpr));
 
-let snapping = false;
-let hasSnapped = false;
-let scrollCooldown = false;
-let programmaticScroll = false;
+    if (canvas.width !== targetWidth || canvas.height !== targetHeight) {
+        canvas.width = targetWidth;
+        canvas.height = targetHeight;
+    }
 
-function isInStickyZone(): boolean {
-    const section = sectionRef.value;
-    if (!section) return false;
-    const rect = section.getBoundingClientRect();
-    const vh = window.innerHeight;
-    return rect.top <= 2 && rect.bottom >= vh - 2;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    ctx.clearRect(0, 0, targetWidth, targetHeight);
+
+    const ir = image.width / image.height;
+    const cr = targetWidth / targetHeight;
+
+    let dw: number;
+    let dh: number;
+    if (ir > cr) {
+        dh = targetHeight;
+        dw = dh * ir;
+    } else {
+        dw = targetWidth;
+        dh = dw / ir;
+    }
+
+    ctx.drawImage(image, (targetWidth - dw) / 2, (targetHeight - dh) / 2, dw, dh);
 }
 
-function handleScroll() {
-    if (window.innerWidth < 1280) {
-        return;
-    }
-    if (programmaticScroll) return;
+function animate(): void {
+    // Lerp toward scroll target
+    displayFrame += (targetFrame - displayFrame) * 0.15;
+    const intFrame = clamp(Math.round(displayFrame), 0, TOTAL_FRAMES - 1);
 
-    const section = sectionRef.value;
-    if (!section || snapping) return;
-
-    const rect = section.getBoundingClientRect();
-    const vh = window.innerHeight;
-
-    if (rect.top <= 0) {
-        cardVisible.value = true;
+    if (intFrame !== currentFrameIndex.value) {
+        currentFrameIndex.value = intFrame;
     }
 
-    // Snap
-    if (!hasSnapped && rect.top > 0 && rect.top <= vh / 2) {
-        snapping = true;
-        hasSnapped = true;
-        cardVisible.value = true;
-        window.scrollTo({ top: window.scrollY + rect.top, behavior: 'smooth' });
-        setTimeout(() => { snapping = false; }, 600);
-        return;
-    }
-
-    // Reset when above
-    if (rect.top > vh / 2) {
-        hasSnapped = false;
-        cardVisible.value = false;
-        currentImageIndex.value = 0;
-    }
-}
-
-function handleWheel(e: WheelEvent) {
-    if (window.innerWidth < 1280) {
-        return;
-    }
-    if (!isInStickyZone()) return;
-
-    const section = sectionRef.value!;
-    const direction = e.deltaY > 0 ? 1 : -1;
-    const nextIndex = currentImageIndex.value + direction;
-
-    // Scroll up from first slide is normal
-    if (nextIndex < 0) return;
-
-    e.preventDefault();
-
-    if (scrollCooldown) return;
-
-    // Exit after last slide
-    if (nextIndex >= images.length) {
-        scrollCooldown = true;
-        programmaticScroll = true;
-        const sectionScrollSpace = section.offsetHeight - window.innerHeight;
-        window.scrollTo({
-            top: section.offsetTop + sectionScrollSpace + 50,
-            behavior: 'smooth',
-        });
-        setTimeout(() => {
-            scrollCooldown = false;
-            programmaticScroll = false;
-        }, SCROLL_COOLDOWN);
-        return;
-    }
-
-    currentImageIndex.value = nextIndex;
-    scrollCooldown = true;
-    programmaticScroll = true;
-
-    const sectionScrollSpace = section.offsetHeight - window.innerHeight;
-    const targetScrollY = section.offsetTop + (nextIndex / (images.length - 1)) * sectionScrollSpace;
-    window.scrollTo({ top: targetScrollY, behavior: 'smooth' });
-
-    setTimeout(() => {
-        scrollCooldown = false;
-        programmaticScroll = false;
-    }, SCROLL_COOLDOWN);
-}
-
-onMounted(() => {
-    const section = sectionRef.value;
-    if (section) {
-        const rect = section.getBoundingClientRect();
-        if (rect.top <= 0) {
-            const sectionScrollSpace = section.offsetHeight - window.innerHeight;
-            const progress = Math.min(1, Math.max(0, -rect.top / sectionScrollSpace));
-            currentImageIndex.value = Math.min(images.length - 1, Math.floor(progress * images.length));
-            cardVisible.value = true;
+    // Draw only when frame changed - if image is not ready yet, retry next tick
+    if (intFrame !== lastDrawnIndex) {
+        const img = imageElements[intFrame];
+        if (img?.complete && img.naturalWidth > 0) {
+            if (canvasRef.value) drawCover(canvasRef.value, img);
+            lastDrawnIndex = intFrame;
         }
     }
 
+    rafId = requestAnimationFrame(animate);
+}
+
+function handleScroll(): void {
+    const section = sectionRef.value;
+    if (!section) return;
+
+    const rect = section.getBoundingClientRect();
+    const vh = window.innerHeight;
+
+    if (!isSnapping && !hasSnappedIntoSection && rect.top > 0 && rect.top <= vh / 2) {
+        isSnapping = true;
+        hasSnappedIntoSection = true;
+        window.scrollTo({ top: window.scrollY + rect.top, behavior: 'smooth' });
+
+        window.setTimeout(() => {
+            isSnapping = false;
+            handleScroll();
+        }, 600);
+
+        return;
+    }
+
+    if (rect.top > vh / 2) {
+        hasSnappedIntoSection = false;
+    }
+
+    cardVisible.value = rect.top <= 0 && rect.bottom >= vh;
+
+    if (rect.bottom < 0 || rect.top > vh) return;
+
+    const scrollable = Math.max(1, section.offsetHeight - vh);
+    const progress = clamp(-rect.top / scrollable, 0, 1);
+    targetFrame = progress * (TOTAL_FRAMES - 1);
+}
+
+onMounted(() => {
+    // Instantiate all Image objects immediately - browser downloads all 228 in parallel
+    imageElements = imagePaths.map((src) => {
+        const img = new Image();
+        img.decoding = 'async';
+        img.src = src;
+        return img;
+    });
+
+    handleScroll();
+    animate();
+
     window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('wheel', handleWheel, { passive: false });
 });
 
 onUnmounted(() => {
     window.removeEventListener('scroll', handleScroll);
-    window.removeEventListener('wheel', handleWheel);
+    if (rafId !== null) cancelAnimationFrame(rafId);
+    imageElements = [];
 });
 </script>
 
 <style scoped>
-/* Image crossfade */
-.features-fade-enter-active,
-.features-fade-leave-active {
-    transition: opacity 0.35s ease;
-}
-.features-fade-enter-from,
-.features-fade-leave-to {
-    opacity: 0;
-}
-
 /* Card slide-in */
 .card-slide-enter-active,
 .card-slide-leave-active {
