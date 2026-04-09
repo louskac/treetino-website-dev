@@ -196,7 +196,7 @@ function handleScroll(): void {
         hasSnappedIntoSection = false;
     }
 
-    cardVisible.value = rect.top <= 0 && rect.bottom >= vh;
+    cardVisible.value = rect.top <= 0;
 
     if (rect.bottom < 0 || rect.top > vh) return;
 
