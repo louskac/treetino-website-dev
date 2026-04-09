@@ -29,61 +29,76 @@
         <div
             class="relative mx-auto h-full w-full max-w-[1400px] sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
         >
-            <div class="flex h-full w-full flex-col p-6 pb-12">
-                <div class="mt-auto text-white">
-                    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+            <Swiper
+                :slides-per-view="1"
+                :space-between="0"
+                :on-slide-change="onSlideChange"
+                :on-progress="onProgress"
+                class="h-full"
+            >
+                <!-- Slide 1 -->
+                <SwiperSlide>
+                    <div class="flex h-full flex-col p-6 pb-12 text-white">
                         <div class="mt-auto">
-                            <h1
-                                class="mb-6 text-6xl leading-13 lg:text-8xl lg:leading-20"
-                            >
+                            <h1 class="mb-6 text-6xl lg:text-8xl">
                                 The Future <br />
                                 of Energy
                             </h1>
-                            <div class="flex gap-2">
-                                <div class="opacity-70">
-                                    <Leaf class="h-8 w-8 mt-0.5" stroke-width="1.5"/>
-                                </div>
-                                <div class="text-3xl opacity-70 leading-8">
+
+                            <div class="flex gap-2 opacity-70">
+                                <div class="text-3xl">
                                     Eco-Friendly <br />
                                     with modern design
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </SwiperSlide>
 
-                        <div class="hidden lg:flex lg:justify-end">
-                            <div class="mt-auto">
-                                <div
-                                    class="w-100 rounded-2xl border border-blue-500/30 bg-black/40 p-6 backdrop-blur-2xl"
-                                >
-                                    <h2 class="mb-3 text-4xl">Treetino App</h2>
-                                    <div class="mb-4 text-sm opacity-70">
-                                        Install the Treetino App for the
-                                        Ultimate Control of your Products
-                                    </div>
-
-                                    <div class="">
-                                        <ButtonPrimary class="w-full"
-                                            >About the App</ButtonPrimary
-                                        >
-                                    </div>
-                                </div>
-                            </div>
+                <!-- Slide 2 -->
+                <SwiperSlide>
+                    <div class="flex h-full flex-col p-6 pb-12 text-white">
+                        <div class="mt-auto">
+                            <h1 class="mb-6 text-6xl lg:text-8xl">
+                                Smart Systems
+                            </h1>
                         </div>
                     </div>
-                </div>
-            </div>
+                </SwiperSlide>
+            </Swiper>
         </div>
     </section>
 </template>
 
 <script setup lang="ts">
 import { Leaf } from '@iconoir/vue';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import type { Swiper as SwiperType } from 'swiper';
 import { ref, onMounted } from 'vue';
+import 'swiper/css';
+
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 
 const video = ref<HTMLVideoElement | null>(null);
 
 onMounted(() => {
     video.value?.play();
+});
+
+const activeIndex = ref(0);
+const progress = ref(0);
+
+const onSlideChange = (swiper: SwiperType) => {
+    activeIndex.value = swiper.activeIndex;
+};
+
+const onProgress = (swiper: SwiperType, prog: number) => {
+    progress.value = prog;
+};
+
+// expose to parent if needed
+defineExpose({
+    activeIndex,
+    progress,
 });
 </script>
