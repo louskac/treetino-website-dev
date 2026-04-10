@@ -41,13 +41,6 @@ const activeIndex = computed(() => {
     return carouselRef.value?.activeIndex ?? 0;
 });
 
-// watch(
-//     () => carouselRef.value?.activeIndex,
-//     (newIndex) => {
-//         if (newIndex !== undefined) console.log('Current slide:', newIndex);
-//     },
-// );
-
 const next = () => carouselRef.value?.next();
 const prev = () => carouselRef.value?.prev();
 const goTo = (i: number) => carouselRef.value?.goTo(i);
