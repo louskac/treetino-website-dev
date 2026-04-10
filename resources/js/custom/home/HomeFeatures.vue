@@ -59,12 +59,14 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 import { SunLight, Leaf, Tree, MultiplePages } from '@iconoir/vue';
 import ButtonSecondary from '../ButtonSecondary.vue';
 
 const TOTAL_FRAMES = 228;
-const FRAMES_PER_SECTION = 57;
+const TRANSITION_FRAMES = 56;
+const SCROLL_LOCK_MS = 600;
+const TRANSITION_DURATION_MS = 1500;
 
 const sections = [
     {
@@ -87,17 +89,23 @@ const sections = [
         title: 'Text 4',
         text: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     },
+    {
+        icon: SunLight,
+        title: 'Text 5',
+        text: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.',
+    },
 ];
+
+const sectionFrames = sections.map((_, i) =>
+    i === sections.length - 1 ? TOTAL_FRAMES - 1 : i * TRANSITION_FRAMES,
+);
 
 const sectionRef = ref<HTMLElement | null>(null);
 const canvasRef = ref<HTMLCanvasElement | null>(null);
 
 const currentFrameIndex = ref(0);
+const currentSectionIndex = ref(0);
 const cardVisible = ref(false);
-
-const currentSectionIndex = computed(() =>
-    Math.min(sections.length - 1, Math.floor(currentFrameIndex.value / FRAMES_PER_SECTION)),
-);
 
 const imagePaths = Array.from(
     { length: TOTAL_FRAMES },
@@ -114,6 +122,12 @@ let rafId: number | null = null;
 let lastDrawnIndex = -1;
 let isSnapping = false;
 let hasSnappedIntoSection = false;
+let isWheelLocked = false;
+let wheelLockTimeoutId: number | null = null;
+let transitionFromFrame = 0;
+let transitionToFrame = 0;
+let transitionStartTime = 0;
+let isTransitioning = false;
 
 function clamp(value: number, min: number, max: number): number {
     return Math.min(max, Math.max(min, value));
@@ -152,8 +166,20 @@ function drawCover(canvas: HTMLCanvasElement, image: HTMLImageElement): void {
 }
 
 function animate(): void {
-    // Lerp toward scroll target
-    displayFrame += (targetFrame - displayFrame) * 0.15;
+    if (isTransitioning) {
+        const elapsed = performance.now() - transitionStartTime;
+        const progress = clamp(elapsed / TRANSITION_DURATION_MS, 0, 1);
+        displayFrame = transitionFromFrame + (transitionToFrame - transitionFromFrame) * progress;
+
+        if (progress >= 1) {
+            isTransitioning = false;
+            displayFrame = transitionToFrame;
+            targetFrame = transitionToFrame;
+        }
+    } else {
+        displayFrame = targetFrame;
+    }
+
     const intFrame = clamp(Math.round(displayFrame), 0, TOTAL_FRAMES - 1);
 
     if (intFrame !== currentFrameIndex.value) {
@@ -170,6 +196,72 @@ function animate(): void {
     }
 
     rafId = requestAnimationFrame(animate);
+}
+
+function startStateTransition(nextSectionIndex: number): void {
+    const nextFrame = sectionFrames[nextSectionIndex];
+
+    if (nextFrame === targetFrame || isTransitioning) return;
+
+    transitionFromFrame = targetFrame;
+    transitionToFrame = nextFrame;
+    transitionStartTime = performance.now();
+    isTransitioning = true;
+
+    currentSectionIndex.value = nextSectionIndex;
+    targetFrame = nextFrame;
+
+    isWheelLocked = true;
+    if (wheelLockTimeoutId !== null) {
+        window.clearTimeout(wheelLockTimeoutId);
+    }
+    wheelLockTimeoutId = window.setTimeout(() => {
+        isWheelLocked = false;
+        wheelLockTimeoutId = null;
+    }, SCROLL_LOCK_MS);
+}
+
+function handleWheel(event: WheelEvent): void {
+    const section = sectionRef.value;
+    if (!section) return;
+
+    const rect = section.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const isInsidePinnedArea = rect.top <= 0 && rect.bottom >= vh;
+
+    if (!isInsidePinnedArea || !cardVisible.value) return;
+
+    if (isWheelLocked || isTransitioning) {
+        event.preventDefault();
+        return;
+    }
+
+    const direction = event.deltaY > 0 ? 1 : -1;
+
+    const nextSectionIndex = clamp(currentSectionIndex.value + direction, 0, sections.length - 1);
+    if (nextSectionIndex === currentSectionIndex.value) {
+        const sectionTop = window.scrollY + rect.top;
+
+        // Let user leave sticky area immediately when trying to scroll past edges.
+        if (currentSectionIndex.value === sections.length - 1 && direction > 0) {
+            event.preventDefault();
+            const exitBottomY = sectionTop + section.offsetHeight - vh + 2;
+            window.scrollTo({ top: exitBottomY, behavior: 'auto' });
+            return;
+        }
+
+        if (currentSectionIndex.value === 0 && direction < 0) {
+            event.preventDefault();
+            const exitTopY = Math.max(0, sectionTop - 2);
+            window.scrollTo({ top: exitTopY, behavior: 'auto' });
+            return;
+        }
+
+        return;
+    }
+
+    event.preventDefault();
+    startStateTransition(nextSectionIndex);
 }
 
 function handleScroll(): void {
@@ -197,12 +289,6 @@ function handleScroll(): void {
     }
 
     cardVisible.value = rect.top <= 0;
-
-    if (rect.bottom < 0 || rect.top > vh) return;
-
-    const scrollable = Math.max(1, section.offsetHeight - vh);
-    const progress = clamp(-rect.top / scrollable, 0, 1);
-    targetFrame = progress * (TOTAL_FRAMES - 1);
 }
 
 onMounted(() => {
@@ -214,15 +300,26 @@ onMounted(() => {
         return img;
     });
 
+    targetFrame = sectionFrames[0];
+    displayFrame = sectionFrames[0];
+    currentFrameIndex.value = sectionFrames[0];
+    currentSectionIndex.value = 0;
+
     handleScroll();
     animate();
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('wheel', handleWheel, { passive: false });
 });
 
 onUnmounted(() => {
     window.removeEventListener('scroll', handleScroll);
+    window.removeEventListener('wheel', handleWheel);
     if (rafId !== null) cancelAnimationFrame(rafId);
+    if (wheelLockTimeoutId !== null) {
+        window.clearTimeout(wheelLockTimeoutId);
+        wheelLockTimeoutId = null;
+    }
     imageElements = [];
 });
 </script>
