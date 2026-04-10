@@ -4,37 +4,103 @@
             class="mx-auto flex w-full max-w-[1400px] justify-between p-6 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
         >
             <div
-                class="flex w-full flex-col rounded-2xl border border-white/20 bg-black/20 p-6 backdrop-blur-2xl"
+                class="flex w-full flex-col rounded-2xl border border-white/20 bg-black/20 p-6 backdrop-blur-2xl transition-all duration-300"
+                :class="{
+                    'bg-white': activeDropdown === 'products',
+                    'bg-black/20': activeDropdown !== 'products',
+                }"
                 @mouseleave="activeDropdown = null"
             >
                 <div class="flex w-full justify-between">
                     <div class="logo my-auto flex gap-3 text-white">
-                        <LogoType class="fill-current text-white dark:text-white" />
+                        <LogoType
+                            class="fill-current transition-all duration-300"
+                            :class="{
+                                'text-black': activeDropdown === 'products',
+                                'text-white': activeDropdown !== 'products',
+                            }"
+                        />
                     </div>
 
                     <nav class="my-auto hidden gap-6 xl:flex">
-                        <Link href="#" class="text-sm text-white/80 transition-colors hover:text-white" @mouseenter="activeDropdown = 'products'">Produkty</Link>
+                        <Link
+                            href="#"
+                            class="text-sm transition-all duration-300"
+                            :class="{
+                                'text-black/80 hover:text-black':
+                                    activeDropdown === 'products',
+                                'text-white/80 hover:text-white':
+                                    activeDropdown !== 'products',
+                            }"
+                            @mouseenter="activeDropdown = 'products'"
+                            >Produkty</Link
+                        >
                         <!--<Link href="#" class="text-sm text-white/80 transition-colors hover:text-white" @mouseenter="activeDropdown = null">Sdílení energie</Link>-->
-                        <Link href="#" class="text-sm text-white/80 transition-colors hover:text-white" @mouseenter="activeDropdown = null">Spolupráce</Link>
-                        <Link href="#" class="text-sm text-white/80 transition-colors hover:text-white" @mouseenter="activeDropdown = null">Média</Link>
-                        <Link href="#" class="text-sm text-white/80 transition-colors hover:text-white" @mouseenter="activeDropdown = null">Kontakty</Link>
+                        <Link
+                            href="#"
+                            class="text-sm transition-all duration-300"
+                            :class="{
+                                'text-black/80 hover:text-black':
+                                    activeDropdown === 'products',
+                                'text-white/80 hover:text-white':
+                                    activeDropdown !== 'products',
+                            }"
+                            @mouseenter="activeDropdown = null"
+                            >Spolupráce</Link
+                        >
+                        <Link
+                            href="#"
+                            class="text-sm transition-all duration-300"
+                            :class="{
+                                'text-black/80 hover:text-black':
+                                    activeDropdown === 'products',
+                                'text-white/80 hover:text-white':
+                                    activeDropdown !== 'products',
+                            }"
+                            @mouseenter="activeDropdown = null"
+                            >Média</Link
+                        >
+                        <Link
+                            href="#"
+                            class="text-sm transition-all duration-300"
+                            :class="{
+                                'text-black/80 hover:text-black':
+                                    activeDropdown === 'products',
+                                'text-white/80 hover:text-white':
+                                    activeDropdown !== 'products',
+                            }"
+                            @mouseenter="activeDropdown = null"
+                            >Kontakty</Link
+                        >
                     </nav>
 
                     <div class="flex gap-8">
                         <div class="my-auto flex gap-4">
-                            <div class="dark-switch my-auto text-white flex">
+                            <div class="dark-switch my-auto flex text-white">
                                 <button
                                     @click="toggleDark"
-                                    class="cursor-pointer p-1 transition-opacity hover:opacity-70 my-auto"
+                                    class="my-auto cursor-pointer p-1 transition-opacity hover:opacity-70"
                                 >
                                     <SunLight
                                         v-if="isDark"
-                                        class="h-4.5 w-4.5 text-white"
+                                        class="h-4.5 w-4.5 transition-all duration-300"
+                                        :class="{
+                                            'text-black/80 hover:text-black':
+                                                activeDropdown === 'products',
+                                            'text-white/80 hover:text-white':
+                                                activeDropdown !== 'products',
+                                        }"
                                         stroke-width="2"
                                     />
                                     <HalfMoon
                                         v-else
-                                        class="h-4.5 w-4.5 text-white"
+                                        class="h-4.5 w-4.5 transition-all duration-300"
+                                        :class="{
+                                            'text-black/80 hover:text-black':
+                                                activeDropdown === 'products',
+                                            'text-white/80 hover:text-white':
+                                                activeDropdown !== 'products',
+                                        }"
                                         stroke-width="2"
                                     />
                                 </button>
@@ -50,7 +116,16 @@
 
                         <div class="my-auto hidden text-white md:block">
                             <Link href="/configurator">
-                                <ButtonWhite variant="slim">Preorder Now</ButtonWhite>
+                                <ButtonWhite
+                                    variant="slim"
+                                    :class="{
+                                        'border shadow-xl':
+                                            activeDropdown === 'products',
+                                        'border border-white':
+                                            activeDropdown !== 'products',
+                                    }"
+                                    >Preorder Now</ButtonWhite
+                                >
                             </Link>
                         </div>
                     </div>
@@ -58,13 +133,42 @@
 
                 <!-- Products dropdown-->
                 <Transition name="dropdown">
-                    <div v-if="activeDropdown === 'products'" class="mt-4 hidden gap-6 xl:flex">
-                        <div v-for="item in products" :key="item.id" class="flex flex-1 flex-col gap-2">
-                            <div class="h-36 rounded-xl bg-white/10"></div>
-                            <p class="text-sm font-medium text-white">{{ item.label }}</p>
+                    <div
+                        v-if="activeDropdown === 'products'"
+                        class="hidden gap-6 xl:flex"
+                    >
+                        <div
+                            v-for="item in products"
+                            :key="item.id"
+                            class="flex flex-1 flex-col gap-2 pt-6"
+                        >
+                            <div class="h-36 rounded-xl bg-black/10"></div>
+                            <p class="mt-1 text-2xl font-medium text-black">
+                                {{ item.label }}
+                            </p>
                             <div class="flex gap-2">
-                                <Link href="#" class="flex-1 rounded-lg border border-white/20 py-1.5 text-center text-xs text-white/80 transition-colors hover:text-white">Více informací</Link>
-                                <Link :href="`/configurator?product=${item.id}`" class="flex-1 rounded-lg bg-white py-1.5 text-center text-xs font-medium text-black transition-opacity hover:opacity-80">Objednat</Link>
+                                <Link
+                                    href="#"
+                                    class="flex-1 rounded-lg py-1.5 text-center text-xs transition-colors"
+                                    :class="{
+                                        'border text-black/80 shadow-xl hover:text-white':
+                                            activeDropdown === 'products',
+                                        'border border-transparent text-white/80 hover:text-white':
+                                            activeDropdown !== 'products',
+                                    }"
+                                    >Více informací</Link
+                                >
+                                <Link
+                                    :href="`/configurator?product=${item.id}`"
+                                    class="flex-1 rounded-lg py-1.5 text-center text-xs font-medium transition-opacity hover:opacity-80"
+                                    :class="{
+                                        'border border-transparent bg-black text-white shadow-xl':
+                                            activeDropdown === 'products',
+                                        'border border-transparent bg-white text-black':
+                                            activeDropdown !== 'products',
+                                    }"
+                                    >Objednat</Link
+                                >
                             </div>
                         </div>
                     </div>
@@ -75,8 +179,8 @@
 </template>
 
 <script setup lang="ts">
-import { Link } from '@inertiajs/vue3';
 import { SunLight, HalfMoon, Menu } from '@iconoir/vue';
+import { Link } from '@inertiajs/vue3';
 import { ref, onMounted } from 'vue';
 import ButtonWhite from '@/custom/ButtonWhite.vue';
 import LogoType from '@/custom/LogoType.vue';
@@ -120,7 +224,7 @@ const toggleDark = () => {
 }
 .dropdown-enter-to,
 .dropdown-leave-from {
-    max-height: 200px;
+    max-height: 250px; /* Increased from 200px */
     opacity: 1;
 }
 </style>
