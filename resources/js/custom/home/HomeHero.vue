@@ -1,22 +1,6 @@
 <template>
     <section class="hero h-screen w-full bg-zinc-950">
-        <div class="bg absolute top-0 h-full w-full bg-t-dark">
-            <video
-                ref="video"
-                class="h-full w-full object-cover"
-                id="video"
-                muted
-                loop
-                playsinline
-                style="
-                    pointer-events: none;
-                    object-fit: cover;
-                    min-height: 100%;
-                "
-            >
-                <source src="/video/hero-test-2.mp4" type="video/mp4" />
-            </video>
-        </div>
+        <HomeHeroBackground :active-index="activeIndex" />
 
         <div
             class="absolute bottom-0 h-100 w-full bg-linear-to-b from-transparent to-black"
@@ -26,19 +10,45 @@
             class="absolute left-1/2 hidden h-full max-w-[1400px] -translate-x-1/2 border-r border-l border-r-white/20 border-l-white/20 sm:block sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
         ></div>
 
-        <HomeHeroCarousel />
+        <HomeHeroCarousel ref="carouselRef" />
+
+        <HomeHeroCarouselControls @next="next" @prev="prev" @goTo="goTo" />
     </section>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, computed, watch } from 'vue';
 import 'swiper/css';
 
+import HomeHeroBackground from '@/custom/home/hero/HomeHeroBackground.vue';
 import HomeHeroCarousel from '@/custom/home/hero/HomeHeroCarousel.vue';
+import HomeHeroCarouselControls from '@/custom/home/hero/HomeHeroCarouselControls.vue';
 
-const video = ref<HTMLVideoElement | null>(null);
+type CarouselExpose = {
+    swiper: any;
+    activeIndex: number;
+    progress: number;
+    localProgress: number;
+    next: () => void;
+    prev: () => void;
+    goTo: (index: number) => void;
+};
 
-onMounted(() => {
-    video.value?.play();
+const carouselRef = ref<CarouselExpose | null>(null);
+
+// active Index
+const activeIndex = computed(() => {
+    return carouselRef.value?.activeIndex ?? 0;
 });
+
+// watch(
+//     () => carouselRef.value?.activeIndex,
+//     (newIndex) => {
+//         if (newIndex !== undefined) console.log('Current slide:', newIndex);
+//     },
+// );
+
+const next = () => carouselRef.value?.next();
+const prev = () => carouselRef.value?.prev();
+const goTo = (i: number) => carouselRef.value?.goTo(i);
 </script>

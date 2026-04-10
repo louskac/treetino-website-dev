@@ -3,6 +3,14 @@ import type { Swiper as SwiperType } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { ref, computed } from 'vue';
 
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/effect-fade';
+
+// Import modules
+import { EffectFade } from 'swiper/modules';
+const modules = [EffectFade];
+
 // SWIPER
 // --- core state ---
 const swiper = ref<SwiperType | null>(null);
@@ -15,7 +23,7 @@ const onSwiper = (instance: SwiperType): void => {
 };
 
 const onSlideChange = (instance: SwiperType): void => {
-    activeIndex.value = instance.activeIndex;
+    activeIndex.value = instance.realIndex;
 };
 
 const onProgress = (_: SwiperType, prog: number): void => {
@@ -65,12 +73,16 @@ defineExpose({
             :allow-touch-move="false"
             :simulate-touch="false"
             :space-between="0"
-            :on-slide-change="onSlideChange"
-            :on-progress="onProgress"
             :keyboard="false"
             :mousewheel="false"
             :loop="true"
+            :modules="modules"
+            effect="fade"
+            :fadeEffect="{ crossFade: true }"
+            :speed="400"
             @swiper="onSwiper"
+            @slideChange="onSlideChange"
+            @progress="onProgress"
             class="h-full"
         >
             <!-- Slide 1 -->
@@ -107,11 +119,5 @@ defineExpose({
                 </div>
             </SwiperSlide>
         </Swiper>
-    </div>
-
-    <!-- Controls -->
-    <div class="absolute bottom-10 left-10 z-50 flex gap-4 text-white">
-        <button @click="prev">Prev</button>
-        <button @click="next">Next</button>
     </div>
 </template>
