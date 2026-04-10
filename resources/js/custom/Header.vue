@@ -149,9 +149,9 @@
                             <div class="flex gap-2">
                                 <Link
                                     href="#"
-                                    class="flex-1 rounded-lg py-1.5 text-center text-xs transition-colors"
+                                    class="flex-1 rounded-lg py-1.5 text-center text-xs transition-all duration-300"
                                     :class="{
-                                        'border text-black/80 shadow-xl hover:text-white':
+                                        'border text-black/80 hover:text-white':
                                             activeDropdown === 'products',
                                         'border border-transparent text-white/80 hover:text-white':
                                             activeDropdown !== 'products',
@@ -160,9 +160,9 @@
                                 >
                                 <Link
                                     :href="`/configurator?product=${item.id}`"
-                                    class="flex-1 rounded-lg py-1.5 text-center text-xs font-medium transition-opacity hover:opacity-80"
+                                    class="flex-1 rounded-lg py-1.5 text-center text-xs font-medium transition-all duration-300 hover:opacity-80"
                                     :class="{
-                                        'border border-transparent bg-black text-white shadow-xl':
+                                        'border border-transparent bg-black text-white':
                                             activeDropdown === 'products',
                                         'border border-transparent bg-white text-black':
                                             activeDropdown !== 'products',
