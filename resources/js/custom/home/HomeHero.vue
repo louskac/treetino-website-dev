@@ -1,22 +1,6 @@
 <template>
     <section class="hero h-screen w-full bg-zinc-950">
-        <div class="bg absolute top-0 h-full w-full bg-t-dark">
-            <video
-                ref="video"
-                class="h-full w-full object-cover"
-                id="video"
-                muted
-                loop
-                playsinline
-                style="
-                    pointer-events: none;
-                    object-fit: cover;
-                    min-height: 100%;
-                "
-            >
-                <source src="/video/hero-test-2.mp4" type="video/mp4" />
-            </video>
-        </div>
+        <HomeHeroBackground :active-index="activeIndex" />
 
         <div
             class="absolute bottom-0 h-100 w-full bg-linear-to-b from-transparent to-black"
@@ -26,79 +10,38 @@
             class="absolute left-1/2 hidden h-full max-w-[1400px] -translate-x-1/2 border-r border-l border-r-white/20 border-l-white/20 sm:block sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
         ></div>
 
-        <div
-            class="relative mx-auto h-full w-full max-w-[1400px] sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
-        >
-            <Swiper
-                :slides-per-view="1"
-                :space-between="0"
-                :on-slide-change="onSlideChange"
-                :on-progress="onProgress"
-                class="h-full"
-            >
-                <!-- Slide 1 -->
-                <SwiperSlide>
-                    <div class="flex h-full flex-col p-6 pb-12 text-white">
-                        <div class="mt-auto">
-                            <h1 class="mb-6 text-6xl lg:text-8xl">
-                                The Future <br />
-                                of Energy
-                            </h1>
+        <HomeHeroCarousel ref="carouselRef" />
 
-                            <div class="flex gap-2 opacity-70">
-                                <div class="text-3xl">
-                                    Eco-Friendly <br />
-                                    with modern design
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </SwiperSlide>
-
-                <!-- Slide 2 -->
-                <SwiperSlide>
-                    <div class="flex h-full flex-col p-6 pb-12 text-white">
-                        <div class="mt-auto">
-                            <h1 class="mb-6 text-6xl lg:text-8xl">
-                                Smart Systems
-                            </h1>
-                        </div>
-                    </div>
-                </SwiperSlide>
-            </Swiper>
-        </div>
+        <HomeHeroCarouselControls @next="next" @prev="prev" @goTo="goTo" />
     </section>
 </template>
 
 <script setup lang="ts">
-import { Leaf } from '@iconoir/vue';
-import { Swiper, SwiperSlide } from 'swiper/vue';
-import type { Swiper as SwiperType } from 'swiper';
-import { ref, onMounted } from 'vue';
+import { ref, computed, watch } from 'vue';
 import 'swiper/css';
 
-import ButtonPrimary from '@/custom/ButtonPrimary.vue';
+import HomeHeroBackground from '@/custom/home/hero/HomeHeroBackground.vue';
+import HomeHeroCarousel from '@/custom/home/hero/HomeHeroCarousel.vue';
+import HomeHeroCarouselControls from '@/custom/home/hero/HomeHeroCarouselControls.vue';
 
-const video = ref<HTMLVideoElement | null>(null);
-
-onMounted(() => {
-    video.value?.play();
-});
-
-const activeIndex = ref(0);
-const progress = ref(0);
-
-const onSlideChange = (swiper: SwiperType) => {
-    activeIndex.value = swiper.activeIndex;
+type CarouselExpose = {
+    swiper: any;
+    activeIndex: number;
+    progress: number;
+    localProgress: number;
+    next: () => void;
+    prev: () => void;
+    goTo: (index: number) => void;
 };
 
-const onProgress = (swiper: SwiperType, prog: number) => {
-    progress.value = prog;
-};
+const carouselRef = ref<CarouselExpose | null>(null);
 
-// expose to parent if needed
-defineExpose({
-    activeIndex,
-    progress,
+// active Index
+const activeIndex = computed(() => {
+    return carouselRef.value?.activeIndex ?? 0;
 });
+
+const next = () => carouselRef.value?.next();
+const prev = () => carouselRef.value?.prev();
+const goTo = (i: number) => carouselRef.value?.goTo(i);
 </script>
