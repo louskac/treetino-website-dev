@@ -239,7 +239,26 @@ function handleWheel(event: WheelEvent): void {
     const direction = event.deltaY > 0 ? 1 : -1;
 
     const nextSectionIndex = clamp(currentSectionIndex.value + direction, 0, sections.length - 1);
-    if (nextSectionIndex === currentSectionIndex.value) return;
+    if (nextSectionIndex === currentSectionIndex.value) {
+        const sectionTop = window.scrollY + rect.top;
+
+        // Let user leave sticky area immediately when trying to scroll past edges.
+        if (currentSectionIndex.value === sections.length - 1 && direction > 0) {
+            event.preventDefault();
+            const exitBottomY = sectionTop + section.offsetHeight - vh + 2;
+            window.scrollTo({ top: exitBottomY, behavior: 'auto' });
+            return;
+        }
+
+        if (currentSectionIndex.value === 0 && direction < 0) {
+            event.preventDefault();
+            const exitTopY = Math.max(0, sectionTop - 2);
+            window.scrollTo({ top: exitTopY, behavior: 'auto' });
+            return;
+        }
+
+        return;
+    }
 
     event.preventDefault();
     startStateTransition(nextSectionIndex);
