@@ -252,8 +252,8 @@ function handleWheel(event: WheelEvent): void {
 
         if (currentSectionIndex.value === 0 && direction < 0) {
             event.preventDefault();
-            const exitTopY = Math.max(0, sectionTop - 2);
-            window.scrollTo({ top: exitTopY, behavior: 'auto' });
+            const exitTopY = Math.max(0, sectionTop - vh);
+            window.scrollTo({ top: exitTopY, behavior: 'smooth' });
             return;
         }
 
