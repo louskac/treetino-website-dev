@@ -7,12 +7,12 @@
             class="sticky top-0 z-10 h-[30vh] bg-white md:static md:z-auto md:h-auto md:w-4/5 flex items-center justify-center overflow-hidden"
             @wheel.prevent="scrollConfigurator"
         >
-            <div class="relative w-full h-full">
+            <div class="relative w-full h-full flex items-center justify-center">
                 <img
                     v-for="(img, i) in sectionImages"
                     :key="i"
                     :src="img"
-                    class="absolute inset-0 max-h-full max-w-full object-contain transition-opacity duration-700"
+                    class="absolute max-h-full max-w-full object-contain transition-opacity duration-700"
                     :class="i === currentSectionIndex ? 'opacity-100' : 'opacity-0'"
                 />
             </div>
