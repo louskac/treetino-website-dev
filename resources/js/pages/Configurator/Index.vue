@@ -54,7 +54,7 @@
 
 <script setup lang="ts">
 import { Head } from '@inertiajs/vue3';
-import { ref, computed, onMounted, ComponentPublicInstance } from 'vue';
+import { ref, computed, onMounted, onUnmounted, nextTick, ComponentPublicInstance } from 'vue';
 import { PRODUCTS, BASE_PRICES, ProductId } from '@/types/products';
 import ConfiguratorModelSelect from '@/custom/configurator/ConfiguratorModelSelect.vue';
 import ConfiguratorProductHeader from '@/custom/configurator/ConfiguratorProductHeader.vue';
@@ -68,14 +68,25 @@ import ConfiguratorCheckout from '@/custom/configurator/ConfiguratorCheckout.vue
 const products = PRODUCTS;
 
 const selectedProductId = ref<ProductId>(ProductId.StromV2);
+let removePanelScrollListener: (() => void) | null = null;
 
 onMounted(() => {
-    const param = new URLSearchParams(window.location.search).get('product') as ProductId | null;
-    if (param && PRODUCTS.some(p => p.id === param)) {
-        selectedProductId.value = param;
+    const panel = configuratorPanel.value;
+    if (panel) {
+        panel.addEventListener('scroll', updateActiveSection, { passive: true });
+        removePanelScrollListener = () => panel.removeEventListener('scroll', updateActiveSection);
     }
 
-    configuratorPanel.value?.addEventListener('scroll', updateActiveSection);
+    window.addEventListener('scroll', updateActiveSection, { passive: true });
+    window.addEventListener('resize', updateActiveSection, { passive: true });
+
+    nextTick(updateActiveSection);
+});
+
+onUnmounted(() => {
+    removePanelScrollListener?.();
+    window.removeEventListener('scroll', updateActiveSection);
+    window.removeEventListener('resize', updateActiveSection);
 });
 const selectedColorId = ref('white');
 const selectedLeafColorId = ref('green');
@@ -117,12 +128,12 @@ function setSectionRef(
 }
 
 function updateActiveSection() {
-    const container = configuratorPanel.value;
-    if (!container) return;
+    const panel = configuratorPanel.value;
 
-    const containerRect = container.getBoundingClientRect();
-
-    const triggerY = containerRect.top + containerRect.height * 1/2;
+    const usePanelTrigger = !!panel && window.matchMedia('(min-width: 768px)').matches;
+    const triggerY = usePanelTrigger
+        ? panel.getBoundingClientRect().top + panel.getBoundingClientRect().height * 0.5
+        : window.innerHeight * 0.65;
 
     let activeIndex = 0;
 
