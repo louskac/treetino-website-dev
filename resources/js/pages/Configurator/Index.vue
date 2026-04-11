@@ -12,7 +12,7 @@
 
         <div
             ref="configuratorPanel"
-            class="md:w-1/5 md:h-full border-l border-t-blue/10 dark:border-white/10 md:overflow-y-auto bg-white dark:bg-black"
+            class="md:w-5/9 lg:w-3/7 xl:w-1/3 2xl:w-3/13 md:h-full border-l border-t-blue/10 dark:border-white/10 md:overflow-y-auto bg-white dark:bg-black"
         >
             <div class="p-6 flex flex-col gap-7">
                 <ConfiguratorModelSelect
