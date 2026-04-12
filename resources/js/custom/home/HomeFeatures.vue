@@ -3,7 +3,6 @@
         <div class="sticky top-0 h-screen w-full overflow-hidden">
             <div class="absolute inset-0 overflow-hidden lg:left-auto lg:right-0 lg:w-7/12">
                 <canvas ref="canvasRef" class="h-full w-full"></canvas>
-                <div class="absolute inset-0 bg-linear-to-b from-black/10 via-transparent to-black/70 lg:hidden"></div>
             </div>
 
             <div class="relative h-full w-full lg:w-1/2">
