@@ -6,7 +6,7 @@
             </div>
 
             <div class="relative h-full w-full lg:w-1/2">
-                <div class="relative h-full w-full">
+                <div class="relative h-full w-full bg-[#fdfdfd]">
                     <div class="absolute inset-x-0 bottom-0 z-10 px-4 pb-6 sm:px-6 sm:pb-8 lg:inset-x-auto lg:top-1/2 lg:right-0 lg:mx-auto lg:my-auto lg:h-100 lg:max-w-150 lg:-translate-y-1/2 lg:px-0 lg:pb-0  2xl:h-110">
                         <HomeFeaturesCardMobile
                             class="lg:hidden mb-5"
