@@ -2,7 +2,7 @@
     <Transition name="card-slide" appear>
         <div
             v-if="visible"
-            class="relative mx-auto hidden h-110 w-full max-w-lg flex-col overflow-hidden rounded-2xl border border-white/30 bg-black/5 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.3)] backdrop-blur-3xl backdrop-saturate-150 lg:flex lg:h-full lg:max-w-none"
+            class="relative mx-auto hidden w-full max-w-lg flex-col overflow-hidden rounded-2xl border border-white/30 bg-black/5 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.3)] backdrop-blur-3xl backdrop-saturate-150 lg:flex lg:h-full lg:max-w-none"
         >
             <div
                 class="pointer-events-none absolute -top-14 -right-14 h-48 w-48 rounded-full bg-t-accent/25 blur-3xl"
