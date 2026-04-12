@@ -2,14 +2,14 @@
     <Transition name="card-slide" appear>
         <div
             v-if="visible"
-            class="relative mx-auto hidden h-80 w-full max-w-lg flex-col overflow-hidden rounded-2xl border border-white/10 bg-linear-to-br from-t-blue to-t-dark shadow-2xl lg:flex lg:h-full lg:max-w-none"
+            class="relative mx-auto hidden h-80 w-full max-w-lg flex-col overflow-hidden rounded-2xl border border-white/30 bg-black/25 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.7)] backdrop-blur-3xl backdrop-saturate-150 lg:flex lg:h-full lg:max-w-none"
         >
             <div class="pointer-events-none absolute -right-14 -top-14 h-48 w-48 rounded-full bg-t-accent/25 blur-3xl"></div>
             <div class="pointer-events-none absolute -bottom-14 -left-14 h-48 w-48 rounded-full bg-white/5 blur-3xl"></div>
 
             <div class="relative z-10 flex items-center justify-between px-6 pt-6 lg:px-8 lg:pt-8">
-                <span class="text-xs font-semibold uppercase tracking-[0.2em] text-white/30">Funkce</span>
-                <span class="text-xs font-medium tracking-widest text-white/30">
+                <span class="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">Funkce</span>
+                <span class="text-xs font-medium tracking-widest text-white/70">
                     {{ String(currentSectionIndex + 1).padStart(2, '0') }} / {{ String(sections.length).padStart(2, '0') }}
                 </span>
             </div>
@@ -22,7 +22,7 @@
 
                     <div>
                         <h2 class="text-2xl font-bold leading-tight text-white">{{ sections[currentSectionIndex].title }}</h2>
-                        <p class="mt-2 text-sm leading-relaxed text-white/65 lg:mt-3 lg:text-base">{{ sections[currentSectionIndex].text }}</p>
+                        <p class="mt-2 text-sm leading-relaxed text-white/75 lg:mt-3 lg:text-base">{{ sections[currentSectionIndex].text }}</p>
                     </div>
 
                     <div class="mt-auto">
