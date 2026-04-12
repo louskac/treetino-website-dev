@@ -5,41 +5,157 @@
         ></div>
 
         <div
-            class="hidden sm:block absolute left-1/2 h-full max-w-[1400px] -translate-x-1/2 border-r border-l border-r-white/20 border-l-white/20 [mask-image:linear-gradient(to_bottom,black_0%,transparent_100%)] sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
+            class="absolute left-1/2 hidden h-full max-w-[1400px] -translate-x-1/2 border-r border-l border-r-white/20 border-l-white/20 [mask-image:linear-gradient(to_bottom,black_0%,transparent_100%)] sm:block sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
         ></div>
 
         <div
-            class="relative mx-auto flex h-200 w-full max-w-[1400px] justify-end py-20 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
+            class="relative mx-auto max-w-[1400px] px-6 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
         >
-            <div class="relative mt-auto">
+            <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
                 <div
-                    class="mx-6 flex flex-col gap-6 rounded-2xl border border-black/20 bg-black/5 p-6 backdrop-blur-2xl dark:border-white/20 dark:bg-white/5"
+                    class="group flex aspect-3/2 flex-col overflow-clip rounded-2xl border bg-white/70 p-8 backdrop-blur-xl transition-all hover:p-10"
                 >
-                    <h2 class="text-right text-4xl md:text-6xl">
-                        Turn your empty space <br />
-                        into an asset.
-                        <span class="text-t-blue">With Treetino</span>
-                    </h2>
-                    <div class="flex justify-end flex-col gap-3 sm:flex-row">
-                        <div class="w-full md:w-fit">
-                            <ButtonPrimary class="w-full text-center md:w-fit"
-                                >Předobjednat</ButtonPrimary
-                            >
-                        </div>
+                    <div
+                        class="absolute -bottom-16 -left-16 h-100 w-100 transition-all group-hover:h-110 group-hover:w-110"
+                    >
+                        <img
+                            class="w-full"
+                            src="/img/treetino-vrstevnice.png"
+                            alt=""
+                        />
+                    </div>
 
-                        <div class="w-full md:w-fit">
-                            <ButtonSecondary class="w-full text-center md:w-fit"
-                                >Objevit technologie</ButtonSecondary
+                    <div
+                        class="relative z-10 flex items-center justify-between"
+                    >
+                        <span
+                            class="text-xs font-semibold tracking-[0.2em] text-black/60 uppercase"
+                            >Space</span
+                        >
+                        <span
+                            class="text-xs font-medium tracking-widest text-black/60"
+                        >
+                            <InfoCircle class="h-4 w-4" stroke-width="3" />
+                        </span>
+                    </div>
+
+                    <div class="mt-3 text-4xl">
+                        Proměňte prázdná Místa v&nbsp;Aktiva
+                    </div>
+
+                    <div class="mt-auto flex w-full justify-end gap-2">
+                        <div
+                            class="opacity-0 transition-all group-hover:opacity-100"
+                        >
+                            <ButtonPrimary>Konfigurovat</ButtonPrimary>
+                        </div>
+                        <div class="">
+                            <div
+                                class="flex h-11 w-11 items-center justify-center rounded-xl border border-blue-800/15 bg-blue-200/10 lg:h-12 lg:w-12"
                             >
+                                <FastArrowRight class="h-5 w-5" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="group flex aspect-3/2 flex-col overflow-clip rounded-2xl bg-linear-to-br from-t-blue to-t-dark p-8 text-white backdrop-blur-xl transition-all hover:p-10"
+                >
+                    <div
+                        class="absolute -bottom-16 -left-16 h-100 w-100 transition-all group-hover:h-110 group-hover:w-110"
+                    >
+                        <img
+                            class="w-full"
+                            src="/img/treetino-v1-isometric.png"
+                            alt=""
+                        />
+                    </div>
+
+                    <div
+                        class="relative z-10 flex items-center justify-between"
+                    >
+                        <span
+                            class="text-xs font-semibold tracking-[0.2em] text-white/30 uppercase"
+                            >Technologies</span
+                        >
+                        <span
+                            class="text-xs font-medium tracking-widest text-white/30"
+                        >
+                            <InfoCircle class="h-4 w-4" stroke-width="3" />
+                        </span>
+                    </div>
+
+                    <div class="mt-3 text-4xl">
+                        Objevte Technologie Treetino
+                    </div>
+
+                    <div class="mt-auto flex w-full justify-end gap-2">
+                        <div
+                            class="opacity-0 transition-all group-hover:opacity-100"
+                        >
+                            <ButtonWhite>Jak to Funguje?</ButtonWhite>
+                        </div>
+                        <div class="">
+                            <div
+                                class="flex h-11 w-11 items-center justify-center rounded-xl border border-white/15 bg-white/10 lg:h-12 lg:w-12"
+                            >
+                                <FastArrowRight class="h-5 w-5" />
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!--        <div-->
+        <!--            class="relative mx-auto flex h-200 w-full max-w-[1400px] justify-end py-20 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"-->
+        <!--        >-->
+        <!--            <div class="relative mt-auto">-->
+        <!--                <div-->
+        <!--                    class="mx-6 flex flex-col gap-6 rounded-2xl border border-black/20 bg-black/5 p-6 backdrop-blur-2xl dark:border-white/20 dark:bg-white/5"-->
+        <!--                >-->
+        <!--                    <h2 class="text-right text-4xl md:text-6xl">-->
+        <!--                        Turn your empty space <br />-->
+        <!--                        into an asset.-->
+        <!--                        <span class="text-t-blue">With Treetino</span>-->
+        <!--                    </h2>-->
+        <!--                    <div class="flex flex-col justify-end gap-3 sm:flex-row">-->
+        <!--                        <div class="w-full md:w-fit">-->
+        <!--                            <ButtonPrimary class="w-full text-center md:w-fit"-->
+        <!--                                >Předobjednat</ButtonPrimary-->
+        <!--                            >-->
+        <!--                        </div>-->
+
+        <!--                        <div class="w-full md:w-fit">-->
+        <!--                            <ButtonSecondary class="w-full text-center md:w-fit"-->
+        <!--                                >Objevit technologie</ButtonSecondary-->
+        <!--                            >-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
     </section>
 </template>
 
 <script setup lang="ts">
+import { onMounted, ref } from 'vue';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import ButtonSecondary from '@/custom/ButtonSecondary.vue';
+import { InfoCircle, FastArrowRight } from '@iconoir/vue';
+import ButtonWhite from '@/custom/ButtonWhite.vue';
+
+const videoRefs = ref<HTMLVideoElement[]>([]);
+
+onMounted(() => {
+    // Programmatically play all videos concurrently to ensure mobile compatibility
+    videoRefs.value.forEach((video) => {
+        if (video) {
+            video
+                .play()
+                .catch((err) => console.warn('Video play blocked:', err));
+        }
+    });
+});
 </script>

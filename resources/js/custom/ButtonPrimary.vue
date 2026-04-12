@@ -1,6 +1,6 @@
 <template>
     <a
-        class="inline-block rounded-2xl bg-t-blue px-5 text-white dark:bg-white dark:text-t-blue"
+        class="inline-block rounded-xl bg-t-blue px-5 text-white dark:bg-white dark:text-t-blue"
         :class="variant === 'slim' ? 'py-2' : 'py-3'"
         href=""
     >
