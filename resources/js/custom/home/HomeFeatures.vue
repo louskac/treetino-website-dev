@@ -9,10 +9,17 @@
             <div class="relative h-full w-full lg:w-1/2">
                 <div class="relative h-full w-full">
                     <div class="absolute inset-x-0 bottom-0 z-10 px-4 pb-6 sm:px-6 sm:pb-8 lg:inset-x-auto lg:top-1/2 lg:right-0 lg:mx-auto lg:my-auto lg:h-100 lg:max-w-150 lg:-translate-y-1/2 lg:px-0 lg:pb-0  2xl:h-110">
+                        <HomeFeaturesCardMobile
+                            class="lg:hidden"
+                            :sections="sections"
+                            :current-section-index="currentSectionIndex"
+                            :visible="cardVisible"
+                        />
+
                         <Transition name="card-slide" appear>
                             <div
                                 v-if="cardVisible"
-                                class="relative mx-auto flex h-80 w-full max-w-lg flex-col overflow-hidden rounded-2xl border border-white/10 bg-linear-to-br from-t-blue to-t-dark shadow-2xl lg:h-full lg:max-w-none"
+                                class="relative mx-auto hidden h-80 w-full max-w-lg flex-col overflow-hidden rounded-2xl border border-white/10 bg-linear-to-br from-t-blue to-t-dark shadow-2xl lg:flex lg:h-full lg:max-w-none"
                             >
                                 <div class="pointer-events-none absolute -right-14 -top-14 h-48 w-48 rounded-full bg-t-accent/25 blur-3xl"></div>
                                 <div class="pointer-events-none absolute -bottom-14 -left-14 h-48 w-48 rounded-full bg-white/5 blur-3xl"></div>
@@ -33,10 +40,6 @@
                                         <div>
                                             <h2 class="text-2xl font-bold leading-tight text-white">{{ sections[currentSectionIndex].title }}</h2>
                                             <p class="mt-2 text-sm leading-relaxed text-white/65 lg:mt-3 lg:text-base">{{ sections[currentSectionIndex].text }}</p>
-                                        </div>
-
-                                        <div class="mt-auto">
-                                            <ButtonSecondary>Předobjednat</ButtonSecondary>
                                         </div>
                                     </div>
                                 </Transition>
@@ -61,7 +64,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue';
 import { SunLight, Leaf, Tree, MultiplePages } from '@iconoir/vue';
-import ButtonSecondary from '../ButtonSecondary.vue';
+import HomeFeaturesCardMobile from './HomeFeaturesCardMobile.vue';
 
 const TOTAL_FRAMES = 228;
 const TRANSITION_FRAMES = 56;
