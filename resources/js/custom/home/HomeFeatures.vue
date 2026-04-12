@@ -1,15 +1,34 @@
 <template>
-    <section ref="sectionRef" class="features-desktop relative" style="height: 400vh;">
+    <section
+        ref="sectionRef"
+        class="features-desktop relative"
+        style="height: 400vh"
+    >
         <div class="sticky top-0 h-screen w-full overflow-hidden">
-            <div class="absolute inset-0 overflow-hidden lg:left-auto lg:right-0 lg:w-7/12">
-                <canvas ref="canvasRef" class="h-full w-full bg-[#fdfdfd]"></canvas>
+            <div
+                class="absolute inset-0 overflow-hidden lg:right-0 lg:left-auto lg:w-7/12"
+            >
+                <canvas
+                    ref="canvasRef"
+                    class="h-full w-full bg-[#fdfdfd]"
+                ></canvas>
             </div>
 
-            <div class="relative h-full w-full lg:w-1/2">
-                <div class="relative h-full w-full bg-transparent lg:bg-[#fdfdfd]">
-                    <div class="absolute inset-x-0 bottom-0 z-10 px-4 pb-6 sm:px-6 sm:pb-8 lg:inset-x-auto lg:top-1/2 lg:right-0 lg:mx-auto lg:my-auto lg:h-100 lg:max-w-150 lg:-translate-y-1/2 lg:px-0 lg:pb-0  2xl:h-110">
+            <div class="absolute hidden lg:block lg:w-7/12 h-full right-0">
+                <div class="w-28 h-full bg-linear-90 from-white to-transparent">
+
+                </div>
+            </div>
+
+            <div
+                class="relative mx-auto h-full w-full max-w-[1400px] sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
+            >
+                <div class="relative h-full w-full bg-transparent">
+                    <div
+                        class="absolute inset-x-0 bottom-0 z-10 px-4 pb-6 sm:px-6 sm:pb-8 lg:inset-x-auto lg:top-1/2 lg:my-auto lg:h-100 lg:max-w-150 lg:-translate-y-1/2 lg:px-0 lg:pb-0 2xl:h-110"
+                    >
                         <HomeFeaturesCardMobile
-                            class="lg:hidden mb-5"
+                            class="mb-5 lg:hidden"
                             :sections="sections"
                             :current-section-index="currentSectionIndex"
                             :visible="cardVisible"
@@ -28,10 +47,10 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue';
 import { SunLight, Leaf, Tree, MultiplePages } from '@iconoir/vue';
-import HomeFeaturesCardMobile from './HomeFeaturesCardMobile.vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 import HomeFeaturesCardDesktop from './HomeFeaturesCardDesktop.vue';
+import HomeFeaturesCardMobile from './HomeFeaturesCardMobile.vue';
 
 const TOTAL_FRAMES = 228;
 const TRANSITION_FRAMES = 56;
@@ -79,7 +98,8 @@ const cardVisible = ref(false);
 
 const imagePaths = Array.from(
     { length: TOTAL_FRAMES },
-    (_, i) => `/img/features-frames/features_frame_${String(i + 1).padStart(4, '0')}.webp`,
+    (_, i) =>
+        `/img/features-frames/features_frame_${String(i + 1).padStart(4, '0')}.webp`,
 );
 
 // Image objects pre-instantiated at mount so the browser downloads all in parallel
@@ -115,7 +135,10 @@ function drawCover(canvas: HTMLCanvasElement, image: HTMLImageElement): void {
     }
 
     const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+
+    if (!ctx) {
+        return;
+    }
 
     ctx.clearRect(0, 0, targetWidth, targetHeight);
 
@@ -151,7 +174,9 @@ function animate(): void {
     if (isTransitioning) {
         const elapsed = performance.now() - transitionStartTime;
         const progress = clamp(elapsed / TRANSITION_DURATION_MS, 0, 1);
-        displayFrame = transitionFromFrame + (transitionToFrame - transitionFromFrame) * progress;
+        displayFrame =
+            transitionFromFrame +
+            (transitionToFrame - transitionFromFrame) * progress;
 
         if (progress >= 1) {
             isTransitioning = false;
@@ -171,8 +196,12 @@ function animate(): void {
     // Draw only when frame changed - if image is not ready yet, retry next tick
     if (intFrame !== lastDrawnIndex) {
         const img = imageElements[intFrame];
+
         if (img?.complete && img.naturalWidth > 0) {
-            if (canvasRef.value) drawCover(canvasRef.value, img);
+            if (canvasRef.value) {
+                drawCover(canvasRef.value, img);
+            }
+
             lastDrawnIndex = intFrame;
         }
     }
@@ -183,7 +212,9 @@ function animate(): void {
 function startStateTransition(nextSectionIndex: number): void {
     const nextFrame = sectionFrames[nextSectionIndex];
 
-    if (nextFrame === targetFrame || isTransitioning) return;
+    if (nextFrame === targetFrame || isTransitioning) {
+        return;
+    }
 
     transitionFromFrame = targetFrame;
     transitionToFrame = nextFrame;
@@ -194,9 +225,11 @@ function startStateTransition(nextSectionIndex: number): void {
     targetFrame = nextFrame;
 
     isWheelLocked = true;
+
     if (wheelLockTimeoutId !== null) {
         window.clearTimeout(wheelLockTimeoutId);
     }
+
     wheelLockTimeoutId = window.setTimeout(() => {
         isWheelLocked = false;
         wheelLockTimeoutId = null;
@@ -205,30 +238,45 @@ function startStateTransition(nextSectionIndex: number): void {
 
 function handleWheel(event: WheelEvent): void {
     const section = sectionRef.value;
-    if (!section) return;
+
+    if (!section) {
+        return;
+    }
 
     const rect = section.getBoundingClientRect();
     const vh = window.innerHeight;
     const isInsidePinnedArea = rect.top <= 0 && rect.bottom >= vh;
 
-    if (!isInsidePinnedArea || !cardVisible.value) return;
+    if (!isInsidePinnedArea || !cardVisible.value) {
+        return;
+    }
 
     if (isWheelLocked || isTransitioning) {
         event.preventDefault();
+
         return;
     }
 
     const direction = event.deltaY > 0 ? 1 : -1;
 
-    const nextSectionIndex = clamp(currentSectionIndex.value + direction, 0, sections.length - 1);
+    const nextSectionIndex = clamp(
+        currentSectionIndex.value + direction,
+        0,
+        sections.length - 1,
+    );
+
     if (nextSectionIndex === currentSectionIndex.value) {
         const sectionTop = window.scrollY + rect.top;
 
         // Let user leave sticky area immediately when trying to scroll past edges.
-        if (currentSectionIndex.value === sections.length - 1 && direction > 0) {
+        if (
+            currentSectionIndex.value === sections.length - 1 &&
+            direction > 0
+        ) {
             event.preventDefault();
             const exitBottomY = sectionTop + section.offsetHeight - vh + 2;
             window.scrollTo({ top: exitBottomY, behavior: 'auto' });
+
             return;
         }
 
@@ -236,6 +284,7 @@ function handleWheel(event: WheelEvent): void {
             event.preventDefault();
             const exitTopY = Math.max(0, sectionTop - vh);
             window.scrollTo({ top: exitTopY, behavior: 'smooth' });
+
             return;
         }
 
@@ -248,12 +297,20 @@ function handleWheel(event: WheelEvent): void {
 
 function handleScroll(): void {
     const section = sectionRef.value;
-    if (!section) return;
+
+    if (!section) {
+        return;
+    }
 
     const rect = section.getBoundingClientRect();
     const vh = window.innerHeight;
 
-    if (!isSnapping && !hasSnappedIntoSection && rect.top > 0 && rect.top <= vh / 2) {
+    if (
+        !isSnapping &&
+        !hasSnappedIntoSection &&
+        rect.top > 0 &&
+        rect.top <= vh / 2
+    ) {
         isSnapping = true;
         hasSnappedIntoSection = true;
         window.scrollTo({ top: window.scrollY + rect.top, behavior: 'smooth' });
@@ -279,6 +336,7 @@ onMounted(() => {
         const img = new Image();
         img.decoding = 'async';
         img.src = src;
+
         return img;
     });
 
@@ -297,11 +355,16 @@ onMounted(() => {
 onUnmounted(() => {
     window.removeEventListener('scroll', handleScroll);
     window.removeEventListener('wheel', handleWheel);
-    if (rafId !== null) cancelAnimationFrame(rafId);
+
+    if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+    }
+
     if (wheelLockTimeoutId !== null) {
         window.clearTimeout(wheelLockTimeoutId);
         wheelLockTimeoutId = null;
     }
+
     imageElements = [];
 });
 </script>
