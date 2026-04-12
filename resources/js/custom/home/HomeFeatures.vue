@@ -2,14 +2,14 @@
     <section ref="sectionRef" class="features-desktop relative" style="height: 400vh;">
         <div class="sticky top-0 h-screen w-full overflow-hidden">
             <div class="absolute inset-0 overflow-hidden lg:left-auto lg:right-0 lg:w-7/12">
-                <canvas ref="canvasRef" class="h-full w-full"></canvas>
+                <canvas ref="canvasRef" class="h-full w-full bg-[#fdfdfd]"></canvas>
             </div>
 
             <div class="relative h-full w-full lg:w-1/2">
                 <div class="relative h-full w-full">
                     <div class="absolute inset-x-0 bottom-0 z-10 px-4 pb-6 sm:px-6 sm:pb-8 lg:inset-x-auto lg:top-1/2 lg:right-0 lg:mx-auto lg:my-auto lg:h-100 lg:max-w-150 lg:-translate-y-1/2 lg:px-0 lg:pb-0  2xl:h-110">
                         <HomeFeaturesCardMobile
-                            class="lg:hidden"
+                            class="lg:hidden mb-5"
                             :sections="sections"
                             :current-section-index="currentSectionIndex"
                             :visible="cardVisible"
@@ -120,19 +120,15 @@ function drawCover(canvas: HTMLCanvasElement, image: HTMLImageElement): void {
     ctx.clearRect(0, 0, targetWidth, targetHeight);
 
     const ir = image.width / image.height;
-    const cr = targetWidth / targetHeight;
 
-    let dw: number;
-    let dh: number;
-    if (ir > cr) {
-        dh = targetHeight;
-        dw = dh * ir;
-    } else {
-        dw = targetWidth;
-        dh = dw / ir;
-    }
+    const dw = targetWidth;
+    const dh = dw / ir;
 
-    ctx.drawImage(image, (targetWidth - dw) / 2, (targetHeight - dh) / 2, dw, dh);
+    const isMobile = window.innerWidth < 1024; // lg breakpoint
+
+    const offsetY = isMobile ? -130 : 0;
+
+    ctx.drawImage(image, 0, (targetHeight - dh) / 2 + offsetY, dw, dh);
 }
 
 function animate(): void {
