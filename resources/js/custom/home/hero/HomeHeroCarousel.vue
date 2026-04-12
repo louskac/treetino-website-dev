@@ -87,7 +87,7 @@ defineExpose({
         >
             <!-- Slide 1 -->
             <SwiperSlide>
-                <div class="flex h-full flex-col p-6 pb-12 text-white">
+                <div class="flex h-full flex-col p-6 pb-28 text-white">
                     <div class="mt-auto">
                         <h1 class="mb-6 text-6xl lg:text-8xl">Treetino v1</h1>
 
@@ -103,7 +103,7 @@ defineExpose({
 
             <!-- Slide 2 -->
             <SwiperSlide>
-                <div class="flex h-full flex-col p-6 pb-12 text-white">
+                <div class="flex h-full flex-col p-6 pb-28 text-white">
                     <div class="mt-auto">
                         <h1 class="mb-6 text-6xl lg:text-8xl">Treetino v2</h1>
                     </div>
@@ -112,7 +112,7 @@ defineExpose({
 
             <!-- Slide 2 -->
             <SwiperSlide>
-                <div class="flex h-full flex-col p-6 pb-12 text-white">
+                <div class="flex h-full flex-col p-6 pb-28 text-white">
                     <div class="mt-auto">
                         <h1 class="mb-6 text-6xl lg:text-8xl">Turbine</h1>
                     </div>

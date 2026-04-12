@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue';
+import { ref, computed } from 'vue';
 import 'swiper/css';
 
 import HomeHeroBackground from '@/custom/home/hero/HomeHeroBackground.vue';
