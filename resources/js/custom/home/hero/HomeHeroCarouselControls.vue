@@ -16,26 +16,24 @@ const emit = defineEmits<{
         <div class="flex gap-3 p-6">
             <div
                 @click="emit('prev')"
-                class="group flex h-11 cursor-pointer gap-2 rounded-xl border border-white/15 bg-white/10 px-4 lg:h-12"
+                class="group flex h-11 cursor-pointer gap-0 rounded-xl border border-white/15 bg-white/10 px-4 transition-all duration-300 hover:gap-2 lg:h-12"
             >
                 <FastArrowLeft class="my-auto h-5 w-5" />
                 <div
-                    class="my-auto hidden overflow-clip transition-all group-hover:block"
+                    class="my-auto max-w-0 overflow-hidden transition-all duration-300 ease-in-out group-hover:max-w-xs"
                 >
-                    <div class="w-0 transition-all group-hover:w-fit">
-                        Previous
-                    </div>
+                    <span class="whitespace-nowrap">Previous</span>
                 </div>
             </div>
 
             <div
                 @click="emit('next')"
-                class="group flex h-11 cursor-pointer gap-2 rounded-xl border border-white/15 bg-white/10 px-4 lg:h-12"
+                class="group flex h-11 cursor-pointer gap-0 rounded-xl border border-white/15 bg-white/10 px-4 transition-all duration-300 hover:gap-2 lg:h-12"
             >
                 <div
-                    class="my-auto hidden overflow-clip transition-all group-hover:block"
+                    class="my-auto max-w-0 overflow-hidden transition-all duration-300 ease-in-out group-hover:max-w-xs"
                 >
-                    <div class="w-0 transition-all group-hover:w-fit">Next</div>
+                    <span class="whitespace-nowrap">Next</span>
                 </div>
                 <FastArrowRight class="my-auto h-5 w-5" />
             </div>
