@@ -155,7 +155,7 @@
                                     class="flex aspect-square h-12 w-12 rounded-xl bg-primary/5 text-t-blue dark:text-primary"
                                 >
                                     <Flash
-                                        stroke-width="2.5"
+                                        stroke-width="1.5"
                                         class="mx-auto my-auto h-6 w-6"
                                     />
                                 </div>
@@ -178,7 +178,7 @@
                                     class="flex aspect-square h-12 w-12 rounded-xl bg-primary/5 text-t-blue dark:text-primary"
                                 >
                                     <CloudSunny
-                                        stroke-width="2.5"
+                                        stroke-width="1.5"
                                         class="mx-auto my-auto h-6 w-6"
                                     />
                                 </div>
@@ -201,7 +201,7 @@
                                     class="flex aspect-square h-12 w-12 rounded-xl bg-primary/5 text-t-blue dark:text-primary"
                                 >
                                     <Sparks
-                                        stroke-width="2.5"
+                                        stroke-width="1.5"
                                         class="mx-auto my-auto h-6 w-6"
                                     />
                                 </div>
@@ -224,7 +224,7 @@
                                     class="flex aspect-square h-12 w-12 rounded-xl bg-primary/5 text-t-blue dark:text-primary"
                                 >
                                     <StatsReport
-                                        stroke-width="2.5"
+                                        stroke-width="1.5"
                                         class="mx-auto my-auto h-6 w-6"
                                     />
                                 </div>
@@ -247,7 +247,7 @@
                                     class="flex aspect-square h-12 w-12 rounded-xl bg-primary/5 text-t-blue dark:text-primary"
                                 >
                                     <BellNotification
-                                        stroke-width="2.5"
+                                        stroke-width="1.5"
                                         class="mx-auto my-auto h-6 w-6"
                                     />
                                 </div>
@@ -270,7 +270,7 @@
                                     class="flex aspect-square h-12 w-12 rounded-xl bg-primary/5 text-t-blue dark:text-primary"
                                 >
                                     <DimmerSwitch
-                                        stroke-width="2.5"
+                                        stroke-width="1.5"
                                         class="mx-auto my-auto h-6 w-6"
                                     />
                                 </div>
