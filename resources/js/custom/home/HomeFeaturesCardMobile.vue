@@ -19,7 +19,7 @@
             <Transition name="mobile-card-content" mode="out-in">
                 <div :key="currentSectionIndex" class="relative z-10 flex flex-1 flex-col px-5 py-4">
                     <div class="flex flex-row items-center gap-3">
-                        <div class="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/25 bg-white/12 backdrop-blur-sm">
+                        <div class="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/35 bg-gray-500/25">
                             <component :is="sections[currentSectionIndex].icon" class="h-6 w-6 text-white" stroke-width="1.5" />
                         </div>
 
