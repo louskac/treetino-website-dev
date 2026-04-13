@@ -12,10 +12,6 @@
         "lint:check": "eslint .",
         "types:check": "vue-tsc --noEmit"
     },
-    "engines": {
-        "node": ">=22.14.0",
-        "npm": ">=11.2.0"
-    },
     "devDependencies": {
         "@eslint/js": "^9.19.0",
         "@laravel/vite-plugin-wayfinder": "^0.1.3",
