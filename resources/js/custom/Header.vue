@@ -76,35 +76,35 @@
 
                     <div class="flex gap-8">
                         <div class="my-auto flex gap-4">
-                            <div class="dark-switch my-auto flex text-white">
-                                <button
-                                    @click="toggleDark"
-                                    class="my-auto cursor-pointer p-1 transition-opacity hover:opacity-70"
-                                >
-                                    <SunLight
-                                        v-if="isDark"
-                                        class="h-4.5 w-4.5 transition-all duration-300"
-                                        :class="{
-                                            'text-black/80 hover:text-black':
-                                                activeDropdown === 'products',
-                                            'text-white/80 hover:text-white':
-                                                activeDropdown !== 'products',
-                                        }"
-                                        stroke-width="2"
-                                    />
-                                    <HalfMoon
-                                        v-else
-                                        class="h-4.5 w-4.5 transition-all duration-300"
-                                        :class="{
-                                            'text-black/80 hover:text-black':
-                                                activeDropdown === 'products',
-                                            'text-white/80 hover:text-white':
-                                                activeDropdown !== 'products',
-                                        }"
-                                        stroke-width="2"
-                                    />
-                                </button>
-                            </div>
+<!--                            <div class="dark-switch my-auto flex text-white">-->
+<!--                                <button-->
+<!--                                    @click="toggleDark"-->
+<!--                                    class="my-auto cursor-pointer p-1 transition-opacity hover:opacity-70"-->
+<!--                                >-->
+<!--                                    <SunLight-->
+<!--                                        v-if="isDark"-->
+<!--                                        class="h-4.5 w-4.5 transition-all duration-300"-->
+<!--                                        :class="{-->
+<!--                                            'text-black/80 hover:text-black':-->
+<!--                                                activeDropdown === 'products',-->
+<!--                                            'text-white/80 hover:text-white':-->
+<!--                                                activeDropdown !== 'products',-->
+<!--                                        }"-->
+<!--                                        stroke-width="2"-->
+<!--                                    />-->
+<!--                                    <HalfMoon-->
+<!--                                        v-else-->
+<!--                                        class="h-4.5 w-4.5 transition-all duration-300"-->
+<!--                                        :class="{-->
+<!--                                            'text-black/80 hover:text-black':-->
+<!--                                                activeDropdown === 'products',-->
+<!--                                            'text-white/80 hover:text-white':-->
+<!--                                                activeDropdown !== 'products',-->
+<!--                                        }"-->
+<!--                                        stroke-width="2"-->
+<!--                                    />-->
+<!--                                </button>-->
+<!--                            </div>-->
 
                             <div class="my-auto xl:hidden">
                                 <Menu
@@ -198,15 +198,15 @@ onMounted(() => {
     isDark.value = document.documentElement.classList.contains('dark');
 });
 
-const toggleDark = () => {
-    isDark.value = !isDark.value;
-
-    // 2. Toggle the class
-    document.documentElement.classList.toggle('dark');
-
-    // 3. Save it so it persists on refresh
-    localStorage.setItem('appearance', isDark.value ? 'dark' : 'light');
-};
+// const toggleDark = () => {
+//     isDark.value = !isDark.value;
+//
+//     // 2. Toggle the class
+//     document.documentElement.classList.toggle('dark');
+//
+//     // 3. Save it so it persists on refresh
+//     localStorage.setItem('appearance', isDark.value ? 'dark' : 'light');
+// };
 </script>
 
 <style scoped>

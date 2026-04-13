@@ -4,7 +4,7 @@ import type { DefineComponent } from 'vue';
 import { createApp, h } from 'vue';
 import '../css/app.css';
 import { ZiggyVue } from 'ziggy-js';
-import { initializeTheme } from '@/composables/useAppearance';
+// import { initializeTheme } from '@/composables/useAppearance';
 
 const appName = 'Treetino';
 
@@ -27,4 +27,4 @@ createInertiaApp({
 });
 
 // This will set light / dark mode on page load...
-initializeTheme();
+// initializeTheme();
