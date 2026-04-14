@@ -44,7 +44,9 @@
                     </div>
 
                     <div class="relative mt-auto flex justify-end md:hidden">
-                        <ButtonPrimary>Konfigurovat</ButtonPrimary>
+                        <ButtonPrimary :href="route('configurator')"
+                            >Konfigurovat</ButtonPrimary
+                        >
                     </div>
 
                     <div
@@ -53,7 +55,9 @@
                         <div
                             class="opacity-0 transition-all group-hover:opacity-100"
                         >
-                            <ButtonPrimary>Konfigurovat</ButtonPrimary>
+                            <ButtonPrimary :href="route('configurator')"
+                                >Konfigurovat</ButtonPrimary
+                            >
                         </div>
                         <div class="">
                             <div
@@ -153,6 +157,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
+import { route } from 'ziggy-js';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import ButtonSecondary from '@/custom/ButtonSecondary.vue';
 import { InfoCircle, FastArrowRight } from '@iconoir/vue';
