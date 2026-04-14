@@ -103,7 +103,7 @@
                     </div>
 
                     <div class="col-span-1 xl:col-span-2">
-                        <div class="rounded-2xl bg-white p-6 border">
+                        <div class="rounded-2xl border bg-white p-6 shadow-xl">
                             <div
                                 class="relative z-10 flex items-center justify-between"
                             >
@@ -132,7 +132,7 @@
                                 <div class="flex w-full gap-2">
                                     <!-- Added flex-1 so it grows to fill all available space -->
                                     <input
-                                        class="flex-1 rounded-xl bg-white py-3 px-4 text-black border"
+                                        class="flex-1 rounded-xl border bg-white px-4 py-3 text-black"
                                         type="email"
                                         placeholder="jiri.dozvedel@domena.cz"
                                     />
