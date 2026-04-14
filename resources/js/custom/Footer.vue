@@ -49,9 +49,8 @@
 </template>
 
 <script setup lang="ts">
-import { Instagram, Linkedin, X } from '@iconoir/vue';
-import { Link } from '@inertiajs/vue3';
-import { route } from 'ziggy-js';
-import LogoType from '@/custom/LogoType.vue';
-import FooterLink from '@/custom/footer/FooterLink.vue';
+    import { Instagram, Linkedin, X } from '@iconoir/vue';
+    import { route } from 'ziggy-js';
+    import FooterLink from '@/custom/footer/FooterLink.vue';
+    import LogoType from '@/custom/LogoType.vue';
 </script>
