@@ -13,10 +13,10 @@
         >
             <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
                 <div
-                    class="group flex aspect-3/2 flex-col overflow-clip rounded-2xl border bg-white/70 p-8 backdrop-blur-xl transition-all hover:p-10"
+                    class="group flex aspect-square flex-col overflow-clip rounded-2xl border bg-white/70 p-8 backdrop-blur-xl transition-all hover:p-10 sm:aspect-5/4 md:aspect-2/1 lg:aspect-square xl:aspect-3/2"
                 >
                     <div
-                        class="absolute -bottom-16 -left-16 h-100 w-100 transition-all group-hover:h-110 group-hover:w-110"
+                        class="absolute -bottom-16 -left-16 h-[100%] w-[100%] transition-all group-hover:h-110 group-hover:w-110 sm:h-80 sm:w-80 lg:h-90 lg:w-90 xl:h-110 xl:w-110 xl:group-hover:h-115 xl:group-hover:w-115"
                     >
                         <img
                             class="w-full"
@@ -39,11 +39,17 @@
                         </span>
                     </div>
 
-                    <div class="mt-3 text-4xl">
+                    <div class="relative mt-3 text-4xl">
                         Proměňte prázdná Místa v&nbsp;Aktiva
                     </div>
 
-                    <div class="mt-auto flex w-full justify-end gap-2">
+                    <div class="relative mt-auto flex justify-end md:hidden">
+                        <ButtonPrimary>Konfigurovat</ButtonPrimary>
+                    </div>
+
+                    <div
+                        class="relative mt-auto hidden w-full justify-end gap-2 lg:flex"
+                    >
                         <div
                             class="opacity-0 transition-all group-hover:opacity-100"
                         >
@@ -60,10 +66,10 @@
                 </div>
 
                 <div
-                    class="group flex aspect-3/2 flex-col overflow-clip rounded-2xl bg-linear-to-br from-t-blue to-t-dark p-8 text-white backdrop-blur-xl transition-all hover:p-10"
+                    class="group flex aspect-square flex-col overflow-clip rounded-2xl bg-linear-to-br from-t-blue to-t-dark p-8 text-white backdrop-blur-xl transition-all hover:p-10 sm:aspect-5/4 md:aspect-2/1 lg:aspect-square xl:aspect-3/2"
                 >
                     <div
-                        class="absolute -bottom-16 -left-16 h-100 w-100 transition-all group-hover:h-110 group-hover:w-110"
+                        class="absolute -bottom-16 -left-16 h-[100%] w-[100%] transition-all group-hover:h-110 group-hover:w-110 sm:h-80 sm:w-80 lg:h-90 lg:w-90 xl:h-110 xl:w-110 xl:group-hover:h-115 xl:group-hover:w-115"
                     >
                         <img
                             class="w-full"
@@ -86,11 +92,17 @@
                         </span>
                     </div>
 
-                    <div class="mt-3 text-4xl">
+                    <div class="relative mt-3 text-4xl">
                         Objevte Technologie Treetino
                     </div>
 
-                    <div class="mt-auto flex w-full justify-end gap-2">
+                    <div class="relative mt-auto flex justify-end md:hidden">
+                        <ButtonWhite>Jak to Funguje?</ButtonWhite>
+                    </div>
+
+                    <div
+                        class="relative mt-auto hidden w-full justify-end gap-2 lg:flex"
+                    >
                         <div
                             class="opacity-0 transition-all group-hover:opacity-100"
                         >
