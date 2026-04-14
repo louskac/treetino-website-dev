@@ -43,8 +43,10 @@
                             <h2 class="my-auto text-xl">Links</h2>
                         </div>
 
-                        <div class="mt-4 flex flex-col gap-2">
-                            <FooterLink :href="route('home')">Home</FooterLink>
+                        <div class="mt-6 flex flex-col gap-2">
+                            <FooterLink :href="route('home')">
+                                Home
+                            </FooterLink>
                             <FooterLink :href="route('configurator')"
                                 >Configurator</FooterLink
                             >
@@ -68,7 +70,7 @@
                             <h2 class="my-auto text-xl">Community</h2>
                         </div>
 
-                        <div class="mt-4 flex flex-col gap-2">
+                        <div class="mt-6 flex flex-col gap-2">
                             <div class="w-fit cursor-not-allowed">
                                 Coming Soon
                             </div>
@@ -89,7 +91,7 @@
                             <h2 class="my-auto text-xl">Legal</h2>
                         </div>
 
-                        <div class="mt-4 flex flex-col gap-2">
+                        <div class="mt-6 flex flex-col gap-2">
                             <FooterLink :href="route('home')">
                                 Terms & Conditions
                             </FooterLink>
