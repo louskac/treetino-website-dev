@@ -26,84 +26,138 @@
             </div>
 
             <div class="mb-12 pt-6">
-                <div
-                    class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5"
-                >
-                    <div class="">
-                        <div class="flex gap-4">
+                <div class="grid gap-6">
+                    <div
+                        class="grid grid-cols-2 gap-6 sm:grid-cols-2 md:grid-cols-3"
+                    >
+                        <div class="">
                             <div
-                                class="flex aspect-square h-12 w-12 rounded-xl bg-primary/5 text-t-blue dark:text-primary"
+                                class="flex flex-col gap-4 sm:flex-row md:flex-col lg:flex-row"
                             >
-                                <Link
-                                    stroke-width="1.5"
-                                    class="mx-auto my-auto h-6 w-6"
-                                />
+                                <div
+                                    class="flex aspect-square h-12 w-12 rounded-xl bg-primary/5 text-t-blue dark:text-primary"
+                                >
+                                    <Link
+                                        stroke-width="1.5"
+                                        class="mx-auto my-auto h-6 w-6"
+                                    />
+                                </div>
+
+                                <h2 class="my-auto text-xl">Links</h2>
                             </div>
 
-                            <h2 class="my-auto text-xl">Links</h2>
+                            <div class="mt-6 flex flex-col gap-2">
+                                <FooterLink :href="route('home')">
+                                    Home
+                                </FooterLink>
+                                <FooterLink :href="route('configurator')"
+                                    >Configurator</FooterLink
+                                >
+                                <FooterLink :href="route('configurator')"
+                                    >Government Grants</FooterLink
+                                >
+                            </div>
                         </div>
 
-                        <div class="mt-6 flex flex-col gap-2">
-                            <FooterLink :href="route('home')">
-                                Home
-                            </FooterLink>
-                            <FooterLink :href="route('configurator')"
-                                >Configurator</FooterLink
+                        <div class="">
+                            <div
+                                class="flex flex-col gap-4 sm:flex-row md:flex-col lg:flex-row"
                             >
-                            <FooterLink :href="route('configurator')"
-                                >Government Grants</FooterLink
+                                <div
+                                    class="flex aspect-square h-12 w-12 rounded-xl bg-primary/5 text-t-blue dark:text-primary"
+                                >
+                                    <PeopleTag
+                                        stroke-width="1.5"
+                                        class="mx-auto my-auto h-6 w-6"
+                                    />
+                                </div>
+
+                                <h2 class="my-auto text-xl">Community</h2>
+                            </div>
+
+                            <div class="mt-6 flex flex-col gap-2">
+                                <div class="w-fit cursor-not-allowed">
+                                    Coming Soon
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <div
+                                class="flex flex-col gap-4 sm:flex-row md:flex-col lg:flex-row"
                             >
+                                <div
+                                    class="flex aspect-square h-12 w-12 rounded-xl bg-primary/5 text-t-blue dark:text-primary"
+                                >
+                                    <GraduationCap
+                                        stroke-width="1.5"
+                                        class="mx-auto my-auto h-6 w-6"
+                                    />
+                                </div>
+
+                                <h2 class="my-auto text-xl">Legal</h2>
+                            </div>
+
+                            <div class="mt-6 flex flex-col gap-2">
+                                <FooterLink :href="route('home')">
+                                    Terms & Conditions
+                                </FooterLink>
+
+                                <FooterLink :href="route('home')">
+                                    Privacy Policy
+                                </FooterLink>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="">
-                        <div class="flex gap-4">
+                    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+                        <div
+                            class="order-2 flex flex-col rounded-2xl border-transparent bg-t-blue p-6 shadow-xl lg:order-1"
+                        >
                             <div
-                                class="flex aspect-square h-12 w-12 rounded-xl bg-primary/5 text-t-blue dark:text-primary"
+                                class="relative z-10 flex items-center justify-between"
                             >
-                                <PeopleTag
-                                    stroke-width="1.5"
-                                    class="mx-auto my-auto h-6 w-6"
-                                />
+                                <span
+                                    class="text-xs font-semibold tracking-[0.2em] text-white/60 uppercase"
+                                    >Company</span
+                                >
+                                <span
+                                    class="text-xs font-medium tracking-widest text-white/60"
+                                >
+                                    <Building
+                                        class="h-4 w-4"
+                                        stroke-width="3"
+                                    />
+                                </span>
                             </div>
 
-                            <h2 class="my-auto text-xl">Community</h2>
-                        </div>
+                            <div class="mt-3 text-white">
+                                <h2 class="text-3xl">Treetino Corp s.r.o.</h2>
 
-                        <div class="mt-6 flex flex-col gap-2">
-                            <div class="w-fit cursor-not-allowed">
-                                Coming Soon
-                            </div>
-                        </div>
-                    </div>
+                                <p class="mt-1 opacity-70">IČO: 10800107</p>
 
-                    <div class="">
-                        <div class="flex gap-4">
-                            <div
-                                class="flex aspect-square h-12 w-12 rounded-xl bg-primary/5 text-t-blue dark:text-primary"
-                            >
-                                <GraduationCap
-                                    stroke-width="1.5"
-                                    class="mx-auto my-auto h-6 w-6"
-                                />
+                                <p class="mt-2 opacity-70">
+                                    Český Šternberk 9, <br />
+                                    257 26 &mdash; Český Šternberk
+                                </p>
                             </div>
 
-                            <h2 class="my-auto text-xl">Legal</h2>
+                            <div class="mt-auto text-xs text-white opacity-70">
+                                &copy; 2026, Treetino Corp s.r.o., All Rights
+                                Reserved<br />
+                                Design & Development by
+                                <a
+                                    class="underline"
+                                    target="_blank"
+                                    href="https://baranowski.cz"
+                                    >Baranowski & Collective</a
+                                >
+                            </div>
                         </div>
 
-                        <div class="mt-6 flex flex-col gap-2">
-                            <FooterLink :href="route('home')">
-                                Terms & Conditions
-                            </FooterLink>
-
-                            <FooterLink :href="route('home')">
-                                Privacy Policy
-                            </FooterLink>
-                        </div>
-                    </div>
-
-                    <div class="col-span-1 xl:col-span-2">
-                        <div class="rounded-2xl border bg-white p-6 shadow-xl">
+                        <div
+                            class="order-1 rounded-2xl border bg-white p-6 shadow-xl lg:order-2"
+                        >
                             <div
                                 class="relative z-10 flex items-center justify-between"
                             >
@@ -129,15 +183,18 @@
                             </div>
 
                             <div class="my-5">
-                                <div class="flex w-full gap-2">
-                                    <!-- Added flex-1 so it grows to fill all available space -->
+                                <div class="flex w-full items-stretch gap-2">
                                     <input
-                                        class="flex-1 rounded-xl border bg-white px-4 py-3 text-black"
+                                        class="min-w-0 flex-1 rounded-xl border bg-white px-4 py-3 text-black"
                                         type="email"
                                         placeholder="jiri.dozvedel@domena.cz"
                                     />
 
-                                    <ButtonPrimary>Send</ButtonPrimary>
+                                    <ButtonPrimary
+                                        class="flex shrink-0 items-center justify-center p-0"
+                                    >
+                                        Send
+                                    </ButtonPrimary>
                                 </div>
                             </div>
 
@@ -162,11 +219,10 @@ import {
     PeopleTag,
     X,
     Mail,
+    Building,
 } from '@iconoir/vue';
 import { route } from 'ziggy-js';
 import FooterLink from '@/custom/footer/FooterLink.vue';
 import LogoType from '@/custom/LogoType.vue';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
-import ButtonWhite from '@/custom/ButtonWhite.vue';
-import ButtonSecondary from '@/custom/ButtonSecondary.vue';
 </script>
