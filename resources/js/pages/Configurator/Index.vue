@@ -33,6 +33,7 @@
                     v-for="step in selectedProduct.steps" 
                     :key="step.id" 
                     :ref="setSectionRef" 
+                    @click="forceActiveSection(step.id)"
                     class="border-t border-t-blue/10 dark:border-white/10 pt-7"
                 >
                     <ConfiguratorColorStep v-if="step.id === 'color'" v-model="selectedColorId" />
@@ -101,6 +102,9 @@ const basePrice = computed(() => selectedProduct.value.basePrice ?? 0);
 
 const configuratorPanel = ref<HTMLElement | null>(null);
 
+let focusTimeout: ReturnType<typeof setTimeout> | null = null;
+let isForcedFocus = false;
+
 function scrollConfigurator(event: WheelEvent) {
     if (configuratorPanel.value) {
         configuratorPanel.value.scrollTop += event.deltaY;
@@ -153,6 +157,9 @@ function setSectionRef(
 }
 
 function updateActiveSection() {
+    // forced focus is used to prevent instantly switching back from selected option to section when clicked and scrolled
+    if (isForcedFocus) return; 
+
     const panel = configuratorPanel.value;
 
     const usePanelTrigger = !!panel && window.matchMedia('(min-width: 768px)').matches;
@@ -173,5 +180,23 @@ function updateActiveSection() {
     });
 
     currentSectionIndex.value = activeIndex;
+}
+
+function forceActiveSection(stepId: string) {
+    if (!selectedProduct.value.steps) return;
+    
+    const index = selectedProduct.value.steps.findIndex(s => s.id === stepId);
+    
+    if (index !== -1 && currentSectionIndex.value !== index) {
+        currentSectionIndex.value = index;
+        
+        isForcedFocus = true;
+        
+        if (focusTimeout) clearTimeout(focusTimeout);
+        
+        focusTimeout = setTimeout(() => {
+            isForcedFocus = false;
+        }, 400);
+    }
 }
 </script>
