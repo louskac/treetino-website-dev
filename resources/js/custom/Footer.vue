@@ -5,7 +5,7 @@
         ></div>
 
         <div
-            class="mx-auto w-full max-w-[1400px] justify-between px-6 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
+            class="relative mx-auto w-full max-w-[1400px] justify-between px-6 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
         >
             <div class="flex flex-col">
                 <div class="w-full py-6">
@@ -24,11 +24,34 @@
                     </div>
                 </div>
             </div>
+
+            <div class="mb-12">
+                <div
+                    class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5"
+                >
+                    <div class="">
+                        <h2 class="text-xl">Links</h2>
+
+                        <div class="mt-4 flex flex-col gap-2">
+                            <FooterLink :href="route('home')">Home</FooterLink>
+                            <FooterLink :href="route('configurator')">Configurator</FooterLink>
+                            <FooterLink :href="route('configurator')">Government Grants</FooterLink>
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <h2 class="text-xl">Legal</h2>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
 </template>
 
 <script setup lang="ts">
 import { Instagram, Linkedin, X } from '@iconoir/vue';
+import { Link } from '@inertiajs/vue3';
+import { route } from 'ziggy-js';
 import LogoType from '@/custom/LogoType.vue';
+import FooterLink from '@/custom/footer/FooterLink.vue';
 </script>
