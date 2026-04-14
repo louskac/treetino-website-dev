@@ -13,15 +13,10 @@
 </template>
 
 <script setup lang="ts">
+import { Product } from '@/types';
 import { computed } from 'vue';
 
-const props = defineProps<{
-    product: {
-        id: string;
-        label: string;
-        params: { power: string; dailyProduction: string; roi: string };
-    };
-}>();
+const props = defineProps<{product: Product}>();
 
 const paramList = computed(() => [
     { label: 'Výkon', value: props.product.params.power },
