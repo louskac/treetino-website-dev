@@ -1,19 +1,26 @@
 <template>
-    <a
-        class="inline-block rounded-xl bg-zinc-950 px-5 text-white dark:bg-zinc-800 dark:text-white"
+    <component
+        :is="href ? Link : 'button'"
+        class="inline-block rounded-xl bg-zinc-950 px-5 text-white dark:text-t-blue"
         :class="variant === 'slim' ? 'py-2' : 'py-3'"
-        href=""
+        :href="href"
     >
         <slot />
-    </a>
+    </component>
 </template>
 
 <script setup lang="ts">
+import { Link } from '@inertiajs/vue3';
+
 const props = defineProps({
     variant: {
         type: String,
         default: 'regular',
         validator: (value) => ['regular', 'slim'].includes(value),
+    },
+    href: {
+        type: String,
+        default: undefined,
     },
 });
 </script>

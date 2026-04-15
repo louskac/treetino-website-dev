@@ -25,11 +25,11 @@
         </div>
 
         <div class="flex flex-col gap-2">
-            <ButtonPrimary class="text-center">
+            <ButtonPrimary>
                 Rezervovat a Zaplatit
             </ButtonPrimary>
 
-            <ButtonSecondary class="text-center">
+            <ButtonSecondary>
                 Více Informací
             </ButtonSecondary>
         </div>
