@@ -13,7 +13,7 @@ const emit = defineEmits<{
     <div
         class="absolute bottom-0 left-1/2 z-50 max-w-[1400px] -translate-x-1/2 gap-4 text-white sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
     >
-        <div class="flex gap-3 p-6">
+        <div class="flex gap-3 py-6">
             <div
                 @click="emit('prev')"
                 class="group flex h-11 cursor-pointer gap-0 rounded-xl border border-white/15 bg-white/10 px-4 transition-all duration-300 hover:gap-2 lg:h-12"

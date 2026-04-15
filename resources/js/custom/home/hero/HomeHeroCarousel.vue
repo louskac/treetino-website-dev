@@ -66,7 +66,7 @@ defineExpose({
 </script>
 <template>
     <div
-        class="relative mx-auto h-full w-full max-w-[1400px] sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
+        class="sm:px-0 relative mx-auto h-full w-full max-w-[1400px] px-6 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
     >
         <Swiper
             :slides-per-view="1"
@@ -87,7 +87,7 @@ defineExpose({
         >
             <!-- Slide 1 -->
             <SwiperSlide>
-                <div class="flex h-full flex-col p-6 pb-28 text-white">
+                <div class="flex h-full flex-col pb-28 text-white">
                     <div class="mt-auto">
                         <h1 class="mb-6 text-6xl lg:text-8xl">Treetino v1</h1>
 
@@ -103,7 +103,7 @@ defineExpose({
 
             <!-- Slide 2 -->
             <SwiperSlide>
-                <div class="flex h-full flex-col p-6 pb-28 text-white">
+                <div class="flex h-full flex-col pb-28 text-white">
                     <div class="mt-auto">
                         <h1 class="mb-6 text-6xl lg:text-8xl">Treetino v2</h1>
                     </div>
@@ -112,7 +112,7 @@ defineExpose({
 
             <!-- Slide 2 -->
             <SwiperSlide>
-                <div class="flex h-full flex-col p-6 pb-28 text-white">
+                <div class="flex h-full flex-col pb-28 text-white">
                     <div class="mt-auto">
                         <h1 class="mb-6 text-6xl lg:text-8xl">Turbine</h1>
                     </div>

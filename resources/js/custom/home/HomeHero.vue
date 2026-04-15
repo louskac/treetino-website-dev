@@ -6,9 +6,9 @@
             class="absolute bottom-0 h-100 w-full bg-linear-to-b from-transparent to-black"
         ></div>
 
-        <div
-            class="absolute left-1/2 hidden h-full max-w-[1400px] -translate-x-1/2 border-r border-l border-r-white/20 border-l-white/20 sm:block sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
-        ></div>
+<!--        <div-->
+<!--            class="absolute left-1/2 hidden h-full max-w-[1400px] -translate-x-1/2 border-r border-l border-r-white/20 border-l-white/20 sm:block sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"-->
+<!--        ></div>-->
 
         <HomeHeroCarousel ref="carouselRef" />
 

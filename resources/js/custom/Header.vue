@@ -1,7 +1,7 @@
 <template>
     <header class="absolute z-50 w-full">
         <div
-            class="mx-auto flex w-full max-w-[1400px] justify-between p-6 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
+            class="mx-auto flex w-full max-w-[1400px] justify-between px-6 sm:px-0 pt-6 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
         >
             <div
                 class="flex w-full flex-col rounded-2xl border border-white/20 bg-black/20 p-6 backdrop-blur-2xl transition-all duration-300"
