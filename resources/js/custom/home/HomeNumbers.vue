@@ -10,7 +10,7 @@
             />
         </div>
 
-        <div class="mx-6 grid grid-cols-1 gap-12 pt-12 sm:mx-0 lg:grid-cols-4">
+        <div class="mx-6 grid grid-cols-1 gap-12 pt-12 sm:mx-0 lg:grid-cols-3 2xl:grid-cols-4">
             <div class="col-span-1 flex flex-col">
                 <div class="relative z-10 flex items-center justify-between">
                     <span
@@ -19,17 +19,17 @@
                     >
                 </div>
 
-                <h2 class="text-5xl 2xl:text-6xl mt-3">
+                <h2 class="text-4xl 2xl:text-6xl mt-3 leading-9 2xl:leading-14">
                     Information &&nbsp;Numbers
                 </h2>
 
-                <div class="mt-auto">
+                <div class="mt-auto pt-6">
                     <ButtonPrimary class="w-full">Configure</ButtonPrimary>
                 </div>
             </div>
 
             <div
-                class="col-span-1 grid grid-cols-2 gap-6 border-l pl-12 lg:col-span-3 lg:grid-cols-3"
+                class="col-span-1 grid grid-cols-2 gap-6 lg:border-l lg:pl-12 lg:col-span-2 lg:grid-cols-2 2xl:grid-cols-3 2xl:col-span-3"
             >
                 <div class="">
                     <div class="mb-2 flex gap-3">
