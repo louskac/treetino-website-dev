@@ -1,7 +1,7 @@
 <template>
     <div>
         <p class="text-xs uppercase tracking-widest text-black/70 dark:text-white/50 mb-4">
-            05 — Příplatkové produkty
+            {{ formatStep(stepNumber) }} — Příplatkové produkty
         </p>
         <div class="flex flex-col gap-1">
 
@@ -9,7 +9,7 @@
             <div class="py-3 px-3 rounded">
                 <div class="flex items-center justify-between mb-1">
                     <span class="text-sm text-black dark:text-white">Nabíjení pro elektromobily</span>
-                    <span class="text-xs text-black/100 font-semibold dark:text-white/40">11 kW</span>
+                    <span class="text-xs text-black font-semibold dark:text-white/40">11 kW</span>
                 </div>
                 <p class="text-xs text-black/40 dark:text-white/40 leading-relaxed mb-3">Přípojka pro rychlé domácí nebo firemní nabíjení elektromobilů.</p>
                 <div class="flex items-center gap-3">
@@ -51,8 +51,12 @@
 </template>
 
 <script setup lang="ts">
+import { useStepFormatter } from '@/composables/useStepFormatter';
 import CheckCircle from '../icons/CheckCircle.vue';
 
+defineProps<{ stepNumber: number }>();
+
+const { formatStep } = useStepFormatter();
 const evCount = defineModel<number>('evChargerCount', { default: 0 });
 const bikeEnabled = defineModel<boolean>('bikeChargerRequested', { default: false });
 </script>

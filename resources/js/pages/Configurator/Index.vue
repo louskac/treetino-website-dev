@@ -30,17 +30,17 @@
                 <ConfiguratorProductHeader :product="selectedProduct" />
                 
                 <div 
-                    v-for="step in selectedProduct.steps" 
+                    v-for="(step, index) in selectedProduct.steps" 
                     :key="step.id" 
                     :ref="setSectionRef" 
                     @click="forceActiveSection(step.id)"
                     class="border-t border-t-blue/10 dark:border-white/10 pt-7"
                 >
-                    <ConfiguratorColorStep v-if="step.id === 'color'" v-model="selectedColorId" />
-                    <ConfiguratorLeafColorStep v-else-if="step.id === 'leaf'" v-model="selectedLeafColorId" />
-                    <ConfiguratorConnectivityStep v-else-if="step.id === 'connectivity'" v-model="selectedConnectivity" />
-                    <ConfiguratorBatteryStep v-else-if="step.id === 'battery'" v-model="selectedBattery" />
-                    <ConfiguratorAddonsStep v-else-if="step.id === 'addons'" v-model:ev-charger-count="evChargerCount" v-model:bike-charger-requested="bikeChargerRequested" />
+                    <ConfiguratorColorStep v-if="step.id === 'color'" v-model="selectedColorId" :step-number="index + 1" />
+                    <ConfiguratorLeafColorStep v-else-if="step.id === 'leaf'" v-model="selectedLeafColorId" :step-number="index + 1" />
+                    <ConfiguratorConnectivityStep v-else-if="step.id === 'connectivity'" v-model="selectedConnectivity" :step-number="index + 1" />
+                    <ConfiguratorBatteryStep v-else-if="step.id === 'battery'" v-model="selectedBattery" :step-number="index + 1" />
+                    <ConfiguratorAddonsStep v-else-if="step.id === 'addons'" v-model:ev-charger-count="evChargerCount" v-model:bike-charger-requested="bikeChargerRequested" :step-number="index + 1" />
                 </div>
 
                 <div class="border-t border-t-blue/10 dark:border-white/10 pt-7 pb-2">

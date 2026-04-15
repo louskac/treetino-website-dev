@@ -1,7 +1,7 @@
 <template>
     <div>
         <p class="text-xs uppercase tracking-widest text-black/70 dark:text-white/50 mb-4">
-            04 — Fyzická baterie
+            {{ formatStep(stepNumber) }} — Fyzická baterie
         </p>
         <div class="flex flex-col gap-1">
             <button
@@ -28,8 +28,12 @@
 </template>
 
 <script setup lang="ts">
+import { useStepFormatter } from '@/composables/useStepFormatter';
+const { formatStep } = useStepFormatter();
+
 defineProps<{
     modelValue: string;
+    stepNumber: number;
 }>();
 
 defineEmits<{

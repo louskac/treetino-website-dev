@@ -1,11 +1,13 @@
 <template>
-    <ConfiguratorColorPicker step-label="01 — Barva konstrukce" :colors="colors" :model-value="modelValue" @update:model-value="$emit('update:modelValue', $event)" />
+    <ConfiguratorColorPicker :step-label="`${formatStep(stepNumber)} — Barva konstrukce`" :colors="colors" :model-value="modelValue" @update:model-value="$emit('update:modelValue', $event)" />
 </template>
 
 <script setup lang="ts">
 import ConfiguratorColorPicker, { type ColorOption } from './ConfiguratorColorPicker.vue';
+import { useStepFormatter } from '@/composables/useStepFormatter';
+const { formatStep } = useStepFormatter();
 
-defineProps<{ modelValue: string }>();
+defineProps<{ modelValue: string, stepNumber: number }>();
 defineEmits<{ 'update:modelValue': [value: string] }>();
 
 const colors: ColorOption[] = [
