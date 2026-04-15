@@ -11,7 +11,7 @@
             </div>
         </div>
 
-        <div class="rounded-sm border border-black/10 dark:border-white/10 p-4 flex flex-col gap-3">
+        <div class="rounded-xl border border-black/10 dark:border-white/10 p-4 flex flex-col gap-3">
             <div class="flex items-baseline justify-between">
                 <span class="text-sm text-black font-semibold dark:text-white/50">Splatné dnes</span>
                 <span class="text-xl font-semibold text-black dark:text-white">12 000 Kč</span>
