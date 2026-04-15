@@ -5,7 +5,7 @@
         </h1>
         <div class="mt-5 border-t border-black/10 dark:border-white/10 pt-5 flex flex-col gap-3">
             <div v-for="param in paramList" :key="param.label" class="flex justify-between items-baseline">
-                <span class="text-xs uppercase tracking-widest text-black/50 dark:text-white/50">{{ param.label }}</span>
+                <span class="text-xs uppercase tracking-widest text-black/80 dark:text-white/50">{{ param.label }}</span>
                 <span class="text-sm font-semibold text-black dark:text-white">{{ param.value }}</span>
             </div>
         </div>
