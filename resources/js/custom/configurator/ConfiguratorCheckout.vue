@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col gap-5">
+    <div class="flex flex-col gap-6">
 
         <div>
             <p class="text-xs uppercase tracking-widest text-black/50 dark:text-white/50 mb-4">
@@ -24,18 +24,23 @@
             </ul>
         </div>
 
-        <button class="w-full rounded-sm bg-t-blue dark:bg-white py-4 text-sm font-semibold tracking-wide text-white dark:text-black transition-opacity hover:opacity-80 active:opacity-70">
-            Rezervovat a zaplatit
-        </button>
+        <div class="flex flex-col gap-2">
+            <ButtonPrimary class="text-center">
+                Rezervovat a Zaplatit
+            </ButtonPrimary>
 
-        <button class="w-full rounded-sm border border-black/15 dark:border-white/15 py-3 text-sm text-black/60 dark:text-white/60 transition-opacity hover:opacity-70">
-            Více informací
-        </button>
+            <ButtonSecondary class="text-center">
+                Více Informací
+            </ButtonSecondary>
+        </div>
 
     </div>
 </template>
 
 <script setup lang="ts">
+import ButtonPrimary from '@/custom/ButtonPrimary.vue';
+import ButtonSecondary from '@/custom/ButtonSecondary.vue';
+
 const props = defineProps<{
     basePrice: number;
 }>();
