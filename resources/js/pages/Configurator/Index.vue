@@ -10,7 +10,7 @@
             <div class="relative w-full h-full flex items-center justify-center">
                 <img
                     v-for="(img, i) in sectionImages"
-                    :key="i"
+                    :key="selectedProductId + '-' + i + '-' + img"
                     :src="img"
                     class="absolute max-h-full max-w-full object-contain transition-opacity duration-700"
                     :class="i === currentSectionIndex ? 'opacity-100' : 'opacity-0'"
@@ -28,21 +28,21 @@
                     :products="products"
                 />
                 <ConfiguratorProductHeader :product="selectedProduct" />
-                <div :ref="setSectionRef" class="border-t border-t-blue/10 dark:border-white/10 pt-7">
-                    <ConfiguratorColorStep v-model="selectedColorId" />
+                
+                <div 
+                    v-for="step in selectedProduct.steps" 
+                    :key="step.id" 
+                    :ref="setSectionRef" 
+                    @click="forceActiveSection(step.id)"
+                    class="border-t border-t-blue/10 dark:border-white/10 pt-7"
+                >
+                    <ConfiguratorColorStep v-if="step.id === 'color'" v-model="selectedColorId" />
+                    <ConfiguratorLeafColorStep v-else-if="step.id === 'leaf'" v-model="selectedLeafColorId" />
+                    <ConfiguratorConnectivityStep v-else-if="step.id === 'connectivity'" v-model="selectedConnectivity" />
+                    <ConfiguratorBatteryStep v-else-if="step.id === 'battery'" v-model="selectedBattery" />
+                    <ConfiguratorAddonsStep v-else-if="step.id === 'addons'" v-model:ev-charger-count="evChargerCount" v-model:bike-charger-requested="bikeChargerRequested" />
                 </div>
-                <div :ref="setSectionRef" class="border-t border-t-blue/10 dark:border-white/10 pt-7">
-                    <ConfiguratorLeafColorStep v-model="selectedLeafColorId" />
-                </div>
-                <div :ref="setSectionRef" class="border-t border-t-blue/10 dark:border-white/10 pt-7">
-                    <ConfiguratorConnectivityStep v-model="selectedConnectivity" />
-                </div>
-                <div :ref="setSectionRef" class="border-t border-t-blue/10 dark:border-white/10 pt-7">
-                    <ConfiguratorBatteryStep v-model="selectedBattery" />
-                </div>
-                <div :ref="setSectionRef" class="border-t border-t-blue/10 dark:border-white/10 pt-7">
-                    <ConfiguratorAddonsStep v-model:ev-charger-count="evChargerCount" v-model:bike-charger-requested="bikeChargerRequested" />
-                </div>
+
                 <div class="border-t border-t-blue/10 dark:border-white/10 pt-7 pb-2">
                     <ConfiguratorCheckout :base-price="basePrice" />
                 </div>
@@ -54,8 +54,8 @@
 
 <script setup lang="ts">
 import { Head } from '@inertiajs/vue3';
-import { ref, computed, onMounted, onUnmounted, nextTick, ComponentPublicInstance } from 'vue';
-import { PRODUCTS, BASE_PRICES, ProductId } from '@/types/products';
+import { ref, computed, onMounted, onUnmounted, nextTick, watch, ComponentPublicInstance } from 'vue';
+import { PRODUCTS, ProductId } from '@/types/products';
 import ConfiguratorModelSelect from '@/custom/configurator/ConfiguratorModelSelect.vue';
 import ConfiguratorProductHeader from '@/custom/configurator/ConfiguratorProductHeader.vue';
 import ConfiguratorColorStep from '@/custom/configurator/ConfiguratorColorStep.vue';
@@ -88,6 +88,7 @@ onUnmounted(() => {
     window.removeEventListener('scroll', updateActiveSection);
     window.removeEventListener('resize', updateActiveSection);
 });
+
 const selectedColorId = ref('white');
 const selectedLeafColorId = ref('green');
 const selectedConnectivity = ref('none');
@@ -97,9 +98,12 @@ const bikeChargerRequested = ref(false);
 
 const selectedProduct = computed(() => products.find(p => p.id === selectedProductId.value)!);
 
-const basePrice = computed(() => BASE_PRICES[selectedProductId.value] ?? 0);
+const basePrice = computed(() => selectedProduct.value.basePrice ?? 0);
 
 const configuratorPanel = ref<HTMLElement | null>(null);
+
+let focusTimeout: ReturnType<typeof setTimeout> | null = null;
+let isForcedFocus = false;
 
 function scrollConfigurator(event: WheelEvent) {
     if (configuratorPanel.value) {
@@ -111,13 +115,38 @@ function scrollConfigurator(event: WheelEvent) {
 const sectionsRefs = ref<HTMLElement[]>([]);
 const currentSectionIndex = ref(0);
 
-const sectionImages = [
-    '/img/features-frames/features_frame_0001.webp',
-    '/img/features-frames/features_frame_0058.webp',
-    '/img/features-frames/features_frame_0114.webp',
-    '/img/features-frames/features_frame_0171.webp',
-    '/img/features-frames/features_frame_0228.webp',
-];
+const sectionImages = computed(() => {
+    if (!selectedProduct.value.steps) return [];
+
+    return selectedProduct.value.steps.map(step => {
+        const prodId = selectedProductId.value;
+        
+        switch (step.id) {
+            case 'color':
+                return `/img/config-images/${prodId}/color/color_${selectedColorId.value}.webp`;
+            case 'leaf':
+                return `/img/config-images/${prodId}/leaf-color/leaf_${selectedLeafColorId.value}.webp`;
+            case 'connectivity':
+                return `/img/config-images/${prodId}/connectivity/connectivity_${selectedConnectivity.value}.webp`;
+            case 'battery':
+                return `/img/config-images/${prodId}/battery/battery_${selectedBattery.value}.webp`;
+            case 'addons':
+                return `/img/config-images/${prodId}/addons.webp`;
+            default:
+                return `/img/config-images/${prodId}/default.webp`;
+        }
+    });
+});
+
+// when product is changed, reset watched DOM elements and reset section index
+watch(selectedProductId, async () => {
+    sectionsRefs.value = [];
+    currentSectionIndex.value = 0;
+    
+    // wait for re-render and reset scroll
+    await nextTick();
+    updateActiveSection();
+});
 
 function setSectionRef(
     el: Element | ComponentPublicInstance | null
@@ -128,6 +157,9 @@ function setSectionRef(
 }
 
 function updateActiveSection() {
+    // forced focus is used to prevent instantly switching back from selected option to section when clicked and scrolled
+    if (isForcedFocus) return; 
+
     const panel = configuratorPanel.value;
 
     const usePanelTrigger = !!panel && window.matchMedia('(min-width: 768px)').matches;
@@ -150,4 +182,21 @@ function updateActiveSection() {
     currentSectionIndex.value = activeIndex;
 }
 
+function forceActiveSection(stepId: string) {
+    if (!selectedProduct.value.steps) return;
+    
+    const index = selectedProduct.value.steps.findIndex(s => s.id === stepId);
+    
+    if (index !== -1 && currentSectionIndex.value !== index) {
+        currentSectionIndex.value = index;
+        
+        isForcedFocus = true;
+        
+        if (focusTimeout) clearTimeout(focusTimeout);
+        
+        focusTimeout = setTimeout(() => {
+            isForcedFocus = false;
+        }, 400);
+    }
+}
 </script>
