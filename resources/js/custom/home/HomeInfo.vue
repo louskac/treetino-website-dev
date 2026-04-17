@@ -19,7 +19,7 @@
                 </div>
 
                 <div
-                    class="w-full flex flex-col rounded-2xl border border-black/20 p-6 shadow-xl"
+                    class="w-full flex flex-col rounded-2xl border p-6 shadow-xl"
                 >
                     <div class="">
                         <Tree class="h-8 w-8" stroke-width="2" />
@@ -41,7 +41,7 @@
                 </div>
 
                 <div
-                    class="reveal reveal-right w-full rounded-2xl border border-black/20 p-6 shadow-xl"
+                    class="reveal reveal-right w-full rounded-2xl border p-6 shadow-xl"
                 >
                     <div class="">
                         <Tree class="h-8 w-8" stroke-width="2" />
@@ -81,7 +81,7 @@
                     class="mt-26"
                 >
                     <div
-                        class="w-full rounded-2xl border border-black/20 p-6 shadow-xl"
+                        class="w-full rounded-2xl border p-6 shadow-xl"
                     >
                         <div class="">
                             <Tree class="h-8 w-8" stroke-width="2" />
@@ -133,7 +133,7 @@
                     class="mt-26"
                 >
                     <div
-                        class="reveal reveal-right w-full rounded-2xl border border-black/20 p-6 shadow-xl"
+                        class="reveal reveal-right w-full rounded-2xl border p-6 shadow-xl"
                     >
                         <div class="">
                             <Tree class="h-8 w-8" stroke-width="2" />

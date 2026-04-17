@@ -1,5 +1,5 @@
 <template>
-    <header class="fixed z-50 w-full">
+    <header class="fixed z-50 w-full translate-x-[1px]">
         <div
             class="mx-auto flex w-full max-w-[1400px] justify-between px-6 pt-6 sm:w-[500px] sm:px-0 md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
         >
@@ -125,18 +125,11 @@
                         </div>
 
                         <div class="my-auto hidden text-white md:block">
-                            <Link href="/configurator">
-                                <ButtonWhite
+                                <ButtonPrimary
+                                    :href="route('configurator')"
                                     variant="slim"
-                                    :class="{
-                                        'border shadow-xl':
-                                            activeDropdown === 'products',
-                                        'border border-white':
-                                            activeDropdown !== 'products',
-                                    }"
-                                    >Preorder Now</ButtonWhite
+                                    >Preorder Now</ButtonPrimary
                                 >
-                            </Link>
                         </div>
                     </div>
                 </div>
@@ -195,6 +188,8 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import ButtonWhite from '@/custom/ButtonWhite.vue';
 import LogoType from '@/custom/LogoType.vue';
 import { PRODUCTS } from '@/types/products';
+import ButtonPrimary from '@/custom/ButtonPrimary.vue';
+import { route } from 'ziggy-js';
 
 const activeDropdown = ref<string | null>(null);
 const isScrolled = ref(false);
