@@ -2,68 +2,129 @@
     <Head title="Configurator" />
 
     <div class="md:flex md:h-screen md:overflow-hidden">
-
         <div
-            class="sticky top-0 z-10 h-[30vh] bg-white md:static md:z-auto md:h-auto md:w-4/5 flex items-center justify-center overflow-hidden"
+            class="sticky top-0 z-10 flex h-[30vh] items-center justify-center overflow-hidden bg-white md:static md:z-auto md:h-auto md:w-4/5"
             @wheel.prevent="scrollConfigurator"
         >
-            <div class="relative w-full h-full flex items-center justify-center">
+            <div
+                class="relative flex h-full w-full items-center justify-center"
+            >
                 <img
                     v-for="(img, i) in sectionImages"
                     :key="selectedProductId + '-' + i + '-' + img"
                     :src="img"
                     class="absolute max-h-full max-w-full object-contain transition-opacity duration-700"
-                    :class="i === currentSectionIndex ? 'opacity-100' : 'opacity-0'"
+                    :class="
+                        i === currentSectionIndex ? 'opacity-100' : 'opacity-0'
+                    "
                 />
             </div>
         </div>
 
         <div
             ref="configuratorPanel"
-            class="md:w-5/9 lg:w-3/7 xl:w-1/3 2xl:w-3/13 md:h-full border-l border-t-blue/10 dark:border-white/10 md:overflow-y-auto bg-white dark:bg-black"
+            class="border-l border-t-blue/10 bg-white md:h-full md:w-5/9 md:overflow-y-auto lg:w-3/7 xl:w-1/3 2xl:w-3/13 dark:border-white/10 dark:bg-black"
         >
-            <div class="p-6 flex flex-col gap-7">
+            <div class="flex flex-col gap-7 p-6">
                 <ConfiguratorModelSelect
                     v-model="selectedProductId"
                     :products="products"
                 />
                 <ConfiguratorProductHeader :product="selectedProduct" />
-                
-                <div 
-                    v-for="step in selectedProduct.steps" 
-                    :key="step.id" 
-                    :ref="setSectionRef" 
+
+                <div
+                    v-for="step in selectedProduct.steps"
+                    :key="step.id"
+                    :ref="setSectionRef"
                     @click="forceActiveSection(step.id)"
-                    class="border-t border-t-blue/10 dark:border-white/10 pt-7"
+                    class="border-t border-t-blue/10 pt-7 dark:border-white/10"
                 >
-                    <ConfiguratorColorStep v-if="step.id === 'color'" v-model="selectedColorId" />
-                    <ConfiguratorLeafColorStep v-else-if="step.id === 'leaf'" v-model="selectedLeafColorId" />
-                    <ConfiguratorConnectivityStep v-else-if="step.id === 'connectivity'" v-model="selectedConnectivity" />
-                    <ConfiguratorBatteryStep v-else-if="step.id === 'battery'" v-model="selectedBattery" />
-                    <ConfiguratorAddonsStep v-else-if="step.id === 'addons'" v-model:ev-charger-count="evChargerCount" v-model:bike-charger-requested="bikeChargerRequested" />
+                    <ConfiguratorColorStep
+                        v-if="step.id === 'color'"
+                        v-model="selectedColorId"
+                    />
+                    <ConfiguratorLeafColorStep
+                        v-else-if="step.id === 'leaf'"
+                        v-model="selectedLeafColorId"
+                    />
+                    <ConfiguratorConnectivityStep
+                        v-else-if="step.id === 'connectivity'"
+                        v-model="selectedConnectivity"
+                    />
+                    <ConfiguratorBatteryStep
+                        v-else-if="step.id === 'battery'"
+                        v-model="selectedBattery"
+                    />
+                    <ConfiguratorAddonsStep
+                        v-else-if="step.id === 'addons'"
+                        v-model:ev-charger-count="evChargerCount"
+                        v-model:bike-charger-requested="bikeChargerRequested"
+                    />
                 </div>
 
-                <div class="border-t border-t-blue/10 dark:border-white/10 pt-7 pb-2">
-                    <ConfiguratorCheckout :base-price="basePrice" />
+                <div
+                    class="border-t border-t-blue/10 pt-7 pb-2 dark:border-white/10"
+                >
+                    <ConfiguratorCheckout
+                        :base-price="basePrice"
+                        @checkout="modalCheckoutOpen"
+                        @info="modalInfoOpen"
+                    />
                 </div>
             </div>
         </div>
-
     </div>
+
+    <!--  MODALS  -->
+    <!--  Checkout  -->
+    <ConfiguratorModalCheckout
+        v-if="modalCheckout"
+        @close="modalCheckoutClose"
+    />
+
+    <!--  Info  -->
+    <ConfiguratorModalInfo
+        v-if="modalInfo"
+        @close="modalInfoClose"
+    />
 </template>
 
 <script setup lang="ts">
 import { Head } from '@inertiajs/vue3';
-import { ref, computed, onMounted, onUnmounted, nextTick, watch, ComponentPublicInstance } from 'vue';
-import { PRODUCTS, ProductId } from '@/types/products';
+import type { ComponentPublicInstance } from 'vue';
+import { ref, computed, onMounted, onUnmounted, nextTick, watch } from 'vue';
+import ConfiguratorAddonsStep from '@/custom/configurator/ConfiguratorAddonsStep.vue';
+import ConfiguratorBatteryStep from '@/custom/configurator/ConfiguratorBatteryStep.vue';
+import ConfiguratorCheckout from '@/custom/configurator/ConfiguratorCheckout.vue';
+import ConfiguratorColorStep from '@/custom/configurator/ConfiguratorColorStep.vue';
+import ConfiguratorConnectivityStep from '@/custom/configurator/ConfiguratorConnectivityStep.vue';
+import ConfiguratorLeafColorStep from '@/custom/configurator/ConfiguratorLeafColorStep.vue';
+import ConfiguratorModalCheckout from '@/custom/configurator/ConfiguratorModalCheckout.vue';
+import ConfiguratorModalInfo from '@/custom/configurator/ConfiguratorModalInfo.vue';
 import ConfiguratorModelSelect from '@/custom/configurator/ConfiguratorModelSelect.vue';
 import ConfiguratorProductHeader from '@/custom/configurator/ConfiguratorProductHeader.vue';
-import ConfiguratorColorStep from '@/custom/configurator/ConfiguratorColorStep.vue';
-import ConfiguratorLeafColorStep from '@/custom/configurator/ConfiguratorLeafColorStep.vue';
-import ConfiguratorConnectivityStep from '@/custom/configurator/ConfiguratorConnectivityStep.vue';
-import ConfiguratorBatteryStep from '@/custom/configurator/ConfiguratorBatteryStep.vue';
-import ConfiguratorAddonsStep from '@/custom/configurator/ConfiguratorAddonsStep.vue';
-import ConfiguratorCheckout from '@/custom/configurator/ConfiguratorCheckout.vue';
+import { PRODUCTS, ProductId } from '@/types/products';
+
+// modals
+
+const modalCheckout = ref(false);
+const modalInfo = ref(false);
+
+function modalCheckoutOpen() {
+    modalCheckout.value = true;
+}
+
+function modalCheckoutClose() {
+    modalCheckout.value = false;
+}
+
+function modalInfoOpen() {
+    modalInfo.value = true;
+}
+
+function modalInfoClose() {
+    modalInfo.value = false;
+}
 
 const products = PRODUCTS;
 
@@ -72,9 +133,13 @@ let removePanelScrollListener: (() => void) | null = null;
 
 onMounted(() => {
     const panel = configuratorPanel.value;
+
     if (panel) {
-        panel.addEventListener('scroll', updateActiveSection, { passive: true });
-        removePanelScrollListener = () => panel.removeEventListener('scroll', updateActiveSection);
+        panel.addEventListener('scroll', updateActiveSection, {
+            passive: true,
+        });
+        removePanelScrollListener = () =>
+            panel.removeEventListener('scroll', updateActiveSection);
     }
 
     window.addEventListener('scroll', updateActiveSection, { passive: true });
@@ -96,7 +161,9 @@ const selectedBattery = ref('none');
 const evChargerCount = ref(0);
 const bikeChargerRequested = ref(false);
 
-const selectedProduct = computed(() => products.find(p => p.id === selectedProductId.value)!);
+const selectedProduct = computed(
+    () => products.find((p) => p.id === selectedProductId.value)!,
+);
 
 const basePrice = computed(() => selectedProduct.value.basePrice ?? 0);
 
@@ -118,9 +185,9 @@ const currentSectionIndex = ref(0);
 const sectionImages = computed(() => {
     if (!selectedProduct.value.steps) return [];
 
-    return selectedProduct.value.steps.map(step => {
+    return selectedProduct.value.steps.map((step) => {
         const prodId = selectedProductId.value;
-        
+
         switch (step.id) {
             case 'color':
                 return `/img/config-images/${prodId}/color/color_${selectedColorId.value}.webp`;
@@ -142,15 +209,13 @@ const sectionImages = computed(() => {
 watch(selectedProductId, async () => {
     sectionsRefs.value = [];
     currentSectionIndex.value = 0;
-    
+
     // wait for re-render and reset scroll
     await nextTick();
     updateActiveSection();
 });
 
-function setSectionRef(
-    el: Element | ComponentPublicInstance | null
-) {
+function setSectionRef(el: Element | ComponentPublicInstance | null) {
     if (el instanceof HTMLElement && !sectionsRefs.value.includes(el)) {
         sectionsRefs.value.push(el);
     }
@@ -158,13 +223,15 @@ function setSectionRef(
 
 function updateActiveSection() {
     // forced focus is used to prevent instantly switching back from selected option to section when clicked and scrolled
-    if (isForcedFocus) return; 
+    if (isForcedFocus) return;
 
     const panel = configuratorPanel.value;
 
-    const usePanelTrigger = !!panel && window.matchMedia('(min-width: 768px)').matches;
+    const usePanelTrigger =
+        !!panel && window.matchMedia('(min-width: 768px)').matches;
     const triggerY = usePanelTrigger
-        ? panel.getBoundingClientRect().top + panel.getBoundingClientRect().height * 0.5
+        ? panel.getBoundingClientRect().top +
+          panel.getBoundingClientRect().height * 0.5
         : window.innerHeight * 0.65;
 
     let activeIndex = 0;
@@ -184,16 +251,16 @@ function updateActiveSection() {
 
 function forceActiveSection(stepId: string) {
     if (!selectedProduct.value.steps) return;
-    
-    const index = selectedProduct.value.steps.findIndex(s => s.id === stepId);
-    
+
+    const index = selectedProduct.value.steps.findIndex((s) => s.id === stepId);
+
     if (index !== -1 && currentSectionIndex.value !== index) {
         currentSectionIndex.value = index;
-        
+
         isForcedFocus = true;
-        
+
         if (focusTimeout) clearTimeout(focusTimeout);
-        
+
         focusTimeout = setTimeout(() => {
             isForcedFocus = false;
         }, 400);

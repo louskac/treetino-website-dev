@@ -1,39 +1,58 @@
 <template>
     <div class="flex flex-col gap-6">
-
         <div>
-            <p class="text-xs uppercase tracking-widest text-black/50 dark:text-white/50 mb-4">
+            <p
+                class="mb-4 text-xs tracking-widest text-black/50 uppercase dark:text-white/50"
+            >
                 Shrnutí objednávky
             </p>
             <div class="flex items-baseline justify-between">
-                <span class="text-xs text-black/50 dark:text-white/50">Cena od</span>
-                <span class="text-lg font-bold tracking-tight text-black dark:text-white">{{ basePrice.toLocaleString('cs-CZ') }} Kč</span>
+                <span class="text-xs text-black/50 dark:text-white/50"
+                    >Cena od</span
+                >
+                <span
+                    class="text-lg font-bold tracking-tight text-black dark:text-white"
+                    >{{ basePrice.toLocaleString('cs-CZ') }} Kč</span
+                >
             </div>
         </div>
 
-        <div class="rounded-xl border border-black/10 dark:border-white/10 p-4 flex flex-col gap-3">
+        <div
+            class="flex flex-col gap-3 rounded-xl border border-black/10 p-4 dark:border-white/10"
+        >
             <div class="flex items-baseline justify-between">
-                <span class="text-sm text-black font-semibold dark:text-white/50">Splatné dnes</span>
-                <span class="text-xl font-semibold text-black dark:text-white">12 000 Kč</span>
+                <span
+                    class="text-sm font-semibold text-black dark:text-white/50"
+                    >Splatné dnes</span
+                >
+                <span class="text-xl font-semibold text-black dark:text-white"
+                    >12 000 Kč</span
+                >
             </div>
             <ul class="flex flex-col gap-1.5">
-                <li v-for="item in reservationBenefits" :key="item" class="flex items-start gap-2 text-xs text-black/50 dark:text-white/50">
-                    <span class="mt-px text-black/30 dark:text-white/30 shrink-0">—</span>
+                <li
+                    v-for="item in reservationBenefits"
+                    :key="item"
+                    class="flex items-start gap-2 text-xs text-black/50 dark:text-white/50"
+                >
+                    <span
+                        class="mt-px shrink-0 text-black/30 dark:text-white/30"
+                        >—</span
+                    >
                     {{ item }}
                 </li>
             </ul>
         </div>
 
         <div class="flex flex-col gap-2">
-            <ButtonPrimary>
+            <ButtonPrimary @click="emit('checkout')">
                 Rezervovat a Zaplatit
             </ButtonPrimary>
 
-            <ButtonSecondary>
+            <ButtonSecondary @click="emit('info')">
                 Více Informací
             </ButtonSecondary>
         </div>
-
     </div>
 </template>
 
@@ -44,6 +63,8 @@ import ButtonSecondary from '@/custom/ButtonSecondary.vue';
 const props = defineProps<{
     basePrice: number;
 }>();
+
+const emit = defineEmits(['checkout', 'info']);
 
 const reservationBenefits = [
     'Lorem ipsum dolor sit amet',
