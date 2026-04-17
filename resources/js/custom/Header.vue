@@ -1,14 +1,17 @@
 <template>
-    <header class="absolute z-50 w-full">
+    <header class="fixed z-50 w-full">
         <div
-            class="mx-auto flex w-full max-w-[1400px] justify-between px-6 sm:px-0 pt-6 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
+            class="mx-auto flex w-full max-w-[1400px] justify-between px-6 pt-6 sm:w-[500px] sm:px-0 md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
         >
             <div
-                class="flex w-full flex-col rounded-2xl border border-white/20 bg-black/20 p-6 backdrop-blur-2xl transition-all duration-300"
-                :class="{
-                    'bg-white': activeDropdown === 'products',
-                    'bg-black/20': activeDropdown !== 'products',
-                }"
+                class="flex w-full flex-col rounded-2xl border bg-black/20 p-6 backdrop-blur-2xl transition-all duration-300"
+                :class="[
+                    activeDropdown === 'products'
+                        ? 'border-transparent bg-white'
+                        : isScrolled
+                          ? 'bg-white/80 shadow-lg'
+                          : 'border-white/20 bg-black/20',
+                ]"
                 @mouseleave="activeDropdown = null"
             >
                 <div class="flex w-full justify-between">
@@ -16,8 +19,11 @@
                         <LogoType
                             class="fill-current transition-all duration-300"
                             :class="{
-                                'text-black': activeDropdown === 'products',
-                                'text-white': activeDropdown !== 'products',
+                                'text-black':
+                                    activeDropdown === 'products' || isScrolled,
+                                'text-white':
+                                    activeDropdown !== 'products' &&
+                                    !isScrolled,
                             }"
                         />
                     </div>
@@ -28,9 +34,10 @@
                             class="text-sm transition-all duration-300"
                             :class="{
                                 'text-black/80 hover:text-black':
-                                    activeDropdown === 'products',
+                                    activeDropdown === 'products' || isScrolled,
                                 'text-white/80 hover:text-white':
-                                    activeDropdown !== 'products',
+                                    activeDropdown !== 'products' &&
+                                    !isScrolled,
                             }"
                             @mouseenter="activeDropdown = 'products'"
                             >Produkty</Link
@@ -41,9 +48,10 @@
                             class="text-sm transition-all duration-300"
                             :class="{
                                 'text-black/80 hover:text-black':
-                                    activeDropdown === 'products',
+                                    activeDropdown === 'products' || isScrolled,
                                 'text-white/80 hover:text-white':
-                                    activeDropdown !== 'products',
+                                    activeDropdown !== 'products' &&
+                                    !isScrolled,
                             }"
                             @mouseenter="activeDropdown = null"
                             >Spolupráce</Link
@@ -53,9 +61,10 @@
                             class="text-sm transition-all duration-300"
                             :class="{
                                 'text-black/80 hover:text-black':
-                                    activeDropdown === 'products',
+                                    activeDropdown === 'products' || isScrolled,
                                 'text-white/80 hover:text-white':
-                                    activeDropdown !== 'products',
+                                    activeDropdown !== 'products' &&
+                                    !isScrolled,
                             }"
                             @mouseenter="activeDropdown = null"
                             >Média</Link
@@ -65,9 +74,10 @@
                             class="text-sm transition-all duration-300"
                             :class="{
                                 'text-black/80 hover:text-black':
-                                    activeDropdown === 'products',
+                                    activeDropdown === 'products' || isScrolled,
                                 'text-white/80 hover:text-white':
-                                    activeDropdown !== 'products',
+                                    activeDropdown !== 'products' &&
+                                    !isScrolled,
                             }"
                             @mouseenter="activeDropdown = null"
                             >Kontakty</Link
@@ -76,35 +86,35 @@
 
                     <div class="flex gap-8">
                         <div class="my-auto flex gap-4">
-<!--                            <div class="dark-switch my-auto flex text-white">-->
-<!--                                <button-->
-<!--                                    @click="toggleDark"-->
-<!--                                    class="my-auto cursor-pointer p-1 transition-opacity hover:opacity-70"-->
-<!--                                >-->
-<!--                                    <SunLight-->
-<!--                                        v-if="isDark"-->
-<!--                                        class="h-4.5 w-4.5 transition-all duration-300"-->
-<!--                                        :class="{-->
-<!--                                            'text-black/80 hover:text-black':-->
-<!--                                                activeDropdown === 'products',-->
-<!--                                            'text-white/80 hover:text-white':-->
-<!--                                                activeDropdown !== 'products',-->
-<!--                                        }"-->
-<!--                                        stroke-width="2"-->
-<!--                                    />-->
-<!--                                    <HalfMoon-->
-<!--                                        v-else-->
-<!--                                        class="h-4.5 w-4.5 transition-all duration-300"-->
-<!--                                        :class="{-->
-<!--                                            'text-black/80 hover:text-black':-->
-<!--                                                activeDropdown === 'products',-->
-<!--                                            'text-white/80 hover:text-white':-->
-<!--                                                activeDropdown !== 'products',-->
-<!--                                        }"-->
-<!--                                        stroke-width="2"-->
-<!--                                    />-->
-<!--                                </button>-->
-<!--                            </div>-->
+                            <!--                            <div class="dark-switch my-auto flex text-white">-->
+                            <!--                                <button-->
+                            <!--                                    @click="toggleDark"-->
+                            <!--                                    class="my-auto cursor-pointer p-1 transition-opacity hover:opacity-70"-->
+                            <!--                                >-->
+                            <!--                                    <SunLight-->
+                            <!--                                        v-if="isDark"-->
+                            <!--                                        class="h-4.5 w-4.5 transition-all duration-300"-->
+                            <!--                                        :class="{-->
+                            <!--                                            'text-black/80 hover:text-black':-->
+                            <!--                                                activeDropdown === 'products',-->
+                            <!--                                            'text-white/80 hover:text-white':-->
+                            <!--                                                activeDropdown !== 'products',-->
+                            <!--                                        }"-->
+                            <!--                                        stroke-width="2"-->
+                            <!--                                    />-->
+                            <!--                                    <HalfMoon-->
+                            <!--                                        v-else-->
+                            <!--                                        class="h-4.5 w-4.5 transition-all duration-300"-->
+                            <!--                                        :class="{-->
+                            <!--                                            'text-black/80 hover:text-black':-->
+                            <!--                                                activeDropdown === 'products',-->
+                            <!--                                            'text-white/80 hover:text-white':-->
+                            <!--                                                activeDropdown !== 'products',-->
+                            <!--                                        }"-->
+                            <!--                                        stroke-width="2"-->
+                            <!--                                    />-->
+                            <!--                                </button>-->
+                            <!--                            </div>-->
 
                             <div class="my-auto xl:hidden">
                                 <Menu
@@ -181,22 +191,38 @@
 <script setup lang="ts">
 import { SunLight, HalfMoon, Menu } from '@iconoir/vue';
 import { Link } from '@inertiajs/vue3';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import ButtonWhite from '@/custom/ButtonWhite.vue';
 import LogoType from '@/custom/LogoType.vue';
 import { PRODUCTS } from '@/types/products';
 
 const activeDropdown = ref<string | null>(null);
+const isScrolled = ref(false);
 
 const products = PRODUCTS;
 
-// 1. Track if we are currently dark
-const isDark = ref(false);
+const handleScroll = () => {
+    // Change state after 600px
+    isScrolled.value = window.scrollY > 600;
+};
 
 onMounted(() => {
-    // Check the actual HTML class on load
-    isDark.value = document.documentElement.classList.contains('dark');
+    handleScroll();
+
+    window.addEventListener('scroll', handleScroll);
 });
+
+onUnmounted(() => {
+    window.removeEventListener('scroll', handleScroll);
+});
+
+// // 1. Track if we are currently dark
+// const isDark = ref(false);
+
+// onMounted(() => {
+//     // Check the actual HTML class on load
+//     isDark.value = document.documentElement.classList.contains('dark');
+// });
 
 // const toggleDark = () => {
 //     isDark.value = !isDark.value;
