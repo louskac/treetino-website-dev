@@ -81,6 +81,7 @@
         <ConfiguratorModalCheckout
             v-if="modalCheckout"
             @close="modalCheckoutClose"
+            @success="paymentSuccess"
         />
     </Transition>
 
@@ -266,6 +267,11 @@ function forceActiveSection(stepId: string) {
             isForcedFocus = false;
         }, 400);
     }
+}
+
+// Payment Success
+function paymentSuccess() {
+    console.log('payment success')
 }
 </script>
 
