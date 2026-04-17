@@ -1,9 +1,162 @@
 <script setup lang="ts">
+import axios from 'axios';
+import { ref, nextTick } from 'vue';
+import { route } from 'ziggy-js';
+import { loadStripe } from '@stripe/stripe-js';
+
 import { Xmark } from '@iconoir/vue';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import ButtonSecondary from '@/custom/ButtonSecondary.vue';
 
-const emit = defineEmits(['close']);
+const emit = defineEmits(['close', 'success']);
+
+// State logic
+const step = ref(1);
+const email = ref('');
+const isProcessing = ref(false);
+const errorMessage = ref('');
+
+// Stripe refs
+const stripe = ref(null);
+const paymentRequest = ref(null);
+const prButton = ref(null);
+const canPayWithWallet = ref(false);
+const cardElement = ref(null);
+const clientSecret = ref('');
+
+const handleContinue = async () => {
+    if (!email.value) return;
+
+    isProcessing.value = true;
+    errorMessage.value = '';
+
+    try {
+        const response = await axios.post(route('checkout-initiate'), {
+            email: email.value,
+            type: '1',
+        });
+
+        console.log('Backend Response:', response.data);
+        clientSecret.value = response.data.client_secret;
+
+        // Move to Step 2
+        step.value = 2;
+
+        // Wait for DOM to update so Stripe can find the #card-element div
+        await nextTick();
+        await initStripe();
+    } catch (error) {
+        errorMessage.value =
+            error.response?.data?.message || 'Something went wrong.';
+    } finally {
+        isProcessing.value = false;
+    }
+};
+
+/**
+ * Step 2: Initialize Stripe Elements
+ */
+const initStripe = async () => {
+    stripe.value = await loadStripe(import.meta.env.VITE_STRIPE_KEY);
+
+    // 1. Create the Payment Request
+    paymentRequest.value = stripe.value.paymentRequest({
+        country: 'CZ',
+        currency: 'czk',
+        total: {
+            label: 'Reservation Deposit',
+            amount: 1200000,
+        },
+        requestPayerName: true,
+        requestPayerEmail: true,
+    });
+
+    const elements = stripe.value.elements();
+
+    // 2. Wallet Button check
+    const result = await paymentRequest.value.canMakePayment();
+    if (result) {
+        canPayWithWallet.value = true;
+        prButton.value = elements.create('paymentRequestButton', {
+            paymentRequest: paymentRequest.value,
+            style: {
+                paymentRequestButton: {
+                    type: 'book',
+                    theme: 'dark',
+                    height: '48px',
+                },
+            },
+        });
+    }
+
+    // 3. MOUNT THE CARD ELEMENT CORRECTLY
+    // Use .value to store it in the reactive ref defined at the top
+    cardElement.value = elements.create('card', {
+        style: { base: { fontSize: '16px' } },
+        hidePostalCode: true,
+    });
+
+    // Use .value to mount it
+    cardElement.value.mount('#card-element');
+
+    // 4. Mount Wallet Button
+    if (canPayWithWallet.value) {
+        await nextTick();
+        prButton.value.mount('#wallet-button');
+    }
+
+    // 5. Wallet listener... (keep as you have it)
+    paymentRequest.value.on('paymentmethod', async (ev) => {
+        const { paymentIntent, error: confirmError } =
+            await stripe.value.confirmCardPayment(
+                clientSecret.value,
+                { payment_method: ev.paymentMethod.id },
+                { handleActions: false },
+            );
+
+        if (confirmError) {
+            ev.complete('fail');
+            errorMessage.value = confirmError.message;
+        } else {
+            ev.complete('success');
+            if (paymentIntent.status === 'succeeded') {
+                emit('success', paymentIntent);
+            }
+        }
+    });
+};
+
+/**
+ * Step 3: Confirm Payment
+ */
+const handlePayment = async () => {
+    isProcessing.value = true;
+    errorMessage.value = '';
+
+    // Verify cardElement.value exists
+    if (!cardElement.value) {
+        errorMessage.value = 'Card form not initialized.';
+        isProcessing.value = false;
+        return;
+    }
+
+    const { paymentIntent, error } = await stripe.value.confirmCardPayment(
+        clientSecret.value,
+        {
+            payment_method: {
+                card: cardElement.value, // This now correctly references the Stripe Element
+                billing_details: { email: email.value },
+            },
+        },
+    );
+
+    if (error) {
+        errorMessage.value = error.message;
+        isProcessing.value = false;
+    } else if (paymentIntent.status === 'succeeded') {
+        emit('success', paymentIntent);
+    }
+};
 </script>
 
 <template>
@@ -11,10 +164,10 @@ const emit = defineEmits(['close']);
         <div
             class="mx-auto my-auto flex min-h-140 w-full flex-col rounded-2xl bg-white lg:w-160"
         >
-<!--            <div class="flex justify-between border-b p-6">-->
-<!--                <div class="opacity-70">Finish Your Order</div>-->
-<!--                <div class="my-auto"></div>-->
-<!--            </div>-->
+            <!--            <div class="flex justify-between border-b p-6">-->
+            <!--                <div class="opacity-70">Finish Your Order</div>-->
+            <!--                <div class="my-auto"></div>-->
+            <!--            </div>-->
 
             <div class="bg-t-accent/10 p-6">
                 <div class="flex items-baseline justify-between">
@@ -30,23 +183,53 @@ const emit = defineEmits(['close']);
             </div>
 
             <div class="flex flex-1 flex-col p-6">
-                <div class="">
-                    <label for="mail" class="mb-2 block text-sm">
-                        E-mail
-                    </label>
+                <div v-if="step === 1" class="step-1">
+                    <div class="">
+                        <label for="mail" class="mb-2 block text-sm">
+                            E-mail
+                        </label>
 
-                    <input
-                        id="mail"
-                        class="w-full rounded-xl border bg-white px-4 py-3 text-black"
-                        type="email"
-                        placeholder="jiri.dozvedel@domena.cz"
-                    />
+                        <input
+                            v-model="email"
+                            id="mail"
+                            class="w-full rounded-xl border bg-white px-4 py-3 text-black"
+                            type="email"
+                            placeholder="jiri.dozvedel@domena.cz"
+                            :disabled="isProcessing"
+                        />
+                    </div>
+
+                    <div class="pt-6 opacity-70">
+                        We need your e-mail address to process your desired
+                        configuration for our team. Your configuration and
+                        invoice will be delivered to you.
+                    </div>
                 </div>
 
-                <div class="pt-6 opacity-70">
-                    We need your e-mail address to process your desired
-                    configuration for our team. Your configuration and invoice
-                    will be delivered to you.
+                <div v-if="step === 2" class="step-2">
+                    <!-- Wallet Button Container -->
+                    <div v-if="canPayWithWallet" class="mb-6">
+                        <div id="wallet-button"></div>
+                        <div
+                            class="relative my-6 flex items-center justify-center"
+                        >
+                            <hr class="w-full border-black/10" />
+                            <span
+                                class="absolute bg-white px-2 text-xs text-black/40"
+                                >OR PAY WITH CARD</span
+                            >
+                        </div>
+                    </div>
+
+                    <label class="mb-2 block text-sm">Card Information</label>
+                    <div
+                        id="card-element"
+                        class="w-full rounded-xl border bg-white px-4 py-4 text-black"
+                    ></div>
+
+                    <p v-if="errorMessage" class="mt-2 text-xs text-red-500">
+                        {{ errorMessage }}
+                    </p>
                 </div>
 
                 <div class="mt-auto pt-6">
@@ -60,13 +243,31 @@ const emit = defineEmits(['close']);
                         <div
                             class="text-xs tracking-widest text-black/50 uppercase"
                         >
-                            Step 1 of 2
+                            Step {{ step }} of 2
                         </div>
                     </div>
 
                     <div class="flex gap-2">
-                        <ButtonPrimary class="w-full">Continue</ButtonPrimary>
-                        <ButtonSecondary @click="emit('close')" class="curpoin">
+                        <ButtonPrimary
+                            class="w-full cursor-pointer"
+                            @click="
+                                step === 1 ? handleContinue() : handlePayment()
+                            "
+                            :disabled="isProcessing || !email"
+                        >
+                            {{
+                                isProcessing
+                                    ? 'Processing...'
+                                    : step === 1
+                                      ? 'Continue'
+                                      : 'Pay 12 000 Kč'
+                            }}
+                        </ButtonPrimary>
+
+                        <ButtonSecondary
+                            @click="emit('close')"
+                            class="cursor-pointer"
+                        >
                             <Xmark class="h-5 w-5" />
                         </ButtonSecondary>
                     </div>
