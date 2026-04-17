@@ -11,10 +11,10 @@ const emit = defineEmits(['close']);
         <div
             class="mx-auto my-auto flex min-h-140 w-full flex-col rounded-2xl bg-white lg:w-160"
         >
-<!--            <div class="flex justify-between border-b p-6">-->
-<!--                <div class="opacity-70">Finish Your Order</div>-->
-<!--                <div class="my-auto"></div>-->
-<!--            </div>-->
+            <!--            <div class="flex justify-between border-b p-6">-->
+            <!--                <div class="opacity-70">Finish Your Order</div>-->
+            <!--                <div class="my-auto"></div>-->
+            <!--            </div>-->
 
             <div class="bg-t-accent/10 p-6">
                 <div class="flex items-baseline justify-between">
@@ -30,23 +30,25 @@ const emit = defineEmits(['close']);
             </div>
 
             <div class="flex flex-1 flex-col p-6">
-                <div class="">
-                    <label for="mail" class="mb-2 block text-sm">
-                        E-mail
-                    </label>
+                <div class="step-1">
+                    <div class="">
+                        <label for="mail" class="mb-2 block text-sm">
+                            E-mail
+                        </label>
 
-                    <input
-                        id="mail"
-                        class="w-full rounded-xl border bg-white px-4 py-3 text-black"
-                        type="email"
-                        placeholder="jiri.dozvedel@domena.cz"
-                    />
-                </div>
+                        <input
+                            id="mail"
+                            class="w-full rounded-xl border bg-white px-4 py-3 text-black"
+                            type="email"
+                            placeholder="jiri.dozvedel@domena.cz"
+                        />
+                    </div>
 
-                <div class="pt-6 opacity-70">
-                    We need your e-mail address to process your desired
-                    configuration for our team. Your configuration and invoice
-                    will be delivered to you.
+                    <div class="pt-6 opacity-70">
+                        We need your e-mail address to process your desired
+                        configuration for our team. Your configuration and
+                        invoice will be delivered to you.
+                    </div>
                 </div>
 
                 <div class="mt-auto pt-6">
