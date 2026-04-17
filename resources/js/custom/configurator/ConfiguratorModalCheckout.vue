@@ -233,7 +233,7 @@ const handlePayment = async () => {
                 </div>
 
                 <div class="mt-auto pt-6">
-                    <div class="flex w-full justify-between pb-6">
+                    <div class="flex w-full justify-between pb-4">
                         <div
                             class="text-xs tracking-widest text-black/50 uppercase"
                         >
@@ -243,7 +243,7 @@ const handlePayment = async () => {
                         <div
                             class="text-xs tracking-widest text-black/50 uppercase"
                         >
-                            Step {{ step }} of 2
+                            0{{ step }} / 02
                         </div>
                     </div>
 

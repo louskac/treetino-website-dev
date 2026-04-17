@@ -24,7 +24,7 @@
                 </h2>
 
                 <div class="mt-auto pt-6">
-                    <ButtonPrimary class="w-full">Configure</ButtonPrimary>
+                    <ButtonPrimary :href="route('configurator')" class="w-full text-center">Configure</ButtonPrimary>
                 </div>
             </div>
 
@@ -162,4 +162,5 @@ import {
     Wind,
 } from '@iconoir/vue';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
+import { route } from 'ziggy-js';
 </script>
