@@ -2,31 +2,31 @@
     <div class="flex flex-col gap-6">
         <div>
             <p
-                class="mb-4 text-xs tracking-widest text-black/50 uppercase dark:text-white/50"
+                class="text-xs tracking-widest text-black/50 uppercase dark:text-white/50"
             >
                 Shrnutí objednávky
             </p>
-            <div class="flex items-baseline justify-between">
-                <span class="text-xs text-black/50 dark:text-white/50"
-                    >Cena od</span
-                >
-                <span
-                    class="text-lg font-bold tracking-tight text-black dark:text-white"
-                    >{{ basePrice.toLocaleString('cs-CZ') }} Kč</span
-                >
-            </div>
+<!--            <div class="flex items-baseline justify-between">-->
+<!--                <span class="text-xs text-black/50 dark:text-white/50"-->
+<!--                    >Cena od</span-->
+<!--                >-->
+<!--                <span-->
+<!--                    class="text-lg font-bold tracking-tight text-black dark:text-white"-->
+<!--                    >{{ basePrice.toLocaleString('cs-CZ') }} Kč</span-->
+<!--                >-->
+<!--            </div>-->
         </div>
 
         <div
-            class="flex flex-col gap-3 rounded-xl border border-black/10 p-4 dark:border-white/10"
+            class="flex flex-col gap-4 rounded-xl border border-black/10 p-4 dark:border-white/10"
         >
             <div class="flex items-baseline justify-between">
-                <span
-                    class="text-sm font-semibold text-black dark:text-white/50"
-                    >Splatné dnes</span
+                <div
+                    class="text-sm text-black/70 dark:text-white/50"
+                    >Reserve Price</div
                 >
-                <span class="text-xl font-semibold text-black dark:text-white"
-                    >12 000 Kč</span
+                <div class="text-xl font-semibold text-black dark:text-white"
+                    >12 000 Kč</div
                 >
             </div>
             <ul class="flex flex-col gap-1.5">
