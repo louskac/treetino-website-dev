@@ -45,11 +45,11 @@
         </div>
 
         <div class="flex flex-col gap-2">
-            <ButtonPrimary @click="emit('checkout')">
+            <ButtonPrimary @click="emit('checkout')" class="cursor-pointer">
                 Rezervovat a Zaplatit
             </ButtonPrimary>
 
-            <ButtonSecondary @click="emit('info')">
+            <ButtonSecondary @click="emit('info')" class="cursor-pointer">
                 Více Informací
             </ButtonSecondary>
         </div>

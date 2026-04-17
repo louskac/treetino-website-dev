@@ -77,16 +77,17 @@
 
     <!--  MODALS  -->
     <!--  Checkout  -->
-    <ConfiguratorModalCheckout
-        v-if="modalCheckout"
-        @close="modalCheckoutClose"
-    />
+    <Transition>
+        <ConfiguratorModalCheckout
+            v-if="modalCheckout"
+            @close="modalCheckoutClose"
+        />
+    </Transition>
 
     <!--  Info  -->
-    <ConfiguratorModalInfo
-        v-if="modalInfo"
-        @close="modalInfoClose"
-    />
+    <Transition>
+        <ConfiguratorModalInfo v-if="modalInfo" @close="modalInfoClose" />
+    </Transition>
 </template>
 
 <script setup lang="ts">
@@ -267,3 +268,15 @@ function forceActiveSection(stepId: string) {
     }
 }
 </script>
+
+<style>
+    .v-enter-active,
+    .v-leave-active {
+        transition: opacity 200ms ease;
+    }
+
+    .v-enter-from,
+    .v-leave-to {
+        opacity: 0;
+    }
+</style>
