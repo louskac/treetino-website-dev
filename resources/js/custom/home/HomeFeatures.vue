@@ -49,8 +49,8 @@
 <script setup lang="ts">
 import { SunLight, Leaf, Tree, MultiplePages } from '@iconoir/vue';
 import { onMounted, onUnmounted, ref } from 'vue';
-import HomeFeaturesCardDesktop from './HomeFeaturesCardDesktop.vue';
-import HomeFeaturesCardMobile from './HomeFeaturesCardMobile.vue';
+import HomeFeaturesCardDesktop from '@/custom/home/features/HomeFeaturesCardDesktop.vue';
+import HomeFeaturesCardMobile from '@/custom/home/features/HomeFeaturesCardMobile.vue';
 
 const TOTAL_FRAMES = 228;
 const TRANSITION_FRAMES = 56;
