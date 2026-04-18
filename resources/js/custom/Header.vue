@@ -1,5 +1,5 @@
 <template>
-    <header class="fixed z-50 w-full translate-x-[1px]">
+    <header class="fixed z-50 w-full">
         <div
             class="mx-auto flex w-full max-w-[1400px] justify-between px-6 pt-6 sm:w-[500px] sm:px-0 md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
         >
@@ -125,11 +125,11 @@
                         </div>
 
                         <div class="my-auto hidden text-white md:block">
-                                <ButtonPrimary
-                                    :href="route('configurator')"
-                                    variant="slim"
-                                    >Preorder Now</ButtonPrimary
-                                >
+                            <ButtonPrimary
+                                :href="route('configurator')"
+                                variant="slim"
+                                >Preorder Now</ButtonPrimary
+                            >
                         </div>
                     </div>
                 </div>
