@@ -85,6 +85,8 @@
     <Transition>
         <ConfiguratorModalCheckout
             v-if="modalCheckout"
+            :product-id="selectedProductId"
+            :configuration="buildConfiguration()"
             @close="modalCheckoutClose"
             @success="paymentSuccess"
         />
@@ -272,6 +274,22 @@ function forceActiveSection(stepId: string) {
             isForcedFocus = false;
         }, 400);
     }
+}
+
+// Build configuration object
+function buildConfiguration() {
+    const configuration = {
+        color: selectedColorId.value,
+        leafColor: selectedLeafColorId.value,
+        connectivity: selectedConnectivity.value,
+        battery: selectedBattery.value,
+        evChargerCount: evChargerCount.value,
+        bikeChargerRequested: bikeChargerRequested.value,
+    };
+
+    console.log("Selected configuration:", configuration);
+
+    return configuration;
 }
 
 // Payment Success

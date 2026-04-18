@@ -8,6 +8,17 @@ import { Xmark } from '@iconoir/vue';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import ButtonSecondary from '@/custom/ButtonSecondary.vue';
 
+const props = defineProps({
+    productId: {
+        type: String,
+        required: true,
+    },
+    configuration: {
+        type: Object,
+        required: true,
+    },
+});
+
 const emit = defineEmits(['close', 'success']);
 
 // State logic
@@ -33,7 +44,8 @@ const handleContinue = async () => {
     try {
         const response = await axios.post(route('checkout-initiate'), {
             email: email.value,
-            type: '1',
+            type: props.productId,
+            configuration: props.configuration,
         });
 
         console.log('Backend Response:', response.data);

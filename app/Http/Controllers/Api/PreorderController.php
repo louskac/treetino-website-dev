@@ -16,13 +16,14 @@ class PreorderController extends Controller
     {
         $request->validate([
             'email' => 'required|email',
-            'type' => 'required|string|in:1,2,turbine'
+            'type' => 'required|string|in:strom-v1,strom-v2,turbina',
+            'configuration' => 'required|array',
         ]);
 
         $productMapping = [
-            '1'       => 'prod_ULthweDdqBE4ew',
-            '2'       => 'prod_ULthcqQBQuS7TS',
-            'turbine' => 'prod_ULti62m2HYe2s8',
+            'strom-v1' => 'prod_ULthweDdqBE4ew',
+            'strom-v2' => 'prod_ULthcqQBQuS7TS',
+            'turbina'  => 'prod_ULti62m2HYe2s8',
         ];
 
         $stripeProductId = $productMapping[$request->type];
