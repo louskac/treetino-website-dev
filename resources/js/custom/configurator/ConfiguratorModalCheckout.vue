@@ -58,6 +58,7 @@ const handleContinue = async () => {
         await nextTick();
         await initStripe();
     } catch (error) {
+            console.log(error)
         errorMessage.value =
             error.response?.data?.message || 'Something went wrong.';
     } finally {
