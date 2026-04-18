@@ -28,6 +28,7 @@ export const PRODUCTS: Product[] = [
             { id: 'color', component: 'ConfiguratorColorStep' },
             { id: 'leaf', component: 'ConfiguratorLeafColorStep' },
             { id: 'connectivity', component: 'ConfiguratorConnectivityStep' },
+            { id: 'battery', component: 'ConfiguratorBatteryStep' },
             { id: 'addons', component: 'ConfiguratorAddonsStep' }
         ],
         basePrice: 1250000
@@ -40,6 +41,7 @@ export const PRODUCTS: Product[] = [
             { id: 'color', component: 'ConfiguratorColorStep' },
             { id: 'leaf', component: 'ConfiguratorLeafColorStep' },
             { id: 'connectivity', component: 'ConfiguratorConnectivityStep' },
+            { id: 'battery', component: 'ConfiguratorBatteryStep' },
             { id: 'addons', component: 'ConfiguratorAddonsStep' }
         ],
         basePrice: 3300000
