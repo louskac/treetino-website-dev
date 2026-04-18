@@ -154,7 +154,7 @@
                                     href="#"
                                     class="flex-1 rounded-lg py-1.5 text-center text-xs transition-all duration-300"
                                     :class="{
-                                        'border text-black/80 hover:text-white':
+                                        'border text-black/80 hover:text-black/60':
                                             activeDropdown === 'products',
                                         'border border-transparent text-white/80 hover:text-white':
                                             activeDropdown !== 'products',
