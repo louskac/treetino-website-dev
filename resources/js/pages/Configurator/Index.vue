@@ -112,7 +112,7 @@ import ConfiguratorModalCheckout from '@/custom/configurator/ConfiguratorModalCh
 import ConfiguratorModalInfo from '@/custom/configurator/ConfiguratorModalInfo.vue';
 import ConfiguratorModelSelect from '@/custom/configurator/ConfiguratorModelSelect.vue';
 import ConfiguratorProductHeader from '@/custom/configurator/ConfiguratorProductHeader.vue';
-import { PRODUCTS, ProductId } from '@/types/products';
+import { PRODUCTS, ProductId, type ConfigurationField } from '@/types/products';
 
 // modals
 
@@ -219,6 +219,8 @@ watch(selectedProductId, async () => {
     sectionsRefs.value = [];
     currentSectionIndex.value = 0;
 
+    resetConfiguration();
+
     // wait for re-render and reset scroll
     await nextTick();
     updateActiveSection();
@@ -228,6 +230,15 @@ function setSectionRef(el: Element | ComponentPublicInstance | null) {
     if (el instanceof HTMLElement && !sectionsRefs.value.includes(el)) {
         sectionsRefs.value.push(el);
     }
+}
+
+function resetConfiguration() {
+    selectedColorId.value = 'white';
+    selectedLeafColorId.value = 'green';
+    selectedConnectivity.value = 'none';
+    selectedBattery.value = 'none';
+    evChargerCount.value = 0;
+    bikeChargerRequested.value = false;
 }
 
 function updateActiveSection() {
@@ -278,7 +289,7 @@ function forceActiveSection(stepId: string) {
 
 // Build configuration object
 function buildConfiguration() {
-    const configuration = {
+    const configurationValues: Record<ConfigurationField, string | number | boolean> = {
         color: selectedColorId.value,
         leafColor: selectedLeafColorId.value,
         connectivity: selectedConnectivity.value,
@@ -287,7 +298,15 @@ function buildConfiguration() {
         bikeChargerRequested: bikeChargerRequested.value,
     };
 
-    console.log("Selected configuration:", configuration);
+    const configuration = selectedProduct.value.steps.reduce<Partial<Record<ConfigurationField, string | number | boolean>>>((result, step) => {
+        step.configurationFields.forEach((field) => {
+            result[field] = configurationValues[field];
+        });
+
+        return result;
+    }, {});
+
+    console.log('Selected configuration:', configuration);
 
     return configuration;
 }
