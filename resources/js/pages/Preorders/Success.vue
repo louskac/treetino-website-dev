@@ -1,8 +1,56 @@
 <script setup lang="ts">
+import { router } from '@inertiajs/vue3';
+import { onMounted, onUnmounted } from 'vue';
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
 
 const props = defineProps({
     preorder: Object,
+});
+
+let intervalId: ReturnType<typeof setInterval> | null = null;
+
+const refreshPreorder = () => {
+    // Only fetch preoprder prop
+    router.reload({
+        only: ['preorder'],
+        onSuccess: () => {
+            // If the status becomes 'paid', stop the interval
+            if (props.preorder?.status === 'paid' && intervalId) {
+                clearInterval(intervalId);
+            }
+        },
+    });
+};
+
+onMounted(() => {
+    // 1. Wait 3 seconds before starting the process
+    setTimeout(() => {
+        // If it's already paid, don't even start polling
+        if (props.preorder?.status === 'paid') {
+            return;
+        }
+
+        // 2. Perform the first refresh immediately after the 3s delay
+        refreshPreorder();
+
+        // 3. Set up the 1-second interval
+        intervalId = setInterval(() => {
+            if (props.preorder?.status !== 'paid') {
+                refreshPreorder();
+            } else {
+                if (intervalId) {
+                    clearInterval(intervalId);
+                }
+            }
+        }, 1000);
+    }, 3000);
+});
+
+// 4. Clean up the interval when the user leaves the page
+onUnmounted(() => {
+    if (intervalId) {
+        clearInterval(intervalId);
+    }
 });
 </script>
 

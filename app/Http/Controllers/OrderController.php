@@ -23,7 +23,12 @@ class OrderController extends Controller
         $preorder = Preorder::where('uuid', $uuid)->with('user')->firstOrFail();
 
         return ($this->renderPublic)('Preorders/Success', [
-            'preorder' => $preorder,
+            // Lazy Query
+            'preorder' => function () use ($uuid) {
+                return Preorder::where('uuid', $uuid)
+                    ->with('user')
+                    ->firstOrFail();
+            },
         ]);
     }
 }
