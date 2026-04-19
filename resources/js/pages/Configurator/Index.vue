@@ -72,6 +72,13 @@
                     />
                 </div>
 
+                <!-- Financing / Grant section – shared across all products -->
+                <div class="border-t-2 border-black/12 pt-7 dark:border-white/12">
+                    <ConfiguratorGrantSection
+                        v-model="selectedGrant"
+                    />
+                </div>
+
                 <div
                     class="border-t border-t-blue/10 pt-7 pb-2 dark:border-white/10"
                 >
@@ -114,6 +121,7 @@ import ConfiguratorCheckout from '@/custom/configurator/ConfiguratorCheckout.vue
 import ConfiguratorColorStep from '@/custom/configurator/ConfiguratorColorStep.vue';
 import ConfiguratorConnectivityStep from '@/custom/configurator/ConfiguratorConnectivityStep.vue';
 import ConfiguratorFveLeafStep from '@/custom/configurator/ConfiguratorFveLeafStep.vue';
+import ConfiguratorGrantSection from '@/custom/configurator/ConfiguratorGrantSection.vue';
 import ConfiguratorLeafColorStep from '@/custom/configurator/ConfiguratorLeafColorStep.vue';
 import ConfiguratorModalCheckout from '@/custom/configurator/ConfiguratorModalCheckout.vue';
 import ConfiguratorModalInfo from '@/custom/configurator/ConfiguratorModalInfo.vue';
@@ -178,6 +186,7 @@ const selectedConnectivity = ref('none');
 const selectedBattery = ref('none');
 const evChargerCount = ref(0);
 const bikeChargerRequested = ref(false);
+const selectedGrant = ref('none');
 
 const selectedProduct = computed(
     () => products.find((p) => p.id === selectedProductId.value)!,
@@ -251,6 +260,7 @@ function resetConfiguration() {
     selectedBattery.value = 'none';
     evChargerCount.value = 0;
     bikeChargerRequested.value = false;
+    selectedGrant.value = 'none';
 }
 
 function updateActiveSection() {
@@ -312,6 +322,7 @@ function buildConfiguration() {
         battery: selectedBattery.value,
         evChargerCount: evChargerCount.value,
         bikeChargerRequested: bikeChargerRequested.value,
+        grant: selectedGrant.value,
     };
 
     const configuration = selectedProduct.value.steps.reduce<
@@ -323,6 +334,9 @@ function buildConfiguration() {
 
         return result;
     }, {});
+
+    // Grant is a shared field not tied to any product step – always append
+    configuration.grant = selectedGrant.value;
 
     console.log('Selected configuration:', configuration);
 

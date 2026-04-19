@@ -30,6 +30,7 @@ const configurationLabels: Record<string, string> = {
     battery: 'Baterie',
     evChargerCount: 'Počet EV nabíječek',
     bikeChargerRequested: 'Nabíječka na kolo',
+    grant: 'Dotační program',
 };
 
 const configurationRows = computed(() => {

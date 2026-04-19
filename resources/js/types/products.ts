@@ -13,7 +13,8 @@ export type ConfigurationField =
     | 'connectivity'
     | 'battery'
     | 'evChargerCount'
-    | 'bikeChargerRequested';
+    | 'bikeChargerRequested'
+    | 'grant';
 
 export interface ConfiguratorStep {
     id: string;
