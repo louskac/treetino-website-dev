@@ -17,6 +17,7 @@ class Preorder extends Model
     protected $fillable = [
         'user_id',
         'stripe_product_id',
+        'product_type',
         'configuration',
         'status',
         'stripe_payment_intent_id',

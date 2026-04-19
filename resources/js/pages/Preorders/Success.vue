@@ -1,7 +1,10 @@
 <script setup lang="ts">
+import { Download } from '@iconoir/vue';
 import { router } from '@inertiajs/vue3';
 import { onMounted, onUnmounted } from 'vue';
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
+import axios from 'axios';
+import { ref } from 'vue';
 
 const props = defineProps({
     preorder: Object,
@@ -52,6 +55,45 @@ onUnmounted(() => {
         clearInterval(intervalId);
     }
 });
+
+const isDownloading = ref(false);
+
+const downloadInvoice = async () => {
+    isDownloading.value = true;
+
+    try {
+        const response = await axios({
+            url: '/preorders/invoice', // Make sure this matches your route path
+            method: 'POST',
+            data: {
+                uuid: props.preorder.uuid,
+            },
+            responseType: 'blob', // CRITICAL: This tells axios to treat response as binary
+        });
+
+        // 1. Create a URL for the binary data
+        const blob = new Blob([response.data], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+
+        // 2. Create a temporary anchor element
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `invoice-${props.preorder.uuid}.pdf`);
+
+        // 3. Append to body, click it, and remove it
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        // 4. Clean up the URL object
+        window.URL.revokeObjectURL(url);
+    } catch (error) {
+        console.error('Download failed:', error);
+        alert('Could not download invoice. Please try again.');
+    } finally {
+        isDownloading.value = false;
+    }
+};
 </script>
 
 <template>
@@ -75,39 +117,64 @@ onUnmounted(() => {
                 </div>
 
                 <div class="pb-6">
-                    <div
-                        class="flex w-fit rounded-2xl border px-5 py-3 shadow-2xl"
-                    >
+                    <div class="flex gap-5">
                         <div
-                            v-if="preorder.status === 'pending'"
-                            class="flex gap-3"
+                            class="flex w-fit rounded-xl border px-5 py-3 shadow-2xl"
                         >
-                            <div class="relative my-auto">
-                                <div
-                                    class="absolute h-2 w-2 animate-ping rounded-full bg-orange-600"
-                                ></div>
-                                <div
-                                    class="relative h-2 w-2 rounded-full bg-orange-600"
-                                ></div>
+                            <div
+                                v-if="preorder.status === 'pending'"
+                                class="flex gap-3"
+                            >
+                                <div class="relative my-auto">
+                                    <div
+                                        class="absolute h-2 w-2 animate-ping rounded-full bg-orange-600"
+                                    ></div>
+                                    <div
+                                        class="relative h-2 w-2 rounded-full bg-orange-600"
+                                    ></div>
+                                </div>
+                                <div class="text-sm text-orange-600">
+                                    Payment Pending
+                                </div>
                             </div>
-                            <div class="text-sm text-orange-600">
-                                Payment Pending
+
+                            <div
+                                v-else-if="preorder.status === 'paid'"
+                                class="flex gap-3"
+                            >
+                                <div class="relative my-auto">
+                                    <div
+                                        class="relative h-2 w-2 rounded-full bg-green-700"
+                                    ></div>
+                                </div>
+                                <div class="text-sm text-green-700">
+                                    Payment Successful
+                                </div>
                             </div>
                         </div>
 
-                        <div
-                            v-else-if="preorder.status === 'paid'"
-                            class="flex gap-3"
-                        >
-                            <div class="relative my-auto">
-                                <div
-                                    class="relative h-2 w-2 rounded-full bg-green-700"
-                                ></div>
+                        <Transition>
+                            <div
+                                class="relative my-auto"
+                                v-if="preorder.status === 'paid'"
+                            >
+                                <button
+                                    @click="downloadInvoice"
+                                    :disabled="isDownloading"
+                                    class="flex cursor-pointer gap-2 opacity-70 transition-all hover:opacity-100 disabled:opacity-50"
+                                >
+                                    <div class="my-auto">
+                                        <Download class="h-5 w-5" />
+                                    </div>
+                                    <div class="my-auto text-sm">
+                                        <span v-if="isDownloading"
+                                            >Generating...</span
+                                        >
+                                        <span v-else>Download Invoice</span>
+                                    </div>
+                                </button>
                             </div>
-                            <div class="text-sm text-green-700">
-                                Payment Successful
-                            </div>
-                        </div>
+                        </Transition>
                     </div>
                 </div>
 
@@ -118,3 +185,15 @@ onUnmounted(() => {
         </div>
     </DefaultLayout>
 </template>
+
+<style>
+.v-enter-active,
+.v-leave-active {
+    transition: opacity 200ms ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+    opacity: 0;
+}
+</style>

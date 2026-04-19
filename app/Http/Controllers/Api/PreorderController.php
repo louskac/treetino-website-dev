@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Preorder;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Stripe\Customer;
 use Stripe\PaymentIntent;
@@ -12,6 +13,7 @@ use Stripe\Stripe;
 
 class PreorderController extends Controller
 {
+    // Checkout
     public function initiate(Request $request)
     {
         $request->validate([
@@ -56,6 +58,7 @@ class PreorderController extends Controller
             'stripe_product_id' => $stripeProductId,
             'configuration' => $request->configuration,
             'status' => 'pending',
+            'product_type' => $request->type,
             'amount_total' => $amount,
         ]);
 
@@ -77,6 +80,30 @@ class PreorderController extends Controller
         return response()->json([
             'client_secret' => $intent->client_secret,
             'preorder_uuid' => $preorder->uuid,
+        ]);
+    }
+
+    // Download Invoice
+    public function invoice(Request $request) {
+        $request->validate([
+            'uuid' => 'required',
+        ]);
+
+        $preorder = Preorder::where('uuid', $request
+            ->input('uuid'))
+            ->with('user')->firstOrFail();
+
+        $data = [
+            'preorder' => $preorder,
+            'date' => date('d. m. Y'),
+        ];
+
+        $pdf = Pdf::loadView('pdf.invoice', $data)
+            ->setPaper('a4', 'portrait');
+
+        return response($pdf->output(), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'attachment; filename="invoice-'.$preorder->uuid.'.pdf"',
         ]);
     }
 }
