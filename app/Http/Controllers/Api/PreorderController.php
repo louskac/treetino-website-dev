@@ -56,6 +56,7 @@ class PreorderController extends Controller
             'stripe_product_id' => $stripeProductId,
             'configuration' => $request->configuration,
             'status' => 'pending',
+            'product_type' => $request->type,
             'amount_total' => $amount,
         ]);
 
