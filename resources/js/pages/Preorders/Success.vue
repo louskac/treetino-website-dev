@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { Download } from '@iconoir/vue';
 import { router } from '@inertiajs/vue3';
-import { onMounted, onUnmounted, computed } from 'vue';
-import DefaultLayout from '@/layouts/DefaultLayout.vue';
 import axios from 'axios';
+import { onMounted, onUnmounted, computed } from 'vue';
 import { ref } from 'vue';
+import DefaultLayout from '@/layouts/DefaultLayout.vue';
 import { PRODUCTS } from '@/types/products';
 
 const props = defineProps({
@@ -146,8 +146,14 @@ const downloadInvoice = async () => {
 </script>
 
 <template>
-    <DefaultLayout>
-        <div class="buffer h-50 pb-12"></div>
+    <DefaultLayout class="relative">
+        <div class="absolute w-full h-90 bg-blue-50">
+            <div class="absolute w-full h-30 bottom-0 bg-linear-to-b from-transparent to-white">
+
+            </div>
+        </div>
+
+        <div class="buffer h-60 pb-12"></div>
 
         <div class="success relative">
             <div
@@ -157,11 +163,11 @@ const downloadInvoice = async () => {
             <div
                 class="relative mx-auto h-full w-full max-w-[1400px] px-6 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
             >
-                <div class="pb-6">
-                    <div class="text-6xl">Preorder Summary</div>
+                <div class="pb-4.5">
+                    <div class="text-6xl">Pre-order Summary</div>
 
-                    <div class="text-xs opacity-70">
-                        Preorder ID: {{ preorder.uuid }}
+                    <div class="text-xs opacity-70 mt-1">
+                        ID: {{ preorder.uuid }}
                     </div>
                 </div>
 
