@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Preorder;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Stripe\Stripe;
-use Stripe\PaymentIntent;
 use Stripe\Customer;
+use Stripe\PaymentIntent;
+use Stripe\Stripe;
 
 class PreorderController extends Controller
 {
@@ -23,7 +23,7 @@ class PreorderController extends Controller
         $productMapping = [
             'strom-v1' => 'prod_ULthweDdqBE4ew',
             'strom-v2' => 'prod_ULthcqQBQuS7TS',
-            'turbina'  => 'prod_ULti62m2HYe2s8',
+            'turbina' => 'prod_ULti62m2HYe2s8',
         ];
 
         $stripeProductId = $productMapping[$request->type];
@@ -37,10 +37,10 @@ class PreorderController extends Controller
         );
 
         // 2. Ensure User has a Stripe Customer ID
-        if (!$user->stripe_customer_id) {
+        if (! $user->stripe_customer_id) {
             $customer = Customer::create([
                 'email' => $user->email,
-                'metadata' => ['user_id' => $user->id]
+                'metadata' => ['user_id' => $user->id],
             ]);
             $user->update(['stripe_customer_id' => $customer->id]);
         }
@@ -76,7 +76,7 @@ class PreorderController extends Controller
         // 7. Return the Client Secret to Vue
         return response()->json([
             'client_secret' => $intent->client_secret,
-            'preorder_id' => $preorder->id
+            'preorder_uuid' => $preorder->uuid,
         ]);
     }
 }

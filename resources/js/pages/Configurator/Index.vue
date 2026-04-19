@@ -31,11 +31,11 @@
                     :products="products"
                 />
                 <ConfiguratorProductHeader :product="selectedProduct" />
-                
-                <div 
-                    v-for="(step, index) in selectedProduct.steps" 
-                    :key="step.id" 
-                    :ref="setSectionRef" 
+
+                <div
+                    v-for="(step, index) in selectedProduct.steps"
+                    :key="step.id"
+                    :ref="setSectionRef"
                     @click="forceActiveSection(step.id)"
                     class="border-t border-t-blue/10 pt-7 dark:border-white/10"
                 >
@@ -59,7 +59,7 @@
                         v-model="selectedBattery"
                         :step-number="index + 1"
                     />
-                    <ConfiguratorAddonsStep 
+                    <ConfiguratorAddonsStep
                         v-else-if="step.id === 'addons'"
                         v-model:ev-charger-count="evChargerCount"
                         v-model:bike-charger-requested="bikeChargerRequested"
@@ -99,9 +99,10 @@
 </template>
 
 <script setup lang="ts">
-import { Head } from '@inertiajs/vue3';
+import { Head, router } from '@inertiajs/vue3';
 import type { ComponentPublicInstance } from 'vue';
 import { ref, computed, onMounted, onUnmounted, nextTick, watch } from 'vue';
+import { route } from 'ziggy-js';
 import ConfiguratorAddonsStep from '@/custom/configurator/ConfiguratorAddonsStep.vue';
 import ConfiguratorBatteryStep from '@/custom/configurator/ConfiguratorBatteryStep.vue';
 import ConfiguratorCheckout from '@/custom/configurator/ConfiguratorCheckout.vue';
@@ -112,7 +113,8 @@ import ConfiguratorModalCheckout from '@/custom/configurator/ConfiguratorModalCh
 import ConfiguratorModalInfo from '@/custom/configurator/ConfiguratorModalInfo.vue';
 import ConfiguratorModelSelect from '@/custom/configurator/ConfiguratorModelSelect.vue';
 import ConfiguratorProductHeader from '@/custom/configurator/ConfiguratorProductHeader.vue';
-import { PRODUCTS, ProductId, type ConfigurationField } from '@/types/products';
+import { PRODUCTS, ProductId  } from '@/types/products';
+import type {ConfigurationField} from '@/types/products';
 
 // modals
 
@@ -289,7 +291,10 @@ function forceActiveSection(stepId: string) {
 
 // Build configuration object
 function buildConfiguration() {
-    const configurationValues: Record<ConfigurationField, string | number | boolean> = {
+    const configurationValues: Record<
+        ConfigurationField,
+        string | number | boolean
+    > = {
         color: selectedColorId.value,
         leafColor: selectedLeafColorId.value,
         connectivity: selectedConnectivity.value,
@@ -298,7 +303,9 @@ function buildConfiguration() {
         bikeChargerRequested: bikeChargerRequested.value,
     };
 
-    const configuration = selectedProduct.value.steps.reduce<Partial<Record<ConfigurationField, string | number | boolean>>>((result, step) => {
+    const configuration = selectedProduct.value.steps.reduce<
+        Partial<Record<ConfigurationField, string | number | boolean>>
+    >((result, step) => {
         step.configurationFields.forEach((field) => {
             result[field] = configurationValues[field];
         });
@@ -312,19 +319,21 @@ function buildConfiguration() {
 }
 
 // Payment Success
-function paymentSuccess() {
-    console.log('payment success')
+function paymentSuccess(uuid: string) {
+    console.log('Redirecting for UUID:', uuid);
+
+    router.visit(route('preorders.success', { uuid: uuid }));
 }
 </script>
 
 <style>
-    .v-enter-active,
-    .v-leave-active {
-        transition: opacity 200ms ease;
-    }
+.v-enter-active,
+.v-leave-active {
+    transition: opacity 200ms ease;
+}
 
-    .v-enter-from,
-    .v-leave-to {
-        opacity: 0;
-    }
+.v-enter-from,
+.v-leave-to {
+    opacity: 0;
+}
 </style>

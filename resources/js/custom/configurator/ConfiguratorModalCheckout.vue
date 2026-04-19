@@ -26,6 +26,7 @@ const step = ref(1);
 const email = ref('');
 const isProcessing = ref(false);
 const errorMessage = ref('');
+const preorderUuid = ref('');
 
 // Stripe refs
 const stripe = ref(null);
@@ -50,6 +51,7 @@ const handleContinue = async () => {
 
         console.log('Backend Response:', response.data);
         clientSecret.value = response.data.client_secret;
+        preorderUuid.value = response.data.preorder_uuid;
 
         // Move to Step 2
         step.value = 2;
@@ -58,7 +60,7 @@ const handleContinue = async () => {
         await nextTick();
         await initStripe();
     } catch (error) {
-            console.log(error)
+        console.log(error);
         errorMessage.value =
             error.response?.data?.message || 'Something went wrong.';
     } finally {
@@ -132,8 +134,9 @@ const initStripe = async () => {
             errorMessage.value = confirmError.message;
         } else {
             ev.complete('success');
+
             if (paymentIntent.status === 'succeeded') {
-                emit('success', paymentIntent);
+                emit('success', preorderUuid.value);
             }
         }
     });
@@ -167,7 +170,7 @@ const handlePayment = async () => {
         errorMessage.value = error.message;
         isProcessing.value = false;
     } else if (paymentIntent.status === 'succeeded') {
-        emit('success', paymentIntent);
+        emit('success', preorderUuid.value);
     }
 };
 </script>
