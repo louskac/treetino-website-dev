@@ -19,7 +19,7 @@ import { computed } from 'vue';
 const props = defineProps<{product: Product}>();
 
 const paramList = computed(() => [
-    { label: 'Výkon', value: props.product.params.power },
+    { label: 'Jmenovitý výkon', value: props.product.params.power },
     { label: 'Denní výroba', value: props.product.params.dailyProduction },
     { label: 'Průměrná návratnost', value: props.product.params.roi },
 ]);
