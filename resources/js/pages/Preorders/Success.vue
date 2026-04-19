@@ -3,6 +3,8 @@ import { Download } from '@iconoir/vue';
 import { router } from '@inertiajs/vue3';
 import { onMounted, onUnmounted } from 'vue';
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
+import axios from 'axios';
+import { ref } from 'vue';
 
 const props = defineProps({
     preorder: Object,
@@ -53,6 +55,45 @@ onUnmounted(() => {
         clearInterval(intervalId);
     }
 });
+
+const isDownloading = ref(false);
+
+const downloadInvoice = async () => {
+    isDownloading.value = true;
+
+    try {
+        const response = await axios({
+            url: '/preorders/invoice', // Make sure this matches your route path
+            method: 'POST',
+            data: {
+                uuid: props.preorder.uuid,
+            },
+            responseType: 'blob', // CRITICAL: This tells axios to treat response as binary
+        });
+
+        // 1. Create a URL for the binary data
+        const blob = new Blob([response.data], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+
+        // 2. Create a temporary anchor element
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `invoice-${props.preorder.uuid}.pdf`);
+
+        // 3. Append to body, click it, and remove it
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        // 4. Clean up the URL object
+        window.URL.revokeObjectURL(url);
+    } catch (error) {
+        console.error('Download failed:', error);
+        alert('Could not download invoice. Please try again.');
+    } finally {
+        isDownloading.value = false;
+    }
+};
 </script>
 
 <template>
@@ -118,13 +159,18 @@ onUnmounted(() => {
                                 v-if="preorder.status === 'paid'"
                             >
                                 <button
-                                    class="flex cursor-pointer gap-2 opacity-70 transition-all hover:opacity-100"
+                                    @click="downloadInvoice"
+                                    :disabled="isDownloading"
+                                    class="flex cursor-pointer gap-2 opacity-70 transition-all hover:opacity-100 disabled:opacity-50"
                                 >
                                     <div class="my-auto">
                                         <Download class="h-5 w-5" />
                                     </div>
                                     <div class="my-auto text-sm">
-                                        Download Invoice
+                                        <span v-if="isDownloading"
+                                            >Generating...</span
+                                        >
+                                        <span v-else>Download Invoice</span>
                                     </div>
                                 </button>
                             </div>
@@ -141,13 +187,13 @@ onUnmounted(() => {
 </template>
 
 <style>
-    .v-enter-active,
-    .v-leave-active {
-        transition: opacity 200ms ease;
-    }
+.v-enter-active,
+.v-leave-active {
+    transition: opacity 200ms ease;
+}
 
-    .v-enter-from,
-    .v-leave-to {
-        opacity: 0;
-    }
+.v-enter-from,
+.v-leave-to {
+    opacity: 0;
+}
 </style>
