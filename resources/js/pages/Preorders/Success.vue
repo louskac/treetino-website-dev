@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Download } from '@iconoir/vue';
 import { router } from '@inertiajs/vue3';
 import { onMounted, onUnmounted } from 'vue';
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
@@ -75,39 +76,59 @@ onUnmounted(() => {
                 </div>
 
                 <div class="pb-6">
-                    <div
-                        class="flex w-fit rounded-2xl border px-5 py-3 shadow-2xl"
-                    >
+                    <div class="flex gap-5">
                         <div
-                            v-if="preorder.status === 'pending'"
-                            class="flex gap-3"
+                            class="flex w-fit rounded-xl border px-5 py-3 shadow-2xl"
                         >
-                            <div class="relative my-auto">
-                                <div
-                                    class="absolute h-2 w-2 animate-ping rounded-full bg-orange-600"
-                                ></div>
-                                <div
-                                    class="relative h-2 w-2 rounded-full bg-orange-600"
-                                ></div>
+                            <div
+                                v-if="preorder.status === 'pending'"
+                                class="flex gap-3"
+                            >
+                                <div class="relative my-auto">
+                                    <div
+                                        class="absolute h-2 w-2 animate-ping rounded-full bg-orange-600"
+                                    ></div>
+                                    <div
+                                        class="relative h-2 w-2 rounded-full bg-orange-600"
+                                    ></div>
+                                </div>
+                                <div class="text-sm text-orange-600">
+                                    Payment Pending
+                                </div>
                             </div>
-                            <div class="text-sm text-orange-600">
-                                Payment Pending
+
+                            <div
+                                v-else-if="preorder.status === 'paid'"
+                                class="flex gap-3"
+                            >
+                                <div class="relative my-auto">
+                                    <div
+                                        class="relative h-2 w-2 rounded-full bg-green-700"
+                                    ></div>
+                                </div>
+                                <div class="text-sm text-green-700">
+                                    Payment Successful
+                                </div>
                             </div>
                         </div>
 
-                        <div
-                            v-else-if="preorder.status === 'paid'"
-                            class="flex gap-3"
-                        >
-                            <div class="relative my-auto">
-                                <div
-                                    class="relative h-2 w-2 rounded-full bg-green-700"
-                                ></div>
+                        <Transition>
+                            <div
+                                class="relative my-auto"
+                                v-if="preorder.status === 'paid'"
+                            >
+                                <button
+                                    class="flex cursor-pointer gap-2 opacity-70 transition-all hover:opacity-100"
+                                >
+                                    <div class="my-auto">
+                                        <Download class="h-5 w-5" />
+                                    </div>
+                                    <div class="my-auto text-sm">
+                                        Download Invoice
+                                    </div>
+                                </button>
                             </div>
-                            <div class="text-sm text-green-700">
-                                Payment Successful
-                            </div>
-                        </div>
+                        </Transition>
                     </div>
                 </div>
 
@@ -118,3 +139,15 @@ onUnmounted(() => {
         </div>
     </DefaultLayout>
 </template>
+
+<style>
+    .v-enter-active,
+    .v-leave-active {
+        transition: opacity 200ms ease;
+    }
+
+    .v-enter-from,
+    .v-leave-to {
+        opacity: 0;
+    }
+</style>
