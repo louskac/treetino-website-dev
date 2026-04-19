@@ -285,7 +285,7 @@ function handleWheel(event: WheelEvent): void {
         return;
     }
 
-    if (isWheelLocked || isTransitioning) {
+    if (isWheelLocked || isTransitioning || isSnapping) {
         event.preventDefault();
 
         return;
@@ -351,6 +351,17 @@ function handleScroll(): void {
 
         window.setTimeout(() => {
             isSnapping = false;
+
+            // Block wheel briefly after snap so trackpad momentum doesn't immediately advance to next section
+            isWheelLocked = true;
+            if (wheelLockTimeoutId !== null) {
+                window.clearTimeout(wheelLockTimeoutId);
+            }
+            wheelLockTimeoutId = window.setTimeout(() => {
+                isWheelLocked = false;
+                wheelLockTimeoutId = null;
+            }, 600);
+
             handleScroll();
         }, 600);
 
