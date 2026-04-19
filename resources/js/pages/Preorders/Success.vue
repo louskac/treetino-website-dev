@@ -171,8 +171,8 @@ const downloadInvoice = async () => {
                     </div>
                 </div>
 
-                <!-- Status + Invoice download -->
-                <div class="pb-6">
+                <!-- Status + Invoice download Desktop -->
+                <div class="hidden sm:block pb-6">
                     <div class="flex gap-5">
                         <div
                             class="flex w-fit rounded-xl border px-5 py-3 shadow-xl"
@@ -247,7 +247,7 @@ const downloadInvoice = async () => {
                             class="h-full w-full object-contain"
                         />
                         <!-- Product name overlay bottom-left -->
-                        <div class="absolute bottom-0 left-0 p-5">
+                        <div class="absolute bottom-0 left-0 p-6">
                             <div class="text-6xl">
                                 {{ product?.label ?? preorder.product_type }}
                             </div>
