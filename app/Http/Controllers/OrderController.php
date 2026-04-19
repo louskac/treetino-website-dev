@@ -20,7 +20,7 @@ class OrderController extends Controller
 
     public function success($uuid)
     {
-        $preorder = Preorder::where('uuid', $uuid)->firstOrFail();
+        $preorder = Preorder::where('uuid', $uuid)->with('user')->firstOrFail();
 
         return ($this->renderPublic)('Preorders/Success', [
             'preorder' => $preorder,
