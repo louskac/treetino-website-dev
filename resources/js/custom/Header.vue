@@ -16,16 +16,19 @@
             >
                 <div class="flex w-full justify-between">
                     <div class="logo my-auto flex gap-3 text-white">
-                        <LogoType
-                            class="fill-current transition-all duration-550"
-                            :class="{
-                                'text-black':
-                                    activeDropdown === 'products' || isScrolled,
-                                'text-white':
-                                    activeDropdown !== 'products' &&
-                                    !isScrolled,
-                            }"
-                        />
+                        <Link :href="route('home')">
+                            <LogoType
+                                class="fill-current transition-all duration-550"
+                                :class="{
+                                    'text-black':
+                                        activeDropdown === 'products' ||
+                                        isScrolled,
+                                    'text-white':
+                                        activeDropdown !== 'products' &&
+                                        !isScrolled,
+                                }"
+                            />
+                        </Link>
                     </div>
 
                     <nav class="my-auto hidden gap-6 xl:flex">
