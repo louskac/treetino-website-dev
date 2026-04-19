@@ -26,7 +26,7 @@
             </div>
 
             <div class="mb-12 pt-6">
-                <div class="grid gap-6">
+                <div class="grid gap-12">
                     <div
                         class="grid grid-cols-2 gap-6 sm:grid-cols-2 md:grid-cols-3"
                     >
