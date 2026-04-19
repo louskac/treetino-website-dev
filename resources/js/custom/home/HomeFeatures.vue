@@ -31,22 +31,26 @@
                         </span>
                     </div>
 
-                    <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-t-blue">
-                        <component
-                            :is="sections[currentSectionIndex].icon"
-                            class="h-6 w-6 text-white"
-                            stroke-width="1.5"
-                        />
-                    </div>
+                    <Transition name="section-content" mode="out-in">
+                        <div :key="currentSectionIndex" class="flex flex-col gap-5">
+                            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-t-blue">
+                                <component
+                                    :is="sections[currentSectionIndex].icon"
+                                    class="h-6 w-6 text-white"
+                                    stroke-width="1.5"
+                                />
+                            </div>
 
-                    <div class="mt-5">
-                        <h2 class="text-4xl leading-tight text-black">
-                            {{ sections[currentSectionIndex].title }}
-                        </h2>
-                        <p class="mt-3 text-base leading-relaxed text-black/75">
-                            {{ sections[currentSectionIndex].text }}
-                        </p>
-                    </div>
+                            <div>
+                                <h2 class="text-4xl leading-tight text-black">
+                                    {{ sections[currentSectionIndex].title }}
+                                </h2>
+                                <p class="mt-3 text-base leading-relaxed text-black/75">
+                                    {{ sections[currentSectionIndex].text }}
+                                </p>
+                            </div>
+                        </div>
+                    </Transition>
 
                     <div class="mt-8 flex gap-1.5">
                         <div
@@ -398,3 +402,20 @@ onUnmounted(() => {
     imageElements = [];
 });
 </script>
+
+<style scoped>
+.section-content-enter-active,
+.section-content-leave-active {
+    transition:
+        opacity 0.35s ease,
+        transform 0.35s ease;
+}
+.section-content-enter-from {
+    opacity: 0;
+    transform: translateY(16px);
+}
+.section-content-leave-to {
+    opacity: 0;
+    transform: translateY(-16px);
+}
+</style>
