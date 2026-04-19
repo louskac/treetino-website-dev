@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import { Download } from '@iconoir/vue';
 import { Head } from '@inertiajs/vue3';
-import DefaultLayout from '@/layouts/DefaultLayout.vue';
 import { route } from 'ziggy-js';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import ButtonWhite from '@/custom/ButtonWhite.vue';
-import { Download } from '@iconoir/vue';
+import DefaultLayout from '@/layouts/DefaultLayout.vue';
 </script>
 
 <template>
@@ -43,7 +43,6 @@ import { Download } from '@iconoir/vue';
 
                         <div class="mt-auto pt-6">
                             <ButtonWhite
-                                :href="route('contact.index')"
                                 class="w-full text-center"
                             >
                                 View Press Releases
@@ -87,7 +86,6 @@ import { Download } from '@iconoir/vue';
 
                         <div class="mt-auto pt-6">
                             <ButtonPrimary
-                                :href="route('contact.index')"
                                 class="w-full text-center"
                             >
                                 <div class="mx-auto flex w-fit gap-2">

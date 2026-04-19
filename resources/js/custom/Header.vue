@@ -47,7 +47,7 @@
                         >
                         <!--<Link href="#" class="text-sm text-white/80 transition-colors hover:text-white" @mouseenter="activeDropdown = null">Sdílení energie</Link>-->
                         <Link
-                            href="#"
+                            :href="route('collaboration.index')"
                             class="text-sm transition-all duration-550"
                             :class="{
                                 'text-black/80 hover:text-black':
@@ -60,7 +60,7 @@
                             >Spolupráce</Link
                         >
                         <Link
-                            href="#"
+                            :href="route('media.index')"
                             class="text-sm transition-all duration-550"
                             :class="{
                                 'text-black/80 hover:text-black':
@@ -73,7 +73,7 @@
                             >Média</Link
                         >
                         <Link
-                            href="#"
+                            :href="route('contact.index')"
                             class="text-sm transition-all duration-550"
                             :class="{
                                 'text-black/80 hover:text-black':

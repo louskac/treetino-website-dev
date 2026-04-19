@@ -53,8 +53,17 @@
                                 <FooterLink :href="route('configurator')"
                                     >Configurator</FooterLink
                                 >
-                                <FooterLink :href="route('configurator')"
+                                <FooterLink :href="route('collaboration.index')"
                                     >Government Grants</FooterLink
+                                >
+                                <FooterLink :href="route('collaboration.index')"
+                                    >Collaboration</FooterLink
+                                >
+                                <FooterLink :href="route('media.index')"
+                                    >Media</FooterLink
+                                >
+                                <FooterLink :href="route('media.index')"
+                                    >Contact</FooterLink
                                 >
                             </div>
                         </div>
@@ -222,7 +231,7 @@ import {
     Building,
 } from '@iconoir/vue';
 import { route } from 'ziggy-js';
+import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import FooterLink from '@/custom/footer/FooterLink.vue';
 import LogoType from '@/custom/LogoType.vue';
-import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 </script>
