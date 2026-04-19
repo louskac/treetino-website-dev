@@ -7,7 +7,7 @@
                 class="flex w-full flex-col rounded-2xl border bg-black/20 p-6 backdrop-blur-2xl transition-all duration-550"
                 :class="[
                     activeDropdown === 'products'
-                        ? 'border-transparent bg-white'
+                        ? 'border-transparent bg-white shadow-2xl'
                         : isScrolled
                           ? 'bg-white/80 shadow-lg'
                           : 'border-white/20 bg-black/20',
@@ -150,7 +150,7 @@
                             >
                                 <div class="mt-auto p-6">
                                     <p
-                                        class="mt-1 text-2xl font-medium text-black"
+                                        class="mb-3 text-2xl font-medium text-black"
                                     >
                                         {{ item.label }}
                                     </p>
