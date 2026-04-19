@@ -169,7 +169,7 @@ const downloadInvoice = async () => {
                 <div class="pb-6">
                     <div class="flex gap-5">
                         <div
-                            class="flex w-fit rounded-xl border px-5 py-3 shadow-2xl"
+                            class="flex w-fit rounded-xl border px-5 py-3 shadow-xl"
                         >
                             <div
                                 v-if="preorder.status === 'pending'"
@@ -232,7 +232,7 @@ const downloadInvoice = async () => {
                 <div class="grid grid-cols-1 gap-8 pb-16 lg:grid-cols-2">
                     <!-- Left: Product image with name overlay -->
                     <div
-                        class="relative aspect-square overflow-hidden rounded-2xl border bg-black/5 dark:bg-white/5"
+                        class="relative aspect-square overflow-hidden rounded-2xl border bg-black/5 shadow-xl dark:bg-white/5"
                     >
                         <img
                             v-if="productImageSrc"
