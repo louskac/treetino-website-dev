@@ -49,6 +49,11 @@
                         v-model="selectedLeafColorId"
                         :step-number="index + 1"
                     />
+                    <ConfiguratorFveLeafStep
+                        v-else-if="step.id === 'fve-leaf'"
+                        v-model="selectedFveLeafDesign"
+                        :step-number="index + 1"
+                    />
                     <ConfiguratorConnectivityStep
                         v-else-if="step.id === 'connectivity'"
                         v-model="selectedConnectivity"
@@ -108,6 +113,7 @@ import ConfiguratorBatteryStep from '@/custom/configurator/ConfiguratorBatterySt
 import ConfiguratorCheckout from '@/custom/configurator/ConfiguratorCheckout.vue';
 import ConfiguratorColorStep from '@/custom/configurator/ConfiguratorColorStep.vue';
 import ConfiguratorConnectivityStep from '@/custom/configurator/ConfiguratorConnectivityStep.vue';
+import ConfiguratorFveLeafStep from '@/custom/configurator/ConfiguratorFveLeafStep.vue';
 import ConfiguratorLeafColorStep from '@/custom/configurator/ConfiguratorLeafColorStep.vue';
 import ConfiguratorModalCheckout from '@/custom/configurator/ConfiguratorModalCheckout.vue';
 import ConfiguratorModalInfo from '@/custom/configurator/ConfiguratorModalInfo.vue';
@@ -167,6 +173,7 @@ onUnmounted(() => {
 
 const selectedColorId = ref('white');
 const selectedLeafColorId = ref('green');
+const selectedFveLeafDesign = ref('realistic');
 const selectedConnectivity = ref('none');
 const selectedBattery = ref('none');
 const evChargerCount = ref(0);
@@ -204,6 +211,8 @@ const sectionImages = computed(() => {
                 return `/img/config-images/${prodId}/color/color_${selectedColorId.value}.webp`;
             case 'leaf':
                 return `/img/config-images/${prodId}/leaf-color/leaf_${selectedLeafColorId.value}.webp`;
+            case 'fve-leaf':
+                return `/img/config-images/${prodId}/fve-leaf/fve-leaf_${selectedFveLeafDesign.value}.webp`;
             case 'connectivity':
                 return `/img/config-images/${prodId}/connectivity/connectivity_${selectedConnectivity.value}.webp`;
             case 'battery':
@@ -237,6 +246,7 @@ function setSectionRef(el: Element | ComponentPublicInstance | null) {
 function resetConfiguration() {
     selectedColorId.value = 'white';
     selectedLeafColorId.value = 'green';
+    selectedFveLeafDesign.value = 'realistic';
     selectedConnectivity.value = 'none';
     selectedBattery.value = 'none';
     evChargerCount.value = 0;
@@ -297,6 +307,7 @@ function buildConfiguration() {
     > = {
         color: selectedColorId.value,
         leafColor: selectedLeafColorId.value,
+        fveLeafDesign: selectedFveLeafDesign.value,
         connectivity: selectedConnectivity.value,
         battery: selectedBattery.value,
         evChargerCount: evChargerCount.value,

@@ -9,6 +9,7 @@ export type ProductId = typeof ProductId[keyof typeof ProductId];
 export type ConfigurationField =
     | 'color'
     | 'leafColor'
+    | 'fveLeafDesign'
     | 'connectivity'
     | 'battery'
     | 'evChargerCount'
@@ -36,6 +37,7 @@ export const PRODUCTS: Product[] = [
         steps: [
             { id: 'color', component: 'ConfiguratorColorStep', configurationFields: ['color'] },
             { id: 'leaf', component: 'ConfiguratorLeafColorStep', configurationFields: ['leafColor'] },
+            { id: 'fve-leaf', component: 'ConfiguratorFveLeafStep', configurationFields: ['fveLeafDesign'] },
             { id: 'connectivity', component: 'ConfiguratorConnectivityStep', configurationFields: ['connectivity'] },
             { id: 'battery', component: 'ConfiguratorBatteryStep', configurationFields: ['battery'] },
             { id: 'addons', component: 'ConfiguratorAddonsStep', configurationFields: ['evChargerCount', 'bikeChargerRequested'] }
@@ -49,6 +51,7 @@ export const PRODUCTS: Product[] = [
         steps: [
             { id: 'color', component: 'ConfiguratorColorStep', configurationFields: ['color'] },
             { id: 'leaf', component: 'ConfiguratorLeafColorStep', configurationFields: ['leafColor'] },
+            { id: 'fve-leaf', component: 'ConfiguratorFveLeafStep', configurationFields: ['fveLeafDesign'] },
             { id: 'connectivity', component: 'ConfiguratorConnectivityStep', configurationFields: ['connectivity'] },
             { id: 'battery', component: 'ConfiguratorBatteryStep', configurationFields: ['battery'] },
             { id: 'addons', component: 'ConfiguratorAddonsStep', configurationFields: ['evChargerCount', 'bikeChargerRequested'] }

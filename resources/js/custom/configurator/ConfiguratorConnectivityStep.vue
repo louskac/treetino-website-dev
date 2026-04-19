@@ -53,7 +53,7 @@ const options = [
         label: 'Premium Connectivity',
         price: 'Měsíční předplatné',
         roi: 18,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.',
+        description: '1 měsíc zdarma, poté dle obchodních podmínek automatické strhávání po předání stavby',
     },
 ];
 </script>

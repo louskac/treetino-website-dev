@@ -25,6 +25,7 @@ const productImageSrc = computed(() => {
 const configurationLabels: Record<string, string> = {
     color: 'Barva',
     leafColor: 'Barva listů',
+    fveLeafDesign: 'Design FVE listů',
     connectivity: 'Konektivita',
     battery: 'Baterie',
     evChargerCount: 'Počet EV nabíječek',
