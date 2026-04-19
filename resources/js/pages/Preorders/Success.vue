@@ -11,8 +11,8 @@ const props = defineProps({
     preorder: Object,
 });
 
-const product = computed(() =>
-    PRODUCTS.find((p) => p.id === props.preorder?.product_type) ?? null,
+const product = computed(
+    () => PRODUCTS.find((p) => p.id === props.preorder?.product_type) ?? null,
 );
 
 const productImageSrc = computed(() => {
@@ -230,9 +230,10 @@ const downloadInvoice = async () => {
 
                 <!-- Two-column layout -->
                 <div class="grid grid-cols-1 gap-8 pb-16 lg:grid-cols-2">
-
                     <!-- Left: Product image with name overlay -->
-                    <div class="relative aspect-square overflow-hidden rounded-2xl border bg-black/5 dark:bg-white/5">
+                    <div
+                        class="relative aspect-square overflow-hidden rounded-2xl border bg-black/5 dark:bg-white/5"
+                    >
                         <img
                             v-if="productImageSrc"
                             :src="productImageSrc"
@@ -241,7 +242,7 @@ const downloadInvoice = async () => {
                         />
                         <!-- Product name overlay bottom-left -->
                         <div class="absolute bottom-0 left-0 p-5">
-                            <div class="text-2xl font-semibold drop-shadow-lg">
+                            <div class="text-6xl">
                                 {{ product?.label ?? preorder.product_type }}
                             </div>
                         </div>
@@ -249,25 +250,50 @@ const downloadInvoice = async () => {
 
                     <!-- Right: Order info + Configuration table -->
                     <div class="flex flex-col gap-6">
-
                         <!-- Order info -->
-                        <div class="rounded-2xl border p-6">
-                            <div class="pb-4 text-lg font-semibold">Informace o objednávce</div>
-                            <dl class="grid grid-cols-[auto_1fr] gap-x-6 gap-y-2 text-sm">
-                                <dt class="opacity-60">Datum vytvoření</dt>
-                                <dd>{{ formattedDate }}</dd>
+                        <div class="">
+                            <div class="pb-4 text-4xl">
+                                Informace o objednávce
+                            </div>
 
-                                <dt class="opacity-60">Celková cena</dt>
-                                <dd>{{ formattedAmount }}</dd>
+                            <table class="w-full text-sm">
+                                <tbody>
+                                    <tr class="border-t first:border-t-0">
+                                        <td class="py-2 pr-6 opacity-60">
+                                            Datum vytvoření
+                                        </td>
+                                        <td class="py-2 font-medium">
+                                            {{ formattedDate }}
+                                        </td>
+                                    </tr>
 
-                                <dt class="opacity-60">Produkt</dt>
-                                <dd>{{ product?.label ?? preorder.product_type }}</dd>
-                            </dl>
+                                    <tr class="border-t first:border-t-0">
+                                        <td class="py-2 pr-6 opacity-60">
+                                            Celková cena
+                                        </td>
+                                        <td class="py-2 font-medium">
+                                            {{ formattedAmount }}
+                                        </td>
+                                    </tr>
+
+                                    <tr class="border-t first:border-t-0">
+                                        <td class="py-2 pr-6 opacity-60">
+                                            Produkt
+                                        </td>
+                                        <td class="py-2 font-medium">
+                                            {{
+                                                product?.label ??
+                                                preorder.product_type
+                                            }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
 
                         <!-- Configuration table -->
-                        <div class="rounded-2xl border p-6">
-                            <div class="pb-4 text-lg font-semibold">Konfigurace</div>
+                        <div class="">
+                            <div class="pb-4 text-4xl">Konfigurace</div>
                             <table class="w-full text-sm">
                                 <tbody>
                                     <tr
@@ -275,16 +301,22 @@ const downloadInvoice = async () => {
                                         :key="row.label"
                                         class="border-t first:border-t-0"
                                     >
-                                        <td class="py-2 pr-6 opacity-60">{{ row.label }}</td>
-                                        <td class="py-2 font-medium">{{ row.value }}</td>
+                                        <td class="py-2 pr-6 opacity-60">
+                                            {{ row.label }}
+                                        </td>
+                                        <td class="py-2 font-medium">
+                                            {{ row.value }}
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
-                            <div v-if="configurationRows.length === 0" class="text-sm opacity-50">
+                            <div
+                                v-if="configurationRows.length === 0"
+                                class="text-sm opacity-50"
+                            >
                                 Žádná konfigurace
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
