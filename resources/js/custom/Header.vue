@@ -4,7 +4,7 @@
             class="mx-auto flex w-full max-w-[1400px] justify-between px-6 pt-6 sm:w-[500px] sm:px-0 md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
         >
             <div
-                class="flex w-full flex-col rounded-2xl border bg-black/20 p-6 backdrop-blur-2xl transition-all duration-300"
+                class="flex w-full flex-col rounded-2xl border bg-black/20 p-6 backdrop-blur-2xl transition-all duration-550"
                 :class="[
                     activeDropdown === 'products'
                         ? 'border-transparent bg-white'
@@ -17,7 +17,7 @@
                 <div class="flex w-full justify-between">
                     <div class="logo my-auto flex gap-3 text-white">
                         <LogoType
-                            class="fill-current transition-all duration-300"
+                            class="fill-current transition-all duration-550"
                             :class="{
                                 'text-black':
                                     activeDropdown === 'products' || isScrolled,
@@ -31,7 +31,7 @@
                     <nav class="my-auto hidden gap-6 xl:flex">
                         <Link
                             href="#"
-                            class="text-sm transition-all duration-300"
+                            class="text-sm transition-all duration-550"
                             :class="{
                                 'text-black/80 hover:text-black':
                                     activeDropdown === 'products' || isScrolled,
@@ -45,7 +45,7 @@
                         <!--<Link href="#" class="text-sm text-white/80 transition-colors hover:text-white" @mouseenter="activeDropdown = null">Sdílení energie</Link>-->
                         <Link
                             href="#"
-                            class="text-sm transition-all duration-300"
+                            class="text-sm transition-all duration-550"
                             :class="{
                                 'text-black/80 hover:text-black':
                                     activeDropdown === 'products' || isScrolled,
@@ -58,7 +58,7 @@
                         >
                         <Link
                             href="#"
-                            class="text-sm transition-all duration-300"
+                            class="text-sm transition-all duration-550"
                             :class="{
                                 'text-black/80 hover:text-black':
                                     activeDropdown === 'products' || isScrolled,
@@ -71,7 +71,7 @@
                         >
                         <Link
                             href="#"
-                            class="text-sm transition-all duration-300"
+                            class="text-sm transition-all duration-550"
                             :class="{
                                 'text-black/80 hover:text-black':
                                     activeDropdown === 'products' || isScrolled,
@@ -145,33 +145,44 @@
                             :key="item.id"
                             class="flex flex-1 flex-col gap-2 pt-6"
                         >
-                            <div class="h-36 rounded-xl bg-black/10"></div>
-                            <p class="mt-1 text-2xl font-medium text-black">
-                                {{ item.label }}
-                            </p>
-                            <div class="flex gap-2">
-                                <Link
-                                    href="#"
-                                    class="flex-1 rounded-lg py-1.5 text-center text-xs transition-all duration-300"
-                                    :class="{
-                                        'border text-black/80 hover:text-black/60':
-                                            activeDropdown === 'products',
-                                        'border border-transparent text-white/80 hover:text-white':
-                                            activeDropdown !== 'products',
-                                    }"
-                                    >Více informací</Link
-                                >
-                                <Link
-                                    :href="`/configurator?product=${item.id}`"
-                                    class="flex-1 rounded-lg py-1.5 text-center text-xs font-medium transition-all duration-300 hover:opacity-80"
-                                    :class="{
-                                        'border border-transparent bg-black text-white':
-                                            activeDropdown === 'products',
-                                        'border border-transparent bg-white text-black':
-                                            activeDropdown !== 'products',
-                                    }"
-                                    >Objednat</Link
-                                >
+                            <div
+                                class="flex aspect-square flex-col rounded-xl bg-black/10"
+                            >
+                                <div class="mt-auto p-6">
+                                    <p
+                                        class="mt-1 text-2xl font-medium text-black"
+                                    >
+                                        {{ item.label }}
+                                    </p>
+                                    <div class="flex gap-2">
+                                        <Link
+                                            href="#"
+                                            class="flex-1 rounded-lg py-1.5 text-center text-xs transition-all duration-550"
+                                            :class="{
+                                                'border bg-white text-black/80 hover:text-black/60':
+                                                    activeDropdown ===
+                                                    'products',
+                                                'border border-transparent bg-white text-white/80 hover:text-white':
+                                                    activeDropdown !==
+                                                    'products',
+                                            }"
+                                            >Více informací</Link
+                                        >
+                                        <Link
+                                            :href="`/configurator?product=${item.id}`"
+                                            class="flex-1 rounded-lg py-1.5 text-center text-xs font-medium transition-all duration-550 hover:opacity-80"
+                                            :class="{
+                                                'border border-transparent bg-black text-white':
+                                                    activeDropdown ===
+                                                    'products',
+                                                'border border-transparent bg-white text-black':
+                                                    activeDropdown !==
+                                                    'products',
+                                            }"
+                                            >Objednat</Link
+                                        >
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -234,8 +245,8 @@ onUnmounted(() => {
 .dropdown-enter-active,
 .dropdown-leave-active {
     transition:
-        max-height 0.35s ease,
-        opacity 0.35s ease;
+        max-height 0.55s ease,
+        opacity 0.55s ease;
     overflow: hidden;
 }
 .dropdown-enter-from,
@@ -245,7 +256,7 @@ onUnmounted(() => {
 }
 .dropdown-enter-to,
 .dropdown-leave-from {
-    max-height: 250px; /* Increased from 200px */
+    max-height: 1000px;
     opacity: 1;
 }
 </style>
