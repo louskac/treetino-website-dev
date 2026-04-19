@@ -20,27 +20,58 @@
                 </div>
             </div>
 
-            <div
-                class="relative mx-auto h-full w-full max-w-[1400px] sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
-            >
-                <div class="relative h-full w-full bg-transparent">
-                    <div
-                        class="absolute inset-x-0 bottom-0 z-10 px-4 pb-6 sm:px-6 sm:pb-8 lg:inset-x-auto lg:top-1/2 lg:my-auto lg:h-100 lg:max-w-150 lg:-translate-y-1/2 lg:px-0 lg:pb-0 2xl:h-110"
-                    >
-                        <HomeFeaturesCardMobile
-                            class="mb-5 lg:hidden"
-                            :sections="sections"
-                            :current-section-index="currentSectionIndex"
-                            :visible="cardVisible"
-                        />
+            <!-- Desktop: left column content (no card) -->
+            <div class="absolute hidden lg:flex left-0 top-0 w-5/12 h-full items-center z-10 px-12 xl:px-16 2xl:px-20">
+                <div class="w-full max-w-sm xl:max-w-md">
+                    <div class="flex items-center justify-between mb-8">
+                        <span class="text-xs font-semibold tracking-[0.2em] text-black/70 uppercase">Funkce</span>
+                        <span class="text-xs font-medium tracking-widest text-black/70">
+                            {{ String(currentSectionIndex + 1).padStart(2, '0') }} /
+                            {{ String(sections.length).padStart(2, '0') }}
+                        </span>
+                    </div>
 
-                        <HomeFeaturesCardDesktop
-                            :sections="sections"
-                            :current-section-index="currentSectionIndex"
-                            :visible="cardVisible"
+                    <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-t-blue">
+                        <component
+                            :is="sections[currentSectionIndex].icon"
+                            class="h-6 w-6 text-white"
+                            stroke-width="1.5"
                         />
                     </div>
+
+                    <div class="mt-5">
+                        <h2 class="text-4xl leading-tight text-black">
+                            {{ sections[currentSectionIndex].title }}
+                        </h2>
+                        <p class="mt-3 text-base leading-relaxed text-black/75">
+                            {{ sections[currentSectionIndex].text }}
+                        </p>
+                    </div>
+
+                    <div class="mt-8 flex gap-1.5">
+                        <div
+                            v-for="(_, i) in sections"
+                            :key="i"
+                            class="h-0.5 flex-1 rounded-full transition-all duration-500"
+                            :class="
+                                i === currentSectionIndex
+                                    ? 'bg-black'
+                                    : i < currentSectionIndex
+                                      ? 'bg-black/50'
+                                      : 'bg-black/20'
+                            "
+                        ></div>
+                    </div>
                 </div>
+            </div>
+
+            <!-- Mobile: card at the bottom -->
+            <div class="lg:hidden absolute inset-x-0 bottom-0 z-10 px-4 pb-6 sm:px-6 sm:pb-8">
+                <HomeFeaturesCardMobile
+                    :sections="sections"
+                    :current-section-index="currentSectionIndex"
+                    :visible="cardVisible"
+                />
             </div>
         </div>
     </section>
@@ -49,7 +80,6 @@
 <script setup lang="ts">
 import { SunLight, Leaf, Tree, MultiplePages } from '@iconoir/vue';
 import { onMounted, onUnmounted, ref } from 'vue';
-import HomeFeaturesCardDesktop from '@/custom/home/features/HomeFeaturesCardDesktop.vue';
 import HomeFeaturesCardMobile from '@/custom/home/features/HomeFeaturesCardMobile.vue';
 
 const TOTAL_FRAMES = 228;
