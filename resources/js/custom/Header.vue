@@ -202,20 +202,38 @@ import { PRODUCTS } from '@/types/products';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import { route } from 'ziggy-js';
 
+const props = defineProps({
+    scroll: {
+        type: Boolean,
+        default: true,
+    },
+});
+
 const activeDropdown = ref<string | null>(null);
-const isScrolled = ref(false);
+
+const isScrolled = ref(!props.scroll);
 
 const products = PRODUCTS;
 
 const handleScroll = () => {
+    if (!props.scroll) {
+        isScrolled.value = true;
+        return;
+    }
+
     // Change state after 600px
     isScrolled.value = window.scrollY > 600;
 };
 
 onMounted(() => {
-    handleScroll();
-
-    window.addEventListener('scroll', handleScroll);
+    if (props.scroll) {
+        window.addEventListener('scroll', handleScroll);
+        // Run once on mount to check current position
+        handleScroll();
+    } else {
+        // If scroll is false, ensure it's set to true
+        isScrolled.value = true;
+    }
 });
 
 onUnmounted(() => {

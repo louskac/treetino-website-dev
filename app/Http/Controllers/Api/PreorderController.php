@@ -106,4 +106,18 @@ class PreorderController extends Controller
             'Content-Disposition' => 'attachment; filename="invoice-'.$preorder->uuid.'.pdf"',
         ]);
     }
+
+    // Invoice Test
+    // 019da517-c3eb-7184-afa7-6015171402c3
+    public function invoicetest(Request $request) {
+        $preorder = Preorder::where('uuid', '019da50e-a184-7120-bf79-262f53178c08')
+            ->with('user')->firstOrFail();
+
+        $data = [
+            'preorder' => $preorder,
+            'date' => date('d. m. Y'),
+        ];
+
+        return view('pdf.invoice', $data);
+    }
 }

@@ -146,7 +146,7 @@ const downloadInvoice = async () => {
 </script>
 
 <template>
-    <DefaultLayout class="relative">
+    <DefaultLayout :scroll="false" class="relative">
         <div class="absolute w-full h-90 bg-blue-50">
             <div class="absolute w-full h-30 bottom-0 bg-linear-to-b from-transparent to-white">
 

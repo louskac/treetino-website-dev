@@ -15,8 +15,10 @@ Route::post('/checkout', [PreorderController::class, 'initiate'])->name('checkou
 
 // Orders
 Route::prefix('preorders')->name('preorders.')->group( function () {
+    Route::post('/invoice',  [PreorderController::class, 'invoice'])->name('invoice');
+    Route::get ('/invoicetest',  [PreorderController::class, 'invoicetest'])->name('invoicetest');
+
     Route::get('/{uuid}', [OrderController::class, 'success'])->name('success');
-    Route::post('/invoice', [PreorderController::class, 'invoice'])->name('invoice');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {

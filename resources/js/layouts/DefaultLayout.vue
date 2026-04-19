@@ -3,7 +3,7 @@
         <!-- Rendered only once globally to achieve better performance -->
         <LiquidGlassFilter/>
 
-        <Header />
+        <Header :scroll="props.scroll" />
 
         <main>
             <slot />
@@ -17,4 +17,11 @@
 import Footer from '@/custom/Footer.vue';
 import Header from '@/custom/Header.vue';
 import LiquidGlassFilter from '@/custom/LiquidGlassFilter.vue';
+
+const props = defineProps({
+    scroll: {
+        type: Boolean,
+        default: true,
+    },
+});
 </script>
