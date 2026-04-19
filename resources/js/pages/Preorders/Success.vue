@@ -1,13 +1,62 @@
 <script setup lang="ts">
 import { Download } from '@iconoir/vue';
 import { router } from '@inertiajs/vue3';
-import { onMounted, onUnmounted } from 'vue';
+import { onMounted, onUnmounted, computed } from 'vue';
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
 import axios from 'axios';
 import { ref } from 'vue';
+import { PRODUCTS } from '@/types/products';
 
 const props = defineProps({
     preorder: Object,
+});
+
+const product = computed(() =>
+    PRODUCTS.find((p) => p.id === props.preorder?.product_type) ?? null,
+);
+
+const productImageSrc = computed(() => {
+    const type = props.preorder?.product_type;
+    const color = props.preorder?.configuration?.color ?? 'green';
+    if (!type) return null;
+    return `/img/config-images/${type}/color/color_${color}.webp`;
+});
+
+const configurationLabels: Record<string, string> = {
+    color: 'Barva',
+    leafColor: 'Barva listů',
+    connectivity: 'Konektivita',
+    battery: 'Baterie',
+    evChargerCount: 'Počet EV nabíječek',
+    bikeChargerRequested: 'Nabíječka na kolo',
+};
+
+const configurationRows = computed(() => {
+    const cfg = props.preorder?.configuration;
+    if (!cfg) return [];
+    return Object.entries(cfg).map(([key, value]) => ({
+        label: configurationLabels[key] ?? key,
+        value: value === true ? 'Ano' : value === false ? 'Ne' : String(value),
+    }));
+});
+
+const formattedAmount = computed(() => {
+    const amount = props.preorder?.amount_total;
+    if (amount == null) return '—';
+    return new Intl.NumberFormat('cs-CZ', {
+        style: 'currency',
+        currency: 'CZK',
+        minimumFractionDigits: 0,
+    }).format(amount / 100);
+});
+
+const formattedDate = computed(() => {
+    const date = props.preorder?.created_at;
+    if (!date) return '—';
+    return new Intl.DateTimeFormat('cs-CZ', {
+        dateStyle: 'long',
+        timeStyle: 'short',
+    }).format(new Date(date));
 });
 
 let intervalId: ReturnType<typeof setInterval> | null = null;
@@ -116,6 +165,7 @@ const downloadInvoice = async () => {
                     </div>
                 </div>
 
+                <!-- Status + Invoice download -->
                 <div class="pb-6">
                     <div class="flex gap-5">
                         <div
@@ -178,8 +228,64 @@ const downloadInvoice = async () => {
                     </div>
                 </div>
 
-                <div class="pb-12">
-                    {{ preorder }}
+                <!-- Two-column layout -->
+                <div class="grid grid-cols-1 gap-8 pb-16 lg:grid-cols-2">
+
+                    <!-- Left: Product image with name overlay -->
+                    <div class="relative aspect-square overflow-hidden rounded-2xl border bg-black/5 dark:bg-white/5">
+                        <img
+                            v-if="productImageSrc"
+                            :src="productImageSrc"
+                            :alt="product?.label ?? preorder.product_type"
+                            class="h-full w-full object-contain"
+                        />
+                        <!-- Product name overlay bottom-left -->
+                        <div class="absolute bottom-0 left-0 p-5">
+                            <div class="text-2xl font-semibold drop-shadow-lg">
+                                {{ product?.label ?? preorder.product_type }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Order info + Configuration table -->
+                    <div class="flex flex-col gap-6">
+
+                        <!-- Order info -->
+                        <div class="rounded-2xl border p-6">
+                            <div class="pb-4 text-lg font-semibold">Informace o objednávce</div>
+                            <dl class="grid grid-cols-[auto_1fr] gap-x-6 gap-y-2 text-sm">
+                                <dt class="opacity-60">Datum vytvoření</dt>
+                                <dd>{{ formattedDate }}</dd>
+
+                                <dt class="opacity-60">Celková cena</dt>
+                                <dd>{{ formattedAmount }}</dd>
+
+                                <dt class="opacity-60">Produkt</dt>
+                                <dd>{{ product?.label ?? preorder.product_type }}</dd>
+                            </dl>
+                        </div>
+
+                        <!-- Configuration table -->
+                        <div class="rounded-2xl border p-6">
+                            <div class="pb-4 text-lg font-semibold">Konfigurace</div>
+                            <table class="w-full text-sm">
+                                <tbody>
+                                    <tr
+                                        v-for="row in configurationRows"
+                                        :key="row.label"
+                                        class="border-t first:border-t-0"
+                                    >
+                                        <td class="py-2 pr-6 opacity-60">{{ row.label }}</td>
+                                        <td class="py-2 font-medium">{{ row.value }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div v-if="configurationRows.length === 0" class="text-sm opacity-50">
+                                Žádná konfigurace
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
