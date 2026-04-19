@@ -111,7 +111,9 @@ onUnmounted(() => {
                     </div>
                 </div>
 
-                {{ preorder }}
+                <div class="pb-12">
+                    {{ preorder }}
+                </div>
             </div>
         </div>
     </DefaultLayout>
