@@ -1,16 +1,50 @@
 <script setup lang="ts">
+import { CheckCircle, Refresh } from '@iconoir/vue';
 import { Head } from '@inertiajs/vue3';
+import axios from 'axios';
+import { ref } from 'vue';
 import { route } from 'ziggy-js';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
-import ButtonSecondary from '@/custom/ButtonSecondary.vue';
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
 
-import { Whatsapp } from '@iconoir/vue';
-import { ref } from 'vue';
-
 // Contact Form
+const name = ref('');
 const mail = ref('');
 const message = ref('');
+
+const formSending = ref(false);
+const formSent = ref(false);
+
+const formErrors = ref({});
+
+async function formProcess() {
+    try {
+        formSending.value = true;
+
+        const response = await axios({
+            url: route('contact.store'), // Make sure this matches your route path
+            method: 'POST',
+            data: {
+                name: name.value,
+                mail: mail.value,
+                message: message.value,
+            },
+        });
+
+        formSent.value = true;
+        formSending.value = false;
+        console.log(response.data);
+    } catch (error) {
+        if (error.response) {
+            // This is where your custom messages from the Controller are!
+            formErrors.value = error.response.data.errors;
+        }
+
+        formSending.value = false;
+        formSent.value = false;
+        console.error('Process failed:', formErrors.value);
+    }
+}
 </script>
 
 <template>
@@ -40,19 +74,24 @@ const message = ref('');
                         <div class="relative my-auto w-full">
                             <div class="pb-4 text-4xl">Write to our team</div>
                             <div class="block opacity-70 2xl:w-3/4">
-                                <p>
+                                <p class="mb-3">
                                     Feel free to ask about our products and
                                     services or about government grant
                                     assistance
+                                </p>
+
+                                <p>
+                                    Our specialists will respond within 2
+                                    business days.
                                 </p>
                             </div>
                         </div>
                     </div>
 
                     <div
-                        class="flex flex-col rounded-2xl border bg-white p-6 shadow-xl"
+                        class="relative flex flex-col overflow-clip rounded-2xl border bg-white p-6 shadow-xl"
                     >
-                        <div class="grid gap-3">
+                        <div class="relative grid gap-3">
                             <div class="">
                                 <label
                                     for="name"
@@ -64,9 +103,15 @@ const message = ref('');
                                     class="w-full rounded-xl border bg-white px-4 py-3 text-black"
                                     type="text"
                                     id="name"
-                                    v-model="mail"
+                                    v-model="name"
                                     placeholder="Jiří Dozvěděl"
                                 />
+                                <div
+                                    v-if="formErrors.name"
+                                    class="pt-1.5 text-sm text-red-500 opacity-70"
+                                >
+                                    {{ formErrors.name[0] }}
+                                </div>
                             </div>
 
                             <div class="">
@@ -83,6 +128,12 @@ const message = ref('');
                                     v-model="mail"
                                     placeholder="jiri.dozvedel@domena.cz"
                                 />
+                                <div
+                                    v-if="formErrors.mail"
+                                    class="pt-1.5 text-sm text-red-500 opacity-70"
+                                >
+                                    {{ formErrors.mail[0] }}
+                                </div>
                             </div>
 
                             <div class="">
@@ -98,28 +149,103 @@ const message = ref('');
                                     v-model="message"
                                     placeholder="Leave your message here"
                                 />
+                                <div
+                                    v-if="formErrors.message"
+                                    class="pt-1.5 text-sm text-red-500 opacity-70"
+                                >
+                                    {{ formErrors.message[0] }}
+                                </div>
                             </div>
                         </div>
 
-                        <div class="mt-auto grid gap-2 pt-6">
-                            <ButtonPrimary class="w-full text-center">
-                                Send
-                            </ButtonPrimary>
+                        <div class="relative mt-auto">
+                            <div class="grid gap-2 pt-6">
+                                <ButtonPrimary
+                                    class="w-full cursor-pointer text-center"
+                                    @click="formProcess"
+                                >
+                                    Send
+                                </ButtonPrimary>
 
-                            <ButtonSecondary class="flex w-full">
-                                <div class="mx-auto flex w-fit gap-2">
-                                    <div class="my-auto">
-                                        <Whatsapp class="h-5 w-5" />
+                                <!--  Removed for Prod  -->
+                                <!--                            <ButtonSecondary class="flex w-full">-->
+                                <!--                                <div class="mx-auto flex w-fit gap-2">-->
+                                <!--                                    <div class="my-auto">-->
+                                <!--                                        <Whatsapp class="h-5 w-5" />-->
+                                <!--                                    </div>-->
+                                <!--                                    <div class="my-auto">-->
+                                <!--                                        Chat with WhatsApp-->
+                                <!--                                    </div>-->
+                                <!--                                </div>-->
+                                <!--                            </ButtonSecondary>-->
+                            </div>
+
+                            <div class="mt-4 text-xs opacity-70">
+                                By submitting the form, you agree to our Terms &
+                                Conditions and Privacy Policy
+                            </div>
+                        </div>
+
+                        <Transition>
+                            <div
+                                v-if="formSending || formSent"
+                                class="absolute top-0 left-0 flex h-full w-full bg-white p-6"
+                            >
+                                <div
+                                    class="mx-auto my-auto flex w-full flex-col gap-2"
+                                >
+                                    <div class="relative h-8 text-center">
+                                        <Transition>
+                                            <Refresh
+                                                v-if="formSending"
+                                                class="absolute left-1/2 h-8 w-8 -translate-x-1/2 animate-spin"
+                                            />
+                                        </Transition>
+
+                                        <Transition>
+                                            <CheckCircle
+                                                v-if="formSent"
+                                                class="absolute left-1/2 h-8 w-8 -translate-x-1/2 text-green-600"
+                                            />
+                                        </Transition>
                                     </div>
-                                    <div class="my-auto">
-                                        Chat with WhatsApp
+                                    <div class="relative w-full">
+                                        <Transition>
+                                            <div
+                                                v-if="formSending"
+                                                class="absolute left-1/2 -translate-x-1/2 text-center opacity-70 text-sm"
+                                            >
+                                                Your message is being processed
+                                            </div>
+                                        </Transition>
+
+                                        <Transition>
+                                            <div
+                                                v-if="formSent"
+                                                class="absolute left-1/2 -translate-x-1/2 text-center opacity-70 text-sm"
+                                            >
+                                                Your message was sent
+                                            </div>
+                                        </Transition>
                                     </div>
                                 </div>
-                            </ButtonSecondary>
-                        </div>
+                            </div>
+                        </Transition>
                     </div>
                 </div>
             </div>
         </section>
     </DefaultLayout>
 </template>
+
+<style>
+.v-enter-active,
+.v-leave-active {
+    transition: opacity 200ms ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+    opacity: 0;
+}
+</style>

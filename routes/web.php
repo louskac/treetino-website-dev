@@ -27,6 +27,7 @@ Route::prefix('media')->name('media.')->group( function () {
 // Kontakt
 Route::prefix('contact')->name('contact.')->group( function () {
     Route::get('/', [ContactController::class, 'index'])->name('index');
+    Route::post('/', [ContactController::class, 'store'])->name('store');
 });
 
 // Checkout
