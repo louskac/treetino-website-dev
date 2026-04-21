@@ -28,6 +28,7 @@ export interface Product {
     params: { power: string; dailyProduction: string; roi: string };
     steps: ConfiguratorStep[];
     basePrice: number;
+    monthlySavings: number;
 }
 
 export const PRODUCTS: Product[] = [
@@ -43,7 +44,8 @@ export const PRODUCTS: Product[] = [
             { id: 'battery', component: 'ConfiguratorBatteryStep', configurationFields: ['battery'] },
             { id: 'addons', component: 'ConfiguratorAddonsStep', configurationFields: ['evChargerCount', 'bikeChargerRequested'] }
         ],
-        basePrice: 1250000
+        basePrice: 3500000,
+        monthlySavings: 5700
     },
     { 
         id: ProductId.StromV2, 
@@ -57,7 +59,8 @@ export const PRODUCTS: Product[] = [
             { id: 'battery', component: 'ConfiguratorBatteryStep', configurationFields: ['battery'] },
             { id: 'addons', component: 'ConfiguratorAddonsStep', configurationFields: ['evChargerCount', 'bikeChargerRequested'] }
         ],
-        basePrice: 3300000
+        basePrice: 4000000,
+        monthlySavings: 7350
     },
     { 
         id: ProductId.Turbina,  
@@ -67,6 +70,7 @@ export const PRODUCTS: Product[] = [
             { id: 'color', component: 'ConfiguratorColorStep', configurationFields: ['color'] },
             { id: 'connectivity', component: 'ConfiguratorConnectivityStep', configurationFields: ['connectivity'] }
         ],
-        basePrice: 135000
+        basePrice: 150000,
+        monthlySavings: 1300
     },
 ];

@@ -85,41 +85,7 @@ defineEmits<{
     'update:modelValue': [value: string];
 }>();
 
-const grants = [
-    {
-        id: 'optak',
-        label: 'OPTAK',
-        percentage: 65,
-        eligibility: 'Pro firmy',
-        description: 'Operační program Technologie a aplikace pro konkurenceschopnost.',
-    },
-    {
-        id: 'res-plus',
-        label: 'RES+',
-        percentage: null,   // percentage TBD – will be confirmed
-        eligibility: 'Pro obce a města',
-        description: 'Podpora komunitní energetiky a obecních obnovitelných zdrojů.',
-    },
-    {
-        id: 'nzu',
-        label: 'NZÚ',
-        percentage: 30,
-        eligibility: 'Pro fyzické osoby',
-        description: 'Nová zelená úsporám - podpora pro domácnosti a fyzické osoby.',
-    },
-    {
-        id: 'irop',
-        label: 'IROP',
-        percentage: 90,
-        eligibility: 'Komplexní městské projekty',
-        description: 'Integrovaný regionální operační program pro rozsáhlé projekty.',
-    },
-    {
-        id: 'none',
-        label: 'Bez dotace',
-        percentage: null,
-        eligibility: '',
-        description: '',
-    },
-];
+import { GRANTS } from '@/types/grants';
+
+const grants = GRANTS;
 </script>

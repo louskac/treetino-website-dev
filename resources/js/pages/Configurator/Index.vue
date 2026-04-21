@@ -84,6 +84,8 @@
                 >
                     <ConfiguratorCheckout
                         :base-price="basePrice"
+                        :grant="selectedGrant"
+                        :monthly-savings="selectedProduct.monthlySavings"
                         @checkout="modalCheckoutOpen"
                         @info="modalInfoOpen"
                     />
@@ -135,7 +137,10 @@ import type {ConfigurationField} from '@/types/products';
 const modalCheckout = ref(false);
 const modalInfo = ref(false);
 
-function modalCheckoutOpen() {
+const selectedPaymentMode = ref('cash');
+
+function modalCheckoutOpen(paymentMode: string) {
+    selectedPaymentMode.value = paymentMode;
     modalCheckout.value = true;
 }
 
@@ -337,6 +342,9 @@ function buildConfiguration() {
 
     // Grant is a shared field not tied to any product step – always append
     configuration.grant = selectedGrant.value;
+
+    // Payment mode is a shared field not tied to any product step – always append
+    (configuration as Record<string, string | number | boolean>).paymentMode = selectedPaymentMode.value;
 
     console.log('Selected configuration:', configuration);
 
