@@ -101,6 +101,14 @@
             </ul>
         </div>
 
+        <!-- Urgency notice -->
+        <div class="flex flex-row items-center gap-3 p-3 rounded-lg bg-orange-50 border border-orange-200 dark:bg-orange-900/20 dark:border-orange-800/40">
+            <Flash class="h-5 w-5 shrink-0 text-orange-600 dark:text-orange-400" />
+            <p class="text-xs font-medium text-orange-700 dark:text-orange-300">
+                Pro měsíc <strong>{{ currentMonthName }}</strong> bylo již rezervováno <strong>3 z 5</strong> stromů.
+            </p>
+        </div>
+
         <div class="flex flex-col gap-2">
             <ButtonPrimary @click="emit('checkout', paymentMode)" class="cursor-pointer">
                 Rezervovat a Zaplatit
@@ -135,6 +143,7 @@ import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import ButtonSecondary from '@/custom/ButtonSecondary.vue';
 import ConfiguratorModalFinancing from '@/custom/configurator/ConfiguratorModalFinancing.vue';
 import { getGrantById } from '@/types/grants';
+import { Flash } from '@iconoir/vue';
 
 const ANNUAL_RATE = 3.9;
 
@@ -178,6 +187,14 @@ const adjustedMonthlyPayment = computed(() =>
         ? Math.max(0, monthlyPayment.value - props.monthlySavings)
         : monthlyPayment.value,
 );
+
+const currentMonthName = computed(() => {
+    const monthNames = [
+        'leden', 'únor', 'březen', 'duben', 'květen', 'červen', 'červenec', 'srpen', 'září', 'říjen', 'listopad', 'prosinec',
+    ];
+    const now = new Date();
+    return monthNames[now.getMonth()];
+});
 
 function formatPrice(v: number) {
     return Math.round(v).toLocaleString('cs-CZ');
