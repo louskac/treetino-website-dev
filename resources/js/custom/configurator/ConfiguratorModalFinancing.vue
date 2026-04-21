@@ -1,66 +1,3 @@
-<script setup lang="ts">
-import { computed } from 'vue';
-import { Xmark } from '@iconoir/vue';
-import { getGrantById } from '@/types/grants';
-
-const ANNUAL_RATE = 3.9;
-
-const props = defineProps<{
-    basePrice: number;
-    grant: string;
-    downPayment: number;
-    loanMonths: number;
-    includeSavings: boolean;
-    monthlySavings: number;
-}>();
-
-const emit = defineEmits<{
-    close: [];
-    'update:downPayment': [number];
-    'update:loanMonths': [number];
-    'update:includeSavings': [boolean];
-}>();
-
-const grantPct = computed(() => getGrantById(props.grant)?.percentage ?? 0);
-const grantLabel = computed(() => getGrantById(props.grant)?.label ?? '');
-
-const discountedPrice = computed(() => {
-    const pct = getGrantById(props.grant)?.percentage;
-    if (!pct) return props.basePrice;
-    return Math.round(props.basePrice * (1 - pct / 100));
-});
-
-const safeDownPayment = computed(() =>
-    Math.min(Math.max(0, props.downPayment), discountedPrice.value - 1),
-);
-
-const isOverMaxDownPayment = computed(() => {
-    return props.downPayment >= discountedPrice.value;
-});
-
-const loanPrincipal = computed(() => discountedPrice.value - safeDownPayment.value);
-
-const monthlyPayment = computed(() => {
-    const P = loanPrincipal.value;
-    const r = ANNUAL_RATE / 100 / 12;
-    const n = props.loanMonths;
-    if (P <= 0) return 0;
-    return (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
-});
-
-const adjustedMonthlyPayment = computed(() =>
-    props.includeSavings
-        ? Math.max(0, monthlyPayment.value - props.monthlySavings)
-        : monthlyPayment.value,
-);
-
-function formatPrice(v: number) {
-    return Math.round(v).toLocaleString('cs-CZ');
-}
-
-const monthOptions = [12, 24, 36, 48, 60];
-</script>
-
 <template>
     <div class="fixed top-0 left-0 z-50 flex h-full w-full backdrop-blur-xs p-6" @click.self="emit('close')">
         <div class="mx-auto my-auto w-full rounded-2xl bg-white dark:bg-zinc-900 shadow-[0_0_15px_5px_rgba(0,0,0,0.2)] lg:w-120">
@@ -157,3 +94,66 @@ const monthOptions = [12, 24, 36, 48, 60];
         </div>
     </div>
 </template>
+
+<script setup lang="ts">
+import { computed } from 'vue';
+import { Xmark } from '@iconoir/vue';
+import { getGrantById } from '@/types/grants';
+
+const ANNUAL_RATE = 3.9;
+
+const props = defineProps<{
+    basePrice: number;
+    grant: string;
+    downPayment: number;
+    loanMonths: number;
+    includeSavings: boolean;
+    monthlySavings: number;
+}>();
+
+const emit = defineEmits<{
+    close: [];
+    'update:downPayment': [number];
+    'update:loanMonths': [number];
+    'update:includeSavings': [boolean];
+}>();
+
+const grantPct = computed(() => getGrantById(props.grant)?.percentage ?? 0);
+const grantLabel = computed(() => getGrantById(props.grant)?.label ?? '');
+
+const discountedPrice = computed(() => {
+    const pct = getGrantById(props.grant)?.percentage;
+    if (!pct) return props.basePrice;
+    return Math.round(props.basePrice * (1 - pct / 100));
+});
+
+const safeDownPayment = computed(() =>
+    Math.min(Math.max(0, props.downPayment), discountedPrice.value - 1),
+);
+
+const isOverMaxDownPayment = computed(() => {
+    return props.downPayment >= discountedPrice.value;
+});
+
+const loanPrincipal = computed(() => discountedPrice.value - safeDownPayment.value);
+
+const monthlyPayment = computed(() => {
+    const P = loanPrincipal.value;
+    const r = ANNUAL_RATE / 100 / 12;
+    const n = props.loanMonths;
+    if (P <= 0) return 0;
+    return (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+});
+
+const adjustedMonthlyPayment = computed(() =>
+    props.includeSavings
+        ? Math.max(0, monthlyPayment.value - props.monthlySavings)
+        : monthlyPayment.value,
+);
+
+function formatPrice(v: number) {
+    return Math.round(v).toLocaleString('cs-CZ');
+}
+
+const monthOptions = [12, 24, 36, 48, 60];
+</script>
