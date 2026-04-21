@@ -42,6 +42,16 @@
             </button>
         </div>
 
+        <p v-if="grantInfo?.percentage" class="text-xs leading-relaxed text-black/50 dark:text-white/40">
+            <template v-if="grantInfo?.percentage">
+                <span class="text-xs text-black/50 dark:text-white/35 leading-relaxed">
+                Základní cena <strong class="text-black dark:text-white">{{ formatPrice(basePrice) }}&thinsp;Kč</strong>
+                po odečtení dotace <strong class="text-t-blue">{{ grantLabel }} −{{ grantPct }}&thinsp;%</strong>:
+                <strong class="text-black dark:text-white">{{ formatPrice(discountedPrice) }}&thinsp;Kč</strong>
+            </span>
+            </template>
+        </p>
+
         <!-- Price display -->
         <div v-if="paymentMode === 'cash'" class="flex flex-col gap-1">
             <p class="text-xs text-black/40 dark:text-white/30 uppercase tracking-widest">Cena celkem</p>
@@ -164,8 +174,12 @@ const downPayment = ref(0);
 const loanMonths = ref(60);
 const includeSavings = ref(false);
 
+const grantInfo = computed(() => getGrantById(props.grant));
+const grantPct = computed(() => getGrantById(props.grant)?.percentage ?? 0);
+const grantLabel = computed(() => getGrantById(props.grant)?.label ?? '');
+
 const discountedPrice = computed(() => {
-    const pct = getGrantById(props.grant)?.percentage;
+    const pct = grantInfo.value?.percentage;
     if (!pct) return props.basePrice;
     return Math.round(props.basePrice * (1 - pct / 100));
 });
