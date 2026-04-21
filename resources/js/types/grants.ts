@@ -17,7 +17,7 @@ export const GRANTS: Grant[] = [
     {
         id: 'res-plus',
         label: 'RES+',
-        percentage: null,
+        percentage: 50,
         eligibility: 'Pro obce a města',
         description: 'Podpora komunitní energetiky a obecních obnovitelných zdrojů.',
     },

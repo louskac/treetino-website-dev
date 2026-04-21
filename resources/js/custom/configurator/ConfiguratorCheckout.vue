@@ -138,7 +138,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import ButtonSecondary from '@/custom/ButtonSecondary.vue';
 import ConfiguratorModalFinancing from '@/custom/configurator/ConfiguratorModalFinancing.vue';
@@ -160,7 +160,7 @@ const emit = defineEmits<{
 
 const modalFinancing = ref(false);
 const paymentMode = ref<'cash' | 'credit'>('cash');
-const downPayment = ref(750000);
+const downPayment = ref(0);
 const loanMonths = ref(60);
 const includeSavings = ref(false);
 
@@ -169,6 +169,15 @@ const discountedPrice = computed(() => {
     if (!pct) return props.basePrice;
     return Math.round(props.basePrice * (1 - pct / 100));
 });
+
+// Watch discountedPrice and update downPayment to 30% of it
+watch(
+    () => discountedPrice.value,
+    (newPrice) => {
+        downPayment.value = Math.round(newPrice * 0.3);
+    },
+    { immediate: true },
+);
 
 const loanPrincipal = computed(() =>
     discountedPrice.value - Math.min(Math.max(0, downPayment.value), discountedPrice.value - 1),
