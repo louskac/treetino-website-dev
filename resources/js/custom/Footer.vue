@@ -115,6 +115,18 @@
                                 <FooterLink :href="route('home')">
                                     Privacy Policy
                                 </FooterLink>
+
+                                <div
+                                    @click="openSettings"
+                                    class="group relative w-fit cursor-pointer opacity-70 transition-all duration-300 hover:opacity-100"
+                                >
+                                    <div class="relative">
+                                        Cookie Settings
+                                    </div>
+                                    <div
+                                        class="absolute w-0 border-b transition-all duration-300 group-hover:w-full group-hover:border-b group-hover:border-b-black"
+                                    ></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -230,8 +242,14 @@ import {
     Mail,
     Building,
 } from '@iconoir/vue';
+import { showPreferences } from 'vanilla-cookieconsent';
 import { route } from 'ziggy-js';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import FooterLink from '@/custom/footer/FooterLink.vue';
 import LogoType from '@/custom/LogoType.vue';
+
+const openSettings = () => {
+    // This function will automatically find the active instance
+    showPreferences();
+};
 </script>
