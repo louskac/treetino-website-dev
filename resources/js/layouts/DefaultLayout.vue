@@ -10,10 +10,13 @@
         </main>
 
         <Footer class="mt-auto"/>
+
+        <CookieBanner/>
     </div>
 </template>
 
 <script setup lang="ts">
+import CookieBanner from '@/custom/CookieBanner.vue';
 import Footer from '@/custom/Footer.vue';
 import Header from '@/custom/Header.vue';
 import LiquidGlassFilter from '@/custom/LiquidGlassFilter.vue';

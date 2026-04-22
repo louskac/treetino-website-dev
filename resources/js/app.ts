@@ -15,6 +15,7 @@ const appName = 'Treetino';
 
 // Cookie Consent Config
 const ccConfig: CookieConsentConfig = {
+    autoShow: false,
     guiOptions: {
         consentModal: {
             layout: 'box',
