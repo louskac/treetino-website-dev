@@ -10,7 +10,7 @@ const fadeDurationMs = 700;
 
 // --- 2. Define your 3 video sources ---
 const videos = [
-    '/video/hero-office-1.mp4', // index 0
+    '/video/hero-office-2.mp4', // index 0
     '/video/hero-home-1.mp4', // index 1
     '/video/hero-warehouse-1.mp4', // index 2
 ];
