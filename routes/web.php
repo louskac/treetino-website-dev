@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/configurator', [ConfiguratorController::class, 'index'])->name('configurator');
+Route::get('/configurator/{product}', [ConfiguratorController::class, 'index'])->name('configurator.product');
 
 // Spolupráce
 Route::prefix('collaboration')->name('collaboration.')->group( function () {

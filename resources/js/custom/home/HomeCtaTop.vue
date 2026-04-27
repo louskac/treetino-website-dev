@@ -34,7 +34,7 @@
 
                         <div class="grid grid-cols-2 gap-2">
                             <ButtonPrimary
-                                :href="route('configurator')"
+                                :href="route('configurator.product', 'strom-v1')"
                                 class="text-center"
                                 >Configure</ButtonPrimary
                             >
@@ -65,7 +65,7 @@
 
                         <div class="grid">
                             <ButtonPrimary
-                                :href="route('configurator')"
+                                :href="route('configurator.product', 'strom-v2')"
                                 class="text-center"
                                 >Configure</ButtonPrimary
                             >
@@ -95,7 +95,7 @@
 
                         <div class="grid">
                             <ButtonPrimary
-                                :href="route('configurator')"
+                                :href="route('configurator.product', 'turbina')"
                                 class="text-center"
                                 >Configure</ButtonPrimary
                             >

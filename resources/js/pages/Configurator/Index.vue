@@ -130,7 +130,11 @@ import ConfiguratorModalInfo from '@/custom/configurator/ConfiguratorModalInfo.v
 import ConfiguratorModelSelect from '@/custom/configurator/ConfiguratorModelSelect.vue';
 import ConfiguratorProductHeader from '@/custom/configurator/ConfiguratorProductHeader.vue';
 import { PRODUCTS, ProductId  } from '@/types/products';
-import type {ConfigurationField} from '@/types/products';
+import type {ConfigurationField, ProductId as ProductIdType} from '@/types/products';
+
+const props = defineProps({
+    initialProduct: String,
+});
 
 // modals
 
@@ -158,7 +162,14 @@ function modalInfoClose() {
 
 const products = PRODUCTS;
 
-const selectedProductId = ref<ProductId>(ProductId.StromV2);
+const getInitialProduct = (): ProductIdType => {
+    if (props.initialProduct && Object.values(ProductId).includes(props.initialProduct as ProductIdType)) {
+        return props.initialProduct as ProductIdType;
+    }
+    return ProductId.StromV2;
+};
+
+const selectedProductId = ref<ProductIdType>(getInitialProduct());
 let removePanelScrollListener: (() => void) | null = null;
 
 onMounted(() => {

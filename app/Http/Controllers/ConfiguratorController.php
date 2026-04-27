@@ -18,10 +18,10 @@ class ConfiguratorController extends Controller
         };
     }
 
-    public function index()
+    public function index(Request $request, $product = null)
     {
         return ($this->renderPublic)('Configurator/Index', [
-
+            'initialProduct' => $product,
         ]);
     }
 }
