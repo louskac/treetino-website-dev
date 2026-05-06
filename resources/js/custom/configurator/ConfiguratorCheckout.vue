@@ -70,7 +70,7 @@
                 <span class="text-base font-normal text-black/40 dark:text-white/30">/měs.</span>
             </p>
             <p class="text-xs text-black/35 dark:text-white/25 mt-0.5">
-                na {{ loanMonths }}&nbsp;měsíců · {{ ANNUAL_RATE }}&thinsp;%&nbsp;p.a.
+                na {{ loanMonths }}&nbsp;měsíců
             </p>
             <p class="text-xs text-black/38 dark:text-white/30 leading-relaxed mt-1">
                 Cena nezahrnuje odhadované měsíční úspory za výrobu energie ve výši
@@ -154,8 +154,7 @@ import ButtonSecondary from '@/custom/ButtonSecondary.vue';
 import ConfiguratorModalFinancing from '@/custom/configurator/ConfiguratorModalFinancing.vue';
 import { getGrantById } from '@/types/grants';
 import { Flash } from '@iconoir/vue';
-
-const ANNUAL_RATE = 3.9;
+import { calcMonthlyPayment, formatPrice } from '@/composables/useFinancing';
 
 const props = defineProps<{
     basePrice: number;
@@ -197,13 +196,7 @@ const loanPrincipal = computed(() =>
     discountedPrice.value - Math.min(Math.max(0, downPayment.value), discountedPrice.value - 1),
 );
 
-const monthlyPayment = computed(() => {
-    const P = loanPrincipal.value;
-    const r = ANNUAL_RATE / 100 / 12;
-    const n = loanMonths.value;
-    if (P <= 0) return 0;
-    return (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
-});
+const monthlyPayment = computed(() => calcMonthlyPayment(loanPrincipal.value, loanMonths.value));
 
 const adjustedMonthlyPayment = computed(() =>
     includeSavings.value
@@ -218,10 +211,6 @@ const currentMonthName = computed(() => {
     const now = new Date();
     return monthNames[now.getMonth()];
 });
-
-function formatPrice(v: number) {
-    return Math.round(v).toLocaleString('cs-CZ');
-}
 
 const reservationBenefits = [
     'Lorem ipsum dolor sit amet',

@@ -63,7 +63,7 @@
                         <span class="text-base font-normal text-black/40 dark:text-white/30">/měs.</span>
                     </p>
                     <p class="text-xs text-black/35 dark:text-white/25 mt-0.5">
-                        Výše úvěru {{ formatPrice(loanPrincipal) }}&thinsp;Kč · {{ loanMonths }}&nbsp;měsíců · {{ ANNUAL_RATE }}&thinsp;%&nbsp;p.a.
+                        Výše úvěru {{ formatPrice(loanPrincipal) }}&thinsp;Kč · {{ loanMonths }}&nbsp;měsíců
                     </p>
                 </div>
 
@@ -99,8 +99,7 @@
 import { computed } from 'vue';
 import { Xmark } from '@iconoir/vue';
 import { getGrantById } from '@/types/grants';
-
-const ANNUAL_RATE = 3.9;
+import { calcMonthlyPayment, formatPrice } from '@/composables/useFinancing';
 
 const props = defineProps<{
     basePrice: number;
@@ -137,23 +136,13 @@ const isOverMaxDownPayment = computed(() => {
 
 const loanPrincipal = computed(() => discountedPrice.value - safeDownPayment.value);
 
-const monthlyPayment = computed(() => {
-    const P = loanPrincipal.value;
-    const r = ANNUAL_RATE / 100 / 12;
-    const n = props.loanMonths;
-    if (P <= 0) return 0;
-    return (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
-});
+const monthlyPayment = computed(() => calcMonthlyPayment(loanPrincipal.value, props.loanMonths));
 
 const adjustedMonthlyPayment = computed(() =>
     props.includeSavings
         ? Math.max(0, monthlyPayment.value - props.monthlySavings)
         : monthlyPayment.value,
 );
-
-function formatPrice(v: number) {
-    return Math.round(v).toLocaleString('cs-CZ');
-}
 
 const monthOptions = [12, 24, 36, 48, 60];
 </script>
