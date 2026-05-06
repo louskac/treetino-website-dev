@@ -195,6 +195,12 @@ onUnmounted(() => {
     window.removeEventListener('resize', updateActiveSection);
 });
 
+// Update URL when product changes without page reload
+watch(selectedProductId, (newProductId) => {
+    const newUrl = route('configurator.product', newProductId);
+    window.history.replaceState({}, '', newUrl);
+});
+
 const selectedColorId = ref('white');
 const selectedLeafColorId = ref('green');
 const selectedFveLeafDesign = ref('realistic');
