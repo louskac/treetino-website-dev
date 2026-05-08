@@ -7,8 +7,8 @@
         <div
             class="relative mx-auto w-full max-w-[1400px] justify-between px-6 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
         >
-            <div class="flex flex-col">
-                <div class="w-full py-6">
+            <div class="flex flex-col pt-16">
+                <div class="w-full pb-6">
                     <div class="flex justify-between">
                         <div class="logo flex">
                             <LogoType

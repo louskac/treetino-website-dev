@@ -2,7 +2,7 @@
     <section
         class="claims relative mx-auto max-w-[1400px] pb-20 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
     >
-        <div class="mx-6 aspect-3/1 overflow-hidden rounded-2xl sm:mx-0 shadow-lg">
+        <div class="mx-6 aspect-3/2 lg:aspect-3/1 overflow-hidden rounded-2xl sm:mx-0 shadow-lg">
             <img
                 class="h-full w-full object-cover"
                 src="https://picsum.photos/1500/500"

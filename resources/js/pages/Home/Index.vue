@@ -16,7 +16,7 @@
 
         <HomeCtaGeneric/>
 
-        <DefaultConfig/>
+<!--        <DefaultConfig/>-->
     </DefaultLayout>
 </template>
 
