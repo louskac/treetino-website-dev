@@ -14,63 +14,92 @@
                 ></canvas>
             </div>
 
-            <div class="absolute hidden lg:block lg:w-7/12 h-full right-0">
-                <div class="w-28 h-full bg-linear-90 from-white to-transparent">
-
-                </div>
+            <div class="absolute right-0 hidden h-full lg:block lg:w-7/12">
+                <div
+                    class="h-full w-28 bg-linear-90 from-white to-transparent"
+                ></div>
             </div>
 
             <!-- Desktop: left column content (no card) -->
-            <div class="absolute hidden lg:flex left-0 top-0 w-5/12 h-full items-center z-10 px-12 xl:px-16 2xl:px-20">
-                <div class="w-full max-w-sm xl:max-w-md">
-                    <div class="flex items-center justify-between mb-8">
-                        <span class="text-xs font-semibold tracking-[0.2em] text-black/70 uppercase">Funkce</span>
-                        <span class="text-xs font-medium tracking-widest text-black/70">
-                            {{ String(currentSectionIndex + 1).padStart(2, '0') }} /
-                            {{ String(sections.length).padStart(2, '0') }}
-                        </span>
-                    </div>
-
-                    <Transition name="section-content" mode="out-in">
-                        <div :key="currentSectionIndex" class="flex flex-col gap-5">
-                            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-t-blue">
-                                <component
-                                    :is="sections[currentSectionIndex].icon"
-                                    class="h-6 w-6 text-white"
-                                    stroke-width="1.5"
-                                />
-                            </div>
-
-                            <div>
-                                <h2 class="text-4xl leading-tight text-black">
-                                    {{ sections[currentSectionIndex].title }}
-                                </h2>
-                                <p class="mt-3 text-base leading-relaxed text-black/75">
-                                    {{ sections[currentSectionIndex].text }}
-                                </p>
-                            </div>
+            <div
+                class="absolute top-0 left-1/2 h-full w-full max-w-[1400px] -translate-x-1/2 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
+            >
+                <!--                <div-->
+                <!--                    class="absolute top-0 left-0 z-10 hidden h-full w-5/12 items-center px-12 lg:flex xl:px-16 2xl:px-20"-->
+                <!--                >-->
+                <div
+                    class="absolute top-0 left-0 z-10 hidden h-full w-5/12 items-center lg:flex"
+                >
+                    <div class="w-full max-w-sm xl:max-w-md">
+                        <div class="mb-8 flex items-center justify-between">
+                            <span
+                                class="text-xs font-semibold tracking-[0.2em] text-black/70 uppercase"
+                                >Funkce</span
+                            >
+                            <span
+                                class="text-xs font-medium tracking-widest text-black/70"
+                            >
+                                {{
+                                    String(currentSectionIndex + 1).padStart(
+                                        2,
+                                        '0',
+                                    )
+                                }}
+                                /
+                                {{ String(sections.length).padStart(2, '0') }}
+                            </span>
                         </div>
-                    </Transition>
 
-                    <div class="mt-8 flex gap-1.5">
-                        <div
-                            v-for="(_, i) in sections"
-                            :key="i"
-                            class="h-0.5 flex-1 rounded-full transition-all duration-500"
-                            :class="
-                                i === currentSectionIndex
-                                    ? 'bg-black'
-                                    : i < currentSectionIndex
-                                      ? 'bg-black/50'
-                                      : 'bg-black/20'
-                            "
-                        ></div>
+                        <Transition name="section-content" mode="out-in">
+                            <div
+                                :key="currentSectionIndex"
+                                class="flex flex-col gap-5"
+                            >
+                                <div
+                                    class="flex h-12 w-12 items-center justify-center rounded-xl bg-t-blue"
+                                >
+                                    <component
+                                        :is="sections[currentSectionIndex].icon"
+                                        class="h-6 w-6 text-white"
+                                        stroke-width="1.5"
+                                    />
+                                </div>
+
+                                <div>
+                                    <!--                                <h2 class="text-4xl leading-tight text-black">-->
+                                    <!--                                    {{ sections[currentSectionIndex].title }}-->
+                                    <!--                                </h2>-->
+                                    <p
+                                        class="mt-0 text-base leading-relaxed text-black/75"
+                                    >
+                                        {{ sections[currentSectionIndex].text }}
+                                    </p>
+                                </div>
+                            </div>
+                        </Transition>
+
+                        <div class="mt-8 flex gap-1.5">
+                            <div
+                                v-for="(_, i) in sections"
+                                :key="i"
+                                class="h-0.5 flex-1 rounded-full transition-all duration-500"
+                                :class="
+                                    i === currentSectionIndex
+                                        ? 'bg-black'
+                                        : i < currentSectionIndex
+                                          ? 'bg-black/50'
+                                          : 'bg-black/20'
+                                "
+                            ></div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Mobile: card at the bottom -->
-            <div class="lg:hidden absolute inset-x-0 bottom-0 z-10 px-4 pb-6 sm:px-6 sm:pb-8">
+            <div
+                class="absolute inset-x-0 bottom-0 z-10 px-4 pb-6 sm:px-6 sm:pb-8 lg:hidden"
+            >
                 <HomeFeaturesCardMobile
                     :sections="sections"
                     :current-section-index="currentSectionIndex"
@@ -95,27 +124,27 @@ const sections = [
     {
         icon: SunLight,
         title: 'Text 1',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        text: 'Treetino je chytrý strom, který na 1 m² kombinuje solární a větrnou energii. Jeho 49 kW dokáže napájet až 60 domácností.',
     },
     {
         icon: Leaf,
         title: 'Text 2',
-        text: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        text: 'Zabere pouhý 1 m², přesto nahradí 400 m² solárních panelů. Treetino mění parkoviště, firemní areály a ulice v efektivní zdroje energie.',
     },
     {
         icon: Tree,
         title: 'Text 3',
-        text: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+        text: 'Patentovaný AI systém plynule sleduje slunce, čímž zvyšuje výkon o 30 %. Před bouří navíc inteligentně složí své listy pro maximální bezpečnost.',
     },
     {
         icon: MultiplePages,
         title: 'Text 4',
-        text: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        text: 'Korunu tvoří 300 solárních listů prémiové české výroby. Plně přizpůsobitelný design a barvy dokonale sladíte se svou značkou či architekturou.',
     },
     {
         icon: SunLight,
         title: 'Text 5',
-        text: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.',
+        text: 'Transparentní turbíny 2. generace vyrábí energii 24 hodin denně i při slabém větru. Nerušivý výkon stvořený pro města.',
     },
 ];
 
