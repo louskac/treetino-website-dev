@@ -9,11 +9,11 @@
         >
             <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:hidden">
                 <div
-                    class="aspect-square overflow-hidden rounded-2xl shadow-xl sm:col-span-2"
+                    class="relative aspect-square overflow-hidden rounded-2xl border bg-t-blue/5 shadow-xl sm:col-span-2"
                 >
                     <img
-                        src="https://picsum.photos/600"
-                        class="h-full w-full object-cover"
+                        src="/img/treetino-v1-isometric.png"
+                        class="absolute bottom-0 h-full w-full object-cover"
                         alt=""
                     />
                 </div>
@@ -131,11 +131,11 @@
                     </div>
 
                     <div
-                        class="aspect-square overflow-hidden rounded-2xl shadow-xl"
+                        class="relative aspect-square overflow-hidden rounded-2xl border bg-t-blue/5 shadow-xl sm:col-span-2"
                     >
                         <img
-                            src="https://picsum.photos/600"
-                            class="h-full w-full object-cover"
+                            src="/img/treetino-v1-isometric.png"
+                            class="absolute bottom-0 h-full w-full object-cover"
                             alt=""
                         />
                     </div>
