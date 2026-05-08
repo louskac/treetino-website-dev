@@ -119,12 +119,12 @@
                             <!--                                </button>-->
                             <!--                            </div>-->
 
-                            <div class="my-auto xl:hidden">
-                                <Menu
-                                    class="h-4.5 w-4.5 text-white"
-                                    stroke-width="2"
-                                />
-                            </div>
+<!--                            <div class="my-auto xl:hidden">-->
+<!--                                <Menu-->
+<!--                                    class="h-4.5 w-4.5 text-white"-->
+<!--                                    stroke-width="2"-->
+<!--                                />-->
+<!--                            </div>-->
                         </div>
 
                         <div class="my-auto hidden text-white md:block">
