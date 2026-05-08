@@ -149,11 +149,25 @@
                             class="flex flex-1 flex-col gap-2 pt-6"
                         >
                             <div
-                                class="flex aspect-square flex-col rounded-xl bg-black/10"
+                                class="relative flex aspect-4/5 flex-col overflow-clip rounded-xl bg-black/10"
                             >
-                                <div class="mt-auto p-6">
+                                <div
+                                    class="absolute top-0 left-0 h-full w-full"
+                                >
+                                    <img
+                                        class="h-full w-full"
+                                        :src="item.image"
+                                        alt=""
+                                    />
+                                </div>
+
+                                <div
+                                    class="absolute bottom-0 left-0 h-50 w-full rounded-b-2xl bg-linear-to-b from-transparent to-black to-50%"
+                                ></div>
+
+                                <div class="relative mt-auto p-6">
                                     <p
-                                        class="mb-3 text-2xl font-medium text-black"
+                                        class="mb-3 text-2xl font-medium text-white"
                                     >
                                         {{ item.label }}
                                     </p>
@@ -175,10 +189,10 @@
                                             :href="`/configurator?product=${item.id}`"
                                             class="flex-1 rounded-lg py-1.5 text-center text-xs font-medium transition-all duration-550 hover:opacity-80"
                                             :class="{
-                                                'border border-transparent bg-black text-white':
+                                                'border border-transparent bg-t-blue text-white':
                                                     activeDropdown ===
                                                     'products',
-                                                'border border-transparent bg-white text-black':
+                                                'border border-transparent bg-white text-t-blue':
                                                     activeDropdown !==
                                                     'products',
                                             }"
