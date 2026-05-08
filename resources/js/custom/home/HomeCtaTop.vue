@@ -13,59 +13,63 @@
         >
             <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
                 <div
-                    class="group relative flex aspect-square flex-col rounded-2xl border bg-white/70 p-6 backdrop-blur-2xl"
+                    class="group relative flex aspect-4/5 flex-col rounded-2xl border bg-white/70 p-6 backdrop-blur-2xl"
                 >
                     <div
                         class="absolute top-0 left-0 h-full w-full overflow-clip rounded-2xl"
                     >
                         <img
                             class="rounded-2xl transition-all duration-600 group-hover:scale-110"
-                            src="/img/config-images/strom-v1/connectivity/connectivity_none.webp"
+                            src="/img/stills/Still_Strom-v1.png"
                             alt=""
                         />
                     </div>
 
                     <div
-                        class="absolute bottom-0 left-0 h-50 w-full rounded-b-2xl bg-linear-to-b from-transparent to-white to-50%"
+                        class="absolute bottom-0 left-0 h-50 w-full rounded-b-2xl bg-linear-to-b from-transparent to-black to-50%"
                     ></div>
 
-                    <div class="relative mt-auto">
+                    <div class="relative mt-auto text-white">
                         <div class="relative mb-4 text-4xl">Treetino v1</div>
 
                         <div class="grid grid-cols-2 gap-2">
                             <ButtonPrimary
-                                :href="route('configurator.product', 'strom-v1')"
+                                :href="
+                                    route('configurator.product', 'strom-v1')
+                                "
                                 class="text-center"
                                 >Configure</ButtonPrimary
                             >
-                            <ButtonSecondary>How It Works</ButtonSecondary>
+                            <ButtonWhite>How It Works</ButtonWhite>
                         </div>
                     </div>
                 </div>
 
                 <div
-                    class="group relative flex aspect-square flex-col rounded-2xl border bg-white/70 p-6 backdrop-blur-2xl"
+                    class="group relative flex aspect-4/5 flex-col rounded-2xl border bg-white/70 p-6 backdrop-blur-2xl"
                 >
                     <div
                         class="absolute top-0 left-0 h-full w-full overflow-clip rounded-2xl"
                     >
                         <img
                             class="rounded-2xl transition-all duration-600 group-hover:scale-110"
-                            src="/img/config-images/strom-v1/connectivity/connectivity_none.webp"
+                            src="/img/stills/Still_Strom-v2.png"
                             alt=""
                         />
                     </div>
 
                     <div
-                        class="absolute bottom-0 left-0 h-50 w-full rounded-b-2xl bg-linear-to-b from-transparent to-white to-50%"
+                        class="absolute bottom-0 left-0 h-50 w-full rounded-b-2xl bg-linear-to-b from-transparent to-black to-50%"
                     ></div>
 
-                    <div class="relative mt-auto">
+                    <div class="relative mt-auto text-white">
                         <div class="relative mb-4 text-4xl">Treetino v2</div>
 
                         <div class="grid">
                             <ButtonPrimary
-                                :href="route('configurator.product', 'strom-v2')"
+                                :href="
+                                    route('configurator.product', 'strom-v2')
+                                "
                                 class="text-center"
                                 >Configure</ButtonPrimary
                             >
@@ -74,24 +78,26 @@
                 </div>
 
                 <div
-                    class="group relative flex aspect-square flex-col rounded-2xl border bg-white/70 p-6 backdrop-blur-2xl"
+                    class="group relative flex aspect-4/5 flex-col rounded-2xl border bg-white/70 p-6 backdrop-blur-2xl"
                 >
                     <div
                         class="absolute top-0 left-0 h-full w-full overflow-clip rounded-2xl"
                     >
                         <img
                             class="rounded-2xl transition-all duration-600 group-hover:scale-110"
-                            src="/img/config-images/strom-v1/connectivity/connectivity_none.webp"
+                            src="/img/stills/Still_Turbina.png"
                             alt=""
                         />
                     </div>
 
                     <div
-                        class="absolute bottom-0 left-0 h-50 w-full rounded-b-2xl bg-linear-to-b from-transparent to-white to-50%"
+                        class="absolute bottom-0 left-0 h-50 w-full rounded-b-2xl bg-linear-to-b from-transparent to-black to-50%"
                     ></div>
 
-                    <div class="relative mt-auto">
-                        <div class="relative mb-4 text-4xl">Treetino Turbine</div>
+                    <div class="relative mt-auto text-white">
+                        <div class="relative mb-4 text-4xl">
+                            Treetino Turbine
+                        </div>
 
                         <div class="grid">
                             <ButtonPrimary
