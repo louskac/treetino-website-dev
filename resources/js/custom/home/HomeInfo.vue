@@ -1,68 +1,15 @@
 <template>
     <section class="keypoints relative">
         <div
-            class="hidden sm:block absolute left-1/2 h-full max-w-[1400px] -translate-x-1/2 border-r border-l border-r-black/20 border-l-black/20 [mask-image:linear-gradient(to_bottom,black_0%,transparent_100%)] sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)] dark:border-r-white/20 dark:border-l-white/20"
+            class="absolute left-1/2 hidden h-full max-w-[1400px] -translate-x-1/2 border-r border-l border-r-black/20 border-l-black/20 [mask-image:linear-gradient(to_bottom,black_0%,transparent_100%)] sm:block sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)] dark:border-r-white/20 dark:border-l-white/20"
         ></div>
 
         <div
-            class="relative mx-auto max-w-[1400px] py-20 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)] px-6"
+            class="relative mx-auto max-w-[1400px] px-6 py-20 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
         >
-            <div class="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:hidden">
                 <div
-                    class="sm:col-span-2 w-full rounded-2xl border border-black bg-zinc-800 p-6 shadow-xl dark:border-white dark:bg-zinc-200"
-                >
-                    <p class="text-2xl text-secondary">
-                        In a world increasingly dependent on electricity,
-                        we're developing a new way to integrate sustainable
-                        power
-                    </p>
-                </div>
-
-                <div
-                    class="w-full flex flex-col rounded-2xl border p-6 shadow-xl"
-                >
-                    <div class="">
-                        <Tree class="h-8 w-8" stroke-width="2" />
-                    </div>
-                    <h2 class="mt-2 text-3xl sm:text-4xl">World-class design</h2>
-                    <p class="mt-2 mb-3">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit. Integer at tortor est. Sed malesuada at lorem
-                        id finibus. Sed mollis sodales hendrerit. Etiam ut
-                        ligula at ante laoreet blandit.
-                    </p>
-
-                    <p>
-                        Vivamus at convallis quam. Etiam pellentesque augue
-                        nec lectus pulvinar accumsan. Duis volutpat
-                        ullamcorper dignissim. Donec mattis, enim a
-                        malesuada
-                    </p>
-                </div>
-
-                <div
-                    class="reveal reveal-right w-full rounded-2xl border p-6 shadow-xl"
-                >
-                    <div class="">
-                        <Tree class="h-8 w-8" stroke-width="2" />
-                    </div>
-                    <h2 class="mt-2 text-3xl sm:text-4xl">U I U A A</h2>
-                    <p class="mt-2 mb-3">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit. Integer at tortor est. Sed malesuada at lorem
-                        id finibus. Sed mollis sodales hendrerit. Etiam ut
-                        ligula at ante laoreet blandit.
-                    </p>
-                    <p>
-                        Vivamus at convallis quam. Etiam pellentesque augue
-                        nec lectus pulvinar accumsan. Duis volutpat
-                        ullamcorper dignissim. Donec mattis, enim a
-                        malesuada
-                    </p>
-                </div>
-
-                <div
-                    class="sm:col-span-2 aspect-video overflow-hidden rounded-2xl shadow-xl"
+                    class="aspect-square overflow-hidden rounded-2xl shadow-xl sm:col-span-2"
                 >
                     <img
                         src="https://picsum.photos/600"
@@ -70,9 +17,73 @@
                         alt=""
                     />
                 </div>
+
+                <div
+                    class="w-full rounded-2xl border border-black bg-zinc-800 p-6 shadow-xl sm:col-span-2 dark:border-white dark:bg-zinc-200"
+                >
+                    <p class="text-2xl text-secondary">
+                        In a world increasingly dependent on electricity, we're
+                        developing a new way to integrate sustainable power
+                    </p>
+                </div>
+
+                <div
+                    class="flex w-full flex-col rounded-2xl border p-6 shadow-xl"
+                >
+                    <div class="">
+                        <div
+                            class="flex aspect-square h-12 w-12 rounded-xl bg-t-blue text-white dark:text-primary"
+                        >
+                            <DesignPencil
+                                stroke-width="1.5"
+                                class="mx-auto my-auto h-6 w-6"
+                            />
+                        </div>
+                    </div>
+                    <h2 class="mt-4 text-3xl sm:text-4xl">Špičkový design</h2>
+                    <p class="mt-2 mb-3">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Integer at tortor est. Sed malesuada at lorem id
+                        finibus. Sed mollis sodales hendrerit. Etiam ut ligula
+                        at ante laoreet blandit.
+                    </p>
+
+                    <p>
+                        Vivamus at convallis quam. Etiam pellentesque augue nec
+                        lectus pulvinar accumsan. Duis volutpat ullamcorper
+                        dignissim. Donec mattis, enim a malesuada
+                    </p>
+                </div>
+
+                <div
+                    class="reveal reveal-right w-full rounded-2xl border p-6 shadow-xl"
+                >
+                    <div class="">
+                        <div
+                            class="flex aspect-square h-12 w-12 rounded-xl bg-t-blue text-white dark:text-primary"
+                        >
+                            <Network
+                                stroke-width="1.5"
+                                class="mx-auto my-auto h-6 w-6"
+                            />
+                        </div>
+                    </div>
+                    <h2 class="mt-4 text-3xl sm:text-4xl">U I U A A</h2>
+                    <p class="mt-2 mb-3">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Integer at tortor est. Sed malesuada at lorem id
+                        finibus. Sed mollis sodales hendrerit. Etiam ut ligula
+                        at ante laoreet blandit.
+                    </p>
+                    <p>
+                        Vivamus at convallis quam. Etiam pellentesque augue nec
+                        lectus pulvinar accumsan. Duis volutpat ullamcorper
+                        dignissim. Donec mattis, enim a malesuada
+                    </p>
+                </div>
             </div>
 
-            <div class="hidden lg:grid grid-cols-3 gap-6">
+            <div class="hidden grid-cols-3 gap-6 lg:grid">
                 <div
                     ref="leftCardEl"
                     :style="{
@@ -80,25 +91,28 @@
                     }"
                     class="mt-26"
                 >
-                    <div
-                        class="w-full rounded-2xl border p-6 shadow-xl"
-                    >
+                    <div class="w-full rounded-2xl border p-6 shadow-xl">
                         <div class="">
-                            <Tree class="h-8 w-8" stroke-width="2" />
+                            <div
+                                class="flex aspect-square h-12 w-12 rounded-xl bg-t-blue text-white dark:text-primary"
+                            >
+                                <DesignPencil
+                                    stroke-width="1.5"
+                                    class="mx-auto my-auto h-6 w-6"
+                                />
+                            </div>
                         </div>
-                        <h2 class="mt-2 text-4xl">World-class design</h2>
+                        <h2 class="mt-4 text-4xl">Špičkový design</h2>
                         <p class="mt-2 mb-3">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Integer at tortor est. Sed malesuada at lorem
-                            id finibus. Sed mollis sodales hendrerit. Etiam ut
-                            ligula at ante laoreet blandit.
+                            Treetino je víc než elektrárna. Slouží jako
+                            sebevědomý symbol udržitelnosti, se kterým firmy a
+                            instituce elegantně naplní své ESG cíle.
                         </p>
 
                         <p>
-                            Vivamus at convallis quam. Etiam pellentesque augue
-                            nec lectus pulvinar accumsan. Duis volutpat
-                            ullamcorper dignissim. Donec mattis, enim a
-                            malesuada
+                            Kombinace 300 solárních listů a transparentních
+                            turbín obohacuje veřejný prostor. Zcela neslyšný
+                            chod umožňuje bezpečnou integraci přímo mezi lidi.
                         </p>
                     </div>
                 </div>
@@ -108,9 +122,11 @@
                         class="w-full rounded-2xl border border-black bg-zinc-800 p-6 shadow-xl dark:border-white dark:bg-zinc-200"
                     >
                         <p class="text-2xl text-secondary">
-                            In a world increasingly dependent on electricity,
-                            we’re developing a new way to integrate sustainable
-                            power
+                            Vracíme energetickou stabilitu do vašich rukou.
+                            <span class="opacity-70"
+                                >Treetino je elegantní off-grid řešení pro
+                                lokální nezávislost bez kompromisů.</span
+                            >
                         </p>
                     </div>
 
@@ -136,21 +152,28 @@
                         class="reveal reveal-right w-full rounded-2xl border p-6 shadow-xl"
                     >
                         <div class="">
-                            <Tree class="h-8 w-8" stroke-width="2" />
+                            <div
+                                class="flex aspect-square h-12 w-12 rounded-xl bg-t-blue text-white dark:text-primary"
+                            >
+                                <Network
+                                    stroke-width="1.5"
+                                    class="mx-auto my-auto h-6 w-6"
+                                />
+                            </div>
                         </div>
-                        <h2 class="mt-2 text-4xl">U I U A A</h2>
+                        <h2 class="mt-4 text-4xl">Chytrý propojený les </h2>
                         <p class="mt-2 mb-3">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Integer at tortor est. Sed malesuada at lorem
-                            id finibus. Sed mollis sodales hendrerit. Etiam ut
-                            ligula at ante laoreet blandit.
+                            Treetino tvoří inteligentní, propojený ekosystém.
+                            Integrovaná AI v reálném čase maximalizuje
+                            energetický výnos a autonomně řídí prediktivní
+                            údržbu.
                         </p>
 
                         <p>
-                            Vivamus at convallis quam. Etiam pellentesque augue
-                            nec lectus pulvinar accumsan. Duis volutpat
-                            ullamcorper dignissim. Donec mattis, enim a
-                            malesuada
+                            Technologie blockchain umožňuje bezpečné a
+                            automatizované sdílení energie s okolím. Definujeme
+                            tak standardy pro novou, decentralizovanou
+                            energetiku.
                         </p>
                     </div>
                 </div>
@@ -160,7 +183,7 @@
 </template>
 
 <script setup lang="ts">
-import { Tree } from '@iconoir/vue';
+import { DesignPencil, Network } from '@iconoir/vue';
 
 import { useParallax } from '@/composables/useAnimations';
 
