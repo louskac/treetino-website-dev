@@ -44,29 +44,26 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="bg absolute top-0 left-0 h-full w-full bg-black" >
-
-    </div>
-    <!--    <div class="bg absolute top-0 left-0 h-full w-full bg-t-dark">-->
-    <!--        &lt;!&ndash; Loop through videos, stacking them concurrently &ndash;&gt;-->
-    <!--        <video-->
-    <!--            v-for="(src, index) in videos"-->
-    <!--            :key="index"-->
-    <!--            ref="videoRefs"-->
-    <!--            class="absolute top-0 left-0 h-full w-full object-cover transition-opacity ease-in-out"-->
-    <!--            :class="props.activeIndex === index ? 'opacity-100' : 'opacity-0'"-->
-    <!--            :style="{-->
-    <!--                pointerEvents: 'none',-->
-    <!--                objectFit: 'cover',-->
-    <!--                minHeight: '100%',-->
-    <!--                transitionDuration: `${fadeDurationMs}ms` /* Dynamically applied duration */,-->
-    <!--            }"-->
-    <!--            muted-->
-    <!--            loop-->
-    <!--            playsinline-->
-    <!--            autoplay-->
-    <!--        >-->
-    <!--            <source :src="src" type="video/mp4" />-->
-    <!--        </video>-->
-    <!--    </div>-->
+        <div class="bg absolute top-0 left-0 h-full w-full bg-t-dark">
+            <!-- Loop through videos, stacking them concurrently -->
+            <video
+                v-for="(src, index) in videos"
+                :key="index"
+                ref="videoRefs"
+                class="absolute top-0 left-0 h-full w-full object-cover transition-opacity ease-in-out"
+                :class="props.activeIndex === index ? 'opacity-100' : 'opacity-0'"
+                :style="{
+                    pointerEvents: 'none',
+                    objectFit: 'cover',
+                    minHeight: '100%',
+                    transitionDuration: `${fadeDurationMs}ms` /* Dynamically applied duration */,
+                }"
+                muted
+                loop
+                playsinline
+                autoplay
+            >
+                <source :src="src" type="video/mp4" />
+            </video>
+        </div>
 </template>
