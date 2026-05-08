@@ -134,16 +134,22 @@
                 <div class="col-span-1 flex xl:col-span-3">
                     <div class="my-auto">
                         <h2 class="mb-6 text-6xl">
-                            Your Treetino <br />
-                            <span class="text-t-blue">In Your Pocket </span>
+                            Treetino <br />
+                            <span class="text-t-blue">Ve vaší kapse </span>
                         </h2>
 
                         <div class="mb-6">
                             <p class="opacity-70">
-                                Monitor live energy production, control the
-                                light show, recieve maintenance alerts and
-                                access detailed historical reports. All from our
-                                intuitive Treetino app for iOS and Android
+                                <!--                                Monitor live energy production, control the-->
+                                <!--                                light show, recieve maintenance alerts and-->
+                                <!--                                access detailed historical reports. All from our-->
+                                <!--                                intuitive Treetino app for iOS and Android-->
+
+                                Mějte dokonalý přehled. Sledujte výrobu energie
+                                v reálném čase, ovládejte světelnou show,
+                                přijímejte upozornění na údržbu a prohlížejte si
+                                detailní historické reporty. To vše z naší
+                                intuitivní aplikace Treetino pro iOS a Android.
                             </p>
                         </div>
 
@@ -162,13 +168,13 @@
 
                                 <div class="my-auto">
                                     <div class="mb-1 leading-5 tracking-tight">
-                                        Live Energy Dashboard
+                                        Živý přehled energie
                                     </div>
                                     <div
                                         class="text-xs tracking-tight opacity-70"
                                     >
-                                        Real-time wattage, daily totals and
-                                        source split
+                                        Aktuální výkon, denní součty a rozdělení
+                                        podle zdrojů energie.
                                     </div>
                                 </div>
                             </div>
@@ -185,13 +191,13 @@
 
                                 <div class="my-auto">
                                     <div class="mb-1 leading-5 tracking-tight">
-                                        Weather Integration
+                                        Integrace počasí
                                     </div>
                                     <div
                                         class="text-xs tracking-tight opacity-70"
                                     >
-                                        Production forecast and warnings based
-                                        on local weather
+                                        Předpověď produkce a automatická
+                                        varování na základě lokálního počasí.
                                     </div>
                                 </div>
                             </div>
@@ -208,13 +214,13 @@
 
                                 <div class="my-auto">
                                     <div class="mb-1 leading-5 tracking-tight">
-                                        Light Show Control
+                                        Ovládání světelné show
                                     </div>
                                     <div
                                         class="text-xs tracking-tight opacity-70"
                                     >
-                                        Design and Schedule custom lighting
-                                        scenes
+                                        Navrhujte a plánujte vlastní barevné
+                                        scény pro osvětlení stromu.
                                     </div>
                                 </div>
                             </div>
@@ -231,13 +237,13 @@
 
                                 <div class="my-auto">
                                     <div class="mb-1 leading-5 tracking-tight">
-                                        Historical Reports
+                                        Historické reporty
                                     </div>
                                     <div
                                         class="text-xs tracking-tight opacity-70"
                                     >
-                                        Monthly, Yearly and lifetime performance
-                                        reports
+                                        Přehledné statistiky výkonu za měsíc,
+                                        rok i celou dobu provozu.
                                     </div>
                                 </div>
                             </div>
@@ -254,13 +260,13 @@
 
                                 <div class="my-auto">
                                     <div class="mb-1 leading-5 tracking-tight">
-                                        Smart Alerts
+                                        Chytrá upozornění
                                     </div>
                                     <div
                                         class="text-xs tracking-tight opacity-70"
                                     >
-                                        Maintenance reminders and anomaly
-                                        notifications
+                                        Automatické připomínky údržby a
+                                        notifikace o nestandardních stavech.
                                     </div>
                                 </div>
                             </div>
@@ -277,13 +283,13 @@
 
                                 <div class="my-auto">
                                     <div class="mb-1 leading-5 tracking-tight">
-                                        Remote Configuration
+                                        Vzdálená konfigurace
                                     </div>
                                     <div
                                         class="text-xs tracking-tight opacity-70"
                                     >
-                                        Adjust tracking angles and system
-                                        preferences remotely
+                                        Upravujte úhly natáčení větví a další
+                                        systémové předvolby na dálku.
                                     </div>
                                 </div>
                             </div>
