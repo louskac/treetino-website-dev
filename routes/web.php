@@ -9,11 +9,18 @@ use App\Http\Controllers\Api\PreorderController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Api\WebhookController;
 use App\Http\Controllers\ConfiguratorController;
+use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/configurator', [ConfiguratorController::class, 'index'])->name('configurator');
 Route::get('/configurator/{product}', [ConfiguratorController::class, 'index'])->name('configurator.product');
+
+Route::prefix('products')->name('products.')->group(function () {
+    Route::get('/treetino-v1', [ProductsController::class, 'treeV1'])->name('treeV1');
+    Route::get('/treetino-v2', [ProductsController::class, 'treeV2'])->name('treeV2');
+    Route::get('/turbine', [ProductsController::class, 'turbine'])->name('turbine');
+});
 
 // Spolupráce
 Route::prefix('collaboration')->name('collaboration.')->group( function () {

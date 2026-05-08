@@ -173,7 +173,7 @@
                                     </p>
                                     <div class="flex gap-2">
                                         <Link
-                                            href="#"
+                                            :href="`/products/${item.detail}`"
                                             class="flex-1 rounded-lg py-1.5 text-center text-xs transition-all duration-550"
                                             :class="{
                                                 'border bg-white text-black/80 hover:text-black/60':

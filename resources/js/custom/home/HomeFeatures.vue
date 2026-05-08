@@ -70,7 +70,7 @@
                                     <!--                                    {{ sections[currentSectionIndex].title }}-->
                                     <!--                                </h2>-->
                                     <p
-                                        class="mt-0 text-base leading-relaxed text-black/75"
+                                        class="mt-0 text-2xl leading-tight text-black/75"
                                     >
                                         {{ sections[currentSectionIndex].text }}
                                     </p>
@@ -111,7 +111,7 @@
 </template>
 
 <script setup lang="ts">
-import { SunLight, Leaf, Tree, MultiplePages } from '@iconoir/vue';
+import { SunLight, Leaf, Tree, RulerCombine, Wind } from '@iconoir/vue';
 import { onMounted, onUnmounted, ref } from 'vue';
 import HomeFeaturesCardMobile from '@/custom/home/features/HomeFeaturesCardMobile.vue';
 
@@ -122,27 +122,27 @@ const TRANSITION_DURATION_MS = 1500;
 
 const sections = [
     {
-        icon: SunLight,
+        icon: Tree,
         title: 'Text 1',
         text: 'Treetino je chytrý strom, který na 1 m² kombinuje solární a větrnou energii. Jeho 49 kW dokáže napájet až 60 domácností.',
     },
     {
-        icon: Leaf,
+        icon: RulerCombine,
         title: 'Text 2',
         text: 'Zabere pouhý 1 m², přesto nahradí 400 m² solárních panelů. Treetino mění parkoviště, firemní areály a ulice v efektivní zdroje energie.',
     },
     {
-        icon: Tree,
+        icon: SunLight,
         title: 'Text 3',
         text: 'Patentovaný AI systém plynule sleduje slunce, čímž zvyšuje výkon o 30 %. Před bouří navíc inteligentně složí své listy pro maximální bezpečnost.',
     },
     {
-        icon: MultiplePages,
+        icon: Leaf,
         title: 'Text 4',
         text: 'Korunu tvoří 300 solárních listů prémiové české výroby. Plně přizpůsobitelný design a barvy dokonale sladíte se svou značkou či architekturou.',
     },
     {
-        icon: SunLight,
+        icon: Wind,
         title: 'Text 5',
         text: 'Transparentní turbíny 2. generace vyrábí energii 24 hodin denně i při slabém větru. Nerušivý výkon stvořený pro města.',
     },

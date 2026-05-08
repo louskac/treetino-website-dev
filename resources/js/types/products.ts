@@ -25,6 +25,7 @@ export interface ConfiguratorStep {
 export interface Product {
     id: ProductId;
     label: string;
+    detail: string;
     image: string;
     params: { power: string; dailyProduction: string; roi: string };
     steps: ConfiguratorStep[];
@@ -36,6 +37,7 @@ export const PRODUCTS: Product[] = [
     {
         id: ProductId.StromV1,
         label: 'Strom V1',
+        detail: 'treetino-v1',
         image: '/img/stills/Still_Strom-v1.png',
         params: { power: '800 W', dailyProduction: '3,2 kWh', roi: '7 let' },
         steps: [
@@ -76,6 +78,7 @@ export const PRODUCTS: Product[] = [
     {
         id: ProductId.StromV2,
         label: 'Strom V2',
+        detail: 'treetino-v2',
         image: '/img/stills/Still_Strom-v2.png',
         params: { power: '1200 W', dailyProduction: '4,8 kWh', roi: '6 let' },
         steps: [
@@ -116,6 +119,7 @@ export const PRODUCTS: Product[] = [
     {
         id: ProductId.Turbina,
         label: 'Větrná turbína',
+        detail: 'turbine',
         image: '/img/stills/Still_Turbina.png',
         params: { power: '600 W', dailyProduction: '2,4 kWh', roi: '8 let' },
         steps: [
