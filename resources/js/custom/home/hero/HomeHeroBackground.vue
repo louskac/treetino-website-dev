@@ -1,69 +1,69 @@
+<template>
+    <div class="bg absolute top-0 left-0 h-full w-full bg-t-dark">
+        <video
+            v-for="(src, index) in videos"
+            :key="src"
+            :ref="
+                (el) => {
+                    if (el) videoRefs[index] = el as HTMLVideoElement;
+                }
+            "
+            class="absolute top-0 left-0 h-full w-full object-cover transition-opacity ease-in-out"
+            :class="activeIndex === index ? 'opacity-100' : 'opacity-0'"
+            :style="{
+                pointerEvents: 'none',
+                transitionDuration: `${fadeDurationMs}ms`,
+            }"
+            muted
+            loop
+            playsinline
+            preload="auto"
+        >
+            <source :src="src" type="video/mp4" />
+        </video>
+    </div>
+</template>
+
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, nextTick } from 'vue';
 
 const props = defineProps<{
     activeIndex: number;
 }>();
 
-// --- 1. Isolate the duration variable here (in milliseconds) ---
 const fadeDurationMs = 700;
-
-// --- 2. Define your 3 video sources ---
 const videos = [
-    '/video/hero-v1-cine.mp4', // index 0
-    '/video/hero-home-1.mp4', // index 1
-    '/video/hero-warehouse-1.mp4', // index 2
+    '/video/hero-v1-cine.mp4',
+    '/video/hero-home-1.mp4',
+    '/video/hero-warehouse-1.mp4',
 ];
 
-// array of videos
+// Using a standard array to store refs (more reliable than ref<[]> in v-for)
 const videoRefs = ref<HTMLVideoElement[]>([]);
 
-watch(
-    () => props.activeIndex,
-    (newIndex) => {
-        if (newIndex !== undefined) console.log('Current slide:', newIndex);
-    },
-);
+onMounted(async () => {
+    // Wait for the next DOM update to ensure refs are filled
+    await nextTick();
 
-onMounted(() => {
-    // Programmatically play all videos concurrently to ensure mobile compatibility
     videoRefs.value.forEach((video) => {
         if (video) {
-            video
-                .play()
-                .catch((err) => console.warn('Video play blocked:', err));
+            // CRITICAL: Explicitly set muted property to bypass mobile autoplay blocks
+            video.muted = true;
+            video.defaultMuted = true;
+
+            // Start playing
+            const playPromise = video.play();
+
+            if (playPromise !== undefined) {
+                playPromise.catch((error) => {
+                    console.warn('Autoplay was prevented:', error);
+                    // If blocked, try playing again on the first user interaction
+                    document.addEventListener('click', () => video.play(), {
+                        once: true,
+                    });
+                });
+            }
         }
     });
 });
-
-// const video = ref<HTMLVideoElement | null>(null);
-//
-// onMounted(() => {
-//     video.value?.play();
-// });
 </script>
-
-<template>
-        <div class="bg absolute top-0 left-0 h-full w-full bg-t-dark">
-            <!-- Loop through videos, stacking them concurrently -->
-            <video
-                v-for="(src, index) in videos"
-                :key="index"
-                ref="videoRefs"
-                class="absolute top-0 left-0 h-full w-full object-cover transition-opacity ease-in-out"
-                :class="props.activeIndex === index ? 'opacity-100' : 'opacity-0'"
-                :style="{
-                    pointerEvents: 'none',
-                    objectFit: 'cover',
-                    minHeight: '100%',
-                    transitionDuration: `${fadeDurationMs}ms` /* Dynamically applied duration */,
-                }"
-                muted
-                loop
-                playsinline
-                autoplay
-            >
-                <source :src="src" type="video/mp4" />
-            </video>
-        </div>
-</template>
