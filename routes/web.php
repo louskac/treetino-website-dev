@@ -12,6 +12,9 @@ use App\Http\Controllers\ConfiguratorController;
 use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/home', function () {
+   return redirect('/');
+});
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/configurator', [ConfiguratorController::class, 'index'])->name('configurator');
 Route::get('/configurator/{product}', [ConfiguratorController::class, 'index'])->name('configurator.product');
