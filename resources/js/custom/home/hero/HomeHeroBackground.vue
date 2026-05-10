@@ -1,26 +1,32 @@
 <template>
-    <div class="bg absolute top-0 left-0 h-full w-full bg-t-dark">
-        <video
-            v-for="(src, index) in videos"
-            :key="src"
-            :ref="
-                (el) => {
-                    if (el) videoRefs[index] = el as HTMLVideoElement;
-                }
-            "
-            class="absolute top-0 left-0 h-full w-full object-cover transition-opacity ease-in-out"
-            :class="activeIndex === index ? 'opacity-100' : 'opacity-0'"
-            :style="{
-                pointerEvents: 'none',
-                transitionDuration: `${fadeDurationMs}ms`,
-            }"
-            muted
-            loop
-            playsinline
-            preload="auto"
-        >
-            <source :src="src" type="video/mp4" />
-        </video>
+        <div class="bg absolute top-0 left-0 h-full w-full bg-t-dark">
+            <video
+                v-for="(src, index) in videos"
+                :key="src"
+                :ref="
+                    (el) => {
+                        if (el) videoRefs[index] = el as HTMLVideoElement;
+                    }
+                "
+                class="absolute top-0 left-0 h-full w-full object-cover transition-opacity ease-in-out"
+                :class="activeIndex === index ? 'opacity-100' : 'opacity-0'"
+                :style="{
+                    pointerEvents: 'none',
+                    transitionDuration: `${fadeDurationMs}ms`,
+                }"
+                muted
+                loop
+                playsinline
+                preload="auto"
+            >
+                <source :src="src" type="video/mp4" />
+            </video>
+        </div>
+
+    <div
+        class="bg absolute top-0 left-0 h-full w-full"
+        style="background-image: url('/video/hero-v1-cine.mp4'); background-size: cover;">
+
     </div>
 </template>
 
