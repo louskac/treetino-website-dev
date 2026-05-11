@@ -31,67 +31,24 @@
                     class="absolute top-0 left-0 z-10 hidden h-full w-5/12 items-center lg:flex"
                 >
                     <div class="w-full max-w-sm xl:max-w-md">
-                        <div class="mb-8 flex items-center justify-between">
-                            <span
-                                class="text-xs font-semibold tracking-[0.2em] text-black/70 uppercase"
-                                >Funkce</span
-                            >
-                            <span
-                                class="text-xs font-medium tracking-widest text-black/70"
-                            >
-                                {{
-                                    String(currentSectionIndex + 1).padStart(
-                                        2,
-                                        '0',
-                                    )
-                                }}
-                                /
-                                {{ String(sections.length).padStart(2, '0') }}
-                            </span>
-                        </div>
-
                         <Transition name="section-content" mode="out-in">
                             <div
                                 :key="currentSectionIndex"
-                                class="flex flex-col gap-5"
+                                class="flex flex-col gap-4"
                             >
-                                <div
-                                    class="flex h-12 w-12 items-center justify-center rounded-xl bg-t-blue"
-                                >
-                                    <component
-                                        :is="sections[currentSectionIndex].icon"
-                                        class="h-6 w-6 text-white"
-                                        stroke-width="1.5"
-                                    />
-                                </div>
+                                <span class="text-sm font-medium tabular-nums text-black/35">
+                                    {{ String(currentSectionIndex + 1).padStart(2, '0') }} / {{ String(sections.length).padStart(2, '0') }}
+                                </span>
 
-                                <div>
-                                    <!--                                <h2 class="text-4xl leading-tight text-black">-->
-                                    <!--                                    {{ sections[currentSectionIndex].title }}-->
-                                    <!--                                </h2>-->
-                                    <p
-                                        class="mt-0 text-2xl leading-tight text-black/75"
-                                    >
-                                        {{ sections[currentSectionIndex].text }}
-                                    </p>
-                                </div>
+                                <h2 class="text-4xl leading-tight text-black">
+                                    {{ sections[currentSectionIndex].title }}
+                                </h2>
+
+                                <p class="text-2xl leading-tight text-black/75">
+                                    {{ sections[currentSectionIndex].text }}
+                                </p>
                             </div>
                         </Transition>
-
-                        <div class="mt-8 flex gap-1.5">
-                            <div
-                                v-for="(_, i) in sections"
-                                :key="i"
-                                class="h-0.5 flex-1 rounded-full transition-all duration-500"
-                                :class="
-                                    i === currentSectionIndex
-                                        ? 'bg-black'
-                                        : i < currentSectionIndex
-                                          ? 'bg-black/50'
-                                          : 'bg-black/20'
-                                "
-                            ></div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -123,8 +80,8 @@ const TRANSITION_DURATION_MS = 1500;
 const sections = [
     {
         icon: Tree,
-        title: 'Text 1',
-        text: 'Treetino je chytrý strom, který na 1 m² kombinuje solární a větrnou energii. Jeho 49 kW dokáže napájet až 60 domácností.',
+        title: 'Designová konstrukce',
+        text: 'Treetino je chytrý strom, který na 1 m² kombinuje solární a větrnou energii.',
     },
     {
         icon: RulerCombine,

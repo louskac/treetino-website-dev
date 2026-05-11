@@ -10,7 +10,6 @@
             <div class="pointer-events-none absolute inset-0 bg-linear-to-b from-white/8 via-transparent to-black/20"></div>
 
             <div class="relative z-10 flex items-center justify-between px-5 pt-5">
-                <span class="text-[0.65rem] font-semibold uppercase tracking-[0.24em] text-white/70">Funkce</span>
                 <span class="text-[0.65rem] font-medium tracking-[0.18em] text-white/60">
                     {{ String(currentSectionIndex + 1).padStart(2, '0') }} / {{ String(sections.length).padStart(2, '0') }}
                 </span>
@@ -19,10 +18,6 @@
             <Transition name="mobile-card-content" mode="out-in">
                 <div :key="currentSectionIndex" class="relative z-10 flex flex-1 flex-col px-5 py-4">
                     <div class="flex flex-row items-center gap-3">
-                        <div class="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/35 bg-gray-500/25">
-                            <component :is="sections[currentSectionIndex].icon" class="h-6 w-6 text-white" stroke-width="1.5" />
-                        </div>
-
                         <h2 class="text-2xl font-bold leading-tight text-white drop-shadow-sm">{{ sections[currentSectionIndex].title }}</h2>
                     </div>
 
