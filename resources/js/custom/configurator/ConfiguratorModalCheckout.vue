@@ -17,6 +17,10 @@ const props = defineProps({
         type: Object,
         required: true,
     },
+    reservationPrice: {
+        type: Number,
+        required: true,
+    },
 });
 
 const emit = defineEmits(['close', 'success']);
@@ -80,7 +84,7 @@ const initStripe = async () => {
         currency: 'czk',
         total: {
             label: 'Reservation Deposit',
-            amount: 1200000,
+            amount: props.reservationPrice * 100,
         },
         requestPayerName: true,
         requestPayerEmail: true,
@@ -193,7 +197,7 @@ const handlePayment = async () => {
                     <div
                         class="text-xl font-semibold text-black dark:text-white"
                     >
-                        12 000 Kč
+                        {{ reservationPrice.toLocaleString('cs-CZ') }}&thinsp;Kč
                     </div>
                 </div>
             </div>
@@ -276,7 +280,7 @@ const handlePayment = async () => {
                                     ? 'Processing...'
                                     : step === 1
                                       ? 'Continue'
-                                      : 'Pay 12 000 Kč'
+                                      : `Pay ${reservationPrice.toLocaleString('cs-CZ')} Kč`
                             }}
                         </ButtonPrimary>
 

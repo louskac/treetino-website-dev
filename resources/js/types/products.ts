@@ -31,6 +31,7 @@ export interface Product {
     steps: ConfiguratorStep[];
     basePrice: number;
     monthlySavings: number;
+    reservationPrice: number;
 }
 
 export const PRODUCTS: Product[] = [
@@ -74,6 +75,7 @@ export const PRODUCTS: Product[] = [
         ],
         basePrice: 3500000,
         monthlySavings: 5700,
+        reservationPrice: 12000,
     },
     {
         id: ProductId.StromV2,
@@ -115,6 +117,7 @@ export const PRODUCTS: Product[] = [
         ],
         basePrice: 4000000,
         monthlySavings: 7350,
+        reservationPrice: 12000,
     },
     {
         id: ProductId.Turbina,
@@ -131,5 +134,6 @@ export const PRODUCTS: Product[] = [
         ],
         basePrice: 150000,
         monthlySavings: 1300,
+        reservationPrice: 6000,
     },
 ];

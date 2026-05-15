@@ -88,6 +88,7 @@
                         :grant="selectedGrant"
                         :monthly-savings="selectedProduct.monthlySavings"
                         :product-id="selectedProductId"
+                        :reservation-price="selectedProduct.reservationPrice"
                         @checkout="modalCheckoutOpen"
                         @info="modalInfoOpen"
                     />
@@ -103,6 +104,7 @@
             v-if="modalCheckout"
             :product-id="selectedProductId"
             :configuration="buildConfiguration()"
+            :reservation-price="selectedProduct.reservationPrice"
             @close="modalCheckoutClose"
             @success="paymentSuccess"
         />

@@ -47,9 +47,14 @@ class PreorderController extends Controller
             $user->update(['stripe_customer_id' => $customer->id]);
         }
 
-        // 3. Determine Amount (Logic for your 3 products)
-        // Hardcoded for now based on your 12,000 Kč example
-        $amount = 1200000;
+        // 3. Determine Amount
+        $reservationPrices = [
+            'strom-v1' => 1200000, // 12 000 CZK
+            'strom-v2' => 1200000, // 12 000 CZK
+            'turbina'  =>  600000, //  6 000 CZK
+        ];
+
+        $amount = $reservationPrices[$request->type];
 
         // 4. CREATE PREORDER RECORD IN DB FIRST
         // This gives us the $preorder->id immediately

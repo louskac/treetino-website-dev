@@ -93,7 +93,7 @@
                     >Reserve Price</div
                 >
                 <div class="text-xl font-semibold text-black dark:text-white"
-                    >12 000 Kč</div
+                    >{{ formatPrice(reservationPrice) }}&thinsp;Kč</div
                 >
             </div>
             <ul class="flex flex-col gap-1.5">
@@ -164,6 +164,7 @@ const props = defineProps<{
     grant: string;
     monthlySavings: number;
     productId: string;
+    reservationPrice: number;
 }>();
 
 const emit = defineEmits<{
