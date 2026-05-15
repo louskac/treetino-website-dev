@@ -14,6 +14,7 @@ export type ConfigurationField =
     | 'battery'
     | 'evChargerCount'
     | 'bikeChargerRequested'
+    | 'windTurbines'
     | 'grant';
 
 export interface ConfiguratorStep {
@@ -84,6 +85,11 @@ export const PRODUCTS: Product[] = [
         image: '/img/stills/Still_Strom-v2.png',
         params: { power: '1200 W', dailyProduction: '4,8 kWh', roi: '6 let' },
         steps: [
+            {
+                id: 'wind-turbines',
+                component: 'ConfiguratorWindTurbinesStep',
+                configurationFields: ['windTurbines'],
+            },
             {
                 id: 'color',
                 component: 'ConfiguratorColorStep',
