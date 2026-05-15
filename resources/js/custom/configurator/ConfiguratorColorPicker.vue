@@ -14,6 +14,7 @@
                 <div class="w-6 h-6 rounded-full shrink-0 border border-black/15 dark:border-white/15 transition-all duration-200"
                     :class="[
                         color.isCustom ? 'bg-[conic-gradient(red,yellow,lime,cyan,blue,magenta,red)]' : '',
+                        color.isTransparent ? 'bg-[repeating-conic-gradient(#ccc_0%_25%,white_0%_50%)] bg-size-[8px_8px]' : '',
                         modelValue === color.id ? 'ring-2 ring-black dark:ring-white ring-offset-1 ring-offset-white dark:ring-offset-black' : '',
                     ]"
                     :style="color.hex ? { background: color.hex } : {}"
@@ -32,6 +33,7 @@ export type ColorOption = {
     hex: string | null;
     price: string | null;
     isCustom: boolean;
+    isTransparent?: boolean;
 };
 
 defineProps<{

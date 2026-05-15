@@ -44,6 +44,11 @@
                         v-model="selectedColorId"
                         :step-number="index + 1"
                     />
+                    <ConfiguratorTurbineColorStep
+                        v-else-if="step.id === 'color-turbine'"
+                        v-model="selectedColorId"
+                        :step-number="index + 1"
+                    />
                     <ConfiguratorLeafColorStep
                         v-else-if="step.id === 'leaf'"
                         v-model="selectedLeafColorId"
@@ -125,6 +130,7 @@ import ConfiguratorAddonsStep from '@/custom/configurator/ConfiguratorAddonsStep
 import ConfiguratorBatteryStep from '@/custom/configurator/ConfiguratorBatteryStep.vue';
 import ConfiguratorCheckout from '@/custom/configurator/ConfiguratorCheckout.vue';
 import ConfiguratorColorStep from '@/custom/configurator/ConfiguratorColorStep.vue';
+import ConfiguratorTurbineColorStep from '@/custom/configurator/ConfiguratorTurbineColorStep.vue';
 import ConfiguratorConnectivityStep from '@/custom/configurator/ConfiguratorConnectivityStep.vue';
 import ConfiguratorFveLeafStep from '@/custom/configurator/ConfiguratorFveLeafStep.vue';
 import ConfiguratorGrantSection from '@/custom/configurator/ConfiguratorGrantSection.vue';
@@ -243,6 +249,8 @@ const sectionImages = computed(() => {
 
         switch (step.id) {
             case 'color':
+                return `/img/config-images/${prodId}/color/color_${selectedColorId.value}.webp`;
+            case 'color-turbine':
                 return `/img/config-images/${prodId}/color/color_${selectedColorId.value}.webp`;
             case 'leaf':
                 return `/img/config-images/${prodId}/leaf-color/leaf_${selectedLeafColorId.value}.webp`;

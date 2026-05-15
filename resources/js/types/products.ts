@@ -127,8 +127,8 @@ export const PRODUCTS: Product[] = [
         params: { power: '600 W', dailyProduction: '2,4 kWh', roi: '8 let' },
         steps: [
             {
-                id: 'color',
-                component: 'ConfiguratorColorStep',
+                id: 'color-turbine',
+                component: 'ConfiguratorTurbineColorStep',
                 configurationFields: ['color'],
             },
         ],
