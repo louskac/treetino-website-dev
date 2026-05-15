@@ -166,7 +166,7 @@ const getInitialProduct = (): ProductIdType => {
     if (props.initialProduct && Object.values(ProductId).includes(props.initialProduct as ProductIdType)) {
         return props.initialProduct as ProductIdType;
     }
-    return ProductId.StromV2;
+    return ProductId.StromV1;
 };
 
 const selectedProductId = ref<ProductIdType>(getInitialProduct());
