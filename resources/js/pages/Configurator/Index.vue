@@ -86,6 +86,7 @@
                         :base-price="basePrice"
                         :grant="selectedGrant"
                         :monthly-savings="selectedProduct.monthlySavings"
+                        :product-id="selectedProductId"
                         @checkout="modalCheckoutOpen"
                         @info="modalInfoOpen"
                     />

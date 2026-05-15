@@ -115,7 +115,8 @@
         <div class="flex flex-row items-center gap-3 p-3 rounded-lg bg-orange-50 border border-orange-200 dark:bg-orange-900/20 dark:border-orange-800/40">
             <Flash class="h-5 w-5 shrink-0 text-orange-600 dark:text-orange-400" />
             <p class="text-xs font-medium text-orange-700 dark:text-orange-300">
-                Pro měsíc <strong>{{ currentMonthName }}</strong> bylo již rezervováno <strong>3 z 5</strong> stromů.
+                Pro měsíc <strong>{{ currentMonthName }}</strong> bylo již rezervováno
+                <strong>{{ urgency.reserved }} z {{ urgency.total }}</strong> {{ urgency.unit }}.
             </p>
         </div>
 
@@ -156,10 +157,13 @@ import { getGrantById } from '@/types/grants';
 import { Flash } from '@iconoir/vue';
 import { calcMonthlyPayment, formatPrice } from '@/composables/useFinancing';
 
+import { ProductId } from '@/types/products';
+
 const props = defineProps<{
     basePrice: number;
     grant: string;
     monthlySavings: number;
+    productId: string;
 }>();
 
 const emit = defineEmits<{
@@ -202,6 +206,16 @@ const adjustedMonthlyPayment = computed(() =>
     includeSavings.value
         ? Math.max(0, monthlyPayment.value - props.monthlySavings)
         : monthlyPayment.value,
+);
+
+const URGENCY_DATA: Record<string, { reserved: number; total: number; unit: string }> = {
+    [ProductId.StromV1]: { reserved: 3, total: 5, unit: 'stromů' },
+    [ProductId.StromV2]: { reserved: 2, total: 10, unit: 'stromů' },
+    [ProductId.Turbina]: { reserved: 14, total: 20, unit: 'turbín' },
+};
+
+const urgency = computed(
+    () => URGENCY_DATA[props.productId] ?? { reserved: 0, total: 0, unit: 'kusů' },
 );
 
 const currentMonthName = computed(() => {
