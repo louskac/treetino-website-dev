@@ -30,7 +30,7 @@
                     v-model="selectedProductId"
                     :products="products"
                 />
-                <ConfiguratorProductHeader :product="selectedProduct" />
+                <ConfiguratorProductHeader :product="selectedProduct" :params="effectiveParams" />
 
                 <div
                     v-for="(step, index) in selectedProduct.steps"
@@ -230,6 +230,18 @@ const selectedGrant = ref('none');
 const selectedProduct = computed(
     () => products.find((p) => p.id === selectedProductId.value)!,
 );
+
+const configFieldValues: Record<string, () => string> = {
+    windTurbines: () => selectedWindTurbines.value,
+};
+
+const effectiveParams = computed(() => {
+    const { configField, variants } = selectedProduct.value.params;
+    if (!configField) return Object.values(variants)[0];
+    const getter = configFieldValues[configField];
+    const key = getter ? getter() : '';
+    return variants[key] ?? Object.values(variants)[0];
+});
 
 const basePrice = computed(() => selectedProduct.value.basePrice ?? 0);
 

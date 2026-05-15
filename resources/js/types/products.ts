@@ -23,12 +23,21 @@ export interface ConfiguratorStep {
     configurationFields: ConfigurationField[];
 }
 
+export interface ProductParams {
+    power: string;
+    dailyProduction: string;
+    roi: string;
+}
+
 export interface Product {
     id: ProductId;
     label: string;
     detail: string;
     image: string;
-    params: { power: string; dailyProduction: string; roi: string };
+    params: {
+        configField?: ConfigurationField;
+        variants: Record<string, ProductParams>;
+    };
     steps: ConfiguratorStep[];
     basePrice: number;
     monthlySavings: number;
@@ -41,7 +50,11 @@ export const PRODUCTS: Product[] = [
         label: 'Strom V1',
         detail: 'treetino-v1',
         image: '/img/stills/Still_Strom-v1.png',
-        params: { power: '800 W', dailyProduction: '3,2 kWh', roi: '7 let' },
+        params: {
+            variants: {
+                default: { power: '800 W', dailyProduction: '3,2 kWh', roi: '7 let' },
+            },
+        },
         steps: [
             {
                 id: 'color',
@@ -83,7 +96,13 @@ export const PRODUCTS: Product[] = [
         label: 'Strom V2',
         detail: 'treetino-v2',
         image: '/img/stills/Still_Strom-v2.png',
-        params: { power: '1200 W', dailyProduction: '4,8 kWh', roi: '6 let' },
+        params: {
+            configField: 'windTurbines',
+            variants: {
+                'with-turbines':    { power: '1800 W', dailyProduction: '7,0 kWh', roi: '5 let' },
+                'without-turbines': { power: '1200 W', dailyProduction: '4,8 kWh', roi: '6 let' },
+            },
+        },
         steps: [
             {
                 id: 'wind-turbines',
@@ -130,7 +149,11 @@ export const PRODUCTS: Product[] = [
         label: 'Větrná turbína',
         detail: 'turbine',
         image: '/img/stills/Still_Turbina.png',
-        params: { power: '600 W', dailyProduction: '2,4 kWh', roi: '8 let' },
+        params: {
+            variants: {
+                default: { power: '600 W', dailyProduction: '2,4 kWh', roi: '8 let' },
+            },
+        },
         steps: [
             {
                 id: 'color-turbine',
