@@ -17,29 +17,69 @@ const product = computed(
 
 const productImageSrc = computed(() => {
     const type = props.preorder?.product_type;
-    const color = props.preorder?.configuration?.color ?? 'green';
     if (!type) return null;
-    return `/img/config-images/${type}/color/color_${color}.webp`;
+    const color = props.preorder?.configuration?.color;
+    if (color) return `/img/config-images/${type}/color/color_${color}.webp`;
+    return `/img/config-images/${type}/default.webp`;
 });
 
 const configurationLabels: Record<string, string> = {
-    color: 'Barva',
+    color: 'Barva konstrukce',
     leafColor: 'Barva listů',
     fveLeafDesign: 'Design FVE listů',
     connectivity: 'Konektivita',
     battery: 'Baterie',
     evChargerCount: 'Počet EV nabíječek',
-    bikeChargerRequested: 'Nabíječka na kolo',
+    bikeChargerRequested: 'Nabíječka pro elektrokola',
+    windTurbines: 'Větrné turbíny',
+    turbineSize: 'Velikost turbíny',
+    turbineMount: 'Umístění turbíny',
     grant: 'Dotační program',
+    paymentMode: 'Způsob platby',
 };
+
+const configurationValueLabels: Record<string, Record<string, string>> = {
+    windTurbines: {
+        'with-turbines': 'S větrnými turbínami',
+        'without-turbines': 'Bez větrných turbín',
+    },
+    turbineSize: {
+        large: 'Velká (3 kW)',
+        medium: 'Střední (1,5 kW)',
+        small: 'Menší (1 kW)',
+    },
+    turbineMount: {
+        roof: 'Na střechu',
+        wall: 'Na zeď',
+        pole: 'Na sloup',
+    },
+    paymentMode: {
+        cash: 'Hotovost',
+        credit: 'Zelený úvěr',
+    },
+};
+
+// Fields to skip when value is empty/zero/false
+const skipIfEmpty = new Set(['evChargerCount', 'bikeChargerRequested']);
 
 const configurationRows = computed(() => {
     const cfg = props.preorder?.configuration;
     if (!cfg) return [];
-    return Object.entries(cfg).map(([key, value]) => ({
-        label: configurationLabels[key] ?? key,
-        value: value === true ? 'Ano' : value === false ? 'Ne' : String(value),
-    }));
+    return Object.entries(cfg)
+        .filter(([key, value]) => {
+            if (skipIfEmpty.has(key) && !value) return false;
+            return true;
+        })
+        .map(([key, value]) => {
+            const valueMap = configurationValueLabels[key];
+            const displayValue = valueMap
+                ? (valueMap[String(value)] ?? String(value))
+                : value === true ? 'Ano' : value === false ? 'Ne' : String(value);
+            return {
+                label: configurationLabels[key] ?? key,
+                value: displayValue,
+            };
+        });
 });
 
 const formattedAmount = computed(() => {
