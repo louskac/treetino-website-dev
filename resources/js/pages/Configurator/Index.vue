@@ -63,6 +63,7 @@
                         v-else-if="step.id === 'battery'"
                         v-model="selectedBattery"
                         :step-number="index + 1"
+                        :product-id="selectedProductId"
                     />
                     <ConfiguratorAddonsStep
                         v-else-if="step.id === 'addons'"

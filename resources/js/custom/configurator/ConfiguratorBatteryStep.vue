@@ -33,32 +33,44 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import { useStepFormatter } from '@/composables/useStepFormatter';
 import CheckCircle from '../icons/CheckCircle.vue';
+import { ProductId } from '@/types/products';
 const { formatStep } = useStepFormatter();
 
-defineProps<{
+const props = defineProps<{
     modelValue: string;
     stepNumber: number;
+    productId: string;
 }>();
 
 defineEmits<{
     'update:modelValue': [value: string];
 }>();
 
-const options = [
-    {
-        id: 'none',
-        label: 'Bez baterie',
-        price: 'Zdarma',
-        roi: null,
-        description: 'Vyrobená energie se spotřebuje ihned nebo odteče do sítě.',
-    },
-    {
-        id: 'battery-100',
-        label: 'Baterie 100 kWh',
-        roi: 14,
-        description: 'Skladování přebytků pro noční využití a maximální soběstačnost.',
-    },
-];
+const BATTERY_CAPACITY: Partial<Record<string, string>> = {
+    [ProductId.StromV1]: '100 kWh',
+    [ProductId.StromV2]: '50 kWh',
+};
+
+const options = computed(() => {
+    const capacity = BATTERY_CAPACITY[props.productId];
+    return [
+        {
+            id: 'none',
+            label: 'Bez baterie',
+            price: 'Zdarma',
+            roi: null,
+            description: 'Vyrobená energie se spotřebuje ihned nebo odteče do sítě.',
+        },
+        {
+            id: 'battery',
+            label: `Baterie${capacity ? ' ' + capacity : ''}`,
+            roi: 14,
+            price: null,
+            description: 'Skladování přebytků pro noční využití a maximální soběstačnost.',
+        },
+    ];
+});
 </script>
