@@ -16,6 +16,7 @@ export type ConfigurationField =
     | 'bikeChargerRequested'
     | 'windTurbines'
     | 'turbineSize'
+    | 'turbineMount'
     | 'grant';
 
 export interface ConfiguratorStep {
@@ -163,6 +164,11 @@ export const PRODUCTS: Product[] = [
                 id: 'turbine-size',
                 component: 'ConfiguratorTurbinaSizeStep',
                 configurationFields: ['turbineSize'],
+            },
+            {
+                id: 'turbine-mount',
+                component: 'ConfiguratorTurbinaMountStep',
+                configurationFields: ['turbineMount'],
             },
             {
                 id: 'color-turbine',

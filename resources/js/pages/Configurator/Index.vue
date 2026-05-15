@@ -54,6 +54,11 @@
                         v-model="selectedTurbineSize"
                         :step-number="index + 1"
                     />
+                    <ConfiguratorTurbinaMountStep
+                        v-else-if="step.id === 'turbine-mount'"
+                        v-model="selectedTurbineMount"
+                        :step-number="index + 1"
+                    />
                     <ConfiguratorTurbineColorStep
                         v-else-if="step.id === 'color-turbine'"
                         v-model="selectedColorId"
@@ -144,6 +149,7 @@ import ConfiguratorTurbineColorStep from '@/custom/configurator/ConfiguratorTurb
 import ConfiguratorConnectivityStep from '@/custom/configurator/ConfiguratorConnectivityStep.vue';
 import ConfiguratorWindTurbinesStep from '@/custom/configurator/ConfiguratorWindTurbinesStep.vue';
 import ConfiguratorTurbinaSizeStep from '@/custom/configurator/ConfiguratorTurbinaSizeStep.vue';
+import ConfiguratorTurbinaMountStep from '@/custom/configurator/ConfiguratorTurbinaMountStep.vue';
 import ConfiguratorFveLeafStep from '@/custom/configurator/ConfiguratorFveLeafStep.vue';
 import ConfiguratorGrantSection from '@/custom/configurator/ConfiguratorGrantSection.vue';
 import ConfiguratorLeafColorStep from '@/custom/configurator/ConfiguratorLeafColorStep.vue';
@@ -230,6 +236,7 @@ const selectedConnectivity = ref('none');
 const selectedBattery = ref('none');
 const selectedWindTurbines = ref('with-turbines');
 const selectedTurbineSize = ref('large');
+const selectedTurbineMount = ref('roof');
 const evChargerCount = ref(0);
 const bikeChargerRequested = ref(false);
 const selectedGrant = ref('none');
@@ -283,6 +290,8 @@ const sectionImages = computed(() => {
                 return `/img/config-images/${prodId}/wind-turbines/wind-turbines_${selectedWindTurbines.value}.webp`;
             case 'turbine-size':
                 return `/img/config-images/${prodId}/turbine-size/turbine-size_${selectedTurbineSize.value}.webp`;
+            case 'turbine-mount':
+                return `/img/config-images/${prodId}/turbine-mount/turbine-mount_${selectedTurbineMount.value}.webp`;
             case 'leaf':
                 return `/img/config-images/${prodId}/leaf-color/leaf_${selectedLeafColorId.value}.webp`;
             case 'fve-leaf':
@@ -325,6 +334,9 @@ function resetConfiguration() {
     selectedBattery.value = 'none';
     evChargerCount.value = 0;
     bikeChargerRequested.value = false;
+    selectedWindTurbines.value = 'with-turbines';
+    selectedTurbineSize.value = 'large';
+    selectedTurbineMount.value = 'roof';
     selectedGrant.value = 'none';
 }
 
@@ -389,6 +401,7 @@ function buildConfiguration() {
         bikeChargerRequested: bikeChargerRequested.value,
         windTurbines: selectedWindTurbines.value,
         turbineSize: selectedTurbineSize.value,
+        turbineMount: selectedTurbineMount.value,
         grant: selectedGrant.value,
     };
 
