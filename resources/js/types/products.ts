@@ -128,11 +128,6 @@ export const PRODUCTS: Product[] = [
                 component: 'ConfiguratorColorStep',
                 configurationFields: ['color'],
             },
-            {
-                id: 'connectivity',
-                component: 'ConfiguratorConnectivityStep',
-                configurationFields: ['connectivity'],
-            },
         ],
         basePrice: 150000,
         monthlySavings: 1300,
