@@ -15,6 +15,7 @@ export type ConfigurationField =
     | 'evChargerCount'
     | 'bikeChargerRequested'
     | 'windTurbines'
+    | 'turbineSize'
     | 'grant';
 
 export interface ConfiguratorStep {
@@ -150,11 +151,19 @@ export const PRODUCTS: Product[] = [
         detail: 'turbine',
         image: '/img/stills/Still_Turbina.png',
         params: {
+            configField: 'turbineSize',
             variants: {
-                default: { power: '600 W', dailyProduction: '2,4 kWh', roi: '8 let' },
+                large:  { power: '3 kW',   dailyProduction: '12 kWh', roi: '6 let' },
+                medium: { power: '1,5 kW', dailyProduction: '6 kWh',  roi: '8 let' },
+                small:  { power: '1 kW',   dailyProduction: '4 kWh',  roi: '10 let' },
             },
         },
         steps: [
+            {
+                id: 'turbine-size',
+                component: 'ConfiguratorTurbinaSizeStep',
+                configurationFields: ['turbineSize'],
+            },
             {
                 id: 'color-turbine',
                 component: 'ConfiguratorTurbineColorStep',

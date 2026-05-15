@@ -49,6 +49,11 @@
                         v-model="selectedWindTurbines"
                         :step-number="index + 1"
                     />
+                    <ConfiguratorTurbinaSizeStep
+                        v-else-if="step.id === 'turbine-size'"
+                        v-model="selectedTurbineSize"
+                        :step-number="index + 1"
+                    />
                     <ConfiguratorTurbineColorStep
                         v-else-if="step.id === 'color-turbine'"
                         v-model="selectedColorId"
@@ -138,6 +143,7 @@ import ConfiguratorColorStep from '@/custom/configurator/ConfiguratorColorStep.v
 import ConfiguratorTurbineColorStep from '@/custom/configurator/ConfiguratorTurbineColorStep.vue';
 import ConfiguratorConnectivityStep from '@/custom/configurator/ConfiguratorConnectivityStep.vue';
 import ConfiguratorWindTurbinesStep from '@/custom/configurator/ConfiguratorWindTurbinesStep.vue';
+import ConfiguratorTurbinaSizeStep from '@/custom/configurator/ConfiguratorTurbinaSizeStep.vue';
 import ConfiguratorFveLeafStep from '@/custom/configurator/ConfiguratorFveLeafStep.vue';
 import ConfiguratorGrantSection from '@/custom/configurator/ConfiguratorGrantSection.vue';
 import ConfiguratorLeafColorStep from '@/custom/configurator/ConfiguratorLeafColorStep.vue';
@@ -223,6 +229,7 @@ const selectedFveLeafDesign = ref('realistic');
 const selectedConnectivity = ref('none');
 const selectedBattery = ref('none');
 const selectedWindTurbines = ref('with-turbines');
+const selectedTurbineSize = ref('large');
 const evChargerCount = ref(0);
 const bikeChargerRequested = ref(false);
 const selectedGrant = ref('none');
@@ -233,6 +240,7 @@ const selectedProduct = computed(
 
 const configFieldValues: Record<string, () => string> = {
     windTurbines: () => selectedWindTurbines.value,
+    turbineSize: () => selectedTurbineSize.value,
 };
 
 const effectiveParams = computed(() => {
@@ -273,6 +281,8 @@ const sectionImages = computed(() => {
                 return `/img/config-images/${prodId}/color/color_${selectedColorId.value}.webp`;
             case 'wind-turbines':
                 return `/img/config-images/${prodId}/wind-turbines/wind-turbines_${selectedWindTurbines.value}.webp`;
+            case 'turbine-size':
+                return `/img/config-images/${prodId}/turbine-size/turbine-size_${selectedTurbineSize.value}.webp`;
             case 'leaf':
                 return `/img/config-images/${prodId}/leaf-color/leaf_${selectedLeafColorId.value}.webp`;
             case 'fve-leaf':
@@ -378,6 +388,7 @@ function buildConfiguration() {
         evChargerCount: evChargerCount.value,
         bikeChargerRequested: bikeChargerRequested.value,
         windTurbines: selectedWindTurbines.value,
+        turbineSize: selectedTurbineSize.value,
         grant: selectedGrant.value,
     };
 
