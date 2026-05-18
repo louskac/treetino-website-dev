@@ -108,14 +108,14 @@ export const PRODUCTS: Product[] = [
         },
         steps: [
             {
-                id: 'tree-design',
-                component: 'ConfiguratorTreeDesignStep',
-                configurationFields: ['treeDesign'],
-            },
-            {
                 id: 'wind-turbines',
                 component: 'ConfiguratorWindTurbinesStep',
                 configurationFields: ['windTurbines'],
+            },
+            {
+                id: 'tree-design',
+                component: 'ConfiguratorTreeDesignStep',
+                configurationFields: ['treeDesign'],
             },
             {
                 id: 'color',
