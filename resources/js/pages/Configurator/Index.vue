@@ -44,6 +44,11 @@
                         v-model="selectedColorId"
                         :step-number="index + 1"
                     />
+                    <ConfiguratorTreeDesignStep
+                        v-else-if="step.id === 'tree-design'"
+                        v-model="selectedTreeDesign"
+                        :step-number="index + 1"
+                    />
                     <ConfiguratorWindTurbinesStep
                         v-else-if="step.id === 'wind-turbines'"
                         v-model="selectedWindTurbines"
@@ -142,6 +147,7 @@ import type { ComponentPublicInstance } from 'vue';
 import { ref, computed, onMounted, onUnmounted, nextTick, watch } from 'vue';
 import { route } from 'ziggy-js';
 import ConfiguratorAddonsStep from '@/custom/configurator/ConfiguratorAddonsStep.vue';
+import ConfiguratorTreeDesignStep from '@/custom/configurator/ConfiguratorTreeDesignStep.vue';
 import ConfiguratorBatteryStep from '@/custom/configurator/ConfiguratorBatteryStep.vue';
 import ConfiguratorCheckout from '@/custom/configurator/ConfiguratorCheckout.vue';
 import ConfiguratorColorStep from '@/custom/configurator/ConfiguratorColorStep.vue';
@@ -240,6 +246,7 @@ const selectedTurbineMount = ref('roof');
 const evChargerCount = ref(0);
 const bikeChargerRequested = ref(false);
 const selectedGrant = ref('none');
+const selectedTreeDesign = ref('standard');
 
 const selectedProduct = computed(
     () => products.find((p) => p.id === selectedProductId.value)!,
@@ -300,6 +307,8 @@ const sectionImages = computed(() => {
                 return `/img/config-images/${prodId}/connectivity/connectivity_${selectedConnectivity.value}.webp`;
             case 'battery':
                 return `/img/config-images/${prodId}/battery/battery_${selectedBattery.value}.webp`;
+            case 'tree-design':
+                return `/img/config-images/${prodId}/tree-design/tree-design_${selectedTreeDesign.value}.webp`;
             case 'addons':
                 return `/img/config-images/${prodId}/addons.webp`;
             default:
@@ -338,6 +347,7 @@ function resetConfiguration() {
     selectedTurbineSize.value = 'large';
     selectedTurbineMount.value = 'roof';
     selectedGrant.value = 'none';
+    selectedTreeDesign.value = 'standard';
 }
 
 function updateActiveSection() {
@@ -402,6 +412,7 @@ function buildConfiguration() {
         windTurbines: selectedWindTurbines.value,
         turbineSize: selectedTurbineSize.value,
         turbineMount: selectedTurbineMount.value,
+        treeDesign: selectedTreeDesign.value,
         grant: selectedGrant.value,
     };
 

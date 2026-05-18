@@ -17,6 +17,7 @@ export type ConfigurationField =
     | 'windTurbines'
     | 'turbineSize'
     | 'turbineMount'
+    | 'treeDesign'
     | 'grant';
 
 export interface ConfiguratorStep {
@@ -106,6 +107,11 @@ export const PRODUCTS: Product[] = [
             },
         },
         steps: [
+            {
+                id: 'tree-design',
+                component: 'ConfiguratorTreeDesignStep',
+                configurationFields: ['treeDesign'],
+            },
             {
                 id: 'wind-turbines',
                 component: 'ConfiguratorWindTurbinesStep',

@@ -34,6 +34,7 @@ const configurationLabels: Record<string, string> = {
     windTurbines: 'Větrné turbíny',
     turbineSize: 'Velikost turbíny',
     turbineMount: 'Umístění turbíny',
+    treeDesign: 'Design stromu',
     grant: 'Dotační program',
     paymentMode: 'Způsob platby',
 };
@@ -52,6 +53,10 @@ const configurationValueLabels: Record<string, Record<string, string>> = {
         roof: 'Na střechu',
         wall: 'Na zeď',
         pole: 'Na sloup',
+    },
+    treeDesign: {
+        standard: 'Standardní',
+        cyber: 'Cyber',
     },
     paymentMode: {
         cash: 'Hotovost',
