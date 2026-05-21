@@ -23,14 +23,14 @@
         </video>
     </div>
 
-    <div
-        class="bg absolute top-0 left-0 h-full w-full"
-        style="
-            background-position: center;
-            background-image: url('/video/hero-v1-cine.mp4');
-            background-size: cover;
-        "
-    ></div>
+<!--    <div-->
+<!--        class="bg absolute top-0 left-0 h-full w-full"-->
+<!--        style="-->
+<!--            background-position: center;-->
+<!--            background-image: url('/video/hero-v1-cine.mp4');-->
+<!--            background-size: cover;-->
+<!--        "-->
+<!--    ></div>-->
 </template>
 
 <script setup lang="ts">
