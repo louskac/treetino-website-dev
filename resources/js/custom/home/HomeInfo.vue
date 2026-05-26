@@ -9,7 +9,7 @@
         >
             <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:hidden">
                 <div
-                    class="relative aspect-square overflow-hidden rounded-2xl border bg-t-blue/5 shadow-xl sm:col-span-2"
+                    class="relative aspect-square overflow-hidden rounded-2xl border bg-t-blue/5 shadow-xl sm:col-span-2 col-span-2"
                 >
                     <img
                         src="/img/treetino-v1-isometric.png"
@@ -19,7 +19,7 @@
                 </div>
 
                 <div
-                    class="w-full rounded-2xl border border-black bg-zinc-800 p-6 shadow-xl sm:col-span-2 dark:border-white dark:bg-zinc-200"
+                    class="w-full rounded-2xl border border-black bg-zinc-800 p-6 shadow-xl col-span-2 dark:border-white dark:bg-zinc-200"
                 >
                     <p class="text-2xl text-secondary">
                         In a world increasingly dependent on electricity, we're
