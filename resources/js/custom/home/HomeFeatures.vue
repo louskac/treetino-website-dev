@@ -85,22 +85,22 @@ const sections = [
     },
     {
         icon: RulerCombine,
-        title: 'Text 2',
+        title: 'Prostorová efektivita',
         text: 'Zabere pouhý 1 m², přesto nahradí 400 m² solárních panelů. Treetino mění parkoviště, firemní areály a ulice v efektivní zdroje energie.',
     },
     {
         icon: SunLight,
-        title: 'Text 3',
+        title: 'Vyvinutý pro výkon',
         text: 'Patentovaný AI systém plynule sleduje slunce, čímž zvyšuje výkon o 30 %. Před bouří navíc inteligentně složí své listy pro maximální bezpečnost.',
     },
     {
         icon: Leaf,
-        title: 'Text 4',
+        title: 'Prémiový design',
         text: 'Korunu tvoří 300 solárních listů prémiové české výroby. Plně přizpůsobitelný design a barvy dokonale sladíte se svou značkou či architekturou.',
     },
     {
         icon: Wind,
-        title: 'Text 5',
+        title: 'Rovnováha výroby',
         text: 'Transparentní turbíny 2. generace vyrábí energii 24 hodin denně i při slabém větru. Nerušivý výkon stvořený pro města.',
     },
 ];

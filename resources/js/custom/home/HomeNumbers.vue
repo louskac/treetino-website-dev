@@ -2,15 +2,31 @@
     <section
         class="claims relative mx-auto max-w-[1400px] pb-20 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
     >
-        <div class="mx-6 aspect-3/2 lg:aspect-3/1 overflow-hidden rounded-2xl sm:mx-0 shadow-lg">
+        <div
+            class="mx-6 aspect-3/2 overflow-hidden rounded-2xl shadow-lg sm:mx-0 lg:aspect-3/1"
+        >
+            <!--            <img-->
+            <!--                class="h-full w-full object-cover"-->
+            <!--                src="https://picsum.photos/1500/500"-->
+            <!--                alt=""-->
+            <!--            />-->
+
             <img
-                class="h-full w-full object-cover"
-                src="https://picsum.photos/1500/500"
+                class="hidden h-full w-full object-cover lg:block"
+                src="/img/night-detail-w.jpg"
+                alt=""
+            />
+
+            <img
+                class="block h-full w-full object-cover lg:hidden"
+                src="/img/night-detail-l.jpg"
                 alt=""
             />
         </div>
 
-        <div class="mx-6 grid grid-cols-1 gap-12 pt-12 sm:mx-0 lg:grid-cols-3 2xl:grid-cols-4">
+        <div
+            class="mx-6 grid grid-cols-1 gap-12 pt-12 sm:mx-0 lg:grid-cols-3 2xl:grid-cols-4"
+        >
             <div class="col-span-1 flex flex-col">
                 <div class="relative z-10 flex items-center justify-between">
                     <span
@@ -19,17 +35,21 @@
                     >
                 </div>
 
-                <h2 class="text-4xl 2xl:text-6xl mt-3 leading-9 2xl:leading-14">
+                <h2 class="mt-3 text-4xl leading-9 2xl:text-6xl 2xl:leading-14">
                     Information &&nbsp;Numbers
                 </h2>
 
                 <div class="mt-auto pt-6">
-                    <ButtonPrimary :href="route('configurator')" class="w-full text-center">Configure</ButtonPrimary>
+                    <ButtonPrimary
+                        :href="route('configurator')"
+                        class="w-full text-center"
+                        >Configure</ButtonPrimary
+                    >
                 </div>
             </div>
 
             <div
-                class="col-span-1 grid grid-cols-2 gap-6 lg:border-l lg:pl-12 lg:col-span-2 lg:grid-cols-2 2xl:grid-cols-3 2xl:col-span-3"
+                class="col-span-1 grid grid-cols-2 gap-6 lg:col-span-2 lg:grid-cols-2 lg:border-l lg:pl-12 2xl:col-span-3 2xl:grid-cols-3"
             >
                 <div class="">
                     <div class="mb-2 flex gap-3">
