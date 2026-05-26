@@ -28,7 +28,7 @@
                 </div>
 
                 <div
-                    class="flex w-full flex-col rounded-2xl border p-6 shadow-xl"
+                    class="col-span-2 flex w-full flex-col rounded-2xl border p-6 shadow-xl"
                 >
                     <div class="">
                         <div
@@ -42,21 +42,20 @@
                     </div>
                     <h2 class="mt-4 text-3xl sm:text-4xl">Špičkový design</h2>
                     <p class="mt-2 mb-3">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Integer at tortor est. Sed malesuada at lorem id
-                        finibus. Sed mollis sodales hendrerit. Etiam ut ligula
-                        at ante laoreet blandit.
+                        Treetino je víc než elektrárna. Slouží jako sebevědomý
+                        symbol udržitelnosti, se kterým firmy a instituce
+                        elegantně naplní své ESG cíle.
                     </p>
 
                     <p>
-                        Vivamus at convallis quam. Etiam pellentesque augue nec
-                        lectus pulvinar accumsan. Duis volutpat ullamcorper
-                        dignissim. Donec mattis, enim a malesuada
+                        Kombinace 300 solárních listů a transparentních turbín
+                        obohacuje veřejný prostor. Zcela neslyšný chod umožňuje
+                        bezpečnou integraci přímo mezi lidi.
                     </p>
                 </div>
 
                 <div
-                    class="reveal reveal-right w-full rounded-2xl border p-6 shadow-xl"
+                    class="reveal reveal-right col-span-2 w-full rounded-2xl border p-6 shadow-xl"
                 >
                     <div class="">
                         <div
@@ -68,17 +67,19 @@
                             />
                         </div>
                     </div>
-                    <h2 class="mt-4 text-3xl sm:text-4xl">U I U A A</h2>
+                    <h2 class="mt-4 text-3xl sm:text-4xl">
+                        Chytrý propojený les
+                    </h2>
                     <p class="mt-2 mb-3">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Integer at tortor est. Sed malesuada at lorem id
-                        finibus. Sed mollis sodales hendrerit. Etiam ut ligula
-                        at ante laoreet blandit.
+                        Treetino tvoří inteligentní, propojený ekosystém.
+                        Integrovaná AI v reálném čase maximalizuje energetický
+                        výnos a autonomně řídí prediktivní údržbu.
                     </p>
+
                     <p>
-                        Vivamus at convallis quam. Etiam pellentesque augue nec
-                        lectus pulvinar accumsan. Duis volutpat ullamcorper
-                        dignissim. Donec mattis, enim a malesuada
+                        Technologie blockchain umožňuje bezpečné a
+                        automatizované sdílení energie s okolím. Definujeme tak
+                        standardy pro novou, decentralizovanou energetiku.
                     </p>
                 </div>
             </div>
