@@ -1,78 +1,73 @@
 <template>
-    <div class="bg absolute top-0 left-0 h-full w-full bg-t-dark">
+    <div
+        class="bg absolute top-0 left-0 h-full w-full overflow-hidden bg-t-dark"
+    >
         <video
-            v-for="(src, index) in videos"
-            :key="src"
-            :ref="
-                (el) => {
-                    if (el) videoRefs[index] = el as HTMLVideoElement;
-                }
-            "
-            class="absolute top-0 left-0 h-full w-full object-cover transition-opacity ease-in-out"
-            :class="activeIndex === index ? 'opacity-100' : 'opacity-0'"
-            :style="{
-                pointerEvents: 'none',
-                transitionDuration: `${fadeDurationMs}ms`,
-            }"
+            ref="videoRef"
+            :key="currentVideo"
+            class="absolute top-0 left-0 h-full w-full object-cover"
             muted
             loop
             playsinline
+            webkit-playsinline
+            autoplay
             preload="auto"
+            style="pointer-events: none"
         >
-            <source :src="src" type="video/mp4" />
+            <source :src="currentVideo" type="video/mp4" />
         </video>
     </div>
-
-<!--    <div-->
-<!--        class="bg absolute top-0 left-0 h-full w-full"-->
-<!--        style="-->
-<!--            background-position: center;-->
-<!--            background-image: url('/video/hero-v1-cine.mp4');-->
-<!--            background-size: cover;-->
-<!--        "-->
-<!--    ></div>-->
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, nextTick } from 'vue';
+import { computed, nextTick, onMounted, ref, watch } from 'vue';
 
 const props = defineProps<{
     activeIndex: number;
 }>();
 
-const fadeDurationMs = 700;
 const videos = [
-    '/video/hero-v1-cine.mp4',
-    '/video/hero-v2-cine.mp4',
-    '/video/hero-turbine-cine.mp4',
+    '/video/hero-v1-cine-noaudio.mp4',
+    '/video/hero-v2-cine-noaudio.mp4',
+    '/video/hero-turbine-cine-noaudio.mp4',
 ];
 
-// Using a standard array to store refs (more reliable than ref<[]> in v-for)
-const videoRefs = ref<HTMLVideoElement[]>([]);
+const videoRef = ref<HTMLVideoElement | null>(null);
 
-onMounted(async () => {
-    // Wait for the next DOM update to ensure refs are filled
+const currentVideo = computed(() => videos[props.activeIndex]);
+
+const playVideo = async () => {
     await nextTick();
 
-    videoRefs.value.forEach((video) => {
-        if (video) {
-            // CRITICAL: Explicitly set muted property to bypass mobile autoplay blocks
-            video.muted = true;
-            video.defaultMuted = true;
+    const video = videoRef.value;
+    if (!video) return;
 
-            // Start playing
-            const playPromise = video.play();
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.autoplay = true;
 
-            if (playPromise !== undefined) {
-                playPromise.catch((error) => {
-                    console.warn('Autoplay was prevented:', error);
-                    // If blocked, try playing again on the first user interaction
-                    document.addEventListener('click', () => video.play(), {
-                        once: true,
-                    });
-                });
-            }
-        }
-    });
+    video.setAttribute('muted', '');
+    video.setAttribute('playsinline', '');
+    video.setAttribute('webkit-playsinline', '');
+    video.setAttribute('autoplay', '');
+
+    try {
+        video.load();
+        await video.play();
+    } catch (error) {
+        console.warn('Video autoplay failed:', error);
+    }
+};
+
+onMounted(() => {
+    playVideo();
 });
+
+watch(
+    () => props.activeIndex,
+    () => {
+        playVideo();
+    },
+);
 </script>
