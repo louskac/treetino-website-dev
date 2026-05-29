@@ -1,6 +1,7 @@
 <template>
     <section class="hero h-screen w-full bg-zinc-950">
-        <HomeHeroBackground :active-index="activeIndex" />
+        <HomeHeroBackground class="hidden lg:block" :active-index="activeIndex" />
+        <HomeHeroBackgroundSm class="block lg:hidden" :active-index="activeIndex" />
 
         <div
             class="absolute bottom-0 h-100 w-full bg-linear-to-b from-transparent to-black"
@@ -21,6 +22,7 @@ import { ref, computed } from 'vue';
 import 'swiper/css';
 
 import HomeHeroBackground from '@/custom/home/hero/HomeHeroBackground.vue';
+import HomeHeroBackgroundSm from '@/custom/home/hero/HomeHeroBackgroundSm.vue';
 import HomeHeroCarousel from '@/custom/home/hero/HomeHeroCarousel.vue';
 import HomeHeroCarouselControls from '@/custom/home/hero/HomeHeroCarouselControls.vue';
 

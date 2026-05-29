@@ -27,9 +27,9 @@ const props = defineProps<{
 }>();
 
 const videos = [
-    '/video/hero-v1-cine-noaudio.mp4',
-    '/video/hero-v2-cine-noaudio.mp4',
-    '/video/hero-turbine-cine-noaudio.mp4',
+    '/video/hero-v1-cine-sm.mp4',
+    '/video/hero-v2-cine-sm.mp4',
+    '/video/hero-turbine-cine-sm.mp4',
 ];
 
 const videoRef = ref<HTMLVideoElement | null>(null);
