@@ -43,8 +43,8 @@ const props = defineProps<{
 const fadeDurationMs = 700;
 const videos = [
     '/video/hero-v1-cine.mp4',
-    '/video/hero-home-1.mp4',
-    '/video/hero-warehouse-1.mp4',
+    '/video/hero-v2-cine.mp4',
+    '/video/hero-turbine-cine.mp4',
 ];
 
 // Using a standard array to store refs (more reliable than ref<[]> in v-for)
