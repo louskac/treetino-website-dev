@@ -6,6 +6,13 @@
             class="sticky top-0 z-10 flex h-[30vh] items-center justify-center overflow-hidden bg-white md:static md:z-auto md:h-auto md:w-4/5"
             @wheel.prevent="scrollConfigurator"
         >
+            <Link
+                :href="route('home')"
+                class="absolute top-4 left-4 z-10 flex items-center gap-1.5 text-md text-black/35 hover:text-black/60 transition-colors duration-200"
+            >
+                <ArrowLeft class="w-4 h-4" />
+                Zpět
+            </Link>
             <div
                 class="relative flex h-full w-full items-center justify-center"
             >
@@ -142,10 +149,11 @@
 </template>
 
 <script setup lang="ts">
-import { Head, router } from '@inertiajs/vue3';
+import { Head, router, Link } from '@inertiajs/vue3';
 import type { ComponentPublicInstance } from 'vue';
 import { ref, computed, onMounted, onUnmounted, nextTick, watch } from 'vue';
 import { route } from 'ziggy-js';
+import { ArrowLeft } from '@iconoir/vue';
 import ConfiguratorAddonsStep from '@/custom/configurator/ConfiguratorAddonsStep.vue';
 import ConfiguratorTreeDesignStep from '@/custom/configurator/ConfiguratorTreeDesignStep.vue';
 import ConfiguratorBatteryStep from '@/custom/configurator/ConfiguratorBatteryStep.vue';
