@@ -13,7 +13,8 @@ defineEmits<{ 'update:modelValue': [value: string] }>();
 const colors: ColorOption[] = [
     { id: 'transparent', label: 'Průhledná',       hex: null,      price: null,           isCustom: false, isTransparent: true },
     { id: 'white',       label: 'Bílá',            hex: '#F0F0F0', price: null,           isCustom: false },
-    { id: 'black',       label: 'Černá',           hex: '#1B1B1B', price: null,           isCustom: false },
+    { id: 'grey',        label: 'Šedá',            hex: '#A8A9AD', price: '+2 900 Kč',    isCustom: false },
+    { id: 'green',       label: 'Tmavě zelená',    hex: '#3A5F3A', price: '+2 900 Kč',    isCustom: false },
     { id: 'custom',      label: 'Barva na míru',   hex: null,      price: 'Individuální', isCustom: true  },
 ];
 </script>
