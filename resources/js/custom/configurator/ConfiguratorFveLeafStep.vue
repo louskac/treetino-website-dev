@@ -62,5 +62,12 @@ const options = [
         price: '+3 900 Kč',
         description: 'Čistý, jednoduchý tvar listu bez rušivých detailů – vhodný pro moderní architekturu.',
     },
+    {
+        id: 'custom',
+        label: 'Barva na míru',
+        swatch: 'conic-gradient(red, yellow, lime, aqua, blue, magenta, red)',
+        price: 'Individuální',
+        description: 'Vlastní barva FVE listů zpracovaná dle vašich požadavků.',
+    },
 ];
 </script>

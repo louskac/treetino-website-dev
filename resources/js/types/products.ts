@@ -62,7 +62,7 @@ export const PRODUCTS: Product[] = [
         image: '/img/stills/Still_Strom-v1.png',
         params: {
             variants: {
-                default: { power: '800 W', dailyProduction: '3,2 kWh', roi: '7 let' },
+                default: { power: '49,8 kW', dailyProduction: '350–450 kWh', roi: '9,5 roku' },
             },
         },
         steps: [

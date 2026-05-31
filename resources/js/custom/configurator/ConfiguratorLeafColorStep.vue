@@ -14,7 +14,7 @@ const { formatStep } = useStepFormatter();
 const colors: ColorOption[] = [
     { id: 'green',  label: 'Zelená',    hex: '#4A7C3F', price: null,            isCustom: false },
     { id: 'orange', label: 'Oranžová',  hex: '#C1541A', price: '+1 900 Kč',    isCustom: false },
-    { id: 'golden', label: 'Zlatá',     hex: '#C8A100', price: '+1 900 Kč',    isCustom: false },
+    { id: 'grey',   label: 'Šedá',      hex: '#8A8A8A', price: '+1 900 Kč',    isCustom: false },
     { id: 'custom', label: 'Na míru',   hex: null,      price: 'Individuální', isCustom: true  },
 ];
 </script>
