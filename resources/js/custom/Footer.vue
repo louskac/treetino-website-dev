@@ -156,10 +156,11 @@
                                 <h2 class="text-3xl">Treetino Corp s.r.o.</h2>
 
                                 <p class="mt-1 opacity-70">IČO: 10800107</p>
+                                <p class="mt-1 opacity-70">DIČ: CZ10800107</p>
 
                                 <p class="mt-2 opacity-70">
-                                    Český Šternberk 9, <br />
-                                    257 26 &mdash; Český Šternberk
+                                    Bílá - Vlčetín 62, <br />
+                                    463 43 &mdash; Bílá - Vlčetín
                                 </p>
                             </div>
 

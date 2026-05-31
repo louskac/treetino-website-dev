@@ -295,50 +295,8 @@
                             </div>
                         </div>
 
-                        <div class="hidden gap-6 lg:flex">
-                            <div
-                                class="button-app flex gap-4 rounded-2xl bg-black p-4 text-white dark:bg-white dark:text-black"
-                            >
-                                <AppStore
-                                    class="my-auto h-8 w-8"
-                                    stroke-width="2"
-                                />
-
-                                <div class="my-auto">
-                                    <div
-                                        class="mb-0.5 text-xs leading-3 tracking-tight opacity-70"
-                                    >
-                                        Download on the
-                                    </div>
-                                    <div
-                                        class="leading-4 font-semibold tracking-tight"
-                                    >
-                                        App Store
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div
-                                class="button-app flex gap-4 rounded-2xl bg-black p-4 text-white dark:bg-white dark:text-black"
-                            >
-                                <DownloadCircle
-                                    class="my-auto h-8 w-8"
-                                    stroke-width="2"
-                                />
-
-                                <div class="my-auto">
-                                    <div
-                                        class="mb-0.5 text-xs leading-3 tracking-tight opacity-70"
-                                    >
-                                        Download on the
-                                    </div>
-                                    <div
-                                        class="leading-4 font-semibold tracking-tight"
-                                    >
-                                        Google Play Store
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="hidden items-center lg:flex">
+                            <span class="inline-block rounded-full border border-black/20 px-5 py-2 text-sm font-medium tracking-wide opacity-60">Coming Soon on App Store and Google Play</span>
                         </div>
 
                         <div class="mt-6 hidden text-xs opacity-70 lg:block">
@@ -346,50 +304,8 @@
                             beta is available for pre-ordered units
                         </div>
 
-                        <div class="grid gap-3 lg:hidden">
-                            <div
-                                class="button-app flex gap-4 rounded-2xl bg-black p-4 text-white dark:bg-white dark:text-black"
-                            >
-                                <AppStore
-                                    class="my-auto h-8 w-8"
-                                    stroke-width="2"
-                                />
-
-                                <div class="my-auto">
-                                    <div
-                                        class="mb-0.5 text-xs leading-3 tracking-tight opacity-70"
-                                    >
-                                        Download on the
-                                    </div>
-                                    <div
-                                        class="leading-4 font-semibold tracking-tight"
-                                    >
-                                        App Store
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div
-                                class="button-app flex gap-4 rounded-2xl bg-black p-4 text-white dark:bg-white dark:text-black"
-                            >
-                                <DownloadCircle
-                                    class="my-auto h-8 w-8"
-                                    stroke-width="2"
-                                />
-
-                                <div class="my-auto">
-                                    <div
-                                        class="mb-0.5 text-xs leading-3 tracking-tight opacity-70"
-                                    >
-                                        Download on the
-                                    </div>
-                                    <div
-                                        class="leading-4 font-semibold tracking-tight"
-                                    >
-                                        Google Play Store
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="flex justify-center lg:hidden">
+                            <span class="inline-block rounded-full border border-black/20 px-5 py-2 text-sm font-medium tracking-wide opacity-60">Coming Soon</span>
                         </div>
 
                         <div
@@ -415,8 +331,6 @@ import {
     StatsReport,
     BellNotification,
     DimmerSwitch,
-    AppStore,
-    DownloadCircle,
 } from '@iconoir/vue';
 import { useParallax } from '@/composables/useAnimations';
 

@@ -48,8 +48,8 @@
                     IČO: 10800107
                 </div>
                 <div style="margin-top: 10px">
-                    Český Šternberk 9,<br>
-                    257 26 — Český Šternberk
+                    Bílá - Vlčetín 62,<br>
+                    463 43 — Bílá - Vlčetín
                 </div>
             </td>
             <td class="text-right">
