@@ -11,7 +11,7 @@ const emit = defineEmits<{
 <template>
     <!-- Controls -->
     <div
-        class="absolute bottom-0 left-1/2 z-50 max-w-[1400px] -translate-x-1/2 gap-4 text-white sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
+        class="absolute bottom-0 left-1/2 z-10 max-w-[1400px] -translate-x-1/2 gap-4 text-white sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
     >
         <div class="flex gap-3 py-6">
             <div

@@ -6,7 +6,7 @@
             <div
                 class="flex w-full flex-col rounded-2xl border bg-black/20 p-6 backdrop-blur-2xl transition-all duration-550"
                 :class="[
-                    activeDropdown === 'products'
+                    activeDropdown === 'products' || mobileMenuOpen
                         ? 'border-transparent bg-white shadow-2xl'
                         : isScrolled
                           ? 'bg-white/80 shadow-lg'
@@ -22,10 +22,12 @@
                                 :class="{
                                     'text-black':
                                         activeDropdown === 'products' ||
-                                        isScrolled,
+                                        isScrolled ||
+                                        mobileMenuOpen,
                                     'text-white':
                                         activeDropdown !== 'products' &&
-                                        !isScrolled,
+                                        !isScrolled &&
+                                        !mobileMenuOpen,
                                 }"
                             />
                         </Link>
@@ -119,12 +121,27 @@
                             <!--                                </button>-->
                             <!--                            </div>-->
 
-<!--                            <div class="my-auto xl:hidden">-->
-<!--                                <Menu-->
-<!--                                    class="h-4.5 w-4.5 text-white"-->
-<!--                                    stroke-width="2"-->
-<!--                                />-->
-<!--                            </div>-->
+                            <div class="my-auto xl:hidden">
+                                <button
+                                    class="-m-1 cursor-pointer p-1"
+                                    @click="mobileMenuOpen = !mobileMenuOpen"
+                                >
+                                    <Xmark
+                                        v-if="mobileMenuOpen"
+                                        stroke-width="2"
+                                        class="h-4.5 w-4.5 text-black"
+                                    />
+                                    <Menu
+                                        v-else
+                                        stroke-width="2"
+                                        class="h-4.5 w-4.5"
+                                        :class="{
+                                            'text-black': activeDropdown === 'products' || isScrolled,
+                                            'text-white': activeDropdown !== 'products' && !isScrolled,
+                                        }"
+                                    />
+                                </button>
+                            </div>
                         </div>
 
                         <div class="my-auto hidden text-white md:block">
@@ -204,13 +221,90 @@
                         </div>
                     </div>
                 </Transition>
+
+                <!-- Mobile menu -->
+                <Transition
+                    enter-active-class="transition-all duration-300 ease-out"
+                    leave-active-class="transition-all duration-200 ease-in"
+                    enter-from-class="opacity-0 -translate-y-2"
+                    leave-to-class="opacity-0 -translate-y-2"
+                >
+                    <div
+                        v-if="mobileMenuOpen"
+                        class="mt-6 border-t border-black/10 pt-6 xl:hidden"
+                    >
+                        <!-- Nav links -->
+                        <nav class="flex flex-col">
+                            <Link
+                                :href="route('collaboration.index')"
+                                class="rounded-xl px-3 py-3 text-sm font-medium text-black/80 transition-colors hover:bg-black/5 hover:text-black"
+                                @click="mobileMenuOpen = false"
+                                >Spolupráce</Link
+                            >
+                            <Link
+                                :href="route('media.index')"
+                                class="rounded-xl px-3 py-3 text-sm font-medium text-black/80 transition-colors hover:bg-black/5 hover:text-black"
+                                @click="mobileMenuOpen = false"
+                                >Média</Link
+                            >
+                            <Link
+                                :href="route('contact.index')"
+                                class="rounded-xl px-3 py-3 text-sm font-medium text-black/80 transition-colors hover:bg-black/5 hover:text-black"
+                                @click="mobileMenuOpen = false"
+                                >Kontakty</Link
+                            >
+                        </nav>
+
+                        <!-- Products -->
+                        <div class="mt-2">
+                            <p
+                                class="mb-1 px-3 text-xs font-semibold tracking-[0.2em] text-black/40 uppercase"
+                            >
+                                Produkty
+                            </p>
+                            <div class="flex flex-col">
+                                <div
+                                    v-for="item in products"
+                                    :key="item.id"
+                                    class="flex items-center justify-between rounded-xl px-3 py-2.5 transition-colors hover:bg-black/5"
+                                >
+                                    <span class="text-sm font-medium text-black/80">{{ item.label }}</span>
+                                    <div class="flex gap-2">
+                                        <Link
+                                            :href="`/products/${item.detail}`"
+                                            class="rounded-lg border border-black/20 px-3 py-1 text-xs text-black/70 transition-colors hover:text-black"
+                                            @click="mobileMenuOpen = false"
+                                            >Více info</Link
+                                        >
+                                        <Link
+                                            :href="`/configurator?product=${item.id}`"
+                                            class="rounded-lg bg-t-blue px-3 py-1 text-xs font-medium text-white transition-opacity hover:opacity-80"
+                                            @click="mobileMenuOpen = false"
+                                            >Objednat</Link
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CTA -->
+                        <div class="mt-6">
+                            <ButtonPrimary
+                                :href="route('configurator')"
+                                class="w-full text-center"
+                                @click="mobileMenuOpen = false"
+                                >Preorder Now</ButtonPrimary
+                            >
+                        </div>
+                    </div>
+                </Transition>
             </div>
         </div>
     </header>
 </template>
 
 <script setup lang="ts">
-import { SunLight, HalfMoon, Menu } from '@iconoir/vue';
+import { SunLight, HalfMoon, Menu, Xmark } from '@iconoir/vue';
 import { Link } from '@inertiajs/vue3';
 import { ref, onMounted, onUnmounted } from 'vue';
 import ButtonWhite from '@/custom/ButtonWhite.vue';
@@ -227,6 +321,7 @@ const props = defineProps({
 });
 
 const activeDropdown = ref<string | null>(null);
+const mobileMenuOpen = ref(false);
 
 const isScrolled = ref(!props.scroll);
 
@@ -242,6 +337,12 @@ const handleScroll = () => {
     isScrolled.value = window.scrollY > 600;
 };
 
+// Close mobile menu exactly once when crossing the xl breakpoint (1280px)
+const xlQuery = window.matchMedia('(min-width: 1280px)');
+const handleBreakpoint = (e: MediaQueryListEvent) => {
+    if (e.matches) mobileMenuOpen.value = false;
+};
+
 onMounted(() => {
     if (props.scroll) {
         window.addEventListener('scroll', handleScroll);
@@ -251,10 +352,12 @@ onMounted(() => {
         // If scroll is false, ensure it's set to true
         isScrolled.value = true;
     }
+    xlQuery.addEventListener('change', handleBreakpoint);
 });
 
 onUnmounted(() => {
     window.removeEventListener('scroll', handleScroll);
+    xlQuery.removeEventListener('change', handleBreakpoint);
 });
 
 // // 1. Track if we are currently dark
