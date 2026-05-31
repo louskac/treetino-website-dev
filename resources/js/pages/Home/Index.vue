@@ -6,9 +6,7 @@
 
         <HomeCtaTop/>
 
-        <HomeFeatures class="hidden lg:block"/>
-
-        <HomeFeaturesMobile class="block lg:hidden"/>
+        <HomeFeatures />
 
         <HomeApp/>
 
@@ -33,5 +31,4 @@ import HomeHero from '@/custom/home/HomeHero.vue';
 import HomeInfo from '@/custom/home/HomeInfo.vue';
 import HomeNumbers from '@/custom/home/HomeNumbers.vue';
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
-import HomeFeaturesMobile from '@/custom/home/HomeFeaturesMobile.vue';
 </script>
