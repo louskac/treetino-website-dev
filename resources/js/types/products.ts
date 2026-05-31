@@ -32,6 +32,12 @@ export interface ProductParams {
     roi: string;
 }
 
+export interface ProductStat {
+    icon: string;
+    value: string;
+    description: string;
+}
+
 export interface Product {
     id: ProductId;
     label: string;
@@ -45,6 +51,7 @@ export interface Product {
     basePrice: number;
     monthlySavings: number;
     reservationPrice: number;
+    stats: ProductStat[];
 }
 
 export const PRODUCTS: Product[] = [
@@ -93,6 +100,14 @@ export const PRODUCTS: Product[] = [
         basePrice: 3500000,
         monthlySavings: 5700,
         reservationPrice: 12000,
+        stats: [
+            { icon: 'leaf',              value: '300',    description: 'Solárních listů nejvyšší kvality' },
+            { icon: 'wind',              value: '12',     description: 'Větrných turbín generujících energii i v noci' },
+            { icon: 'asterisk',          value: '49 kW',  description: 'Výkon přizpůsobený podmínkám státní dotace' },
+            { icon: 'cube',              value: '300 m²', description: 'Průměrná úspora plochy oproti klasickým FV panelům' },
+            { icon: 'two-points-circle', value: '1 m²',   description: 'Zastavěná plocha - bez nutnosti stavebního povolení' },
+            { icon: 'home',              value: '60',     description: 'Jedna instalace napájí až 60 moderních domácností' },
+        ],
     },
     {
         id: ProductId.StromV2,
@@ -151,6 +166,14 @@ export const PRODUCTS: Product[] = [
         basePrice: 4000000,
         monthlySavings: 7350,
         reservationPrice: 12000,
+        stats: [
+            { icon: 'leaf',              value: '122',      description: 'Solárních listů nejvyšší kvality' },
+            { icon: 'wind',              value: '6',       description: 'Větrných turbín generujících energii i v noci' },
+            { icon: 'flash',             value: '12 kW',  description: 'Špičkový výkon s aktivními turbínami' },
+            { icon: 'cube',              value: '140 m²',   description: 'Průměrná úspora plochy oproti klasickým FV panelům' },
+            { icon: 'two-points-circle', value: '1 m²',     description: 'Zastavěná plocha - bez nutnosti stavebního povolení' },
+            { icon: 'home',              value: '15',       description: 'Jedna instalace napájí až 15 moderních domácností' },
+        ],
     },
     {
         id: ProductId.Turbina,
@@ -185,5 +208,10 @@ export const PRODUCTS: Product[] = [
         basePrice: 150000,
         monthlySavings: 1300,
         reservationPrice: 6000,
+        stats: [
+            { icon: 'flash',     value: '1,5 - 3 kW',      description: 'Výkon větrné turbíny' },
+            { icon: 'map-pin',   value: '3 varianty', description: 'Montáž na sloup, stěnu nebo střechu' },
+            { icon: 'palette',   value: 'Na přání',  description: 'Barva rámu přizpůsobená vašim požadavkům' },
+        ],
     },
 ];
