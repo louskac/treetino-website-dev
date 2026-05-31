@@ -62,7 +62,7 @@ export const PRODUCTS: Product[] = [
         image: '/img/stills/Still_Strom-v1.png',
         params: {
             variants: {
-                default: { power: '49,8 kW', dailyProduction: '350–450 kWh', roi: '9,5 roku' },
+                default: { power: '49,8 kW', dailyProduction: '350-450 kWh', roi: '9,5 roku' },
             },
         },
         steps: [
@@ -117,8 +117,8 @@ export const PRODUCTS: Product[] = [
         params: {
             configField: 'windTurbines',
             variants: {
-                'with-turbines':    { power: '1800 W', dailyProduction: '7,0 kWh', roi: '5 let' },
-                'without-turbines': { power: '1200 W', dailyProduction: '4,8 kWh', roi: '6 let' },
+                'with-turbines':    { power: '15 kW', dailyProduction: '110-135 kWh', roi: '5 let' },
+                'without-turbines': { power: '12 kW', dailyProduction: '85-115 kWh', roi: '6 let' },
             },
         },
         steps: [

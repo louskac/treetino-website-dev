@@ -7,15 +7,24 @@
             <button
                 v-for="option in options"
                 :key="option.id"
-                @click="$emit('update:modelValue', option.id)"
+                @click="!option.comingSoon && $emit('update:modelValue', option.id)"
                 class="w-full py-3.5 px-4 rounded-lg text-left border-2 transition-all duration-200"
-                :class="modelValue === option.id
-                    ? 'border-black dark:border-white bg-black/4 dark:bg-white/6'
-                    : 'border-black/15 dark:border-white/15 hover:border-black/35 dark:hover:border-white/35'"
+                :class="option.comingSoon
+                    ? 'border-black/8 dark:border-white/8 opacity-50 cursor-not-allowed'
+                    : modelValue === option.id
+                        ? 'border-black dark:border-white bg-black/4 dark:bg-white/6'
+                        : 'border-black/15 dark:border-white/15 hover:border-black/35 dark:hover:border-white/35'"
             >
                 <div class="flex items-center justify-between mb-1">
                     <span class="text-sm font-medium text-black dark:text-white">{{ option.label }}</span>
                     <span
+                        v-if="option.comingSoon"
+                        class="text-xs font-medium px-2 py-0.5 rounded-full bg-black/8 dark:bg-white/10 text-black/40 dark:text-white/40"
+                    >
+                        Připravujeme
+                    </span>
+                    <span
+                        v-else
                         class="flex items-center gap-1.5 text-xs transition-colors duration-200"
                         :class="modelValue === option.id
                             ? 'text-black dark:text-white font-semibold'
@@ -50,11 +59,13 @@ const options = [
         id: 'with-turbines',
         label: 'S větrnými turbínami',
         description: 'Kombinace solárních listů a větrných turbín pro maximální výrobu energie za každého počasí.',
+        comingSoon: true,
     },
     {
         id: 'without-turbines',
         label: 'Bez větrných turbín',
         description: 'Pouze solární listy. Ideální pro lokality s vysokým slunečním svitem.',
+        comingSoon: false,
     },
 ];
 </script>
