@@ -5,6 +5,7 @@
         <video
             ref="videoRef"
             :key="currentVideo"
+            :poster="currentPoster"
             class="absolute top-0 left-0 h-full w-full object-cover"
             muted
             loop
@@ -32,9 +33,16 @@ const videos = [
     '/video/hero-turbine-cine-sm.mp4',
 ];
 
+const posters = [
+    '/img/hero-images/poster-v1_1.1.1.webp',
+    '/img/hero-images/poster-v2_2.1.2.webp',
+    '/img/hero-images/poster-turbine_2.1.1.webp',
+];
+
 const videoRef = ref<HTMLVideoElement | null>(null);
 
 const currentVideo = computed(() => videos[props.activeIndex]);
+const currentPoster = computed(() => posters[props.activeIndex]);
 
 const playVideo = async () => {
     await nextTick();
