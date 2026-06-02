@@ -19,7 +19,7 @@
                             >
                                 <img
                                     class="h-full w-full object-cover"
-                                    src="/img/app-placeholder.jpg"
+                                    src="/img/treetino-app.png"
                                     alt=""
                                 />
                             </div>
