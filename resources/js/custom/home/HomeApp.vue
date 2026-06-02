@@ -50,7 +50,7 @@
 
                         <!-- Card -->
                         <div
-                            class="absolute right-[5%] bottom-58 z-3 w-60 rounded-2xl border border-black/20 bg-white/30 p-3 shadow-lg backdrop-blur-xl"
+                            class="absolute right-[5%] bottom-58 z-3 w-60 rounded-2xl border border-black/20 bg-white/20 p-3 shadow-lg backdrop-blur-xl"
                             ref="rightCard"
                             :style="{
                                 transform:
@@ -69,11 +69,11 @@
 
                                 <div class="my-auto">
                                     <div
-                                        class="text-xs tracking-tight text-black opacity-70"
+                                        class="text-xs tracking-tight text-white opacity-70"
                                     >
                                         Performance
                                     </div>
-                                    <div class="tracking-tight text-black">
+                                    <div class="tracking-tight text-white">
                                         44.1 kW at 90 %
                                     </div>
                                 </div>
@@ -99,7 +99,7 @@
 
                         <!-- Card -->
                         <div
-                            class="absolute bottom-32 left-[5%] z-3 w-60 rounded-2xl border border-black/20 bg-white/30 p-3 shadow-lg backdrop-blur-xl"
+                            class="absolute bottom-32 left-[5%] z-3 w-60 rounded-2xl border border-black/20 bg-white/20 p-3 shadow-lg backdrop-blur-xl"
                             ref="leftCard"
                             :style="{
                                 transform:
@@ -118,11 +118,11 @@
 
                                 <div class="my-auto">
                                     <div
-                                        class="text-xs tracking-tight text-black opacity-70"
+                                        class="text-xs tracking-tight text-white opacity-70"
                                     >
                                         Weather Warning
                                     </div>
-                                    <div class="tracking-tight text-black">
+                                    <div class="tracking-tight text-white">
                                         Safe Mode Started
                                     </div>
                                 </div>
