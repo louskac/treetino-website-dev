@@ -18,7 +18,7 @@
                                 class="absolute inset-x-[4%] top-[2%] bottom-[2%] z-1 overflow-hidden rounded-[6vw] sm:rounded-[5vw] md:rounded-[6vw] lg:rounded-[3vw] xl:rounded-[2vw]"
                             >
                                 <img
-                                    class="h-full w-full object-cover"
+                                    class="h-full w-full object-cover scale-[.99]"
                                     src="/img/treetino-app.png"
                                     alt=""
                                 />
