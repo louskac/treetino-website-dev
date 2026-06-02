@@ -6,24 +6,47 @@
         <div
             class="relative mx-6 aspect-3/2 overflow-hidden rounded-2xl bg-stone-100 shadow-lg sm:mx-0 lg:aspect-3/1 dark:bg-stone-900"
         >
-            <img
-                v-if="selectedProductId === ProductId.StromV1"
-                class="h-full w-full object-contain p-6 lg:p-12"
-                src="/img/stills/Still_Strom-v1.png"
-                alt="Strom V1"
-            />
-            <img
-                v-else-if="selectedProductId === ProductId.StromV2"
-                class="h-full w-full object-contain p-6 lg:p-12"
-                src="/img/stills/Still_Strom-v2.png"
-                alt="Strom V2"
-            />
-            <img
-                v-else
-                class="h-full w-full object-contain p-6 lg:p-12"
-                src="/img/stills/Still_Turbina.png"
-                alt="Větrná turbína"
-            />
+            <!-- Strom V1 -->
+            <div v-if="selectedProductId === ProductId.StromV1">
+                <img
+                    class="hidden h-full w-full object-cover lg:block"
+                    src="/img/info/night-detail-w.jpg"
+                    alt="Strom V1"
+                />
+                <img
+                    class="block h-full w-full object-cover lg:hidden"
+                    src="/img/info/night-detail-l.jpg"
+                    alt="Strom V1"
+                />
+            </div>
+
+            <!-- Strom V2 -->
+            <div v-else-if="selectedProductId === ProductId.StromV2">
+                <img
+                    class="hidden h-full w-full object-cover lg:block"
+                    src="/img/info/info-strom-v2-w.webp"
+                    alt="Strom V2"
+                />
+                <img
+                    class="block h-full w-full object-cover lg:hidden"
+                    src="/img/info/info-strom-v2-l.webp"
+                    alt="Strom V2"
+                />
+            </div>
+
+            <!-- Turbine -->
+            <div v-else>
+                <img
+                    class="hidden h-full w-full object-cover lg:block"
+                    src="/img/info/info-turbine-w.webp"
+                    alt="Větrná turbína"
+                />
+                <img
+                    class="block h-full w-full object-cover lg:hidden"
+                    src="/img/info/info-turbine-l.webp"
+                    alt="Větrná turbína"
+                />
+            </div>
 
             <!-- Product toggle -->
             <div class="absolute inset-x-0 bottom-4 flex justify-start px-4">
@@ -79,7 +102,10 @@
                         : 'grid-cols-2 2xl:grid-cols-3'
                 "
             >
-                <div v-for="stat in selectedProduct.stats" :key="stat.icon + stat.value">
+                <div
+                    v-for="stat in selectedProduct.stats"
+                    :key="stat.icon + stat.value"
+                >
                     <div class="mb-2 flex gap-3">
                         <div
                             class="flex aspect-square h-12 w-12 shrink-0 rounded-xl bg-primary/5 text-t-blue dark:text-primary"

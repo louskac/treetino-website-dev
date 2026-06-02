@@ -51,7 +51,7 @@ onMounted(async () => {
                 playsinline
                 preload="auto"
             >
-                <source src="/video/hero-office-2.mp4" type="video/mp4" />
+                <source src="/video/office-corr.mp4" type="video/mp4" />
             </video>
         </div>
 
