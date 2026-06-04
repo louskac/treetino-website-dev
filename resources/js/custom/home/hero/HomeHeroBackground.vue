@@ -1,6 +1,6 @@
 <template>
     <div
-        class="bg absolute top-0 left-0 h-full w-full overflow-hidden bg-t-dark"
+        class="bg absolute top-0 left-0 h-full w-full overflow-hidden bg-black"
     >
         <video
             ref="videoRef"
