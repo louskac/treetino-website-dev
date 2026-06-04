@@ -15,7 +15,7 @@
             preload="auto"
             style="pointer-events: none"
         >
-            <source :src="currentVideo" type="video/mp4" />
+            <source :src="currentVideo" type="video/webm" />
         </video>
     </div>
 </template>
@@ -28,9 +28,9 @@ const props = defineProps<{
 }>();
 
 const videos = [
-    '/video/hero-v1-cine-noaudio.mp4',
-    '/video/hero-v2-cine-noaudio.mp4',
-    '/video/hero-turbine-cine-noaudio.mp4',
+    '/video/hero-v1-cine-noaudio.webm',
+    '/video/hero-v2-cine-noaudio.webm',
+    '/video/hero-turbine-cine-noaudio.webm',
 ];
 
 const posters = [

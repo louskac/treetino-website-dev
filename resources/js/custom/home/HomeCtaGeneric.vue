@@ -51,7 +51,7 @@ onMounted(async () => {
                 playsinline
                 preload="auto"
             >
-                <source src="/video/office-corr.mp4" type="video/mp4" />
+                <source src="/video/office-corr.webm" type="video/webm" />
             </video>
         </div>
 
@@ -59,7 +59,7 @@ onMounted(async () => {
             v-if="isSafari"
             class="bg absolute top-0 left-0 h-full w-full bg-t-dark opacity-20"
             style="
-                background-image: url('/video/hero-office-2.mp4');
+                background-image: url('/video/office-corr.webm');
                 background-size: cover;
                 background-position: center;
             "

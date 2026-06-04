@@ -1,7 +1,7 @@
 <template>
     <section class="hero h-screen w-full bg-zinc-950">
-        <HomeHeroBackground class="hidden lg:block" :active-index="activeIndex" />
-        <HomeHeroBackgroundSm class="block lg:hidden" :active-index="activeIndex" />
+        <HomeHeroBackground class="" :active-index="activeIndex" />
+<!--        <HomeHeroBackgroundSm class="block lg:hidden" :active-index="activeIndex" />-->
 
         <div
             class="absolute bottom-0 h-100 w-full bg-linear-to-b from-transparent to-black"
