@@ -1,7 +1,7 @@
 import CookieConsentPlugin from './Plugins/CookieConsent';
 import type { CookieConsentConfig } from 'vanilla-cookieconsent';
 import 'vanilla-cookieconsent/dist/cookieconsent.css';
-import { createInertiaApp } from '@inertiajs/vue3';
+import { createInertiaApp, router } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import type { DefineComponent } from 'vue';
 import { createApp, h } from 'vue';
@@ -60,6 +60,15 @@ createInertiaApp({
         });
 
         document.documentElement.lang = shared.i18n.locale;
+
+        router.on('navigate', (event) => {
+            const next = event.detail.page.props.i18n as typeof shared.i18n;
+
+            i18n.global.setLocaleMessage(next.locale, next.messages);
+            i18n.global.fallbackLocale.value = next.fallbackLocale;
+            i18n.global.locale.value = next.locale;
+            document.documentElement.lang = next.locale;
+        });
 
         createApp({ render: () => h(App, props) })
             .use(plugin)

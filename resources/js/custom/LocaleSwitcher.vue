@@ -7,7 +7,14 @@ const locale = computed(() => page.props.i18n.locale);
 const locales = computed(() => page.props.i18n.locales);
 
 const change = (event: Event) => {
-    router.post('/locale', { locale: (event.target as HTMLSelectElement).value }, { preserveScroll: true });
+    router.post(
+        '/locale',
+        { locale: (event.target as HTMLSelectElement).value },
+        {
+            preserveScroll: true,
+            onSuccess: () => window.location.reload(),
+        },
+    );
 };
 </script>
 

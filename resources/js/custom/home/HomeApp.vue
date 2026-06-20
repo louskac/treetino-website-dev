@@ -18,7 +18,7 @@
                                 class="absolute inset-x-[4%] top-[2%] bottom-[2%] z-1 overflow-hidden rounded-[6vw] sm:rounded-[5vw] md:rounded-[6vw] lg:rounded-[3vw] xl:rounded-[2vw]"
                             >
                                 <img
-                                    class="h-full w-full object-cover scale-[.99]"
+                                    class="h-full w-full scale-[.99] object-cover"
                                     src="/img/treetino-app.png"
                                     alt=""
                                 />
@@ -92,7 +92,7 @@
                         >
                             <div class="flex w-full gap-3">
                                 <div
-                                    class="flex aspect-square w-12 rounded-xl bg-purple-700 text-white"
+                                    class="flex aspect-square w-12 rounded-xl bg-blue-700 text-white"
                                 ></div>
                             </div>
                         </div>
@@ -108,7 +108,7 @@
                         >
                             <div class="flex w-full gap-3">
                                 <div
-                                    class="flex aspect-square w-12 rounded-xl bg-purple-700 text-white"
+                                    class="flex aspect-square w-12 rounded-xl bg-blue-700 text-white"
                                 >
                                     <Thunderstorm
                                         stroke-width="2.5"
@@ -135,7 +135,9 @@
                     <div class="my-auto">
                         <h2 class="mb-6 text-6xl">
                             Treetino <br />
-                            <span class="text-t-blue">Ve vaší kapse </span>
+                            <span class="text-t-blue">{{
+                                $t('app.title')
+                            }}</span>
                         </h2>
 
                         <div class="mb-6">
@@ -145,11 +147,7 @@
                                 <!--                                access detailed historical reports. All from our-->
                                 <!--                                intuitive Treetino app for iOS and Android-->
 
-                                Mějte dokonalý přehled. Sledujte výrobu energie
-                                v reálném čase, ovládejte světelnou show,
-                                přijímejte upozornění na údržbu a prohlížejte si
-                                detailní historické reporty. To vše z naší
-                                intuitivní aplikace Treetino pro iOS a Android.
+                                {{ $t('app.text') }}
                             </p>
                         </div>
 
@@ -296,7 +294,10 @@
                         </div>
 
                         <div class="hidden items-center lg:flex">
-                            <span class="inline-block rounded-full border border-black/20 px-5 py-2 text-sm font-medium tracking-wide opacity-60">Coming Soon on App Store and Google Play</span>
+                            <span
+                                class="inline-block rounded-full border border-black/20 px-5 py-2 text-sm font-medium tracking-wide opacity-60"
+                                >Coming Soon on App Store and Google Play</span
+                            >
                         </div>
 
                         <div class="mt-6 hidden text-xs opacity-70 lg:block">
@@ -305,7 +306,10 @@
                         </div>
 
                         <div class="flex justify-center lg:hidden">
-                            <span class="inline-block rounded-full border border-black/20 px-5 py-2 text-sm font-medium tracking-wide opacity-60">Coming Soon</span>
+                            <span
+                                class="inline-block rounded-full border border-black/20 px-5 py-2 text-sm font-medium tracking-wide opacity-60"
+                                >Coming Soon</span
+                            >
                         </div>
 
                         <div

@@ -47,6 +47,10 @@ return [
         'info.forest.text' => ['cs' => 'Integrovaná AI maximalizuje energetický výnos a řídí prediktivní údržbu.', 'en' => 'Integrated AI maximizes energy yield and manages predictive maintenance.'],
         'numbers.title' => ['cs' => 'Informace & čísla', 'en' => 'Facts & figures'],
     ],
+    'app' => [
+        'title' => ['cs' => 'Ve vaší kapse', 'en' => 'In Your Pocket'],
+        'text' => ['cs' => 'Mějte dokonalý přehled. Sledujte výrobu energie v reálném čase, ovládejte světelnou show, přijímejte upozornění na údržbu a prohlížejte si detailní historické reporty. To vše z naší intuitivní aplikace Treetino pro iOS a Android.', 'en' => 'Mějte dokonalý přehled. Sledujte výrobu energie v reálném čase, ovládejte světelnou show, přijímejte upozornění na údržbu a prohlížejte si detailní historické reporty. To vše z naší intuitivní aplikace Treetino pro iOS a Android.'],
+    ],
     'products' => [
         'v1.title' => ['cs' => 'Treetino v1', 'en' => 'Treetino v1'],
         'v1.audience' => ['cs' => 'Pro firmy a města', 'en' => 'For companies and cities'],
