@@ -11,6 +11,7 @@ export type User = {
 
 export type Auth = {
     user: User;
+    admin: User | null;
 };
 
 export type TwoFactorConfigContent = {

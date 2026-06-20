@@ -2,7 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Services\TranslationService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -35,11 +37,23 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $locale = app()->getLocale();
+
         return [
             ...parent::share($request),
             'name' => config('app.name'),
             'auth' => [
                 'user' => $request->user(),
+                'admin' => Auth::guard('admin')->user(),
+            ],
+            'i18n' => [
+                'locale' => $locale,
+                'fallbackLocale' => config('app.fallback_locale'),
+                'locales' => config('localization.locales'),
+                'messages' => app(TranslationService::class)->messages($locale),
+            ],
+            'flash' => [
+                'success' => fn () => $request->session()->get('success'),
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
         ];

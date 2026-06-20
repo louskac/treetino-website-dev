@@ -1,21 +1,22 @@
 <?php
 
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\CollaborationController;
-use App\Http\Controllers\MediaController;
-use App\Http\Controllers\ContactController;
-
 use App\Http\Controllers\Api\PreorderController;
-use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Api\WebhookController;
+use App\Http\Controllers\CollaborationController;
 use App\Http\Controllers\ConfiguratorController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LocaleController;
+use App\Http\Controllers\MediaController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/home', function () {
-   return redirect('/');
+    return redirect('/');
 });
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::post('/locale', LocaleController::class)->name('locale.update');
 Route::get('/configurator', [ConfiguratorController::class, 'index'])->name('configurator');
 Route::get('/configurator/{product}', [ConfiguratorController::class, 'index'])->name('configurator.product');
 
@@ -26,17 +27,17 @@ Route::prefix('products')->name('products.')->group(function () {
 });
 
 // Spolupráce
-Route::prefix('collaboration')->name('collaboration.')->group( function () {
+Route::prefix('collaboration')->name('collaboration.')->group(function () {
     Route::get('/', [CollaborationController::class, 'index'])->name('index');
 });
 
 // Media
-Route::prefix('media')->name('media.')->group( function () {
+Route::prefix('media')->name('media.')->group(function () {
     Route::get('/', [MediaController::class, 'index'])->name('index');
 });
 
 // Kontakt
-Route::prefix('contact')->name('contact.')->group( function () {
+Route::prefix('contact')->name('contact.')->group(function () {
     Route::get('/', [ContactController::class, 'index'])->name('index');
     Route::post('/', [ContactController::class, 'store'])->name('store');
 });
@@ -45,9 +46,9 @@ Route::prefix('contact')->name('contact.')->group( function () {
 Route::post('/checkout', [PreorderController::class, 'initiate'])->name('checkout-initiate');
 
 // Orders
-Route::prefix('preorders')->name('preorders.')->group( function () {
-    Route::post('/invoice',  [PreorderController::class, 'invoice'])->name('invoice');
-    Route::get ('/invoicetest',  [PreorderController::class, 'invoicetest'])->name('invoicetest');
+Route::prefix('preorders')->name('preorders.')->group(function () {
+    Route::post('/invoice', [PreorderController::class, 'invoice'])->name('invoice');
+    Route::get('/invoicetest', [PreorderController::class, 'invoicetest'])->name('invoicetest');
 
     Route::get('/{uuid}', [OrderController::class, 'success'])->name('success');
 });
@@ -60,3 +61,4 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::post('/webhook', [WebhookController::class, 'webhook'])->name('webhook');
 
 require __DIR__.'/settings.php';
+require __DIR__.'/admin.php';

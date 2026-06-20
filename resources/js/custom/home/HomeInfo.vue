@@ -40,11 +40,9 @@
                             />
                         </div>
                     </div>
-                    <h2 class="mt-4 text-3xl sm:text-4xl">Špičkový design</h2>
+                    <h2 class="mt-4 text-3xl sm:text-4xl">{{ $t('home.info.design.title') }}</h2>
                     <p class="mt-2 mb-3">
-                        Treetino je víc než elektrárna. Slouží jako sebevědomý
-                        symbol udržitelnosti, se kterým firmy a instituce
-                        elegantně naplní své ESG cíle.
+                        {{ $t('home.info.design.text') }}
                     </p>
 
                     <p>
@@ -68,12 +66,10 @@
                         </div>
                     </div>
                     <h2 class="mt-4 text-3xl sm:text-4xl">
-                        Chytrý propojený les
+                        {{ $t('home.info.forest.title') }}
                     </h2>
                     <p class="mt-2 mb-3">
-                        Treetino tvoří inteligentní, propojený ekosystém.
-                        Integrovaná AI v reálném čase maximalizuje energetický
-                        výnos a autonomně řídí prediktivní údržbu.
+                        {{ $t('home.info.forest.text') }}
                     </p>
 
                     <p>
@@ -103,7 +99,7 @@
                                 />
                             </div>
                         </div>
-                        <h2 class="mt-4 text-4xl">Špičkový design</h2>
+                        <h2 class="mt-4 text-4xl">{{ $t('home.info.design.title') }}</h2>
                         <p class="mt-2 mb-3">
                             Treetino je víc než elektrárna. Slouží jako
                             sebevědomý symbol udržitelnosti, se kterým firmy a

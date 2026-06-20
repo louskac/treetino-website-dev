@@ -280,10 +280,10 @@ import {
 } from '@iconoir/vue';
 import { Head } from '@inertiajs/vue3';
 import { ref, onMounted } from 'vue';
-import DefaultLayout from '@/layouts/DefaultLayout.vue';
 import { useParallax } from '@/composables/useAnimations';
+import DefaultLayout from '@/layouts/DefaultLayout.vue';
 
-const video = ref(null);
+const video = ref<HTMLVideoElement | null>(null);
 
 const { el: leftCardEl, translateY: leftTranslateY } = useParallax(1);
 const { el: rightCardEl, translateY: rightTranslateY } = useParallax(1);

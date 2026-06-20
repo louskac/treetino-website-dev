@@ -32,16 +32,13 @@
                             <div
                                 class="text-xs font-semibold tracking-[0.2em] text-black/70 uppercase"
                             >
-                                Pro velké projekty
+                                {{ $t('products.turbine.audience') }}
                             </div>
 
-                            <div class="mt-2 text-6xl">Větrná Turbína</div>
+                            <div class="mt-2 text-6xl">{{ $t('products.turbine.title') }}</div>
 
                             <div class="mt-4 text-2xl opacity-70">
-                                Čistá energie, která je vidět na vašich
-                                úsporách, ale neruší okolí svou přítomností.
-                                Naše tichá a průhledná turbína vyrábí elektřinu
-                                24/7.
+                                {{ $t('products.turbine.lead') }}
                             </div>
                         </div>
                     </div>
@@ -60,7 +57,7 @@
                 <div class="w-full h-full flex lg:px-20">
                     <div class="my-auto mx-auto">
                         <div class="text-6xl text-t-blue">
-                            Coming Soon
+                            {{ $t('common.status.coming_soon') }}
                         </div>
                     </div>
                 </div>

@@ -35,10 +35,10 @@ class ContactController extends Controller
             'mail' => 'required|email',
             'message' => 'required',
         ], [
-            'name.required' => 'Name is required.',
-            'mail.required' => 'Email is required.',
-            'mail.email' => 'Email is not valid.',
-            'message.required' => 'Message is required.',
+            'name.required' => __('contact.validation.name_required'),
+            'mail.required' => __('contact.validation.email_required'),
+            'mail.email' => __('contact.validation.email_invalid'),
+            'message.required' => __('contact.validation.message_required'),
         ]);
 
         $user = User::where('email', $request->mail)->first();
@@ -54,7 +54,7 @@ class ContactController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Thank you! Your message has been sent.',
+            'message' => __('contact.form.success'),
         ], 200);
     }
 }

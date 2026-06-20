@@ -13,7 +13,7 @@
 
         <HomeHeroCarousel ref="carouselRef" />
 
-        <HomeHeroCarouselControls @next="next" @prev="prev" @goTo="goTo" />
+        <HomeHeroCarouselControls @next="next" @prev="prev" />
     </section>
 </template>
 

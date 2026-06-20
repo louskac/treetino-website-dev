@@ -82,7 +82,7 @@
                 </div>
 
                 <h2 class="mt-3 text-4xl leading-9 2xl:text-6xl 2xl:leading-14">
-                    Informace &&nbsp;Čísla
+                    {{ $t('home.numbers.title') }}
                 </h2>
 
                 <div class="mt-auto pt-6">
@@ -127,8 +127,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-import type { Component } from 'vue';
 import {
     Asterisk,
     Cube,
@@ -140,8 +138,10 @@ import {
     TwoPointsCircle,
     Wind,
 } from '@iconoir/vue';
-import ButtonPrimary from '@/custom/ButtonPrimary.vue';
+import { computed, ref } from 'vue';
+import type { Component } from 'vue';
 import { route } from 'ziggy-js';
+import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import { PRODUCTS, ProductId } from '@/types/products';
 
 const ICON_MAP: Record<string, Component> = {

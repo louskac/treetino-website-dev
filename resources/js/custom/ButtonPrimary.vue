@@ -16,7 +16,7 @@ const props = defineProps({
     variant: {
         type: String,
         default: 'regular',
-        validator: (value) => ['regular', 'slim'].includes(value),
+        validator: (value: unknown) => ['regular', 'slim'].includes(value as string),
     },
     href: {
         type: String,

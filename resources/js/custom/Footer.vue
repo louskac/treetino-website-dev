@@ -48,22 +48,22 @@
 
                             <div class="mt-6 flex flex-col gap-2">
                                 <FooterLink :href="route('home')">
-                                    Home
+                                    {{ $t('common.nav.home') }}
                                 </FooterLink>
                                 <FooterLink :href="route('configurator')"
-                                    >Configurator</FooterLink
+                                    >{{ $t('configurator.title') }}</FooterLink
                                 >
                                 <FooterLink :href="route('collaboration.index')"
                                     >Government Grants</FooterLink
                                 >
                                 <FooterLink :href="route('collaboration.index')"
-                                    >Collaboration</FooterLink
+                                    >{{ $t('common.nav.collaboration') }}</FooterLink
                                 >
                                 <FooterLink :href="route('media.index')"
-                                    >Media</FooterLink
+                                    >{{ $t('common.nav.media') }}</FooterLink
                                 >
                                 <FooterLink :href="route('media.index')"
-                                    >Contact</FooterLink
+                                    >{{ $t('common.nav.contact') }}</FooterLink
                                 >
                             </div>
                         </div>
@@ -86,7 +86,7 @@
 
                             <div class="mt-6 flex flex-col gap-2">
                                 <div class="w-fit cursor-not-allowed">
-                                    Coming Soon
+                                    {{ $t('common.status.coming_soon') }}
                                 </div>
                             </div>
                         </div>
@@ -140,7 +140,7 @@
                             >
                                 <span
                                     class="text-xs font-semibold tracking-[0.2em] text-white/60 uppercase"
-                                    >Company</span
+                                    >{{ $t('common.footer.company') }}</span
                                 >
                                 <span
                                     class="text-xs font-medium tracking-widest text-white/60"
@@ -165,8 +165,7 @@
                             </div>
 
                             <div class="mt-auto text-xs text-white opacity-70">
-                                &copy; 2026, Treetino Corp s.r.o., All Rights
-                                Reserved<br />
+                                &copy; 2026, Treetino Corp s.r.o., {{ $t('common.footer.rights') }}<br />
                                 Design & Development by
                                 <a
                                     class="underline"

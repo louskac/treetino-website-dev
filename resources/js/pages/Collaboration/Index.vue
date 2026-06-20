@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { Head } from '@inertiajs/vue3';
-import DefaultLayout from '@/layouts/DefaultLayout.vue';
-import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import { route } from 'ziggy-js';
+import ButtonPrimary from '@/custom/ButtonPrimary.vue';
+import DefaultLayout from '@/layouts/DefaultLayout.vue';
 </script>
 
 <template>
@@ -25,7 +25,7 @@ import { route } from 'ziggy-js';
             <div
                 class="relative mx-auto h-full w-full max-w-[1400px] px-6 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
             >
-                <div class="text-6xl">Collaboration</div>
+                <div class="text-6xl">{{ $t('collaboration.title') }}</div>
 
                 <div class="grid grid-cols-1 gap-6 pt-6 pb-12 md:grid-cols-2">
                     <div
@@ -35,10 +35,7 @@ import { route } from 'ziggy-js';
 
                         <div class="opacity-70">
                             <p class="mb-3">
-                                Treetino Helps you with applying for government
-                                grant programs and navigating the bureaucratic
-                                landscape. You can focus on your own company
-                                development.
+                                {{ $t('collaboration.grant_help') }}
                             </p>
 
                             <p>

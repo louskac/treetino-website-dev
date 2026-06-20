@@ -2,6 +2,7 @@
 import { CheckCircle, Refresh } from '@iconoir/vue';
 import { Head } from '@inertiajs/vue3';
 import axios from 'axios';
+import type { AxiosError } from 'axios';
 import { ref } from 'vue';
 import { route } from 'ziggy-js';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
@@ -15,7 +16,7 @@ const message = ref('');
 const formSending = ref(false);
 const formSent = ref(false);
 
-const formErrors = ref({});
+const formErrors = ref<Record<string, string[]>>({});
 
 async function formProcess() {
     try {
@@ -35,9 +36,11 @@ async function formProcess() {
         formSending.value = false;
         console.log(response.data);
     } catch (error) {
-        if (error.response) {
+        const requestError = error as AxiosError<{ errors: Record<string, string[]> }>;
+
+        if (requestError.response) {
             // This is where your custom messages from the Controller are!
-            formErrors.value = error.response.data.errors;
+            formErrors.value = requestError.response.data.errors;
         }
 
         formSending.value = false;
@@ -67,17 +70,15 @@ async function formProcess() {
             <div
                 class="relative mx-auto h-full w-full max-w-[1400px] px-6 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
             >
-                <div class="text-6xl">Contact</div>
+                <div class="text-6xl">{{ $t('contact.title') }}</div>
 
                 <div class="grid grid-cols-1 gap-6 pt-6 pb-12 md:grid-cols-2">
                     <div class="relative flex flex-col">
                         <div class="relative my-auto w-full">
-                            <div class="pb-4 text-4xl">Write to our team</div>
+                            <div class="pb-4 text-4xl">{{ $t('contact.title') }}</div>
                             <div class="block opacity-70 2xl:w-3/4">
                                 <p class="mb-3">
-                                    Feel free to ask about our products and
-                                    services or about government grant
-                                    assistance
+                                    {{ $t('contact.lead') }}
                                 </p>
 
                                 <p>
@@ -97,7 +98,7 @@ async function formProcess() {
                                     for="name"
                                     class="mb-2 block text-sm opacity-70"
                                 >
-                                    Name
+                                    {{ $t('contact.form.name') }}
                                 </label>
                                 <input
                                     class="w-full rounded-xl border bg-white px-4 py-3 text-black"
@@ -119,7 +120,7 @@ async function formProcess() {
                                     for="email"
                                     class="mb-2 block text-sm opacity-70"
                                 >
-                                    E-Mail
+                                    {{ $t('contact.form.email') }}
                                 </label>
                                 <input
                                     class="w-full rounded-xl border bg-white px-4 py-3 text-black"
@@ -141,7 +142,7 @@ async function formProcess() {
                                     for="message"
                                     class="mb-2 block text-sm opacity-70"
                                 >
-                                    Message
+                                    {{ $t('contact.form.message') }}
                                 </label>
                                 <textarea
                                     class="w-full rounded-xl border bg-white px-4 py-3 text-black"
@@ -164,7 +165,7 @@ async function formProcess() {
                                     class="w-full cursor-pointer text-center"
                                     @click="formProcess"
                                 >
-                                    Send
+                                    {{ $t('contact.form.submit') }}
                                 </ButtonPrimary>
 
                                 <!--  Removed for Prod  -->
@@ -224,7 +225,7 @@ async function formProcess() {
                                                 v-if="formSent"
                                                 class="absolute left-1/2 -translate-x-1/2 text-center opacity-70 text-sm"
                                             >
-                                                Your message was sent
+                                                {{ $t('contact.form.success') }}
                                             </div>
                                         </Transition>
                                     </div>

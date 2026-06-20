@@ -1,5 +1,5 @@
 <template>
-    <Head title="Home" />
+    <Head :title="$t('home.meta.title')" />
 
     <DefaultLayout>
         <HomeHero/>

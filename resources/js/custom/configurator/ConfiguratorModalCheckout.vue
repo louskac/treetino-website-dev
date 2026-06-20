@@ -1,10 +1,18 @@
 <script setup lang="ts">
+import { Xmark } from '@iconoir/vue';
+import { loadStripe } from '@stripe/stripe-js';
+import type {
+    PaymentRequest,
+    PaymentRequestPaymentMethodEvent,
+    Stripe,
+    StripeCardElement,
+    StripePaymentRequestButtonElement,
+} from '@stripe/stripe-js';
 import axios from 'axios';
+import type { AxiosError } from 'axios';
 import { ref, nextTick } from 'vue';
 import { route } from 'ziggy-js';
-import { loadStripe } from '@stripe/stripe-js';
 
-import { Xmark } from '@iconoir/vue';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import ButtonSecondary from '@/custom/ButtonSecondary.vue';
 
@@ -33,15 +41,17 @@ const errorMessage = ref('');
 const preorderUuid = ref('');
 
 // Stripe refs
-const stripe = ref(null);
-const paymentRequest = ref(null);
-const prButton = ref(null);
+const stripe = ref<Stripe | null>(null);
+const paymentRequest = ref<PaymentRequest | null>(null);
+const prButton = ref<StripePaymentRequestButtonElement | null>(null);
 const canPayWithWallet = ref(false);
-const cardElement = ref(null);
+const cardElement = ref<StripeCardElement | null>(null);
 const clientSecret = ref('');
 
 const handleContinue = async () => {
-    if (!email.value) return;
+    if (!email.value) {
+return;
+}
 
     isProcessing.value = true;
     errorMessage.value = '';
@@ -64,9 +74,10 @@ const handleContinue = async () => {
         await nextTick();
         await initStripe();
     } catch (error) {
+        const requestError = error as AxiosError<{ message?: string }>;
         console.log(error);
         errorMessage.value =
-            error.response?.data?.message || 'Something went wrong.';
+            requestError.response?.data?.message || 'Something went wrong.';
     } finally {
         isProcessing.value = false;
     }
@@ -78,8 +89,16 @@ const handleContinue = async () => {
 const initStripe = async () => {
     stripe.value = await loadStripe(import.meta.env.VITE_STRIPE_KEY);
 
+    if (!stripe.value) {
+        errorMessage.value = 'Payment service could not be initialized.';
+
+        return;
+    }
+
+    const stripeInstance = stripe.value;
+
     // 1. Create the Payment Request
-    paymentRequest.value = stripe.value.paymentRequest({
+    paymentRequest.value = stripeInstance.paymentRequest({
         country: 'CZ',
         currency: 'czk',
         total: {
@@ -90,14 +109,16 @@ const initStripe = async () => {
         requestPayerEmail: true,
     });
 
-    const elements = stripe.value.elements();
+    const elements = stripeInstance.elements();
 
     // 2. Wallet Button check
-    const result = await paymentRequest.value.canMakePayment();
+    const request = paymentRequest.value;
+    const result = await request.canMakePayment();
+
     if (result) {
         canPayWithWallet.value = true;
         prButton.value = elements.create('paymentRequestButton', {
-            paymentRequest: paymentRequest.value,
+            paymentRequest: request,
             style: {
                 paymentRequestButton: {
                     type: 'book',
@@ -121,13 +142,13 @@ const initStripe = async () => {
     // 4. Mount Wallet Button
     if (canPayWithWallet.value) {
         await nextTick();
-        prButton.value.mount('#wallet-button');
+        prButton.value?.mount('#wallet-button');
     }
 
     // 5. Wallet listener... (keep as you have it)
-    paymentRequest.value.on('paymentmethod', async (ev) => {
+    request.on('paymentmethod', async (ev: PaymentRequestPaymentMethodEvent) => {
         const { paymentIntent, error: confirmError } =
-            await stripe.value.confirmCardPayment(
+            await stripeInstance.confirmCardPayment(
                 clientSecret.value,
                 { payment_method: ev.paymentMethod.id },
                 { handleActions: false },
@@ -135,7 +156,7 @@ const initStripe = async () => {
 
         if (confirmError) {
             ev.complete('fail');
-            errorMessage.value = confirmError.message;
+            errorMessage.value = confirmError.message ?? 'Payment failed.';
         } else {
             ev.complete('success');
 
@@ -157,6 +178,14 @@ const handlePayment = async () => {
     if (!cardElement.value) {
         errorMessage.value = 'Card form not initialized.';
         isProcessing.value = false;
+
+        return;
+    }
+
+    if (!stripe.value) {
+        errorMessage.value = 'Payment service not initialized.';
+        isProcessing.value = false;
+
         return;
     }
 
@@ -171,7 +200,7 @@ const handlePayment = async () => {
     );
 
     if (error) {
-        errorMessage.value = error.message;
+        errorMessage.value = error.message ?? 'Payment failed.';
         isProcessing.value = false;
     } else if (paymentIntent.status === 'succeeded') {
         emit('success', preorderUuid.value);

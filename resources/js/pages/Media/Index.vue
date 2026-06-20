@@ -27,7 +27,7 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue';
             <div
                 class="relative mx-auto h-full w-full max-w-[1400px] px-6 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
             >
-                <div class="text-6xl">Media</div>
+                <div class="text-6xl">{{ $t('media.title') }}</div>
 
                 <div class="grid grid-cols-1 gap-6 pt-6 pb-12 md:grid-cols-3">
                     <div
@@ -37,7 +37,7 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue';
 
                         <div class="opacity-70">
                             <p class="mb-3">
-                                Download Official Treetino Press Releases
+                                {{ $t('media.press_releases') }}
                             </p>
                         </div>
 
@@ -53,7 +53,7 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue';
                     <div
                         class="flex flex-col rounded-2xl border bg-white p-6 shadow-xl"
                     >
-                        <div class="pb-4 text-4xl">Ask Treetino</div>
+                        <div class="pb-4 text-4xl">{{ $t('media.ask') }}</div>
 
                         <div class="opacity-70">
                             <p class="">
@@ -79,8 +79,7 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue';
 
                         <div class="opacity-70">
                             <p class="">
-                                Represent Treetino correctly in your materials.
-                                Download official logo variants and manuals
+                                {{ $t('media.brand') }}
                             </p>
                         </div>
 

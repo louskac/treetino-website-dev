@@ -7,9 +7,16 @@ import { ref } from 'vue';
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
 import { PRODUCTS } from '@/types/products';
 
-const props = defineProps({
-    preorder: Object,
-});
+type Preorder = {
+    uuid: string;
+    product_type: string;
+    configuration: Record<string, unknown>;
+    amount_total: number | null;
+    created_at: string;
+    status: string;
+};
+
+const props = defineProps<{ preorder: Preorder }>();
 
 const product = computed(
     () => PRODUCTS.find((p) => p.id === props.preorder?.product_type) ?? null,
@@ -17,9 +24,17 @@ const product = computed(
 
 const productImageSrc = computed(() => {
     const type = props.preorder?.product_type;
-    if (!type) return null;
+
+    if (!type) {
+return null;
+}
+
     const color = props.preorder?.configuration?.color;
-    if (color) return `/img/config-images/${type}/color/color_${color}.webp`;
+
+    if (color) {
+return `/img/config-images/${type}/color/color_${color}.webp`;
+}
+
     return `/img/config-images/${type}/default.webp`;
 });
 
@@ -69,10 +84,17 @@ const skipIfEmpty = new Set(['evChargerCount', 'bikeChargerRequested']);
 
 const configurationRows = computed(() => {
     const cfg = props.preorder?.configuration;
-    if (!cfg) return [];
+
+    if (!cfg) {
+return [];
+}
+
     return Object.entries(cfg)
         .filter(([key, value]) => {
-            if (skipIfEmpty.has(key) && !value) return false;
+            if (skipIfEmpty.has(key) && !value) {
+return false;
+}
+
             return true;
         })
         .map(([key, value]) => {
@@ -80,6 +102,7 @@ const configurationRows = computed(() => {
             const displayValue = valueMap
                 ? (valueMap[String(value)] ?? String(value))
                 : value === true ? 'Ano' : value === false ? 'Ne' : String(value);
+
             return {
                 label: configurationLabels[key] ?? key,
                 value: displayValue,
@@ -89,7 +112,11 @@ const configurationRows = computed(() => {
 
 const formattedAmount = computed(() => {
     const amount = props.preorder?.amount_total;
-    if (amount == null) return '—';
+
+    if (amount == null) {
+return '—';
+}
+
     return new Intl.NumberFormat('cs-CZ', {
         style: 'currency',
         currency: 'CZK',
@@ -99,7 +126,11 @@ const formattedAmount = computed(() => {
 
 const formattedDate = computed(() => {
     const date = props.preorder?.created_at;
-    if (!date) return '—';
+
+    if (!date) {
+return '—';
+}
+
     return new Intl.DateTimeFormat('cs-CZ', {
         dateStyle: 'long',
         timeStyle: 'short',

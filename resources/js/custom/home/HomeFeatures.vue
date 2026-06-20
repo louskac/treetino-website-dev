@@ -70,38 +70,40 @@
 <script setup lang="ts">
 import { SunLight, Leaf, Tree, RulerCombine, Wind } from '@iconoir/vue';
 import { onMounted, onUnmounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import HomeFeaturesCardMobile from '@/custom/home/features/HomeFeaturesCardMobile.vue';
 
 const TOTAL_FRAMES = 228;
 const TRANSITION_FRAMES = 56;
 const SCROLL_LOCK_MS = 600;
 const TRANSITION_DURATION_MS = 1500;
+const { t } = useI18n();
 
 const sections = [
     {
         icon: Tree,
-        title: 'Designová konstrukce',
-        text: 'Treetino je chytrý strom, který na 1 m² kombinuje solární a větrnou energii.',
+        title: t('home.features.design.title'),
+        text: t('home.features.design.text'),
     },
     {
         icon: RulerCombine,
-        title: 'Prostorová efektivita',
-        text: 'Zabere pouhý 1 m², přesto nahradí 400 m² solárních panelů. Treetino mění parkoviště, firemní areály a ulice v efektivní zdroje energie.',
+        title: t('home.features.space.title'),
+        text: t('home.features.space.text'),
     },
     {
         icon: SunLight,
-        title: 'Vyvinutý pro výkon',
-        text: 'Patentovaný AI systém plynule sleduje slunce, čímž zvyšuje výkon o 30 %. Před bouří navíc inteligentně složí své listy pro maximální bezpečnost.',
+        title: t('home.features.performance.title'),
+        text: t('home.features.performance.text'),
     },
     {
         icon: Leaf,
-        title: 'Prémiový design',
-        text: 'Korunu tvoří 300 solárních listů prémiové české výroby. Plně přizpůsobitelný design a barvy dokonale sladíte se svou značkou či architekturou.',
+        title: t('home.features.premium.title'),
+        text: t('home.features.premium.text'),
     },
     {
         icon: Wind,
-        title: 'Rovnováha výroby',
-        text: 'Transparentní turbíny 2. generace vyrábí energii 24 hodin denně i při slabém větru. Nerušivý výkon stvořený pro města.',
+        title: t('home.features.balance.title'),
+        text: t('home.features.balance.text'),
     },
 ];
 
@@ -340,9 +342,11 @@ function handleScroll(): void {
 
             // Block wheel briefly after snap so trackpad momentum doesn't immediately advance to next section
             isWheelLocked = true;
+
             if (wheelLockTimeoutId !== null) {
                 window.clearTimeout(wheelLockTimeoutId);
             }
+
             wheelLockTimeoutId = window.setTimeout(() => {
                 isWheelLocked = false;
                 wheelLockTimeoutId = null;

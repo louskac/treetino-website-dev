@@ -32,15 +32,13 @@
                             <div
                                 class="text-xs font-semibold tracking-[0.2em] text-black/70 uppercase"
                             >
-                                Pro váš domov
+                                {{ $t('products.v2.audience') }}
                             </div>
 
-                            <div class="mt-2 text-6xl">Treetino v2</div>
+                            <div class="mt-2 text-6xl">{{ $t('products.v2.title') }}</div>
 
                             <div class="mt-4 text-2xl opacity-70">
-                                Dopřejte svému domovu energetickou svobodu a
-                                design, který bude ozdobou vaší zahrady. V2 tiše
-                                čerpá energii z&nbsp;přírody ve dne i v noci.
+                                {{ $t('products.v2.lead') }}
                             </div>
                         </div>
                     </div>
@@ -58,7 +56,7 @@
             >
                 <div class="flex h-full w-full lg:px-20">
                     <div class="mx-auto my-auto">
-                        <div class="text-6xl text-t-blue">Coming Soon</div>
+                        <div class="text-6xl text-t-blue">{{ $t('common.status.coming_soon') }}</div>
                     </div>
                 </div>
             </div>

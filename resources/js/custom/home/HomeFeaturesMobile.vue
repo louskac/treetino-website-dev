@@ -246,13 +246,13 @@
             <!-- Custom Navigation Buttons Below -->
             <div class="mt-6 flex justify-center gap-2">
                 <button
-                    @click="swiperInstance.slidePrev()"
+                    @click="swiperInstance?.slidePrev()"
                     class="group flex aspect-square cursor-pointer gap-0 rounded-xl border border-primary/15 bg-primary/5 px-3 transition-all duration-300 hover:gap-2"
                 >
                     <FastArrowLeft class="my-auto h-5 w-5" />
                 </button>
                 <button
-                    @click="swiperInstance.slideNext()"
+                    @click="swiperInstance?.slideNext()"
                     class="group flex aspect-square cursor-pointer gap-0 rounded-xl border border-primary/15 bg-primary/5 px-3 transition-all duration-300 hover:gap-2"
                 >
                     <FastArrowRight class="mx-auto my-auto h-5 w-5" />
@@ -263,6 +263,7 @@
 </template>
 
 <script setup lang="ts">
+import type { Swiper as SwiperInstance } from 'swiper';
 import { EffectFade } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { ref } from 'vue';
@@ -283,9 +284,9 @@ import {
 const modules = [EffectFade];
 
 // Store the swiper instance
-const swiperInstance = ref(null);
+const swiperInstance = ref<SwiperInstance | null>(null);
 
-const onSwiper = (swiper: null) => {
+const onSwiper = (swiper: SwiperInstance) => {
     swiperInstance.value = swiper;
 };
 </script>

@@ -45,7 +45,7 @@
                                     !isScrolled,
                             }"
                             @mouseenter="activeDropdown = 'products'"
-                            >Produkty</Link
+                            >{{ $t('common.nav.products') }}</Link
                         >
                         <!--<Link href="#" class="text-sm text-white/80 transition-colors hover:text-white" @mouseenter="activeDropdown = null">Sdílení energie</Link>-->
                         <Link
@@ -59,7 +59,7 @@
                                     !isScrolled,
                             }"
                             @mouseenter="activeDropdown = null"
-                            >Spolupráce</Link
+                            >{{ $t('common.nav.collaboration') }}</Link
                         >
                         <Link
                             :href="route('media.index')"
@@ -72,7 +72,7 @@
                                     !isScrolled,
                             }"
                             @mouseenter="activeDropdown = null"
-                            >Média</Link
+                            >{{ $t('common.nav.media') }}</Link
                         >
                         <Link
                             :href="route('contact.index')"
@@ -85,12 +85,16 @@
                                     !isScrolled,
                             }"
                             @mouseenter="activeDropdown = null"
-                            >Kontakty</Link
+                            >{{ $t('common.nav.contact') }}</Link
                         >
                     </nav>
 
                     <div class="flex gap-8">
                         <div class="my-auto flex gap-4">
+                            <LocaleSwitcher
+                                class="transition-colors"
+                                :class="activeDropdown === 'products' || isScrolled || mobileMenuOpen ? 'text-black' : 'text-white'"
+                            />
                             <!--                            <div class="dark-switch my-auto flex text-white">-->
                             <!--                                <button-->
                             <!--                                    @click="toggleDark"-->
@@ -148,7 +152,7 @@
                             <ButtonPrimary
                                 :href="route('configurator')"
                                 variant="slim"
-                                >Preorder Now</ButtonPrimary
+                                >{{ $t('common.actions.preorder') }}</ButtonPrimary
                             >
                         </div>
                     </div>
@@ -200,7 +204,7 @@
                                                     activeDropdown !==
                                                     'products',
                                             }"
-                                            >Více informací</Link
+                                            >{{ $t('common.actions.configure') }}</Link
                                         >
                                         <Link
                                             :href="`/configurator?product=${item.id}`"
@@ -213,7 +217,7 @@
                                                     activeDropdown !==
                                                     'products',
                                             }"
-                                            >Objednat</Link
+                                            >{{ $t('common.actions.preorder') }}</Link
                                         >
                                     </div>
                                 </div>
@@ -239,19 +243,19 @@
                                 :href="route('collaboration.index')"
                                 class="rounded-xl px-3 py-3 text-sm font-medium text-black/80 transition-colors hover:bg-black/5 hover:text-black"
                                 @click="mobileMenuOpen = false"
-                                >Spolupráce</Link
+                                >{{ $t('common.nav.collaboration') }}</Link
                             >
                             <Link
                                 :href="route('media.index')"
                                 class="rounded-xl px-3 py-3 text-sm font-medium text-black/80 transition-colors hover:bg-black/5 hover:text-black"
                                 @click="mobileMenuOpen = false"
-                                >Média</Link
+                                >{{ $t('common.nav.media') }}</Link
                             >
                             <Link
                                 :href="route('contact.index')"
                                 class="rounded-xl px-3 py-3 text-sm font-medium text-black/80 transition-colors hover:bg-black/5 hover:text-black"
                                 @click="mobileMenuOpen = false"
-                                >Kontakty</Link
+                                >{{ $t('common.nav.contact') }}</Link
                             >
                         </nav>
 
@@ -260,7 +264,7 @@
                             <p
                                 class="mb-1 px-3 text-xs font-semibold tracking-[0.2em] text-black/40 uppercase"
                             >
-                                Produkty
+                                {{ $t('common.nav.products') }}
                             </p>
                             <div class="flex flex-col">
                                 <div
@@ -274,13 +278,13 @@
                                             :href="`/products/${item.detail}`"
                                             class="rounded-lg border border-black/20 px-3 py-1 text-xs text-black/70 transition-colors hover:text-black"
                                             @click="mobileMenuOpen = false"
-                                            >Více info</Link
+                                            >{{ $t('common.actions.configure') }}</Link
                                         >
                                         <Link
                                             :href="`/configurator?product=${item.id}`"
                                             class="rounded-lg bg-t-blue px-3 py-1 text-xs font-medium text-white transition-opacity hover:opacity-80"
                                             @click="mobileMenuOpen = false"
-                                            >Objednat</Link
+                                            >{{ $t('common.actions.preorder') }}</Link
                                         >
                                     </div>
                                 </div>
@@ -293,7 +297,7 @@
                                 :href="route('configurator')"
                                 class="w-full text-center"
                                 @click="mobileMenuOpen = false"
-                                >Preorder Now</ButtonPrimary
+                                >{{ $t('common.actions.preorder') }}</ButtonPrimary
                             >
                         </div>
                     </div>
@@ -307,11 +311,12 @@
 import { SunLight, HalfMoon, Menu, Xmark } from '@iconoir/vue';
 import { Link } from '@inertiajs/vue3';
 import { ref, onMounted, onUnmounted } from 'vue';
+import { route } from 'ziggy-js';
+import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import ButtonWhite from '@/custom/ButtonWhite.vue';
+import LocaleSwitcher from '@/custom/LocaleSwitcher.vue';
 import LogoType from '@/custom/LogoType.vue';
 import { PRODUCTS } from '@/types/products';
-import ButtonPrimary from '@/custom/ButtonPrimary.vue';
-import { route } from 'ziggy-js';
 
 const props = defineProps({
     scroll: {
@@ -330,6 +335,7 @@ const products = PRODUCTS;
 const handleScroll = () => {
     if (!props.scroll) {
         isScrolled.value = true;
+
         return;
     }
 
@@ -340,7 +346,9 @@ const handleScroll = () => {
 // Close mobile menu exactly once when crossing the xl breakpoint (1280px)
 const xlQuery = window.matchMedia('(min-width: 1280px)');
 const handleBreakpoint = (e: MediaQueryListEvent) => {
-    if (e.matches) mobileMenuOpen.value = false;
+    if (e.matches) {
+mobileMenuOpen.value = false;
+}
 };
 
 onMounted(() => {
@@ -352,6 +360,7 @@ onMounted(() => {
         // If scroll is false, ensure it's set to true
         isScrolled.value = true;
     }
+
     xlQuery.addEventListener('change', handleBreakpoint);
 });
 
