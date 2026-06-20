@@ -16,8 +16,6 @@ class TranslationController extends Controller
 {
     public function index(Request $request, TranslationService $service): Response
     {
-        $service->sync();
-
         $search = $request->string('search')->trim()->toString();
         $group = $request->string('group')->trim()->toString();
 
@@ -51,6 +49,15 @@ class TranslationController extends Controller
         ]);
     }
 
+    public function sync(TranslationService $service): RedirectResponse
+    {
+        $count = $service->sync();
+
+        return back()->with('success', $count > 0
+            ? "Synchronization complete. Added {$count} missing values and marked all live translations as synchronized."
+            : 'Translation synchronization complete. Live values were preserved and marked as synchronized.');
+    }
+
     public function update(Request $request, TranslationKey $translationKey, TranslationService $service): RedirectResponse
     {
         $locales = config('localization.locales');
@@ -70,7 +77,7 @@ class TranslationController extends Controller
         foreach ($locales as $locale) {
             $translationKey->translations()->updateOrCreate(
                 ['locale' => $locale],
-                ['value' => $values[$locale]],
+                ['value' => $values[$locale], 'synced_at' => null],
             );
         }
 

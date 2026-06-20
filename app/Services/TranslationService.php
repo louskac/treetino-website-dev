@@ -22,36 +22,82 @@ class TranslationService
 
     public function sync(bool $force = false): int
     {
-        $count = 0;
+        $count = DB::transaction(function () use ($force): int {
+            $now = now();
+            $catalog = config('translation_catalog');
+            $keyRows = [];
 
-        DB::transaction(function () use ($force, &$count) {
-            foreach (config('translation_catalog') as $group => $items) {
+            foreach ($catalog as $group => $items) {
+                foreach (array_keys($items) as $key) {
+                    $keyRows[] = [
+                        'group' => $group,
+                        'key' => $key,
+                        'description' => null,
+                        'created_at' => $now,
+                        'updated_at' => $now,
+                    ];
+                }
+            }
+
+            TranslationKey::insertOrIgnore($keyRows);
+
+            $keys = TranslationKey::query()
+                ->get(['id', 'group', 'key'])
+                ->keyBy(fn (TranslationKey $key) => "{$key->group}.{$key->key}");
+            $existing = Translation::query()
+                ->whereIn('translation_key_id', $keys->pluck('id'))
+                ->get(['translation_key_id', 'locale'])
+                ->keyBy(fn (Translation $translation) => "{$translation->translation_key_id}.{$translation->locale}");
+            $rows = [];
+
+            foreach ($catalog as $group => $items) {
                 foreach ($items as $key => $values) {
-                    $translationKey = TranslationKey::firstOrCreate(
-                        ['group' => $group, 'key' => $key],
-                        ['description' => null],
-                    );
+                    $translationKey = $keys->get("{$group}.{$key}");
 
                     foreach (config('localization.locales') as $locale) {
-                        $value = $values[$locale] ?? $values[config('app.fallback_locale')] ?? '';
-                        $translation = Translation::firstOrNew([
+                        if (! $force && $existing->has("{$translationKey->id}.{$locale}")) {
+                            continue;
+                        }
+
+                        $rows[] = [
                             'translation_key_id' => $translationKey->id,
                             'locale' => $locale,
-                        ]);
-
-                        if (! $translation->exists || $force) {
-                            $translation->value = $value;
-                            $translation->save();
-                            $count++;
-                        }
+                            'value' => $values[$locale] ?? $values[config('app.fallback_locale')] ?? '',
+                            'synced_at' => $now,
+                            'created_at' => $now,
+                            'updated_at' => $now,
+                        ];
                     }
                 }
             }
+
+            if ($rows !== []) {
+                Translation::upsert(
+                    $rows,
+                    ['translation_key_id', 'locale'],
+                    ['value', 'synced_at', 'updated_at'],
+                );
+            }
+
+            Translation::query()->update(['synced_at' => $now]);
+
+            return count($rows);
         });
 
         $this->forget();
 
         return $count;
+    }
+
+    /** @return array{unsynchronizedValues: int, unsynchronizedKeys: int} */
+    public function status(): array
+    {
+        $pending = Translation::query()->whereNull('synced_at');
+
+        return [
+            'unsynchronizedValues' => (clone $pending)->count(),
+            'unsynchronizedKeys' => (clone $pending)->distinct()->count('translation_key_id'),
+        ];
     }
 
     public function forget(?string $locale = null): void

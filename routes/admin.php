@@ -14,6 +14,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('admin.auth')->group(function () {
         Route::get('/dashboard', DashboardController::class)->name('dashboard');
         Route::get('/translations', [TranslationController::class, 'index'])->name('translations.index');
+        Route::post('/translations/sync', [TranslationController::class, 'sync'])->name('translations.sync');
         Route::put('/translations/{translationKey}', [TranslationController::class, 'update'])->name('translations.update');
         Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
     });
