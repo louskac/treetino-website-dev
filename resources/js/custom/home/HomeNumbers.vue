@@ -89,7 +89,7 @@
                     <ButtonPrimary
                         :href="route('configurator')"
                         class="w-full text-center"
-                        >Configure</ButtonPrimary
+                        >{{ $t('common.actions.configure') }}</ButtonPrimary
                     >
                 </div>
             </div>

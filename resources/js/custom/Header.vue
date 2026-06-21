@@ -204,7 +204,7 @@
                                                     activeDropdown !==
                                                     'products',
                                             }"
-                                            >{{ $t('common.actions.configure') }}</Link
+                                            >{{ $t('common.actions.info') }}</Link
                                         >
                                         <Link
                                             :href="`/configurator?product=${item.id}`"

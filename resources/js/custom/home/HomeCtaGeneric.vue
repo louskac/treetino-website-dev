@@ -74,10 +74,10 @@ onMounted(async () => {
         >
             <div class="flex h-full w-full p-6">
                 <div class="mx-auto my-auto text-white">
-                    <h1 class="text-center text-6xl">
-                        Turn your empty space into an asset. <br />
-                        With Treetino
-                    </h1>
+                    <h1
+                        class="text-center text-6xl leading-17"
+                        v-html="$t('home.cta.generic')"
+                    ></h1>
                 </div>
             </div>
         </div>

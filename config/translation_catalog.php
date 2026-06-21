@@ -7,6 +7,7 @@ return [
         'nav.collaboration' => ['cs' => 'Spolupráce', 'en' => 'Collaboration'],
         'nav.media' => ['cs' => 'Média', 'en' => 'Media'],
         'nav.contact' => ['cs' => 'Kontakt', 'en' => 'Contact'],
+        'actions.info' => ['cs' => 'Více Informací', 'en' => 'More Information'],
         'actions.configure' => ['cs' => 'Konfigurovat', 'en' => 'Configure'],
         'actions.how' => ['cs' => 'Jak to funguje?', 'en' => 'How it Works?'],
         'actions.preorder' => ['cs' => 'Předobjednat', 'en' => 'Preorder'],
@@ -52,6 +53,8 @@ return [
         'info.forest.text' => ['cs' => 'Treetino tvoří inteligentní, propojený ekosystém. Integrovaná AI maximalizuje energetický výnos a řídí prediktivní údržbu.', 'en' => 'Integrated AI maximizes energy yield and manages predictive maintenance.'],
 
         'numbers.title' => ['cs' => 'Informace & čísla', 'en' => 'Facts & figures'],
+
+        'cta.generic' => ['cs' => 'Proměňte prázdné místo ve vaší výhodu.<br>Společně s Treetino', 'en' => 'Turn your empty space into an asset.<br>With Treetino '],
     ],
     'app' => [
         'title' => ['cs' => 'Ve vaší kapse', 'en' => 'In Your Pocket'],
