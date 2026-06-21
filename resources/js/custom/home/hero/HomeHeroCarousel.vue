@@ -66,7 +66,7 @@ defineExpose({
 </script>
 <template>
     <div
-        class="sm:px-0 relative mx-auto h-full w-full max-w-[1400px] px-6 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
+        class="relative mx-auto h-full w-full max-w-[1400px] px-6 sm:w-[500px] sm:px-0 md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
     >
         <Swiper
             :slides-per-view="1"
@@ -89,12 +89,11 @@ defineExpose({
             <SwiperSlide>
                 <div class="flex h-full flex-col pb-28 text-white">
                     <div class="mt-auto">
-                        <h1 class="mb-6 text-6xl lg:text-8xl">Treetino v1</h1>
+                        <h1 class="mb-2 text-6xl lg:text-8xl">Treetino v1</h1>
 
                         <div class="flex gap-2 opacity-70">
-                            <div class="text-3xl">
-                                Eco-Friendly <br />
-                                with modern design
+                            <div class="text-xl tracking-[10px] uppercase">
+                                {{ $t('home.hero.v1.audience') }}
                             </div>
                         </div>
                     </div>
@@ -105,7 +104,13 @@ defineExpose({
             <SwiperSlide>
                 <div class="flex h-full flex-col pb-28 text-white">
                     <div class="mt-auto">
-                        <h1 class="mb-6 text-6xl lg:text-8xl">Treetino v2</h1>
+                        <h1 class="mb-2 text-6xl lg:text-8xl">Treetino v2</h1>
+
+                        <div class="flex gap-2 opacity-70">
+                            <div class="text-xl tracking-[10px] uppercase">
+                                {{ $t('home.hero.v2.audience') }}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </SwiperSlide>
@@ -114,7 +119,13 @@ defineExpose({
             <SwiperSlide>
                 <div class="flex h-full flex-col pb-28 text-white">
                     <div class="mt-auto">
-                        <h1 class="mb-6 text-6xl lg:text-8xl">Turbine</h1>
+                        <h1 class="mb-2 text-6xl lg:text-8xl">Turbine</h1>
+
+                        <div class="flex gap-2 opacity-70">
+                            <div class="text-xl tracking-[10px] uppercase">
+                                {{ $t('home.hero.turbine.audience') }}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </SwiperSlide>
