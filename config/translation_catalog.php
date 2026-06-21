@@ -8,6 +8,7 @@ return [
         'nav.media' => ['cs' => 'Média', 'en' => 'Media'],
         'nav.contact' => ['cs' => 'Kontakt', 'en' => 'Contact'],
         'actions.configure' => ['cs' => 'Konfigurovat', 'en' => 'Configure'],
+        'actions.how' => ['cs' => 'Jak to funguje?', 'en' => 'How it Works?'],
         'actions.preorder' => ['cs' => 'Předobjednat', 'en' => 'Preorder'],
         'actions.select' => ['cs' => 'Vybrat', 'en' => 'Select'],
         'actions.selected' => ['cs' => 'Vybráno', 'en' => 'Selected'],
@@ -50,6 +51,33 @@ return [
     'app' => [
         'title' => ['cs' => 'Ve vaší kapse', 'en' => 'In Your Pocket'],
         'text' => ['cs' => 'Mějte dokonalý přehled. Sledujte výrobu energie v reálném čase, ovládejte světelnou show, přijímejte upozornění na údržbu a prohlížejte si detailní historické reporty. To vše z naší intuitivní aplikace Treetino pro iOS a Android.', 'en' => 'Mějte dokonalý přehled. Sledujte výrobu energie v reálném čase, ovládejte světelnou show, přijímejte upozornění na údržbu a prohlížejte si detailní historické reporty. To vše z naší intuitivní aplikace Treetino pro iOS a Android.'],
+
+        'warning.performance.title' => ['cs' => 'Výkon', 'en' => 'Performance'],
+        'warning.performance.text' => ['cs' => '44.1 kW při 90 %', 'en' => '44.1 kW at 90 %'],
+
+        'warning.weather.title' => ['cs' => 'Pozor! Počasí', 'en' => 'Weather Warning'],
+        'warning.weather.text' => ['cs' => 'Ochrana Aktivní', 'en' => 'Safe Mode Started'],
+
+        'energy.title' => ['cs' => 'Živý přehled energie', 'en' => 'Live Energy Dashboard'],
+        'energy.text' => ['cs' => 'Aktuální výkon, denní součty a rozdělení podle zdrojů energie.', 'en' => ''],
+
+        'lights.title' => ['cs' => 'Ovládání světelné show', 'en' => 'Light-show Controls'],
+        'lights.text' => ['cs' => 'Navrhujte a plánujte vlastní barevné scény pro osvětlení stromu.', 'en' => ''],
+
+        'notifications.title' => ['cs' => 'Chytrá upozornění', 'en' => 'Smart Notifications'],
+        'notifications.text' => ['cs' => 'Automatické připomínky údržby a notifikace o nestandardních stavech.', 'en' => ''],
+
+        'weather.title' => ['cs' => 'Integrace počasí', 'en' => 'Weather Integration'],
+        'weather.text' => ['cs' => 'Předpověď produkce a automatická varování na základě lokálního počasí.', 'en' => ''],
+
+        'reports.title' => ['cs' => 'Historické reporty', 'en' => 'Historical reports'],
+        'reports.text' => ['cs' => 'Přehledné statistiky výkonu za měsíc, rok i celou dobu provozu.', 'en' => ''],
+
+        'remote.title' => ['cs' => 'Vzdálená konfigurace', 'en' => 'Remote Configuration'],
+        'remote.text' => ['cs' => 'Upravujte úhly natáčení větví a další systémové předvolby na dálku.', 'en' => ''],
+
+        'download' => ['cs' => 'Již brzy na App Store a Google Play.', 'en' => 'Coming Soon on App Store and Google Play'],
+        'availability' => ['cs' => 'Očekávaná dostupnost v Q4 2026. Předběžná registrace a betaverze je přístupná pro předobjednávky.', 'en' => ' Projected availability Q4 2026. Pre-registration and beta is available for pre-ordered units '],
     ],
     'products' => [
         'v1.title' => ['cs' => 'Treetino v1', 'en' => 'Treetino v1'],

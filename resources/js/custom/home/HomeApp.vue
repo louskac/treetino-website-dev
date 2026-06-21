@@ -71,10 +71,12 @@
                                     <div
                                         class="text-xs tracking-tight text-white opacity-70"
                                     >
-                                        Performance
+                                        {{
+                                            $t('app.warning.performance.title')
+                                        }}
                                     </div>
                                     <div class="tracking-tight text-white">
-                                        44.1 kW at 90 %
+                                        {{ $t('app.warning.performance.text') }}
                                     </div>
                                 </div>
                             </div>
@@ -120,10 +122,10 @@
                                     <div
                                         class="text-xs tracking-tight text-white opacity-70"
                                     >
-                                        Weather Warning
+                                        {{ $t('app.warning.weather.title') }}
                                     </div>
                                     <div class="tracking-tight text-white">
-                                        Safe Mode Started
+                                        {{ $t('app.warning.weather.text') }}
                                     </div>
                                 </div>
                             </div>
@@ -166,13 +168,12 @@
 
                                 <div class="my-auto">
                                     <div class="mb-1 leading-5 tracking-tight">
-                                        Živý přehled energie
+                                        {{ $t('app.energy.title') }}
                                     </div>
                                     <div
                                         class="text-xs tracking-tight opacity-70"
                                     >
-                                        Aktuální výkon, denní součty a rozdělení
-                                        podle zdrojů energie.
+                                        {{ $t('app.energy.text') }}
                                     </div>
                                 </div>
                             </div>
@@ -189,13 +190,12 @@
 
                                 <div class="my-auto">
                                     <div class="mb-1 leading-5 tracking-tight">
-                                        Integrace počasí
+                                        {{ $t('app.weather.title') }}
                                     </div>
                                     <div
                                         class="text-xs tracking-tight opacity-70"
                                     >
-                                        Předpověď produkce a automatická
-                                        varování na základě lokálního počasí.
+                                        {{ $t('app.weather.text') }}
                                     </div>
                                 </div>
                             </div>
@@ -212,13 +212,12 @@
 
                                 <div class="my-auto">
                                     <div class="mb-1 leading-5 tracking-tight">
-                                        Ovládání světelné show
+                                        {{ $t('app.lights.title') }}
                                     </div>
                                     <div
                                         class="text-xs tracking-tight opacity-70"
                                     >
-                                        Navrhujte a plánujte vlastní barevné
-                                        scény pro osvětlení stromu.
+                                        {{ $t('app.lights.text') }}
                                     </div>
                                 </div>
                             </div>
@@ -235,13 +234,12 @@
 
                                 <div class="my-auto">
                                     <div class="mb-1 leading-5 tracking-tight">
-                                        Historické reporty
+                                        {{ $t('app.reports.title') }}
                                     </div>
                                     <div
                                         class="text-xs tracking-tight opacity-70"
                                     >
-                                        Přehledné statistiky výkonu za měsíc,
-                                        rok i celou dobu provozu.
+                                        {{ $t('app.reports.text') }}
                                     </div>
                                 </div>
                             </div>
@@ -258,13 +256,12 @@
 
                                 <div class="my-auto">
                                     <div class="mb-1 leading-5 tracking-tight">
-                                        Chytrá upozornění
+                                        {{ $t('app.notifications.title') }}
                                     </div>
                                     <div
                                         class="text-xs tracking-tight opacity-70"
                                     >
-                                        Automatické připomínky údržby a
-                                        notifikace o nestandardních stavech.
+                                        {{ $t('app.notifications.text') }}
                                     </div>
                                 </div>
                             </div>
@@ -281,13 +278,12 @@
 
                                 <div class="my-auto">
                                     <div class="mb-1 leading-5 tracking-tight">
-                                        Vzdálená konfigurace
+                                        {{ $t('app.remote.title') }}
                                     </div>
                                     <div
                                         class="text-xs tracking-tight opacity-70"
                                     >
-                                        Upravujte úhly natáčení větví a další
-                                        systémové předvolby na dálku.
+                                        {{ $t('app.remote.text') }}
                                     </div>
                                 </div>
                             </div>
@@ -296,13 +292,12 @@
                         <div class="hidden items-center lg:flex">
                             <span
                                 class="inline-block rounded-full border border-black/20 px-5 py-2 text-sm font-medium tracking-wide opacity-60"
-                                >Coming Soon on App Store and Google Play</span
+                                >{{ $t('app.download') }}</span
                             >
                         </div>
 
                         <div class="mt-6 hidden text-xs opacity-70 lg:block">
-                            Projected availability Q4 2026. Pre-registration and
-                            beta is available for pre-ordered units
+                            {{ $t('app.availability') }}
                         </div>
 
                         <div class="flex justify-center lg:hidden">

@@ -38,9 +38,13 @@
                                     route('configurator.product', 'strom-v1')
                                 "
                                 class="text-center"
-                                >Configure</ButtonPrimary
+                                >{{
+                                    $t('common.actions.configure')
+                                }}</ButtonPrimary
                             >
-                            <ButtonWhite>How It Works</ButtonWhite>
+                            <ButtonWhite>{{
+                                $t('common.actions.how')
+                            }}</ButtonWhite>
                         </div>
                     </div>
                 </div>
@@ -71,7 +75,10 @@
                                     route('configurator.product', 'strom-v2')
                                 "
                                 class="text-center"
-                                >Configure</ButtonPrimary
+                            >
+                                {{
+                                    $t('common.actions.configure')
+                                }}</ButtonPrimary
                             >
                         </div>
                     </div>
@@ -103,7 +110,9 @@
                             <ButtonPrimary
                                 :href="route('configurator.product', 'turbina')"
                                 class="text-center"
-                                >Configure</ButtonPrimary
+                                >{{
+                                    $t('common.actions.configure')
+                                }}</ButtonPrimary
                             >
                         </div>
                     </div>
