@@ -303,15 +303,14 @@
                         <div class="flex justify-center lg:hidden">
                             <span
                                 class="inline-block rounded-full border border-black/20 px-5 py-2 text-sm font-medium tracking-wide opacity-60"
-                                >Coming Soon</span
+                                >{{ $t('app.download-phone') }}</span
                             >
                         </div>
 
                         <div
                             class="mt-6 block text-center text-xs opacity-70 lg:hidden"
                         >
-                            Projected availability Q4 2026. Pre-registration and
-                            beta is available for pre-ordered units
+                            {{ $t('app.availability') }}
                         </div>
                     </div>
                 </div>

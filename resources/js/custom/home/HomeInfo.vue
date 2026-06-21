@@ -9,7 +9,7 @@
         >
             <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:hidden">
                 <div
-                    class="relative aspect-square overflow-hidden rounded-2xl border bg-t-blue/5 shadow-xl sm:col-span-2 col-span-2"
+                    class="relative col-span-2 aspect-square overflow-hidden rounded-2xl border bg-t-blue/5 shadow-xl sm:col-span-2"
                 >
                     <img
                         src="/img/treetino-v1-isometric.png"
@@ -19,11 +19,13 @@
                 </div>
 
                 <div
-                    class="w-full rounded-2xl border border-black bg-zinc-800 p-6 shadow-xl col-span-2 dark:border-white dark:bg-zinc-200"
+                    class="col-span-2 w-full rounded-2xl border border-black bg-zinc-800 p-6 shadow-xl dark:border-white dark:bg-zinc-200"
                 >
                     <p class="text-2xl text-secondary">
-                        In a world increasingly dependent on electricity, we're
-                        developing a new way to integrate sustainable power
+                        {{ $t('home.info.card.1') }}
+                        <span class="opacity-70">{{
+                            $t('home.info.card.1')
+                        }}</span>
                     </p>
                 </div>
 
@@ -40,16 +42,18 @@
                             />
                         </div>
                     </div>
-                    <h2 class="mt-4 text-3xl sm:text-4xl">{{ $t('home.info.design.title') }}</h2>
+                    <h2 class="mt-4 text-3xl sm:text-4xl">
+                        {{ $t('home.info.design.title') }}
+                    </h2>
                     <p class="mt-2 mb-3">
                         {{ $t('home.info.design.text') }}
                     </p>
 
-                    <p>
-                        Kombinace 300 solárních listů a transparentních turbín
-                        obohacuje veřejný prostor. Zcela neslyšný chod umožňuje
-                        bezpečnou integraci přímo mezi lidi.
-                    </p>
+<!--                    <p>-->
+<!--                        Kombinace 300 solárních listů a transparentních turbín-->
+<!--                        obohacuje veřejný prostor. Zcela neslyšný chod umožňuje-->
+<!--                        bezpečnou integraci přímo mezi lidi.-->
+<!--                    </p>-->
                 </div>
 
                 <div
@@ -72,11 +76,11 @@
                         {{ $t('home.info.forest.text') }}
                     </p>
 
-                    <p>
-                        Technologie blockchain umožňuje bezpečné a
-                        automatizované sdílení energie s okolím. Definujeme tak
-                        standardy pro novou, decentralizovanou energetiku.
-                    </p>
+<!--                    <p>-->
+<!--                        Technologie blockchain umožňuje bezpečné a-->
+<!--                        automatizované sdílení energie s okolím. Definujeme tak-->
+<!--                        standardy pro novou, decentralizovanou energetiku.-->
+<!--                    </p>-->
                 </div>
             </div>
 
@@ -99,18 +103,18 @@
                                 />
                             </div>
                         </div>
-                        <h2 class="mt-4 text-4xl">{{ $t('home.info.design.title') }}</h2>
+                        <h2 class="mt-4 text-4xl">
+                            {{ $t('home.info.design.title') }}
+                        </h2>
                         <p class="mt-2 mb-3">
-                            Treetino je víc než elektrárna. Slouží jako
-                            sebevědomý symbol udržitelnosti, se kterým firmy a
-                            instituce elegantně naplní své ESG cíle.
+                            {{ $t('home.info.design.text') }}
                         </p>
 
-                        <p>
-                            Kombinace 300 solárních listů a transparentních
-                            turbín obohacuje veřejný prostor. Zcela neslyšný
-                            chod umožňuje bezpečnou integraci přímo mezi lidi.
-                        </p>
+                        <!--                        <p>-->
+                        <!--                            Kombinace 300 solárních listů a transparentních-->
+                        <!--                            turbín obohacuje veřejný prostor. Zcela neslyšný-->
+                        <!--                            chod umožňuje bezpečnou integraci přímo mezi lidi.-->
+                        <!--                        </p>-->
                     </div>
                 </div>
 
@@ -119,11 +123,10 @@
                         class="w-full rounded-2xl border border-black bg-zinc-800 p-6 shadow-xl dark:border-white dark:bg-zinc-200"
                     >
                         <p class="text-2xl text-secondary">
-                            Vracíme energetickou stabilitu do vašich rukou.
-                            <span class="opacity-70"
-                                >Treetino je elegantní off-grid řešení pro
-                                lokální nezávislost bez kompromisů.</span
-                            >
+                            {{ $t('home.info.card.1') }}
+                            <span class="opacity-70">{{
+                                $t('home.info.card.1')
+                            }}</span>
                         </p>
                     </div>
 
@@ -158,20 +161,19 @@
                                 />
                             </div>
                         </div>
-                        <h2 class="mt-4 text-4xl">Chytrý propojený les </h2>
+                        <h2 class="mt-4 text-4xl">
+                            {{ $t('home.info.forest.title') }}
+                        </h2>
                         <p class="mt-2 mb-3">
-                            Treetino tvoří inteligentní, propojený ekosystém.
-                            Integrovaná AI v reálném čase maximalizuje
-                            energetický výnos a autonomně řídí prediktivní
-                            údržbu.
+                            {{ $t('home.info.forest.text') }}
                         </p>
 
-                        <p>
-                            Technologie blockchain umožňuje bezpečné a
-                            automatizované sdílení energie s okolím. Definujeme
-                            tak standardy pro novou, decentralizovanou
-                            energetiku.
-                        </p>
+                        <!--                        <p>-->
+                        <!--                            Technologie blockchain umožňuje bezpečné a-->
+                        <!--                            automatizované sdílení energie s okolím. Definujeme-->
+                        <!--                            tak standardy pro novou, decentralizovanou-->
+                        <!--                            energetiku.-->
+                        <!--                        </p>-->
                     </div>
                 </div>
             </div>

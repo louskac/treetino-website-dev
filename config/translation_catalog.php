@@ -42,10 +42,15 @@ return [
         'features.premium.text' => ['cs' => 'Přizpůsobitelný design a barvy sladíte se svou značkou či architekturou.', 'en' => 'Customizable design and colors align with your brand or architecture.'],
         'features.balance.title' => ['cs' => 'Rovnováha výroby', 'en' => 'Balanced generation'],
         'features.balance.text' => ['cs' => 'Transparentní turbíny vyrábějí energii i v noci a při slabém větru.', 'en' => 'Transparent turbines generate energy at night and even in light winds.'],
+
+        'info.card.1' => ['cs' => 'Vracíme energetickou stabilitu do vašich rukou.', 'en' => 'We return energy grid stability into your own hands.'],
+        'info.card.2' => ['cs' => 'Treetino je elegantní off-grid řešení pro lokální nezávislost bez kompromisů.', 'en' => 'Treetino is an elegant off-grid solution for local independence without any compromise'],
+
         'info.design.title' => ['cs' => 'Špičkový design', 'en' => 'Outstanding design'],
         'info.design.text' => ['cs' => 'Treetino je víc než elektrárna. Je sebevědomým symbolem udržitelnosti.', 'en' => 'Treetino is more than a power plant. It is a confident symbol of sustainability.'],
         'info.forest.title' => ['cs' => 'Chytrý propojený les', 'en' => 'A smart connected forest'],
-        'info.forest.text' => ['cs' => 'Integrovaná AI maximalizuje energetický výnos a řídí prediktivní údržbu.', 'en' => 'Integrated AI maximizes energy yield and manages predictive maintenance.'],
+        'info.forest.text' => ['cs' => 'Treetino tvoří inteligentní, propojený ekosystém. Integrovaná AI maximalizuje energetický výnos a řídí prediktivní údržbu.', 'en' => 'Integrated AI maximizes energy yield and manages predictive maintenance.'],
+
         'numbers.title' => ['cs' => 'Informace & čísla', 'en' => 'Facts & figures'],
     ],
     'app' => [
@@ -77,6 +82,7 @@ return [
         'remote.text' => ['cs' => 'Upravujte úhly natáčení větví a další systémové předvolby na dálku.', 'en' => ''],
 
         'download' => ['cs' => 'Již brzy na App Store a Google Play.', 'en' => 'Coming Soon on App Store and Google Play'],
+        'download-phone' => ['cs' => 'Již brzy', 'en' => 'Coming Soon'],
         'availability' => ['cs' => 'Očekávaná dostupnost v Q4 2026. Předběžná registrace a betaverze je přístupná pro předobjednávky.', 'en' => ' Projected availability Q4 2026. Pre-registration and beta is available for pre-ordered units '],
     ],
     'products' => [
