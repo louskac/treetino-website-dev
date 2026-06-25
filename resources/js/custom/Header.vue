@@ -89,12 +89,9 @@
                         >
                     </nav>
 
-                    <div class="flex gap-8">
+                    <div class="flex gap-4">
                         <div class="my-auto flex gap-4">
-                            <LocaleSwitcher
-                                class="transition-colors"
-                                :class="activeDropdown === 'products' || isScrolled || mobileMenuOpen ? 'text-black' : 'text-white'"
-                            />
+                            <LocaleSwitcher :inverted="headerIsInverted" />
                             <!--                            <div class="dark-switch my-auto flex text-white">-->
                             <!--                                <button-->
                             <!--                                    @click="toggleDark"-->
@@ -140,8 +137,12 @@
                                         stroke-width="2"
                                         class="h-4.5 w-4.5"
                                         :class="{
-                                            'text-black': activeDropdown === 'products' || isScrolled,
-                                            'text-white': activeDropdown !== 'products' && !isScrolled,
+                                            'text-black':
+                                                activeDropdown === 'products' ||
+                                                isScrolled,
+                                            'text-white':
+                                                activeDropdown !== 'products' &&
+                                                !isScrolled,
                                         }"
                                     />
                                 </button>
@@ -152,7 +153,9 @@
                             <ButtonPrimary
                                 :href="route('configurator')"
                                 variant="slim"
-                                >{{ $t('common.actions.preorder') }}</ButtonPrimary
+                                >{{
+                                    $t('common.actions.preorder')
+                                }}</ButtonPrimary
                             >
                         </div>
                     </div>
@@ -204,7 +207,9 @@
                                                     activeDropdown !==
                                                     'products',
                                             }"
-                                            >{{ $t('common.actions.info') }}</Link
+                                            >{{
+                                                $t('common.actions.info')
+                                            }}</Link
                                         >
                                         <Link
                                             :href="`/configurator?product=${item.id}`"
@@ -217,7 +222,9 @@
                                                     activeDropdown !==
                                                     'products',
                                             }"
-                                            >{{ $t('common.actions.preorder') }}</Link
+                                            >{{
+                                                $t('common.actions.preorder')
+                                            }}</Link
                                         >
                                     </div>
                                 </div>
@@ -272,19 +279,26 @@
                                     :key="item.id"
                                     class="flex items-center justify-between rounded-xl px-3 py-2.5 transition-colors hover:bg-black/5"
                                 >
-                                    <span class="text-sm font-medium text-black/80">{{ item.label }}</span>
+                                    <span
+                                        class="text-sm font-medium text-black/80"
+                                        >{{ item.label }}</span
+                                    >
                                     <div class="flex gap-2">
                                         <Link
                                             :href="`/products/${item.detail}`"
                                             class="rounded-lg border border-black/20 px-3 py-1 text-xs text-black/70 transition-colors hover:text-black"
                                             @click="mobileMenuOpen = false"
-                                            >{{ $t('common.actions.configure') }}</Link
+                                            >{{
+                                                $t('common.actions.configure')
+                                            }}</Link
                                         >
                                         <Link
                                             :href="`/configurator?product=${item.id}`"
                                             class="rounded-lg bg-t-blue px-3 py-1 text-xs font-medium text-white transition-opacity hover:opacity-80"
                                             @click="mobileMenuOpen = false"
-                                            >{{ $t('common.actions.preorder') }}</Link
+                                            >{{
+                                                $t('common.actions.preorder')
+                                            }}</Link
                                         >
                                     </div>
                                 </div>
@@ -297,7 +311,9 @@
                                 :href="route('configurator')"
                                 class="w-full text-center"
                                 @click="mobileMenuOpen = false"
-                                >{{ $t('common.actions.preorder') }}</ButtonPrimary
+                                >{{
+                                    $t('common.actions.preorder')
+                                }}</ButtonPrimary
                             >
                         </div>
                     </div>
@@ -310,7 +326,7 @@
 <script setup lang="ts">
 import { SunLight, HalfMoon, Menu, Xmark } from '@iconoir/vue';
 import { Link } from '@inertiajs/vue3';
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted, computed } from 'vue';
 import { route } from 'ziggy-js';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import ButtonWhite from '@/custom/ButtonWhite.vue';
@@ -347,8 +363,8 @@ const handleScroll = () => {
 const xlQuery = window.matchMedia('(min-width: 1280px)');
 const handleBreakpoint = (e: MediaQueryListEvent) => {
     if (e.matches) {
-mobileMenuOpen.value = false;
-}
+        mobileMenuOpen.value = false;
+    }
 };
 
 onMounted(() => {
@@ -386,6 +402,14 @@ onUnmounted(() => {
 //     // 3. Save it so it persists on refresh
 //     localStorage.setItem('appearance', isDark.value ? 'dark' : 'light');
 // };
+
+const headerIsInverted = computed(() => {
+    return (
+        activeDropdown.value === 'products' ||
+        isScrolled.value ||
+        mobileMenuOpen.value
+    );
+});
 </script>
 
 <style scoped>
