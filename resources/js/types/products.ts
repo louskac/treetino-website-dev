@@ -59,7 +59,7 @@ export const PRODUCTS: Product[] = [
         id: ProductId.StromV1,
         label: 'Strom V1',
         detail: 'treetino-v1',
-        image: '/img/stills/Still_Strom-v1.png',
+        image: '/img/stills/LG-still.webp',
         params: {
             variants: {
                 default: { power: '49,8 kW', dailyProduction: '350-450 kWh', roi: '9,5 roku' },
@@ -113,7 +113,7 @@ export const PRODUCTS: Product[] = [
         id: ProductId.StromV2,
         label: 'Strom V2',
         detail: 'treetino-v2',
-        image: '/img/stills/Still_Strom-v2.png',
+        image: '/img/stills/SM-still.webp',
         params: {
             configField: 'windTurbines',
             variants: {

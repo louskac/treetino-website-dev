@@ -1,11 +1,13 @@
 <template>
     <component
         :is="href ? Link : 'button'"
-        class="inline-block rounded-xl bg-t-blue px-5 text-white dark:bg-white dark:text-t-blue"
+        class="flex flex-col rounded-xl bg-t-blue px-5 text-white dark:bg-white dark:text-t-blue"
         :class="variant === 'slim' ? 'py-2' : 'py-3'"
         :href="href"
     >
-        <slot />
+        <div class="my-auto">
+            <slot />
+        </div>
     </component>
 </template>
 
@@ -16,7 +18,8 @@ const props = defineProps({
     variant: {
         type: String,
         default: 'regular',
-        validator: (value: unknown) => ['regular', 'slim'].includes(value as string),
+        validator: (value: unknown) =>
+            ['regular', 'slim'].includes(value as string),
     },
     href: {
         type: String,

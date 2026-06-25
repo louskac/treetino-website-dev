@@ -13,14 +13,14 @@
         >
             <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
                 <div
-                    class="group relative flex aspect-4/5 flex-col rounded-2xl border bg-white/70 p-6 backdrop-blur-2xl"
+                    class="group relative flex aspect-4/5 flex-col rounded-2xl border border-zinc-600/5 bg-white/70 p-6 backdrop-blur-2xl"
                 >
                     <div
                         class="absolute top-0 left-0 h-full w-full overflow-clip rounded-2xl"
                     >
                         <img
                             class="rounded-2xl transition-all duration-600 group-hover:scale-110"
-                            src="/img/stills/Still_Strom-v1.png"
+                            src="/img/stills/LG-still.webp"
                             alt=""
                         />
                     </div>
@@ -50,14 +50,14 @@
                 </div>
 
                 <div
-                    class="group relative flex aspect-4/5 flex-col rounded-2xl border bg-white/70 p-6 backdrop-blur-2xl"
+                    class="group relative flex aspect-4/5 flex-col rounded-2xl border border-zinc-500/20 bg-white/70 p-6 backdrop-blur-2xl"
                 >
                     <div
                         class="absolute top-0 left-0 h-full w-full overflow-clip rounded-2xl"
                     >
                         <img
                             class="rounded-2xl transition-all duration-600 group-hover:scale-110"
-                            src="/img/stills/Still_Strom-v2.png"
+                            src="/img/stills/SM-still.webp"
                             alt=""
                         />
                     </div>
@@ -85,7 +85,7 @@
                 </div>
 
                 <div
-                    class="group relative flex aspect-4/5 flex-col rounded-2xl border bg-white/70 p-6 backdrop-blur-2xl"
+                    class="group relative flex aspect-4/5 flex-col rounded-2xl border border-zinc-500/20 bg-white/70 p-6 backdrop-blur-2xl"
                 >
                     <div
                         class="absolute top-0 left-0 h-full w-full overflow-clip rounded-2xl"
