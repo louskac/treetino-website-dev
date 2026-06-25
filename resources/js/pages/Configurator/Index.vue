@@ -8,23 +8,42 @@
         >
             <Link
                 :href="route('home')"
-                class="absolute top-4 left-4 z-10 flex items-center gap-1.5 text-md text-black/35 hover:text-black/60 transition-colors duration-200"
+                class="text-md absolute top-4 left-4 z-10 flex items-center gap-1.5 text-black/35 transition-colors duration-200 hover:text-black/60"
             >
-                <ArrowLeft class="w-4 h-4" />
+                <ArrowLeft class="h-4 w-4" />
                 Zpět
             </Link>
             <div
                 class="relative flex h-full w-full items-center justify-center"
             >
-                <img
-                    v-for="(img, i) in sectionImages"
-                    :key="selectedProductId + '-' + i + '-' + img"
-                    :src="img"
-                    class="absolute max-h-full max-w-full object-contain transition-opacity duration-700"
-                    :class="
-                        i === currentSectionIndex ? 'opacity-100' : 'opacity-0'
+                <div
+                    v-for="(layers, sectionIndex) in sectionLayerStacks"
+                    :key="
+                        selectedProductId +
+                        '-' +
+                        selectedProduct.steps[sectionIndex]?.id
                     "
-                />
+                    class="absolute inset-0 transition-opacity duration-700"
+                    :class="
+                        sectionIndex === currentSectionIndex
+                            ? 'opacity-100'
+                            : 'opacity-0'
+                    "
+                >
+                    <img
+                        v-for="layer in layers"
+                        :key="
+                            selectedProductId +
+                            '-' +
+                            selectedProduct.steps[sectionIndex]?.id +
+                            '-' +
+                            layer.src
+                        "
+                        :src="layer.src"
+                        :alt="layer.alt"
+                        class="absolute inset-0 h-full w-full object-contain"
+                    />
+                </div>
             </div>
         </div>
 
@@ -37,7 +56,10 @@
                     v-model="selectedProductId"
                     :products="products"
                 />
-                <ConfiguratorProductHeader :product="selectedProduct" :params="effectiveParams" />
+                <ConfiguratorProductHeader
+                    :product="selectedProduct"
+                    :params="effectiveParams"
+                />
 
                 <div
                     v-for="(step, index) in selectedProduct.steps"
@@ -106,10 +128,10 @@
                 </div>
 
                 <!-- Financing / Grant section – shared across all products -->
-                <div class="border-t-2 border-black/12 pt-7 dark:border-white/12">
-                    <ConfiguratorGrantSection
-                        v-model="selectedGrant"
-                    />
+                <div
+                    class="border-t-2 border-black/12 pt-7 dark:border-white/12"
+                >
+                    <ConfiguratorGrantSection v-model="selectedGrant" />
                 </div>
 
                 <div
@@ -171,8 +193,15 @@ import ConfiguratorModalCheckout from '@/custom/configurator/ConfiguratorModalCh
 import ConfiguratorModalInfo from '@/custom/configurator/ConfiguratorModalInfo.vue';
 import ConfiguratorModelSelect from '@/custom/configurator/ConfiguratorModelSelect.vue';
 import ConfiguratorProductHeader from '@/custom/configurator/ConfiguratorProductHeader.vue';
-import { PRODUCTS, ProductId  } from '@/types/products';
-import type {ConfigurationField, ProductId as ProductIdType} from '@/types/products';
+import {
+    getConfiguratorPreviewLayers,
+    type ConfiguratorPreviewSelection,
+} from '@/custom/configurator/configuratorPreviewImages';
+import { PRODUCTS, ProductId } from '@/types/products';
+import type {
+    ConfigurationField,
+    ProductId as ProductIdType,
+} from '@/types/products';
 
 const props = defineProps({
     initialProduct: String,
@@ -205,7 +234,10 @@ function modalInfoClose() {
 const products = PRODUCTS;
 
 const getInitialProduct = (): ProductIdType => {
-    if (props.initialProduct && Object.values(ProductId).includes(props.initialProduct as ProductIdType)) {
+    if (
+        props.initialProduct &&
+        Object.values(ProductId).includes(props.initialProduct as ProductIdType)
+    ) {
         return props.initialProduct as ProductIdType;
     }
     return ProductId.StromV1;
@@ -290,39 +322,28 @@ function scrollConfigurator(event: WheelEvent) {
 const sectionsRefs = ref<HTMLElement[]>([]);
 const currentSectionIndex = ref(0);
 
-const sectionImages = computed(() => {
+const previewSelection = computed<ConfiguratorPreviewSelection>(() => ({
+    color: selectedColorId.value,
+    leafColor: selectedLeafColorId.value,
+    fveLeafDesign: selectedFveLeafDesign.value,
+    connectivity: selectedConnectivity.value,
+    battery: selectedBattery.value,
+    windTurbines: selectedWindTurbines.value,
+    turbineSize: selectedTurbineSize.value,
+    turbineMount: selectedTurbineMount.value,
+    treeDesign: selectedTreeDesign.value,
+}));
+
+const sectionLayerStacks = computed(() => {
     if (!selectedProduct.value.steps) return [];
 
-    return selectedProduct.value.steps.map((step) => {
-        const prodId = selectedProductId.value;
-
-        switch (step.id) {
-            case 'color':
-                return `/img/config-images/${prodId}/color/color_${selectedColorId.value}.webp`;
-            case 'color-turbine':
-                return `/img/config-images/${prodId}/color/color_${selectedColorId.value}.webp`;
-            case 'wind-turbines':
-                return `/img/config-images/${prodId}/wind-turbines/wind-turbines_${selectedWindTurbines.value}.webp`;
-            case 'turbine-size':
-                return `/img/config-images/${prodId}/turbine-size/turbine-size_${selectedTurbineSize.value}.webp`;
-            case 'turbine-mount':
-                return `/img/config-images/${prodId}/turbine-mount/turbine-mount_${selectedTurbineMount.value}.webp`;
-            case 'leaf':
-                return `/img/config-images/${prodId}/leaf-color/leaf_${selectedLeafColorId.value}.webp`;
-            case 'fve-leaf':
-                return `/img/config-images/${prodId}/fve-leaf/fve-leaf_${selectedFveLeafDesign.value}.webp`;
-            case 'connectivity':
-                return `/img/config-images/${prodId}/connectivity/connectivity_${selectedConnectivity.value}.webp`;
-            case 'battery':
-                return `/img/config-images/${prodId}/battery/battery_${selectedBattery.value}.webp`;
-            case 'tree-design':
-                return `/img/config-images/${prodId}/tree-design/tree-design_${selectedTreeDesign.value}.webp`;
-            case 'addons':
-                return `/img/config-images/${prodId}/addons.webp`;
-            default:
-                return `/img/config-images/${prodId}/default.webp`;
-        }
-    });
+    return selectedProduct.value.steps.map((step) =>
+        getConfiguratorPreviewLayers(
+            selectedProductId.value,
+            step.id,
+            previewSelection.value,
+        ),
+    );
 });
 
 // when product is changed, reset watched DOM elements and reset section index
@@ -438,7 +459,8 @@ function buildConfiguration() {
     configuration.grant = selectedGrant.value;
 
     // Payment mode is a shared field not tied to any product step – always append
-    (configuration as Record<string, string | number | boolean>).paymentMode = selectedPaymentMode.value;
+    (configuration as Record<string, string | number | boolean>).paymentMode =
+        selectedPaymentMode.value;
 
     console.log('Selected configuration:', configuration);
 
