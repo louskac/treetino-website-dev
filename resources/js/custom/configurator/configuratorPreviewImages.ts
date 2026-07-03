@@ -137,16 +137,16 @@ const configuratorPreviewProducts: Partial<
                 backgroundAlt: 'Pozadi konfiguratoru barvy listu',
                 layers: [
                     {
-                        dir: 'construction',
-                        prefix: 'color',
-                        selection: 'color',
-                        alt: 'Barva konstrukce',
-                    },
-                    {
                         dir: 'leaves',
                         prefix: 'leaf',
                         selection: 'leafColor',
                         alt: 'Barva listu',
+                    },
+                    {
+                        dir: 'construction',
+                        prefix: 'color',
+                        selection: 'color',
+                        alt: 'Barva konstrukce',
                     },
                 ],
             },
