@@ -19,7 +19,7 @@ export type ConfiguratorPreviewLayer = {
 };
 
 type DynamicLayer = {
-    dir?: string;
+    dir: string;
     prefix: string;
     selection: keyof ConfiguratorPreviewSelection;
     alt: string;
@@ -103,11 +103,13 @@ const configuratorPreviewProducts: Partial<
                 backgroundAlt: 'Pozadi konfiguratoru barvy listu',
                 layers: [
                     {
+                        dir: 'leaves',
                         prefix: 'leaf',
                         selection: 'leafColor',
                         alt: 'Barva listu',
                     },
                     {
+                        dir: 'construction',
                         prefix: 'color',
                         selection: 'color',
                         alt: 'Barva konstrukce',
@@ -211,12 +213,9 @@ export function getConfiguratorPreviewLayers(
         ...section.layers.map((layer) => {
             const value = selection[layer.selection];
             const fileName = `${layer.prefix}_${value}.webp`;
-            const src = layer.dir
-                ? `${section.basePath}/${layer.dir}/${fileName}`
-                : `${section.basePath}/${fileName}`;
 
             return {
-                src,
+                src: `${section.basePath}/${layer.dir}/${fileName}`,
                 alt: layer.alt,
             };
         }),
