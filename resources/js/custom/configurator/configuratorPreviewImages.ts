@@ -26,24 +26,50 @@ type DynamicLayer = {
 };
 
 type LayeredPreviewSection = {
+    type: 'layered';
     basePath: string;
     background: string;
     backgroundAlt: string;
     layers: DynamicLayer[];
 };
 
-type LayeredPreviewProductConfig = {
-    defaultSectionId?: string;
-    sections: Record<string, LayeredPreviewSection>;
+type CompositePreviewSection = {
+    type: 'composite';
+    basePath: string;
+    alt: string;
+    getFileName: (selection: ConfiguratorPreviewSelection) => string;
 };
 
-const layeredPreviewSections: Partial<
-    Record<ProductIdType, LayeredPreviewProductConfig>
+type PreviewSection = LayeredPreviewSection | CompositePreviewSection;
+
+type PreviewProductConfig = {
+    defaultSectionId?: string;
+    sections: Record<string, PreviewSection>;
+};
+
+const stromV1CompositePreview: CompositePreviewSection = {
+    type: 'composite',
+    basePath: '/img/config-images/v1-config-compressed-webp',
+    alt: 'Konfigurace stromu V1',
+    getFileName: (selection) =>
+        `color_${selection.color}_${selection.leafColor}.webp`,
+};
+
+const configuratorPreviewProducts: Partial<
+    Record<ProductIdType, PreviewProductConfig>
 > = {
+    [ProductId.StromV1]: {
+        defaultSectionId: 'color',
+        sections: {
+            color: stromV1CompositePreview,
+            leaf: stromV1CompositePreview,
+        },
+    },
     [ProductId.StromV2]: {
         defaultSectionId: 'color',
         sections: {
             color: {
+                type: 'layered',
                 basePath: '/img/config-images/v2-config-compressed-webp/color',
                 background: 'color-bg.webp',
                 backgroundAlt: 'Pozadi konfiguratoru barvy konstrukce',
@@ -63,6 +89,7 @@ const layeredPreviewSections: Partial<
                 ],
             },
             leaf: {
+                type: 'layered',
                 basePath:
                     '/img/config-images/v2-config-compressed-webp/leaf-color',
                 background: 'leaf-color-bg.webp',
@@ -91,20 +118,30 @@ export function getConfiguratorPreviewLayers(
     stepId: string,
     selection: ConfiguratorPreviewSelection,
 ): ConfiguratorPreviewLayer[] {
-    const productConfig = layeredPreviewSections[productId];
+    const productConfig = configuratorPreviewProducts[productId];
 
     if (!productConfig) {
         return [];
     }
 
-    const sectionId = stepId in productConfig.sections
+    const sectionId =
+        stepId in productConfig.sections
             ? stepId
             : productConfig.defaultSectionId;
-            
+
     const section = sectionId ? productConfig.sections[sectionId] : null;
 
     if (!section) {
         return [];
+    }
+
+    if (section.type === 'composite') {
+        return [
+            {
+                src: `${section.basePath}/${section.getFileName(selection)}`,
+                alt: section.alt,
+            },
+        ];
     }
 
     return [
