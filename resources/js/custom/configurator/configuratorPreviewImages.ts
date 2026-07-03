@@ -19,7 +19,7 @@ export type ConfiguratorPreviewLayer = {
 };
 
 type DynamicLayer = {
-    dir: string;
+    dir?: string;
     prefix: string;
     selection: keyof ConfiguratorPreviewSelection;
     alt: string;
@@ -95,7 +95,25 @@ const configuratorPreviewProducts: Partial<
         defaultSectionId: 'color',
         sections: {
             color: stromV1CompositePreview,
-            leaf: stromV1CompositePreview,
+            leaf: {
+                type: 'layered',
+                basePath:
+                    '/img/config-images/v1-config-compressed-webp/leaf-color',
+                background: 'leaf-color-bg.webp',
+                backgroundAlt: 'Pozadi konfiguratoru barvy listu',
+                layers: [
+                    {
+                        prefix: 'leaf',
+                        selection: 'leafColor',
+                        alt: 'Barva listu',
+                    },
+                    {
+                        prefix: 'color',
+                        selection: 'color',
+                        alt: 'Barva konstrukce',
+                    },
+                ],
+            },
         },
     },
     [ProductId.Turbina]: {
@@ -192,9 +210,13 @@ export function getConfiguratorPreviewLayers(
         },
         ...section.layers.map((layer) => {
             const value = selection[layer.selection];
+            const fileName = `${layer.prefix}_${value}.webp`;
+            const src = layer.dir
+                ? `${section.basePath}/${layer.dir}/${fileName}`
+                : `${section.basePath}/${fileName}`;
 
             return {
-                src: `${section.basePath}/${layer.dir}/${layer.prefix}_${value}.webp`,
+                src,
                 alt: layer.alt,
             };
         }),
