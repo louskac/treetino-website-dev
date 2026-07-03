@@ -53,8 +53,9 @@
         >
             <div class="flex flex-col gap-7 p-6">
                 <ConfiguratorModelSelect
-                    v-model="selectedProductId"
+                    :model-value="selectedProductId"
                     :products="products"
+                    @update:model-value="selectProduct"
                 />
                 <ConfiguratorProductHeader
                     :product="selectedProduct"
@@ -346,8 +347,16 @@ const sectionLayerStacks = computed(() => {
     );
 });
 
-// when product is changed, reset watched DOM elements and reset section index
-watch(selectedProductId, async () => {
+async function selectProduct(productId: string) {
+    if (!Object.values(ProductId).includes(productId as ProductIdType)) {
+        return;
+    }
+
+    if (selectedProductId.value === productId) {
+        return;
+    }
+
+    selectedProductId.value = productId as ProductIdType;
     sectionsRefs.value = [];
     currentSectionIndex.value = 0;
 
@@ -356,7 +365,7 @@ watch(selectedProductId, async () => {
     // wait for re-render and reset scroll
     await nextTick();
     updateActiveSection();
-});
+}
 
 function setSectionRef(el: Element | ComponentPublicInstance | null) {
     if (el instanceof HTMLElement && !sectionsRefs.value.includes(el)) {
@@ -372,7 +381,7 @@ function resetConfiguration() {
     selectedBattery.value = 'none';
     evChargerCount.value = 0;
     bikeChargerRequested.value = false;
-    selectedWindTurbines.value = 'with-turbines';
+    selectedWindTurbines.value = 'without-turbines';
     selectedTurbineSize.value = 'large';
     selectedTurbineMount.value = 'roof';
     selectedGrant.value = 'none';
