@@ -55,6 +55,39 @@ const stromV1CompositePreview: CompositePreviewSection = {
         `color_${selection.color}_${selection.leafColor}.webp`,
 };
 
+const turbineSizeAssetNames: Record<string, string> = {
+    large: 'lg',
+    medium: 'md',
+    small: 'sm',
+};
+
+const turbineMountAssetNames: Record<string, string> = {
+    roof: 'floor',
+    wall: 'wall',
+    pole: 'floor',
+};
+
+const turbineColorAssetNames: Record<string, string> = {
+    transparent: 'clear',
+    white: 'white',
+    grey: 'grey',
+    green: 'green',
+    custom: 'custom',
+};
+
+const turbineCompositePreview: CompositePreviewSection = {
+    type: 'composite',
+    basePath: '/img/config-images/turbine-config',
+    alt: 'Konfigurace vetrne turbiny',
+    getFileName: (selection) => {
+        const size = turbineSizeAssetNames[selection.turbineSize] ?? 'lg';
+        const mount = turbineMountAssetNames[selection.turbineMount] ?? 'floor';
+        const color = turbineColorAssetNames[selection.color] ?? 'clear';
+
+        return `${size}/${mount}/${size}-${mount}-${color}.webp`;
+    },
+};
+
 const configuratorPreviewProducts: Partial<
     Record<ProductIdType, PreviewProductConfig>
 > = {
@@ -63,6 +96,14 @@ const configuratorPreviewProducts: Partial<
         sections: {
             color: stromV1CompositePreview,
             leaf: stromV1CompositePreview,
+        },
+    },
+    [ProductId.Turbina]: {
+        defaultSectionId: 'turbine-size',
+        sections: {
+            'turbine-size': turbineCompositePreview,
+            'turbine-mount': turbineCompositePreview,
+            'color-turbine': turbineCompositePreview,
         },
     },
     [ProductId.StromV2]: {
