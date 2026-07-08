@@ -2,7 +2,7 @@
     <section
         ref="sectionRef"
         class="features-desktop relative"
-        style="height: 400vh"
+        :style="{ height: `${sections.length * 100}vh` }"
     >
         <div class="sticky top-0 h-screen w-full overflow-hidden">
             <div
@@ -20,13 +20,10 @@
                 ></div>
             </div>
 
-            <!-- Desktop: left column content (no card) -->
+            <!-- Desktop: left column content -->
             <div
                 class="absolute top-0 left-1/2 h-full w-full max-w-[1400px] -translate-x-1/2 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
             >
-                <!--                <div-->
-                <!--                    class="absolute top-0 left-0 z-10 hidden h-full w-5/12 items-center px-12 lg:flex xl:px-16 2xl:px-20"-->
-                <!--                >-->
                 <div
                     class="absolute top-0 left-0 z-10 hidden h-full w-5/12 items-center lg:flex"
                 >
@@ -36,8 +33,18 @@
                                 :key="currentSectionIndex"
                                 class="flex flex-col gap-4"
                             >
-                                <span class="text-sm font-medium tabular-nums text-black/35">
-                                    {{ String(currentSectionIndex + 1).padStart(2, '0') }} / {{ String(sections.length).padStart(2, '0') }}
+                                <span
+                                    class="text-sm font-medium text-black/35 tabular-nums"
+                                >
+                                    {{
+                                        String(
+                                            currentSectionIndex + 1,
+                                        ).padStart(2, '0')
+                                    }}
+                                    /
+                                    {{
+                                        String(sections.length).padStart(2, '0')
+                                    }}
                                 </span>
 
                                 <h2 class="text-4xl leading-tight text-black">
@@ -76,7 +83,10 @@ import HomeFeaturesCardMobile from '@/custom/home/features/HomeFeaturesCardMobil
 const TOTAL_FRAMES = 228;
 const TRANSITION_FRAMES = 56;
 const SCROLL_LOCK_MS = 600;
+const SNAP_LOCK_MS = 600;
 const TRANSITION_DURATION_MS = 1500;
+const LG_BREAKPOINT = 1024;
+
 const { t } = useI18n();
 
 const sections = [
@@ -124,18 +134,19 @@ const imagePaths = Array.from(
         `/img/features-frames/features_frame_${String(i + 1).padStart(4, '0')}.webp`,
 );
 
-// Image objects pre-instantiated at mount so the browser downloads all in parallel
 let imageElements: HTMLImageElement[] = [];
 
-// Lerp state - plain vars, not reactive (mutated 60 fps)
 let targetFrame = 0;
 let displayFrame = 0;
 let rafId: number | null = null;
 let lastDrawnIndex = -1;
+
 let isSnapping = false;
 let hasSnappedIntoSection = false;
+
 let isWheelLocked = false;
 let wheelLockTimeoutId: number | null = null;
+
 let transitionFromFrame = 0;
 let transitionToFrame = 0;
 let transitionStartTime = 0;
@@ -145,9 +156,18 @@ function clamp(value: number, min: number, max: number): number {
     return Math.min(max, Math.max(min, value));
 }
 
+function isMobileViewport(): boolean {
+    return window.innerWidth < LG_BREAKPOINT;
+}
+
+function isInsidePinnedArea(rect: DOMRect, vh: number): boolean {
+    return rect.top <= 0 && rect.bottom >= vh;
+}
+
 function drawCover(canvas: HTMLCanvasElement, image: HTMLImageElement): void {
     const rect = canvas.getBoundingClientRect();
     const dpr = window.devicePixelRatio || 1;
+
     const targetWidth = Math.max(1, Math.floor(rect.width * dpr));
     const targetHeight = Math.max(1, Math.floor(rect.height * dpr));
 
@@ -164,38 +184,35 @@ function drawCover(canvas: HTMLCanvasElement, image: HTMLImageElement): void {
 
     ctx.clearRect(0, 0, targetWidth, targetHeight);
 
-    const ir = image.width / image.height;
+    const imageRatio = image.width / image.height;
 
-    // cover
-    // const cr = targetWidth / targetHeight;
+    // Current mode: contain by width
+    const drawWidth = targetWidth;
+    const drawHeight = drawWidth / imageRatio;
 
-    // let dw: number;
-    // let dh: number;
-    // if (ir > cr) {
-    //     dh = targetHeight;
-    //     dw = dh * ir;
-    // } else {
-    //     dw = targetWidth;
-    //     dh = dw / ir;
-    // }
+    const mobileOffsetY = isMobileViewport() ? -130 : 0;
+    const drawX = 0;
+    const drawY = (targetHeight - drawHeight) / 2 + mobileOffsetY;
 
-    // ctx.drawImage(image, (targetWidth - dw) / 2, (targetHeight - dh) / 2, dw, dh);
+    ctx.drawImage(image, drawX, drawY, drawWidth, drawHeight);
+}
 
-    // contain
-    const dw = targetWidth;
-    const dh = dw / ir;
+function redrawCurrentFrame(): void {
+    const canvas = canvasRef.value;
+    const img = imageElements[currentFrameIndex.value];
 
-    const isMobile = window.innerWidth < 1024; // lg breakpoint
+    if (!canvas || !img?.complete || img.naturalWidth <= 0) {
+        return;
+    }
 
-    const offsetY = isMobile ? -130 : 0;
-
-    ctx.drawImage(image, 0, (targetHeight - dh) / 2 + offsetY, dw, dh);
+    drawCover(canvas, img);
 }
 
 function animate(): void {
     if (isTransitioning) {
         const elapsed = performance.now() - transitionStartTime;
         const progress = clamp(elapsed / TRANSITION_DURATION_MS, 0, 1);
+
         displayFrame =
             transitionFromFrame +
             (transitionToFrame - transitionFromFrame) * progress;
@@ -215,7 +232,6 @@ function animate(): void {
         currentFrameIndex.value = intFrame;
     }
 
-    // Draw only when frame changed - if image is not ready yet, retry next tick
     if (intFrame !== lastDrawnIndex) {
         const img = imageElements[intFrame];
 
@@ -258,7 +274,47 @@ function startStateTransition(nextSectionIndex: number): void {
     }, SCROLL_LOCK_MS);
 }
 
+function updateMobileScrollProgress(rect: DOMRect, vh: number): void {
+    const section = sectionRef.value;
+
+    if (!section || !isInsidePinnedArea(rect, vh)) {
+        return;
+    }
+
+    const sectionTop = window.scrollY + rect.top;
+    const scrollableDistance = section.offsetHeight - vh;
+
+    if (scrollableDistance <= 0) {
+        return;
+    }
+
+    const progress = clamp(
+        (window.scrollY - sectionTop) / scrollableDistance,
+        0,
+        1,
+    );
+
+    const nextFrame = Math.round(progress * (TOTAL_FRAMES - 1));
+
+    const nextSectionIndex = clamp(
+        Math.round(progress * (sections.length - 1)),
+        0,
+        sections.length - 1,
+    );
+
+    isTransitioning = false;
+
+    targetFrame = nextFrame;
+    displayFrame = nextFrame;
+
+    currentSectionIndex.value = nextSectionIndex;
+}
+
 function handleWheel(event: WheelEvent): void {
+    if (isMobileViewport()) {
+        return;
+    }
+
     const section = sectionRef.value;
 
     if (!section) {
@@ -267,15 +323,13 @@ function handleWheel(event: WheelEvent): void {
 
     const rect = section.getBoundingClientRect();
     const vh = window.innerHeight;
-    const isInsidePinnedArea = rect.top <= 0 && rect.bottom >= vh;
 
-    if (!isInsidePinnedArea || !cardVisible.value) {
+    if (!isInsidePinnedArea(rect, vh) || !cardVisible.value) {
         return;
     }
 
     if (isWheelLocked || isTransitioning || isSnapping) {
         event.preventDefault();
-
         return;
     }
 
@@ -290,22 +344,31 @@ function handleWheel(event: WheelEvent): void {
     if (nextSectionIndex === currentSectionIndex.value) {
         const sectionTop = window.scrollY + rect.top;
 
-        // Let user leave sticky area immediately when trying to scroll past edges.
         if (
             currentSectionIndex.value === sections.length - 1 &&
             direction > 0
         ) {
             event.preventDefault();
+
             const exitBottomY = sectionTop + section.offsetHeight - vh + 2;
-            window.scrollTo({ top: exitBottomY, behavior: 'auto' });
+
+            window.scrollTo({
+                top: exitBottomY,
+                behavior: 'auto',
+            });
 
             return;
         }
 
         if (currentSectionIndex.value === 0 && direction < 0) {
             event.preventDefault();
+
             const exitTopY = Math.max(0, sectionTop - vh);
-            window.scrollTo({ top: exitTopY, behavior: 'smooth' });
+
+            window.scrollTo({
+                top: exitTopY,
+                behavior: 'smooth',
+            });
 
             return;
         }
@@ -335,12 +398,15 @@ function handleScroll(): void {
     ) {
         isSnapping = true;
         hasSnappedIntoSection = true;
-        window.scrollTo({ top: window.scrollY + rect.top, behavior: 'smooth' });
+
+        window.scrollTo({
+            top: window.scrollY + rect.top,
+            behavior: 'smooth',
+        });
 
         window.setTimeout(() => {
             isSnapping = false;
 
-            // Block wheel briefly after snap so trackpad momentum doesn't immediately advance to next section
             isWheelLocked = true;
 
             if (wheelLockTimeoutId !== null) {
@@ -350,10 +416,10 @@ function handleScroll(): void {
             wheelLockTimeoutId = window.setTimeout(() => {
                 isWheelLocked = false;
                 wheelLockTimeoutId = null;
-            }, 600);
+            }, SNAP_LOCK_MS);
 
             handleScroll();
-        }, 600);
+        }, SNAP_LOCK_MS);
 
         return;
     }
@@ -362,13 +428,26 @@ function handleScroll(): void {
         hasSnappedIntoSection = false;
     }
 
-    cardVisible.value = rect.top <= 0;
+    const insidePinnedArea = isInsidePinnedArea(rect, vh);
+
+    cardVisible.value = insidePinnedArea;
+
+    if (isMobileViewport()) {
+        updateMobileScrollProgress(rect, vh);
+    }
+}
+
+function handleResize(): void {
+    lastDrawnIndex = -1;
+
+    handleScroll();
+    redrawCurrentFrame();
 }
 
 onMounted(() => {
-    // Instantiate all Image objects immediately - browser downloads all 228 in parallel
     imageElements = imagePaths.map((src) => {
         const img = new Image();
+
         img.decoding = 'async';
         img.src = src;
 
@@ -377,6 +456,7 @@ onMounted(() => {
 
     targetFrame = sectionFrames[0];
     displayFrame = sectionFrames[0];
+
     currentFrameIndex.value = sectionFrames[0];
     currentSectionIndex.value = 0;
 
@@ -385,14 +465,17 @@ onMounted(() => {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('wheel', handleWheel, { passive: false });
+    window.addEventListener('resize', handleResize, { passive: true });
 });
 
 onUnmounted(() => {
     window.removeEventListener('scroll', handleScroll);
     window.removeEventListener('wheel', handleWheel);
+    window.removeEventListener('resize', handleResize);
 
     if (rafId !== null) {
         cancelAnimationFrame(rafId);
+        rafId = null;
     }
 
     if (wheelLockTimeoutId !== null) {
@@ -411,10 +494,12 @@ onUnmounted(() => {
         opacity 0.35s ease,
         transform 0.35s ease;
 }
+
 .section-content-enter-from {
     opacity: 0;
     transform: translateY(16px);
 }
+
 .section-content-leave-to {
     opacity: 0;
     transform: translateY(-16px);
