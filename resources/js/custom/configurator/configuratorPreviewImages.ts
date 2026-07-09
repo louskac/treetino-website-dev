@@ -64,7 +64,7 @@ const turbineSizeAssetNames: Record<string, string> = {
 const turbineMountAssetNames: Record<string, string> = {
     roof: 'floor',
     wall: 'wall',
-    pole: 'floor',
+    pole: 'post',
 };
 
 const turbineColorAssetNames: Record<string, string> = {
