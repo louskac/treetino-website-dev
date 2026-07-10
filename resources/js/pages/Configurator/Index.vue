@@ -17,32 +17,72 @@
                 class="relative flex h-full w-full items-center justify-center"
             >
                 <div
-                    v-for="(layers, sectionIndex) in sectionLayerStacks"
-                    :key="
-                        selectedProductId +
-                        '-' +
-                        selectedProduct.steps[sectionIndex]?.id
-                    "
+                    v-for="preview in sectionPreviews"
+                    :key="selectedProductId + '-' + preview.id"
                     class="absolute inset-0 transition-opacity duration-700"
                     :class="
-                        sectionIndex === currentSectionIndex
+                        preview.id === currentSectionId
                             ? 'opacity-100'
                             : 'opacity-0'
                     "
                 >
-                    <img
-                        v-for="layer in layers"
-                        :key="
-                            selectedProductId +
-                            '-' +
-                            selectedProduct.steps[sectionIndex]?.id +
-                            '-' +
-                            layer.src
-                        "
-                        :src="layer.src"
-                        :alt="layer.alt"
-                        class="absolute inset-0 h-full w-full object-contain"
-                    />
+                    <template v-if="preview.type === 'layers'">
+                        <img
+                            v-for="layer in preview.layers"
+                            :key="
+                                selectedProductId +
+                                '-' +
+                                preview.id +
+                                '-' +
+                                layer.src
+                            "
+                            :src="layer.src"
+                            :alt="layer.alt"
+                            class="absolute inset-0 h-full w-full object-contain"
+                        />
+                    </template>
+                    <div
+                        v-else
+                        class="flex h-full w-full items-center justify-center px-5 sm:px-8 md:px-10"
+                    >
+                        <div
+                            class="grid w-full max-w-4xl grid-cols-3 items-end gap-3 sm:gap-5 md:gap-8"
+                        >
+                            <div
+                                v-for="item in preview.items"
+                                :key="
+                                    selectedProductId +
+                                    '-' +
+                                    preview.id +
+                                    '-' +
+                                    item.src
+                                "
+                                class="flex min-w-0 flex-col items-center gap-3"
+                            >
+                                <img
+                                    :src="item.src"
+                                    :alt="item.alt"
+                                    class="aspect-square w-full max-w-[180px] object-contain transition-opacity duration-300 md:max-w-[240px]"
+                                    :class="
+                                        item.selected
+                                            ? 'opacity-100'
+                                            : 'opacity-50'
+                                    "
+                                />
+                                <div
+                                    class="flex h-9 items-center justify-center"
+                                >
+                                    <div
+                                        v-if="item.selected"
+                                        class="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white shadow-sm"
+                                        :aria-label="item.label + ' vybráno'"
+                                    >
+                                        <Check class="h-5 w-5" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -65,7 +105,7 @@
                 <div
                     v-for="(step, index) in selectedProduct.steps"
                     :key="step.id"
-                    :ref="setSectionRef"
+                    :ref="(el) => setSectionRef(step.id, el)"
                     @click="forceActiveSection(step.id)"
                     class="border-t border-t-blue/10 pt-7 dark:border-white/10"
                 >
@@ -130,6 +170,7 @@
 
                 <!-- Financing / Grant section – shared across all products -->
                 <div
+                    :ref="(el) => setSectionRef(FALLBACK_SECTION_ID, el)"
                     class="border-t-2 border-black/12 pt-7 dark:border-white/12"
                 >
                     <ConfiguratorGrantSection v-model="selectedGrant" />
@@ -172,37 +213,45 @@
 </template>
 
 <script setup lang="ts">
+import { ArrowLeft } from '@iconoir/vue';
 import { Head, router, Link } from '@inertiajs/vue3';
+import { Check } from 'lucide-vue-next';
 import type { ComponentPublicInstance } from 'vue';
 import { ref, computed, onMounted, onUnmounted, nextTick, watch } from 'vue';
 import { route } from 'ziggy-js';
-import { ArrowLeft } from '@iconoir/vue';
 import ConfiguratorAddonsStep from '@/custom/configurator/ConfiguratorAddonsStep.vue';
-import ConfiguratorTreeDesignStep from '@/custom/configurator/ConfiguratorTreeDesignStep.vue';
 import ConfiguratorBatteryStep from '@/custom/configurator/ConfiguratorBatteryStep.vue';
 import ConfiguratorCheckout from '@/custom/configurator/ConfiguratorCheckout.vue';
 import ConfiguratorColorStep from '@/custom/configurator/ConfiguratorColorStep.vue';
-import ConfiguratorTurbineColorStep from '@/custom/configurator/ConfiguratorTurbineColorStep.vue';
 import ConfiguratorConnectivityStep from '@/custom/configurator/ConfiguratorConnectivityStep.vue';
-import ConfiguratorWindTurbinesStep from '@/custom/configurator/ConfiguratorWindTurbinesStep.vue';
-import ConfiguratorTurbinaSizeStep from '@/custom/configurator/ConfiguratorTurbinaSizeStep.vue';
-import ConfiguratorTurbinaMountStep from '@/custom/configurator/ConfiguratorTurbinaMountStep.vue';
 import ConfiguratorFveLeafStep from '@/custom/configurator/ConfiguratorFveLeafStep.vue';
 import ConfiguratorGrantSection from '@/custom/configurator/ConfiguratorGrantSection.vue';
 import ConfiguratorLeafColorStep from '@/custom/configurator/ConfiguratorLeafColorStep.vue';
 import ConfiguratorModalCheckout from '@/custom/configurator/ConfiguratorModalCheckout.vue';
 import ConfiguratorModalInfo from '@/custom/configurator/ConfiguratorModalInfo.vue';
 import ConfiguratorModelSelect from '@/custom/configurator/ConfiguratorModelSelect.vue';
-import ConfiguratorProductHeader from '@/custom/configurator/ConfiguratorProductHeader.vue';
-import {
-    getConfiguratorPreviewLayers,
-    type ConfiguratorPreviewSelection,
+import { getConfiguratorPreview } from '@/custom/configurator/configuratorPreviewImages';
+import type {
+    ConfiguratorPreview,
+    ConfiguratorPreviewSelection,
 } from '@/custom/configurator/configuratorPreviewImages';
+import ConfiguratorProductHeader from '@/custom/configurator/ConfiguratorProductHeader.vue';
+import ConfiguratorTreeDesignStep from '@/custom/configurator/ConfiguratorTreeDesignStep.vue';
+import ConfiguratorTurbinaMountStep from '@/custom/configurator/ConfiguratorTurbinaMountStep.vue';
+import ConfiguratorTurbinaSizeStep from '@/custom/configurator/ConfiguratorTurbinaSizeStep.vue';
+import ConfiguratorTurbineColorStep from '@/custom/configurator/ConfiguratorTurbineColorStep.vue';
+import ConfiguratorWindTurbinesStep from '@/custom/configurator/ConfiguratorWindTurbinesStep.vue';
 import { PRODUCTS, ProductId } from '@/types/products';
 import type {
     ConfigurationField,
     ProductId as ProductIdType,
 } from '@/types/products';
+
+const FALLBACK_SECTION_ID = '__fallback__';
+
+type SectionPreview = ConfiguratorPreview & {
+    id: string;
+};
 
 const props = defineProps({
     initialProduct: String,
@@ -241,6 +290,7 @@ const getInitialProduct = (): ProductIdType => {
     ) {
         return props.initialProduct as ProductIdType;
     }
+
     return ProductId.StromV1;
 };
 
@@ -251,14 +301,16 @@ onMounted(() => {
     const panel = configuratorPanel.value;
 
     if (panel) {
-        panel.addEventListener('scroll', updateActiveSection, {
+        panel.addEventListener('scroll', handleScrollActiveSection, {
             passive: true,
         });
         removePanelScrollListener = () =>
-            panel.removeEventListener('scroll', updateActiveSection);
+            panel.removeEventListener('scroll', handleScrollActiveSection);
     }
 
-    window.addEventListener('scroll', updateActiveSection, { passive: true });
+    window.addEventListener('scroll', handleScrollActiveSection, {
+        passive: true,
+    });
     window.addEventListener('resize', updateActiveSection, { passive: true });
 
     nextTick(updateActiveSection);
@@ -266,7 +318,7 @@ onMounted(() => {
 
 onUnmounted(() => {
     removePanelScrollListener?.();
-    window.removeEventListener('scroll', updateActiveSection);
+    window.removeEventListener('scroll', handleScrollActiveSection);
     window.removeEventListener('resize', updateActiveSection);
 });
 
@@ -300,9 +352,14 @@ const configFieldValues: Record<string, () => string> = {
 
 const effectiveParams = computed(() => {
     const { configField, variants } = selectedProduct.value.params;
-    if (!configField) return Object.values(variants)[0];
+
+    if (!configField) {
+        return Object.values(variants)[0];
+    }
+
     const getter = configFieldValues[configField];
     const key = getter ? getter() : '';
+
     return variants[key] ?? Object.values(variants)[0];
 });
 
@@ -310,7 +367,6 @@ const basePrice = computed(() => selectedProduct.value.basePrice ?? 0);
 
 const configuratorPanel = ref<HTMLElement | null>(null);
 
-let focusTimeout: ReturnType<typeof setTimeout> | null = null;
 let isForcedFocus = false;
 
 function scrollConfigurator(event: WheelEvent) {
@@ -320,8 +376,8 @@ function scrollConfigurator(event: WheelEvent) {
 }
 
 /* Scroll based image switching */
-const sectionsRefs = ref<HTMLElement[]>([]);
-const currentSectionIndex = ref(0);
+const sectionElements = new Map<string, HTMLElement>();
+const currentSectionId = ref(getFirstSectionId());
 
 const previewSelection = computed<ConfiguratorPreviewSelection>(() => ({
     color: selectedColorId.value,
@@ -329,22 +385,21 @@ const previewSelection = computed<ConfiguratorPreviewSelection>(() => ({
     fveLeafDesign: selectedFveLeafDesign.value,
     connectivity: selectedConnectivity.value,
     battery: selectedBattery.value,
+    evChargerCount: evChargerCount.value,
+    bikeChargerRequested: bikeChargerRequested.value,
     windTurbines: selectedWindTurbines.value,
     turbineSize: selectedTurbineSize.value,
     turbineMount: selectedTurbineMount.value,
     treeDesign: selectedTreeDesign.value,
 }));
 
-const sectionLayerStacks = computed(() => {
-    if (!selectedProduct.value.steps) return [];
-
-    return selectedProduct.value.steps.map((step) =>
-        getConfiguratorPreviewLayers(
-            selectedProductId.value,
-            step.id,
-            previewSelection.value,
+const sectionPreviews = computed<SectionPreview[]>(() => {
+    return [
+        ...selectedProduct.value.steps.map((step) =>
+            getPreviewForSection(step.id),
         ),
-    );
+        getPreviewForSection(FALLBACK_SECTION_ID),
+    ];
 });
 
 async function selectProduct(productId: string) {
@@ -357,20 +412,59 @@ async function selectProduct(productId: string) {
     }
 
     selectedProductId.value = productId as ProductIdType;
-    sectionsRefs.value = [];
-    currentSectionIndex.value = 0;
+    clearForcedFocus();
+    sectionElements.clear();
+    currentSectionId.value = getFirstSectionId();
 
     resetConfiguration();
 
     // wait for re-render and reset scroll
     await nextTick();
+    resetConfiguratorScroll();
+    currentSectionId.value = getFirstSectionId();
     updateActiveSection();
 }
 
-function setSectionRef(el: Element | ComponentPublicInstance | null) {
-    if (el instanceof HTMLElement && !sectionsRefs.value.includes(el)) {
-        sectionsRefs.value.push(el);
+function getFirstSectionId() {
+    return selectedProduct.value.steps[0]?.id ?? FALLBACK_SECTION_ID;
+}
+
+function getPreviewForSection(sectionId: string): SectionPreview {
+    return {
+        id: sectionId,
+        ...getConfiguratorPreview(
+            selectedProductId.value,
+            sectionId,
+            previewSelection.value,
+        ),
+    };
+}
+
+function resetConfiguratorScroll() {
+    if (configuratorPanel.value) {
+        configuratorPanel.value.scrollTop = 0;
     }
+
+    if (!window.matchMedia('(min-width: 768px)').matches) {
+        window.scrollTo({ top: 0 });
+    }
+}
+
+function clearForcedFocus() {
+    isForcedFocus = false;
+}
+
+function setSectionRef(
+    sectionId: string,
+    el: Element | ComponentPublicInstance | null,
+) {
+    if (el instanceof HTMLElement) {
+        sectionElements.set(sectionId, el);
+
+        return;
+    }
+
+    sectionElements.delete(sectionId);
 }
 
 function resetConfiguration() {
@@ -390,7 +484,9 @@ function resetConfiguration() {
 
 function updateActiveSection() {
     // forced focus is used to prevent instantly switching back from selected option to section when clicked and scrolled
-    if (isForcedFocus) return;
+    if (isForcedFocus) {
+        return;
+    }
 
     const panel = configuratorPanel.value;
 
@@ -401,36 +497,49 @@ function updateActiveSection() {
           panel.getBoundingClientRect().height * 0.5
         : window.innerHeight * 0.65;
 
-    let activeIndex = 0;
+    let activeSectionId = getFirstSectionId();
 
-    sectionsRefs.value.forEach((el, index) => {
-        const rect = el.getBoundingClientRect();
-        const elCenter = rect.top + rect.height / 2;
+    selectedProduct.value.steps.forEach((step) => {
+        const el = sectionElements.get(step.id);
 
-        // if center is above trigger point
-        if (elCenter <= triggerY) {
-            activeIndex = index;
+        if (el && isPastTrigger(el, triggerY)) {
+            activeSectionId = step.id;
         }
     });
 
-    currentSectionIndex.value = activeIndex;
+    const fallbackEl = sectionElements.get(FALLBACK_SECTION_ID);
+
+    if (fallbackEl && isPastTrigger(fallbackEl, triggerY)) {
+        activeSectionId = FALLBACK_SECTION_ID;
+    }
+
+    currentSectionId.value = activeSectionId;
+}
+
+function isPastTrigger(el: HTMLElement, triggerY: number) {
+    const rect = el.getBoundingClientRect();
+
+    return rect.top + rect.height / 2 <= triggerY;
+}
+
+function handleScrollActiveSection() {
+    if (isForcedFocus) {
+        clearForcedFocus();
+    }
+
+    updateActiveSection();
 }
 
 function forceActiveSection(stepId: string) {
-    if (!selectedProduct.value.steps) return;
+    if (!selectedProduct.value.steps.some((step) => step.id === stepId)) {
+        return;
+    }
 
-    const index = selectedProduct.value.steps.findIndex((s) => s.id === stepId);
+    if (currentSectionId.value !== stepId) {
+        currentSectionId.value = stepId;
 
-    if (index !== -1 && currentSectionIndex.value !== index) {
-        currentSectionIndex.value = index;
-
+        clearForcedFocus();
         isForcedFocus = true;
-
-        if (focusTimeout) clearTimeout(focusTimeout);
-
-        focusTimeout = setTimeout(() => {
-            isForcedFocus = false;
-        }, 400);
     }
 }
 

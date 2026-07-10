@@ -7,6 +7,8 @@ export type ConfiguratorPreviewSelection = {
     fveLeafDesign: string;
     connectivity: string;
     battery: string;
+    evChargerCount: number;
+    bikeChargerRequested: boolean;
     windTurbines: string;
     turbineSize: string;
     turbineMount: string;
@@ -17,6 +19,23 @@ export type ConfiguratorPreviewLayer = {
     src: string;
     alt: string;
 };
+
+export type ConfiguratorPreviewAddon = {
+    src: string;
+    alt: string;
+    label: string;
+    selected: boolean;
+};
+
+export type ConfiguratorPreview =
+    | {
+          type: 'layers';
+          layers: ConfiguratorPreviewLayer[];
+      }
+    | {
+          type: 'addons';
+          items: ConfiguratorPreviewAddon[];
+      };
 
 type DynamicLayer = {
     dir: string;
@@ -40,7 +59,23 @@ type CompositePreviewSection = {
     getFileName: (selection: ConfiguratorPreviewSelection) => string;
 };
 
-type PreviewSection = LayeredPreviewSection | CompositePreviewSection;
+type AddonsPreviewItem = {
+    fileName: string;
+    label: string;
+    alt: string;
+    isSelected: (selection: ConfiguratorPreviewSelection) => boolean;
+};
+
+type AddonsPreviewSection = {
+    type: 'addons';
+    basePath: string;
+    items: AddonsPreviewItem[];
+};
+
+type PreviewSection =
+    | LayeredPreviewSection
+    | CompositePreviewSection
+    | AddonsPreviewSection;
 
 type PreviewProductConfig = {
     defaultSectionId?: string;
@@ -54,6 +89,31 @@ const stromV1CompositePreview: CompositePreviewSection = {
     getFileName: (selection) =>
         `color_${selection.color}_${selection.leafColor}.webp`,
 };
+
+const getAddonsPreview = (basePath: string): AddonsPreviewSection => ({
+    type: 'addons',
+    basePath,
+    items: [
+        {
+            fileName: 'nabijecka-auta.webp',
+            label: 'Nabíjení aut',
+            alt: 'Nabíjení pro elektromobily',
+            isSelected: (selection) => selection.evChargerCount > 0,
+        },
+        {
+            fileName: 'baterie.webp',
+            label: 'Baterie',
+            alt: 'Fyzická baterie',
+            isSelected: (selection) => selection.battery !== 'none',
+        },
+        {
+            fileName: 'nabijecka-kola.webp',
+            label: 'Nabíjení kol',
+            alt: 'Nabíjení pro elektrokola',
+            isSelected: (selection) => selection.bikeChargerRequested,
+        },
+    ],
+});
 
 const turbineSizeAssetNames: Record<string, string> = {
     large: 'lg',
@@ -116,6 +176,12 @@ const configuratorPreviewProducts: Partial<
                     },
                 ],
             },
+            battery: getAddonsPreview(
+                '/img/config-images/v1-config-compressed-webp/addons',
+            ),
+            addons: getAddonsPreview(
+                '/img/config-images/v1-config-compressed-webp/addons',
+            ),
         },
     },
     [ProductId.Turbina]: {
@@ -170,19 +236,25 @@ const configuratorPreviewProducts: Partial<
                     },
                 ],
             },
+            battery: getAddonsPreview(
+                '/img/config-images/v2-config-compressed-webp/addons',
+            ),
+            addons: getAddonsPreview(
+                '/img/config-images/v2-config-compressed-webp/addons',
+            ),
         },
     },
 };
 
-export function getConfiguratorPreviewLayers(
+export function getConfiguratorPreview(
     productId: ProductIdType,
     stepId: string,
     selection: ConfiguratorPreviewSelection,
-): ConfiguratorPreviewLayer[] {
+): ConfiguratorPreview {
     const productConfig = configuratorPreviewProducts[productId];
 
     if (!productConfig) {
-        return [];
+        return { type: 'layers', layers: [] };
     }
 
     const sectionId =
@@ -193,31 +265,49 @@ export function getConfiguratorPreviewLayers(
     const section = sectionId ? productConfig.sections[sectionId] : null;
 
     if (!section) {
-        return [];
+        return { type: 'layers', layers: [] };
     }
 
     if (section.type === 'composite') {
-        return [
-            {
-                src: `${section.basePath}/${section.getFileName(selection)}`,
-                alt: section.alt,
-            },
-        ];
+        return {
+            type: 'layers',
+            layers: [
+                {
+                    src: `${section.basePath}/${section.getFileName(selection)}`,
+                    alt: section.alt,
+                },
+            ],
+        };
     }
 
-    return [
-        {
-            src: `${section.basePath}/${section.background}`,
-            alt: section.backgroundAlt,
-        },
-        ...section.layers.map((layer) => {
-            const value = selection[layer.selection];
-            const fileName = `${layer.prefix}_${value}.webp`;
+    if (section.type === 'addons') {
+        return {
+            type: 'addons',
+            items: section.items.map((item) => ({
+                src: `${section.basePath}/${item.fileName}`,
+                alt: item.alt,
+                label: item.label,
+                selected: item.isSelected(selection),
+            })),
+        };
+    }
 
-            return {
-                src: `${section.basePath}/${layer.dir}/${fileName}`,
-                alt: layer.alt,
-            };
-        }),
-    ];
+    return {
+        type: 'layers',
+        layers: [
+            {
+                src: `${section.basePath}/${section.background}`,
+                alt: section.backgroundAlt,
+            },
+            ...section.layers.map((layer) => {
+                const value = selection[layer.selection];
+                const fileName = `${layer.prefix}_${value}.webp`;
+
+                return {
+                    src: `${section.basePath}/${layer.dir}/${fileName}`,
+                    alt: layer.alt,
+                };
+            }),
+        ],
+    };
 }
