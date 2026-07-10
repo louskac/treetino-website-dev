@@ -1,69 +1,22 @@
-<script setup lang="ts">
-import { ref, onMounted, nextTick } from 'vue';
+<script setup lang="ts"></script>
 
-// Use a single ref typed as an HTMLVideoElement
-const videoRef = ref<HTMLVideoElement | null>(null);
-const isSafari = ref(false);
-
-onMounted(async () => {
-    const ua = navigator.userAgent;
-    isSafari.value = /^((?!chrome|android).)*safari/i.test(ua);
-
-    // If it's Safari, stop here so we don't try to play a non-existent video
-    if (isSafari.value) return;
-
-    // Wait for the DOM to be ready
-    await nextTick();
-
-    const video = videoRef.value;
-
-    if (video) {
-        // CRITICAL: Explicitly set muted property to bypass mobile autoplay blocks
-        video.muted = true;
-        video.defaultMuted = true;
-
-        // Start playing
-        const playPromise = video.play();
-
-        if (playPromise !== undefined) {
-            playPromise.catch((error) => {
-                console.warn('Autoplay was prevented:', error);
-                // If blocked, try playing again on the first user interaction
-                document.addEventListener('click', () => video.play(), {
-                    once: true,
-                });
-            });
-        }
-    }
-});
-</script>
 <template>
-    <section class="cta-generic relative h-180 bg-t-blue">
+    <section class="cta-generic relative h-180 overflow-hidden bg-t-blue">
         <div
-            v-if="!isSafari"
-            class="bg absolute top-0 left-0 h-full w-full bg-t-dark opacity-20 mix-blend-screen saturate-0"
+            class="bg absolute inset-0 overflow-hidden bg-t-dark opacity-20 mix-blend-screen saturate-0"
         >
-            <video
-                ref="videoRef"
-                class="absolute top-0 left-0 h-full w-full object-cover transition-opacity ease-in-out"
-                muted
-                loop
-                playsinline
-                preload="auto"
-            >
-                <source src="/video/office-corr.webm" type="video/webm" />
-            </video>
-        </div>
+            <img
+                src="/img/cta/cta-pos-1.webp"
+                alt=""
+                class="cta-slide cta-slide-first absolute inset-0 h-full w-full object-cover"
+            />
 
-        <div
-            v-if="isSafari"
-            class="bg absolute top-0 left-0 h-full w-full bg-t-dark opacity-20"
-            style="
-                background-image: url('/video/office-corr.webm');
-                background-size: cover;
-                background-position: center;
-            "
-        ></div>
+            <img
+                src="/img/cta/cta-pos-2.webp"
+                alt=""
+                class="cta-slide cta-slide-second absolute inset-0 h-full w-full object-cover"
+            />
+        </div>
 
         <div
             class="absolute left-1/2 hidden h-full max-w-[1400px] -translate-x-1/2 border-r border-l border-r-white/20 border-l-white/20 [mask-image:linear-gradient(to_bottom,transparent_0%,black_100%)] sm:block sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)] dark:border-r-white/20 dark:border-l-white/20"
@@ -83,3 +36,60 @@ onMounted(async () => {
         </div>
     </section>
 </template>
+
+<style scoped>
+.cta-slide {
+    opacity: 0;
+    transform: scale(1);
+    animation: cta-slideshow 6s linear infinite;
+    will-change: opacity, transform;
+}
+
+.cta-slide-first {
+    animation-delay: 0s;
+}
+
+.cta-slide-second {
+    animation-delay: -3s;
+}
+
+@keyframes cta-slideshow {
+    0% {
+        opacity: 0;
+        transform: scale(1);
+    }
+
+    8% {
+        opacity: 1;
+    }
+
+    42% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+        transform: scale(1.08);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1.08);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cta-slide {
+        animation: none;
+        transform: none;
+    }
+
+    .cta-slide-first {
+        opacity: 1;
+    }
+
+    .cta-slide-second {
+        opacity: 0;
+    }
+}
+</style>
