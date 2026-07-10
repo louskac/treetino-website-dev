@@ -74,10 +74,10 @@
                                 >
                                     <div
                                         v-if="item.selected"
-                                        class="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white shadow-sm"
+                                        class="flex h-6 w-6 items-center justify-center rounded-full bg-black text-white shadow-sm"
                                         :aria-label="item.label + ' vybráno'"
                                     >
-                                        <Check class="h-5 w-5" />
+                                        <Check class="h-4 w-4" />
                                     </div>
                                 </div>
                             </div>
