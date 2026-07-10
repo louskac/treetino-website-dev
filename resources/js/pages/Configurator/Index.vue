@@ -17,7 +17,7 @@
                 class="relative flex h-full w-full items-center justify-center"
             >
                 <div
-                    v-for="preview in sectionPreviews"
+                    v-for="preview in visibleSectionPreviews"
                     :key="selectedProductId + '-' + preview.id"
                     class="absolute inset-0 transition-opacity duration-700"
                     :class="
@@ -402,6 +402,23 @@ const sectionPreviews = computed<SectionPreview[]>(() => {
     ];
 });
 
+const visibleSectionPreviews = ref<SectionPreview[]>(sectionPreviews.value);
+let previewPreloadVersion = 0;
+
+watch(
+    sectionPreviews,
+    async (previews) => {
+        const version = ++previewPreloadVersion;
+
+        await preloadPreviewImages(previews);
+
+        if (version === previewPreloadVersion) {
+            visibleSectionPreviews.value = previews;
+        }
+    },
+    { immediate: true },
+);
+
 async function selectProduct(productId: string) {
     if (!Object.values(ProductId).includes(productId as ProductIdType)) {
         return;
@@ -438,6 +455,34 @@ function getPreviewForSection(sectionId: string): SectionPreview {
             previewSelection.value,
         ),
     };
+}
+
+async function preloadPreviewImages(previews: SectionPreview[]) {
+    if (typeof Image === 'undefined') {
+        return;
+    }
+
+    const sources = [
+        ...new Set(previews.flatMap((preview) => getPreviewSources(preview))),
+    ];
+
+    await Promise.all(sources.map(loadImage));
+}
+
+function getPreviewSources(preview: SectionPreview) {
+    return preview.type === 'layers'
+        ? preview.layers.map((layer) => layer.src)
+        : preview.items.map((item) => item.src);
+}
+
+function loadImage(src: string) {
+    return new Promise<void>((resolve) => {
+        const image = new Image();
+
+        image.onload = () => resolve();
+        image.onerror = () => resolve();
+        image.src = src;
+    });
 }
 
 function resetConfiguratorScroll() {
