@@ -27,6 +27,10 @@ const props = defineProps<{
     activeIndex: number;
 }>();
 
+const emit = defineEmits<{
+    autoplayBlocked: [blocked: boolean];
+}>();
+
 const videos = [
     '/video/hero-v1-cine-noaudio.webm',
     '/video/hero-v2-cine-noaudio.webm',
@@ -63,8 +67,12 @@ const playVideo = async () => {
     try {
         video.load();
         await video.play();
+
+        emit('autoplayBlocked', false);
     } catch (error) {
         console.warn('Video autoplay failed:', error);
+
+        emit('autoplayBlocked', true);
     }
 };
 
@@ -78,4 +86,22 @@ watch(
         playVideo();
     },
 );
+
+defineExpose({
+    playVideo,
+});
 </script>
+
+<style>
+video::-webkit-media-controls {
+    display: none !important;
+}
+
+video::-webkit-media-controls-enclosure {
+    display: none !important;
+}
+
+video::-webkit-media-controls-panel {
+    display: none !important;
+}
+</style>
