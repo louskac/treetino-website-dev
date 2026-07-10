@@ -82,10 +82,16 @@ import HomeFeaturesCardMobile from '@/custom/home/features/HomeFeaturesCardMobil
 
 const TOTAL_FRAMES = 228;
 const TRANSITION_FRAMES = 56;
+
 const SCROLL_LOCK_MS = 600;
 const SNAP_LOCK_MS = 600;
 const TRANSITION_DURATION_MS = 1500;
+
 const LG_BREAKPOINT = 1024;
+
+const MOBILE_SWIPE_THRESHOLD_PX = 36;
+const MOBILE_SETTLE_DELAY_MS = 90;
+const MOBILE_SETTLE_MAX_MS = 1000;
 
 const { t } = useI18n();
 
@@ -152,6 +158,15 @@ let transitionToFrame = 0;
 let transitionStartTime = 0;
 let isTransitioning = false;
 
+let isMobileTouching = false;
+let mobileGestureStartedInside = false;
+let mobileGestureStartY = 0;
+let mobileGestureStartIndex = 0;
+
+let isMobileSettling = false;
+let mobileSettleTimeoutId: number | null = null;
+let mobileSettleRafId: number | null = null;
+
 function clamp(value: number, min: number, max: number): number {
     return Math.min(max, Math.max(min, value));
 }
@@ -186,7 +201,6 @@ function drawCover(canvas: HTMLCanvasElement, image: HTMLImageElement): void {
 
     const imageRatio = image.width / image.height;
 
-    // Current mode: contain by width
     const drawWidth = targetWidth;
     const drawHeight = drawWidth / imageRatio;
 
@@ -250,11 +264,12 @@ function animate(): void {
 function startStateTransition(nextSectionIndex: number): void {
     const nextFrame = sectionFrames[nextSectionIndex];
 
-    if (nextFrame === targetFrame || isTransitioning) {
+    if (nextFrame === targetFrame && !isTransitioning) {
+        currentSectionIndex.value = nextSectionIndex;
         return;
     }
 
-    transitionFromFrame = targetFrame;
+    transitionFromFrame = displayFrame;
     transitionToFrame = nextFrame;
     transitionStartTime = performance.now();
     isTransitioning = true;
@@ -274,40 +289,216 @@ function startStateTransition(nextSectionIndex: number): void {
     }, SCROLL_LOCK_MS);
 }
 
-function updateMobileScrollProgress(rect: DOMRect, vh: number): void {
+function getSectionTop(rect: DOMRect): number {
+    return window.scrollY + rect.top;
+}
+
+function getMobileScrollableDistance(section: HTMLElement, vh: number): number {
+    return Math.max(0, section.offsetHeight - vh);
+}
+
+function getMobileStepDistance(section: HTMLElement, vh: number): number {
+    const scrollableDistance = getMobileScrollableDistance(section, vh);
+
+    if (sections.length <= 1) {
+        return scrollableDistance;
+    }
+
+    return scrollableDistance / (sections.length - 1);
+}
+
+function getMobileProgress(rect: DOMRect, vh: number): number {
     const section = sectionRef.value;
 
-    if (!section || !isInsidePinnedArea(rect, vh)) {
-        return;
+    if (!section) {
+        return 0;
     }
 
-    const sectionTop = window.scrollY + rect.top;
-    const scrollableDistance = section.offsetHeight - vh;
+    const sectionTop = getSectionTop(rect);
+    const scrollableDistance = getMobileScrollableDistance(section, vh);
 
     if (scrollableDistance <= 0) {
-        return;
+        return 0;
     }
 
-    const progress = clamp(
-        (window.scrollY - sectionTop) / scrollableDistance,
+    return clamp((window.scrollY - sectionTop) / scrollableDistance, 0, 1);
+}
+
+function getFrameFromMobileProgress(progress: number): number {
+    const lastSectionIndex = sections.length - 1;
+    const exactSectionProgress = progress * lastSectionIndex;
+
+    const fromSectionIndex = clamp(
+        Math.floor(exactSectionProgress),
         0,
-        1,
+        lastSectionIndex,
     );
 
-    const nextFrame = Math.round(progress * (TOTAL_FRAMES - 1));
+    const toSectionIndex = clamp(fromSectionIndex + 1, 0, lastSectionIndex);
 
-    const nextSectionIndex = clamp(
+    const localProgress = clamp(exactSectionProgress - fromSectionIndex, 0, 1);
+
+    const fromFrame = sectionFrames[fromSectionIndex];
+    const toFrame = sectionFrames[toSectionIndex];
+
+    return Math.round(fromFrame + (toFrame - fromFrame) * localProgress);
+}
+
+function getNearestMobileSectionIndex(rect: DOMRect, vh: number): number {
+    const progress = getMobileProgress(rect, vh);
+
+    return clamp(
         Math.round(progress * (sections.length - 1)),
         0,
         sections.length - 1,
     );
+}
+
+function getMobileSectionScrollY(sectionIndex: number): number | null {
+    const section = sectionRef.value;
+
+    if (!section) {
+        return null;
+    }
+
+    const rect = section.getBoundingClientRect();
+    const vh = window.innerHeight;
+
+    const sectionTop = getSectionTop(rect);
+    const stepDistance = getMobileStepDistance(section, vh);
+
+    return sectionTop + stepDistance * sectionIndex;
+}
+
+function clearMobileSettleTimers(): void {
+    if (mobileSettleTimeoutId !== null) {
+        window.clearTimeout(mobileSettleTimeoutId);
+        mobileSettleTimeoutId = null;
+    }
+
+    if (mobileSettleRafId !== null) {
+        cancelAnimationFrame(mobileSettleRafId);
+        mobileSettleRafId = null;
+    }
+}
+
+function finishMobileSettleWhenArrived(
+    targetY: number,
+    sectionIndex: number,
+    startedAt: number,
+): void {
+    const isCloseEnough = Math.abs(window.scrollY - targetY) <= 2;
+    const hasTimedOut = performance.now() - startedAt >= MOBILE_SETTLE_MAX_MS;
+
+    if (isCloseEnough || hasTimedOut) {
+        window.scrollTo({
+            top: targetY,
+            behavior: 'auto',
+        });
+
+        const finalFrame = sectionFrames[sectionIndex];
+
+        isTransitioning = false;
+        isMobileSettling = false;
+
+        targetFrame = finalFrame;
+        displayFrame = finalFrame;
+
+        currentFrameIndex.value = finalFrame;
+        currentSectionIndex.value = sectionIndex;
+
+        mobileSettleRafId = null;
+
+        return;
+    }
+
+    mobileSettleRafId = requestAnimationFrame(() => {
+        finishMobileSettleWhenArrived(targetY, sectionIndex, startedAt);
+    });
+}
+
+function settleMobileToSection(sectionIndex: number): void {
+    const targetY = getMobileSectionScrollY(sectionIndex);
+
+    if (targetY === null) {
+        return;
+    }
+
+    clearMobileSettleTimers();
+
+    isTransitioning = false;
+    isMobileSettling = true;
+
+    currentSectionIndex.value = sectionIndex;
+
+    window.scrollTo({
+        top: targetY,
+        behavior: 'smooth',
+    });
+
+    mobileSettleRafId = requestAnimationFrame(() => {
+        finishMobileSettleWhenArrived(targetY, sectionIndex, performance.now());
+    });
+}
+
+function exitMobilePinnedArea(direction: 1 | -1): void {
+    const section = sectionRef.value;
+
+    if (!section) {
+        return;
+    }
+
+    const rect = section.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const sectionTop = getSectionTop(rect);
+
+    const targetY =
+        direction > 0
+            ? sectionTop + section.offsetHeight - vh + 2
+            : Math.max(0, sectionTop - vh);
+
+    clearMobileSettleTimers();
+
+    isTransitioning = false;
+    isMobileSettling = true;
+
+    const sectionIndex = direction > 0 ? sections.length - 1 : 0;
+    const finalFrame = sectionFrames[sectionIndex];
+
+    currentSectionIndex.value = sectionIndex;
+    targetFrame = finalFrame;
+    displayFrame = finalFrame;
+
+    window.scrollTo({
+        top: targetY,
+        behavior: 'smooth',
+    });
+
+    window.setTimeout(() => {
+        isMobileSettling = false;
+    }, SNAP_LOCK_MS);
+}
+
+function updateMobileFrameFromScroll(rect: DOMRect, vh: number): void {
+    if (!isMobileViewport()) {
+        return;
+    }
+
+    if (!isInsidePinnedArea(rect, vh)) {
+        return;
+    }
+
+    const progress = getMobileProgress(rect, vh);
+    const nextFrame = getFrameFromMobileProgress(progress);
 
     isTransitioning = false;
 
     targetFrame = nextFrame;
     displayFrame = nextFrame;
 
-    currentSectionIndex.value = nextSectionIndex;
+    if (!isMobileTouching && !isMobileSettling) {
+        currentSectionIndex.value = getNearestMobileSectionIndex(rect, vh);
+    }
 }
 
 function handleWheel(event: WheelEvent): void {
@@ -342,7 +533,7 @@ function handleWheel(event: WheelEvent): void {
     );
 
     if (nextSectionIndex === currentSectionIndex.value) {
-        const sectionTop = window.scrollY + rect.top;
+        const sectionTop = getSectionTop(rect);
 
         if (
             currentSectionIndex.value === sections.length - 1 &&
@@ -380,6 +571,102 @@ function handleWheel(event: WheelEvent): void {
     startStateTransition(nextSectionIndex);
 }
 
+function handleTouchStart(event: TouchEvent): void {
+    if (!isMobileViewport()) {
+        return;
+    }
+
+    const section = sectionRef.value;
+    const touch = event.touches[0];
+
+    if (!section || !touch) {
+        return;
+    }
+
+    clearMobileSettleTimers();
+
+    const rect = section.getBoundingClientRect();
+    const vh = window.innerHeight;
+
+    isMobileTouching = true;
+    mobileGestureStartY = touch.clientY;
+    mobileGestureStartedInside = isInsidePinnedArea(rect, vh);
+    mobileGestureStartIndex = mobileGestureStartedInside
+        ? getNearestMobileSectionIndex(rect, vh)
+        : currentSectionIndex.value;
+}
+
+function handleTouchEnd(event: TouchEvent): void {
+    if (!isMobileViewport() || !isMobileTouching) {
+        return;
+    }
+
+    const section = sectionRef.value;
+    const touch = event.changedTouches[0];
+
+    isMobileTouching = false;
+
+    if (!section || !touch) {
+        return;
+    }
+
+    const rect = section.getBoundingClientRect();
+    const vh = window.innerHeight;
+
+    const deltaY = mobileGestureStartY - touch.clientY;
+    const absDeltaY = Math.abs(deltaY);
+
+    const isEnteringPinnedArea =
+        rect.top > 0 && rect.top <= vh / 2 && rect.bottom >= vh;
+
+    if (isEnteringPinnedArea) {
+        mobileSettleTimeoutId = window.setTimeout(() => {
+            settleMobileToSection(0);
+        }, MOBILE_SETTLE_DELAY_MS);
+
+        return;
+    }
+
+    if (!isInsidePinnedArea(rect, vh)) {
+        return;
+    }
+
+    let targetSectionIndex: number;
+
+    if (!mobileGestureStartedInside || absDeltaY < MOBILE_SWIPE_THRESHOLD_PX) {
+        targetSectionIndex = getNearestMobileSectionIndex(rect, vh);
+    } else {
+        const direction = deltaY > 0 ? 1 : -1;
+        const lastSectionIndex = sections.length - 1;
+
+        if (mobileGestureStartIndex === lastSectionIndex && direction > 0) {
+            mobileSettleTimeoutId = window.setTimeout(() => {
+                exitMobilePinnedArea(1);
+            }, MOBILE_SETTLE_DELAY_MS);
+
+            return;
+        }
+
+        if (mobileGestureStartIndex === 0 && direction < 0) {
+            mobileSettleTimeoutId = window.setTimeout(() => {
+                exitMobilePinnedArea(-1);
+            }, MOBILE_SETTLE_DELAY_MS);
+
+            return;
+        }
+
+        targetSectionIndex = clamp(
+            mobileGestureStartIndex + direction,
+            0,
+            lastSectionIndex,
+        );
+    }
+
+    mobileSettleTimeoutId = window.setTimeout(() => {
+        settleMobileToSection(targetSectionIndex);
+    }, MOBILE_SETTLE_DELAY_MS);
+}
+
 function handleScroll(): void {
     const section = sectionRef.value;
 
@@ -391,6 +678,7 @@ function handleScroll(): void {
     const vh = window.innerHeight;
 
     if (
+        !isMobileViewport() &&
         !isSnapping &&
         !hasSnappedIntoSection &&
         rect.top > 0 &&
@@ -433,7 +721,7 @@ function handleScroll(): void {
     cardVisible.value = insidePinnedArea;
 
     if (isMobileViewport()) {
-        updateMobileScrollProgress(rect, vh);
+        updateMobileFrameFromScroll(rect, vh);
     }
 }
 
@@ -466,12 +754,20 @@ onMounted(() => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('wheel', handleWheel, { passive: false });
     window.addEventListener('resize', handleResize, { passive: true });
+
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchend', handleTouchEnd, { passive: true });
+    window.addEventListener('touchcancel', handleTouchEnd, { passive: true });
 });
 
 onUnmounted(() => {
     window.removeEventListener('scroll', handleScroll);
     window.removeEventListener('wheel', handleWheel);
     window.removeEventListener('resize', handleResize);
+
+    window.removeEventListener('touchstart', handleTouchStart);
+    window.removeEventListener('touchend', handleTouchEnd);
+    window.removeEventListener('touchcancel', handleTouchEnd);
 
     if (rafId !== null) {
         cancelAnimationFrame(rafId);
@@ -482,6 +778,8 @@ onUnmounted(() => {
         window.clearTimeout(wheelLockTimeoutId);
         wheelLockTimeoutId = null;
     }
+
+    clearMobileSettleTimers();
 
     imageElements = [];
 });
