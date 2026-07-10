@@ -2,9 +2,12 @@
     <section
         ref="sectionRef"
         class="features-desktop relative"
-        :style="{ height: `${sections.length * 100}vh` }"
+        :style="featureSectionStyle"
     >
-        <div class="sticky top-0 h-screen w-full overflow-hidden">
+        <div
+            ref="stickyRef"
+            class="features-sticky sticky top-0 h-screen w-full overflow-hidden"
+        >
             <div
                 class="absolute inset-0 overflow-hidden lg:right-0 lg:left-auto lg:w-7/12"
             >
@@ -76,7 +79,7 @@
 
 <script setup lang="ts">
 import { SunLight, Leaf, Tree, RulerCombine, Wind } from '@iconoir/vue';
-import { onMounted, onUnmounted, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import HomeFeaturesCardMobile from '@/custom/home/features/HomeFeaturesCardMobile.vue';
 
@@ -88,10 +91,11 @@ const SNAP_LOCK_MS = 600;
 const TRANSITION_DURATION_MS = 1500;
 
 const LG_BREAKPOINT = 1024;
+const MOBILE_EXIT_HOLD_STEPS = 1;
 
-const MOBILE_SWIPE_THRESHOLD_PX = 36;
+const MOBILE_SWIPE_THRESHOLD_PX = 8;
 const MOBILE_SETTLE_DELAY_MS = 90;
-const MOBILE_SETTLE_MAX_MS = 1000;
+const MOBILE_SETTLE_MAX_MS = TRANSITION_DURATION_MS + 400;
 
 const { t } = useI18n();
 
@@ -128,11 +132,18 @@ const sectionFrames = sections.map((_, i) =>
 );
 
 const sectionRef = ref<HTMLElement | null>(null);
+const stickyRef = ref<HTMLElement | null>(null);
 const canvasRef = ref<HTMLCanvasElement | null>(null);
 
-const currentFrameIndex = ref(0);
 const currentSectionIndex = ref(0);
 const cardVisible = ref(false);
+
+const featureSectionStyle = computed<Record<string, string>>(() => ({
+    '--features-desktop-panels': String(sections.length),
+    '--features-mobile-panels': String(
+        sections.length + MOBILE_EXIT_HOLD_STEPS,
+    ),
+}));
 
 const imagePaths = Array.from(
     { length: TOTAL_FRAMES },
@@ -144,8 +155,11 @@ let imageElements: HTMLImageElement[] = [];
 
 let targetFrame = 0;
 let displayFrame = 0;
+let currentFrameIndex = 0;
 let rafId: number | null = null;
 let lastDrawnIndex = -1;
+let canvasPixelWidth = 0;
+let canvasPixelHeight = 0;
 
 let isSnapping = false;
 let hasSnappedIntoSection = false;
@@ -175,20 +189,42 @@ function isMobileViewport(): boolean {
     return window.innerWidth < LG_BREAKPOINT;
 }
 
+function getPinnedViewportHeight(): number {
+    return stickyRef.value?.offsetHeight || window.innerHeight;
+}
+
 function isInsidePinnedArea(rect: DOMRect, vh: number): boolean {
     return rect.top <= 0 && rect.bottom >= vh;
 }
 
-function drawCover(canvas: HTMLCanvasElement, image: HTMLImageElement): void {
+function syncCanvasSize(canvas: HTMLCanvasElement): boolean {
     const rect = canvas.getBoundingClientRect();
     const dpr = window.devicePixelRatio || 1;
 
     const targetWidth = Math.max(1, Math.floor(rect.width * dpr));
     const targetHeight = Math.max(1, Math.floor(rect.height * dpr));
 
-    if (canvas.width !== targetWidth || canvas.height !== targetHeight) {
+    if (
+        canvas.width !== targetWidth ||
+        canvas.height !== targetHeight ||
+        canvasPixelWidth !== targetWidth ||
+        canvasPixelHeight !== targetHeight
+    ) {
         canvas.width = targetWidth;
         canvas.height = targetHeight;
+        canvasPixelWidth = targetWidth;
+        canvasPixelHeight = targetHeight;
+    }
+
+    return targetWidth > 0 && targetHeight > 0;
+}
+
+function drawCover(canvas: HTMLCanvasElement, image: HTMLImageElement): void {
+    if (
+        (canvasPixelWidth <= 0 || canvasPixelHeight <= 0) &&
+        !syncCanvasSize(canvas)
+    ) {
+        return;
     }
 
     const ctx = canvas.getContext('2d');
@@ -197,23 +233,23 @@ function drawCover(canvas: HTMLCanvasElement, image: HTMLImageElement): void {
         return;
     }
 
-    ctx.clearRect(0, 0, targetWidth, targetHeight);
+    ctx.clearRect(0, 0, canvasPixelWidth, canvasPixelHeight);
 
     const imageRatio = image.width / image.height;
 
-    const drawWidth = targetWidth;
+    const drawWidth = canvasPixelWidth;
     const drawHeight = drawWidth / imageRatio;
 
     const mobileOffsetY = isMobileViewport() ? -130 : 0;
     const drawX = 0;
-    const drawY = (targetHeight - drawHeight) / 2 + mobileOffsetY;
+    const drawY = (canvasPixelHeight - drawHeight) / 2 + mobileOffsetY;
 
     ctx.drawImage(image, drawX, drawY, drawWidth, drawHeight);
 }
 
 function redrawCurrentFrame(): void {
     const canvas = canvasRef.value;
-    const img = imageElements[currentFrameIndex.value];
+    const img = imageElements[currentFrameIndex];
 
     if (!canvas || !img?.complete || img.naturalWidth <= 0) {
         return;
@@ -242,8 +278,8 @@ function animate(): void {
 
     const intFrame = clamp(Math.round(displayFrame), 0, TOTAL_FRAMES - 1);
 
-    if (intFrame !== currentFrameIndex.value) {
-        currentFrameIndex.value = intFrame;
+    if (intFrame !== currentFrameIndex) {
+        currentFrameIndex = intFrame;
     }
 
     if (intFrame !== lastDrawnIndex) {
@@ -266,6 +302,7 @@ function startStateTransition(nextSectionIndex: number): void {
 
     if (nextFrame === targetFrame && !isTransitioning) {
         currentSectionIndex.value = nextSectionIndex;
+
         return;
     }
 
@@ -299,12 +336,17 @@ function getMobileScrollableDistance(section: HTMLElement, vh: number): number {
 
 function getMobileStepDistance(section: HTMLElement, vh: number): number {
     const scrollableDistance = getMobileScrollableDistance(section, vh);
+    const stepCount = sections.length - 1 + MOBILE_EXIT_HOLD_STEPS;
 
-    if (sections.length <= 1) {
+    if (stepCount <= 0) {
         return scrollableDistance;
     }
 
-    return scrollableDistance / (sections.length - 1);
+    return scrollableDistance / stepCount;
+}
+
+function getMobileAnimationDistance(section: HTMLElement, vh: number): number {
+    return getMobileStepDistance(section, vh) * Math.max(0, sections.length - 1);
 }
 
 function getMobileProgress(rect: DOMRect, vh: number): number {
@@ -315,13 +357,13 @@ function getMobileProgress(rect: DOMRect, vh: number): number {
     }
 
     const sectionTop = getSectionTop(rect);
-    const scrollableDistance = getMobileScrollableDistance(section, vh);
+    const animationDistance = getMobileAnimationDistance(section, vh);
 
-    if (scrollableDistance <= 0) {
+    if (animationDistance <= 0) {
         return 0;
     }
 
-    return clamp((window.scrollY - sectionTop) / scrollableDistance, 0, 1);
+    return clamp((window.scrollY - sectionTop) / animationDistance, 0, 1);
 }
 
 function getFrameFromMobileProgress(progress: number): number {
@@ -362,7 +404,7 @@ function getMobileSectionScrollY(sectionIndex: number): number | null {
     }
 
     const rect = section.getBoundingClientRect();
-    const vh = window.innerHeight;
+    const vh = getPinnedViewportHeight();
 
     const sectionTop = getSectionTop(rect);
     const stepDistance = getMobileStepDistance(section, vh);
@@ -382,21 +424,47 @@ function clearMobileSettleTimers(): void {
     }
 }
 
+function clearMobileSettleState(): void {
+    clearMobileSettleTimers();
+
+    isMobileSettling = false;
+}
+
+function getMobileExitDirection(deltaY: number): 1 | -1 | null {
+    if (Math.abs(deltaY) < MOBILE_SWIPE_THRESHOLD_PX) {
+        return null;
+    }
+
+    const direction = deltaY > 0 ? 1 : -1;
+    const lastSectionIndex = sections.length - 1;
+
+    if (mobileGestureStartIndex === lastSectionIndex && direction > 0) {
+        return 1;
+    }
+
+    if (mobileGestureStartIndex === 0 && direction < 0) {
+        return -1;
+    }
+
+    return null;
+}
+
 function finishMobileSettleWhenArrived(
     targetY: number,
     sectionIndex: number,
     startedAt: number,
 ): void {
+    const finalFrame = sectionFrames[sectionIndex];
     const isCloseEnough = Math.abs(window.scrollY - targetY) <= 2;
+    const isFrameSettled =
+        !isTransitioning && Math.round(displayFrame) === finalFrame;
     const hasTimedOut = performance.now() - startedAt >= MOBILE_SETTLE_MAX_MS;
 
-    if (isCloseEnough || hasTimedOut) {
+    if ((isCloseEnough && isFrameSettled) || hasTimedOut) {
         window.scrollTo({
             top: targetY,
             behavior: 'auto',
         });
-
-        const finalFrame = sectionFrames[sectionIndex];
 
         isTransitioning = false;
         isMobileSettling = false;
@@ -404,7 +472,7 @@ function finishMobileSettleWhenArrived(
         targetFrame = finalFrame;
         displayFrame = finalFrame;
 
-        currentFrameIndex.value = finalFrame;
+        currentFrameIndex = finalFrame;
         currentSectionIndex.value = sectionIndex;
 
         mobileSettleRafId = null;
@@ -417,6 +485,21 @@ function finishMobileSettleWhenArrived(
     });
 }
 
+function startMobileFrameTransition(sectionIndex: number): void {
+    const finalFrame = sectionFrames[sectionIndex];
+
+    transitionFromFrame = displayFrame;
+    transitionToFrame = finalFrame;
+    transitionStartTime = performance.now();
+    isTransitioning = transitionFromFrame !== transitionToFrame;
+
+    targetFrame = finalFrame;
+
+    if (!isTransitioning) {
+        displayFrame = finalFrame;
+    }
+}
+
 function settleMobileToSection(sectionIndex: number): void {
     const targetY = getMobileSectionScrollY(sectionIndex);
 
@@ -426,10 +509,10 @@ function settleMobileToSection(sectionIndex: number): void {
 
     clearMobileSettleTimers();
 
-    isTransitioning = false;
     isMobileSettling = true;
 
     currentSectionIndex.value = sectionIndex;
+    startMobileFrameTransition(sectionIndex);
 
     window.scrollTo({
         top: targetY,
@@ -449,7 +532,7 @@ function exitMobilePinnedArea(direction: 1 | -1): void {
     }
 
     const rect = section.getBoundingClientRect();
-    const vh = window.innerHeight;
+    const vh = getPinnedViewportHeight();
     const sectionTop = getSectionTop(rect);
 
     const targetY =
@@ -488,6 +571,10 @@ function updateMobileFrameFromScroll(rect: DOMRect, vh: number): void {
         return;
     }
 
+    if (isMobileTouching || isMobileSettling) {
+        return;
+    }
+
     const progress = getMobileProgress(rect, vh);
     const nextFrame = getFrameFromMobileProgress(progress);
 
@@ -513,7 +600,7 @@ function handleWheel(event: WheelEvent): void {
     }
 
     const rect = section.getBoundingClientRect();
-    const vh = window.innerHeight;
+    const vh = getPinnedViewportHeight();
 
     if (!isInsidePinnedArea(rect, vh) || !cardVisible.value) {
         return;
@@ -521,6 +608,7 @@ function handleWheel(event: WheelEvent): void {
 
     if (isWheelLocked || isTransitioning || isSnapping) {
         event.preventDefault();
+
         return;
     }
 
@@ -583,10 +671,10 @@ function handleTouchStart(event: TouchEvent): void {
         return;
     }
 
-    clearMobileSettleTimers();
+    clearMobileSettleState();
 
     const rect = section.getBoundingClientRect();
-    const vh = window.innerHeight;
+    const vh = getPinnedViewportHeight();
 
     isMobileTouching = true;
     mobileGestureStartY = touch.clientY;
@@ -594,6 +682,16 @@ function handleTouchStart(event: TouchEvent): void {
     mobileGestureStartIndex = mobileGestureStartedInside
         ? getNearestMobileSectionIndex(rect, vh)
         : currentSectionIndex.value;
+
+    if (mobileGestureStartedInside) {
+        const startFrame = sectionFrames[mobileGestureStartIndex];
+
+        isTransitioning = false;
+        targetFrame = startFrame;
+        displayFrame = startFrame;
+        currentFrameIndex = startFrame;
+        currentSectionIndex.value = mobileGestureStartIndex;
+    }
 }
 
 function handleTouchEnd(event: TouchEvent): void {
@@ -611,7 +709,7 @@ function handleTouchEnd(event: TouchEvent): void {
     }
 
     const rect = section.getBoundingClientRect();
-    const vh = window.innerHeight;
+    const vh = getPinnedViewportHeight();
 
     const deltaY = mobileGestureStartY - touch.clientY;
     const absDeltaY = Math.abs(deltaY);
@@ -638,18 +736,11 @@ function handleTouchEnd(event: TouchEvent): void {
     } else {
         const direction = deltaY > 0 ? 1 : -1;
         const lastSectionIndex = sections.length - 1;
+        const exitDirection = getMobileExitDirection(deltaY);
 
-        if (mobileGestureStartIndex === lastSectionIndex && direction > 0) {
+        if (exitDirection !== null) {
             mobileSettleTimeoutId = window.setTimeout(() => {
-                exitMobilePinnedArea(1);
-            }, MOBILE_SETTLE_DELAY_MS);
-
-            return;
-        }
-
-        if (mobileGestureStartIndex === 0 && direction < 0) {
-            mobileSettleTimeoutId = window.setTimeout(() => {
-                exitMobilePinnedArea(-1);
+                exitMobilePinnedArea(exitDirection);
             }, MOBILE_SETTLE_DELAY_MS);
 
             return;
@@ -675,7 +766,7 @@ function handleScroll(): void {
     }
 
     const rect = section.getBoundingClientRect();
-    const vh = window.innerHeight;
+    const vh = getPinnedViewportHeight();
 
     if (
         !isMobileViewport() &&
@@ -720,13 +811,23 @@ function handleScroll(): void {
 
     cardVisible.value = insidePinnedArea;
 
+    if (isMobileViewport() && !insidePinnedArea) {
+        clearMobileSettleState();
+    }
+
     if (isMobileViewport()) {
         updateMobileFrameFromScroll(rect, vh);
     }
 }
 
 function handleResize(): void {
+    canvasPixelWidth = 0;
+    canvasPixelHeight = 0;
     lastDrawnIndex = -1;
+
+    if (canvasRef.value) {
+        syncCanvasSize(canvasRef.value);
+    }
 
     handleScroll();
     redrawCurrentFrame();
@@ -745,7 +846,7 @@ onMounted(() => {
     targetFrame = sectionFrames[0];
     displayFrame = sectionFrames[0];
 
-    currentFrameIndex.value = sectionFrames[0];
+    currentFrameIndex = sectionFrames[0];
     currentSectionIndex.value = 0;
 
     handleScroll();
@@ -786,6 +887,20 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+.features-desktop {
+    height: calc(var(--features-desktop-panels) * 100vh);
+}
+
+@media (max-width: 1023px) {
+    .features-desktop {
+        height: calc(var(--features-mobile-panels) * 100svh);
+    }
+
+    .features-sticky {
+        height: 100svh;
+    }
+}
+
 .section-content-enter-active,
 .section-content-leave-active {
     transition:
