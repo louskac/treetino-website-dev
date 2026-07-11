@@ -1,13 +1,6 @@
 <template>
-    <section
-        ref="sectionRef"
-        class="features-desktop relative"
-        :style="featureSectionStyle"
-    >
-        <div
-            ref="stickyRef"
-            class="features-sticky sticky top-0 h-screen w-full overflow-hidden"
-        >
+    <section ref="sectionRef" class="features-desktop relative">
+        <div ref="pinRef" class="features-pin h-screen w-full overflow-hidden">
             <div
                 class="absolute inset-0 overflow-hidden lg:right-0 lg:left-auto lg:w-7/12"
             >
@@ -79,23 +72,28 @@
 
 <script setup lang="ts">
 import { SunLight, Leaf, Tree, RulerCombine, Wind } from '@iconoir/vue';
-import { computed, onMounted, onUnmounted, ref } from 'vue';
+import gsap from 'gsap';
+import { Observer } from 'gsap/Observer';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { nextTick, onMounted, onUnmounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import HomeFeaturesCardMobile from '@/custom/home/features/HomeFeaturesCardMobile.vue';
 
 const TOTAL_FRAMES = 228;
 const TRANSITION_FRAMES = 56;
 
-const SCROLL_LOCK_MS = 600;
-const SNAP_LOCK_MS = 600;
-const TRANSITION_DURATION_MS = 1500;
-
 const LG_BREAKPOINT = 1024;
-const MOBILE_EXIT_HOLD_STEPS = 1;
+const EXIT_HOLD_STEPS = 1;
+const STEP_ANIMATION_SECONDS = 1.5;
+const OBSERVER_TOLERANCE_PX = 14;
+const FRAME_DECODE_CONCURRENCY = 8;
+const PINNED_SCROLL_EPSILON_PX = 4;
+const ENTRY_SNAP_SECONDS = 0.45;
+const ENTRY_SNAP_INPUT_LOCK_MS = 650;
+const EXIT_REENTRY_LOCK_MS = 600;
+const EXIT_SCROLL_OFFSET_PX = 120;
 
-const MOBILE_SWIPE_THRESHOLD_PX = 8;
-const MOBILE_SETTLE_DELAY_MS = 90;
-const MOBILE_SETTLE_MAX_MS = TRANSITION_DURATION_MS + 400;
+gsap.registerPlugin(Observer, ScrollTrigger);
 
 const { t } = useI18n();
 
@@ -127,23 +125,18 @@ const sections = [
     },
 ];
 
+const scrollStepCount = sections.length - 1 + EXIT_HOLD_STEPS;
+
 const sectionFrames = sections.map((_, i) =>
     i === sections.length - 1 ? TOTAL_FRAMES - 1 : i * TRANSITION_FRAMES,
 );
 
 const sectionRef = ref<HTMLElement | null>(null);
-const stickyRef = ref<HTMLElement | null>(null);
+const pinRef = ref<HTMLElement | null>(null);
 const canvasRef = ref<HTMLCanvasElement | null>(null);
 
 const currentSectionIndex = ref(0);
 const cardVisible = ref(false);
-
-const featureSectionStyle = computed<Record<string, string>>(() => ({
-    '--features-desktop-panels': String(sections.length),
-    '--features-mobile-panels': String(
-        sections.length + MOBILE_EXIT_HOLD_STEPS,
-    ),
-}));
 
 const imagePaths = Array.from(
     { length: TOTAL_FRAMES },
@@ -153,33 +146,26 @@ const imagePaths = Array.from(
 
 let imageElements: HTMLImageElement[] = [];
 
-let targetFrame = 0;
-let displayFrame = 0;
+const frameState = {
+    frame: sectionFrames[0],
+};
+
 let currentFrameIndex = 0;
-let rafId: number | null = null;
 let lastDrawnIndex = -1;
 let canvasPixelWidth = 0;
 let canvasPixelHeight = 0;
-
-let isSnapping = false;
-let hasSnappedIntoSection = false;
-
-let isWheelLocked = false;
-let wheelLockTimeoutId: number | null = null;
-
-let transitionFromFrame = 0;
-let transitionToFrame = 0;
-let transitionStartTime = 0;
-let isTransitioning = false;
-
-let isMobileTouching = false;
-let mobileGestureStartedInside = false;
-let mobileGestureStartY = 0;
-let mobileGestureStartIndex = 0;
-
-let isMobileSettling = false;
-let mobileSettleTimeoutId: number | null = null;
-let mobileSettleRafId: number | null = null;
+let canvasContext: CanvasRenderingContext2D | null = null;
+let scrollTriggerInstance: ScrollTrigger | null = null;
+let entrySnapTriggerInstance: ScrollTrigger | null = null;
+let inputObserver: Observer | null = null;
+let stepTween: gsap.core.Tween | null = null;
+let scrollSnapTween: gsap.core.Tween | null = null;
+let isStepAnimating = false;
+let isEntrySnapping = false;
+let ignoreStepInputUntil = 0;
+let suppressScrollTriggerEntryUntil = 0;
+let decodedFrameIndexes = new Set<number>();
+let decodingFrameIndexes = new Set<number>();
 
 function clamp(value: number, min: number, max: number): number {
     return Math.min(max, Math.max(min, value));
@@ -190,11 +176,7 @@ function isMobileViewport(): boolean {
 }
 
 function getPinnedViewportHeight(): number {
-    return stickyRef.value?.offsetHeight || window.innerHeight;
-}
-
-function isInsidePinnedArea(rect: DOMRect, vh: number): boolean {
-    return rect.top <= 0 && rect.bottom >= vh;
+    return pinRef.value?.offsetHeight || window.innerHeight;
 }
 
 function syncCanvasSize(canvas: HTMLCanvasElement): boolean {
@@ -214,6 +196,7 @@ function syncCanvasSize(canvas: HTMLCanvasElement): boolean {
         canvas.height = targetHeight;
         canvasPixelWidth = targetWidth;
         canvasPixelHeight = targetHeight;
+        canvasContext = canvas.getContext('2d');
     }
 
     return targetWidth > 0 && targetHeight > 0;
@@ -227,11 +210,13 @@ function drawCover(canvas: HTMLCanvasElement, image: HTMLImageElement): void {
         return;
     }
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvasContext || canvas.getContext('2d');
 
     if (!ctx) {
         return;
     }
+
+    canvasContext = ctx;
 
     ctx.clearRect(0, 0, canvasPixelWidth, canvasPixelHeight);
 
@@ -247,656 +232,504 @@ function drawCover(canvas: HTMLCanvasElement, image: HTMLImageElement): void {
     ctx.drawImage(image, drawX, drawY, drawWidth, drawHeight);
 }
 
-function redrawCurrentFrame(): void {
+function drawFrame(frame: number): void {
+    const nextFrameIndex = clamp(Math.round(frame), 0, TOTAL_FRAMES - 1);
+
+    currentFrameIndex = nextFrameIndex;
+
+    if (nextFrameIndex === lastDrawnIndex) {
+        return;
+    }
+
     const canvas = canvasRef.value;
-    const img = imageElements[currentFrameIndex];
+    const img = imageElements[nextFrameIndex];
 
     if (!canvas || !img?.complete || img.naturalWidth <= 0) {
+        if (img) {
+            void decodeFrame(nextFrameIndex);
+        }
+
         return;
     }
 
     drawCover(canvas, img);
-}
-
-function animate(): void {
-    if (isTransitioning) {
-        const elapsed = performance.now() - transitionStartTime;
-        const progress = clamp(elapsed / TRANSITION_DURATION_MS, 0, 1);
-
-        displayFrame =
-            transitionFromFrame +
-            (transitionToFrame - transitionFromFrame) * progress;
-
-        if (progress >= 1) {
-            isTransitioning = false;
-            displayFrame = transitionToFrame;
-            targetFrame = transitionToFrame;
-        }
-    } else {
-        displayFrame = targetFrame;
-    }
-
-    const intFrame = clamp(Math.round(displayFrame), 0, TOTAL_FRAMES - 1);
-
-    if (intFrame !== currentFrameIndex) {
-        currentFrameIndex = intFrame;
-    }
-
-    if (intFrame !== lastDrawnIndex) {
-        const img = imageElements[intFrame];
-
-        if (img?.complete && img.naturalWidth > 0) {
-            if (canvasRef.value) {
-                drawCover(canvasRef.value, img);
-            }
-
-            lastDrawnIndex = intFrame;
-        }
-    }
-
-    rafId = requestAnimationFrame(animate);
-}
-
-function startStateTransition(nextSectionIndex: number): void {
-    const nextFrame = sectionFrames[nextSectionIndex];
-
-    if (nextFrame === targetFrame && !isTransitioning) {
-        currentSectionIndex.value = nextSectionIndex;
-
-        return;
-    }
-
-    transitionFromFrame = displayFrame;
-    transitionToFrame = nextFrame;
-    transitionStartTime = performance.now();
-    isTransitioning = true;
-
-    currentSectionIndex.value = nextSectionIndex;
-    targetFrame = nextFrame;
-
-    isWheelLocked = true;
-
-    if (wheelLockTimeoutId !== null) {
-        window.clearTimeout(wheelLockTimeoutId);
-    }
-
-    wheelLockTimeoutId = window.setTimeout(() => {
-        isWheelLocked = false;
-        wheelLockTimeoutId = null;
-    }, SCROLL_LOCK_MS);
-}
-
-function getSectionTop(rect: DOMRect): number {
-    return window.scrollY + rect.top;
-}
-
-function getMobileScrollableDistance(section: HTMLElement, vh: number): number {
-    return Math.max(0, section.offsetHeight - vh);
-}
-
-function getMobileStepDistance(section: HTMLElement, vh: number): number {
-    const scrollableDistance = getMobileScrollableDistance(section, vh);
-    const stepCount = sections.length - 1 + MOBILE_EXIT_HOLD_STEPS;
-
-    if (stepCount <= 0) {
-        return scrollableDistance;
-    }
-
-    return scrollableDistance / stepCount;
-}
-
-function getMobileAnimationDistance(section: HTMLElement, vh: number): number {
-    return getMobileStepDistance(section, vh) * Math.max(0, sections.length - 1);
-}
-
-function getMobileProgress(rect: DOMRect, vh: number): number {
-    const section = sectionRef.value;
-
-    if (!section) {
-        return 0;
-    }
-
-    const sectionTop = getSectionTop(rect);
-    const animationDistance = getMobileAnimationDistance(section, vh);
-
-    if (animationDistance <= 0) {
-        return 0;
-    }
-
-    return clamp((window.scrollY - sectionTop) / animationDistance, 0, 1);
-}
-
-function getFrameFromMobileProgress(progress: number): number {
-    const lastSectionIndex = sections.length - 1;
-    const exactSectionProgress = progress * lastSectionIndex;
-
-    const fromSectionIndex = clamp(
-        Math.floor(exactSectionProgress),
-        0,
-        lastSectionIndex,
-    );
-
-    const toSectionIndex = clamp(fromSectionIndex + 1, 0, lastSectionIndex);
-
-    const localProgress = clamp(exactSectionProgress - fromSectionIndex, 0, 1);
-
-    const fromFrame = sectionFrames[fromSectionIndex];
-    const toFrame = sectionFrames[toSectionIndex];
-
-    return Math.round(fromFrame + (toFrame - fromFrame) * localProgress);
-}
-
-function getNearestMobileSectionIndex(rect: DOMRect, vh: number): number {
-    const progress = getMobileProgress(rect, vh);
-
-    return clamp(
-        Math.round(progress * (sections.length - 1)),
-        0,
-        sections.length - 1,
-    );
-}
-
-function getMobileSectionScrollY(sectionIndex: number): number | null {
-    const section = sectionRef.value;
-
-    if (!section) {
-        return null;
-    }
-
-    const rect = section.getBoundingClientRect();
-    const vh = getPinnedViewportHeight();
-
-    const sectionTop = getSectionTop(rect);
-    const stepDistance = getMobileStepDistance(section, vh);
-
-    return sectionTop + stepDistance * sectionIndex;
-}
-
-function clearMobileSettleTimers(): void {
-    if (mobileSettleTimeoutId !== null) {
-        window.clearTimeout(mobileSettleTimeoutId);
-        mobileSettleTimeoutId = null;
-    }
-
-    if (mobileSettleRafId !== null) {
-        cancelAnimationFrame(mobileSettleRafId);
-        mobileSettleRafId = null;
-    }
-}
-
-function clearMobileSettleState(): void {
-    clearMobileSettleTimers();
-
-    isMobileSettling = false;
-}
-
-function getMobileExitDirection(deltaY: number): 1 | -1 | null {
-    if (Math.abs(deltaY) < MOBILE_SWIPE_THRESHOLD_PX) {
-        return null;
-    }
-
-    const direction = deltaY > 0 ? 1 : -1;
-    const lastSectionIndex = sections.length - 1;
-
-    if (mobileGestureStartIndex === lastSectionIndex && direction > 0) {
-        return 1;
-    }
-
-    if (mobileGestureStartIndex === 0 && direction < 0) {
-        return -1;
-    }
-
-    return null;
-}
-
-function finishMobileSettleWhenArrived(
-    targetY: number,
-    sectionIndex: number,
-    startedAt: number,
-): void {
-    const finalFrame = sectionFrames[sectionIndex];
-    const isCloseEnough = Math.abs(window.scrollY - targetY) <= 2;
-    const isFrameSettled =
-        !isTransitioning && Math.round(displayFrame) === finalFrame;
-    const hasTimedOut = performance.now() - startedAt >= MOBILE_SETTLE_MAX_MS;
-
-    if ((isCloseEnough && isFrameSettled) || hasTimedOut) {
-        window.scrollTo({
-            top: targetY,
-            behavior: 'auto',
-        });
-
-        isTransitioning = false;
-        isMobileSettling = false;
-
-        targetFrame = finalFrame;
-        displayFrame = finalFrame;
-
-        currentFrameIndex = finalFrame;
-        currentSectionIndex.value = sectionIndex;
-
-        mobileSettleRafId = null;
-
-        return;
-    }
-
-    mobileSettleRafId = requestAnimationFrame(() => {
-        finishMobileSettleWhenArrived(targetY, sectionIndex, startedAt);
-    });
-}
-
-function startMobileFrameTransition(sectionIndex: number): void {
-    const finalFrame = sectionFrames[sectionIndex];
-
-    transitionFromFrame = displayFrame;
-    transitionToFrame = finalFrame;
-    transitionStartTime = performance.now();
-    isTransitioning = transitionFromFrame !== transitionToFrame;
-
-    targetFrame = finalFrame;
-
-    if (!isTransitioning) {
-        displayFrame = finalFrame;
-    }
-}
-
-function settleMobileToSection(sectionIndex: number): void {
-    const targetY = getMobileSectionScrollY(sectionIndex);
-
-    if (targetY === null) {
-        return;
-    }
-
-    clearMobileSettleTimers();
-
-    isMobileSettling = true;
-
-    currentSectionIndex.value = sectionIndex;
-    startMobileFrameTransition(sectionIndex);
-
-    window.scrollTo({
-        top: targetY,
-        behavior: 'smooth',
-    });
-
-    mobileSettleRafId = requestAnimationFrame(() => {
-        finishMobileSettleWhenArrived(targetY, sectionIndex, performance.now());
-    });
-}
-
-function exitMobilePinnedArea(direction: 1 | -1): void {
-    const section = sectionRef.value;
-
-    if (!section) {
-        return;
-    }
-
-    const rect = section.getBoundingClientRect();
-    const vh = getPinnedViewportHeight();
-    const sectionTop = getSectionTop(rect);
-
-    const targetY =
-        direction > 0
-            ? sectionTop + section.offsetHeight - vh + 2
-            : Math.max(0, sectionTop - vh);
-
-    clearMobileSettleTimers();
-
-    isTransitioning = false;
-    isMobileSettling = true;
-
-    const sectionIndex = direction > 0 ? sections.length - 1 : 0;
-    const finalFrame = sectionFrames[sectionIndex];
-
-    currentSectionIndex.value = sectionIndex;
-    targetFrame = finalFrame;
-    displayFrame = finalFrame;
-
-    window.scrollTo({
-        top: targetY,
-        behavior: 'smooth',
-    });
-
-    window.setTimeout(() => {
-        isMobileSettling = false;
-    }, SNAP_LOCK_MS);
-}
-
-function updateMobileFrameFromScroll(rect: DOMRect, vh: number): void {
-    if (!isMobileViewport()) {
-        return;
-    }
-
-    if (!isInsidePinnedArea(rect, vh)) {
-        return;
-    }
-
-    if (isMobileTouching || isMobileSettling) {
-        return;
-    }
-
-    const progress = getMobileProgress(rect, vh);
-    const nextFrame = getFrameFromMobileProgress(progress);
-
-    isTransitioning = false;
-
-    targetFrame = nextFrame;
-    displayFrame = nextFrame;
-
-    if (!isMobileTouching && !isMobileSettling) {
-        currentSectionIndex.value = getNearestMobileSectionIndex(rect, vh);
-    }
-}
-
-function handleWheel(event: WheelEvent): void {
-    if (isMobileViewport()) {
-        return;
-    }
-
-    const section = sectionRef.value;
-
-    if (!section) {
-        return;
-    }
-
-    const rect = section.getBoundingClientRect();
-    const vh = getPinnedViewportHeight();
-
-    if (!isInsidePinnedArea(rect, vh) || !cardVisible.value) {
-        return;
-    }
-
-    if (isWheelLocked || isTransitioning || isSnapping) {
-        event.preventDefault();
-
-        return;
-    }
-
-    const direction = event.deltaY > 0 ? 1 : -1;
-
-    const nextSectionIndex = clamp(
-        currentSectionIndex.value + direction,
-        0,
-        sections.length - 1,
-    );
-
-    if (nextSectionIndex === currentSectionIndex.value) {
-        const sectionTop = getSectionTop(rect);
-
-        if (
-            currentSectionIndex.value === sections.length - 1 &&
-            direction > 0
-        ) {
-            event.preventDefault();
-
-            const exitBottomY = sectionTop + section.offsetHeight - vh + 2;
-
-            window.scrollTo({
-                top: exitBottomY,
-                behavior: 'auto',
-            });
-
-            return;
-        }
-
-        if (currentSectionIndex.value === 0 && direction < 0) {
-            event.preventDefault();
-
-            const exitTopY = Math.max(0, sectionTop - vh);
-
-            window.scrollTo({
-                top: exitTopY,
-                behavior: 'smooth',
-            });
-
-            return;
-        }
-
-        return;
-    }
-
-    event.preventDefault();
-    startStateTransition(nextSectionIndex);
-}
-
-function handleTouchStart(event: TouchEvent): void {
-    if (!isMobileViewport()) {
-        return;
-    }
-
-    const section = sectionRef.value;
-    const touch = event.touches[0];
-
-    if (!section || !touch) {
-        return;
-    }
-
-    clearMobileSettleState();
-
-    const rect = section.getBoundingClientRect();
-    const vh = getPinnedViewportHeight();
-
-    isMobileTouching = true;
-    mobileGestureStartY = touch.clientY;
-    mobileGestureStartedInside = isInsidePinnedArea(rect, vh);
-    mobileGestureStartIndex = mobileGestureStartedInside
-        ? getNearestMobileSectionIndex(rect, vh)
-        : currentSectionIndex.value;
-
-    if (mobileGestureStartedInside) {
-        const startFrame = sectionFrames[mobileGestureStartIndex];
-
-        isTransitioning = false;
-        targetFrame = startFrame;
-        displayFrame = startFrame;
-        currentFrameIndex = startFrame;
-        currentSectionIndex.value = mobileGestureStartIndex;
-    }
-}
-
-function handleTouchEnd(event: TouchEvent): void {
-    if (!isMobileViewport() || !isMobileTouching) {
-        return;
-    }
-
-    const section = sectionRef.value;
-    const touch = event.changedTouches[0];
-
-    isMobileTouching = false;
-
-    if (!section || !touch) {
-        return;
-    }
-
-    const rect = section.getBoundingClientRect();
-    const vh = getPinnedViewportHeight();
-
-    const deltaY = mobileGestureStartY - touch.clientY;
-    const absDeltaY = Math.abs(deltaY);
-
-    const isEnteringPinnedArea =
-        rect.top > 0 && rect.top <= vh / 2 && rect.bottom >= vh;
-
-    if (isEnteringPinnedArea) {
-        mobileSettleTimeoutId = window.setTimeout(() => {
-            settleMobileToSection(0);
-        }, MOBILE_SETTLE_DELAY_MS);
-
-        return;
-    }
-
-    if (!isInsidePinnedArea(rect, vh)) {
-        return;
-    }
-
-    let targetSectionIndex: number;
-
-    if (!mobileGestureStartedInside || absDeltaY < MOBILE_SWIPE_THRESHOLD_PX) {
-        targetSectionIndex = getNearestMobileSectionIndex(rect, vh);
-    } else {
-        const direction = deltaY > 0 ? 1 : -1;
-        const lastSectionIndex = sections.length - 1;
-        const exitDirection = getMobileExitDirection(deltaY);
-
-        if (exitDirection !== null) {
-            mobileSettleTimeoutId = window.setTimeout(() => {
-                exitMobilePinnedArea(exitDirection);
-            }, MOBILE_SETTLE_DELAY_MS);
-
-            return;
-        }
-
-        targetSectionIndex = clamp(
-            mobileGestureStartIndex + direction,
-            0,
-            lastSectionIndex,
-        );
-    }
-
-    mobileSettleTimeoutId = window.setTimeout(() => {
-        settleMobileToSection(targetSectionIndex);
-    }, MOBILE_SETTLE_DELAY_MS);
-}
-
-function handleScroll(): void {
-    const section = sectionRef.value;
-
-    if (!section) {
-        return;
-    }
-
-    const rect = section.getBoundingClientRect();
-    const vh = getPinnedViewportHeight();
-
-    if (
-        !isMobileViewport() &&
-        !isSnapping &&
-        !hasSnappedIntoSection &&
-        rect.top > 0 &&
-        rect.top <= vh / 2
-    ) {
-        isSnapping = true;
-        hasSnappedIntoSection = true;
-
-        window.scrollTo({
-            top: window.scrollY + rect.top,
-            behavior: 'smooth',
-        });
-
-        window.setTimeout(() => {
-            isSnapping = false;
-
-            isWheelLocked = true;
-
-            if (wheelLockTimeoutId !== null) {
-                window.clearTimeout(wheelLockTimeoutId);
-            }
-
-            wheelLockTimeoutId = window.setTimeout(() => {
-                isWheelLocked = false;
-                wheelLockTimeoutId = null;
-            }, SNAP_LOCK_MS);
-
-            handleScroll();
-        }, SNAP_LOCK_MS);
-
-        return;
-    }
-
-    if (rect.top > vh / 2) {
-        hasSnappedIntoSection = false;
-    }
-
-    const insidePinnedArea = isInsidePinnedArea(rect, vh);
-
-    cardVisible.value = insidePinnedArea;
-
-    if (isMobileViewport() && !insidePinnedArea) {
-        clearMobileSettleState();
-    }
-
-    if (isMobileViewport()) {
-        updateMobileFrameFromScroll(rect, vh);
-    }
+    lastDrawnIndex = nextFrameIndex;
 }
 
 function handleResize(): void {
     canvasPixelWidth = 0;
     canvasPixelHeight = 0;
     lastDrawnIndex = -1;
+    canvasContext = null;
 
     if (canvasRef.value) {
         syncCanvasSize(canvasRef.value);
     }
 
-    handleScroll();
-    redrawCurrentFrame();
+    drawFrame(frameState.frame);
+}
+
+async function decodeFrame(frameIndex: number): Promise<void> {
+    if (
+        decodedFrameIndexes.has(frameIndex) ||
+        decodingFrameIndexes.has(frameIndex)
+    ) {
+        return;
+    }
+
+    const img = imageElements[frameIndex];
+
+    if (!img) {
+        return;
+    }
+
+    decodingFrameIndexes.add(frameIndex);
+
+    try {
+        await img.decode();
+    } catch {
+        if (!img.complete || img.naturalWidth <= 0) {
+            decodingFrameIndexes.delete(frameIndex);
+
+            return;
+        }
+    }
+
+    decodingFrameIndexes.delete(frameIndex);
+    decodedFrameIndexes.add(frameIndex);
+
+    if (frameIndex === currentFrameIndex) {
+        lastDrawnIndex = -1;
+        drawFrame(frameIndex);
+    }
+}
+
+async function decodeFrames(frameIndexes: number[]): Promise<void> {
+    let nextIndex = 0;
+
+    async function worker(): Promise<void> {
+        while (nextIndex < frameIndexes.length) {
+            const frameIndex = frameIndexes[nextIndex];
+
+            nextIndex++;
+            await decodeFrame(frameIndex);
+        }
+    }
+
+    await Promise.all(
+        Array.from(
+            { length: Math.min(FRAME_DECODE_CONCURRENCY, frameIndexes.length) },
+            worker,
+        ),
+    );
+}
+
+function getFrameRange(fromFrame: number, toFrame: number): number[] {
+    const from = clamp(Math.min(fromFrame, toFrame), 0, TOTAL_FRAMES - 1);
+    const to = clamp(Math.max(fromFrame, toFrame), 0, TOTAL_FRAMES - 1);
+
+    return Array.from({ length: to - from + 1 }, (_, index) => from + index);
+}
+
+function warmUpFeatureFrames(): void {
+    const firstTransitionFrames = getFrameRange(
+        sectionFrames[0],
+        sectionFrames[1],
+    );
+    const remainingFrames = imageElements
+        .map((_, frameIndex) => frameIndex)
+        .filter((frameIndex) => !firstTransitionFrames.includes(frameIndex));
+
+    void decodeFrames(firstTransitionFrames).then(() => {
+        void decodeFrames(remainingFrames);
+    });
+}
+
+function getStepDistance(): number {
+    const trigger = scrollTriggerInstance;
+
+    if (!trigger) {
+        return getPinnedViewportHeight();
+    }
+
+    return (trigger.end - trigger.start) / scrollStepCount;
+}
+
+function getSectionScrollY(sectionIndex: number): number | null {
+    const trigger = scrollTriggerInstance;
+
+    if (!trigger) {
+        return null;
+    }
+
+    const rawY = trigger.start + getStepDistance() * sectionIndex;
+
+    if (sectionIndex === 0) {
+        return rawY + PINNED_SCROLL_EPSILON_PX;
+    }
+
+    if (sectionIndex === sections.length - 1) {
+        return Math.min(rawY, trigger.end - PINNED_SCROLL_EPSILON_PX);
+    }
+
+    return rawY;
+}
+
+function setFrameToSection(sectionIndex: number): void {
+    const frame = sectionFrames[sectionIndex];
+
+    stepTween?.kill();
+    stepTween = null;
+    isStepAnimating = false;
+    frameState.frame = frame;
+    currentSectionIndex.value = sectionIndex;
+    drawFrame(frame);
+}
+
+function syncScrollToSection(sectionIndex: number): void {
+    const targetY = getSectionScrollY(sectionIndex);
+
+    if (targetY === null) {
+        return;
+    }
+
+    window.scrollTo({
+        top: targetY,
+        behavior: 'auto',
+    });
+}
+
+function stopScrollSnap(): void {
+    scrollSnapTween?.kill();
+    scrollSnapTween = null;
+    isEntrySnapping = false;
+}
+
+function lockStepInput(durationMs: number): void {
+    ignoreStepInputUntil = Math.max(
+        ignoreStepInputUntil,
+        performance.now() + durationMs,
+    );
+}
+
+function shouldIgnoreStepInput(): boolean {
+    return isEntrySnapping || performance.now() < ignoreStepInputUntil;
+}
+
+function shouldSuppressScrollTriggerEntry(): boolean {
+    return performance.now() < suppressScrollTriggerEntryUntil;
+}
+
+function snapScrollToY(targetY: number): void {
+    const scrollState = {
+        y: window.scrollY,
+    };
+
+    stopScrollSnap();
+    isEntrySnapping = true;
+    lockStepInput(ENTRY_SNAP_SECONDS * 1000 + ENTRY_SNAP_INPUT_LOCK_MS);
+
+    scrollSnapTween = gsap.to(scrollState, {
+        y: targetY,
+        duration: ENTRY_SNAP_SECONDS,
+        ease: 'none',
+        overwrite: true,
+        onUpdate: () => {
+            window.scrollTo({
+                top: scrollState.y,
+                behavior: 'auto',
+            });
+        },
+        onComplete: () => {
+            scrollSnapTween = null;
+            isEntrySnapping = false;
+            lockStepInput(ENTRY_SNAP_INPUT_LOCK_MS);
+        },
+        onInterrupt: () => {
+            scrollSnapTween = null;
+            isEntrySnapping = false;
+        },
+    });
+}
+
+function snapIntoPinnedArea(): void {
+    const targetY = getSectionScrollY(0);
+
+    if (targetY === null || isEntrySnapping || inputObserver?.isEnabled) {
+        return;
+    }
+
+    snapScrollToY(targetY);
+}
+
+function animateToSection(sectionIndex: number): void {
+    const nextSectionIndex = clamp(sectionIndex, 0, sections.length - 1);
+
+    if (nextSectionIndex === currentSectionIndex.value && !isStepAnimating) {
+        syncScrollToSection(nextSectionIndex);
+
+        return;
+    }
+
+    stepTween?.kill();
+    isStepAnimating = true;
+    currentSectionIndex.value = nextSectionIndex;
+    void decodeFrames(
+        getFrameRange(
+            Math.round(frameState.frame),
+            sectionFrames[nextSectionIndex],
+        ),
+    );
+
+    stepTween = gsap.to(frameState, {
+        frame: sectionFrames[nextSectionIndex],
+        duration: STEP_ANIMATION_SECONDS,
+        ease: 'none',
+        overwrite: true,
+        onUpdate: () => {
+            drawFrame(frameState.frame);
+        },
+        onComplete: () => {
+            isStepAnimating = false;
+            stepTween = null;
+            frameState.frame = sectionFrames[nextSectionIndex];
+            drawFrame(frameState.frame);
+            syncScrollToSection(nextSectionIndex);
+        },
+    });
+}
+
+function getNextSectionForDirection(direction: 1 | -1): number | null {
+    const lastSectionIndex = sections.length - 1;
+
+    if (direction > 0 && currentSectionIndex.value < lastSectionIndex) {
+        return currentSectionIndex.value + 1;
+    }
+
+    if (direction < 0 && currentSectionIndex.value > 0) {
+        return currentSectionIndex.value - 1;
+    }
+
+    return null;
+}
+
+function enableInputObserver(): void {
+    inputObserver?.enable();
+}
+
+function disableInputObserver(): void {
+    inputObserver?.disable();
+}
+
+function exitPinnedArea(direction: 1 | -1): void {
+    const trigger = scrollTriggerInstance;
+
+    if (!trigger) {
+        return;
+    }
+
+    disableInputObserver();
+    stepTween?.kill();
+    stepTween = null;
+    isStepAnimating = false;
+    stopScrollSnap();
+    lockStepInput(EXIT_REENTRY_LOCK_MS);
+    suppressScrollTriggerEntryUntil = performance.now() + EXIT_REENTRY_LOCK_MS;
+
+    if (direction > 0) {
+        setFrameToSection(sections.length - 1);
+    } else {
+        setFrameToSection(0);
+    }
+
+    window.scrollTo({
+        top:
+            direction > 0
+                ? trigger.end + EXIT_SCROLL_OFFSET_PX
+                : Math.max(0, trigger.start - EXIT_SCROLL_OFFSET_PX),
+        behavior: 'auto',
+    });
+}
+
+function getObserverDirection(self: Observer): 1 | -1 {
+    const eventType = self.event?.type ?? '';
+    const isWheel = eventType === 'wheel';
+
+    if (isWheel) {
+        return self.deltaY > 0 ? 1 : -1;
+    }
+
+    return self.deltaY < 0 ? 1 : -1;
+}
+
+function handleStepInput(self: Observer): void {
+    if (shouldIgnoreStepInput()) {
+        return;
+    }
+
+    if (isStepAnimating) {
+        return;
+    }
+
+    const direction = getObserverDirection(self);
+    const nextSectionIndex = getNextSectionForDirection(direction);
+
+    if (nextSectionIndex === null) {
+        exitPinnedArea(direction);
+
+        return;
+    }
+
+    animateToSection(nextSectionIndex);
+}
+
+function setupInputObserver(): void {
+    inputObserver?.kill();
+
+    inputObserver = Observer.create({
+        target: window,
+        type: 'wheel,touch,pointer',
+        preventDefault: true,
+        allowClicks: true,
+        tolerance: OBSERVER_TOLERANCE_PX,
+        wheelSpeed: 1,
+        onChangeY: handleStepInput,
+    });
+
+    disableInputObserver();
+}
+
+function setupScrollTrigger(): void {
+    const section = sectionRef.value;
+    const pin = pinRef.value;
+
+    if (!section || !pin) {
+        return;
+    }
+
+    entrySnapTriggerInstance?.kill();
+    scrollTriggerInstance?.kill();
+
+    scrollTriggerInstance = ScrollTrigger.create({
+        trigger: section,
+        pin,
+        start: 'top top',
+        end: () => `+=${getPinnedViewportHeight() * scrollStepCount}`,
+        invalidateOnRefresh: true,
+        anticipatePin: 1,
+        onEnter: () => {
+            if (shouldSuppressScrollTriggerEntry()) {
+                return;
+            }
+
+            cardVisible.value = true;
+            setFrameToSection(0);
+            lockStepInput(ENTRY_SNAP_INPUT_LOCK_MS);
+            enableInputObserver();
+            syncScrollToSection(0);
+        },
+        onEnterBack: () => {
+            if (shouldSuppressScrollTriggerEntry()) {
+                return;
+            }
+
+            cardVisible.value = true;
+            setFrameToSection(sections.length - 1);
+            lockStepInput(ENTRY_SNAP_INPUT_LOCK_MS);
+            enableInputObserver();
+            syncScrollToSection(sections.length - 1);
+        },
+        onLeave: () => {
+            cardVisible.value = false;
+            disableInputObserver();
+            setFrameToSection(sections.length - 1);
+        },
+        onLeaveBack: () => {
+            cardVisible.value = false;
+            disableInputObserver();
+            setFrameToSection(0);
+        },
+        onUpdate: (self) => {
+            if (shouldSuppressScrollTriggerEntry()) {
+                cardVisible.value = false;
+
+                return;
+            }
+
+            cardVisible.value =
+                self.isActive || Boolean(inputObserver?.isEnabled);
+        },
+        onRefresh: () => {
+            handleResize();
+        },
+    });
+
+    entrySnapTriggerInstance = ScrollTrigger.create({
+        trigger: section,
+        start: 'top 50%',
+        end: 'top top',
+        invalidateOnRefresh: true,
+        onEnter: () => {
+            snapIntoPinnedArea();
+        },
+    });
 }
 
 onMounted(() => {
-    imageElements = imagePaths.map((src) => {
+    imageElements = imagePaths.map((src, imageIndex) => {
         const img = new Image();
 
         img.decoding = 'async';
+        img.onload = () => {
+            if (imageIndex === currentFrameIndex) {
+                drawFrame(currentFrameIndex);
+            }
+        };
         img.src = src;
 
         return img;
     });
 
-    targetFrame = sectionFrames[0];
-    displayFrame = sectionFrames[0];
-
+    frameState.frame = sectionFrames[0];
     currentFrameIndex = sectionFrames[0];
     currentSectionIndex.value = 0;
 
-    handleScroll();
-    animate();
+    drawFrame(frameState.frame);
+    warmUpFeatureFrames();
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('wheel', handleWheel, { passive: false });
+    nextTick(() => {
+        setupInputObserver();
+        setupScrollTrigger();
+        ScrollTrigger.refresh();
+    });
+
     window.addEventListener('resize', handleResize, { passive: true });
-
-    window.addEventListener('touchstart', handleTouchStart, { passive: true });
-    window.addEventListener('touchend', handleTouchEnd, { passive: true });
-    window.addEventListener('touchcancel', handleTouchEnd, { passive: true });
 });
 
 onUnmounted(() => {
-    window.removeEventListener('scroll', handleScroll);
-    window.removeEventListener('wheel', handleWheel);
     window.removeEventListener('resize', handleResize);
 
-    window.removeEventListener('touchstart', handleTouchStart);
-    window.removeEventListener('touchend', handleTouchEnd);
-    window.removeEventListener('touchcancel', handleTouchEnd);
+    scrollTriggerInstance?.kill();
+    entrySnapTriggerInstance?.kill();
+    inputObserver?.kill();
+    stepTween?.kill();
+    scrollSnapTween?.kill();
 
-    if (rafId !== null) {
-        cancelAnimationFrame(rafId);
-        rafId = null;
-    }
-
-    if (wheelLockTimeoutId !== null) {
-        window.clearTimeout(wheelLockTimeoutId);
-        wheelLockTimeoutId = null;
-    }
-
-    clearMobileSettleTimers();
+    scrollTriggerInstance = null;
+    entrySnapTriggerInstance = null;
+    inputObserver = null;
+    stepTween = null;
+    scrollSnapTween = null;
+    decodedFrameIndexes = new Set<number>();
+    decodingFrameIndexes = new Set<number>();
 
     imageElements = [];
 });
 </script>
 
 <style scoped>
-.features-desktop {
-    height: calc(var(--features-desktop-panels) * 100vh);
-}
-
 @media (max-width: 1023px) {
-    .features-desktop {
-        height: calc(var(--features-mobile-panels) * 100svh);
-    }
-
-    .features-sticky {
+    .features-pin {
         height: 100svh;
     }
 }
