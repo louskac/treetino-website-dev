@@ -115,6 +115,19 @@ const getAddonsPreview = (basePath: string): AddonsPreviewSection => ({
     ],
 });
 
+const getConnectivityPreview = (basePath: string): AddonsPreviewSection => ({
+    type: 'addons',
+    basePath,
+    items: [
+        {
+            fileName: 'baterie.webp',
+            label: 'Premium Connectivity',
+            alt: 'Premium Connectivity',
+            isSelected: (selection) => selection.connectivity !== 'none',
+        },
+    ],
+});
+
 const turbineSizeAssetNames: Record<string, string> = {
     large: 'lg',
     medium: 'md',
@@ -176,6 +189,9 @@ const configuratorPreviewProducts: Partial<
                     },
                 ],
             },
+            connectivity: getConnectivityPreview(
+                '/img/config-images/v1-config-compressed-webp/addons',
+            ),
             battery: getAddonsPreview(
                 '/img/config-images/v1-config-compressed-webp/addons',
             ),
@@ -236,6 +252,9 @@ const configuratorPreviewProducts: Partial<
                     },
                 ],
             },
+            connectivity: getConnectivityPreview(
+                '/img/config-images/v2-config-compressed-webp/addons',
+            ),
             battery: getAddonsPreview(
                 '/img/config-images/v2-config-compressed-webp/addons',
             ),

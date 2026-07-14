@@ -46,7 +46,12 @@
                         class="flex h-full w-full items-center justify-center px-5 sm:px-8 md:px-10"
                     >
                         <div
-                            class="grid w-full max-w-4xl grid-cols-3 items-end gap-3 sm:gap-5 md:gap-8"
+                            class="grid w-full items-end justify-center gap-3 sm:gap-5 md:gap-8"
+                            :class="
+                                preview.items.length === 1
+                                    ? 'max-w-[min(72vw,72vh,560px)] grid-cols-1'
+                                    : 'max-w-4xl grid-cols-3'
+                            "
                         >
                             <div
                                 v-for="item in preview.items"
@@ -62,12 +67,15 @@
                                 <img
                                     :src="item.src"
                                     :alt="item.alt"
-                                    class="aspect-square w-full max-w-[180px] object-contain transition-opacity duration-300 md:max-w-[240px]"
-                                    :class="
+                                    class="aspect-square w-full object-contain transition-opacity duration-300"
+                                    :class="[
+                                        preview.items.length === 1
+                                            ? 'max-w-[min(72vw,72vh,560px)]'
+                                            : 'max-w-[180px] md:max-w-[240px]',
                                         item.selected
                                             ? 'opacity-100'
-                                            : 'opacity-50'
-                                    "
+                                            : 'opacity-50',
+                                    ]"
                                 />
                                 <div
                                     class="flex h-9 items-center justify-center"
