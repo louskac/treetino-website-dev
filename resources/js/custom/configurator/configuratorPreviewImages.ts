@@ -24,6 +24,7 @@ export type ConfiguratorPreviewAddon = {
     src: string;
     alt: string;
     label: string;
+    descriptionKey: string;
     selected: boolean;
 };
 
@@ -63,6 +64,7 @@ type AddonsPreviewItem = {
     fileName: string;
     label: string;
     alt: string;
+    descriptionKey: string;
     isSelected: (selection: ConfiguratorPreviewSelection) => boolean;
 };
 
@@ -98,18 +100,21 @@ const getAddonsPreview = (basePath: string): AddonsPreviewSection => ({
             fileName: 'nabijecka-auta.webp',
             label: 'Nabíjení aut',
             alt: 'Nabíjení pro elektromobily',
+            descriptionKey: 'configurator.preview.addons.ev_charger.text',
             isSelected: (selection) => selection.evChargerCount > 0,
         },
         {
             fileName: 'baterie.webp',
             label: 'Baterie',
             alt: 'Fyzická baterie',
+            descriptionKey: 'configurator.preview.addons.battery.text',
             isSelected: (selection) => selection.battery !== 'none',
         },
         {
             fileName: 'nabijecka-kola.webp',
             label: 'Nabíjení kol',
             alt: 'Nabíjení pro elektrokola',
+            descriptionKey: 'configurator.preview.addons.bike_charger.text',
             isSelected: (selection) => selection.bikeChargerRequested,
         },
     ],
@@ -123,6 +128,7 @@ const getConnectivityPreview = (basePath: string): AddonsPreviewSection => ({
             fileName: 'baterie.webp',
             label: 'Premium Connectivity',
             alt: 'Premium Connectivity',
+            descriptionKey: 'configurator.preview.connectivity.premium.text',
             isSelected: (selection) => selection.connectivity !== 'none',
         },
     ],
@@ -306,6 +312,7 @@ export function getConfiguratorPreview(
                 src: `${section.basePath}/${item.fileName}`,
                 alt: item.alt,
                 label: item.label,
+                descriptionKey: item.descriptionKey,
                 selected: item.isSelected(selection),
             })),
         };

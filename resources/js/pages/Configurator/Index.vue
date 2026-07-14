@@ -88,6 +88,16 @@
                                         <Check class="h-4 w-4" />
                                     </div>
                                 </div>
+                                <p
+                                    class="text-center text-sm leading-relaxed text-black/55 dark:text-white/55"
+                                    :class="
+                                        preview.items.length === 1
+                                            ? 'max-w-[34rem]'
+                                            : 'max-w-[12rem]'
+                                    "
+                                >
+                                    {{ $t(item.descriptionKey) }}
+                                </p>
                             </div>
                         </div>
                     </div>

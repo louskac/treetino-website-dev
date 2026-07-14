@@ -139,5 +139,9 @@ return [
         'steps.turbine_mount' => ['cs' => 'Umístění turbíny', 'en' => 'Turbine placement'],
         'steps.tree_design' => ['cs' => 'Design stromu', 'en' => 'Tree design'],
         'steps.addons' => ['cs' => 'Doplňky', 'en' => 'Add-ons'],
+        'preview.addons.ev_charger.text' => ['cs' => 'Zástupný text pro nabíjení elektromobilů.', 'en' => 'Placeholder text for EV charging.'],
+        'preview.addons.battery.text' => ['cs' => 'Zástupný text pro bateriové úložiště.', 'en' => 'Placeholder text for battery storage.'],
+        'preview.addons.bike_charger.text' => ['cs' => 'Zástupný text pro nabíjení elektrokol.', 'en' => 'Placeholder text for e-bike charging.'],
+        'preview.connectivity.premium.text' => ['cs' => 'Zástupný text pro Premium Connectivity.', 'en' => 'Placeholder text for Premium Connectivity.'],
     ],
 ];
