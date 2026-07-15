@@ -125,7 +125,7 @@ const getConnectivityPreview = (basePath: string): AddonsPreviewSection => ({
     basePath,
     items: [
         {
-            fileName: 'baterie.webp',
+            fileName: 'treetino-app-mockup.webp',
             label: 'Premium Connectivity',
             alt: 'Premium Connectivity',
             descriptionKey: 'configurator.preview.connectivity.premium.text',
