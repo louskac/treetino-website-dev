@@ -10,7 +10,7 @@ class CreateAdmin extends Command
 {
     protected $signature = 'admin:create {--name=} {--email=}';
 
-    protected $description = 'Create an administrator account';
+    protected $description = 'Create or update an administrator account';
 
     public function handle(): int
     {
@@ -21,8 +21,8 @@ class CreateAdmin extends Command
 
         $validator = Validator::make(compact('name', 'email', 'password', 'confirmation'), [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255', 'unique:admins,email'],
-            'password' => ['required', 'string', 'min:12', 'same:confirmation'],
+            'email' => ['required', 'email', 'max:255'],
+            'password' => ['required', 'string', 'min:8', 'same:confirmation'],
         ]);
 
         if ($validator->fails()) {
@@ -33,8 +33,12 @@ class CreateAdmin extends Command
             return self::FAILURE;
         }
 
-        Admin::create(compact('name', 'email', 'password'));
-        $this->info("Administrator {$email} created.");
+        $admin = Admin::updateOrCreate(
+            ['email' => $email],
+            compact('name', 'password'),
+        );
+
+        $this->info("Administrator {$email} ".($admin->wasRecentlyCreated ? 'created' : 'updated').'.');
 
         return self::SUCCESS;
     }
