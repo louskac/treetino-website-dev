@@ -141,7 +141,9 @@ return [
         'steps.addons' => ['cs' => 'Doplňky', 'en' => 'Add-ons'],
         'preview.addons.ev_charger.text' => ['cs' => 'Zástupný text pro nabíjení elektromobilů.', 'en' => 'Placeholder text for EV charging.'],
         'preview.addons.battery.text' => ['cs' => 'Zástupný text pro bateriové úložiště.', 'en' => 'Placeholder text for battery storage.'],
+        'preview.addons.battery.none' => ['cs' => 'Zástupný text pro žádné bateriové úložiště.', 'en' => 'Placeholder text for no battery storage.'],
         'preview.addons.bike_charger.text' => ['cs' => 'Zástupný text pro nabíjení elektrokol.', 'en' => 'Placeholder text for e-bike charging.'],
         'preview.connectivity.premium.text' => ['cs' => 'Zástupný text pro Premium Connectivity.', 'en' => 'Placeholder text for Premium Connectivity.'],
+        'preview.connectivity.premium.none' => ['cs' => 'Zástupný text pro žádné Premium Connectivity.', 'en' => 'Placeholder text for No Premium Connectivity.'],
     ],
 ];
