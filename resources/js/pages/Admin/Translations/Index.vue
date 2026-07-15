@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { router, useForm, usePage } from '@inertiajs/vue3';
-import { computed, reactive } from 'vue';
+import { computed, reactive, watch } from 'vue';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import AdminLayout from '@/layouts/AdminLayout.vue';
@@ -21,17 +21,41 @@ const props = defineProps<{
 }>();
 
 const filters = reactive({ ...props.filters });
-const drafts = reactive<Record<number, Record<string, string>>>(
-    Object.fromEntries(props.keys.data.map((row) => [row.id, { ...row.translations }])),
-);
+const drafts = reactive<Record<number, Record<string, string>>>({});
 const saving = reactive<Record<number, boolean>>({});
 const page = usePage();
 const success = computed(() => page.props.flash.success);
 
+const ensureDraft = (row: TranslationRow): Record<string, string> => {
+    drafts[row.id] ??= {};
+
+    props.locales.forEach((locale) => {
+        drafts[row.id][locale] ??= row.translations[locale] ?? '';
+    });
+
+    return drafts[row.id];
+};
+
+const draftValue = (row: TranslationRow, locale: string): string => ensureDraft(row)[locale] ?? '';
+
+const updateDraft = (row: TranslationRow, locale: string, event: Event) => {
+    const target = event.target as HTMLTextAreaElement;
+
+    ensureDraft(row)[locale] = target.value;
+};
+
+watch(
+    () => props.keys.data,
+    (rows) => {
+        rows.forEach((row) => ensureDraft(row));
+    },
+    { immediate: true },
+);
+
 const applyFilters = () => router.get('/admin/translations', filters, { preserveState: true, replace: true });
 const save = (row: TranslationRow) => {
     saving[row.id] = true;
-    useForm({ translations: drafts[row.id] }).put(`/admin/translations/${row.id}`, {
+    useForm({ translations: ensureDraft(row) }).put(`/admin/translations/${row.id}`, {
         preserveScroll: true,
         onFinish: () => { saving[row.id] = false; },
     });
@@ -69,7 +93,7 @@ const save = (row: TranslationRow) => {
                 <div class="mt-4 grid gap-4 lg:grid-cols-2">
                     <label v-for="locale in locales" :key="locale" class="block">
                         <span class="mb-1 block text-xs font-semibold uppercase text-slate-500">{{ locale }}</span>
-                        <textarea v-model="drafts[row.id][locale]" rows="3" class="w-full rounded-lg border px-3 py-2 text-sm focus:border-slate-500 focus:outline-none" />
+                        <textarea :value="draftValue(row, locale)" rows="3" class="w-full rounded-lg border px-3 py-2 text-sm focus:border-slate-500 focus:outline-none" @input="updateDraft(row, locale, $event)" />
                     </label>
                 </div>
             </article>
