@@ -9,7 +9,7 @@ import {
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import ButtonSecondary from '@/custom/ButtonSecondary.vue';
 
-import { Settings } from '@iconoir/vue';
+import { CheckCircle, XmarkCircle, Settings } from '@iconoir/vue';
 
 const isVisible = ref(false);
 
@@ -51,7 +51,37 @@ const handleOpenSettings = () => {
             <div
                 class="w-fit rounded-2xl border bg-white/80 p-3 backdrop-blur-2xl"
             >
-                <div class="flex gap-2">
+                <div class="flex flex-col gap-4 p-2 md:hidden">
+                    <div class="my-auto">Our Site Uses Cookies</div>
+                    <div class="flex gap-2">
+                        <div class="">
+                            <ButtonPrimary
+                                class="cursor-pointer"
+                                @click="handleAcceptAll"
+                            >
+                                <CheckCircle class="my-auto h-5 w-5" />
+                            </ButtonPrimary>
+                        </div>
+                        <div class="">
+                            <ButtonSecondary
+                                class="cursor-pointer"
+                                @click="handleRejectAll"
+                            >
+                                <XmarkCircle class="my-auto h-5 w-5" />
+                            </ButtonSecondary>
+                        </div>
+                        <div class="flex">
+                            <div
+                                class="flex h-full cursor-pointer rounded-xl bg-black px-5 text-white"
+                                @click="handleOpenSettings"
+                            >
+                                <Settings class="my-auto h-5 w-5" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hidden gap-2 md:flex">
                     <div class="my-auto px-3">Our Site Uses Cookies</div>
                     <div class="">
                         <ButtonPrimary
