@@ -92,6 +92,33 @@ const stromV1CompositePreview: CompositePreviewSection = {
         `color_${selection.color}_${selection.leafColor}.webp`,
 };
 
+const stromV1LeafPreview: LayeredPreviewSection = {
+    type: 'layered',
+    basePath: '/img/config-images/v1-config-compressed-webp/leaf-color',
+    background: 'leaf-color-bg.webp',
+    backgroundAlt: 'Pozadi konfiguratoru listu',
+    layers: [
+        {
+            dir: 'construction',
+            prefix: 'color',
+            selection: 'color',
+            alt: 'Barva konstrukce',
+        },
+        {
+            dir: 'leaves',
+            prefix: 'leaf',
+            selection: 'leafColor',
+            alt: 'Barva listu',
+        },
+        {
+            dir: 'fve-design',
+            prefix: 'fve',
+            selection: 'fveLeafDesign',
+            alt: 'Design FVE listu',
+        },
+    ],
+};
+
 const getAddonsPreview = (basePath: string): AddonsPreviewSection => ({
     type: 'addons',
     basePath,
@@ -174,27 +201,8 @@ const configuratorPreviewProducts: Partial<
         defaultSectionId: 'color',
         sections: {
             color: stromV1CompositePreview,
-            leaf: {
-                type: 'layered',
-                basePath:
-                    '/img/config-images/v1-config-compressed-webp/leaf-color',
-                background: 'leaf-color-bg.webp',
-                backgroundAlt: 'Pozadi konfiguratoru barvy listu',
-                layers: [
-                    {
-                        dir: 'construction',
-                        prefix: 'color',
-                        selection: 'color',
-                        alt: 'Barva konstrukce',
-                    },
-                    {
-                        dir: 'leaves',
-                        prefix: 'leaf',
-                        selection: 'leafColor',
-                        alt: 'Barva listu',
-                    },
-                ],
-            },
+            leaf: stromV1LeafPreview,
+            'fve-leaf': stromV1LeafPreview,
             connectivity: getConnectivityPreview(
                 '/img/config-images/v1-config-compressed-webp/addons',
             ),

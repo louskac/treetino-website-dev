@@ -348,7 +348,7 @@ watch(selectedProductId, (newProductId) => {
 
 const selectedColorId = ref('white');
 const selectedLeafColorId = ref('green');
-const selectedFveLeafDesign = ref('realistic');
+const selectedFveLeafDesign = ref('spring');
 const selectedConnectivity = ref('none');
 const selectedBattery = ref('none');
 const selectedWindTurbines = ref('without-turbines');
@@ -533,7 +533,7 @@ function setSectionRef(
 function resetConfiguration() {
     selectedColorId.value = 'white';
     selectedLeafColorId.value = 'green';
-    selectedFveLeafDesign.value = 'realistic';
+    selectedFveLeafDesign.value = 'spring';
     selectedConnectivity.value = 'none';
     selectedBattery.value = 'none';
     evChargerCount.value = 0;

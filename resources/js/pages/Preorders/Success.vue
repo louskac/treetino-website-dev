@@ -73,6 +73,12 @@ const configurationValueLabels: Record<string, Record<string, string>> = {
         standard: 'Standardní',
         cyber: 'Cyber',
     },
+    fveLeafDesign: {
+        spring: 'Jaro',
+        summer: 'Léto',
+        autumn: 'Podzim',
+        winter: 'Zima',
+    },
     paymentMode: {
         cash: 'Hotovost',
         credit: 'Zelený úvěr',
