@@ -146,4 +146,8 @@ return [
         'preview.connectivity.premium.text' => ['cs' => 'Zástupný text pro Premium Connectivity.', 'en' => 'Placeholder text for Premium Connectivity.'],
         'preview.connectivity.premium.none' => ['cs' => 'Zástupný text pro žádné Premium Connectivity.', 'en' => 'Placeholder text for No Premium Connectivity.'],
     ],
+    'legal' => [
+        'privacy.title' => ['cs' => 'Zásady zpracování osobních údajů podle směrnic GDPR', 'en' => 'Privacy Policy According to the GDPR Guidelines'],
+        'tos.title' => ['cs' => 'Všeobecné obchodní podmínky', 'en' => 'Terms of Service'],
+    ],
 ];

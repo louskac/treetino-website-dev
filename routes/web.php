@@ -11,6 +11,7 @@ use App\Http\Controllers\MediaController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LegalController;
 
 Route::get('/home', function () {
     return redirect('/');
@@ -40,6 +41,12 @@ Route::prefix('media')->name('media.')->group(function () {
 Route::prefix('contact')->name('contact.')->group(function () {
     Route::get('/', [ContactController::class, 'index'])->name('index');
     Route::post('/', [ContactController::class, 'store'])->name('store');
+});
+
+// Legal
+Route::prefix('legal')->name('legal.')->group(function () {
+    Route::get('/terms-and-conditions', [LegalController::class, 'tos'])->name('tos');
+    Route::get('/privacy-policy', [LegalController::class, 'pp'])->name('pp');
 });
 
 // Checkout

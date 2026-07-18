@@ -108,11 +108,11 @@
                             </div>
 
                             <div class="mt-6 flex flex-col gap-2">
-                                <FooterLink :href="route('home')">
+                                <FooterLink :href="route('legal.tos')">
                                     Terms & Conditions
                                 </FooterLink>
 
-                                <FooterLink :href="route('home')">
+                                <FooterLink :href="route('legal.pp')">
                                     Privacy Policy
                                 </FooterLink>
 
