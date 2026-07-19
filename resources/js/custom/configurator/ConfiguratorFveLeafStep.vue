@@ -1,27 +1,35 @@
 <template>
     <div>
-        <p class="text-xs uppercase tracking-widest text-black/70 dark:text-white/50 mb-4">
+        <p
+            class="mb-4 text-xs tracking-widest text-black/70 uppercase dark:text-white/50"
+        >
             {{ formatStep(stepNumber) }} — Design FVE listů
         </p>
         <div class="flex flex-col gap-1">
             <button
-                v-for="option in options"
+                v-for="option in visibleOptions"
                 :key="option.id"
                 @click="$emit('update:modelValue', option.id)"
-                class="flex items-center gap-3 w-full py-2 px-1 rounded transition-opacity duration-200"
-                :class="modelValue === option.id ? 'opacity-100' : 'opacity-50 hover:opacity-100'"
+                class="flex w-full items-center gap-3 rounded px-1 py-2 transition-opacity duration-200"
+                :class="
+                    modelValue === option.id
+                        ? 'opacity-100'
+                        : 'opacity-50 hover:opacity-100'
+                "
             >
                 <!-- Design swatch -->
                 <div
-                    class="w-6 h-6 rounded-full shrink-0 border border-black/15 dark:border-white/15 transition-all duration-200"
+                    class="h-6 w-6 shrink-0 rounded-full border border-black/15 transition-all duration-200 dark:border-white/15"
                     :class="[
                         modelValue === option.id
-                            ? 'ring-2 ring-black dark:ring-white ring-offset-1 ring-offset-white dark:ring-offset-black'
+                            ? 'ring-2 ring-black ring-offset-1 ring-offset-white dark:ring-white dark:ring-offset-black'
                             : '',
                     ]"
                     :style="{ background: option.swatch }"
                 />
-                <span class="flex-1 text-sm text-left text-black dark:text-white">
+                <span
+                    class="flex-1 text-left text-sm text-black dark:text-white"
+                >
                     {{ option.label }}
                 </span>
                 <span class="text-xs text-black dark:text-white">
@@ -33,14 +41,27 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import { useStepFormatter } from '@/composables/useStepFormatter';
+import { ProductId } from '@/types/products';
 
-defineProps<{ modelValue: string; stepNumber: number }>();
+const props = defineProps<{
+    modelValue: string;
+    stepNumber: number;
+    productId: string;
+}>();
 defineEmits<{ 'update:modelValue': [value: string] }>();
 
 const { formatStep } = useStepFormatter();
 
 const options = [
+    {
+        id: 'none',
+        label: 'Bez designu',
+        swatch: '#E5E7EB',
+        price: null,
+        description: 'FVE listy bez sezonního designu.',
+    },
     {
         id: 'spring',
         label: 'Jaro',
@@ -70,4 +91,10 @@ const options = [
         description: 'Sezonní design FVE listů pro zimní variantu stromu.',
     },
 ];
+
+const visibleOptions = computed(() =>
+    props.productId === ProductId.StromV1
+        ? options
+        : options.filter((option) => option.id !== 'none'),
+);
 </script>

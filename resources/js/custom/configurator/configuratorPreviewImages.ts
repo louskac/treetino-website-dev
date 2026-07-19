@@ -333,14 +333,21 @@ export function getConfiguratorPreview(
                 src: `${section.basePath}/${section.background}`,
                 alt: section.backgroundAlt,
             },
-            ...section.layers.map((layer) => {
+            ...section.layers.flatMap((layer) => {
                 const value = selection[layer.selection];
+
+                if (value === 'none') {
+                    return [];
+                }
+
                 const fileName = `${layer.prefix}_${value}.webp`;
 
-                return {
-                    src: `${section.basePath}/${layer.dir}/${fileName}`,
-                    alt: layer.alt,
-                };
+                return [
+                    {
+                        src: `${section.basePath}/${layer.dir}/${fileName}`,
+                        alt: layer.alt,
+                    },
+                ];
             }),
         ],
     };

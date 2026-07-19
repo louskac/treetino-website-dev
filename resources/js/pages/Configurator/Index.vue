@@ -166,6 +166,7 @@
                         v-else-if="step.id === 'fve-leaf'"
                         v-model="selectedFveLeafDesign"
                         :step-number="index + 1"
+                        :product-id="selectedProductId"
                     />
                     <ConfiguratorConnectivityStep
                         v-else-if="step.id === 'connectivity'"
