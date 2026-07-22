@@ -181,6 +181,10 @@
                     <a class="underline" :href="route('legal.tos')"
                         >obchodními podmínkami</a
                     >
+                    a
+                    <a class="underline" :href="route('legal.pp')"
+                        >zásadami zpracování osobních údajů</a
+                    >
                     a souhlasím s nimi.
                 </label>
             </div>
