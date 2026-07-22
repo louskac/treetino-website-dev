@@ -67,11 +67,11 @@
                                 <img
                                     :src="item.src"
                                     :alt="item.alt"
-                                    class="aspect-square w-full object-contain transition-opacity duration-300"
+                                    class="w-full translate-y-6 object-contain transition-opacity duration-300 md:translate-y-0"
                                     :class="[
                                         preview.items.length === 1
-                                            ? 'max-w-[min(72vw,72vh,560px)]'
-                                            : 'max-w-[180px] md:max-w-[240px]',
+                                            ? 'h-[22vh] max-w-[min(72vw,72vh,560px)] md:h-auto md:aspect-square'
+                                            : 'aspect-square max-w-[180px] md:max-w-[240px]',
                                         item.selected
                                             ? 'opacity-100'
                                             : 'opacity-50',
@@ -89,7 +89,7 @@
                                     </div>
                                 </div>
                                 <p
-                                    class="text-center text-sm leading-relaxed text-black/55 dark:text-white/55"
+                                    class="hidden text-center text-sm leading-relaxed text-black/55 md:block dark:text-white/55"
                                     :class="
                                         preview.items.length === 1
                                             ? 'max-w-[34rem]'
