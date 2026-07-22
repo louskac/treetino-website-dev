@@ -26,14 +26,14 @@ const productImageSrc = computed(() => {
     const type = props.preorder?.product_type;
 
     if (!type) {
-        return null;
-    }
+return null;
+}
 
     const color = props.preorder?.configuration?.color;
 
     if (color) {
-        return `/img/config-images/${type}/color/color_${color}.webp`;
-    }
+return `/img/config-images/${type}/color/color_${color}.webp`;
+}
 
     return `/img/config-images/${type}/default.webp`;
 });
@@ -93,14 +93,14 @@ const configurationRows = computed(() => {
     const cfg = props.preorder?.configuration;
 
     if (!cfg) {
-        return [];
-    }
+return [];
+}
 
     return Object.entries(cfg)
         .filter(([key, value]) => {
             if (skipIfEmpty.has(key) && !value) {
-                return false;
-            }
+return false;
+}
 
             return true;
         })
@@ -108,11 +108,7 @@ const configurationRows = computed(() => {
             const valueMap = configurationValueLabels[key];
             const displayValue = valueMap
                 ? (valueMap[String(value)] ?? String(value))
-                : value === true
-                  ? 'Ano'
-                  : value === false
-                    ? 'Ne'
-                    : String(value);
+                : value === true ? 'Ano' : value === false ? 'Ne' : String(value);
 
             return {
                 label: configurationLabels[key] ?? key,
@@ -125,8 +121,8 @@ const formattedAmount = computed(() => {
     const amount = props.preorder?.amount_total;
 
     if (amount == null) {
-        return '—';
-    }
+return '—';
+}
 
     return new Intl.NumberFormat('cs-CZ', {
         style: 'currency',
@@ -139,8 +135,8 @@ const formattedDate = computed(() => {
     const date = props.preorder?.created_at;
 
     if (!date) {
-        return '—';
-    }
+return '—';
+}
 
     return new Intl.DateTimeFormat('cs-CZ', {
         dateStyle: 'long',
@@ -236,10 +232,10 @@ const downloadInvoice = async () => {
 
 <template>
     <DefaultLayout :scroll="false" class="relative">
-        <div class="absolute h-90 w-full bg-blue-50">
-            <div
-                class="absolute bottom-0 h-30 w-full bg-linear-to-b from-transparent to-white"
-            ></div>
+        <div class="absolute w-full h-90 bg-blue-50">
+            <div class="absolute w-full h-30 bottom-0 bg-linear-to-b from-transparent to-white">
+
+            </div>
         </div>
 
         <div class="buffer h-60 pb-12"></div>
@@ -255,13 +251,13 @@ const downloadInvoice = async () => {
                 <div class="pb-4.5">
                     <div class="text-6xl">Pre-order Summary</div>
 
-                    <div class="mt-1 text-xs opacity-70">
+                    <div class="text-xs opacity-70 mt-1">
                         ID: {{ preorder.uuid }}
                     </div>
                 </div>
 
                 <!-- Status + Invoice download Desktop -->
-                <div class="hidden pb-6 sm:block">
+                <div class="hidden sm:block pb-6">
                     <div class="flex gap-5">
                         <div
                             class="flex w-fit rounded-xl border px-5 py-3 shadow-xl"

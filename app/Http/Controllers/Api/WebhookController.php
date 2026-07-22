@@ -13,7 +13,7 @@ class WebhookController extends Controller
 {
     public function webhook(Request $request)
     {
-        $endpoint_secret = 'whsec_edec5ec4e16f9ace82f78e0aaf9a61b70fa6769a96a0eea2f41a70a1fbaefd3f'; // The whsec_... key from your CLI
+        $endpoint_secret = 'whsec_FeHu2mIYoB4y9BLiVcmqvZOu27VT7ZUF'; // The whsec_... key from your CLI
         $sig_header = $request->header('Stripe-Signature');
         $payload = $request->getContent();
 
