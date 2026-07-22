@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { CheckCircle, Refresh } from '@iconoir/vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 import axios from 'axios';
 import type { AxiosError } from 'axios';
 import { ref } from 'vue';
@@ -36,7 +36,9 @@ async function formProcess() {
         formSending.value = false;
         console.log(response.data);
     } catch (error) {
-        const requestError = error as AxiosError<{ errors: Record<string, string[]> }>;
+        const requestError = error as AxiosError<{
+            errors: Record<string, string[]>;
+        }>;
 
         if (requestError.response) {
             // This is where your custom messages from the Controller are!
@@ -75,7 +77,9 @@ async function formProcess() {
                 <div class="grid grid-cols-1 gap-6 pt-6 pb-12 md:grid-cols-2">
                     <div class="relative flex flex-col">
                         <div class="relative my-auto w-full">
-                            <div class="pb-4 text-4xl">{{ $t('contact.title') }}</div>
+                            <div class="pb-4 text-4xl">
+                                {{ $t('contact.title') }}
+                            </div>
                             <div class="block opacity-70 2xl:w-3/4">
                                 <p class="mb-3">
                                     {{ $t('contact.lead') }}
@@ -182,8 +186,12 @@ async function formProcess() {
                             </div>
 
                             <div class="mt-4 text-xs opacity-70">
-                                By submitting the form, you agree to our Terms &
-                                Conditions and Privacy Policy
+                                By submitting the form, you agree to our
+                                <Link
+                                    class="underline"
+                                    :href="route('legal.pp')"
+                                    >Privacy Policy</Link
+                                >
                             </div>
                         </div>
 
@@ -214,7 +222,7 @@ async function formProcess() {
                                         <Transition>
                                             <div
                                                 v-if="formSending"
-                                                class="absolute left-1/2 -translate-x-1/2 text-center opacity-70 text-sm"
+                                                class="absolute left-1/2 -translate-x-1/2 text-center text-sm opacity-70"
                                             >
                                                 Your message is being processed
                                             </div>
@@ -223,7 +231,7 @@ async function formProcess() {
                                         <Transition>
                                             <div
                                                 v-if="formSent"
-                                                class="absolute left-1/2 -translate-x-1/2 text-center opacity-70 text-sm"
+                                                class="absolute left-1/2 -translate-x-1/2 text-center text-sm opacity-70"
                                             >
                                                 {{ $t('contact.form.success') }}
                                             </div>

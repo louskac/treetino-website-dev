@@ -37,7 +37,7 @@
                                 <div
                                     class="flex aspect-square h-12 w-12 rounded-xl bg-primary/5 text-t-blue dark:text-primary"
                                 >
-                                    <Link
+                                    <LinkIcon
                                         stroke-width="1.5"
                                         class="mx-auto my-auto h-6 w-6"
                                     />
@@ -50,21 +50,24 @@
                                 <FooterLink :href="route('home')">
                                     {{ $t('common.nav.home') }}
                                 </FooterLink>
-                                <FooterLink :href="route('configurator')"
-                                    >{{ $t('configurator.title') }}</FooterLink
-                                >
+                                <FooterLink :href="route('configurator')">{{
+                                    $t('configurator.title')
+                                }}</FooterLink>
                                 <FooterLink :href="route('collaboration.index')"
                                     >Government Grants</FooterLink
                                 >
-                                <FooterLink :href="route('collaboration.index')"
-                                    >{{ $t('common.nav.collaboration') }}</FooterLink
+                                <FooterLink
+                                    :href="route('collaboration.index')"
+                                    >{{
+                                        $t('common.nav.collaboration')
+                                    }}</FooterLink
                                 >
-                                <FooterLink :href="route('media.index')"
-                                    >{{ $t('common.nav.media') }}</FooterLink
-                                >
-                                <FooterLink :href="route('media.index')"
-                                    >{{ $t('common.nav.contact') }}</FooterLink
-                                >
+                                <FooterLink :href="route('media.index')">{{
+                                    $t('common.nav.media')
+                                }}</FooterLink>
+                                <FooterLink :href="route('media.index')">{{
+                                    $t('common.nav.contact')
+                                }}</FooterLink>
                             </div>
                         </div>
 
@@ -120,9 +123,7 @@
                                     @click="openSettings"
                                     class="group relative w-fit cursor-pointer opacity-70 transition-all duration-300 hover:opacity-100"
                                 >
-                                    <div class="relative">
-                                        Cookie Settings
-                                    </div>
+                                    <div class="relative">Cookie Settings</div>
                                     <div
                                         class="absolute w-0 border-b transition-all duration-300 group-hover:w-full group-hover:border-b group-hover:border-b-black"
                                     ></div>
@@ -165,7 +166,8 @@
                             </div>
 
                             <div class="mt-auto text-xs text-white opacity-70">
-                                &copy; 2026, Treetino Corp s.r.o., {{ $t('common.footer.rights') }}<br />
+                                &copy; 2026, Treetino Corp s.r.o.,
+                                {{ $t('common.footer.rights') }}<br />
                                 Design & Development by
                                 <a
                                     class="underline"
@@ -220,8 +222,8 @@
                             </div>
 
                             <div class="text-xs opacity-70">
-                                By submitting the form, you agree to our Terms &
-                                Conditions and Privacy Policy
+                                By submitting the form, you agree to our
+                                <Link class="underline" :href="route('legal.pp')">Privacy Policy</Link>
                             </div>
                         </div>
                     </div>
@@ -235,13 +237,14 @@
 import {
     Instagram,
     Linkedin,
-    Link,
+    Link as LinkIcon,
     GraduationCap,
     PeopleTag,
     X,
     Mail,
     Building,
 } from '@iconoir/vue';
+import { Link } from '@inertiajs/vue3';
 import { showPreferences } from 'vanilla-cookieconsent';
 import { route } from 'ziggy-js';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
