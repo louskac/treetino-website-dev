@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Mail\PreorderConfirmation;
 use App\Models\Preorder;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Stripe\Customer;
 use Stripe\PaymentIntent;
 use Stripe\Stripe;
@@ -51,7 +53,7 @@ class PreorderController extends Controller
         $reservationPrices = [
             'strom-v1' => 1200000, // 12 000 CZK
             'strom-v2' => 1200000, // 12 000 CZK
-            'turbina'  =>  600000, //  6 000 CZK
+            'turbina' => 600000, //  6 000 CZK
         ];
 
         $amount = $reservationPrices[$request->type];
@@ -81,6 +83,8 @@ class PreorderController extends Controller
         // 6. UPDATE PREORDER WITH INTENT ID (Using local update)
         $preorder->update(['stripe_payment_intent_id' => $intent->id]);
 
+        Mail::to($user->email)->send(new PreorderConfirmation($preorder->uuid));
+
         // 7. Return the Client Secret to Vue
         return response()->json([
             'client_secret' => $intent->client_secret,
@@ -89,7 +93,8 @@ class PreorderController extends Controller
     }
 
     // Download Invoice
-    public function invoice(Request $request) {
+    public function invoice(Request $request)
+    {
         $request->validate([
             'uuid' => 'required',
         ]);
@@ -114,7 +119,8 @@ class PreorderController extends Controller
 
     // Invoice Test
     // 019da517-c3eb-7184-afa7-6015171402c3
-    public function invoicetest(Request $request) {
+    public function invoicetest(Request $request)
+    {
         $preorder = Preorder::where('uuid', '019da50e-a184-7120-bf79-262f53178c08')
             ->with('user')->firstOrFail();
 
