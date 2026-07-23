@@ -2,7 +2,7 @@ TREETINO
 
 Děkujeme za vaši objednávku.
 
-Platbu jsme úspěšně přijali. Kompletní souhrn objednávky a fakturu ke stažení najdete zde:
+Vaše objednávka byla úspěšně odeslána. Jakmile bude platba potvrzena, na stránce objednávky si budete moci stáhnout fakturu:
 https://treetino.eu/preorders/{{ $uuid }}
 
 ID objednávky: {{ $uuid }}

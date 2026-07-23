@@ -6,7 +6,7 @@
     <title>Potvrzení objednávky</title>
 </head>
 <body style="margin: 0; background-color: #f4f6fa; color: #212955; font-family: 'DM Sans', Arial, sans-serif;">
-    <div style="display: none; max-height: 0; overflow: hidden; opacity: 0;">Vaše objednávka Treetino byla úspěšně přijata.</div>
+    <div style="display: none; max-height: 0; overflow: hidden; opacity: 0;">Vaše objednávka Treetino byla odeslána.</div>
 
     <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color: #f4f6fa; padding: 32px 16px;">
         <tr>
@@ -23,7 +23,7 @@
                         <td style="padding: 40px;">
                             <h1 style="margin: 0 0 14px; color: #212955; font-size: 28px; line-height: 1.25;">Děkujeme za vaši objednávku</h1>
                             <p style="margin: 0 0 28px; color: #2a293a; font-size: 16px; line-height: 1.65;">
-                                Platbu jsme úspěšně přijali. Kompletní souhrn objednávky a fakturu ke stažení najdete na stránce objednávky.
+                                Vaše objednávka byla úspěšně odeslána. Jakmile bude platba potvrzena, na stránce objednávky si budete moci stáhnout fakturu.
                             </p>
 
                             <table role="presentation" cellspacing="0" cellpadding="0" style="margin: 0 auto;">

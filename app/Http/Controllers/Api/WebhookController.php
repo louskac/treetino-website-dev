@@ -17,6 +17,8 @@ class WebhookController extends Controller
         $sig_header = $request->header('Stripe-Signature');
         $payload = $request->getContent();
 
+        Log::info("Webhook received from API");
+
         try {
             $event = Webhook::constructEvent($payload, $sig_header, $endpoint_secret);
         } catch (SignatureVerificationException $e) {
@@ -57,6 +59,8 @@ class WebhookController extends Controller
         $preorder = Preorder::where('stripe_payment_intent_id', $intentId)->firstOrFail();
         $preorder->status = 'paid';
         $preorder->save();
+
+        Log::info('Payment Succeeded for ID: '.$intentId);
 
         // Add YAP logging.
     }
