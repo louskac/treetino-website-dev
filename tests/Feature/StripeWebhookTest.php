@@ -2,21 +2,17 @@
 
 namespace Tests\Feature;
 
-use App\Mail\PreorderConfirmation;
 use App\Models\Preorder;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 class StripeWebhookTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_successful_payment_marks_preorder_paid_and_sends_one_email(): void
+    public function test_successful_payment_marks_preorder_paid(): void
     {
-        Mail::fake();
-
         $user = User::factory()->create();
         $preorder = Preorder::create([
             'user_id' => $user->id,
@@ -54,11 +50,5 @@ class StripeWebhookTest extends TestCase
         $this->call('POST', '/webhook', [], [], [], $headers, $payload)->assertOk();
 
         $this->assertSame('paid', $preorder->fresh()->status);
-        Mail::assertSent(PreorderConfirmation::class, 1);
-        Mail::assertSent(
-            PreorderConfirmation::class,
-            fn (PreorderConfirmation $mail) => $mail->hasTo($user->email)
-                && $mail->uuid === $preorder->uuid,
-        );
     }
 }

@@ -35,7 +35,7 @@ class WebhookController extends Controller
                 break;
 
             default:
-                Log::info('Received unhandled event type: ' . $event->type);
+                Log::info('Received unhandled event type: '.$event->type);
         }
 
         return response()->json(['status' => 'success']);
@@ -52,7 +52,7 @@ class WebhookController extends Controller
         // GET METADATA
         // $userId = $paymentIntent->metadata->user_id;
 
-        Log::info('Payment Succeeded for ID: ' . $intentId);
+        Log::info('Payment Succeeded for ID: '.$intentId);
 
         $preorder = Preorder::where('stripe_payment_intent_id', $intentId)->firstOrFail();
         $preorder->status = 'paid';

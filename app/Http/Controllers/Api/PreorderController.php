@@ -83,7 +83,10 @@ class PreorderController extends Controller
         // 6. UPDATE PREORDER WITH INTENT ID (Using local update)
         $preorder->update(['stripe_payment_intent_id' => $intent->id]);
 
-        Mail::to($user->email)->send(new PreorderConfirmation($preorder->uuid));
+        Mail::to($user->email)->send(new PreorderConfirmation(
+            $preorder->uuid,
+            $preorder->configuration,
+        ));
 
         // 7. Return the Client Secret to Vue
         return response()->json([
