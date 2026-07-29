@@ -212,7 +212,7 @@
                                             }}</Link
                                         >
                                         <Link
-                                            :href="`/configurator?product=${item.id}`"
+                                            :href="`/configurator/${item.id}`"
                                             class="flex-1 rounded-lg py-1.5 text-center text-xs font-medium transition-all duration-550 hover:opacity-80"
                                             :class="{
                                                 'border border-transparent bg-t-blue text-white':
