@@ -284,7 +284,8 @@
 
         <!-- Feature Showcase 3: Market Competition Section -->
         <section
-            class="border-t border-black/10 bg-white py-24 text-black dark:border-white/10 dark:bg-black dark:text-white"
+            id="comparison"
+            class="scroll-mt-24 border-t border-black/10 bg-white py-24 text-black dark:border-white/10 dark:bg-black dark:text-white"
         >
             <div
                 class="relative mx-auto max-w-[1400px] px-6 sm:w-[500px] sm:px-0 md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
@@ -299,20 +300,20 @@
 
                 <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
                     <!-- Card 1: Spotlight Solar -->
-                    <div class="group relative flex flex-col justify-between overflow-hidden rounded-3xl bg-black text-white shadow-2xl min-h-[460px]">
-                        <div class="relative h-56 w-full overflow-hidden">
+                    <div class="group relative flex flex-col justify-between overflow-hidden rounded-3xl bg-black text-white shadow-2xl min-h-[480px]">
+                        <div class="relative h-64 w-full overflow-hidden bg-zinc-900">
                             <img
                                 src="/img/competition/spotlight-solar-hq-crop.jpg"
                                 alt="Spotlight Solar"
-                                class="h-full w-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
+                                class="h-full w-full object-cover object-center transition-transform duration-1000 ease-out group-hover:scale-105"
                             />
-                            <div class="absolute inset-0 bg-linear-to-t from-black via-black/30 to-transparent"></div>
+                            <div class="absolute inset-0 bg-linear-to-t from-black via-black/20 to-transparent"></div>
                             <span class="absolute top-4 left-4 rounded-full bg-white/20 px-3.5 py-1 text-[10px] font-bold tracking-[0.2em] text-white uppercase backdrop-blur-md">
                                 {{ $t('products.v2.comp.competitor') }}
                             </span>
                         </div>
 
-                        <div class="p-8 pt-2 flex-1 flex flex-col justify-between">
+                        <div class="p-8 pt-4 flex-1 flex flex-col justify-between">
                             <div>
                                 <h3 class="text-2xl font-bold text-white">Spotlight Solar</h3>
                                 <div class="mt-1 text-3xl font-black text-white">$50,000</div>
@@ -336,20 +337,20 @@
                     </div>
 
                     <!-- Card 2: Smartflower -->
-                    <div class="group relative flex flex-col justify-between overflow-hidden rounded-3xl bg-black text-white shadow-2xl min-h-[460px]">
-                        <div class="relative h-56 w-full overflow-hidden">
+                    <div class="group relative flex flex-col justify-between overflow-hidden rounded-3xl bg-black text-white shadow-2xl min-h-[480px]">
+                        <div class="relative h-64 w-full overflow-hidden bg-zinc-900">
                             <img
                                 src="/img/competition/smart-flower-hq-crop.jpg"
                                 alt="Smartflower"
-                                class="h-full w-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
+                                class="h-full w-full object-cover object-center transition-transform duration-1000 ease-out group-hover:scale-105"
                             />
-                            <div class="absolute inset-0 bg-linear-to-t from-black via-black/30 to-transparent"></div>
+                            <div class="absolute inset-0 bg-linear-to-t from-black via-black/20 to-transparent"></div>
                             <span class="absolute top-4 left-4 rounded-full bg-white/20 px-3.5 py-1 text-[10px] font-bold tracking-[0.2em] text-white uppercase backdrop-blur-md">
                                 {{ $t('products.v2.comp.competitor') }}
                             </span>
                         </div>
 
-                        <div class="p-8 pt-2 flex-1 flex flex-col justify-between">
+                        <div class="p-8 pt-4 flex-1 flex flex-col justify-between">
                             <div>
                                 <h3 class="text-2xl font-bold text-white">Smartflower</h3>
                                 <div class="mt-1 text-3xl font-black text-white">$40,000</div>
@@ -373,20 +374,20 @@
                     </div>
 
                     <!-- Card 3: Treetino Strom V2 -->
-                    <div class="group relative flex flex-col justify-between overflow-hidden rounded-3xl bg-black text-white shadow-2xl min-h-[460px] border-2 border-t-blue/80">
-                        <div class="relative h-56 w-full overflow-hidden">
+                    <div class="group relative flex flex-col justify-between overflow-hidden rounded-3xl bg-black text-white shadow-2xl min-h-[480px] border-2 border-t-blue/80">
+                        <div class="relative h-64 w-full overflow-hidden bg-zinc-900">
                             <img
-                                src="/img/info/info-strom-v2-w.webp"
+                                src="/img/stills/SM-still.webp"
                                 alt="Treetino Strom V2"
-                                class="h-full w-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
+                                class="h-full w-full object-cover object-center transition-transform duration-1000 ease-out group-hover:scale-105"
                             />
-                            <div class="absolute inset-0 bg-linear-to-t from-black via-black/30 to-transparent"></div>
+                            <div class="absolute inset-0 bg-linear-to-t from-black via-black/20 to-transparent"></div>
                             <span class="absolute top-4 left-4 rounded-full bg-t-blue px-3.5 py-1 text-[10px] font-bold tracking-[0.2em] text-white uppercase backdrop-blur-md shadow-lg">
                                 {{ $t('products.v2.comp.winner') }}
                             </span>
                         </div>
 
-                        <div class="p-8 pt-2 flex-1 flex flex-col justify-between">
+                        <div class="p-8 pt-4 flex-1 flex flex-col justify-between">
                             <div>
                                 <h3 class="text-2xl font-black text-white">Treetino {{ $t('products.v2.title') }}</h3>
                                 <div class="mt-1 text-3xl font-black text-white">$60,000</div>
@@ -605,6 +606,8 @@
             :title="$t('products.v2.cta_title')"
             :buttonText="$t('products.v2.configure_label')"
             :buttonHref="route('configurator.product', 'strom-v2')"
+            image1="/img/stills/Still_Strom-v2.png"
+            image2="/img/stills/SM-still.webp"
         />
     </DefaultLayout>
 </template>

@@ -5,22 +5,24 @@ defineProps<{
     title?: string;
     buttonText?: string;
     buttonHref?: string;
+    image1?: string;
+    image2?: string;
 }>();
 </script>
 
 <template>
     <section class="cta-generic relative h-180 overflow-hidden bg-t-blue">
         <div
-            class="bg absolute inset-0 overflow-hidden bg-t-dark opacity-20 mix-blend-screen saturate-0"
+            class="bg absolute inset-0 overflow-hidden bg-t-dark opacity-25 mix-blend-screen saturate-0"
         >
             <img
-                src="/img/cta/cta-pos-1.webp"
+                :src="image1 || '/img/cta/cta-pos-1.webp'"
                 alt=""
                 class="cta-slide cta-slide-first absolute inset-0 h-full w-full object-cover"
             />
 
             <img
-                src="/img/cta/cta-pos-2.webp"
+                :src="image2 || '/img/cta/cta-pos-2.webp'"
                 alt=""
                 class="cta-slide cta-slide-second absolute inset-0 h-full w-full object-cover"
             />
@@ -39,7 +41,7 @@ defineProps<{
                         class="text-center text-4xl font-medium sm:text-6xl lg:text-7xl leading-tight"
                         v-html="title || $t('home.cta.generic')"
                     ></h1>
-                    
+
                     <div v-if="buttonHref" class="mt-8 flex justify-center">
                         <ButtonWhite
                             :href="buttonHref"

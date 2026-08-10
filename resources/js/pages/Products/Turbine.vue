@@ -479,6 +479,8 @@
             :title="$t('products.turbine.cta_title')"
             :buttonText="$t('products.turbine.configure_label')"
             :buttonHref="route('configurator.product', 'turbina')"
+            image1="/img/stills/Still_Turbina.png"
+            image2="/img/info/info-turbine-w.webp"
         />
     </DefaultLayout>
 </template>
