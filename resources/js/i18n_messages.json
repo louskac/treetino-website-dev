@@ -2,37 +2,37 @@
     "cs": {
         "common": {
             "nav": {
-                "home": "Dom\u016f",
+                "home": "Domů",
                 "products": "Produkty",
-                "collaboration": "Spolupr\u00e1ce",
-                "media": "M\u00e9dia",
+                "collaboration": "Spolupráce",
+                "media": "Média",
                 "contact": "Kontakt"
             },
             "actions": {
-                "info": "V\u00edce Informac\u00ed",
+                "info": "Více Informací",
                 "configure": "Konfigurovat",
                 "how": "Jak to funguje?",
-                "preorder": "P\u0159edobjednat",
+                "preorder": "Předobjednat",
                 "select": "Vybrat",
-                "selected": "Vybr\u00e1no",
-                "add": "P\u0159idat",
-                "added": "P\u0159id\u00e1no",
-                "back": "Zp\u011bt",
+                "selected": "Vybráno",
+                "add": "Přidat",
+                "added": "Přidáno",
+                "back": "Zpět",
                 "send": "Odeslat",
-                "close": "Zav\u0159\u00edt"
+                "close": "Zavřít"
             },
             "status": {
-                "coming_soon": "P\u0159ipravujeme"
+                "coming_soon": "Připravujeme"
             },
             "footer": {
-                "company": "Spole\u010dnost",
-                "rights": "V\u0161echna pr\u00e1va vyhrazena"
+                "company": "Společnost",
+                "rights": "Všechna práva vyhrazena"
             },
             "cookie": {
-                "title": "Tento web používá soubory cookies",
+                "title": "Nastavení cookies",
                 "description": "Používáme cookies pro správné fungování webu a anonymní analytiku.",
                 "accept_all": "Přijmout vše",
-                "reject_all": "Odmítnout",
+                "reject_all": "Pouze nezbytné",
                 "settings": "Nastavení"
             }
         },
@@ -42,100 +42,100 @@
             },
             "hero": {
                 "v1": {
-                    "audience": "Pro firmy a m\u011bsta"
+                    "audience": "Pro firmy a města"
                 },
                 "v2": {
-                    "audience": "Pro v\u00e1\u0161 domov"
+                    "audience": "Pro váš domov"
                 },
                 "turbine": {
-                    "audience": "Pro velk\u00e9 projekty"
+                    "audience": "Pro velké projekty"
                 }
             },
             "features": {
-                "title": "Technologie, kter\u00e1 m\u011bn\u00ed prostor v energii",
+                "title": "Technologie, která mění prostor v energii",
                 "key_parameters": "Klíčové Parametry",
                 "design": {
-                    "title": "Designov\u00e1 konstrukce",
-                    "text": "Treetino je chytr\u00fd strom, kter\u00fd na 1 m\u00b2 kombinuje sol\u00e1rn\u00ed a v\u011btrnou energii."
+                    "title": "Designová konstrukce",
+                    "text": "Treetino je chytrý strom, který na 1 m² kombinuje solární a větrnou energii."
                 },
                 "space": {
-                    "title": "Prostorov\u00e1 efektivita",
-                    "text": "Zabere pouh\u00fd 1 m\u00b2, p\u0159esto nahrad\u00ed 400 m\u00b2 sol\u00e1rn\u00edch panel\u016f."
+                    "title": "Prostorová efektivita",
+                    "text": "Zabere pouhý 1 m², přesto nahradí 400 m² solárních panelů."
                 },
                 "performance": {
-                    "title": "Vyvinut\u00fd pro v\u00fdkon",
-                    "text": "Patentovan\u00fd AI syst\u00e9m sleduje slunce a p\u0159ed bou\u0159\u00ed bezpe\u010dn\u011b slo\u017e\u00ed listy."
+                    "title": "Vyvinutý pro výkon",
+                    "text": "Patentovaný AI systém sleduje slunce a před bouří bezpečně složí listy."
                 },
                 "premium": {
-                    "title": "Pr\u00e9miov\u00fd design",
-                    "text": "P\u0159izp\u016fsobiteln\u00fd design a barvy slad\u00edte se svou zna\u010dkou \u010di architekturou."
+                    "title": "Prémiový design",
+                    "text": "Přizpůsobitelný design a barvy sladíte se svou značkou či architekturou."
                 },
                 "balance": {
-                    "title": "Rovnov\u00e1ha v\u00fdroby",
-                    "text": "Transparentn\u00ed turb\u00edny vyr\u00e1b\u011bj\u00ed energii i v noci a p\u0159i slab\u00e9m v\u011btru."
+                    "title": "Rovnováha výroby",
+                    "text": "Transparentní turbíny vyrábějí energii i v noci a při slabém větru."
                 }
             },
             "info": {
                 "card": {
-                    "1": "Vrac\u00edme energetickou stabilitu do va\u0161ich rukou.",
-                    "2": "Treetino je elegantn\u00ed off-grid \u0159e\u0161en\u00ed pro lok\u00e1ln\u00ed nez\u00e1vislost bez kompromis\u016f."
+                    "1": "Vracíme energetickou stabilitu do vašich rukou.",
+                    "2": "Treetino je elegantní off-grid řešení pro lokální nezávislost bez kompromisů."
                 },
                 "design": {
-                    "title": "\u0160pi\u010dkov\u00fd design",
-                    "text": "Treetino je v\u00edc ne\u017e elektr\u00e1rna. Je sebev\u011bdom\u00fdm symbolem udr\u017eitelnosti."
+                    "title": "Špičkový design",
+                    "text": "Treetino je víc než elektrárna. Je sebevědomým symbolem udržitelnosti."
                 },
                 "forest": {
-                    "title": "Chytr\u00fd propojen\u00fd les",
-                    "text": "Treetino tvo\u0159\u00ed inteligentn\u00ed, propojen\u00fd ekosyst\u00e9m. Integrovan\u00e1 AI maximalizuje energetick\u00fd v\u00fdnos a \u0159\u00edd\u00ed prediktivn\u00ed \u00fadr\u017ebu."
+                    "title": "Chytrý propojený les",
+                    "text": "Treetino tvoří inteligentní, propojený ekosystém. Integrovaná AI maximalizuje energetický výnos a řídí prediktivní údržbu."
                 }
             },
             "numbers": {
-                "title": "Informace & \u010d\u00edsla"
+                "title": "Informace & čísla"
             },
             "cta": {
-                "generic": "Prom\u011b\u0148te pr\u00e1zdn\u00e9 m\u00edsto ve va\u0161\u00ed v\u00fdhodu.<br>Spole\u010dn\u011b s Treetino"
+                "generic": "Proměňte prázdné místo ve vaší výhodu.<br>Společně s Treetino"
             }
         },
         "app": {
-            "title": "Ve va\u0161\u00ed kapse",
-            "text": "M\u011bjte dokonal\u00fd p\u0159ehled. Sledujte v\u00fdrobu energie v re\u00e1ln\u00e9m \u010dase, ovl\u00e1dejte sv\u011btelnou show, p\u0159ij\u00edmejte upozorn\u011bn\u00ed na \u00fadr\u017ebu a prohl\u00ed\u017eejte si detailn\u00ed historick\u00e9 reporty. To v\u0161e z na\u0161\u00ed intuitivn\u00ed aplikace Treetino pro iOS a Android.",
+            "title": "Ve vaší kapse",
+            "text": "Mějte dokonalý přehled. Sledujte výrobu energie v reálném čase, ovládejte světelnou show, přijímejte upozornění na údržbu a prohlížejte si detailní historické reporty. To vše z naší intuitivní aplikace Treetino pro iOS a Android.",
             "warning": {
                 "performance": {
-                    "title": "V\u00fdkon",
-                    "text": "44.1 kW p\u0159i 90 %"
+                    "title": "Výkon",
+                    "text": "44.1 kW při 90 %"
                 },
                 "weather": {
-                    "title": "Pozor! Po\u010das\u00ed",
-                    "text": "Ochrana Aktivn\u00ed"
+                    "title": "Pozor! Počasí",
+                    "text": "Ochrana Aktivní"
                 }
             },
             "energy": {
-                "title": "\u017div\u00fd p\u0159ehled energie",
-                "text": "Aktu\u00e1ln\u00ed v\u00fdkon, denn\u00ed sou\u010dty a rozd\u011blen\u00ed podle zdroj\u016f energie."
+                "title": "Živý přehled energie",
+                "text": "Aktuální výkon, denní součty a rozdělení podle zdrojů energie."
             },
             "lights": {
-                "title": "Ovl\u00e1d\u00e1n\u00ed sv\u011bteln\u00e9 show",
-                "text": "Navrhujte a pl\u00e1nujte vlastn\u00ed barevn\u00e9 sc\u00e9ny pro osv\u011btlen\u00ed stromu."
+                "title": "Ovládání světelné show",
+                "text": "Navrhujte a plánujte vlastní barevné scény pro osvětlení stromu."
             },
             "notifications": {
-                "title": "Chytr\u00e1 upozorn\u011bn\u00ed",
-                "text": "Automatick\u00e9 p\u0159ipom\u00ednky \u00fadr\u017eby a notifikace o nestandardn\u00edch stavech."
+                "title": "Chytrá upozornění",
+                "text": "Automatické připomínky údržby a notifikace o nestandardních stavech."
             },
             "weather": {
-                "title": "Integrace po\u010das\u00ed",
-                "text": "P\u0159edpov\u011b\u010f produkce a automatick\u00e1 varov\u00e1n\u00ed na z\u00e1klad\u011b lok\u00e1ln\u00edho po\u010das\u00ed."
+                "title": "Integrace počasí",
+                "text": "Předpověď produkce a automatická varování na základě lokálního počasí."
             },
             "reports": {
-                "title": "Historick\u00e9 reporty",
-                "text": "P\u0159ehledn\u00e9 statistiky v\u00fdkonu za m\u011bs\u00edc, rok i celou dobu provozu."
+                "title": "Historické reporty",
+                "text": "Přehledné statistiky výkonu za měsíc, rok i celou dobu provozu."
             },
             "remote": {
-                "title": "Vzd\u00e1len\u00e1 konfigurace",
-                "text": "Upravujte \u00fahly nat\u00e1\u010den\u00ed v\u011btv\u00ed a dal\u0161\u00ed syst\u00e9mov\u00e9 p\u0159edvolby na d\u00e1lku."
+                "title": "Vzdálená konfigurace",
+                "text": "Upravujte úhly natáčení větví a další systémové předvolby na dálku."
             },
-            "download": "Ji\u017e brzy na App Store a Google Play.",
-            "download-phone": "Ji\u017e brzy",
-            "availability": "O\u010dek\u00e1van\u00e1 dostupnost v Q4 2026. P\u0159edb\u011b\u017en\u00e1 registrace a betaverze je p\u0159\u00edstupn\u00e1 pro p\u0159edobjedn\u00e1vky."
+            "download": "Již brzy na App Store a Google Play.",
+            "download-phone": "Již brzy",
+            "availability": "Očekávaná dostupnost v Q4 2026. Předběžná registrace a betaverze je přístupná pro předobjednávky."
         },
         "products": {
             "v1": {
@@ -154,8 +154,10 @@
                     "grants_text": "Na produkty Treetino V1 lze využít národní i evropské dotační programy až do výše 90 %.",
                     "speed_title": "Rychlost výstavby",
                     "speed_text": "Expresní instalace od předání staveniště do plného provozu za pouhé 3 měsíce.",
+                    "speed_val": "3 měsíce",
                     "warranty_title": "Záruka na skelet",
-                    "warranty_text": "Robustní ocelová konstrukce s 15letou zárukou a 25letou garancí FV výkonu (85 %)."
+                    "warranty_text": "Robustní ocelová konstrukce s 15letou zárukou a 25letou garancí FV výkonu (85 %).",
+                    "warranty_val": "15 let"
                 },
                 "stats": {
                     "1": "13,8 kWp FVE + 36 kW VTE",
@@ -164,6 +166,14 @@
                     "4": "Dotační programy pro firmy a město",
                     "5": "Od předání staveniště po spuštění",
                     "6": "Průměr kmenu 1,0 m u paty"
+                },
+                "stats_val": {
+                    "1": "49,8 kW",
+                    "2": "60 ks",
+                    "3": "4 ks",
+                    "4": "Až 90 %",
+                    "5": "3 měsíce",
+                    "6": "1 m²"
                 },
                 "showcase1": {
                     "tag": "Hybridní Výroba 49.8 kW",
@@ -177,7 +187,7 @@
                     "card1": "Sledování výroby, režim čištění listů & světelná show",
                     "card2": "Integrované rychlonabíjení EV & elektrokol z přebytků"
                 },
-                "cta_title": "Proměňte prázdné místo ve vaší výhodu.<br />Společně s Treetino Strom V1"
+                "cta_title": "Proměňte prázdné místo ve vaší výhodu.<br \/>Společně s Treetino Strom V1"
             },
             "v2": {
                 "title": "Strom V2",
@@ -193,6 +203,14 @@
                     "4": "Pro rodinné domy a vily",
                     "5": "Rychlá montáž za 1 den",
                     "6": "Průměr kmenu 0,6 m u paty"
+                },
+                "stats_val": {
+                    "1": "6 – 12 kW",
+                    "2": "61 ks",
+                    "3": "6 ks",
+                    "4": "Až 90 %",
+                    "5": "2 měsíce",
+                    "6": "< 1 m²"
                 },
                 "tech": {
                     "tag": "Záruka Kvality Českého Výrobce",
@@ -231,9 +249,9 @@
                     "operation": "Provoz:",
                     "daylight_only": "Pouze za denního slunce",
                     "hybrid_op": "Hybridní provoz:",
-                    "day_night": "24/7 (Dne i Noci)"
+                    "day_night": "24\/7 (Dne i Noci)"
                 },
-                "cta_title": "Zažijte energetickou soběstačnost.<br />Nakonfigurujte si váš Treetino Strom V2"
+                "cta_title": "Zažijte energetickou soběstačnost.<br \/>Nakonfigurujte si váš Treetino Strom V2"
             },
             "turbine": {
                 "title": "Větrná Turbína",
@@ -245,20 +263,28 @@
                 "stats": {
                     "1": "Max. výkon jedné turbíny",
                     "2": "Tichý provoz s nízkým startem",
-                    "3": "Odolnost vůči větru až 45 m/s",
+                    "3": "Odolnost vůči větru až 45 m\/s",
                     "4": "Transparentní polymerový design",
                     "5": "Snadná montáž na stožár i střechu",
                     "6": "Bezúdržbový provoz s životností 20 let"
+                },
+                "stats_val": {
+                    "1": "1 – 3 kW",
+                    "2": "3 varianty",
+                    "3": "1,8 m\/s",
+                    "4": "Bezpečné",
+                    "5": "2 měsíce",
+                    "6": "3 roky"
                 },
                 "tech": {
                     "tag": "Bezpečná & Tichá Větrná Energie",
                     "title": "Patentovaný Tvar Kapky",
                     "item1_title": "Nízký startovací vítr",
-                    "item1_text": "Začíná vyrábět energii už při mírném vánku 1.8 m/s s 21% jmenovitou účinností.",
+                    "item1_text": "Začíná vyrábět energii už při mírném vánku 1.8 m\/s s 21% jmenovitou účinností.",
                     "item2_title": "Ochrana ptactva",
                     "item2_text": "Svislá osa rotace a souvislý tvar kapky minimalizují riziko pro ptactvo.",
                     "item3_title": "Flexibilní kotvení",
-                    "item3_text": "Montáž na samostatný 5m sloup, zeď/fasádu budovy nebo střechu.",
+                    "item3_text": "Montáž na samostatný 5m sloup, zeď\/fasádu budovy nebo střechu.",
                     "item4_title": "Rychlost výstavby",
                     "item4_text": "Instalace od předání staveniště připravena k provozu za pouhé 2 měsíce."
                 },
@@ -278,7 +304,7 @@
                     "roof": "Střecha",
                     "roof_sub": "Výškové objekty"
                 },
-                "cta_title": "Tichá větrná energie pro váš objekt.<br />Nakonfigurujte si větrnou turbínu Treetino Aero"
+                "cta_title": "Tichá větrná energie pro váš objekt.<br \/>Nakonfigurujte si větrnou turbínu Treetino Aero"
             },
             "datasheet": {
                 "tag": "Oficiální Datasheet STC",
@@ -286,13 +312,21 @@
                 "power": "Nominální Max. Výkon (Pmax)",
                 "pv": "FVE Solární Články",
                 "wind": "VTE Větrné Turbíny",
-                "wind_speed": "Startovací / Jmenovitá Rychlost Větru",
+                "wind_speed": "Startovací \/ Jmenovitá Rychlost Větru",
                 "dimensions": "Rozměry & Zastavěná Plocha",
                 "voltage": "Max. Provozní Napětí DC",
                 "warranty_steel": "Záruka Ocelový Skelet",
                 "warranty_pv": "Záruka FVE Produkt & Výkon",
                 "warranty_elec": "Záruka Energo Část (Victron)",
-                "cert": "Certifikace & Normy"
+                "cert": "Certifikace & Normy",
+                "val_3months": "3 měsíce od předání staveniště",
+                "val_2months": "2 měsíce od předání staveniště",
+                "val_steel_warranty": "15 let (Obal konstrukce 5 let)",
+                "val_pv_warranty": "12 let fyzický produkt \/ 25 let lineární výkon (85 %)",
+                "val_elec_warranty": "5 let Victron Energy & kabeláže",
+                "val_turbine_warranty": "3 roky na turbínu a mechaniku",
+                "val_years": "let",
+                "val_months": "měsíce"
             },
             "portfolio": {
                 "tag": "Portfolio Treetino",
@@ -301,78 +335,237 @@
             }
         },
         "configurator": {
-            "title": "Konfigur\u00e1tor",
-            "summary": "Shrnut\u00ed objedn\u00e1vky",
-            "base_price": "Z\u00e1kladn\u00ed cena",
-            "cash": "Platba v hotovosti",
-            "green_loan": "Zelen\u00fd \u00fav\u011br",
-            "individual": "Individu\u00e1ln\u00ed",
+            "title": "Konfigurátor",
+            "back": "Zpět",
+            "free": "Zdarma",
+            "select": "Vybrat",
+            "selected": "Vybráno",
+            "add": "Přidat",
+            "added": "Přidáno",
+            "coming_soon": "Připravujeme",
+            "pcs": "ks",
+            "header": {
+                "power": "Jmenovitý výkon",
+                "daily_prod": "Denní výroba",
+                "roi": "Průměrná návratnost",
+                "roi_value": {
+                    "v1": "9,5 roku",
+                    "v2_with": "5 let",
+                    "v2_without": "6 let",
+                    "turb_large": "6 let",
+                    "turb_medium": "8 let",
+                    "turb_small": "10 let"
+                }
+            },
             "steps": {
                 "color": "Barva konstrukce",
-                "leaf_color": "Barva list\u016f",
-                "leaf_design": "Design FVE list\u016f",
-                "battery": "Bateriov\u00e9 \u00falo\u017ei\u0161t\u011b",
-                "connectivity": "Konektivita",
-                "wind_turbines": "V\u011btrn\u00e9 turb\u00edny",
-                "turbine_size": "Velikost turb\u00edny",
-                "turbine_mount": "Um\u00edst\u011bn\u00ed turb\u00edny",
                 "tree_design": "Design stromu",
-                "addons": "Dopl\u0148ky"
+                "wind_turbines": "Větrné turbíny",
+                "turbine_size": "Velikost turbíny",
+                "turbine_mount": "Umístění turbíny",
+                "leaf_color": "Barva listů",
+                "fve_leaf": "Design FVE listů",
+                "connectivity": "Premium Connectivity",
+                "battery": "Fyzická baterie",
+                "addons": "Příplatkové produkty"
             },
-            "preview": {
-                "addons": {
-                    "ev_charger": {
-                        "text": "Z\u00e1stupn\u00fd text pro nab\u00edjen\u00ed elektromobil\u016f."
-                    },
-                    "battery": {
-                        "text": "Z\u00e1stupn\u00fd text pro bateriov\u00e9 \u00falo\u017ei\u0161t\u011b.",
-                        "none": "Z\u00e1stupn\u00fd text pro \u017e\u00e1dn\u00e9 bateriov\u00e9 \u00falo\u017ei\u0161t\u011b."
-                    },
-                    "bike_charger": {
-                        "text": "Z\u00e1stupn\u00fd text pro nab\u00edjen\u00ed elektrokol."
-                    }
+            "color": {
+                "white": "Bílá",
+                "silver": "Stříbrná",
+                "brown": "Hnědá",
+                "green": "Lesní zelená",
+                "dark_green": "Tmavě zelená",
+                "grey": "Šedá",
+                "orange": "Oranžová",
+                "transparent": "Průhledná",
+                "custom": "Barva na míru",
+                "custom_short": "Na míru"
+            },
+            "price": {
+                "individual": "Individuální"
+            },
+            "tree_design": {
+                "standard": {
+                    "label": "Standardní",
+                    "desc": "Klasický design s organickými tvary inspirovanými přírodou. Přirozeně zapadne do každého prostředí."
                 },
-                "connectivity": {
-                    "premium": {
-                        "text": "Z\u00e1stupn\u00fd text pro Premium Connectivity.",
-                        "none": "Z\u00e1stupn\u00fd text pro \u017e\u00e1dn\u00e9 Premium Connectivity."
-                    }
+                "cyber": {
+                    "label": "Cyber",
+                    "desc": "Futuristický geometrický design s ostrými hranami a moderním industriálním výrazem."
                 }
-            }
-        },
-        "contact": {
-            "title": "Kontaktujte n\u00e1s",
-            "lead": "Napi\u0161te n\u00e1m a spole\u010dn\u011b najdeme vhodn\u00e9 \u0159e\u0161en\u00ed.",
-            "form": {
-                "name": "Jm\u00e9no",
-                "email": "E-mail",
-                "message": "Zpr\u00e1va",
-                "submit": "Odeslat zpr\u00e1vu",
-                "success": "D\u011bkujeme! Va\u0161e zpr\u00e1va byla odesl\u00e1na."
             },
-            "validation": {
-                "name_required": "Jm\u00e9no je povinn\u00e9.",
-                "email_required": "E-mail je povinn\u00fd.",
-                "email_invalid": "E-mail nem\u00e1 platn\u00fd form\u00e1t.",
-                "message_required": "Zpr\u00e1va je povinn\u00e1."
-            }
-        },
-        "media": {
-            "title": "M\u00e9dia",
-            "press_releases": "St\u00e1hnout ofici\u00e1ln\u00ed tiskov\u00e9 zpr\u00e1vy Treetino",
-            "ask": "Zeptejte se Treetino",
-            "brand": "Pou\u017e\u00edvejte zna\u010dku Treetino ve sv\u00fdch materi\u00e1lech spr\u00e1vn\u011b."
-        },
-        "collaboration": {
-            "title": "Spolupr\u00e1ce",
-            "grant_help": "Treetino v\u00e1m pom\u016f\u017ee s \u017e\u00e1dost\u00ed o st\u00e1tn\u00ed dotaci."
-        },
-        "legal": {
-            "privacy": {
-                "title": "Z\u00e1sady zpracov\u00e1n\u00ed osobn\u00edch \u00fadaj\u016f podle sm\u011brnic GDPR"
+            "wind_turbines": {
+                "with": {
+                    "label": "S větrnými turbínami",
+                    "desc": "Kombinace solárních listů a větrných turbín pro maximální výrobu energie za každého počasí."
+                },
+                "without": {
+                    "label": "Bez větrných turbín",
+                    "desc": "Pouze solární listy. Ideální pro lokality s vysokým slunečním svitem."
+                }
             },
-            "tos": {
-                "title": "V\u0161eobecn\u00e9 obchodn\u00ed podm\u00ednky"
+            "turbine_size": {
+                "large": {
+                    "label": "Velká",
+                    "desc": "Maximální výkon pro průmyslové a firemní instalace s vysokou spotřebou."
+                },
+                "medium": {
+                    "label": "Střední",
+                    "desc": "Vyvážený poměr výkonu a rozměrů, vhodný pro obce a větší budovy."
+                },
+                "small": {
+                    "label": "Menší",
+                    "desc": "Kompaktní turbína pro menší instalace a lokality s omezeným prostorem."
+                }
+            },
+            "turbine_mount": {
+                "roof": {
+                    "label": "Na střechu",
+                    "desc": "Montáž na střešní konstrukci. Ideální pro maximální expozici větru bez překážek."
+                },
+                "wall": {
+                    "label": "Na zeď",
+                    "desc": "Nástěnná montáž na fasádu budovy. Vhodné tam, kde střecha není dostupná."
+                },
+                "pole": {
+                    "label": "Na sloup",
+                    "desc": "Volně stojící sloupová montáž. Nejuniverzálnější řešení pro libovolnou lokalitu."
+                }
+            },
+            "fve_leaf": {
+                "none": {
+                    "label": "Bez designu",
+                    "desc": "FVE listy bez sezonního designu."
+                },
+                "spring": {
+                    "label": "Jaro",
+                    "desc": "Sezonní design FVE listů pro jarní variantu stromu."
+                },
+                "summer": {
+                    "label": "Léto",
+                    "desc": "Sezonní design FVE listů pro letní variantu stromu."
+                },
+                "autumn": {
+                    "label": "Podzim",
+                    "desc": "Sezonní design FVE listů pro podzimní variantu stromu."
+                },
+                "winter": {
+                    "label": "Zima",
+                    "desc": "Sezonní design FVE listů pro zimní variantu stromu."
+                }
+            },
+            "connectivity": {
+                "none": {
+                    "label": "Bez předplatného"
+                },
+                "premium": {
+                    "label": "Premium Connectivity"
+                },
+                "monthly_sub": "Měsíční předplatné"
+            },
+            "battery": {
+                "none": {
+                    "label": "Bez baterie"
+                },
+                "battery": {
+                    "label": "Baterie"
+                }
+            },
+            "addons": {
+                "ev": {
+                    "label": "Nabíjení pro elektromobily"
+                },
+                "bike": {
+                    "label": "Nabíjení pro elektrokola"
+                }
+            },
+            "financing": {
+                "title": "Financování",
+                "subtitle": "Vyberte dotační program, na který máte nárok. Cena bude upravena po výběru.",
+                "grant_program": "Dotační program",
+                "up_to": "až",
+                "cz_notice": "Uvedené dotace jsou dostupné pouze v rámci ČR. Pokud jste ze Slovenska nebo jiné země, prosím kontaktujte nás."
+            },
+            "grants": {
+                "optak": {
+                    "eligibility": "Pro firmy",
+                    "desc": "Operační program Technologie a aplikace pro konkurenceschopnost."
+                },
+                "res_plus": {
+                    "eligibility": "Pro obce a města",
+                    "desc": "Podpora komunitní energetiky a obecních obnovitelných zdrojů."
+                },
+                "nzu": {
+                    "eligibility": "Pro fyzické osoby",
+                    "desc": "Nová zelená úsporám - podpora pro domácnosti a fyzické osoby."
+                },
+                "irop": {
+                    "eligibility": "Komplexní městské projekty",
+                    "desc": "Integrovaný regionální operační program pro rozsáhlé projekty."
+                },
+                "none": {
+                    "label": "Bez dotace"
+                }
+            },
+            "checkout": {
+                "summary": "Shrnutí objednávky",
+                "cash": "Hotovost",
+                "credit": "Zelený úvěr",
+                "base_price": "Základní cena",
+                "after_grant": "po odečtení dotace",
+                "total_price": "Cena celkem",
+                "monthly_from": "Měsíční splátka od",
+                "per_month": "\/měs.",
+                "for_months": "na {months} měsíců",
+                "savings_5yr_notice": "Cena nezahrnuje odhad 5leté úspory za výrobu energie ve výši {savings} Kč.",
+                "monthly_savings_notice": "Cena nezahrnuje odhadované měsíční úspory za výrobu energie ve výši {savings} Kč.",
+                "edit_financing": "Upravit podmínky financování",
+                "reserve_price": "Rezervační záloha",
+                "urgency": "Pro měsíc {month} bylo již rezervováno {reserved} z {total} {unit}.",
+                "units": {
+                    "trees": "stromů",
+                    "turbines": "turbín",
+                    "pcs": "kusů"
+                },
+                "tos_agree": "Seznámil(a) jsem se s {tos} a {pp} a souhlasím s nimi.",
+                "tos_link": "obchodními podmínkami",
+                "pp_link": "zásadami zpracování osobních údajů",
+                "btn_order": "Závazně Objednat",
+                "btn_info": "Více Informací"
+            },
+            "modal_financing": {
+                "title": "Možnosti financování",
+                "down_payment": "Platba předem",
+                "loan_term": "Doba splatnosti",
+                "months": "měsíců",
+                "loan_amount": "Výše úvěru",
+                "include_savings": "Zahrnout odhadované měsíční úspory za výrobu energie",
+                "per_month": "Kč\/měsíc"
+            },
+            "modal_checkout": {
+                "title": "Dokončení objednávky",
+                "email_label": "E-mail",
+                "email_desc": "E-mailovou adresu potřebujeme pro zpracování konfigurace naším týmem. Konfigurace a faktura vám budou doručeny na tento e-mail.",
+                "card_info": "Informace o kartě",
+                "or_card": "NEBO ZAPLAŤTE KARTOU",
+                "step": "Krok",
+                "processing": "Zpracovávám...",
+                "continue": "Pokračovat",
+                "pay": "Zaplatit {amount} Kč"
+            },
+            "months": {
+                "january": "leden",
+                "february": "únor",
+                "march": "březen",
+                "april": "duben",
+                "may": "květen",
+                "june": "červen",
+                "july": "červenec",
+                "august": "srpen",
+                "september": "září",
+                "october": "říjen",
+                "november": "listopad",
+                "december": "December"
             }
         }
     },
@@ -406,10 +599,10 @@
                 "rights": "All rights reserved"
             },
             "cookie": {
-                "title": "Our site uses cookies",
+                "title": "Cookie consent",
                 "description": "We use cookies for site functionality and anonymous analytics.",
                 "accept_all": "Accept all",
-                "reject_all": "Reject all",
+                "reject_all": "Necessary only",
                 "settings": "Settings"
             }
         },
@@ -433,11 +626,11 @@
                 "key_parameters": "Key Parameters",
                 "design": {
                     "title": "Design-led construction",
-                    "text": "Treetino is a smart tree combining solar and wind energy on just 1 m\u00b2."
+                    "text": "Treetino is a smart tree combining solar and wind energy on just 1 m²."
                 },
                 "space": {
                     "title": "Space efficiency",
-                    "text": "It occupies only 1 m\u00b2 while replacing up to 400 m\u00b2 of solar panels."
+                    "text": "It occupies only 1 m² while replacing up to 400 m² of solar panels."
                 },
                 "performance": {
                     "title": "Engineered for performance",
@@ -475,7 +668,7 @@
         },
         "app": {
             "title": "In Your Pocket",
-            "text": "Gain complete visibility. Track real-time energy generation, control light shows, receive maintenance alerts, and view detailed historical reports\u2014all from our intuitive Treetino app for iOS and Android.",
+            "text": "Gain complete visibility. Track real-time energy generation, control light shows, receive maintenance alerts, and view detailed historical reports—all from our intuitive Treetino app for iOS and Android.",
             "warning": {
                 "performance": {
                     "title": "Performance",
@@ -531,8 +724,10 @@
                     "grants_text": "Treetino V1 qualifies for national and EU subsidy programs up to 90%.",
                     "speed_title": "Construction Speed",
                     "speed_text": "Express installation from site handover to full operation in just 3 months.",
+                    "speed_val": "3 months",
                     "warranty_title": "Skeleton Warranty",
-                    "warranty_text": "Robust steel construction with 15-year warranty and 25-year PV output guarantee (85%)."
+                    "warranty_text": "Robust steel construction with 15-year warranty and 25-year PV output guarantee (85%).",
+                    "warranty_val": "15 years"
                 },
                 "stats": {
                     "1": "13.8 kWp PV + 36 kW Wind",
@@ -541,6 +736,14 @@
                     "4": "Grant programs for companies and cities",
                     "5": "From site handover to commissioning",
                     "6": "Trunk diameter 1.0 m at base"
+                },
+                "stats_val": {
+                    "1": "49.8 kW",
+                    "2": "60 pcs",
+                    "3": "4 pcs",
+                    "4": "Up to 90%",
+                    "5": "3 months",
+                    "6": "1 m²"
                 },
                 "showcase1": {
                     "tag": "Hybrid Generation 49.8 kW",
@@ -554,7 +757,7 @@
                     "card1": "Production tracking, leaf cleaning mode & light show",
                     "card2": "Integrated fast EV & e-bike charging from surplus"
                 },
-                "cta_title": "Turn empty space into your advantage.<br />Together with Treetino Tree V1"
+                "cta_title": "Turn empty space into your advantage.<br \/>Together with Treetino Tree V1"
             },
             "v2": {
                 "title": "Tree V2",
@@ -570,6 +773,14 @@
                     "4": "For family houses and villas",
                     "5": "Fast 1-day installation",
                     "6": "Trunk diameter 0.6 m at base"
+                },
+                "stats_val": {
+                    "1": "6 – 12 kW",
+                    "2": "61 pcs",
+                    "3": "6 pcs",
+                    "4": "Up to 90%",
+                    "5": "2 months",
+                    "6": "< 1 m²"
                 },
                 "tech": {
                     "tag": "Czech Manufacturer Quality Guarantee",
@@ -608,9 +819,9 @@
                     "operation": "Operation:",
                     "daylight_only": "Daylight only",
                     "hybrid_op": "Hybrid Operation:",
-                    "day_night": "24/7 (Day & Night)"
+                    "day_night": "24\/7 (Day & Night)"
                 },
-                "cta_title": "Experience energy independence.<br />Configure your Treetino Tree V2"
+                "cta_title": "Experience energy independence.<br \/>Configure your Treetino Tree V2"
             },
             "turbine": {
                 "title": "Wind Turbine",
@@ -622,20 +833,28 @@
                 "stats": {
                     "1": "Max output per turbine",
                     "2": "Quiet operation with low startup",
-                    "3": "Wind resistance up to 45 m/s",
+                    "3": "Wind resistance up to 45 m\/s",
                     "4": "Transparent polymer design",
                     "5": "Easy mounting on pole or roof",
                     "6": "Maintenance-free with 20-year lifespan"
+                },
+                "stats_val": {
+                    "1": "1 – 3 kW",
+                    "2": "3 options",
+                    "3": "1.8 m\/s",
+                    "4": "Safe",
+                    "5": "2 months",
+                    "6": "3 years"
                 },
                 "tech": {
                     "tag": "Safe & Quiet Wind Energy",
                     "title": "Patented Teardrop Shape",
                     "item1_title": "Low Startup Wind",
-                    "item1_text": "Starts generating power at a light breeze of 1.8 m/s with 21% rated efficiency.",
+                    "item1_text": "Starts generating power at a light breeze of 1.8 m\/s with 21% rated efficiency.",
                     "item2_title": "Bird Safety",
                     "item2_text": "Vertical rotation axis and continuous teardrop form eliminate hazard to birds.",
                     "item3_title": "Flexible Mounting",
-                    "item3_text": "Mounting on standalone 5m pole, building wall/facade, or rooftop.",
+                    "item3_text": "Mounting on standalone 5m pole, building wall\/facade, or rooftop.",
                     "item4_title": "Construction Speed",
                     "item4_text": "Installation ready for operation within 2 months from site handover."
                 },
@@ -655,7 +874,7 @@
                     "roof": "Roof",
                     "roof_sub": "High-rise structures"
                 },
-                "cta_title": "Silent wind energy for your building.<br />Configure your Treetino Aero wind turbine"
+                "cta_title": "Silent wind energy for your building.<br \/>Configure your Treetino Aero wind turbine"
             },
             "datasheet": {
                 "tag": "Official STC Datasheet",
@@ -663,13 +882,21 @@
                 "power": "Nominal Max Output (Pmax)",
                 "pv": "PV Solar Cells",
                 "wind": "Wind Turbines",
-                "wind_speed": "Startup / Rated Wind Speed",
+                "wind_speed": "Startup \/ Rated Wind Speed",
                 "dimensions": "Dimensions & Footprint",
                 "voltage": "Max Operating Voltage DC",
                 "warranty_steel": "Steel Skeleton Warranty",
                 "warranty_pv": "PV Product & Yield Warranty",
                 "warranty_elec": "Electrical System Warranty (Victron)",
-                "cert": "Certifications & Standards"
+                "cert": "Certifications & Standards",
+                "val_3months": "3 months from site handover",
+                "val_2months": "2 months from site handover",
+                "val_steel_warranty": "15 years (Structure cladding 5 years)",
+                "val_pv_warranty": "12-year physical product \/ 25-year linear output (85%)",
+                "val_elec_warranty": "5 years Victron Energy & cabling",
+                "val_turbine_warranty": "3 years on turbine & mechanics",
+                "val_years": "years",
+                "val_months": "months"
             },
             "portfolio": {
                 "tag": "Treetino Portfolio",
@@ -679,77 +906,235 @@
         },
         "configurator": {
             "title": "Configurator",
-            "summary": "Order summary",
-            "base_price": "Base price",
-            "cash": "Cash payment",
-            "green_loan": "Green loan",
-            "individual": "Individual",
-            "steps": {
-                "color": "Construction color",
-                "leaf_color": "Leaf color",
-                "leaf_design": "PV leaf design",
-                "battery": "Battery storage",
-                "connectivity": "Connectivity",
-                "wind_turbines": "Wind turbines",
-                "turbine_size": "Turbine size",
-                "turbine_mount": "Turbine placement",
-                "tree_design": "Tree design",
-                "addons": "Add-ons"
-            },
-            "preview": {
-                "addons": {
-                    "ev_charger": {
-                        "text": "Placeholder text for EV charging."
-                    },
-                    "battery": {
-                        "text": "Placeholder text for battery storage.",
-                        "none": "Placeholder text for no battery storage."
-                    },
-                    "bike_charger": {
-                        "text": "Placeholder text for e-bike charging."
-                    }
-                },
-                "connectivity": {
-                    "premium": {
-                        "text": "Placeholder text for Premium Connectivity.",
-                        "none": "Placeholder text for No Premium Connectivity."
-                    }
+            "back": "Back",
+            "free": "Free",
+            "select": "Select",
+            "selected": "Selected",
+            "add": "Add",
+            "added": "Added",
+            "coming_soon": "Coming soon",
+            "pcs": "pcs",
+            "header": {
+                "power": "Rated Power",
+                "daily_prod": "Daily Production",
+                "roi": "Average ROI",
+                "roi_value": {
+                    "v1": "9.5 years",
+                    "v2_with": "5 years",
+                    "v2_without": "6 years",
+                    "turb_large": "6 years",
+                    "turb_medium": "8 years",
+                    "turb_small": "10 years"
                 }
-            }
-        },
-        "contact": {
-            "title": "Contact us",
-            "lead": "Write to us and we will find the right solution together.",
-            "form": {
-                "name": "Name",
-                "email": "Email",
-                "message": "Message",
-                "submit": "Send message",
-                "success": "Thank you! Your message has been sent."
             },
-            "validation": {
-                "name_required": "Name is required.",
-                "email_required": "Email is required.",
-                "email_invalid": "Email is not valid.",
-                "message_required": "Message is required."
-            }
-        },
-        "media": {
-            "title": "Media",
-            "press_releases": "Download official Treetino press releases",
-            "ask": "Ask Treetino",
-            "brand": "Represent Treetino correctly in your materials."
-        },
-        "collaboration": {
-            "title": "Collaboration",
-            "grant_help": "Treetino helps you apply for government grants."
-        },
-        "legal": {
-            "privacy": {
-                "title": "Privacy Policy According to the GDPR Guidelines"
+            "steps": {
+                "color": "Frame Color",
+                "tree_design": "Tree Design",
+                "wind_turbines": "Wind Turbines",
+                "turbine_size": "Turbine Size",
+                "turbine_mount": "Turbine Location",
+                "leaf_color": "Leaf Color",
+                "fve_leaf": "PV Leaf Design",
+                "connectivity": "Premium Connectivity",
+                "battery": "Physical Battery",
+                "addons": "Addon Products"
             },
-            "tos": {
-                "title": "Terms of Service"
+            "color": {
+                "white": "White",
+                "silver": "Silver",
+                "brown": "Brown",
+                "green": "Forest Green",
+                "dark_green": "Dark Green",
+                "grey": "Grey",
+                "orange": "Orange",
+                "transparent": "Transparent",
+                "custom": "Custom Color",
+                "custom_short": "Custom"
+            },
+            "price": {
+                "individual": "Individual"
+            },
+            "tree_design": {
+                "standard": {
+                    "label": "Standard",
+                    "desc": "Classic design with organic nature-inspired shapes. Fits naturally into any environment."
+                },
+                "cyber": {
+                    "label": "Cyber",
+                    "desc": "Futuristic geometric design with sharp edges and modern industrial expression."
+                }
+            },
+            "wind_turbines": {
+                "with": {
+                    "label": "With Wind Turbines",
+                    "desc": "Combination of solar leaves and wind turbines for maximum energy output in any weather."
+                },
+                "without": {
+                    "label": "Without Wind Turbines",
+                    "desc": "Solar leaves only. Ideal for locations with high solar irradiance."
+                }
+            },
+            "turbine_size": {
+                "large": {
+                    "label": "Large",
+                    "desc": "Maximum output for industrial and commercial installations with high consumption."
+                },
+                "medium": {
+                    "label": "Medium",
+                    "desc": "Balanced ratio of output and size, suitable for municipalities and larger buildings."
+                },
+                "small": {
+                    "label": "Small",
+                    "desc": "Compact turbine for smaller installations and space-constrained sites."
+                }
+            },
+            "turbine_mount": {
+                "roof": {
+                    "label": "Rooftop",
+                    "desc": "Roof mount. Ideal for maximum unobstructed wind exposure."
+                },
+                "wall": {
+                    "label": "Wall Mount",
+                    "desc": "Wall mount on building facade. Suitable where rooftop access is unavailable."
+                },
+                "pole": {
+                    "label": "Pole Mount",
+                    "desc": "Freestanding pole mount. The most versatile solution for any location."
+                }
+            },
+            "fve_leaf": {
+                "none": {
+                    "label": "No Design",
+                    "desc": "PV leaves without seasonal pattern."
+                },
+                "spring": {
+                    "label": "Spring",
+                    "desc": "Seasonal PV leaf design for spring tree variant."
+                },
+                "summer": {
+                    "label": "Summer",
+                    "desc": "Seasonal PV leaf design for summer tree variant."
+                },
+                "autumn": {
+                    "label": "Autumn",
+                    "desc": "Seasonal PV leaf design for autumn tree variant."
+                },
+                "winter": {
+                    "label": "Winter",
+                    "desc": "Seasonal PV leaf design for winter tree variant."
+                }
+            },
+            "connectivity": {
+                "none": {
+                    "label": "No Subscription"
+                },
+                "premium": {
+                    "label": "Premium Connectivity"
+                },
+                "monthly_sub": "Monthly subscription"
+            },
+            "battery": {
+                "none": {
+                    "label": "No Battery"
+                },
+                "battery": {
+                    "label": "Battery"
+                }
+            },
+            "addons": {
+                "ev": {
+                    "label": "EV Charging"
+                },
+                "bike": {
+                    "label": "E-Bike Charging"
+                }
+            },
+            "financing": {
+                "title": "Financing",
+                "subtitle": "Select a grant program you qualify for. Price will be adjusted upon selection.",
+                "grant_program": "Grant Program",
+                "up_to": "up to",
+                "cz_notice": "These subsidies are available only within the Czech Republic. If you are from abroad, please contact us."
+            },
+            "grants": {
+                "optak": {
+                    "eligibility": "For Companies",
+                    "desc": "Operational Programme Technology and Applications for Competitiveness."
+                },
+                "res_plus": {
+                    "eligibility": "For Municipalities & Cities",
+                    "desc": "Support for community energy and municipal renewable sources."
+                },
+                "nzu": {
+                    "eligibility": "For Individuals",
+                    "desc": "New Green Savings - subsidy for households and individuals."
+                },
+                "irop": {
+                    "eligibility": "Comprehensive Urban Projects",
+                    "desc": "Integrated Regional Operational Programme for large-scale projects."
+                },
+                "none": {
+                    "label": "No Grant"
+                }
+            },
+            "checkout": {
+                "summary": "Order Summary",
+                "cash": "Cash",
+                "credit": "Green Loan",
+                "base_price": "Base price",
+                "after_grant": "after grant deduction",
+                "total_price": "Total Price",
+                "monthly_from": "Monthly payment from",
+                "per_month": "\/mo.",
+                "for_months": "for {months} months",
+                "savings_5yr_notice": "Price excludes estimated 5-year energy production savings of {savings} CZK.",
+                "monthly_savings_notice": "Price excludes estimated monthly energy production savings of {savings} CZK.",
+                "edit_financing": "Adjust financing terms",
+                "reserve_price": "Reservation Deposit",
+                "urgency": "For {month}, {reserved} of {total} {unit} have already been reserved.",
+                "units": {
+                    "trees": "trees",
+                    "turbines": "turbines",
+                    "pcs": "units"
+                },
+                "tos_agree": "I have read and agree to the {tos} and {pp}.",
+                "tos_link": "Terms of Service",
+                "pp_link": "Privacy Policy",
+                "btn_order": "Place Binding Order",
+                "btn_info": "More Information"
+            },
+            "modal_financing": {
+                "title": "Financing Options",
+                "down_payment": "Down Payment",
+                "loan_term": "Loan Term",
+                "months": "months",
+                "loan_amount": "Loan Amount",
+                "include_savings": "Include estimated monthly energy production savings",
+                "per_month": "CZK\/month"
+            },
+            "modal_checkout": {
+                "title": "Complete Your Order",
+                "email_label": "E-mail",
+                "email_desc": "We need your email address to process your configuration. Your configuration details and invoice will be sent here.",
+                "card_info": "Card Information",
+                "or_card": "OR PAY WITH CARD",
+                "step": "Step",
+                "processing": "Processing...",
+                "continue": "Continue",
+                "pay": "Pay {amount} CZK"
+            },
+            "months": {
+                "january": "January",
+                "february": "February",
+                "march": "March",
+                "april": "April",
+                "may": "May",
+                "june": "June",
+                "july": "July",
+                "august": "August",
+                "september": "September",
+                "october": "October",
+                "november": "November"
             }
         }
     }
