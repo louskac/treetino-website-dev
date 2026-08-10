@@ -70,7 +70,7 @@
         <!-- Informace & čísla (Databook Stats Grid) -->
         <section
             id="numbers"
-            class="relative bg-white py-20 text-black dark:bg-zinc-950 dark:text-white"
+            class="relative bg-white py-20 text-black dark:bg-zinc-950 dark:text-white scroll-mt-24"
         >
             <div
                 class="relative mx-auto max-w-[1400px] px-6 sm:w-[500px] sm:px-0 md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"

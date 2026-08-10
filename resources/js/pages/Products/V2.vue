@@ -70,7 +70,7 @@
         <!-- Informace & čísla (Databook Stats Grid) -->
         <section
             id="numbers"
-            class="relative bg-white py-20 text-black dark:bg-zinc-950 dark:text-white"
+            class="relative bg-white py-20 text-black dark:bg-zinc-950 dark:text-white scroll-mt-24"
         >
             <div
                 class="relative mx-auto max-w-[1400px] px-6 sm:w-[500px] sm:px-0 md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
@@ -150,7 +150,7 @@
                     </div>
 
                     <div class="border-l border-black/15 pl-6 dark:border-white/15">
-                        <div class="text-3xl font-semibold tracking-tight text-black dark:text-white lg:text-4xl">2 {{ $t('datasheet.val_months') }}</div>
+                        <div class="text-3xl font-semibold tracking-tight text-black dark:text-white lg:text-4xl">2 {{ $t('products.datasheet.val_months') }}</div>
                         <h3 class="mt-2 text-base font-semibold text-black dark:text-white">{{ $t('products.v2.tech.item2_title') }}</h3>
                         <p class="mt-2 text-sm leading-relaxed text-black/65 dark:text-white/65">{{ $t('products.v2.tech.item2_text') }}</p>
                     </div>
@@ -162,7 +162,7 @@
                     </div>
 
                     <div class="border-l border-black/15 pl-6 dark:border-white/15">
-                        <div class="text-3xl font-semibold tracking-tight text-black dark:text-white lg:text-4xl">25 {{ $t('datasheet.val_years') }}</div>
+                        <div class="text-3xl font-semibold tracking-tight text-black dark:text-white lg:text-4xl">25 {{ $t('products.datasheet.val_years') }}</div>
                         <h3 class="mt-2 text-base font-semibold text-black dark:text-white">{{ $t('products.v2.tech.item4_title') }}</h3>
                         <p class="mt-2 text-sm leading-relaxed text-black/65 dark:text-white/65">{{ $t('products.v2.tech.item4_text') }}</p>
                     </div>
