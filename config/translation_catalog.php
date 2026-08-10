@@ -355,6 +355,13 @@ return [
         'connectivity.premium.label' => ['cs' => 'Premium Connectivity', 'en' => 'Premium Connectivity'],
         'connectivity.monthly_sub' => ['cs' => 'Měsíční předplatné', 'en' => 'Monthly subscription'],
 
+        'preview.connectivity.premium.text' => ['cs' => 'Příplatkové řízení výroby pomocí AI, TREElight show, sdílení energie a další.', 'en' => 'AI-driven production optimization, TREElight show, energy sharing, and more.'],
+        'preview.connectivity.premium.none' => ['cs' => 'Standardní automatické i manuální řízení bez doplňkových funkcí.', 'en' => 'Standard automatic and manual control without predictive features.'],
+        'preview.addons.battery.text' => ['cs' => 'Nabízíme bateriová úložiště s kapacitou od 100 kWh do 2 MWh.', 'en' => 'We offer battery storage with capacities ranging from 100 kWh to 2 MWh.'],
+        'preview.addons.battery.none' => ['cs' => 'Nevyužitá energie bude dodávána zpět do sítě jako přebytek.', 'en' => 'Unused energy will be fed back into the grid as surplus.'],
+        'preview.addons.ev_charger.text' => ['cs' => 'Vytvořte nový příjmový proud skrze nabíjení EV aut.', 'en' => 'Create a new revenue stream through EV charging.'],
+        'preview.addons.bike_charger.text' => ['cs' => 'Vytvořte nový příjmový proud skrze nabíjení elektrokol.', 'en' => 'Create a new revenue stream through e-bike charging.'],
+
         'battery.none.label' => ['cs' => 'Bez baterie', 'en' => 'No Battery'],
         'battery.battery.label' => ['cs' => 'Baterie', 'en' => 'Battery'],
 

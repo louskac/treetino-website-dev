@@ -463,6 +463,26 @@
                 },
                 "monthly_sub": "Měsíční předplatné"
             },
+            "preview": {
+                "connectivity": {
+                    "premium": {
+                        "text": "Příplatkové řízení výroby pomocí AI, TREElight show, sdílení energie a další.",
+                        "none": "Standardní automatické i manuální řízení bez doplňkových funkcí."
+                    }
+                },
+                "addons": {
+                    "battery": {
+                        "text": "Nabízíme bateriová úložiště s kapacitou od 100 kWh do 2 MWh.",
+                        "none": "Nevyužitá energie bude dodávána zpět do sítě jako přebytek."
+                    },
+                    "ev_charger": {
+                        "text": "Vytvořte nový příjmový proud skrze nabíjení EV aut."
+                    },
+                    "bike_charger": {
+                        "text": "Vytvořte nový příjmový proud skrze nabíjení elektrokol."
+                    }
+                }
+            },
             "battery": {
                 "none": {
                     "label": "Bez baterie"
@@ -1032,6 +1052,26 @@
                     "label": "Premium Connectivity"
                 },
                 "monthly_sub": "Monthly subscription"
+            },
+            "preview": {
+                "connectivity": {
+                    "premium": {
+                        "text": "AI-driven production optimization, TREElight show, energy sharing, and more.",
+                        "none": "Standard automatic and manual control without predictive features."
+                    }
+                },
+                "addons": {
+                    "battery": {
+                        "text": "We offer battery storage with capacities ranging from 100 kWh to 2 MWh.",
+                        "none": "Unused energy will be fed back into the grid as surplus."
+                    },
+                    "ev_charger": {
+                        "text": "Create a new revenue stream through EV charging."
+                    },
+                    "bike_charger": {
+                        "text": "Create a new revenue stream through e-bike charging."
+                    }
+                }
             },
             "battery": {
                 "none": {
