@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1 class="text-3xl font-bold tracking-tight text-black dark:text-white leading-none">
-            {{ product.label }}
+            {{ $t(product.labelKey, product.label) }}
         </h1>
         <div class="mt-5 border-t border-black/10 dark:border-white/10 pt-5 flex flex-col gap-3">
             <div v-for="param in paramList" :key="param.label" class="flex justify-between items-baseline">
@@ -15,6 +15,9 @@
 <script setup lang="ts">
 import type { Product, ProductParams } from '@/types';
 import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const props = defineProps<{
     product: Product;
@@ -22,8 +25,8 @@ const props = defineProps<{
 }>();
 
 const paramList = computed(() => [
-    { label: 'Jmenovitý výkon', value: props.params.power },
-    { label: 'Denní výroba', value: props.params.dailyProduction },
-    { label: 'Průměrná návratnost', value: props.params.roi },
+    { label: t('configurator.header.power'), value: props.params.power },
+    { label: t('configurator.header.daily_prod'), value: props.params.dailyProduction },
+    { label: t('configurator.header.roi'), value: props.params.roi ? (props.params.roi.startsWith('configurator.') ? t(props.params.roi) : props.params.roi) : '' },
 ]);
 </script>

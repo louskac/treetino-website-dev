@@ -3,7 +3,7 @@
         <p
             class="mb-4 text-xs tracking-widest text-black/70 uppercase dark:text-white/50"
         >
-            {{ formatStep(stepNumber) }} — Fyzická baterie
+            {{ formatStep(stepNumber) }} — {{ $t('configurator.steps.battery') }}
         </p>
         <div class="flex flex-col gap-1">
             <button
@@ -19,7 +19,7 @@
             >
                 <div class="mb-1 flex items-center justify-between">
                     <span class="text-sm text-black dark:text-white">{{
-                        option.label
+                        $t(option.labelKey, option.label)
                     }}</span>
                     <span
                         class="flex items-center gap-1.5 text-xs transition-colors duration-200"
@@ -30,7 +30,7 @@
                         "
                     >
                         <CheckCircle v-if="modelValue === option.id" />
-                        {{ modelValue === option.id ? 'Přidáno' : 'Přidat' }}
+                        {{ modelValue === option.id ? $t('configurator.added') : $t('configurator.add') }}
                     </span>
                 </div>
                 <p
@@ -45,10 +45,10 @@
                     {{ option.description }}
                 </p>
                 <p
-                    v-if="option.price"
+                    v-if="option.priceKey || option.price"
                     class="mt-1 text-xs text-black/40 dark:text-white/40"
                 >
-                    {{ option.price }}
+                    {{ option.priceKey ? $t(option.priceKey) : option.price }}
                 </p>
             </button>
         </div>
@@ -87,13 +87,16 @@ const options = computed(() => {
         {
             id: 'none',
             label: 'Bez baterie',
+            labelKey: 'configurator.battery.none.label',
             price: 'Zdarma',
+            priceKey: 'configurator.free',
             roi: null,
             description: t("configurator.preview.addons.battery.none"),
         },
         {
             id: 'battery',
             label: `Baterie${capacity ? ' ' + capacity : ''}`,
+            labelKey: 'configurator.battery.battery.label',
             roi: 14,
             price: null,
             description: t("configurator.preview.addons.battery.text"),

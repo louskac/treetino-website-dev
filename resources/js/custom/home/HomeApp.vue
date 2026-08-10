@@ -135,7 +135,7 @@
 
                 <div class="col-span-1 flex xl:col-span-3">
                     <div class="my-auto">
-                        <h2 class="mb-6 text-6xl">
+                        <h2 class="mb-6 text-5xl font-medium text-black lg:text-6xl">
                             Treetino <br />
                             <span class="text-t-blue">{{
                                 $t('app.title')
@@ -143,12 +143,7 @@
                         </h2>
 
                         <div class="mb-6">
-                            <p class="opacity-70">
-                                <!--                                Monitor live energy production, control the-->
-                                <!--                                light show, recieve maintenance alerts and-->
-                                <!--                                access detailed historical reports. All from our-->
-                                <!--                                intuitive Treetino app for iOS and Android-->
-
+                            <p class="text-black/70">
                                 {{ $t('app.text') }}
                             </p>
                         </div>
@@ -158,7 +153,7 @@
                         >
                             <div class="flex h-fit w-full gap-3">
                                 <div
-                                    class="flex aspect-square h-12 w-12 rounded-xl bg-primary/5 text-t-blue dark:text-primary"
+                                    class="flex aspect-square h-12 w-12 rounded-xl bg-primary/5 text-t-blue"
                                 >
                                     <Flash
                                         stroke-width="1.5"
@@ -167,11 +162,11 @@
                                 </div>
 
                                 <div class="my-auto">
-                                    <div class="mb-1 leading-5 tracking-tight">
+                                    <div class="mb-1 leading-5 tracking-tight text-black font-medium">
                                         {{ $t('app.energy.title') }}
                                     </div>
                                     <div
-                                        class="text-xs tracking-tight opacity-70"
+                                        class="text-xs tracking-tight text-black/70"
                                     >
                                         {{ $t('app.energy.text') }}
                                     </div>
@@ -180,7 +175,7 @@
 
                             <div class="flex h-fit w-full gap-3">
                                 <div
-                                    class="flex aspect-square h-12 w-12 rounded-xl bg-primary/5 text-t-blue dark:text-primary"
+                                    class="flex aspect-square h-12 w-12 rounded-xl bg-primary/5 text-t-blue"
                                 >
                                     <CloudSunny
                                         stroke-width="1.5"
@@ -189,11 +184,11 @@
                                 </div>
 
                                 <div class="my-auto">
-                                    <div class="mb-1 leading-5 tracking-tight">
+                                    <div class="mb-1 leading-5 tracking-tight text-black font-medium">
                                         {{ $t('app.weather.title') }}
                                     </div>
                                     <div
-                                        class="text-xs tracking-tight opacity-70"
+                                        class="text-xs tracking-tight text-black/70"
                                     >
                                         {{ $t('app.weather.text') }}
                                     </div>
@@ -202,7 +197,7 @@
 
                             <div class="flex h-fit w-full gap-3">
                                 <div
-                                    class="flex aspect-square h-12 w-12 rounded-xl bg-primary/5 text-t-blue dark:text-primary"
+                                    class="flex aspect-square h-12 w-12 rounded-xl bg-primary/5 text-t-blue"
                                 >
                                     <Sparks
                                         stroke-width="1.5"
@@ -211,11 +206,11 @@
                                 </div>
 
                                 <div class="my-auto">
-                                    <div class="mb-1 leading-5 tracking-tight">
+                                    <div class="mb-1 leading-5 tracking-tight text-black font-medium">
                                         {{ $t('app.lights.title') }}
                                     </div>
                                     <div
-                                        class="text-xs tracking-tight opacity-70"
+                                        class="text-xs tracking-tight text-black/70"
                                     >
                                         {{ $t('app.lights.text') }}
                                     </div>
@@ -224,7 +219,7 @@
 
                             <div class="flex h-fit w-full gap-3">
                                 <div
-                                    class="flex aspect-square h-12 w-12 rounded-xl bg-primary/5 text-t-blue dark:text-primary"
+                                    class="flex aspect-square h-12 w-12 rounded-xl bg-primary/5 text-t-blue"
                                 >
                                     <StatsReport
                                         stroke-width="1.5"
@@ -233,11 +228,11 @@
                                 </div>
 
                                 <div class="my-auto">
-                                    <div class="mb-1 leading-5 tracking-tight">
+                                    <div class="mb-1 leading-5 tracking-tight text-black font-medium">
                                         {{ $t('app.reports.title') }}
                                     </div>
                                     <div
-                                        class="text-xs tracking-tight opacity-70"
+                                        class="text-xs tracking-tight text-black/70"
                                     >
                                         {{ $t('app.reports.text') }}
                                     </div>
@@ -246,7 +241,7 @@
 
                             <div class="flex h-fit w-full gap-3">
                                 <div
-                                    class="flex aspect-square h-12 w-12 rounded-xl bg-primary/5 text-t-blue dark:text-primary"
+                                    class="flex aspect-square h-12 w-12 rounded-xl bg-primary/5 text-t-blue"
                                 >
                                     <BellNotification
                                         stroke-width="1.5"
@@ -255,11 +250,11 @@
                                 </div>
 
                                 <div class="my-auto">
-                                    <div class="mb-1 leading-5 tracking-tight">
+                                    <div class="mb-1 leading-5 tracking-tight text-black font-medium">
                                         {{ $t('app.notifications.title') }}
                                     </div>
                                     <div
-                                        class="text-xs tracking-tight opacity-70"
+                                        class="text-xs tracking-tight text-black/70"
                                     >
                                         {{ $t('app.notifications.text') }}
                                     </div>
@@ -268,7 +263,7 @@
 
                             <div class="flex h-fit w-full gap-3">
                                 <div
-                                    class="flex aspect-square h-12 w-12 rounded-xl bg-primary/5 text-t-blue dark:text-primary"
+                                    class="flex aspect-square h-12 w-12 rounded-xl bg-primary/5 text-t-blue"
                                 >
                                     <DimmerSwitch
                                         stroke-width="1.5"

@@ -1,5 +1,5 @@
 <template>
-    <section ref="sectionRef" class="features-desktop relative">
+    <section ref="sectionRef" class="features-desktop relative bg-[#fdfdfd] text-black">
         <div ref="pinRef" class="features-pin h-screen w-full overflow-hidden">
             <div
                 class="absolute inset-0 overflow-hidden lg:right-0 lg:left-auto lg:w-7/12"
@@ -30,7 +30,7 @@
                                 class="flex flex-col gap-4"
                             >
                                 <span
-                                    class="text-sm font-medium text-black/35 tabular-nums"
+                                    class="text-sm font-medium text-black/40 tabular-nums"
                                 >
                                     {{
                                         String(
@@ -43,7 +43,7 @@
                                     }}
                                 </span>
 
-                                <h2 class="text-4xl leading-tight text-black">
+                                <h2 class="text-4xl font-medium leading-tight text-black">
                                     {{ sections[currentSectionIndex].title }}
                                 </h2>
 

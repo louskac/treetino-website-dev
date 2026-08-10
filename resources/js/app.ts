@@ -4,12 +4,101 @@ import 'vanilla-cookieconsent/dist/cookieconsent.css';
 import { createInertiaApp, router } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import type { DefineComponent } from 'vue';
-import { createApp, h } from 'vue';
+import { createApp, h, computed } from 'vue';
 import { createI18n } from 'vue-i18n';
 import '../css/app.css';
 import { ZiggyVue } from 'ziggy-js';
+import i18nMessages from './i18n_messages.json';
 
 const appName = 'Treetino';
+
+const ZiggyConfig = {
+    url: typeof window !== 'undefined' ? window.location.origin : '',
+    port: null,
+    defaults: {},
+    routes: {
+        'home': { uri: '/', methods: ['GET', 'HEAD'] },
+        'products.treeV1': { uri: 'products/treetino-v1', methods: ['GET', 'HEAD'] },
+        'products.treeV2': { uri: 'products/treetino-v2', methods: ['GET', 'HEAD'] },
+        'products.turbine': { uri: 'products/turbine', methods: ['GET', 'HEAD'] },
+        'configurator': { uri: 'configurator', methods: ['GET', 'HEAD'] },
+        'configurator.product': { uri: 'configurator', methods: ['GET', 'HEAD'] },
+        'collaboration.index': { uri: 'collaboration', methods: ['GET', 'HEAD'] },
+        'media.index': { uri: 'media', methods: ['GET', 'HEAD'] },
+        'contact.index': { uri: 'contact', methods: ['GET', 'HEAD'] },
+        'contact.store': { uri: 'contact', methods: ['POST'] },
+        'legal.tos': { uri: 'legal/terms-and-conditions', methods: ['GET', 'HEAD'] },
+        'legal.pp': { uri: 'legal/privacy-policy', methods: ['GET', 'HEAD'] },
+        'checkout-initiate': { uri: 'api/checkout/initiate', methods: ['POST'] },
+        'preorders.success': { uri: 'preorders/success', methods: ['GET', 'HEAD'] },
+    },
+};
+
+if (typeof window !== 'undefined') {
+    (window as any).Ziggy = ZiggyConfig;
+}
+
+const staticRoutes: Record<string, string | ((param?: string) => string)> = {
+    'home': '/',
+    'products.treeV1': '/products/treetino-v1',
+    'products.treeV2': '/products/treetino-v2',
+    'products.turbine': '/products/turbine',
+    'configurator': '/configurator',
+    'configurator.product': (id?: string) => (id ? `/configurator?product=${id}` : '/configurator'),
+    'collaboration.index': '/collaboration',
+    'media.index': '/media',
+    'contact.index': '/contact',
+    'contact.store': '/contact',
+    'legal.tos': '/legal/terms-and-conditions',
+    'legal.pp': '/legal/privacy-policy',
+};
+
+function safeRoute(name?: string, params?: any): string {
+    if (!name) return window.location.pathname;
+    const r = staticRoutes[name];
+    if (typeof r === 'function') return r(typeof params === 'string' || typeof params === 'number' ? String(params) : params?.id);
+    if (typeof r === 'string') return r;
+    return '/' + name.replace(/\./g, '/');
+}
+
+(window as any).route = safeRoute;
+
+function getComponentForPath(path: string): string {
+    const p = path.split('?')[0].replace(/\/$/, '') || '/';
+    if (p === '/' || p === '/home') return 'Home/Index';
+    if (p === '/products/treetino-v1' || p === '/products/strom-v1' || p === '/products/v1') return 'Products/V1';
+    if (p === '/products/treetino-v2' || p === '/products/strom-v2' || p === '/products/v2') return 'Products/V2';
+    if (p === '/products/turbine' || p === '/products/turbina') return 'Products/Turbine';
+    if (p.startsWith('/configurator')) return 'Configurator/Index';
+    if (p === '/collaboration') return 'Collaboration/Index';
+    if (p === '/media') return 'Media/Index';
+    if (p === '/contact') return 'Contact/Index';
+    if (p === '/legal/terms-and-conditions') return 'Legal/Tos';
+    if (p === '/legal/privacy-policy') return 'Legal/Pp';
+    return 'Home/Index';
+}
+
+function makePageObject(url: string) {
+    const comp = getComponentForPath(url);
+    const savedLang = typeof window !== 'undefined' ? localStorage.getItem('app_locale') : null;
+    const lang = savedLang || document.documentElement.lang || 'cs';
+    const msgs = (i18nMessages as Record<string, any>)[lang] || (i18nMessages as Record<string, any>)['cs'];
+    return {
+        component: comp,
+        props: {
+            i18n: {
+                locale: lang,
+                fallbackLocale: 'en',
+                locales: ['cs', 'en'],
+                messages: msgs,
+            },
+            auth: { user: null, admin: null },
+            flash: { success: null },
+        },
+        url: url,
+        version: '1',
+    };
+}
 
 const cookieConfig = (t: (key: string) => string): CookieConsentConfig => ({
     autoShow: false,
@@ -41,7 +130,25 @@ const cookieConfig = (t: (key: string) => string): CookieConsentConfig => ({
     },
 });
 
+const appEl = document.getElementById('app');
+let initialPage: any = null;
+
+if (appEl && appEl.dataset.page) {
+    try {
+        initialPage = JSON.parse(appEl.dataset.page);
+    } catch (e) {
+        // fallback
+    }
+}
+
+const isStaticMode = !initialPage;
+
+if (!initialPage) {
+    initialPage = makePageObject(window.location.pathname);
+}
+
 createInertiaApp({
+    page: initialPage,
     title: (title) => (title ? `${title} | ${appName}` : appName),
     resolve: (name) =>
         resolvePageComponent(
@@ -49,33 +156,65 @@ createInertiaApp({
             import.meta.glob<DefineComponent>('./pages/**/*.vue'),
         ),
     setup({ el, App, props, plugin }) {
-        const shared = props.initialPage.props as unknown as {
-            i18n: { locale: string; fallbackLocale: string; messages: Record<string, any> };
-        };
+        const shared = computed(() => (props.initialPage.props as any)?.i18n);
+
+        const savedLang = typeof window !== 'undefined' ? localStorage.getItem('app_locale') : null;
+        const activeLang = savedLang || shared.value?.locale || 'cs';
+        const activeMsgs = (i18nMessages as any)[activeLang] || shared.value?.messages || (i18nMessages as any)['cs'];
+
         const i18n = createI18n({
             legacy: false,
-            locale: shared.i18n.locale,
-            fallbackLocale: shared.i18n.fallbackLocale,
-            messages: { [shared.i18n.locale]: shared.i18n.messages },
+            locale: activeLang,
+            fallbackLocale: shared.value?.fallbackLocale || 'en',
+            messages: {
+                cs: (i18nMessages as any)['cs'] || {},
+                en: (i18nMessages as any)['en'] || {},
+            },
         });
 
-        document.documentElement.lang = shared.i18n.locale;
+        document.documentElement.lang = activeLang;
 
-        router.on('navigate', (event) => {
-            const next = event.detail.page.props.i18n as typeof shared.i18n;
+        if (isStaticMode) {
+            router.on('before', (event) => {
+                const targetUrl = event.detail.visit.url;
+                const path = typeof targetUrl === 'string' ? targetUrl : targetUrl?.pathname;
+                if (path && path.startsWith('/') && path !== window.location.pathname) {
+                    event.preventDefault();
+                    window.location.href = path;
+                }
+            });
 
-            i18n.global.setLocaleMessage(next.locale, next.messages);
-            i18n.global.fallbackLocale.value = next.fallbackLocale;
-            i18n.global.locale.value = next.locale;
-            document.documentElement.lang = next.locale;
-        });
+            router.on('invalid', (event) => {
+                event.preventDefault();
+                const detailUrl = (event.detail as any)?.response?.config?.url || (event.detail as any)?.url;
+                const targetUrl = detailUrl ? new URL(detailUrl, window.location.origin).pathname : window.location.pathname;
+                if (targetUrl !== window.location.pathname) {
+                    window.location.href = targetUrl;
+                }
+            });
+        } else {
+            router.on('navigate', (event) => {
+                const next = event.detail.page.props.i18n as typeof shared.value;
+                if (next && next.locale) {
+                    i18n.global.setLocaleMessage(next.locale, next.messages);
+                    i18n.global.fallbackLocale.value = next.fallbackLocale;
+                    i18n.global.locale.value = next.locale;
+                    document.documentElement.lang = next.locale;
+                }
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
 
-        createApp({ render: () => h(App, props) })
+        const app = createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(i18n)
             .use(CookieConsentPlugin, cookieConfig((key) => String(i18n.global.t(key))))
-            .use(ZiggyVue)
-            .mount(el);
+            .use(ZiggyVue, ZiggyConfig);
+
+        app.config.globalProperties.route = safeRoute;
+        app.provide('route', safeRoute);
+
+        app.mount(el);
     },
     progress: { color: '#4B5563' },
 });

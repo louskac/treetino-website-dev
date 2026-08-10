@@ -1,7 +1,7 @@
 <template>
     <div>
         <p class="text-xs uppercase tracking-widest text-black/70 dark:text-white/50 mb-4">
-            {{ formatStep(stepNumber) }} — Velikost turbíny
+            {{ formatStep(stepNumber) }} — {{ $t('configurator.steps.turbine_size') }}
         </p>
         <div class="flex flex-col gap-2">
             <button
@@ -14,7 +14,7 @@
                     : 'border-black/15 dark:border-white/15 hover:border-black/35 dark:hover:border-white/35'"
             >
                 <div class="flex items-center justify-between mb-1">
-                    <span class="text-sm font-medium text-black dark:text-white">{{ option.label }}</span>
+                    <span class="text-sm font-medium text-black dark:text-white">{{ $t(option.labelKey, option.label) }}</span>
                     <span class="flex items-center gap-2">
                         <span class="text-xs font-semibold text-black/60 dark:text-white/50">{{ option.power }}</span>
                         <span
@@ -24,11 +24,11 @@
                                 : 'text-black/35 dark:text-white/35'"
                         >
                             <CheckCircle v-if="modelValue === option.id" />
-                            {{ modelValue === option.id ? 'Vybráno' : 'Vybrat' }}
+                            {{ modelValue === option.id ? $t('configurator.selected') : $t('configurator.select') }}
                         </span>
                     </span>
                 </div>
-                <p class="text-xs text-black/55 dark:text-white/40 leading-relaxed">{{ option.description }}</p>
+                <p class="text-xs text-black/55 dark:text-white/40 leading-relaxed">{{ $t(option.descKey, option.description) }}</p>
             </button>
         </div>
     </div>
@@ -52,20 +52,26 @@ const options = [
     {
         id: 'large',
         label: 'Velká',
+        labelKey: 'configurator.turbine_size.large.label',
         power: '3 kW',
         description: 'Maximální výkon pro průmyslové a firemní instalace s vysokou spotřebou.',
+        descKey: 'configurator.turbine_size.large.desc',
     },
     {
         id: 'medium',
         label: 'Střední',
+        labelKey: 'configurator.turbine_size.medium.label',
         power: '1,5 kW',
         description: 'Vyvážený poměr výkonu a rozměrů, vhodný pro obce a větší budovy.',
+        descKey: 'configurator.turbine_size.medium.desc',
     },
     {
         id: 'small',
         label: 'Menší',
+        labelKey: 'configurator.turbine_size.small.label',
         power: '1 kW',
         description: 'Kompaktní turbína pro menší instalace a lokality s omezeným prostorem.',
+        descKey: 'configurator.turbine_size.small.desc',
     },
 ];
 </script>

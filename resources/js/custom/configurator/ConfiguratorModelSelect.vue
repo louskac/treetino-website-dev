@@ -7,7 +7,7 @@
                 :class="modelValue === product.id
                     ? 'text-black dark:text-white font-bold'
                     : 'text-black/55 dark:text-white/35 hover:text-black/65 dark:hover:text-white/65'"
-            >{{ product.label }}</button>
+            >{{ $t(product.labelKey, product.label) }}</button>
             <span
                 v-if="i < products.length - 1"
                 class="mx-2.5 text-black/20 dark:text-white/20 text-xs select-none"
@@ -17,9 +17,11 @@
 </template>
 
 <script setup lang="ts">
+import type { Product } from '@/types/products';
+
 defineProps<{
     modelValue: string;
-    products: { id: string; label: string }[];
+    products: Product[];
 }>();
 
 defineEmits<{

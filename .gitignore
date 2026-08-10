@@ -4,6 +4,7 @@
 /public/build
 /public/hot
 /public/storage
+/public/index.html
 /storage/*.key
 /storage/pail
 /resources/js/actions
@@ -26,3 +27,5 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+.vercel
+.env*

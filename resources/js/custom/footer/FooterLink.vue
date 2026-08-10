@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
 
-const props = defineProps({
+defineProps({
     href: {
         type: String,
         default: undefined,
@@ -11,14 +11,14 @@ const props = defineProps({
 
 <template>
     <Link
-        class="group relative w-fit cursor-pointer opacity-70 transition-all duration-300 hover:opacity-100"
+        class="group relative w-fit cursor-pointer text-black/70 transition-colors duration-300 hover:text-black"
         :href="href"
     >
         <div class="relative">
             <slot/>
         </div>
         <div
-            class="absolute w-0 border-b transition-all duration-300 group-hover:w-full group-hover:border-b group-hover:border-b-black"
+            class="absolute bottom-0 left-0 h-[1px] w-0 bg-black transition-all duration-300 group-hover:w-full"
         ></div>
     </Link>
 </template>

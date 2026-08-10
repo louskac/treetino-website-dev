@@ -2,14 +2,14 @@
     <div>
         <!-- Section heading – larger visual break than regular steps -->
         <h2 class="text-base font-semibold tracking-tight text-black dark:text-white mb-1">
-            Financování
+            {{ $t('configurator.financing.title') }}
         </h2>
         <p class="text-xs text-black/40 dark:text-white/30 mb-5 leading-relaxed">
-            Vyberte dotační program, na který máte nárok. Cena bude upravena po výběru.
+            {{ $t('configurator.financing.subtitle') }}
         </p>
 
         <p class="text-xs uppercase tracking-widest text-black/70 dark:text-white/50 mb-3">
-            Dotační program
+            {{ $t('configurator.financing.grant_program') }}
         </p>
 
         <div class="flex flex-col gap-1">
@@ -34,28 +34,28 @@
                             />
                         </span>
                         <span class="text-sm font-medium text-black dark:text-white">
-                            {{ option.label }}
+                            {{ option.labelKey ? $t(option.labelKey, option.label) : option.label }}
                         </span>
                     </div>
                     <span
                         v-if="option.percentage !== null"
                         class="text-xs px-2 py-0.5 rounded-full bg-black/5 dark:bg-white/10 text-t-blue dark:text-t-blue border border-t-blue font-medium"
                     >
-                        až {{ option.percentage }}&thinsp;%
+                        {{ $t('configurator.financing.up_to') }} {{ option.percentage }}&thinsp;%
                     </span>
                 </div>
                 <div class="pl-6">
                     <p
-                        v-if="option.eligibility"
+                        v-if="option.eligibilityKey || option.eligibility"
                         class="text-xs text-black/55 dark:text-white/40"
                     >
-                        {{ option.eligibility }}
+                        {{ option.eligibilityKey ? $t(option.eligibilityKey, option.eligibility) : option.eligibility }}
                     </p>
                     <p
-                        v-if="option.description"
+                        v-if="option.descriptionKey || option.description"
                         class="text-xs text-black/35 dark:text-white/25 leading-relaxed mt-0.5"
                     >
-                        {{ option.description }}
+                        {{ option.descriptionKey ? $t(option.descriptionKey, option.description) : option.description }}
                     </p>
                 </div>
             </button>
@@ -65,12 +65,7 @@
         <div class="mt-4 flex items-start gap-2 rounded-lg bg-black/4 dark:bg-white/5 px-3 py-2.5">
             <span class="text-black/35 dark:text-white/25 text-xs mt-px shrink-0 select-none">ℹ</span>
             <p class="text-xs text-black/50 dark:text-white/35 leading-relaxed">
-                Uvedené dotace jsou dostupné pouze v&nbsp;rámci&nbsp;ČR. Pokud jste ze Slovenska nebo
-                jiné země, prosím
-                <a
-                    href="/kontakt"
-                    class="underline underline-offset-2 hover:text-black dark:hover:text-white transition-colors"
-                >kontaktujte nás</a>.
+                {{ $t('configurator.financing.cz_notice') }}
             </p>
         </div>
     </div>

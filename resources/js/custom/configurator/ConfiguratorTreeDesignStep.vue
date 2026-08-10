@@ -1,7 +1,7 @@
 <template>
     <div>
         <p class="text-xs uppercase tracking-widest text-black/70 dark:text-white/50 mb-4">
-            {{ formatStep(stepNumber) }} — Design stromu
+            {{ formatStep(stepNumber) }} — {{ $t('configurator.steps.tree_design') }}
         </p>
         <div class="flex flex-col gap-2">
             <button
@@ -14,7 +14,7 @@
                     : 'border-black/15 dark:border-white/15 hover:border-black/35 dark:hover:border-white/35'"
             >
                 <div class="flex items-center justify-between mb-1">
-                    <span class="text-sm font-medium text-black dark:text-white">{{ option.label }}</span>
+                    <span class="text-sm font-medium text-black dark:text-white">{{ $t(option.labelKey, option.label) }}</span>
                     <span
                         class="flex items-center gap-1.5 text-xs transition-colors duration-200"
                         :class="modelValue === option.id
@@ -22,10 +22,10 @@
                             : 'text-black/35 dark:text-white/35'"
                     >
                         <CheckCircle v-if="modelValue === option.id" />
-                        {{ modelValue === option.id ? 'Vybráno' : 'Vybrat' }}
+                        {{ modelValue === option.id ? $t('configurator.selected') : $t('configurator.select') }}
                     </span>
                 </div>
-                <p class="text-xs text-black/55 dark:text-white/40 leading-relaxed">{{ option.description }}</p>
+                <p class="text-xs text-black/55 dark:text-white/40 leading-relaxed">{{ $t(option.descKey, option.description) }}</p>
             </button>
         </div>
     </div>
@@ -50,12 +50,16 @@ const options = [
     {
         id: 'standard',
         label: 'Standardní',
+        labelKey: 'configurator.tree_design.standard.label',
         description: 'Klasický design s organickými tvary inspirovanými přírodou. Přirozeně zapadne do každého prostředí.',
+        descKey: 'configurator.tree_design.standard.desc',
     },
     {
         id: 'cyber',
         label: 'Cyber',
+        labelKey: 'configurator.tree_design.cyber.label',
         description: 'Futuristický geometrický design s ostrými hranami a moderním industriálním výrazem.',
+        descKey: 'configurator.tree_design.cyber.desc',
     },
 ];
 </script>

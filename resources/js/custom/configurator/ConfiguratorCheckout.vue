@@ -4,17 +4,8 @@
             <p
                 class="text-xs tracking-widest text-black/50 uppercase dark:text-white/50"
             >
-                Shrnutí objednávky
+                {{ $t('configurator.checkout.summary') }}
             </p>
-            <!--            <div class="flex items-baseline justify-between">-->
-            <!--                <span class="text-xs text-black/50 dark:text-white/50"-->
-            <!--                    >Cena od</span-->
-            <!--                >-->
-            <!--                <span-->
-            <!--                    class="text-lg font-bold tracking-tight text-black dark:text-white"-->
-            <!--                    >{{ basePrice.toLocaleString('cs-CZ') }} Kč</span-->
-            <!--                >-->
-            <!--            </div>-->
         </div>
 
         <!-- Cash / Zelený úvěr tabs -->
@@ -28,7 +19,7 @@
                         : 'text-black/38 hover:text-black/65 dark:text-white/35 dark:hover:text-white/55'
                 "
             >
-                Hotovost
+                {{ $t('configurator.checkout.cash') }}
                 <span
                     v-if="paymentMode === 'cash'"
                     class="absolute right-0 bottom-0 left-0 h-0.5 rounded-t-full bg-black dark:bg-white"
@@ -43,7 +34,7 @@
                         : 'text-black/38 hover:text-black/65 dark:text-white/35 dark:hover:text-white/55'
                 "
             >
-                Zelený úvěr
+                {{ $t('configurator.checkout.credit') }}
                 <span
                     v-if="paymentMode === 'credit'"
                     class="absolute right-0 bottom-0 left-0 h-0.5 rounded-t-full bg-black dark:bg-white"
@@ -59,11 +50,11 @@
                 <span
                     class="text-xs leading-relaxed text-black/50 dark:text-white/35"
                 >
-                    Základní cena
+                    {{ $t('configurator.checkout.base_price') }}
                     <strong class="text-black dark:text-white"
                         >{{ formatPrice(basePrice) }}&thinsp;Kč</strong
                     >
-                    po odečtení dotace
+                    {{ $t('configurator.checkout.after_grant') }}
                     <strong class="text-t-blue"
                         >{{ grantLabel }} −{{ grantPct }}&thinsp;%</strong
                     >:
@@ -79,7 +70,7 @@
             <p
                 class="text-xs tracking-widest text-black/40 uppercase dark:text-white/30"
             >
-                Cena celkem
+                {{ $t('configurator.checkout.total_price') }}
             </p>
             <p
                 class="text-3xl font-bold tracking-tight text-black dark:text-white"
@@ -89,17 +80,14 @@
             <p
                 class="mt-1 text-xs leading-relaxed text-black/38 dark:text-white/30"
             >
-                Cena nezahrnuje odhad 5leté úspory za výrobu energie ve výši
-                <strong class="font-medium text-black/55 dark:text-white/45"
-                    >{{ formatPrice(monthlySavings * 60) }}&thinsp;Kč</strong
-                >.
+                {{ $t('configurator.checkout.savings_5yr_notice', { savings: formatPrice(monthlySavings * 60) }) }}
             </p>
         </div>
         <div v-else class="flex flex-col gap-1">
             <p
                 class="text-xs tracking-widest text-black/40 uppercase dark:text-white/30"
             >
-                Měsíční splátka od
+                {{ $t('configurator.checkout.monthly_from') }}
             </p>
             <p
                 class="text-3xl font-bold tracking-tight text-black dark:text-white"
@@ -107,26 +95,22 @@
                 {{ formatPrice(adjustedMonthlyPayment) }}&thinsp;Kč
                 <span
                     class="text-base font-normal text-black/40 dark:text-white/30"
-                    >/měs.</span
+                    >{{ $t('configurator.checkout.per_month') }}</span
                 >
             </p>
             <p class="mt-0.5 text-xs text-black/35 dark:text-white/25">
-                na {{ loanMonths }}&nbsp;měsíců
+                {{ $t('configurator.checkout.for_months', { months: loanMonths }) }}
             </p>
             <p
                 class="mt-1 text-xs leading-relaxed text-black/38 dark:text-white/30"
             >
-                Cena nezahrnuje odhadované měsíční úspory za výrobu energie ve
-                výši
-                <strong class="font-medium text-black/55 dark:text-white/45"
-                    >{{ formatPrice(monthlySavings) }}&thinsp;Kč</strong
-                >.
+                {{ $t('configurator.checkout.monthly_savings_notice', { savings: formatPrice(monthlySavings) }) }}
             </p>
             <button
                 @click="modalFinancing = true"
                 class="mt-2 cursor-pointer self-start text-xs text-black/50 underline underline-offset-2 transition-colors hover:text-black dark:text-white/40 dark:hover:text-white"
             >
-                Upravit podmínky financování
+                {{ $t('configurator.checkout.edit_financing') }}
             </button>
         </div>
 
@@ -135,7 +119,7 @@
         >
             <div class="flex items-baseline justify-between">
                 <div class="text-sm text-black/70 dark:text-white/50">
-                    Reserve Price
+                    {{ $t('configurator.checkout.reserve_price') }}
                 </div>
                 <div class="text-xl font-semibold text-black dark:text-white">
                     {{ formatPrice(reservationPrice) }}&thinsp;Kč
@@ -164,10 +148,7 @@
                 class="h-5 w-5 shrink-0 text-orange-600 dark:text-orange-400"
             />
             <p class="text-xs font-medium text-orange-700 dark:text-orange-300">
-                Pro měsíc <strong>{{ currentMonthName }}</strong> bylo již
-                rezervováno
-                <strong>{{ urgency.reserved }} z {{ urgency.total }}</strong>
-                {{ urgency.unit }}.
+                {{ $t('configurator.checkout.urgency', { month: currentMonthTranslated, reserved: urgency.reserved, total: urgency.total, unit: urgencyTranslatedUnit }) }}
             </p>
         </div>
 
@@ -177,15 +158,14 @@
             </div>
             <div class="-mt-0.5">
                 <label for="tosConsent" class="text-sm">
-                    Seznámil(a) jsem se s
-                    <a class="underline" :href="route('legal.tos')"
-                        >obchodními podmínkami</a
-                    >
-                    a
-                    <a class="underline" :href="route('legal.pp')"
-                        >zásadami zpracování osobních údajů</a
-                    >
-                    a souhlasím s nimi.
+                    <i18n-t keypath="configurator.checkout.tos_agree" tag="span">
+                        <template #tos>
+                            <a class="underline" :href="route('legal.tos')">{{ $t('configurator.checkout.tos_link') }}</a>
+                        </template>
+                        <template #pp>
+                            <a class="underline" :href="route('legal.pp')">{{ $t('configurator.checkout.pp_link') }}</a>
+                        </template>
+                    </i18n-t>
                 </label>
             </div>
         </div>
@@ -196,11 +176,11 @@
                 @click="emit('checkout', paymentMode)"
                 class="cursor-pointer disabled:opacity-70"
             >
-                Závazně Objednat
+                {{ $t('configurator.checkout.btn_order') }}
             </ButtonPrimary>
 
             <ButtonSecondary @click="emit('info')" class="cursor-pointer">
-                Více Informací
+                {{ $t('configurator.checkout.btn_info') }}
             </ButtonSecondary>
         </div>
     </div>
@@ -224,6 +204,7 @@
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import ButtonSecondary from '@/custom/ButtonSecondary.vue';
 import ConfiguratorModalFinancing from '@/custom/configurator/ConfiguratorModalFinancing.vue';
@@ -233,6 +214,8 @@ import { calcMonthlyPayment, formatPrice } from '@/composables/useFinancing';
 
 import { ProductId } from '@/types/products';
 import { route } from 'ziggy-js';
+
+const { t } = useI18n();
 
 const props = defineProps<{
     basePrice: number;
@@ -255,7 +238,11 @@ const includeSavings = ref(false);
 
 const grantInfo = computed(() => getGrantById(props.grant));
 const grantPct = computed(() => getGrantById(props.grant)?.percentage ?? 0);
-const grantLabel = computed(() => getGrantById(props.grant)?.label ?? '');
+const grantLabel = computed(() => {
+    const info = getGrantById(props.grant);
+    if (!info) return '';
+    return info.labelKey ? t(info.labelKey, info.label) : info.label;
+});
 
 const discountedPrice = computed(() => {
     const pct = grantInfo.value?.percentage;
@@ -292,11 +279,11 @@ const adjustedMonthlyPayment = computed(() =>
 
 const URGENCY_DATA: Record<
     string,
-    { reserved: number; total: number; unit: string }
+    { reserved: number; total: number; unitKey: string }
 > = {
-    [ProductId.StromV1]: { reserved: 3, total: 5, unit: 'stromů' },
-    [ProductId.StromV2]: { reserved: 2, total: 10, unit: 'stromů' },
-    [ProductId.Turbina]: { reserved: 14, total: 20, unit: 'turbín' },
+    [ProductId.StromV1]: { reserved: 3, total: 5, unitKey: 'configurator.checkout.units.trees' },
+    [ProductId.StromV2]: { reserved: 2, total: 10, unitKey: 'configurator.checkout.units.trees' },
+    [ProductId.Turbina]: { reserved: 14, total: 20, unitKey: 'configurator.checkout.units.turbines' },
 };
 
 const urgency = computed(
@@ -304,27 +291,31 @@ const urgency = computed(
         URGENCY_DATA[props.productId] ?? {
             reserved: 0,
             total: 0,
-            unit: 'kusů',
+            unitKey: 'configurator.checkout.units.pcs',
         },
 );
 
-const currentMonthName = computed(() => {
-    const monthNames = [
-        'leden',
-        'únor',
-        'březen',
-        'duben',
-        'květen',
-        'červen',
-        'červenec',
-        'srpen',
-        'září',
-        'říjen',
-        'listopad',
-        'prosinec',
-    ];
+const urgencyTranslatedUnit = computed(() => t(urgency.value.unitKey));
+
+const monthKeys = [
+    'january',
+    'february',
+    'march',
+    'april',
+    'may',
+    'june',
+    'july',
+    'august',
+    'september',
+    'october',
+    'november',
+    'december',
+];
+
+const currentMonthTranslated = computed(() => {
     const now = new Date();
-    return monthNames[now.getMonth()];
+    const key = monthKeys[now.getMonth()];
+    return t(`configurator.months.${key}`);
 });
 
 const reservationBenefits = [

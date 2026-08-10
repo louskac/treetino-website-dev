@@ -11,10 +11,13 @@ import type {
 import axios from 'axios';
 import type { AxiosError } from 'axios';
 import { ref, nextTick } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { route } from 'ziggy-js';
 
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import ButtonSecondary from '@/custom/ButtonSecondary.vue';
+
+const { t } = useI18n();
 
 const props = defineProps({
     productId: {
@@ -50,8 +53,8 @@ const clientSecret = ref('');
 
 const handleContinue = async () => {
     if (!email.value) {
-return;
-}
+        return;
+    }
 
     isProcessing.value = true;
     errorMessage.value = '';
@@ -91,7 +94,6 @@ const initStripe = async () => {
 
     if (!stripe.value) {
         errorMessage.value = 'Payment service could not be initialized.';
-
         return;
     }
 
@@ -130,13 +132,11 @@ const initStripe = async () => {
     }
 
     // 3. MOUNT THE CARD ELEMENT CORRECTLY
-    // Use .value to store it in the reactive ref defined at the top
     cardElement.value = elements.create('card', {
         style: { base: { fontSize: '16px' } },
         hidePostalCode: true,
     });
 
-    // Use .value to mount it
     cardElement.value.mount('#card-element');
 
     // 4. Mount Wallet Button
@@ -145,7 +145,7 @@ const initStripe = async () => {
         prButton.value?.mount('#wallet-button');
     }
 
-    // 5. Wallet listener... (keep as you have it)
+    // 5. Wallet listener
     request.on('paymentmethod', async (ev: PaymentRequestPaymentMethodEvent) => {
         const { paymentIntent, error: confirmError } =
             await stripeInstance.confirmCardPayment(
@@ -159,41 +159,34 @@ const initStripe = async () => {
             errorMessage.value = confirmError.message ?? 'Payment failed.';
         } else {
             ev.complete('success');
-
-            if (paymentIntent.status === 'succeeded') {
+            if (paymentIntent.status === 'requires_action') {
+                const { error: actionError } =
+                    await stripeInstance.confirmCardPayment(clientSecret.value);
+                if (actionError) {
+                    errorMessage.value = actionError.message ?? 'Payment failed.';
+                } else {
+                    emit('success', preorderUuid.value);
+                }
+            } else {
                 emit('success', preorderUuid.value);
             }
         }
     });
 };
 
-/**
- * Step 3: Confirm Payment
- */
 const handlePayment = async () => {
+    if (!stripe.value || !cardElement.value) {
+        return;
+    }
+
     isProcessing.value = true;
     errorMessage.value = '';
-
-    // Verify cardElement.value exists
-    if (!cardElement.value) {
-        errorMessage.value = 'Card form not initialized.';
-        isProcessing.value = false;
-
-        return;
-    }
-
-    if (!stripe.value) {
-        errorMessage.value = 'Payment service not initialized.';
-        isProcessing.value = false;
-
-        return;
-    }
 
     const { paymentIntent, error } = await stripe.value.confirmCardPayment(
         clientSecret.value,
         {
             payment_method: {
-                card: cardElement.value, // This now correctly references the Stripe Element
+                card: cardElement.value,
                 billing_details: { email: email.value },
             },
         },
@@ -213,15 +206,10 @@ const handlePayment = async () => {
         <div
             class="mx-auto my-auto flex min-h-140 w-full flex-col rounded-2xl bg-white lg:w-160"
         >
-            <!--            <div class="flex justify-between border-b p-6">-->
-            <!--                <div class="opacity-70">Finish Your Order</div>-->
-            <!--                <div class="my-auto"></div>-->
-            <!--            </div>-->
-
             <div class="bg-t-accent/10 p-6">
                 <div class="flex items-baseline justify-between">
                     <div class="text-sm text-black/70 dark:text-white/50">
-                        Reserve Price
+                        {{ $t('configurator.checkout.reserve_price') }}
                     </div>
                     <div
                         class="text-xl font-semibold text-black dark:text-white"
@@ -235,7 +223,7 @@ const handlePayment = async () => {
                 <div v-if="step === 1" class="step-1">
                     <div class="">
                         <label for="mail" class="mb-2 block text-sm">
-                            E-mail
+                            {{ $t('configurator.modal_checkout.email_label') }}
                         </label>
 
                         <input
@@ -249,9 +237,7 @@ const handlePayment = async () => {
                     </div>
 
                     <div class="pt-6 opacity-70">
-                        We need your e-mail address to process your desired
-                        configuration for our team. Your configuration and
-                        invoice will be delivered to you.
+                        {{ $t('configurator.modal_checkout.email_desc') }}
                     </div>
                 </div>
 
@@ -265,12 +251,12 @@ const handlePayment = async () => {
                             <hr class="w-full border-black/10" />
                             <span
                                 class="absolute bg-white px-2 text-xs text-black/40"
-                                >OR PAY WITH CARD</span
+                                >{{ $t('configurator.modal_checkout.or_card') }}</span
                             >
                         </div>
                     </div>
 
-                    <label class="mb-2 block text-sm">Card Information</label>
+                    <label class="mb-2 block text-sm">{{ $t('configurator.modal_checkout.card_info') }}</label>
                     <div
                         id="card-element"
                         class="w-full rounded-xl border bg-white px-4 py-4 text-black"
@@ -286,7 +272,7 @@ const handlePayment = async () => {
                         <div
                             class="text-xs tracking-widest text-black/50 uppercase"
                         >
-                            Checkout
+                            {{ $t('configurator.title') }}
                         </div>
 
                         <div
@@ -306,10 +292,10 @@ const handlePayment = async () => {
                         >
                             {{
                                 isProcessing
-                                    ? 'Processing...'
+                                    ? $t('configurator.modal_checkout.processing')
                                     : step === 1
-                                      ? 'Continue'
-                                      : `Pay ${reservationPrice.toLocaleString('cs-CZ')} Kč`
+                                      ? $t('configurator.modal_checkout.continue')
+                                      : $t('configurator.modal_checkout.pay', { amount: reservationPrice.toLocaleString('cs-CZ') })
                             }}
                         </ButtonPrimary>
 

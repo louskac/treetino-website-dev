@@ -3,14 +3,14 @@
         <p
             class="mb-4 text-xs tracking-widest text-black/70 uppercase dark:text-white/50"
         >
-            {{ formatStep(stepNumber) }} — Příplatkové produkty
+            {{ formatStep(stepNumber) }} — {{ $t('configurator.steps.addons') }}
         </p>
         <div class="flex flex-col gap-1">
             <!-- EV Charger -->
             <div class="rounded px-3 py-3">
                 <div class="mb-1 flex items-center justify-between">
                     <span class="text-sm text-black dark:text-white"
-                        >Nabíjení pro elektromobily</span
+                        >{{ $t('configurator.addons.ev.label') }}</span
                     >
                     <span
                         class="text-xs font-semibold text-black dark:text-white/40"
@@ -41,7 +41,7 @@
                         +
                     </button>
                     <span class="ml-1 text-xs text-black/60 dark:text-white/40"
-                        >ks</span
+                        >{{ $t('configurator.pcs') }}</span
                     >
                 </div>
             </div>
@@ -55,7 +55,7 @@
             >
                 <div class="mb-1 flex items-center justify-between">
                     <span class="text-sm text-black dark:text-white"
-                        >Nabíjení pro elektrokola</span
+                        >{{ $t('configurator.addons.bike.label') }}</span
                     >
                     <span
                         class="flex items-center gap-1.5 text-xs transition-colors duration-200"
@@ -66,7 +66,7 @@
                         "
                     >
                         <CheckCircle v-if="bikeEnabled" />
-                        {{ bikeEnabled ? 'Přidáno' : 'Přidat' }}
+                        {{ bikeEnabled ? $t('configurator.added') : $t('configurator.add') }}
                     </span>
                 </div>
                 <p

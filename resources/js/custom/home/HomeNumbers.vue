@@ -4,10 +4,10 @@
     >
         <!-- Image with product toggle overlay -->
         <div
-            class="relative mx-6 aspect-3/2 overflow-hidden rounded-2xl bg-stone-100 shadow-lg sm:mx-0 lg:aspect-3/1 dark:bg-stone-900"
+            class="relative mx-6 aspect-3/2 overflow-hidden rounded-3xl border border-black/10 bg-stone-100 shadow-2xl sm:mx-0 lg:aspect-3/1 dark:border-white/10 dark:bg-stone-900"
         >
             <!-- Strom V1 -->
-            <div v-if="selectedProductId === ProductId.StromV1">
+            <div v-if="selectedProductId === ProductId.StromV1" class="h-full w-full">
                 <img
                     class="hidden h-full w-full object-cover lg:block"
                     src="/img/info/night-detail-w.jpg"
@@ -21,7 +21,7 @@
             </div>
 
             <!-- Strom V2 -->
-            <div v-else-if="selectedProductId === ProductId.StromV2">
+            <div v-else-if="selectedProductId === ProductId.StromV2" class="h-full w-full">
                 <img
                     class="hidden h-full w-full object-cover lg:block"
                     src="/img/info/info-strom-v2-w.webp"
@@ -35,7 +35,7 @@
             </div>
 
             <!-- Turbine -->
-            <div v-else>
+            <div v-else class="h-full w-full">
                 <img
                     class="hidden h-full w-full object-cover lg:block"
                     src="/img/info/info-turbine-w.webp"
@@ -48,78 +48,87 @@
                 />
             </div>
 
-            <!-- Product toggle -->
-            <div class="absolute inset-x-0 bottom-4 flex justify-start px-4">
+            <!-- Product toggle pills -->
+            <div class="absolute inset-x-0 bottom-6 flex justify-center px-6">
                 <div
-                    class="inline-flex gap-0.5 rounded-full border border-black/10 bg-white/80 p-1 shadow-lg backdrop-blur-md"
+                    class="inline-flex gap-2 rounded-full border border-black/10 bg-white/90 p-2 shadow-2xl backdrop-blur-xl dark:border-white/10 dark:bg-black/90"
                 >
                     <button
                         v-for="product in PRODUCTS"
                         :key="product.id"
-                        class="rounded-full px-5 py-1.5 text-sm font-medium transition-all"
+                        class="rounded-full px-5 py-2 text-xs font-medium transition-all sm:text-sm cursor-pointer"
                         :class="
                             selectedProductId === product.id
-                                ? 'bg-primary text-white shadow-sm'
-                                : 'text-black/60 hover:text-black'
+                                ? 'bg-t-blue text-white shadow-md'
+                                : 'text-black/70 hover:bg-black/5 hover:text-black dark:text-white/70 dark:hover:bg-white/10 dark:hover:text-white'
                         "
                         @click="selectedProductId = product.id"
                     >
-                        {{ product.label }}
+                        {{ $t(product.labelKey, product.label) }}
                     </button>
                 </div>
             </div>
         </div>
 
+        <!-- 6 Stats Grid (Dual CTAs: Details + Configurator) -->
         <div
             class="mx-6 grid grid-cols-1 gap-12 pt-12 sm:mx-0 lg:grid-cols-3 2xl:grid-cols-4"
         >
             <div class="col-span-1 flex flex-col">
-                <div class="relative z-10 flex items-center justify-between">
-                    <span
-                        class="text-xs font-semibold tracking-[0.2em] text-black/60 uppercase"
-                        >{{ selectedProduct.label }}</span
-                    >
-                </div>
-
-                <h2 class="mt-3 text-4xl leading-9 2xl:text-6xl 2xl:leading-14">
-                    {{ $t('home.numbers.title') }}
+                <span
+                    class="text-xs font-semibold tracking-[0.2em] text-t-blue uppercase"
+                    >{{ $t('home.features.key_parameters', 'Klíčové Parametry') }}</span
+                >
+                <h2
+                    class="mt-3 text-4xl font-medium leading-tight text-black lg:text-5xl"
+                >
+                    {{ $t(selectedProduct.numbersTitleKey, selectedProduct.numbersTitle) }}
                 </h2>
-
-                <div class="mt-auto pt-6">
-                    <ButtonPrimary
-                        :href="route('configurator')"
-                        class="w-full text-center"
-                        >{{ $t('common.actions.configure') }}</ButtonPrimary
+                <p class="mt-4 text-sm text-black/70">
+                    {{ $t(selectedProduct.numbersDescriptionKey, selectedProduct.numbersDescription) }}
+                </p>
+                <div class="mt-auto pt-6 flex flex-col gap-2.5 sm:flex-row">
+                    <ButtonSecondary
+                        :href="`/products/${selectedProduct.detail}`"
+                        class="w-full text-center sm:w-1/2"
                     >
+                        {{ $t('common.actions.info') }}
+                    </ButtonSecondary>
+                    <ButtonPrimary
+                        :href="route('configurator.product', selectedProduct.id)"
+                        class="w-full text-center sm:w-1/2"
+                    >
+                        {{ $t(selectedProduct.configureLabelKey, selectedProduct.configureLabel) }}
+                    </ButtonPrimary>
                 </div>
             </div>
 
             <div
-                class="col-span-1 grid gap-6 lg:col-span-2 lg:border-l lg:pl-12 2xl:col-span-3"
-                :class="
-                    selectedProduct.stats.length <= 3
-                        ? 'grid-cols-1 sm:grid-cols-3'
-                        : 'grid-cols-2 2xl:grid-cols-3'
-                "
+                class="col-span-1 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:col-span-2 lg:border-l lg:border-black/10 lg:pl-12 2xl:col-span-3"
             >
                 <div
                     v-for="stat in selectedProduct.stats"
                     :key="stat.icon + stat.value"
                 >
-                    <div class="mb-2 flex gap-3">
+                    <div class="mb-2 flex items-center gap-3">
                         <div
-                            class="flex aspect-square h-12 w-12 shrink-0 rounded-xl bg-primary/5 text-t-blue dark:text-primary"
+                            class="flex aspect-square h-12 w-12 shrink-0 rounded-xl bg-t-blue/10 text-t-blue"
                         >
                             <component
-                                :is="ICON_MAP[stat.icon]"
+                                :is="ICON_MAP[stat.icon] || Flash"
                                 stroke-width="1.5"
-                                class="mx-auto my-auto h-6 w-6"
+                                class="m-auto h-6 w-6"
                             />
                         </div>
-                        <div class="my-auto text-4xl">{{ stat.value }}</div>
+                        <div
+                            class="text-2xl font-medium text-black whitespace-nowrap sm:text-3xl lg:text-3xl xl:text-4xl"
+                        >
+                            {{ stat.value }}
+                        </div>
                     </div>
-
-                    <div class="pt-1 opacity-70">{{ stat.description }}</div>
+                    <div class="text-sm text-black/70">
+                        {{ $t(stat.descriptionKey, stat.description) }}
+                    </div>
                 </div>
             </div>
         </div>
@@ -129,12 +138,14 @@
 <script setup lang="ts">
 import {
     Asterisk,
+    Clock,
     Cube,
     Flash,
     Home,
     Leaf,
     MapPin,
     Palette,
+    ShieldCheck,
     TwoPointsCircle,
     Wind,
 } from '@iconoir/vue';
@@ -142,6 +153,7 @@ import { computed, ref } from 'vue';
 import type { Component } from 'vue';
 import { route } from 'ziggy-js';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
+import ButtonSecondary from '@/custom/ButtonSecondary.vue';
 import { PRODUCTS, ProductId } from '@/types/products';
 
 const ICON_MAP: Record<string, Component> = {
@@ -154,6 +166,8 @@ const ICON_MAP: Record<string, Component> = {
     flash: Flash,
     'map-pin': MapPin,
     palette: Palette,
+    'shield-check': ShieldCheck,
+    clock: Clock,
 };
 
 const selectedProductId = ref<string>(ProductId.StromV1);

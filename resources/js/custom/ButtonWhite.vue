@@ -1,22 +1,41 @@
 <template>
-    <component
-        :is="href ? Link : 'button'"
-        class="inline-block rounded-xl bg-white px-5 text-black"
-        :class="variant === 'slim' ? 'py-2' : 'py-3'"
-        href=""
+    <a
+        v-if="href"
+        :href="href"
+        class="inline-flex items-center justify-center rounded-xl bg-white px-2 text-center font-medium text-black transition-all hover:bg-white/90 cursor-pointer sm:px-3 lg:px-4"
+        :class="
+            variant === 'slim'
+                ? 'min-h-9 py-1.5 text-xs sm:text-sm'
+                : 'min-h-11 py-2.5 text-xs sm:text-sm lg:text-base'
+        "
     >
-        <slot />
-    </component>
+        <span class="w-full text-center leading-snug truncate pointer-events-none">
+            <slot />
+        </span>
+    </a>
+    <button
+        v-else
+        type="button"
+        class="inline-flex items-center justify-center rounded-xl bg-white px-2 text-center font-medium text-black transition-all hover:bg-white/90 cursor-pointer sm:px-3 lg:px-4"
+        :class="
+            variant === 'slim'
+                ? 'min-h-9 py-1.5 text-xs sm:text-sm'
+                : 'min-h-11 py-2.5 text-xs sm:text-sm lg:text-base'
+        "
+    >
+        <span class="w-full text-center leading-snug truncate pointer-events-none">
+            <slot />
+        </span>
+    </button>
 </template>
 
 <script setup lang="ts">
-import { Link } from '@inertiajs/vue3';
-
-const props = defineProps({
+defineProps({
     variant: {
         type: String,
         default: 'regular',
-        validator: (value: unknown) => ['regular', 'slim'].includes(value as string),
+        validator: (value: unknown) =>
+            ['regular', 'slim'].includes(value as string),
     },
     href: {
         type: String,

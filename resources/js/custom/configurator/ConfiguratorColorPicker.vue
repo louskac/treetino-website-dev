@@ -19,8 +19,8 @@
                     ]"
                     :style="color.hex ? { background: color.hex } : {}"
                 />
-                <span class="flex-1 text-sm text-left text-black dark:text-white">{{ color.label }}</span>
-                <span class="text-xs text-black dark:text-white">{{ color.price ?? 'Zdarma' }}</span>
+                <span class="flex-1 text-sm text-left text-black dark:text-white">{{ color.labelKey ? $t(color.labelKey) : color.label }}</span>
+                <span class="text-xs text-black dark:text-white">{{ color.priceKey ? $t(color.priceKey) : (color.price ?? $t('configurator.free')) }}</span>
             </button>
         </div>
     </div>
@@ -30,8 +30,10 @@
 export type ColorOption = {
     id: string;
     label: string;
+    labelKey?: string;
     hex: string | null;
     price: string | null;
+    priceKey?: string;
     isCustom: boolean;
     isTransparent?: boolean;
 };

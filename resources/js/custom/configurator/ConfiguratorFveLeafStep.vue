@@ -3,7 +3,7 @@
         <p
             class="mb-4 text-xs tracking-widest text-black/70 uppercase dark:text-white/50"
         >
-            {{ formatStep(stepNumber) }} — Design FVE listů
+            {{ formatStep(stepNumber) }} — {{ $t('configurator.steps.fve_leaf') }}
         </p>
         <div class="flex flex-col gap-1">
             <button
@@ -30,10 +30,10 @@
                 <span
                     class="flex-1 text-left text-sm text-black dark:text-white"
                 >
-                    {{ option.label }}
+                    {{ $t(option.labelKey, option.label) }}
                 </span>
                 <span class="text-xs text-black dark:text-white">
-                    {{ option.price ?? 'Zdarma' }}
+                    {{ option.priceKey ? $t(option.priceKey) : (option.price ?? $t('configurator.free')) }}
                 </span>
             </button>
         </div>
@@ -58,37 +58,47 @@ const options = [
     {
         id: 'none',
         label: 'Bez designu',
+        labelKey: 'configurator.fve_leaf.none.label',
         swatch: '#E5E7EB',
         price: null,
         description: 'FVE listy bez sezonního designu.',
+        descKey: 'configurator.fve_leaf.none.desc',
     },
     {
         id: 'spring',
         label: 'Jaro',
+        labelKey: 'configurator.fve_leaf.spring.label',
         swatch: 'linear-gradient(135deg, #CFEA7D 0%, #82B84C 50%, #3F7E3A 100%)',
         price: null,
         description: 'Sezonní design FVE listů pro jarní variantu stromu.',
+        descKey: 'configurator.fve_leaf.spring.desc',
     },
     {
         id: 'summer',
         label: 'Léto',
+        labelKey: 'configurator.fve_leaf.summer.label',
         swatch: 'linear-gradient(135deg, #8BC34A 0%, #4C9A3D 50%, #1F6F3A 100%)',
         price: null,
         description: 'Sezonní design FVE listů pro letní variantu stromu.',
+        descKey: 'configurator.fve_leaf.summer.desc',
     },
     {
         id: 'autumn',
         label: 'Podzim',
+        labelKey: 'configurator.fve_leaf.autumn.label',
         swatch: 'linear-gradient(135deg, #F2B84B 0%, #C85D2A 50%, #7A3B20 100%)',
         price: null,
         description: 'Sezonní design FVE listů pro podzimní variantu stromu.',
+        descKey: 'configurator.fve_leaf.autumn.desc',
     },
     {
         id: 'winter',
         label: 'Zima',
+        labelKey: 'configurator.fve_leaf.winter.label',
         swatch: 'linear-gradient(135deg, #F3F7FA 0%, #B8D1E0 50%, #6E8798 100%)',
         price: null,
         description: 'Sezonní design FVE listů pro zimní variantu stromu.',
+        descKey: 'configurator.fve_leaf.winter.desc',
     },
 ];
 

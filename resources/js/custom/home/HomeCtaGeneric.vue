@@ -1,4 +1,12 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import ButtonWhite from '@/custom/ButtonWhite.vue';
+
+defineProps<{
+    title?: string;
+    buttonText?: string;
+    buttonHref?: string;
+}>();
+</script>
 
 <template>
     <section class="cta-generic relative h-180 overflow-hidden bg-t-blue">
@@ -26,11 +34,20 @@
             class="relative mx-auto h-full w-full max-w-[1200px] sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
         >
             <div class="flex h-full w-full p-6">
-                <div class="mx-auto my-auto text-white">
+                <div class="mx-auto my-auto text-center text-white">
                     <h1
-                        class="text-center text-6xl leading-17"
-                        v-html="$t('home.cta.generic')"
+                        class="text-center text-4xl font-medium sm:text-6xl lg:text-7xl leading-tight"
+                        v-html="title || $t('home.cta.generic')"
                     ></h1>
+                    
+                    <div v-if="buttonHref" class="mt-8 flex justify-center">
+                        <ButtonWhite
+                            :href="buttonHref"
+                            class="px-8 py-4 text-base font-semibold text-t-blue transition-all hover:scale-105 sm:text-lg"
+                        >
+                            {{ buttonText || 'Nakonfigurovat' }}
+                        </ButtonWhite>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,0 +1,756 @@
+{
+    "cs": {
+        "common": {
+            "nav": {
+                "home": "Dom\u016f",
+                "products": "Produkty",
+                "collaboration": "Spolupr\u00e1ce",
+                "media": "M\u00e9dia",
+                "contact": "Kontakt"
+            },
+            "actions": {
+                "info": "V\u00edce Informac\u00ed",
+                "configure": "Konfigurovat",
+                "how": "Jak to funguje?",
+                "preorder": "P\u0159edobjednat",
+                "select": "Vybrat",
+                "selected": "Vybr\u00e1no",
+                "add": "P\u0159idat",
+                "added": "P\u0159id\u00e1no",
+                "back": "Zp\u011bt",
+                "send": "Odeslat",
+                "close": "Zav\u0159\u00edt"
+            },
+            "status": {
+                "coming_soon": "P\u0159ipravujeme"
+            },
+            "footer": {
+                "company": "Spole\u010dnost",
+                "rights": "V\u0161echna pr\u00e1va vyhrazena"
+            },
+            "cookie": {
+                "title": "Tento web používá soubory cookies",
+                "description": "Používáme cookies pro správné fungování webu a anonymní analytiku.",
+                "accept_all": "Přijmout vše",
+                "reject_all": "Odmítnout",
+                "settings": "Nastavení"
+            }
+        },
+        "home": {
+            "meta": {
+                "title": "Treetino"
+            },
+            "hero": {
+                "v1": {
+                    "audience": "Pro firmy a m\u011bsta"
+                },
+                "v2": {
+                    "audience": "Pro v\u00e1\u0161 domov"
+                },
+                "turbine": {
+                    "audience": "Pro velk\u00e9 projekty"
+                }
+            },
+            "features": {
+                "title": "Technologie, kter\u00e1 m\u011bn\u00ed prostor v energii",
+                "key_parameters": "Klíčové Parametry",
+                "design": {
+                    "title": "Designov\u00e1 konstrukce",
+                    "text": "Treetino je chytr\u00fd strom, kter\u00fd na 1 m\u00b2 kombinuje sol\u00e1rn\u00ed a v\u011btrnou energii."
+                },
+                "space": {
+                    "title": "Prostorov\u00e1 efektivita",
+                    "text": "Zabere pouh\u00fd 1 m\u00b2, p\u0159esto nahrad\u00ed 400 m\u00b2 sol\u00e1rn\u00edch panel\u016f."
+                },
+                "performance": {
+                    "title": "Vyvinut\u00fd pro v\u00fdkon",
+                    "text": "Patentovan\u00fd AI syst\u00e9m sleduje slunce a p\u0159ed bou\u0159\u00ed bezpe\u010dn\u011b slo\u017e\u00ed listy."
+                },
+                "premium": {
+                    "title": "Pr\u00e9miov\u00fd design",
+                    "text": "P\u0159izp\u016fsobiteln\u00fd design a barvy slad\u00edte se svou zna\u010dkou \u010di architekturou."
+                },
+                "balance": {
+                    "title": "Rovnov\u00e1ha v\u00fdroby",
+                    "text": "Transparentn\u00ed turb\u00edny vyr\u00e1b\u011bj\u00ed energii i v noci a p\u0159i slab\u00e9m v\u011btru."
+                }
+            },
+            "info": {
+                "card": {
+                    "1": "Vrac\u00edme energetickou stabilitu do va\u0161ich rukou.",
+                    "2": "Treetino je elegantn\u00ed off-grid \u0159e\u0161en\u00ed pro lok\u00e1ln\u00ed nez\u00e1vislost bez kompromis\u016f."
+                },
+                "design": {
+                    "title": "\u0160pi\u010dkov\u00fd design",
+                    "text": "Treetino je v\u00edc ne\u017e elektr\u00e1rna. Je sebev\u011bdom\u00fdm symbolem udr\u017eitelnosti."
+                },
+                "forest": {
+                    "title": "Chytr\u00fd propojen\u00fd les",
+                    "text": "Treetino tvo\u0159\u00ed inteligentn\u00ed, propojen\u00fd ekosyst\u00e9m. Integrovan\u00e1 AI maximalizuje energetick\u00fd v\u00fdnos a \u0159\u00edd\u00ed prediktivn\u00ed \u00fadr\u017ebu."
+                }
+            },
+            "numbers": {
+                "title": "Informace & \u010d\u00edsla"
+            },
+            "cta": {
+                "generic": "Prom\u011b\u0148te pr\u00e1zdn\u00e9 m\u00edsto ve va\u0161\u00ed v\u00fdhodu.<br>Spole\u010dn\u011b s Treetino"
+            }
+        },
+        "app": {
+            "title": "Ve va\u0161\u00ed kapse",
+            "text": "M\u011bjte dokonal\u00fd p\u0159ehled. Sledujte v\u00fdrobu energie v re\u00e1ln\u00e9m \u010dase, ovl\u00e1dejte sv\u011btelnou show, p\u0159ij\u00edmejte upozorn\u011bn\u00ed na \u00fadr\u017ebu a prohl\u00ed\u017eejte si detailn\u00ed historick\u00e9 reporty. To v\u0161e z na\u0161\u00ed intuitivn\u00ed aplikace Treetino pro iOS a Android.",
+            "warning": {
+                "performance": {
+                    "title": "V\u00fdkon",
+                    "text": "44.1 kW p\u0159i 90 %"
+                },
+                "weather": {
+                    "title": "Pozor! Po\u010das\u00ed",
+                    "text": "Ochrana Aktivn\u00ed"
+                }
+            },
+            "energy": {
+                "title": "\u017div\u00fd p\u0159ehled energie",
+                "text": "Aktu\u00e1ln\u00ed v\u00fdkon, denn\u00ed sou\u010dty a rozd\u011blen\u00ed podle zdroj\u016f energie."
+            },
+            "lights": {
+                "title": "Ovl\u00e1d\u00e1n\u00ed sv\u011bteln\u00e9 show",
+                "text": "Navrhujte a pl\u00e1nujte vlastn\u00ed barevn\u00e9 sc\u00e9ny pro osv\u011btlen\u00ed stromu."
+            },
+            "notifications": {
+                "title": "Chytr\u00e1 upozorn\u011bn\u00ed",
+                "text": "Automatick\u00e9 p\u0159ipom\u00ednky \u00fadr\u017eby a notifikace o nestandardn\u00edch stavech."
+            },
+            "weather": {
+                "title": "Integrace po\u010das\u00ed",
+                "text": "P\u0159edpov\u011b\u010f produkce a automatick\u00e1 varov\u00e1n\u00ed na z\u00e1klad\u011b lok\u00e1ln\u00edho po\u010das\u00ed."
+            },
+            "reports": {
+                "title": "Historick\u00e9 reporty",
+                "text": "P\u0159ehledn\u00e9 statistiky v\u00fdkonu za m\u011bs\u00edc, rok i celou dobu provozu."
+            },
+            "remote": {
+                "title": "Vzd\u00e1len\u00e1 konfigurace",
+                "text": "Upravujte \u00fahly nat\u00e1\u010den\u00ed v\u011btv\u00ed a dal\u0161\u00ed syst\u00e9mov\u00e9 p\u0159edvolby na d\u00e1lku."
+            },
+            "download": "Ji\u017e brzy na App Store a Google Play.",
+            "download-phone": "Ji\u017e brzy",
+            "availability": "O\u010dek\u00e1van\u00e1 dostupnost v Q4 2026. P\u0159edb\u011b\u017en\u00e1 registrace a betaverze je p\u0159\u00edstupn\u00e1 pro p\u0159edobjedn\u00e1vky."
+        },
+        "products": {
+            "v1": {
+                "title": "Strom V1",
+                "audience": "Pro firmy a města (49.8 kW)",
+                "lead": "Nejvýkonnější designová hybridní elektrárna na světě. Kombinuje slunce i vítr na 1 m² zastavěné plochy.",
+                "numbers_title": "Strom V1 v číslech",
+                "numbers_description": "Navrženo pro byznys centra, průmyslové parky, městská náměstí a EV nabíjecí huby.",
+                "configure_label": "Konfigurovat Strom V1",
+                "collab_tag": "Špičková Evropská Technologická Spolupráce",
+                "collab_title": "Český Výzkum & Špičková Výroba",
+                "collab": {
+                    "rd_title": "Výzkum & Vývoj",
+                    "rd_text": "Vyvíjeno ve spolupráci s předními českými univerzitami. Výroba a kompletace probíhá v ČR.",
+                    "grants_title": "Dotace & Podpory",
+                    "grants_text": "Na produkty Treetino V1 lze využít národní i evropské dotační programy až do výše 90 %.",
+                    "speed_title": "Rychlost výstavby",
+                    "speed_text": "Expresní instalace od předání staveniště do plného provozu za pouhé 3 měsíce.",
+                    "warranty_title": "Záruka na skelet",
+                    "warranty_text": "Robustní ocelová konstrukce s 15letou zárukou a 25letou garancí FV výkonu (85 %)."
+                },
+                "stats": {
+                    "1": "13,8 kWp FVE + 36 kW VTE",
+                    "2": "Články TopCon s účinností 20,2 %",
+                    "3": "Generátory 4× 3 kW (výška 2,8 m)",
+                    "4": "Dotační programy pro firmy a město",
+                    "5": "Od předání staveniště po spuštění",
+                    "6": "Průměr kmenu 1,0 m u paty"
+                },
+                "showcase1": {
+                    "tag": "Hybridní Výroba 49.8 kW",
+                    "title": "Kombinovaný solární a větrný výkon",
+                    "lead": "Strom V1 kombinuje 13.8 kWp fotovoltaiky (60 listů TopCon) a 36 kW větrných turbín (4× 3 kW). Dodává stabilní energii ve dne i v noci na 1 m² zastavěné plochy."
+                },
+                "showcase2": {
+                    "tag": "TreeApp & AI Inteligencia",
+                    "title": "AI Optimalizace & Dálková Konektivita",
+                    "text": "Pomocí aplikace TreeApp a německých servomotorů se větrve automaticky naklápí za sluncem pro +29% vyšší efektivitu tracking systému. Systém predikuje počasí a v případě vichřice aktivuje ochranný režim.",
+                    "card1": "Sledování výroby, režim čištění listů & světelná show",
+                    "card2": "Integrované rychlonabíjení EV & elektrokol z přebytků"
+                },
+                "cta_title": "Proměňte prázdné místo ve vaší výhodu.<br />Společně s Treetino Strom V1"
+            },
+            "v2": {
+                "title": "Strom V2",
+                "audience": "Pro váš domov & vily (6 – 12 kW)",
+                "lead": "Kompaktní 5metrová hybridní elektrárna pro rezidenční objekty, luxusní vily a butikové hotely.",
+                "numbers_title": "Strom V2 v číslech",
+                "numbers_description": "Ideální řešení pro dokonalé proporce na zahradě bez zabírání trávníku.",
+                "configure_label": "Konfigurovat Strom V2",
+                "stats": {
+                    "1": "12 kWp FVE + 3 kW VTE",
+                    "2": "Zabere jen 1 m² trávníku",
+                    "3": "6× tiché vertikální turbíny",
+                    "4": "Pro rodinné domy a vily",
+                    "5": "Rychlá montáž za 1 den",
+                    "6": "Průměr kmenu 0,6 m u paty"
+                },
+                "tech": {
+                    "tag": "Záruka Kvality Českého Výrobce",
+                    "title": "Technologie Bez Kompromisů",
+                    "item1_title": "Perfektní proporce",
+                    "item1_text": "Kompaktní 5metrová stavba navržená pro přirozené zapadnutí na soukromou zahradu.",
+                    "item2_title": "Rychlá realizace",
+                    "item2_text": "Kompletní instalace od předání staveniště připravena k provozu za pouhé 2 měsíce.",
+                    "item3_title": "Zastavěná plocha",
+                    "item3_text": "Průměr kmenu u paty pouhých 0.50 m. Nahrazuje až 140 m² tradičních střešních panelů.",
+                    "item4_title": "Záruka na výkon",
+                    "item4_text": "15 let záruka na ocelový skelet kmenu a 25 let garance lineárního FV výkonu (85 %)."
+                },
+                "showcase1": {
+                    "tag": "Rezidenční Architektura STC",
+                    "title": "Výkon 6 až 12 kW v elegantním balení",
+                    "lead": "Strom V2 nabízí 5.61 kWp FVE výkonu (61 monokrystalických TopCon listů) s možností osazení větrným kitem s 6 vertikálními turbínami (6 kW). Bez nutnosti stavebního povolení."
+                },
+                "showcase2": {
+                    "tag": "Domácí Energetika",
+                    "title": "Chytré Řízení & Domácí Energetické Centrum",
+                    "text": "Precizní německé servomotory naklápí listy pro o 29 % vyšší účinnost osvitu. Holandské řídicí jednotky a střídače Victron Energy zajišťují bezproblémové propojení s vaším bateriovým úložištěm a wallboxem pro elektromobil.",
+                    "card1": "Režim ochrany před bouří & přehled výroby v mobilu",
+                    "card2": "Prémiová střídačová technika s 5letou zárukou"
+                },
+                "comp": {
+                    "tag": "Tržní Srovnání",
+                    "title": "Srovnání s Konkurencí",
+                    "subtitle": "Porovnání instalovaného výkonu, technologie a investice Treetino V2 s předními světovými výrobci solární architektury.",
+                    "competitor": "Konkurence",
+                    "winner": "Vítěz Výkonu (5× Vyšší)",
+                    "pv_panels": "FVE Solární panely:",
+                    "pv_leaves": "FVE Solární listy:",
+                    "wind_turbine": "Větrná turbína:",
+                    "none": "Neobsahuje",
+                    "operation": "Provoz:",
+                    "daylight_only": "Pouze za denního slunce",
+                    "hybrid_op": "Hybridní provoz:",
+                    "day_night": "24/7 (Dne i Noci)"
+                },
+                "cta_title": "Zažijte energetickou soběstačnost.<br />Nakonfigurujte si váš Treetino Strom V2"
+            },
+            "turbine": {
+                "title": "Větrná Turbína",
+                "audience": "Treetino Aero (1 – 3 kW)",
+                "lead": "Samostatné tiché vertikální turbíny ve tvaru kapky, bezpečné pro ptactvo a navržené pro splynutí s architekturou.",
+                "numbers_title": "Větrná Turbína v číslech",
+                "numbers_description": "Ideální doplněk pro střechy budov, parkovací domy nebo městskou infrastrukturu.",
+                "configure_label": "Konfigurovat Turbínu",
+                "stats": {
+                    "1": "Max. výkon jedné turbíny",
+                    "2": "Tichý provoz s nízkým startem",
+                    "3": "Odolnost vůči větru až 45 m/s",
+                    "4": "Transparentní polymerový design",
+                    "5": "Snadná montáž na stožár i střechu",
+                    "6": "Bezúdržbový provoz s životností 20 let"
+                },
+                "tech": {
+                    "tag": "Bezpečná & Tichá Větrná Energie",
+                    "title": "Patentovaný Tvar Kapky",
+                    "item1_title": "Nízký startovací vítr",
+                    "item1_text": "Začíná vyrábět energii už při mírném vánku 1.8 m/s s 21% jmenovitou účinností.",
+                    "item2_title": "Ochrana ptactva",
+                    "item2_text": "Svislá osa rotace a souvislý tvar kapky minimalizují riziko pro ptactvo.",
+                    "item3_title": "Flexibilní kotvení",
+                    "item3_text": "Montáž na samostatný 5m sloup, zeď/fasádu budovy nebo střechu.",
+                    "item4_title": "Rychlost výstavby",
+                    "item4_text": "Instalace od předání staveniště připravena k provozu za pouhé 2 měsíce."
+                },
+                "showcase1": {
+                    "tag": "Aerodynamika 2. generace",
+                    "title": "Transparentní turbíny 2. generace",
+                    "lead": "Svislá osa rotace a lehký transparentní polymer vytváří nerušivý design, který přirozeně splyne s libovolnou fasádou či sloupem. Nezávislé na směru větru."
+                },
+                "showcase2": {
+                    "tag": "Instalační Variabilita",
+                    "title": "Flexibilní systém montáže",
+                    "text": "Navrženo pro snadné uchycení na stožáry, střechy výškových budov i stěny komerčních a průmyslových objektů.",
+                    "pole": "Sloup",
+                    "pole_sub": "Montáž na stožár (5 m)",
+                    "wall": "Stěna",
+                    "wall_sub": "Fasády budov",
+                    "roof": "Střecha",
+                    "roof_sub": "Výškové objekty"
+                },
+                "cta_title": "Tichá větrná energie pro váš objekt.<br />Nakonfigurujte si větrnou turbínu Treetino Aero"
+            },
+            "datasheet": {
+                "tag": "Oficiální Datasheet STC",
+                "model": "Model",
+                "power": "Nominální Max. Výkon (Pmax)",
+                "pv": "FVE Solární Články",
+                "wind": "VTE Větrné Turbíny",
+                "wind_speed": "Startovací / Jmenovitá Rychlost Větru",
+                "dimensions": "Rozměry & Zastavěná Plocha",
+                "voltage": "Max. Provozní Napětí DC",
+                "warranty_steel": "Záruka Ocelový Skelet",
+                "warranty_pv": "Záruka FVE Produkt & Výkon",
+                "warranty_elec": "Záruka Energo Část (Victron)",
+                "cert": "Certifikace & Normy"
+            },
+            "portfolio": {
+                "tag": "Portfolio Treetino",
+                "title": "Prozkoumejte další produktové stránky",
+                "description": "Kliknutím na produkt přejdete na jeho samostatnou landing page."
+            }
+        },
+        "configurator": {
+            "title": "Konfigur\u00e1tor",
+            "summary": "Shrnut\u00ed objedn\u00e1vky",
+            "base_price": "Z\u00e1kladn\u00ed cena",
+            "cash": "Platba v hotovosti",
+            "green_loan": "Zelen\u00fd \u00fav\u011br",
+            "individual": "Individu\u00e1ln\u00ed",
+            "steps": {
+                "color": "Barva konstrukce",
+                "leaf_color": "Barva list\u016f",
+                "leaf_design": "Design FVE list\u016f",
+                "battery": "Bateriov\u00e9 \u00falo\u017ei\u0161t\u011b",
+                "connectivity": "Konektivita",
+                "wind_turbines": "V\u011btrn\u00e9 turb\u00edny",
+                "turbine_size": "Velikost turb\u00edny",
+                "turbine_mount": "Um\u00edst\u011bn\u00ed turb\u00edny",
+                "tree_design": "Design stromu",
+                "addons": "Dopl\u0148ky"
+            },
+            "preview": {
+                "addons": {
+                    "ev_charger": {
+                        "text": "Z\u00e1stupn\u00fd text pro nab\u00edjen\u00ed elektromobil\u016f."
+                    },
+                    "battery": {
+                        "text": "Z\u00e1stupn\u00fd text pro bateriov\u00e9 \u00falo\u017ei\u0161t\u011b.",
+                        "none": "Z\u00e1stupn\u00fd text pro \u017e\u00e1dn\u00e9 bateriov\u00e9 \u00falo\u017ei\u0161t\u011b."
+                    },
+                    "bike_charger": {
+                        "text": "Z\u00e1stupn\u00fd text pro nab\u00edjen\u00ed elektrokol."
+                    }
+                },
+                "connectivity": {
+                    "premium": {
+                        "text": "Z\u00e1stupn\u00fd text pro Premium Connectivity.",
+                        "none": "Z\u00e1stupn\u00fd text pro \u017e\u00e1dn\u00e9 Premium Connectivity."
+                    }
+                }
+            }
+        },
+        "contact": {
+            "title": "Kontaktujte n\u00e1s",
+            "lead": "Napi\u0161te n\u00e1m a spole\u010dn\u011b najdeme vhodn\u00e9 \u0159e\u0161en\u00ed.",
+            "form": {
+                "name": "Jm\u00e9no",
+                "email": "E-mail",
+                "message": "Zpr\u00e1va",
+                "submit": "Odeslat zpr\u00e1vu",
+                "success": "D\u011bkujeme! Va\u0161e zpr\u00e1va byla odesl\u00e1na."
+            },
+            "validation": {
+                "name_required": "Jm\u00e9no je povinn\u00e9.",
+                "email_required": "E-mail je povinn\u00fd.",
+                "email_invalid": "E-mail nem\u00e1 platn\u00fd form\u00e1t.",
+                "message_required": "Zpr\u00e1va je povinn\u00e1."
+            }
+        },
+        "media": {
+            "title": "M\u00e9dia",
+            "press_releases": "St\u00e1hnout ofici\u00e1ln\u00ed tiskov\u00e9 zpr\u00e1vy Treetino",
+            "ask": "Zeptejte se Treetino",
+            "brand": "Pou\u017e\u00edvejte zna\u010dku Treetino ve sv\u00fdch materi\u00e1lech spr\u00e1vn\u011b."
+        },
+        "collaboration": {
+            "title": "Spolupr\u00e1ce",
+            "grant_help": "Treetino v\u00e1m pom\u016f\u017ee s \u017e\u00e1dost\u00ed o st\u00e1tn\u00ed dotaci."
+        },
+        "legal": {
+            "privacy": {
+                "title": "Z\u00e1sady zpracov\u00e1n\u00ed osobn\u00edch \u00fadaj\u016f podle sm\u011brnic GDPR"
+            },
+            "tos": {
+                "title": "V\u0161eobecn\u00e9 obchodn\u00ed podm\u00ednky"
+            }
+        }
+    },
+    "en": {
+        "common": {
+            "nav": {
+                "home": "Home",
+                "products": "Products",
+                "collaboration": "Collaboration",
+                "media": "Media",
+                "contact": "Contact"
+            },
+            "actions": {
+                "info": "More Info",
+                "configure": "Configure",
+                "how": "How it Works?",
+                "preorder": "Preorder",
+                "select": "Select",
+                "selected": "Selected",
+                "add": "Add",
+                "added": "Added",
+                "back": "Back",
+                "send": "Send",
+                "close": "Close"
+            },
+            "status": {
+                "coming_soon": "Coming soon"
+            },
+            "footer": {
+                "company": "Company",
+                "rights": "All rights reserved"
+            },
+            "cookie": {
+                "title": "Our site uses cookies",
+                "description": "We use cookies for site functionality and anonymous analytics.",
+                "accept_all": "Accept all",
+                "reject_all": "Reject all",
+                "settings": "Settings"
+            }
+        },
+        "home": {
+            "meta": {
+                "title": "Treetino"
+            },
+            "hero": {
+                "v1": {
+                    "audience": "For companies and cities"
+                },
+                "v2": {
+                    "audience": "For your home"
+                },
+                "turbine": {
+                    "audience": "For large projects"
+                }
+            },
+            "features": {
+                "title": "Technology that turns space into energy",
+                "key_parameters": "Key Parameters",
+                "design": {
+                    "title": "Design-led construction",
+                    "text": "Treetino is a smart tree combining solar and wind energy on just 1 m\u00b2."
+                },
+                "space": {
+                    "title": "Space efficiency",
+                    "text": "It occupies only 1 m\u00b2 while replacing up to 400 m\u00b2 of solar panels."
+                },
+                "performance": {
+                    "title": "Engineered for performance",
+                    "text": "A patented AI system tracks the sun and safely folds the leaves before a storm."
+                },
+                "premium": {
+                    "title": "Premium design",
+                    "text": "Customizable design and colors align with your brand or architecture."
+                },
+                "balance": {
+                    "title": "Balanced generation",
+                    "text": "Transparent turbines generate energy at night and even in light winds."
+                }
+            },
+            "info": {
+                "card": {
+                    "1": "We return energy grid stability into your own hands.",
+                    "2": "Treetino is an elegant off-grid solution for local independence without compromise."
+                },
+                "design": {
+                    "title": "Outstanding design",
+                    "text": "Treetino is more than a power plant. It is a confident symbol of sustainability."
+                },
+                "forest": {
+                    "title": "A smart connected forest",
+                    "text": "Integrated AI maximizes energy yield and manages predictive maintenance."
+                }
+            },
+            "numbers": {
+                "title": "Facts & figures"
+            },
+            "cta": {
+                "generic": "Turn your empty space into an asset.<br>With Treetino"
+            }
+        },
+        "app": {
+            "title": "In Your Pocket",
+            "text": "Gain complete visibility. Track real-time energy generation, control light shows, receive maintenance alerts, and view detailed historical reports\u2014all from our intuitive Treetino app for iOS and Android.",
+            "warning": {
+                "performance": {
+                    "title": "Performance",
+                    "text": "44.1 kW at 90 %"
+                },
+                "weather": {
+                    "title": "Weather Warning",
+                    "text": "Safe Mode Active"
+                }
+            },
+            "energy": {
+                "title": "Live Energy Dashboard",
+                "text": "Real-time output, daily totals, and breakdown by energy source."
+            },
+            "lights": {
+                "title": "Light Show Controls",
+                "text": "Design and schedule custom color scenes for tree illumination."
+            },
+            "notifications": {
+                "title": "Smart Notifications",
+                "text": "Automated maintenance reminders and status notifications."
+            },
+            "weather": {
+                "title": "Weather Integration",
+                "text": "Production forecasting and automated warnings based on local weather."
+            },
+            "reports": {
+                "title": "Historical Reports",
+                "text": "Clear performance analytics per month, year, and total operation."
+            },
+            "remote": {
+                "title": "Remote Configuration",
+                "text": "Adjust branch tilt angles and system preferences remotely."
+            },
+            "download": "Coming Soon on App Store and Google Play.",
+            "download-phone": "Coming Soon",
+            "availability": "Projected availability Q4 2026. Pre-registration and beta access available for pre-orders."
+        },
+        "products": {
+            "v1": {
+                "title": "Tree V1",
+                "audience": "For Companies & Cities (49.8 kW)",
+                "lead": "The world's most powerful design hybrid power plant. Combines solar and wind energy on just 1 m² of footprint.",
+                "numbers_title": "Tree V1 in Numbers",
+                "numbers_description": "Designed for business centers, industrial parks, city squares, and EV charging hubs.",
+                "configure_label": "Configure Tree V1",
+                "collab_tag": "Top European Technology Collaboration",
+                "collab_title": "Czech R&D & High-Tech Production",
+                "collab": {
+                    "rd_title": "R&D",
+                    "rd_text": "Developed in collaboration with top Czech universities. Manufacturing & assembly in CZ.",
+                    "grants_title": "Grants & Support",
+                    "grants_text": "Treetino V1 qualifies for national and EU subsidy programs up to 90%.",
+                    "speed_title": "Construction Speed",
+                    "speed_text": "Express installation from site handover to full operation in just 3 months.",
+                    "warranty_title": "Skeleton Warranty",
+                    "warranty_text": "Robust steel construction with 15-year warranty and 25-year PV output guarantee (85%)."
+                },
+                "stats": {
+                    "1": "13.8 kWp PV + 36 kW Wind",
+                    "2": "TopCon cells with 20.2% efficiency",
+                    "3": "4× 3 kW generators (height 2.8 m)",
+                    "4": "Grant programs for companies and cities",
+                    "5": "From site handover to commissioning",
+                    "6": "Trunk diameter 1.0 m at base"
+                },
+                "showcase1": {
+                    "tag": "Hybrid Generation 49.8 kW",
+                    "title": "Combined Solar & Wind Power",
+                    "lead": "Tree V1 combines 13.8 kWp photovoltaics (60 TopCon leaves) and 36 kW wind turbines (4× 3 kW). Delivers stable energy day and night on 1 m² footprint."
+                },
+                "showcase2": {
+                    "tag": "TreeApp & AI Intelligence",
+                    "title": "AI Optimization & Remote Connectivity",
+                    "text": "Using TreeApp and German servomotors, branches automatically tilt towards the sun for +29% tracking efficiency. System predicts weather and activates storm protection mode during gales.",
+                    "card1": "Production tracking, leaf cleaning mode & light show",
+                    "card2": "Integrated fast EV & e-bike charging from surplus"
+                },
+                "cta_title": "Turn empty space into your advantage.<br />Together with Treetino Tree V1"
+            },
+            "v2": {
+                "title": "Tree V2",
+                "audience": "For Your Home & Villas (6 – 12 kW)",
+                "lead": "Compact 5-metre hybrid power plant for residential properties, luxury villas, and boutique hotels.",
+                "numbers_title": "Tree V2 in Numbers",
+                "numbers_description": "Ideal solution for perfect proportions in the garden without taking up lawn space.",
+                "configure_label": "Configure Tree V2",
+                "stats": {
+                    "1": "12 kWp PV + 3 kW Wind",
+                    "2": "Occupies just 1 m² of lawn",
+                    "3": "6× quiet vertical wind turbines",
+                    "4": "For family houses and villas",
+                    "5": "Fast 1-day installation",
+                    "6": "Trunk diameter 0.6 m at base"
+                },
+                "tech": {
+                    "tag": "Czech Manufacturer Quality Guarantee",
+                    "title": "Technology Without Compromise",
+                    "item1_title": "Perfect Proportions",
+                    "item1_text": "Compact 5-metre structure engineered to fit naturally into private gardens.",
+                    "item2_title": "Fast Delivery",
+                    "item2_text": "Full installation ready for operation within just 2 months from site handover.",
+                    "item3_title": "Footprint",
+                    "item3_text": "Base trunk diameter of just 0.50 m. Replaces up to 140 m² of traditional rooftop panels.",
+                    "item4_title": "Performance Warranty",
+                    "item4_text": "15-year steel skeleton warranty and 25-year linear PV performance guarantee (85%)."
+                },
+                "showcase1": {
+                    "tag": "Residential Architecture STC",
+                    "title": "6 to 12 kW Output in an Elegant Design",
+                    "lead": "Tree V2 delivers 5.61 kWp PV output (61 monocrystalline TopCon leaves) with optional 6-turbine wind kit (6 kW). No building permit required."
+                },
+                "showcase2": {
+                    "tag": "Home Energy",
+                    "title": "Smart Control & Home Energy Center",
+                    "text": "Precision German servomotors tilt leaves for +29% solar efficiency. Dutch Victron Energy control units ensure seamless connection to battery storage and EV wallbox.",
+                    "card1": "Storm protection mode & mobile production overview",
+                    "card2": "Premium inverter technology with 5-year warranty"
+                },
+                "comp": {
+                    "tag": "Market Comparison",
+                    "title": "Comparison with Competition",
+                    "subtitle": "Comparing installed capacity, technology, and investment of Treetino V2 with leading solar architecture manufacturers.",
+                    "competitor": "Competitor",
+                    "winner": "Output Winner (5× Higher)",
+                    "pv_panels": "PV Solar Panels:",
+                    "pv_leaves": "PV Solar Leaves:",
+                    "wind_turbine": "Wind Turbine:",
+                    "none": "Not included",
+                    "operation": "Operation:",
+                    "daylight_only": "Daylight only",
+                    "hybrid_op": "Hybrid Operation:",
+                    "day_night": "24/7 (Day & Night)"
+                },
+                "cta_title": "Experience energy independence.<br />Configure your Treetino Tree V2"
+            },
+            "turbine": {
+                "title": "Wind Turbine",
+                "audience": "Treetino Aero (1 – 3 kW)",
+                "lead": "Standalone silent teardrop vertical wind turbines, bird-safe and engineered to harmonize with modern architecture.",
+                "numbers_title": "Wind Turbine in numbers",
+                "numbers_description": "Ideal addition for building rooftops, parking garages, or city infrastructure.",
+                "configure_label": "Configure Turbine",
+                "stats": {
+                    "1": "Max output per turbine",
+                    "2": "Quiet operation with low startup",
+                    "3": "Wind resistance up to 45 m/s",
+                    "4": "Transparent polymer design",
+                    "5": "Easy mounting on pole or roof",
+                    "6": "Maintenance-free with 20-year lifespan"
+                },
+                "tech": {
+                    "tag": "Safe & Quiet Wind Energy",
+                    "title": "Patented Teardrop Shape",
+                    "item1_title": "Low Startup Wind",
+                    "item1_text": "Starts generating power at a light breeze of 1.8 m/s with 21% rated efficiency.",
+                    "item2_title": "Bird Safety",
+                    "item2_text": "Vertical rotation axis and continuous teardrop form eliminate hazard to birds.",
+                    "item3_title": "Flexible Mounting",
+                    "item3_text": "Mounting on standalone 5m pole, building wall/facade, or rooftop.",
+                    "item4_title": "Construction Speed",
+                    "item4_text": "Installation ready for operation within 2 months from site handover."
+                },
+                "showcase1": {
+                    "tag": "2nd Gen Aerodynamics",
+                    "title": "2nd Gen Transparent Turbines",
+                    "lead": "Vertical rotation axis and lightweight transparent polymer create a non-intrusive aesthetic that blends into facades and pillars."
+                },
+                "showcase2": {
+                    "tag": "Installation Options",
+                    "title": "Flexible Mounting System",
+                    "text": "Engineered for easy mounting on light poles, high-rise rooftops, or walls of commercial buildings.",
+                    "pole": "Pole",
+                    "pole_sub": "Pole mounting (5 m)",
+                    "wall": "Wall",
+                    "wall_sub": "Building facades",
+                    "roof": "Roof",
+                    "roof_sub": "High-rise structures"
+                },
+                "cta_title": "Silent wind energy for your building.<br />Configure your Treetino Aero wind turbine"
+            },
+            "datasheet": {
+                "tag": "Official STC Datasheet",
+                "model": "Model",
+                "power": "Nominal Max Output (Pmax)",
+                "pv": "PV Solar Cells",
+                "wind": "Wind Turbines",
+                "wind_speed": "Startup / Rated Wind Speed",
+                "dimensions": "Dimensions & Footprint",
+                "voltage": "Max Operating Voltage DC",
+                "warranty_steel": "Steel Skeleton Warranty",
+                "warranty_pv": "PV Product & Yield Warranty",
+                "warranty_elec": "Electrical System Warranty (Victron)",
+                "cert": "Certifications & Standards"
+            },
+            "portfolio": {
+                "tag": "Treetino Portfolio",
+                "title": "Explore Other Product Pages",
+                "description": "Click on a product to navigate to its dedicated landing page."
+            }
+        },
+        "configurator": {
+            "title": "Configurator",
+            "summary": "Order summary",
+            "base_price": "Base price",
+            "cash": "Cash payment",
+            "green_loan": "Green loan",
+            "individual": "Individual",
+            "steps": {
+                "color": "Construction color",
+                "leaf_color": "Leaf color",
+                "leaf_design": "PV leaf design",
+                "battery": "Battery storage",
+                "connectivity": "Connectivity",
+                "wind_turbines": "Wind turbines",
+                "turbine_size": "Turbine size",
+                "turbine_mount": "Turbine placement",
+                "tree_design": "Tree design",
+                "addons": "Add-ons"
+            },
+            "preview": {
+                "addons": {
+                    "ev_charger": {
+                        "text": "Placeholder text for EV charging."
+                    },
+                    "battery": {
+                        "text": "Placeholder text for battery storage.",
+                        "none": "Placeholder text for no battery storage."
+                    },
+                    "bike_charger": {
+                        "text": "Placeholder text for e-bike charging."
+                    }
+                },
+                "connectivity": {
+                    "premium": {
+                        "text": "Placeholder text for Premium Connectivity.",
+                        "none": "Placeholder text for No Premium Connectivity."
+                    }
+                }
+            }
+        },
+        "contact": {
+            "title": "Contact us",
+            "lead": "Write to us and we will find the right solution together.",
+            "form": {
+                "name": "Name",
+                "email": "Email",
+                "message": "Message",
+                "submit": "Send message",
+                "success": "Thank you! Your message has been sent."
+            },
+            "validation": {
+                "name_required": "Name is required.",
+                "email_required": "Email is required.",
+                "email_invalid": "Email is not valid.",
+                "message_required": "Message is required."
+            }
+        },
+        "media": {
+            "title": "Media",
+            "press_releases": "Download official Treetino press releases",
+            "ask": "Ask Treetino",
+            "brand": "Represent Treetino correctly in your materials."
+        },
+        "collaboration": {
+            "title": "Collaboration",
+            "grant_help": "Treetino helps you apply for government grants."
+        },
+        "legal": {
+            "privacy": {
+                "title": "Privacy Policy According to the GDPR Guidelines"
+            },
+            "tos": {
+                "title": "Terms of Service"
+            }
+        }
+    }
+}

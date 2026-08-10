@@ -4,31 +4,22 @@
             class="mx-auto flex w-full max-w-[1400px] justify-between px-6 pt-6 sm:w-[500px] sm:px-0 md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
         >
             <div
-                class="flex w-full flex-col rounded-2xl border bg-black/20 p-6 backdrop-blur-2xl transition-all duration-550"
+                class="flex w-full flex-col rounded-2xl border p-6 backdrop-blur-2xl transition-all duration-550"
                 :class="[
                     activeDropdown === 'products' || mobileMenuOpen
-                        ? 'border-transparent bg-white shadow-2xl'
+                        ? 'border-transparent bg-white shadow-2xl text-black'
                         : isScrolled
-                          ? 'bg-white/80 shadow-lg'
-                          : 'border-white/20 bg-black/20',
+                          ? 'border-black/10 bg-white/90 shadow-lg text-black'
+                          : 'border-white/20 bg-black/20 text-white',
                 ]"
                 @mouseleave="activeDropdown = null"
             >
                 <div class="flex w-full justify-between">
-                    <div class="logo my-auto flex gap-3 text-white">
+                    <div class="logo my-auto flex gap-3">
                         <Link :href="route('home')">
                             <LogoType
-                                class="fill-current transition-all duration-550"
-                                :class="{
-                                    'text-black':
-                                        activeDropdown === 'products' ||
-                                        isScrolled ||
-                                        mobileMenuOpen,
-                                    'text-white':
-                                        activeDropdown !== 'products' &&
-                                        !isScrolled &&
-                                        !mobileMenuOpen,
-                                }"
+                                class="fill-current transition-colors duration-350"
+                                :class="headerIsInverted ? 'text-black' : 'text-white'"
                             />
                         </Link>
                     </div>
@@ -36,54 +27,29 @@
                     <nav class="my-auto hidden gap-6 xl:flex">
                         <Link
                             href="#"
-                            class="text-sm transition-all duration-550"
-                            :class="{
-                                'text-black/80 hover:text-black':
-                                    activeDropdown === 'products' || isScrolled,
-                                'text-white/80 hover:text-white':
-                                    activeDropdown !== 'products' &&
-                                    !isScrolled,
-                            }"
+                            class="text-sm font-medium transition-colors"
+                            :class="headerIsInverted ? 'text-black/80 hover:text-black' : 'text-white/80 hover:text-white'"
                             @mouseenter="activeDropdown = 'products'"
                             >{{ $t('common.nav.products') }}</Link
                         >
-                        <!--<Link href="#" class="text-sm text-white/80 transition-colors hover:text-white" @mouseenter="activeDropdown = null">Sdílení energie</Link>-->
                         <Link
                             :href="route('collaboration.index')"
-                            class="text-sm transition-all duration-550"
-                            :class="{
-                                'text-black/80 hover:text-black':
-                                    activeDropdown === 'products' || isScrolled,
-                                'text-white/80 hover:text-white':
-                                    activeDropdown !== 'products' &&
-                                    !isScrolled,
-                            }"
+                            class="text-sm font-medium transition-colors"
+                            :class="headerIsInverted ? 'text-black/80 hover:text-black' : 'text-white/80 hover:text-white'"
                             @mouseenter="activeDropdown = null"
                             >{{ $t('common.nav.collaboration') }}</Link
                         >
                         <Link
                             :href="route('media.index')"
-                            class="text-sm transition-all duration-550"
-                            :class="{
-                                'text-black/80 hover:text-black':
-                                    activeDropdown === 'products' || isScrolled,
-                                'text-white/80 hover:text-white':
-                                    activeDropdown !== 'products' &&
-                                    !isScrolled,
-                            }"
+                            class="text-sm font-medium transition-colors"
+                            :class="headerIsInverted ? 'text-black/80 hover:text-black' : 'text-white/80 hover:text-white'"
                             @mouseenter="activeDropdown = null"
                             >{{ $t('common.nav.media') }}</Link
                         >
                         <Link
                             :href="route('contact.index')"
-                            class="text-sm transition-all duration-550"
-                            :class="{
-                                'text-black/80 hover:text-black':
-                                    activeDropdown === 'products' || isScrolled,
-                                'text-white/80 hover:text-white':
-                                    activeDropdown !== 'products' &&
-                                    !isScrolled,
-                            }"
+                            class="text-sm font-medium transition-colors"
+                            :class="headerIsInverted ? 'text-black/80 hover:text-black' : 'text-white/80 hover:text-white'"
                             @mouseenter="activeDropdown = null"
                             >{{ $t('common.nav.contact') }}</Link
                         >
@@ -92,64 +58,29 @@
                     <div class="flex gap-4">
                         <div class="my-auto flex gap-4">
                             <LocaleSwitcher :inverted="headerIsInverted" />
-                            <!--                            <div class="dark-switch my-auto flex text-white">-->
-                            <!--                                <button-->
-                            <!--                                    @click="toggleDark"-->
-                            <!--                                    class="my-auto cursor-pointer p-1 transition-opacity hover:opacity-70"-->
-                            <!--                                >-->
-                            <!--                                    <SunLight-->
-                            <!--                                        v-if="isDark"-->
-                            <!--                                        class="h-4.5 w-4.5 transition-all duration-300"-->
-                            <!--                                        :class="{-->
-                            <!--                                            'text-black/80 hover:text-black':-->
-                            <!--                                                activeDropdown === 'products',-->
-                            <!--                                            'text-white/80 hover:text-white':-->
-                            <!--                                                activeDropdown !== 'products',-->
-                            <!--                                        }"-->
-                            <!--                                        stroke-width="2"-->
-                            <!--                                    />-->
-                            <!--                                    <HalfMoon-->
-                            <!--                                        v-else-->
-                            <!--                                        class="h-4.5 w-4.5 transition-all duration-300"-->
-                            <!--                                        :class="{-->
-                            <!--                                            'text-black/80 hover:text-black':-->
-                            <!--                                                activeDropdown === 'products',-->
-                            <!--                                            'text-white/80 hover:text-white':-->
-                            <!--                                                activeDropdown !== 'products',-->
-                            <!--                                        }"-->
-                            <!--                                        stroke-width="2"-->
-                            <!--                                    />-->
-                            <!--                                </button>-->
-                            <!--                            </div>-->
 
                             <div class="my-auto xl:hidden">
                                 <button
+                                    type="button"
                                     class="-m-1 cursor-pointer p-1"
+                                    :class="headerIsInverted ? 'text-black' : 'text-white'"
                                     @click="mobileMenuOpen = !mobileMenuOpen"
                                 >
                                     <Xmark
                                         v-if="mobileMenuOpen"
                                         stroke-width="2"
-                                        class="h-4.5 w-4.5 text-black"
+                                        class="h-5 w-5 text-black"
                                     />
                                     <Menu
                                         v-else
                                         stroke-width="2"
-                                        class="h-4.5 w-4.5"
-                                        :class="{
-                                            'text-black':
-                                                activeDropdown === 'products' ||
-                                                isScrolled,
-                                            'text-white':
-                                                activeDropdown !== 'products' &&
-                                                !isScrolled,
-                                        }"
+                                        class="h-5 w-5"
                                     />
                                 </button>
                             </div>
                         </div>
 
-                        <div class="my-auto hidden text-white md:block">
+                        <div class="my-auto hidden md:block">
                             <ButtonPrimary
                                 :href="route('configurator')"
                                 variant="slim"
@@ -172,63 +103,10 @@
                             :key="item.id"
                             class="flex flex-1 flex-col gap-2 pt-6"
                         >
-                            <div
-                                class="relative flex aspect-4/5 flex-col overflow-clip rounded-xl bg-black/10"
-                            >
-                                <div
-                                    class="absolute top-0 left-0 h-full w-full"
-                                >
-                                    <img
-                                        class="h-full w-full"
-                                        :src="item.image"
-                                        alt=""
-                                    />
-                                </div>
-
-                                <div
-                                    class="absolute bottom-0 left-0 h-50 w-full rounded-b-2xl bg-linear-to-b from-transparent to-black to-50%"
-                                ></div>
-
-                                <div class="relative mt-auto p-6">
-                                    <p
-                                        class="mb-3 text-2xl font-medium text-white"
-                                    >
-                                        {{ item.label }}
-                                    </p>
-                                    <div class="flex gap-2">
-                                        <Link
-                                            :href="`/products/${item.detail}`"
-                                            class="flex-1 rounded-lg py-1.5 text-center text-xs transition-all duration-550"
-                                            :class="{
-                                                'border bg-white text-black/80 hover:text-black/60':
-                                                    activeDropdown ===
-                                                    'products',
-                                                'border border-transparent bg-white text-white/80 hover:text-white':
-                                                    activeDropdown !==
-                                                    'products',
-                                            }"
-                                            >{{
-                                                $t('common.actions.info')
-                                            }}</Link
-                                        >
-                                        <Link
-                                            :href="`/configurator/${item.id}`"
-                                            class="flex-1 rounded-lg py-1.5 text-center text-xs font-medium transition-all duration-550 hover:opacity-80"
-                                            :class="{
-                                                'border border-transparent bg-t-blue text-white':
-                                                    activeDropdown ===
-                                                    'products',
-                                                'border border-transparent bg-white text-t-blue':
-                                                    activeDropdown !==
-                                                    'products',
-                                            }"
-                                            >{{
-                                                $t('common.actions.preorder')
-                                            }}</Link
-                                        >
-                                    </div>
-                                </div>
-                            </div>
+                            <ProductCard
+                                :product="item"
+                                @click="activeDropdown = null"
+                            />
                         </div>
                     </div>
                 </Transition>
@@ -245,7 +123,7 @@
                         class="mt-6 border-t border-black/10 pt-6 xl:hidden"
                     >
                         <!-- Nav links -->
-                        <nav class="flex flex-col">
+                        <nav class="flex flex-col gap-1">
                             <Link
                                 :href="route('collaboration.index')"
                                 class="rounded-xl px-3 py-3 text-sm font-medium text-black/80 transition-colors hover:bg-black/5 hover:text-black"
@@ -267,38 +145,38 @@
                         </nav>
 
                         <!-- Products -->
-                        <div class="mt-2">
+                        <div class="mt-4">
                             <p
-                                class="mb-1 px-3 text-xs font-semibold tracking-[0.2em] text-black/40 uppercase"
+                                class="mb-2 px-3 text-xs font-semibold tracking-[0.2em] text-black/40 uppercase"
                             >
                                 {{ $t('common.nav.products') }}
                             </p>
-                            <div class="flex flex-col">
+                            <div class="flex flex-col gap-1">
                                 <div
                                     v-for="item in products"
                                     :key="item.id"
                                     class="flex items-center justify-between rounded-xl px-3 py-2.5 transition-colors hover:bg-black/5"
                                 >
                                     <span
-                                        class="text-sm font-medium text-black/80"
+                                        class="text-sm font-medium text-black"
                                         >{{ item.label }}</span
                                     >
                                     <div class="flex gap-2">
-                                        <Link
+                                        <a
                                             :href="`/products/${item.detail}`"
-                                            class="rounded-lg border border-black/20 px-3 py-1 text-xs text-black/70 transition-colors hover:text-black"
+                                            class="rounded-lg border border-black/10 px-3 py-1 text-xs text-black/80 transition-colors hover:text-black"
                                             @click="mobileMenuOpen = false"
                                             >{{
-                                                $t('common.actions.configure')
-                                            }}</Link
+                                                $t('common.actions.info')
+                                            }}</a
                                         >
-                                        <Link
-                                            :href="`/configurator?product=${item.id}`"
+                                        <a
+                                            :href="`/configurator/${item.id}`"
                                             class="rounded-lg bg-t-blue px-3 py-1 text-xs font-medium text-white transition-opacity hover:opacity-80"
                                             @click="mobileMenuOpen = false"
                                             >{{
                                                 $t('common.actions.preorder')
-                                            }}</Link
+                                            }}</a
                                         >
                                     </div>
                                 </div>
@@ -311,10 +189,9 @@
                                 :href="route('configurator')"
                                 class="w-full text-center"
                                 @click="mobileMenuOpen = false"
-                                >{{
-                                    $t('common.actions.preorder')
-                                }}</ButtonPrimary
                             >
+                                {{ $t('common.actions.preorder') }}
+                            </ButtonPrimary>
                         </div>
                     </div>
                 </Transition>
@@ -324,84 +201,21 @@
 </template>
 
 <script setup lang="ts">
-import { SunLight, HalfMoon, Menu, Xmark } from '@iconoir/vue';
 import { Link } from '@inertiajs/vue3';
-import { ref, onMounted, onUnmounted, computed } from 'vue';
-import { route } from 'ziggy-js';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
+
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
-import ButtonWhite from '@/custom/ButtonWhite.vue';
 import LocaleSwitcher from '@/custom/LocaleSwitcher.vue';
 import LogoType from '@/custom/LogoType.vue';
+import ProductCard from '@/custom/ProductCard.vue';
 import { PRODUCTS } from '@/types/products';
-
-const props = defineProps({
-    scroll: {
-        type: Boolean,
-        default: true,
-    },
-});
-
-const activeDropdown = ref<string | null>(null);
-const mobileMenuOpen = ref(false);
-
-const isScrolled = ref(!props.scroll);
+import { Menu, Xmark } from '@iconoir/vue';
 
 const products = PRODUCTS;
 
-const handleScroll = () => {
-    if (!props.scroll) {
-        isScrolled.value = true;
-
-        return;
-    }
-
-    // Change state after 600px
-    isScrolled.value = window.scrollY > 600;
-};
-
-// Close mobile menu exactly once when crossing the xl breakpoint (1280px)
-const xlQuery = window.matchMedia('(min-width: 1280px)');
-const handleBreakpoint = (e: MediaQueryListEvent) => {
-    if (e.matches) {
-        mobileMenuOpen.value = false;
-    }
-};
-
-onMounted(() => {
-    if (props.scroll) {
-        window.addEventListener('scroll', handleScroll);
-        // Run once on mount to check current position
-        handleScroll();
-    } else {
-        // If scroll is false, ensure it's set to true
-        isScrolled.value = true;
-    }
-
-    xlQuery.addEventListener('change', handleBreakpoint);
-});
-
-onUnmounted(() => {
-    window.removeEventListener('scroll', handleScroll);
-    xlQuery.removeEventListener('change', handleBreakpoint);
-});
-
-// // 1. Track if we are currently dark
-// const isDark = ref(false);
-
-// onMounted(() => {
-//     // Check the actual HTML class on load
-//     isDark.value = document.documentElement.classList.contains('dark');
-// });
-
-// const toggleDark = () => {
-//     isDark.value = !isDark.value;
-//
-//     // 2. Toggle the class
-//     document.documentElement.classList.toggle('dark');
-//
-//     // 3. Save it so it persists on refresh
-//     localStorage.setItem('appearance', isDark.value ? 'dark' : 'light');
-// };
+const isScrolled = ref(false);
+const activeDropdown = ref<'products' | null>(null);
+const mobileMenuOpen = ref(false);
 
 const headerIsInverted = computed(() => {
     return (
@@ -409,6 +223,18 @@ const headerIsInverted = computed(() => {
         isScrolled.value ||
         mobileMenuOpen.value
     );
+});
+
+const handleScroll = () => {
+    isScrolled.value = window.scrollY > 50;
+};
+
+onMounted(() => {
+    window.addEventListener('scroll', handleScroll);
+});
+
+onUnmounted(() => {
+    window.removeEventListener('scroll', handleScroll);
 });
 </script>
 

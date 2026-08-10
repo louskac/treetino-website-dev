@@ -4,7 +4,7 @@
 
             <!-- Header -->
             <div class="flex items-center justify-between border-b border-black/10 dark:border-white/10 p-6">
-                <h2 class="text-base font-semibold text-black dark:text-white">Možnosti financování</h2>
+                <h2 class="text-base font-semibold text-black dark:text-white">{{ $t('configurator.modal_financing.title') }}</h2>
                 <Xmark class="h-5 w-5 cursor-pointer text-black/50 dark:text-white/50 hover:text-black dark:hover:text-white transition-colors" @click="emit('close')" />
             </div>
 
@@ -13,8 +13,8 @@
                 <!-- Grant discount notice -->
                 <div v-if="grantPct" class="flex items-center gap-2 rounded-lg bg-black/4 dark:bg-white/5 px-3 py-2.5">
                     <span class="text-xs text-black/50 dark:text-white/35 leading-relaxed">
-                        Základní cena <strong class="text-black dark:text-white">{{ formatPrice(basePrice) }}&thinsp;Kč</strong>
-                        po odečtení dotace <strong class="text-t-blue">{{ grantLabel }} −{{ grantPct }}&thinsp;%</strong>:
+                        {{ $t('configurator.checkout.base_price') }} <strong class="text-black dark:text-white">{{ formatPrice(basePrice) }}&thinsp;Kč</strong>
+                        {{ $t('configurator.checkout.after_grant') }} <strong class="text-t-blue">{{ grantLabel }} −{{ grantPct }}&thinsp;%</strong>:
                         <strong class="text-black dark:text-white">{{ formatPrice(discountedPrice) }}&thinsp;Kč</strong>
                     </span>
                 </div>
@@ -24,7 +24,7 @@
 
                     <!-- Down payment -->
                     <div class="flex flex-col gap-1.5">
-                        <label class="text-xs text-black/50 dark:text-white/40 uppercase tracking-widest">Platba předem</label>
+                        <label class="text-xs text-black/50 dark:text-white/40 uppercase tracking-widest">{{ $t('configurator.modal_financing.down_payment') }}</label>
                         <div class="relative">
                             <input
                                 type="number"
@@ -44,26 +44,26 @@
 
                     <!-- Loan term -->
                     <div class="flex flex-col gap-1.5">
-                        <label class="text-xs text-black/50 dark:text-white/40 uppercase tracking-widest">Doba splatnosti</label>
+                        <label class="text-xs text-black/50 dark:text-white/40 uppercase tracking-widest">{{ $t('configurator.modal_financing.loan_term') }}</label>
                         <select
                             :value="loanMonths"
                             @change="emit('update:loanMonths', Number(($event.target as HTMLSelectElement).value))"
                             class="w-full rounded-lg border border-black/15 dark:border-white/15 bg-white dark:bg-zinc-900 px-3 py-2.5 text-sm text-black dark:text-white focus:outline-none focus:border-black dark:focus:border-white transition-colors cursor-pointer"
                         >
-                            <option v-for="m in monthOptions" :key="m" :value="m">{{ m }} měsíců</option>
+                            <option v-for="m in monthOptions" :key="m" :value="m">{{ m }} {{ $t('configurator.modal_financing.months') }}</option>
                         </select>
                     </div>
                 </div>
 
                 <!-- Result -->
                 <div class="rounded-xl border border-black/10 dark:border-white/10 p-4 flex flex-col gap-1">
-                    <p class="text-xs text-black/40 dark:text-white/30 uppercase tracking-widest">Měsíční splátka od</p>
+                    <p class="text-xs text-black/40 dark:text-white/30 uppercase tracking-widest">{{ $t('configurator.checkout.monthly_from') }}</p>
                     <p class="text-3xl font-bold tracking-tight text-black dark:text-white">
                         {{ formatPrice(adjustedMonthlyPayment) }}&thinsp;Kč
-                        <span class="text-base font-normal text-black/40 dark:text-white/30">/měs.</span>
+                        <span class="text-base font-normal text-black/40 dark:text-white/30">{{ $t('configurator.checkout.per_month') }}</span>
                     </p>
                     <p class="text-xs text-black/35 dark:text-white/25 mt-0.5">
-                        Výše úvěru {{ formatPrice(loanPrincipal) }}&thinsp;Kč · {{ loanMonths }}&nbsp;měsíců
+                        {{ $t('configurator.modal_financing.loan_amount') }} {{ formatPrice(loanPrincipal) }}&thinsp;Kč · {{ loanMonths }}&nbsp;{{ $t('configurator.modal_financing.months') }}
                     </p>
                 </div>
 
@@ -85,8 +85,8 @@
                         />
                     </div>
                     <span class="text-xs leading-snug" :class="includeSavings ? 'text-emerald-700 dark:text-emerald-400' : 'text-black/65 dark:text-white/55'">
-                        Zahrnout odhadované měsíční úspory za výrobu energie
-                        <span class="block mt-0.5 font-medium">−{{ props.monthlySavings.toLocaleString('cs-CZ') }}&nbsp;Kč/měsíc</span>
+                        {{ $t('configurator.modal_financing.include_savings') }}
+                        <span class="block mt-0.5 font-medium">−{{ props.monthlySavings.toLocaleString('cs-CZ') }}&nbsp;{{ $t('configurator.modal_financing.per_month') }}</span>
                     </span>
                 </button>
 
@@ -97,9 +97,12 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { Xmark } from '@iconoir/vue';
 import { getGrantById } from '@/types/grants';
 import { calcMonthlyPayment, formatPrice } from '@/composables/useFinancing';
+
+const { t } = useI18n();
 
 const props = defineProps<{
     basePrice: number;
@@ -118,7 +121,11 @@ const emit = defineEmits<{
 }>();
 
 const grantPct = computed(() => getGrantById(props.grant)?.percentage ?? 0);
-const grantLabel = computed(() => getGrantById(props.grant)?.label ?? '');
+const grantLabel = computed(() => {
+    const info = getGrantById(props.grant);
+    if (!info) return '';
+    return info.labelKey ? t(info.labelKey, info.label) : info.label;
+});
 
 const discountedPrice = computed(() => {
     const pct = getGrantById(props.grant)?.percentage;

@@ -9,7 +9,7 @@
         <!--        <HomeHeroBackgroundSm class="block lg:hidden" :active-index="activeIndex" />-->
 
         <div
-            class="absolute bottom-0 h-100 w-full bg-linear-to-b from-transparent to-black"
+            class="pointer-events-none absolute bottom-0 h-100 w-full bg-linear-to-b from-transparent to-black"
         ></div>
 
         <!--        <div-->

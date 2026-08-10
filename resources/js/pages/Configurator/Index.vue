@@ -11,7 +11,7 @@
                 class="text-md absolute top-4 left-4 z-10 flex items-center gap-1.5 text-black/35 transition-colors duration-200 hover:text-black/60"
             >
                 <ArrowLeft class="h-4 w-4" />
-                Zpět
+                {{ $t('configurator.back') }}
             </Link>
             <div
                 class="relative flex h-full w-full items-center justify-center"

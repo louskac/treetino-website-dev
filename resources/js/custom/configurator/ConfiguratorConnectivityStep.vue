@@ -3,7 +3,7 @@
         <p
             class="mb-4 text-xs tracking-widest text-black/70 uppercase dark:text-white/50"
         >
-            {{ formatStep(stepNumber) }} — Premium Connectivity
+            {{ formatStep(stepNumber) }} — {{ $t('configurator.steps.connectivity') }}
         </p>
         <div class="flex flex-col gap-1">
             <button
@@ -19,7 +19,7 @@
             >
                 <div class="mb-1 flex items-center justify-between">
                     <span class="text-sm text-black dark:text-white">{{
-                        option.label
+                        $t(option.labelKey, option.label)
                     }}</span>
                     <span
                         class="flex items-center gap-1.5 text-xs transition-colors duration-200"
@@ -30,7 +30,7 @@
                         "
                     >
                         <CheckCircle v-if="modelValue === option.id" />
-                        {{ modelValue === option.id ? 'Přidáno' : 'Přidat' }}
+                        {{ modelValue === option.id ? $t('configurator.added') : $t('configurator.add') }}
                     </span>
                 </div>
                 <p
@@ -45,10 +45,10 @@
                     {{ option.description }}
                 </p>
                 <p
-                    v-if="option.price"
+                    v-if="option.priceKey || option.price"
                     class="mt-1 text-xs text-black/40 dark:text-white/40"
                 >
-                    {{ option.price }}
+                    {{ option.priceKey ? $t(option.priceKey) : option.price }}
                 </p>
             </button>
         </div>
@@ -56,6 +56,7 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useStepFormatter } from '@/composables/useStepFormatter';
 import CheckCircle from '../icons/CheckCircle.vue';
@@ -72,20 +73,24 @@ defineEmits<{
     'update:modelValue': [value: string];
 }>();
 
-const options = [
+const options = computed(() => [
     {
         id: 'none',
         label: 'Bez předplatného',
+        labelKey: 'configurator.connectivity.none.label',
         price: 'Zdarma',
+        priceKey: 'configurator.free',
         roi: null,
         description: t('configurator.preview.connectivity.premium.none'),
     },
     {
         id: 'premium',
         label: 'Premium Connectivity',
+        labelKey: 'configurator.connectivity.premium.label',
         price: 'Měsíční předplatné',
+        priceKey: 'configurator.connectivity.monthly_sub',
         roi: 18,
         description: t('configurator.preview.connectivity.premium.text'),
     },
-];
+]);
 </script>
