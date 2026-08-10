@@ -26,7 +26,17 @@
             },
             "footer": {
                 "company": "Společnost",
-                "rights": "Všechna práva vyhrazena"
+                "rights": "Všechna práva vyhrazena",
+                "links": "Odkazy",
+                "community": "Komunita",
+                "legal": "Právní informace",
+                "grants": "Dotační programy",
+                "terms": "Obchodní podmínky",
+                "privacy": "Zásady ochrany osobních údajů",
+                "cookie_settings": "Nastavení cookies",
+                "newsletter": "Newsletter",
+                "get_updates": "Získejte novinky",
+                "newsletter_subtitle": "Buďte v obraze a získejte nejnovější informace o nových produktech, funkcích a vývoji komunity."
             },
             "cookie": {
                 "title": "Nastavení cookies",
@@ -53,6 +63,7 @@
             },
             "features": {
                 "title": "Technologie, která mění prostor v energii",
+                "title_tag": "Funkce",
                 "key_parameters": "Klíčové Parametry",
                 "design": {
                     "title": "Designová konstrukce",
@@ -334,6 +345,47 @@
                 "description": "Kliknutím na produkt přejdete na jeho samostatnou landing page."
             }
         },
+        "collaboration": {
+            "title": "Spolupráce",
+            "grant_help": "Pomáháme s vyřízením dotačních titulů v rámci ČR i EU.",
+            "grants": {
+                "title": "Dotační programy",
+                "text": "Nabízíme pomoc s dotačními iniciativami EU i místními programy. Kontaktujte naše specialisty přes kontaktní formulář."
+            },
+            "engineering": {
+                "title": "Inženýrství & Vývoj",
+                "text": "Spolupracujeme s místními inženýry a designéry na každodenním zdokonalování našich produktů a služeb."
+            }
+        },
+        "contact": {
+            "title": "Kontaktujte nás",
+            "lead": "Máte dotaz k našim produktům, možnosti financování nebo chcete konzultaci pro váš projekt? Napište nám.",
+            "response_time": "Naši specialisté odpoví do 2 pracovních dnů.",
+            "form": {
+                "name": "Vaše Jméno",
+                "email": "E-mailová adresa",
+                "message": "Zpráva",
+                "message_placeholder": "Napište nám vaši zprávu...",
+                "submit": "Odeslat zprávu",
+                "sending": "Zpráva se zpracovává...",
+                "success": "Zpráva byla úspěšně odeslána. Děkujeme!"
+            }
+        },
+        "media": {
+            "title": "Média & Tisk",
+            "press_releases": "Oficiální tiskové zprávy, oznámení a materiály pro novináře.",
+            "press": {
+                "title": "Tiskové zprávy",
+                "action": "Zobrazit tiskové zprávy"
+            },
+            "ask": "Máte dotaz pro média?",
+            "ask_desc": "Nenašli jste odpověď? Napište našemu týmu přes kontaktní formulář.",
+            "brand": "Stáhněte si naše vektory loga, fotomateriály a vizuální pokyny pro média.",
+            "brand_kit": {
+                "title": "Brand Kit",
+                "action": "Stáhnout Brand Kit"
+            }
+        },
         "configurator": {
             "title": "Konfigurátor",
             "back": "Zpět",
@@ -573,6 +625,10 @@
                 "continue": "Pokračovat",
                 "pay": "Zaplatit {amount} Kč"
             },
+            "modal_info": {
+                "title": "Získat více informací",
+                "body": "Více informací o vybraném dotačním programu nebo konfiguraci vám rádi poskytneme na vyžádání."
+            },
             "months": {
                 "january": "leden",
                 "february": "únor",
@@ -616,7 +672,17 @@
             },
             "footer": {
                 "company": "Company",
-                "rights": "All rights reserved"
+                "rights": "All rights reserved",
+                "links": "Links",
+                "community": "Community",
+                "legal": "Legal",
+                "grants": "Government Grants",
+                "terms": "Terms & Conditions",
+                "privacy": "Privacy Policy",
+                "cookie_settings": "Cookie Settings",
+                "newsletter": "Newsletter",
+                "get_updates": "Get Updates",
+                "newsletter_subtitle": "Stay in the loop and get the latest info about new product, features and community development."
             },
             "cookie": {
                 "title": "Cookie consent",
@@ -643,6 +709,7 @@
             },
             "features": {
                 "title": "Technology that turns space into energy",
+                "title_tag": "Features",
                 "key_parameters": "Key Parameters",
                 "design": {
                     "title": "Design-led construction",
@@ -924,6 +991,47 @@
                 "description": "Click on a product to navigate to its dedicated landing page."
             }
         },
+        "collaboration": {
+            "title": "Collaboration",
+            "grant_help": "We assist with processing grant applications within the CZ and EU.",
+            "grants": {
+                "title": "Government Grants",
+                "text": "We offer assistance with both EU and Local grant initiatives. Contact our specialists via our contact form."
+            },
+            "engineering": {
+                "title": "Engineering",
+                "text": "We cooperate with local engineers and designers to improve our products and services on a daily basis."
+            }
+        },
+        "contact": {
+            "title": "Contact Us",
+            "lead": "Have questions about our products, financing options, or want a consultation for your project? Drop us a line.",
+            "response_time": "Our specialists will respond within 2 business days.",
+            "form": {
+                "name": "Your Name",
+                "email": "Email Address",
+                "message": "Message",
+                "message_placeholder": "Leave your message here...",
+                "submit": "Send Message",
+                "sending": "Your message is being processed...",
+                "success": "Your message has been sent successfully. Thank you!"
+            }
+        },
+        "media": {
+            "title": "Media & Press",
+            "press_releases": "Official press releases, announcements and media kits for journalists.",
+            "press": {
+                "title": "Press Releases",
+                "action": "View Press Releases"
+            },
+            "ask": "Have a Media Query?",
+            "ask_desc": "Didn't find the answer? Write to our team via our contact form.",
+            "brand": "Download our logo vectors, photo assets, and brand guidelines for media coverage.",
+            "brand_kit": {
+                "title": "Brand Kit",
+                "action": "Download Brand Kit"
+            }
+        },
         "configurator": {
             "title": "Configurator",
             "back": "Back",
@@ -1162,6 +1270,10 @@
                 "processing": "Processing...",
                 "continue": "Continue",
                 "pay": "Pay {amount} CZK"
+            },
+            "modal_info": {
+                "title": "Get More Information",
+                "body": "We are happy to provide more information about the selected grant program or configuration upon request."
             },
             "months": {
                 "january": "January",

@@ -23,7 +23,7 @@ async function formProcess() {
         formSending.value = true;
 
         const response = await axios({
-            url: route('contact.store'), // Make sure this matches your route path
+            url: route('contact.store'),
             method: 'POST',
             data: {
                 name: name.value,
@@ -41,7 +41,6 @@ async function formProcess() {
         }>;
 
         if (requestError.response) {
-            // This is where your custom messages from the Controller are!
             formErrors.value = requestError.response.data.errors;
         }
 
@@ -53,7 +52,7 @@ async function formProcess() {
 </script>
 
 <template>
-    <Head title="Contact" />
+    <Head :title="$t('contact.title')" />
 
     <DefaultLayout :scroll="false" class="relative">
         <div class="absolute h-90 w-full bg-blue-50">
@@ -86,8 +85,7 @@ async function formProcess() {
                                 </p>
 
                                 <p>
-                                    Our specialists will respond within 2
-                                    business days.
+                                    {{ $t('contact.response_time') }}
                                 </p>
                             </div>
                         </div>
@@ -152,7 +150,7 @@ async function formProcess() {
                                     class="w-full rounded-xl border bg-white px-4 py-3 text-black"
                                     id="message"
                                     v-model="message"
-                                    placeholder="Leave your message here"
+                                    :placeholder="$t('contact.form.message_placeholder')"
                                 />
                                 <div
                                     v-if="formErrors.message"
@@ -171,26 +169,13 @@ async function formProcess() {
                                 >
                                     {{ $t('contact.form.submit') }}
                                 </ButtonPrimary>
-
-                                <!--  Removed for Prod  -->
-                                <!--                            <ButtonSecondary class="flex w-full">-->
-                                <!--                                <div class="mx-auto flex w-fit gap-2">-->
-                                <!--                                    <div class="my-auto">-->
-                                <!--                                        <Whatsapp class="h-5 w-5" />-->
-                                <!--                                    </div>-->
-                                <!--                                    <div class="my-auto">-->
-                                <!--                                        Chat with WhatsApp-->
-                                <!--                                    </div>-->
-                                <!--                                </div>-->
-                                <!--                            </ButtonSecondary>-->
                             </div>
 
                             <div class="mt-4 text-xs opacity-70">
-                                By submitting the form, you agree to our
                                 <Link
                                     class="underline"
                                     :href="route('legal.pp')"
-                                    >Privacy Policy</Link
+                                    >{{ $t('common.footer.privacy') }}</Link
                                 >
                             </div>
                         </div>
@@ -224,7 +209,7 @@ async function formProcess() {
                                                 v-if="formSending"
                                                 class="absolute left-1/2 -translate-x-1/2 text-center text-sm opacity-70"
                                             >
-                                                Your message is being processed
+                                                {{ $t('contact.form.sending') }}
                                             </div>
                                         </Transition>
 

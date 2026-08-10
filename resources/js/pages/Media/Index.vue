@@ -8,7 +8,7 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue';
 </script>
 
 <template>
-    <Head title="Media" />
+    <Head :title="$t('media.title')" />
 
     <DefaultLayout :scroll="false" class="relative">
         <div class="absolute h-90 w-full bg-blue-50">
@@ -33,7 +33,7 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue';
                     <div
                         class="flex flex-col rounded-2xl border bg-t-blue p-6 text-white shadow-xl"
                     >
-                        <div class="pb-4 text-4xl">Press Releases</div>
+                        <div class="pb-4 text-4xl">{{ $t('media.press.title') }}</div>
 
                         <div class="opacity-70">
                             <p class="mb-3">
@@ -45,7 +45,7 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue';
                             <ButtonWhite
                                 class="w-full text-center"
                             >
-                                View Press Releases
+                                {{ $t('media.press.action') }}
                             </ButtonWhite>
                         </div>
                     </div>
@@ -57,8 +57,7 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue';
 
                         <div class="opacity-70">
                             <p class="">
-                                Didn't find the answer? Write to our team
-                                via our contact form.
+                                {{ $t('media.ask_desc') }}
                             </p>
                         </div>
 
@@ -67,7 +66,7 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue';
                                 :href="route('contact.index')"
                                 class="w-full text-center"
                             >
-                                Contact
+                                {{ $t('common.nav.contact') }}
                             </ButtonPrimary>
                         </div>
                     </div>
@@ -75,7 +74,7 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue';
                     <div
                         class="flex flex-col rounded-2xl border bg-white p-6 shadow-xl"
                     >
-                        <div class="pb-4 text-4xl">Brand Kit</div>
+                        <div class="pb-4 text-4xl">{{ $t('media.brand_kit.title') }}</div>
 
                         <div class="opacity-70">
                             <p class="">
@@ -91,7 +90,7 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue';
                                     <div class="my-auto">
                                         <Download class="h-5 w-5" />
                                     </div>
-                                    <div class="my-auto">Download</div>
+                                    <div class="my-auto">{{ $t('media.brand_kit.action') }}</div>
                                 </div>
                             </ButtonPrimary>
                         </div>

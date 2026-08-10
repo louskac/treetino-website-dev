@@ -28,7 +28,7 @@
                         <div class="flex items-center justify-between">
                             <span
                                 class="text-xs font-semibold tracking-[0.2em] text-black/70 uppercase"
-                                >Funkce</span
+                                >{{ $t('home.features.title_tag') }}</span
                             >
                             <span
                                 class="text-xs font-medium tracking-widest text-black/70"
@@ -51,9 +51,7 @@
 
                     <div class="mt-4">
                         <div class="text-2xl">
-                            Treetino je chytrý strom, který na 1 m² kombinuje
-                            solární a větrnou energii. Jeho 49 kW dokáže napájet
-                            až 60 domácností.
+                            {{ $t('home.features.design.text') }}
                         </div>
                     </div>
                 </swiper-slide>
@@ -74,7 +72,7 @@
                         <div class="flex items-center justify-between">
                             <span
                                 class="text-xs font-semibold tracking-[0.2em] text-black/70 uppercase"
-                                >Funkce</span
+                                >{{ $t('home.features.title_tag') }}</span
                             >
                             <span
                                 class="text-xs font-medium tracking-widest text-black/70"
@@ -97,9 +95,7 @@
 
                     <div class="mt-4">
                         <div class="text-2xl">
-                            Zabere pouhý 1 m², přesto nahradí 400 m² solárních
-                            panelů. Treetino mění parkoviště, firemní areály a
-                            ulice v efektivní zdroje energie.
+                            {{ $t('home.features.space.text') }}
                         </div>
                     </div>
                 </swiper-slide>
@@ -120,7 +116,7 @@
                         <div class="flex items-center justify-between">
                             <span
                                 class="text-xs font-semibold tracking-[0.2em] text-black/70 uppercase"
-                                >Funkce</span
+                                >{{ $t('home.features.title_tag') }}</span
                             >
                             <span
                                 class="text-xs font-medium tracking-widest text-black/70"
@@ -143,9 +139,7 @@
 
                     <div class="mt-4">
                         <div class="text-2xl">
-                            Patentovaný AI systém plynule sleduje slunce, čímž
-                            zvyšuje výkon o 30 %. Před bouří navíc inteligentně
-                            složí své listy pro maximální bezpečnost.
+                            {{ $t('home.features.performance.text') }}
                         </div>
                     </div>
                 </swiper-slide>
@@ -166,7 +160,7 @@
                         <div class="flex items-center justify-between">
                             <span
                                 class="text-xs font-semibold tracking-[0.2em] text-black/70 uppercase"
-                                >Funkce</span
+                                >{{ $t('home.features.title_tag') }}</span
                             >
                             <span
                                 class="text-xs font-medium tracking-widest text-black/70"
@@ -189,9 +183,7 @@
 
                     <div class="mt-4">
                         <div class="text-2xl">
-                            Korunu tvoří 300 solárních listů prémiové české
-                            výroby. Plně přizpůsobitelný design a barvy dokonale
-                            sladíte se svou značkou či architekturou.
+                            {{ $t('home.features.premium.text') }}
                         </div>
                     </div>
                 </swiper-slide>
@@ -212,7 +204,7 @@
                         <div class="flex items-center justify-between">
                             <span
                                 class="text-xs font-semibold tracking-[0.2em] text-black/70 uppercase"
-                                >Funkce</span
+                                >{{ $t('home.features.title_tag') }}</span
                             >
                             <span
                                 class="text-xs font-medium tracking-widest text-black/70"
@@ -235,9 +227,7 @@
 
                     <div class="mt-4">
                         <div class="text-2xl">
-                            Transparentní turbíny 2. generace vyrábí energii 24
-                            hodin denně i při slabém větru. Nerušivý výkon
-                            stvořený pro města.
+                            {{ $t('home.features.balance.text') }}
                         </div>
                     </div>
                 </swiper-slide>

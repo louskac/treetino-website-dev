@@ -6,7 +6,7 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue';
 </script>
 
 <template>
-    <Head title="Collaboration" />
+    <Head :title="$t('collaboration.title')" />
 
     <DefaultLayout :scroll="false" class="relative">
         <div class="absolute h-90 w-full bg-blue-50">
@@ -31,7 +31,7 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue';
                     <div
                         class="flex flex-col rounded-2xl border bg-white p-6 shadow-xl"
                     >
-                        <div class="pb-4 text-4xl">Government Grants</div>
+                        <div class="pb-4 text-4xl">{{ $t('collaboration.grants.title') }}</div>
 
                         <div class="opacity-70">
                             <p class="mb-3">
@@ -39,9 +39,7 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue';
                             </p>
 
                             <p>
-                                We offer assistance with both EU and Local grant
-                                initiatives. Contact our specialists thru our
-                                contact form.
+                                {{ $t('collaboration.grants.text') }}
                             </p>
                         </div>
 
@@ -50,7 +48,7 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue';
                                 :href="route('contact.index')"
                                 class="w-full text-center"
                             >
-                                Contact
+                                {{ $t('common.nav.contact') }}
                             </ButtonPrimary>
                         </div>
                     </div>
@@ -58,13 +56,11 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue';
                     <div
                         class="flex flex-col rounded-2xl border bg-white p-6 shadow-xl"
                     >
-                        <div class="pb-4 text-4xl">Engineering</div>
+                        <div class="pb-4 text-4xl">{{ $t('collaboration.engineering.title') }}</div>
 
                         <div class="opacity-70">
                             <p class="">
-                                We cooperate with local engineers and designers
-                                to improve our products and&nbsp;services on
-                                daily basis.
+                                {{ $t('collaboration.engineering.text') }}
                             </p>
                         </div>
 
@@ -73,7 +69,7 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue';
                                 :href="route('contact.index')"
                                 class="w-full text-center"
                             >
-                                Contact
+                                {{ $t('common.nav.contact') }}
                             </ButtonPrimary>
                         </div>
                     </div>

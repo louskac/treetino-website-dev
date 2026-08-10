@@ -43,7 +43,7 @@
                                     />
                                 </div>
 
-                                <h2 class="my-auto text-xl font-medium text-black">Links</h2>
+                                <h2 class="my-auto text-xl font-medium text-black">{{ $t('common.footer.links') }}</h2>
                             </div>
 
                             <div class="mt-6 flex flex-col gap-2">
@@ -53,9 +53,9 @@
                                 <FooterLink :href="route('configurator')">{{
                                     $t('configurator.title')
                                 }}</FooterLink>
-                                <FooterLink :href="route('collaboration.index')"
-                                    >Government Grants</FooterLink
-                                >
+                                <FooterLink :href="route('collaboration.index')">{{
+                                    $t('common.footer.grants')
+                                }}</FooterLink>
                                 <FooterLink
                                     :href="route('collaboration.index')"
                                     >{{
@@ -84,7 +84,7 @@
                                     />
                                 </div>
 
-                                <h2 class="my-auto text-xl font-medium text-black">Community</h2>
+                                <h2 class="my-auto text-xl font-medium text-black">{{ $t('common.footer.community') }}</h2>
                             </div>
 
                             <div class="mt-6 flex flex-col gap-2">
@@ -107,23 +107,23 @@
                                     />
                                 </div>
 
-                                <h2 class="my-auto text-xl font-medium text-black">Legal</h2>
+                                <h2 class="my-auto text-xl font-medium text-black">{{ $t('common.footer.legal') }}</h2>
                             </div>
 
                             <div class="mt-6 flex flex-col gap-2">
                                 <FooterLink :href="route('legal.tos')">
-                                    Terms & Conditions
+                                    {{ $t('common.footer.terms') }}
                                 </FooterLink>
 
                                 <FooterLink :href="route('legal.pp')">
-                                    Privacy Policy
+                                    {{ $t('common.footer.privacy') }}
                                 </FooterLink>
 
                                 <div
                                     @click="openSettings"
                                     class="group relative w-fit cursor-pointer text-black/70 transition-colors duration-300 hover:text-black"
                                 >
-                                    <div class="relative">Cookie Settings</div>
+                                    <div class="relative">{{ $t('common.footer.cookie_settings') }}</div>
                                     <div
                                         class="absolute bottom-0 left-0 h-[1px] w-0 bg-black transition-all duration-300 group-hover:w-full"
                                     ></div>
@@ -186,7 +186,7 @@
                             >
                                 <span
                                     class="text-xs font-semibold tracking-[0.2em] text-black/60 uppercase"
-                                    >Newsletter</span
+                                    >{{ $t('common.footer.newsletter') }}</span
                                 >
                                 <span
                                     class="text-xs font-medium tracking-widest text-black/60"
@@ -196,12 +196,10 @@
                             </div>
 
                             <div class="mt-3">
-                                <h2 class="text-3xl font-medium text-black">Get Updates</h2>
+                                <h2 class="text-3xl font-medium text-black">{{ $t('common.footer.get_updates') }}</h2>
 
                                 <p class="mt-1 text-black/70">
-                                    Stay in the loop and get the latest info
-                                    about new product, features and community
-                                    development.
+                                    {{ $t('common.footer.newsletter_subtitle') }}
                                 </p>
                             </div>
 
@@ -216,14 +214,13 @@
                                     <ButtonPrimary
                                         class="flex shrink-0 items-center justify-center px-6"
                                     >
-                                        Send
+                                        {{ $t('common.actions.send') }}
                                     </ButtonPrimary>
                                 </div>
                             </div>
 
                             <div class="text-xs text-black/60">
-                                By submitting the form, you agree to our
-                                <Link class="underline hover:text-black" :href="route('legal.pp')">Privacy Policy</Link>
+                                <Link class="underline hover:text-black" :href="route('legal.pp')">{{ $t('common.footer.privacy') }}</Link>
                             </div>
                         </div>
                     </div>
