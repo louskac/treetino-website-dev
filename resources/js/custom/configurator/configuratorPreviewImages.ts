@@ -5,6 +5,7 @@ export type ConfiguratorPreviewSelection = {
     color: string;
     leafColor: string;
     fveLeafDesign: string;
+    customFveLeafImage?: string | null;
     connectivity: string;
     battery: string;
     evChargerCount: number;
@@ -338,6 +339,19 @@ export function getConfiguratorPreview(
 
                 if (value === 'none') {
                     return [];
+                }
+
+                if (
+                    layer.selection === 'fveLeafDesign' &&
+                    value === 'custom' &&
+                    selection.customFveLeafImage
+                ) {
+                    return [
+                        {
+                            src: selection.customFveLeafImage,
+                            alt: 'Vlastní fotka FVE listů na míru',
+                        },
+                    ];
                 }
 
                 const fileName = `${layer.prefix}_${value}.webp`;

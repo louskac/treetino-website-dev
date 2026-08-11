@@ -165,6 +165,7 @@
                     <ConfiguratorFveLeafStep
                         v-else-if="step.id === 'fve-leaf'"
                         v-model="selectedFveLeafDesign"
+                        v-model:custom-image="customFveLeafImage"
                         :step-number="index + 1"
                         :product-id="selectedProductId"
                     />
@@ -350,6 +351,7 @@ watch(selectedProductId, (newProductId) => {
 const selectedColorId = ref('white');
 const selectedLeafColorId = ref('green');
 const selectedFveLeafDesign = ref('spring');
+const customFveLeafImage = ref<string | null>(null);
 const selectedConnectivity = ref('none');
 const selectedBattery = ref('none');
 const selectedWindTurbines = ref('without-turbines');
@@ -402,6 +404,7 @@ const previewSelection = computed<ConfiguratorPreviewSelection>(() => ({
     color: selectedColorId.value,
     leafColor: selectedLeafColorId.value,
     fveLeafDesign: selectedFveLeafDesign.value,
+    customFveLeafImage: customFveLeafImage.value,
     connectivity: selectedConnectivity.value,
     battery: selectedBattery.value,
     evChargerCount: evChargerCount.value,

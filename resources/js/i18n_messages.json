@@ -504,6 +504,10 @@
                 "winter": {
                     "label": "Zima",
                     "desc": "Sezonní design FVE listů pro zimní variantu stromu."
+                },
+                "custom": {
+                    "label": "Na míru",
+                    "desc": "Nahrajte vlastní fotku nebo grafiku pro potisk FVE listů."
                 }
             },
             "connectivity": {
@@ -1150,6 +1154,10 @@
                 "winter": {
                     "label": "Winter",
                     "desc": "Seasonal PV leaf design for winter tree variant."
+                },
+                "custom": {
+                    "label": "Custom",
+                    "desc": "Upload your custom picture or graphics to print onto the PV leaves."
                 }
             },
             "connectivity": {
