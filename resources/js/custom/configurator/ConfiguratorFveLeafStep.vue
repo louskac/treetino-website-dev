@@ -40,7 +40,7 @@
                         :style="!option.isCustom ? { background: option.swatch } : {}"
                     />
                     <span
-                        class="flex-1 text-left text-sm text-black dark:text-white font-medium"
+                        class="flex-1 text-left text-sm font-medium text-black dark:text-white"
                     >
                         {{ $t(option.labelKey, option.label) }}
                     </span>
@@ -92,34 +92,12 @@
                             @wheel.prevent="onWheelZoom"
                             class="group relative aspect-square w-full cursor-grab overflow-hidden rounded-2xl border border-black/10 bg-stone-100 select-none active:cursor-grabbing dark:border-white/10 dark:bg-zinc-900/80 shadow-xs"
                         >
-                            <!-- User Image inside Drag Pad (Branch Mode) -->
+                            <!-- Rendered Mapped Leaf Texture (Exact WYSIWYG Canvas Output) -->
                             <img
-                                v-if="mappingMode === 'branch'"
-                                :src="rawUserImage"
-                                alt="Vlastní obrázek"
-                                class="absolute max-w-none pointer-events-none transition-transform duration-75"
-                                :style="{
-                                    width: (100 * scale) + '%',
-                                    height: (100 * scale) + '%',
-                                    left: (50 + posX - (50 * scale)) + '%',
-                                    top: (50 + posY - (50 * scale)) + '%',
-                                    objectFit: 'cover'
-                                }"
-                            />
-
-                            <!-- Rendered Individual Leaves Preview inside Drag Pad (Individual Mode) -->
-                            <img
-                                v-else-if="customImage"
+                                v-if="customImage"
                                 :src="customImage"
-                                alt="Vlastní obrázek na listech"
-                                class="absolute inset-0 h-full w-full object-contain pointer-events-none"
-                            />
-
-                            <!-- Leaf Contour Mask Overlay (Default Black PV Panel Grid) -->
-                            <img
-                                src="/img/config-images/v1-config-compressed-webp/leaf-color/fve-design/fve_black_pv_mask.png"
-                                alt="FVE Listy vzor"
-                                class="absolute inset-0 h-full w-full object-contain mix-blend-overlay opacity-70 pointer-events-none"
+                                alt="Vlastní potisk FVE listů"
+                                class="absolute inset-0 h-full w-full object-contain pointer-events-none p-2"
                             />
 
                             <!-- Floating Glassmorphic Top Controls -->
@@ -158,12 +136,12 @@
                             </div>
                         </div>
 
-                        <!-- Photovoltaic Grid Undertone Control -->
+                        <!-- Print Coverage / Opacity Slider over Photovoltaic Panel -->
                         <div class="flex flex-col gap-1.5">
                             <div class="flex items-center justify-between text-xs">
-                                <span class="font-medium text-black/80 dark:text-white/80">Fotovoltaický vzor listů</span>
+                                <span class="font-medium text-black/80 dark:text-white/80">Krytí potisku FVE listů</span>
                                 <span class="rounded-md bg-t-blue/10 px-2 py-0.5 font-mono text-[11px] font-semibold text-t-blue dark:bg-white/10 dark:text-white">
-                                    {{ Math.round(pvOpacity * 100) }}%
+                                    {{ Math.round(printOpacity * 100) }}%
                                 </span>
                             </div>
                             <input
@@ -171,14 +149,17 @@
                                 min="0.0"
                                 max="1.0"
                                 step="0.05"
-                                v-model.number="pvOpacity"
+                                v-model.number="printOpacity"
                                 @input="updateMappedTexture"
                                 class="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-black/10 accent-t-blue dark:bg-white/15 dark:accent-t-blue"
                             />
+                            <p class="text-[11px] text-black/50 dark:text-white/50">
+                                Odhalte fotovoltaické články pod potiskem snížením krytí.
+                            </p>
                         </div>
 
                         <!-- Uploaded Photo Action Bar -->
-                        <div class="flex items-center justify-between pt-1 border-t border-black/10 dark:border-white/10">
+                        <div class="flex items-center justify-between pt-2 border-t border-black/10 dark:border-white/10">
                             <button
                                 type="button"
                                 @click="triggerFileInput"
@@ -209,7 +190,7 @@
                         </div>
                         <div>
                             <p class="text-xs font-semibold text-black dark:text-white">Nahrajte vlastní obrázek nebo vzor</p>
-                            <p class="mt-0.5 text-[11px] text-black/55 dark:text-white/45">PNG, JPG, WebP — vytvořte unikátní solární listy</p>
+                            <p class="mt-0.5 text-[11px] text-black/55 dark:text-white/45">PNG, JPG, WebP — vytvořte unikátní potisk FVE listů</p>
                         </div>
                     </div>
                 </div>
@@ -244,7 +225,7 @@ const rawUserImage = ref<string | null>(null);
 const posX = ref(0);
 const posY = ref(0);
 const scale = ref(1.0);
-const pvOpacity = ref(0.6);
+const printOpacity = ref(0.8);
 const mappingMode = ref<'branch' | 'individual'>('branch');
 
 let isDragging = false;
@@ -357,7 +338,7 @@ async function updateMappedTexture() {
         offsetX: posX.value,
         offsetY: posY.value,
         scale: scale.value,
-        pvOpacity: pvOpacity.value,
+        printOpacity: printOpacity.value,
         mappingMode: mappingMode.value,
     });
     emit('update:customImage', mappedTexture);
@@ -367,7 +348,7 @@ function resetPosition() {
     posX.value = 0;
     posY.value = 0;
     scale.value = 1.0;
-    pvOpacity.value = 0.6;
+    printOpacity.value = 0.8;
     updateMappedTexture();
 }
 
@@ -405,8 +386,8 @@ function onDragMove(event: MouseEvent) {
     const deltaX = ((event.clientX - startX) / rect.width) * 100;
     const deltaY = ((event.clientY - startY) / rect.height) * 100;
 
-    posX.value = Math.min(60, Math.max(-60, Math.round(startPosX + deltaX)));
-    posY.value = Math.min(60, Math.max(-60, Math.round(startPosY + deltaY)));
+    posX.value = Math.min(80, Math.max(-80, Math.round(startPosX + deltaX)));
+    posY.value = Math.min(80, Math.max(-80, Math.round(startPosY + deltaY)));
 
     updateMappedTexture();
 }
@@ -439,8 +420,8 @@ function onTouchMove(event: TouchEvent) {
     const deltaX = ((touch.clientX - startX) / rect.width) * 100;
     const deltaY = ((touch.clientY - startY) / rect.height) * 100;
 
-    posX.value = Math.min(60, Math.max(-60, Math.round(startPosX + deltaX)));
-    posY.value = Math.min(60, Math.max(-60, Math.round(startPosY + deltaY)));
+    posX.value = Math.min(80, Math.max(-80, Math.round(startPosX + deltaX)));
+    posY.value = Math.min(80, Math.max(-80, Math.round(startPosY + deltaY)));
 
     updateMappedTexture();
 }
