@@ -5,6 +5,16 @@
         >
             {{ formatStep(stepNumber) }} — {{ $t('configurator.steps.fve_leaf') }}
         </p>
+
+        <!-- Hidden File Input for Custom Image Upload -->
+        <input
+            ref="fileInput"
+            type="file"
+            accept="image/*"
+            class="hidden"
+            @change="onFileSelected"
+        />
+
         <div class="flex flex-col gap-1">
             <template v-for="option in visibleOptions" :key="option.id">
                 <button
@@ -44,14 +54,6 @@
                     v-if="option.isCustom && modelValue === 'custom'"
                     class="my-2 flex flex-col gap-3 rounded-lg border border-dashed border-black/20 bg-black/5 p-3 dark:border-white/20 dark:bg-white/5"
                 >
-                    <input
-                        ref="fileInput"
-                        type="file"
-                        accept="image/*"
-                        class="hidden"
-                        @change="onFileSelected"
-                    />
-
                     <div v-if="customImage" class="flex items-center gap-3">
                         <div class="relative h-12 w-12 shrink-0 overflow-hidden rounded-md border border-black/15 bg-white dark:border-white/15 dark:bg-black">
                             <img :src="customImage" alt="Vlastní obrázek FVE listů" class="h-full w-full object-cover" />
@@ -194,7 +196,12 @@ function selectOption(id: string) {
 }
 
 function triggerFileInput() {
-    fileInput.value?.click();
+    const el = Array.isArray(fileInput.value)
+        ? (fileInput.value[0] as HTMLInputElement | undefined)
+        : fileInput.value;
+    if (el && typeof el.click === 'function') {
+        el.click();
+    }
 }
 
 async function onFileSelected(event: Event) {
