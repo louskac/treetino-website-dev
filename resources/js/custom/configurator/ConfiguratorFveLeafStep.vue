@@ -54,7 +54,18 @@ defineEmits<{ 'update:modelValue': [value: string] }>();
 
 const { formatStep } = useStepFormatter();
 
-const options = [
+interface FveLeafOption {
+    id: string;
+    label: string;
+    labelKey: string;
+    swatch: string;
+    price: string | null;
+    priceKey?: string;
+    description: string;
+    descKey: string;
+}
+
+const options: FveLeafOption[] = [
     {
         id: 'none',
         label: 'Bez designu',
@@ -68,7 +79,7 @@ const options = [
         id: 'spring',
         label: 'Jaro',
         labelKey: 'configurator.fve_leaf.spring.label',
-        swatch: 'linear-gradient(135deg, #CFEA7D 0%, #82B84C 50%, #3F7E3A 100%)',
+        swatch: 'linear-gradient(135deg, #E2F674 0%, #A3E635 50%, #4D7C0F 100%)',
         price: null,
         description: 'Sezonní design FVE listů pro jarní variantu stromu.',
         descKey: 'configurator.fve_leaf.spring.desc',
@@ -77,7 +88,7 @@ const options = [
         id: 'summer',
         label: 'Léto',
         labelKey: 'configurator.fve_leaf.summer.label',
-        swatch: 'linear-gradient(135deg, #8BC34A 0%, #4C9A3D 50%, #1F6F3A 100%)',
+        swatch: 'linear-gradient(135deg, #34D399 0%, #059669 50%, #064E3B 100%)',
         price: null,
         description: 'Sezonní design FVE listů pro letní variantu stromu.',
         descKey: 'configurator.fve_leaf.summer.desc',
