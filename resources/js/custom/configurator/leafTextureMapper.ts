@@ -25,7 +25,7 @@ export async function generateMappedLeafTexture(
     userImageUrl: string,
     transform: LeafTextureTransform = {},
     maskUrl: string = '/img/config-images/v1-config-compressed-webp/leaf-color/fve-design/fve_black_pv_mask.png',
-    pvBaseUrl: string = '/img/config-images/v1-config-compressed-webp/leaf-color/fve-design/fve_black_pv_template.png',
+    pvBaseUrl: string = '/img/config-images/v1-config-compressed-webp/leaf-color/fve-design/fve_real_pv_panel_base.png',
 ): Promise<string> {
     const {
         offsetX = 0,
@@ -66,74 +66,76 @@ export async function generateMappedLeafTexture(
                             return;
                         }
 
-                        // STEP 1: Draw the base Photovoltaic Panel texture (solar cells & silver grid lines)
+                        // STEP 1: Draw the base Photovoltaic Panel texture (real 3D rendered black PV solar panel)
                         ctx.globalCompositeOperation = 'source-over';
                         ctx.globalAlpha = 1.0;
                         ctx.drawImage(pvBaseImg, 0, 0, w, h);
 
                         // STEP 2: Draw user custom photo over PV panel with printOpacity
-                        const userAspect = userImg.width / userImg.height;
-                        ctx.globalAlpha = Math.max(0.0, Math.min(1.0, printOpacity));
+                        if (printOpacity > 0.001) {
+                            const userAspect = userImg.width / userImg.height;
+                            ctx.globalAlpha = Math.max(0.0, Math.min(1.0, printOpacity));
 
-                        if (mappingMode === 'individual') {
-                            // --- MODE B: Map user image onto EACH INDIVIDUAL LEAF upright aligned with leaf angle ---
-                            for (const leaf of LEAF_CONFIGS) {
-                                ctx.save();
-                                ctx.translate(leaf.cx, leaf.cy);
-                                ctx.rotate((leaf.angleDeg * Math.PI) / 180);
+                            if (mappingMode === 'individual') {
+                                // --- MODE B: Map user image onto EACH INDIVIDUAL LEAF upright aligned with leaf angle ---
+                                for (const leaf of LEAF_CONFIGS) {
+                                    ctx.save();
+                                    ctx.translate(leaf.cx, leaf.cy);
+                                    ctx.rotate((leaf.angleDeg * Math.PI) / 180);
 
-                                const leafAspect = leaf.w / leaf.h;
-                                let baseW = leaf.w;
-                                let baseH = leaf.h;
+                                    const leafAspect = leaf.w / leaf.h;
+                                    let baseW = leaf.w;
+                                    let baseH = leaf.h;
 
-                                if (userAspect > leafAspect) {
-                                    baseW = leaf.h * userAspect;
+                                    if (userAspect > leafAspect) {
+                                        baseW = leaf.h * userAspect;
+                                    } else {
+                                        baseH = leaf.w / userAspect;
+                                    }
+
+                                    const renderW = baseW * scale;
+                                    const renderH = baseH * scale;
+
+                                    const drawX = -renderW / 2 + (offsetX / 100) * leaf.w;
+                                    const drawY = -renderH / 2 + (offsetY / 100) * leaf.h;
+
+                                    ctx.drawImage(userImg, drawX, drawY, renderW, renderH);
+                                    ctx.restore();
+                                }
+                            } else {
+                                // --- MODE A: Map user image continuously across FULL BRANCH ---
+                                const canvasAspect = w / h;
+                                let baseW = w;
+                                let baseH = h;
+
+                                if (userAspect > canvasAspect) {
+                                    baseW = h * userAspect;
                                 } else {
-                                    baseH = leaf.w / userAspect;
+                                    baseH = w / userAspect;
                                 }
 
                                 const renderW = baseW * scale;
                                 const renderH = baseH * scale;
 
-                                const drawX = -renderW / 2 + (offsetX / 100) * leaf.w;
-                                const drawY = -renderH / 2 + (offsetY / 100) * leaf.h;
+                                const drawX = (w - renderW) / 2 + (offsetX / 100) * w;
+                                const drawY = (h - renderH) / 2 + (offsetY / 100) * h;
 
                                 ctx.drawImage(userImg, drawX, drawY, renderW, renderH);
-                                ctx.restore();
                             }
-                        } else {
-                            // --- MODE A: Map user image continuously across FULL BRANCH ---
-                            const canvasAspect = w / h;
-                            let baseW = w;
-                            let baseH = h;
-
-                            if (userAspect > canvasAspect) {
-                                baseW = h * userAspect;
-                            } else {
-                                baseH = w / userAspect;
-                            }
-
-                            const renderW = baseW * scale;
-                            const renderH = baseH * scale;
-
-                            const drawX = (w - renderW) / 2 + (offsetX / 100) * w;
-                            const drawY = (h - renderH) / 2 + (offsetY / 100) * h;
-
-                            ctx.drawImage(userImg, drawX, drawY, renderW, renderH);
                         }
 
-                        // STEP 3: Overlay photovoltaic cell grid lines for realistic solar panel texture
-                        if (printOpacity > 0.1) {
+                        // STEP 3: Overlay photovoltaic cell grid lines and busbars (multiply & overlay)
+                        if (printOpacity > 0.05) {
                             ctx.globalCompositeOperation = 'multiply';
-                            ctx.globalAlpha = 0.3 * printOpacity;
+                            ctx.globalAlpha = 0.35 * printOpacity;
                             ctx.drawImage(maskImg, 0, 0, w, h);
 
                             ctx.globalCompositeOperation = 'overlay';
-                            ctx.globalAlpha = 0.2 * printOpacity;
+                            ctx.globalAlpha = 0.25 * printOpacity;
                             ctx.drawImage(maskImg, 0, 0, w, h);
                         }
 
-                        // STEP 4: Trim everything outside leaf shape contours to 100% transparency
+                        // STEP 4: Trim everything outside leaf shape contours using maskImg alpha channel
                         ctx.globalCompositeOperation = 'destination-in';
                         ctx.globalAlpha = 1.0;
                         ctx.drawImage(maskImg, 0, 0, w, h);
