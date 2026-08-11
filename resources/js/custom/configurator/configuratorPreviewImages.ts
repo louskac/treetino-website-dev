@@ -201,7 +201,7 @@ const configuratorPreviewProducts: Partial<
     [ProductId.StromV1]: {
         defaultSectionId: 'color',
         sections: {
-            color: stromV1CompositePreview,
+            color: stromV1LeafPreview,
             leaf: stromV1LeafPreview,
             'fve-leaf': stromV1LeafPreview,
             connectivity: getConnectivityPreview(
@@ -209,7 +209,7 @@ const configuratorPreviewProducts: Partial<
             ),
             battery: getAddonsPreview(
                 '/img/config-images/v1-config-compressed-webp/addons',
-            ),
+                ),
             addons: getAddonsPreview(
                 '/img/config-images/v1-config-compressed-webp/addons',
             ),
