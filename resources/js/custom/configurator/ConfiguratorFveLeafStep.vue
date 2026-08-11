@@ -49,26 +49,108 @@
                     </span>
                 </button>
 
-                <!-- Custom Image Upload Section -->
+                <!-- Custom Image Upload & Positioning Section -->
                 <div
                     v-if="option.isCustom && modelValue === 'custom'"
                     class="my-2 flex flex-col gap-3 rounded-lg border border-dashed border-black/20 bg-black/5 p-3 dark:border-white/20 dark:bg-white/5"
                 >
-                    <div v-if="customImage" class="flex items-center gap-3">
-                        <div class="relative h-12 w-12 shrink-0 overflow-hidden rounded-md border border-black/15 bg-white dark:border-white/15 dark:bg-black">
-                            <img :src="customImage" alt="Vlastní obrázek FVE listů" class="h-full w-full object-cover" />
+                    <div v-if="customImage" class="flex flex-col gap-3">
+                        <!-- Header with Thumbnail & Change Photo -->
+                        <div class="flex items-center gap-3">
+                            <div class="relative h-12 w-12 shrink-0 overflow-hidden rounded-md border border-black/15 bg-white dark:border-white/15 dark:bg-black">
+                                <img :src="customImage" alt="Vlastní fotka FVE listů" class="h-full w-full object-cover" />
+                            </div>
+                            <div class="flex-1 text-xs text-black/70 dark:text-white/70">
+                                <p class="font-medium text-black dark:text-white">Vlastní fotka namapována</p>
+                                <p class="text-[11px] opacity-75">S fotovoltaickým podtónem</p>
+                            </div>
+                            <button
+                                type="button"
+                                @click="triggerFileInput"
+                                class="rounded border border-black/20 px-2 py-1 text-xs font-medium text-black hover:bg-black/10 dark:border-white/20 dark:text-white dark:hover:bg-white/10"
+                            >
+                                Změnit
+                            </button>
                         </div>
-                        <div class="flex-1 text-xs text-black/70 dark:text-white/70">
-                            <p class="font-medium text-black dark:text-white">Vlastní fotka namapována</p>
-                            <p class="text-[11px] opacity-75">Obrázek je nanesen na FVE listy</p>
+
+                        <!-- Interactive Positioning & Undertone Controls -->
+                        <div class="mt-1 flex flex-col gap-2.5 border-t border-black/10 pt-2.5 dark:border-white/10">
+                            <!-- Scale / Zoom slider -->
+                            <div class="flex flex-col gap-1 text-xs">
+                                <div class="flex items-center justify-between text-[11px] text-black/70 dark:text-white/70">
+                                    <span>Velikost / Zoom</span>
+                                    <span class="font-mono font-medium">{{ Math.round(scale * 100) }}%</span>
+                                </div>
+                                <input
+                                    type="range"
+                                    min="0.5"
+                                    max="2.5"
+                                    step="0.05"
+                                    v-model.number="scale"
+                                    @input="updateMappedTexture"
+                                    class="h-1.5 w-full cursor-pointer appearance-none rounded-lg bg-black/20 accent-black dark:bg-white/20 dark:accent-white"
+                                />
+                            </div>
+
+                            <!-- Position X slider -->
+                            <div class="flex flex-col gap-1 text-xs">
+                                <div class="flex items-center justify-between text-[11px] text-black/70 dark:text-white/70">
+                                    <span>Posun Vodorovně (X)</span>
+                                    <span class="font-mono font-medium">{{ posX > 0 ? '+' + posX : posX }}%</span>
+                                </div>
+                                <input
+                                    type="range"
+                                    min="-50"
+                                    max="50"
+                                    step="1"
+                                    v-model.number="posX"
+                                    @input="updateMappedTexture"
+                                    class="h-1.5 w-full cursor-pointer appearance-none rounded-lg bg-black/20 accent-black dark:bg-white/20 dark:accent-white"
+                                />
+                            </div>
+
+                            <!-- Position Y slider -->
+                            <div class="flex flex-col gap-1 text-xs">
+                                <div class="flex items-center justify-between text-[11px] text-black/70 dark:text-white/70">
+                                    <span>Posun Svisle (Y)</span>
+                                    <span class="font-mono font-medium">{{ posY > 0 ? '+' + posY : posY }}%</span>
+                                </div>
+                                <input
+                                    type="range"
+                                    min="-50"
+                                    max="50"
+                                    step="1"
+                                    v-model.number="posY"
+                                    @input="updateMappedTexture"
+                                    class="h-1.5 w-full cursor-pointer appearance-none rounded-lg bg-black/20 accent-black dark:bg-white/20 dark:accent-white"
+                                />
+                            </div>
+
+                            <!-- Photovoltaic Grid Undertone slider -->
+                            <div class="flex flex-col gap-1 text-xs">
+                                <div class="flex items-center justify-between text-[11px] text-black/70 dark:text-white/70">
+                                    <span>FVE Vzor / Fotovoltaický podtón</span>
+                                    <span class="font-mono font-medium">{{ Math.round(pvOpacity * 100) }}%</span>
+                                </div>
+                                <input
+                                    type="range"
+                                    min="0.2"
+                                    max="1.0"
+                                    step="0.05"
+                                    v-model.number="pvOpacity"
+                                    @input="updateMappedTexture"
+                                    class="h-1.5 w-full cursor-pointer appearance-none rounded-lg bg-black/20 accent-black dark:bg-white/20 dark:accent-white"
+                                />
+                            </div>
+
+                            <button
+                                type="button"
+                                @click="resetPosition"
+                                class="mt-0.5 text-right text-[11px] text-black/50 hover:text-black dark:text-white/50 dark:hover:text-white"
+                            >
+                                Obnovit výchozí pozici
+                            </button>
                         </div>
-                        <button
-                            type="button"
-                            @click="triggerFileInput"
-                            class="rounded border border-black/20 px-2 py-1 text-xs font-medium text-black hover:bg-black/10 dark:border-white/20 dark:text-white dark:hover:bg-white/10"
-                        >
-                            Změnit
-                        </button>
                     </div>
 
                     <div
@@ -110,6 +192,12 @@ const emit = defineEmits<{
 
 const { formatStep } = useStepFormatter();
 const fileInput = ref<HTMLInputElement | null>(null);
+
+const rawUserImage = ref<string | null>(null);
+const posX = ref(0);
+const posY = ref(0);
+const scale = ref(1.0);
+const pvOpacity = ref(0.85);
 
 interface FveLeafOption {
     id: string;
@@ -204,6 +292,25 @@ function triggerFileInput() {
     }
 }
 
+async function updateMappedTexture() {
+    if (!rawUserImage.value) return;
+    const mappedTexture = await generateMappedLeafTexture(rawUserImage.value, {
+        offsetX: posX.value,
+        offsetY: posY.value,
+        scale: scale.value,
+        pvOpacity: pvOpacity.value,
+    });
+    emit('update:customImage', mappedTexture);
+}
+
+function resetPosition() {
+    posX.value = 0;
+    posY.value = 0;
+    scale.value = 1.0;
+    pvOpacity.value = 0.85;
+    updateMappedTexture();
+}
+
 async function onFileSelected(event: Event) {
     const target = event.target as HTMLInputElement;
     const file = target.files?.[0];
@@ -213,8 +320,8 @@ async function onFileSelected(event: Event) {
     reader.onload = async (e) => {
         const dataUrl = e.target?.result as string;
         if (dataUrl) {
-            const mappedTexture = await generateMappedLeafTexture(dataUrl);
-            emit('update:customImage', mappedTexture);
+            rawUserImage.value = dataUrl;
+            await updateMappedTexture();
         }
     };
     reader.readAsDataURL(file);
