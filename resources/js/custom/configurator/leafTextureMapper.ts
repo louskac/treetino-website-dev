@@ -1,19 +1,19 @@
 /**
- * Maps a user-uploaded image onto the FVE solar leaves mask template using HTML5 Canvas
- * with support for mouse dragging (offsetX/offsetY), scale (zoom), and photovoltaic cell grid overlay blending.
+ * Maps a user-uploaded image onto the default black FVE solar panel mask template using HTML5 Canvas
+ * with support for mouse dragging (offsetX/offsetY), scale (zoom), and neutral black photovoltaic grid overlay blending.
  */
 
 export type LeafTextureTransform = {
     offsetX?: number; // -60 to +60 (% of width)
     offsetY?: number; // -60 to +60 (% of height)
-    scale?: number; // 0.5 to 3.0
-    pvOpacity?: number; // 0.0 to 1.0 (photovoltaic cell grid undertone strength)
+    scale?: number; // 0.4 to 3.0
+    pvOpacity?: number; // 0.0 to 1.0 (black photovoltaic cell grid undertone strength)
 };
 
 export async function generateMappedLeafTexture(
     userImageUrl: string,
     transform: LeafTextureTransform = {},
-    maskUrl: string = '/img/config-images/v1-config-compressed-webp/leaf-color/fve-design/fve_spring.webp',
+    maskUrl: string = '/img/config-images/v1-config-compressed-webp/leaf-color/fve-design/fve_black_pv_mask.png',
 ): Promise<string> {
     const {
         offsetX = 0,
@@ -66,18 +66,18 @@ export async function generateMappedLeafTexture(
                     const posX = (w - renderW) / 2 + (offsetX / 100) * w;
                     const posY = (h - renderH) / 2 + (offsetY / 100) * h;
 
-                    // Step 1: Draw the user photo FIRST as full-color base (never turns dark/black)
+                    // Step 1: Draw the user photo FIRST as full-color base (preserving all original colors)
                     ctx.globalCompositeOperation = 'source-over';
                     ctx.globalAlpha = 1.0;
                     ctx.drawImage(userImg, posX, posY, renderW, renderH);
 
-                    // Step 2: Overlay photovoltaic solar cell grid lines & veins on top
+                    // Step 2: Overlay default black photovoltaic panel grid lines on top (zero Jaro green/yellow tint)
                     if (pvOpacity > 0.02) {
-                        ctx.globalCompositeOperation = 'overlay';
+                        ctx.globalCompositeOperation = 'multiply';
                         ctx.globalAlpha = Math.min(1.0, pvOpacity * 0.75);
                         ctx.drawImage(maskImg, 0, 0, w, h);
 
-                        ctx.globalCompositeOperation = 'soft-light';
+                        ctx.globalCompositeOperation = 'overlay';
                         ctx.globalAlpha = Math.min(1.0, pvOpacity * 0.45);
                         ctx.drawImage(maskImg, 0, 0, w, h);
                     }

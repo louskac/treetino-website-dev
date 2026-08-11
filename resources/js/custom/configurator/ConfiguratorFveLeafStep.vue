@@ -83,9 +83,9 @@
                                 }"
                             />
 
-                            <!-- Leaf Contour Mask Overlay -->
+                            <!-- Leaf Contour Mask Overlay (Default Black PV Panel Grid) -->
                             <img
-                                src="/img/config-images/v1-config-compressed-webp/leaf-color/fve-design/fve_spring.webp"
+                                src="/img/config-images/v1-config-compressed-webp/leaf-color/fve-design/fve_black_pv_mask.png"
                                 alt="FVE Listy vzor"
                                 class="absolute inset-0 h-full w-full object-contain mix-blend-overlay opacity-75 pointer-events-none"
                             />
