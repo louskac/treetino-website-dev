@@ -19,11 +19,11 @@
             <template v-for="option in visibleOptions" :key="option.id">
                 <button
                     @click="selectOption(option.id)"
-                    class="flex w-full items-center gap-3 rounded px-1 py-2 transition-opacity duration-200"
+                    class="flex w-full items-center gap-3 rounded-lg px-2 py-2.5 transition-opacity duration-200"
                     :class="
                         modelValue === option.id
                             ? 'opacity-100'
-                            : 'opacity-50 hover:opacity-100'
+                            : 'opacity-55 hover:opacity-100'
                     "
                 >
                     <!-- Design swatch -->
@@ -34,40 +34,39 @@
                                 ? 'bg-[conic-gradient(from_180deg_at_50%_50%,#FF0000_0deg,#FFFF00_60deg,#00FF00_120deg,#00FFFF_180deg,#0000FF_240deg,#FF00FF_300deg,#FF0000_360deg)]'
                                 : '',
                             modelValue === option.id
-                                ? 'ring-2 ring-black ring-offset-1 ring-offset-white dark:ring-white dark:ring-offset-black'
+                                ? 'ring-2 ring-t-blue ring-offset-1 ring-offset-white dark:ring-white dark:ring-offset-black'
                                 : '',
                         ]"
                         :style="!option.isCustom ? { background: option.swatch } : {}"
                     />
                     <span
-                        class="flex-1 text-left text-sm text-black dark:text-white"
+                        class="flex-1 text-left text-sm text-black dark:text-white font-medium"
                     >
                         {{ $t(option.labelKey, option.label) }}
                     </span>
-                    <span class="text-xs text-black dark:text-white">
+                    <span class="text-xs text-black/60 dark:text-white/60">
                         {{ option.priceKey ? $t(option.priceKey) : (option.price ?? $t('configurator.free')) }}
                     </span>
                 </button>
 
-                <!-- Custom Image Upload & Mouse Drag-and-Drop Pad -->
+                <!-- Custom Image Upload & Redesigned Interactive Editor Panel -->
                 <div
                     v-if="option.isCustom && modelValue === 'custom'"
-                    class="my-2 flex flex-col gap-3 rounded-lg border border-dashed border-black/20 bg-black/5 p-3 dark:border-white/20 dark:bg-white/5"
+                    class="my-2.5 flex flex-col gap-4 rounded-2xl border border-black/10 bg-black/3 p-4 dark:border-white/10 dark:bg-white/4"
                 >
-                    <div v-if="rawUserImage" class="flex flex-col gap-2.5">
-                        <!-- Header bar & Mapping Mode Switch -->
-                        <div class="flex flex-col gap-1.5 border-b border-black/10 pb-2 dark:border-white/10">
-                            <div class="flex items-center justify-between text-xs text-black/70 dark:text-white/70">
-                                <span class="font-medium text-black dark:text-white">Režim mapování obrázku</span>
-                                <span class="text-[11px] opacity-75">Přepínač stylu</span>
-                            </div>
-                            <div class="grid grid-cols-2 gap-1 rounded-lg bg-black/10 p-1 dark:bg-white/10">
+                    <div v-if="rawUserImage" class="flex flex-col gap-3.5">
+                        <!-- Mapping Mode Segmented Pill Switch -->
+                        <div class="flex flex-col gap-1.5">
+                            <span class="text-xs font-semibold text-black/80 dark:text-white/80">
+                                Režim potisku listů
+                            </span>
+                            <div class="inline-flex w-full rounded-full border border-black/10 bg-black/5 p-1 dark:border-white/10 dark:bg-white/5">
                                 <button
                                     type="button"
                                     @click="setMappingMode('branch')"
-                                    class="rounded px-2 py-1.5 text-center text-xs font-medium transition-all"
+                                    class="flex-1 rounded-full py-1.5 text-center text-xs font-semibold transition-all duration-200 cursor-pointer"
                                     :class="mappingMode === 'branch'
-                                        ? 'bg-white text-black shadow-sm dark:bg-black dark:text-white'
+                                        ? 'bg-t-blue text-white shadow-xs'
                                         : 'text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white'"
                                 >
                                     Celá větev
@@ -75,9 +74,9 @@
                                 <button
                                     type="button"
                                     @click="setMappingMode('individual')"
-                                    class="rounded px-2 py-1.5 text-center text-xs font-medium transition-all"
+                                    class="flex-1 rounded-full py-1.5 text-center text-xs font-semibold transition-all duration-200 cursor-pointer"
                                     :class="mappingMode === 'individual'
-                                        ? 'bg-white text-black shadow-sm dark:bg-black dark:text-white'
+                                        ? 'bg-t-blue text-white shadow-xs'
                                         : 'text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white'"
                                 >
                                     Jednotlivé listy
@@ -85,13 +84,13 @@
                             </div>
                         </div>
 
-                        <!-- Interactive Mouse Drag-and-Drop Viewport Pad -->
+                        <!-- Interactive Viewport Drag Pad -->
                         <div
                             ref="dragPad"
                             @mousedown="startDrag"
                             @touchstart.prevent="startTouchDrag"
                             @wheel.prevent="onWheelZoom"
-                            class="group relative aspect-square w-full cursor-grab overflow-hidden rounded-md border border-black/15 bg-white select-none active:cursor-grabbing dark:border-white/15 dark:bg-black"
+                            class="group relative aspect-square w-full cursor-grab overflow-hidden rounded-2xl border border-black/10 bg-stone-100 select-none active:cursor-grabbing dark:border-white/10 dark:bg-zinc-900/80 shadow-xs"
                         >
                             <!-- User Image inside Drag Pad (Branch Mode) -->
                             <img
@@ -120,21 +119,15 @@
                             <img
                                 src="/img/config-images/v1-config-compressed-webp/leaf-color/fve-design/fve_black_pv_mask.png"
                                 alt="FVE Listy vzor"
-                                class="absolute inset-0 h-full w-full object-contain mix-blend-overlay opacity-75 pointer-events-none"
+                                class="absolute inset-0 h-full w-full object-contain mix-blend-overlay opacity-70 pointer-events-none"
                             />
 
-                            <!-- Drag Instruction Badge -->
-                            <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between rounded bg-black/60 px-2 py-1 text-[10px] text-white backdrop-blur-sm opacity-90 transition-opacity group-hover:opacity-100">
-                                <span>🖱️ Táhněte myší</span>
-                                <span>🔍 Kolečko = Zoom ({{ Math.round(scale * 100) }}%)</span>
-                            </div>
-
-                            <!-- Quick Action Overlay Buttons -->
-                            <div class="absolute top-2 right-2 flex items-center gap-1">
+                            <!-- Floating Glassmorphic Top Controls -->
+                            <div class="absolute top-3 right-3 flex items-center gap-1 rounded-full border border-black/10 bg-white/85 p-1 backdrop-blur-md dark:border-white/10 dark:bg-black/85 shadow-xs">
                                 <button
                                     type="button"
                                     @click.stop="zoomIn"
-                                    class="flex h-6 w-6 items-center justify-center rounded bg-black/60 text-white backdrop-blur-sm hover:bg-black/90"
+                                    class="flex h-7 w-7 items-center justify-center rounded-full text-xs font-semibold text-black hover:bg-t-blue hover:text-white dark:text-white transition-colors cursor-pointer"
                                     title="Přiblížit"
                                 >
                                     +
@@ -142,7 +135,7 @@
                                 <button
                                     type="button"
                                     @click.stop="zoomOut"
-                                    class="flex h-6 w-6 items-center justify-center rounded bg-black/60 text-white backdrop-blur-sm hover:bg-black/90"
+                                    class="flex h-7 w-7 items-center justify-center rounded-full text-xs font-semibold text-black hover:bg-t-blue hover:text-white dark:text-white transition-colors cursor-pointer"
                                     title="Oddálit"
                                 >
                                     -
@@ -150,19 +143,28 @@
                                 <button
                                     type="button"
                                     @click.stop="resetPosition"
-                                    class="flex h-6 w-6 items-center justify-center rounded bg-black/60 text-white backdrop-blur-sm hover:bg-black/90"
+                                    class="flex h-7 w-7 items-center justify-center rounded-full text-xs font-semibold text-black hover:bg-t-blue hover:text-white dark:text-white transition-colors cursor-pointer"
                                     title="Obnovit pozici"
                                 >
                                     ↺
                                 </button>
                             </div>
+
+                            <!-- Floating Glassmorphic Bottom Badge -->
+                            <div class="absolute bottom-3 inset-x-3 flex items-center justify-center">
+                                <div class="rounded-full border border-black/10 bg-white/90 px-3.5 py-1 text-[11px] font-medium text-black/80 backdrop-blur-md dark:border-white/10 dark:bg-black/90 dark:text-white/80 shadow-xs">
+                                    Táhněte myší pro posun • Zoom {{ Math.round(scale * 100) }}%
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Photovoltaic Grid Undertone Control -->
-                        <div class="mt-1 flex flex-col gap-1 text-xs">
-                            <div class="flex items-center justify-between text-[11px] text-black/70 dark:text-white/70">
-                                <span>Fotovoltaický vzor / Mřížka listů</span>
-                                <span class="font-mono font-medium">{{ Math.round(pvOpacity * 100) }}%</span>
+                        <div class="flex flex-col gap-1.5">
+                            <div class="flex items-center justify-between text-xs">
+                                <span class="font-medium text-black/80 dark:text-white/80">Fotovoltaický vzor listů</span>
+                                <span class="rounded-md bg-t-blue/10 px-2 py-0.5 font-mono text-[11px] font-semibold text-t-blue dark:bg-white/10 dark:text-white">
+                                    {{ Math.round(pvOpacity * 100) }}%
+                                </span>
                             </div>
                             <input
                                 type="range"
@@ -171,40 +173,44 @@
                                 step="0.05"
                                 v-model.number="pvOpacity"
                                 @input="updateMappedTexture"
-                                class="h-1.5 w-full cursor-pointer appearance-none rounded-lg bg-black/20 accent-black dark:bg-white/20 dark:accent-white"
+                                class="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-black/10 accent-t-blue dark:bg-white/15 dark:accent-t-blue"
                             />
                         </div>
 
-                        <div class="flex items-center justify-between pt-1">
+                        <!-- Uploaded Photo Action Bar -->
+                        <div class="flex items-center justify-between pt-1 border-t border-black/10 dark:border-white/10">
                             <button
                                 type="button"
                                 @click="triggerFileInput"
-                                class="text-[11px] font-medium text-black/70 underline hover:text-black dark:text-white/70 dark:hover:text-white"
+                                class="text-xs font-semibold text-t-blue hover:underline cursor-pointer"
                             >
-                                Změnit fotku
+                                Změnit obrázek
                             </button>
                             <button
                                 type="button"
                                 @click="resetPosition"
-                                class="text-[11px] text-black/50 hover:text-black dark:text-white/50 dark:hover:text-white"
+                                class="text-xs text-black/50 hover:text-black dark:text-white/50 dark:hover:text-white cursor-pointer"
                             >
-                                Vycentrovat
+                                Obnovit pozici
                             </button>
                         </div>
                     </div>
 
+                    <!-- Empty Upload Dropzone -->
                     <div
                         v-else
                         @click="triggerFileInput"
-                        class="flex cursor-pointer flex-col items-center justify-center gap-1.5 py-4 text-center text-xs text-black/60 transition-colors hover:text-black dark:text-white/60 dark:hover:text-white"
+                        class="flex cursor-pointer flex-col items-center justify-center gap-2.5 py-6 text-center transition-all hover:opacity-90"
                     >
-                        <div class="flex h-8 w-8 items-center justify-center rounded-full bg-black/10 text-black dark:bg-white/10 dark:text-white">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <div class="flex h-11 w-11 items-center justify-center rounded-full bg-t-blue/10 text-t-blue dark:bg-white/10 dark:text-white shadow-xs">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
                         </div>
-                        <span class="font-medium">Nahrajte vlastní fotku nebo vzor</span>
-                        <span class="text-[10px] opacity-70">PNG, JPG, WebP (bude naneseno na listy)</span>
+                        <div>
+                            <p class="text-xs font-semibold text-black dark:text-white">Nahrajte vlastní obrázek nebo vzor</p>
+                            <p class="mt-0.5 text-[11px] text-black/55 dark:text-white/45">PNG, JPG, WebP — vytvořte unikátní solární listy</p>
+                        </div>
                     </div>
                 </div>
             </template>
@@ -452,8 +458,8 @@ onUnmounted(() => {
 
 async function onFileSelected(event: Event) {
     const target = event.target as HTMLInputElement;
-    const file = target.files?.[0];
-    if (!file) return;
+    const fileObj = target.files?.[0];
+    if (!fileObj) return;
 
     const reader = new FileReader();
     reader.onload = async (e) => {
@@ -463,6 +469,6 @@ async function onFileSelected(event: Event) {
             resetPosition();
         }
     };
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(fileObj);
 }
 </script>
