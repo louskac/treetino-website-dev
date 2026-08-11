@@ -1,14 +1,24 @@
 /**
- * Maps a user-uploaded image onto the default black FVE solar panel mask template using HTML5 Canvas
- * with support for mouse dragging (offsetX/offsetY), scale (zoom), and neutral black photovoltaic grid overlay blending.
+ * Maps a user-uploaded image onto the FVE solar leaves mask template using HTML5 Canvas.
+ * Supports both continuous branch mapping and individual leaf mapping, mouse dragging (offsetX/offsetY),
+ * scale (zoom), and neutral black photovoltaic grid overlay blending.
  */
 
 export type LeafTextureTransform = {
-    offsetX?: number; // -60 to +60 (% of width)
-    offsetY?: number; // -60 to +60 (% of height)
+    offsetX?: number; // -60 to +60 (%)
+    offsetY?: number; // -60 to +60 (%)
     scale?: number; // 0.4 to 3.0
     pvOpacity?: number; // 0.0 to 1.0 (black photovoltaic cell grid undertone strength)
+    mappingMode?: 'branch' | 'individual'; // 'branch' (Celá větev) vs 'individual' (Jednotlivé listy)
 };
+
+const LEAF_BOUNDING_BOXES = [
+    { x: 380, y: 460, width: 255, height: 185 }, // Leaf 1 (top right)
+    { x: 210, y: 540, width: 275, height: 170 }, // Leaf 2 (top left)
+    { x: 570, y: 645, width: 165, height: 280 }, // Leaf 3 (middle right)
+    { x: 360, y: 680, width: 215, height: 280 }, // Leaf 4 (middle left)
+    { x: 75, y: 685, width: 320, height: 230 },  // Leaf 5 (bottom left)
+];
 
 export async function generateMappedLeafTexture(
     userImageUrl: string,
@@ -20,6 +30,7 @@ export async function generateMappedLeafTexture(
         offsetY = 0,
         scale = 1.0,
         pvOpacity = 0.6,
+        mappingMode = 'branch',
     } = transform;
 
     return new Promise((resolve) => {
@@ -49,29 +60,56 @@ export async function generateMappedLeafTexture(
                         return;
                     }
 
-                    // 1. Calculate cover dimensions for user image
                     const userAspect = userImg.width / userImg.height;
-                    const canvasAspect = w / h;
-                    let baseW = w;
-                    let baseH = h;
-                    if (userAspect > canvasAspect) {
-                        baseW = h * userAspect;
+
+                    if (mappingMode === 'individual') {
+                        // --- MODE B: Map user image onto EACH INDIVIDUAL LEAF separately ---
+                        ctx.globalCompositeOperation = 'source-over';
+                        ctx.globalAlpha = 1.0;
+
+                        for (const box of LEAF_BOUNDING_BOXES) {
+                            const boxAspect = box.width / box.height;
+                            let baseW = box.width;
+                            let baseH = box.height;
+
+                            if (userAspect > boxAspect) {
+                                baseW = box.height * userAspect;
+                            } else {
+                                baseH = box.width / userAspect;
+                            }
+
+                            const renderW = baseW * scale;
+                            const renderH = baseH * scale;
+
+                            const posX = box.x + (box.width - renderW) / 2 + (offsetX / 100) * box.width;
+                            const posY = box.y + (box.height - renderH) / 2 + (offsetY / 100) * box.height;
+
+                            ctx.drawImage(userImg, posX, posY, renderW, renderH);
+                        }
                     } else {
-                        baseH = w / userAspect;
+                        // --- MODE A: Map user image continuously across FULL BRANCH ---
+                        const canvasAspect = w / h;
+                        let baseW = w;
+                        let baseH = h;
+
+                        if (userAspect > canvasAspect) {
+                            baseW = h * userAspect;
+                        } else {
+                            baseH = w / userAspect;
+                        }
+
+                        const renderW = baseW * scale;
+                        const renderH = baseH * scale;
+
+                        const posX = (w - renderW) / 2 + (offsetX / 100) * w;
+                        const posY = (h - renderH) / 2 + (offsetY / 100) * h;
+
+                        ctx.globalCompositeOperation = 'source-over';
+                        ctx.globalAlpha = 1.0;
+                        ctx.drawImage(userImg, posX, posY, renderW, renderH);
                     }
 
-                    const renderW = baseW * scale;
-                    const renderH = baseH * scale;
-
-                    const posX = (w - renderW) / 2 + (offsetX / 100) * w;
-                    const posY = (h - renderH) / 2 + (offsetY / 100) * h;
-
-                    // Step 1: Draw the user photo FIRST as full-color base (preserving all original colors)
-                    ctx.globalCompositeOperation = 'source-over';
-                    ctx.globalAlpha = 1.0;
-                    ctx.drawImage(userImg, posX, posY, renderW, renderH);
-
-                    // Step 2: Overlay default black photovoltaic panel grid lines on top (zero Jaro green/yellow tint)
+                    // Step 2: Overlay default black photovoltaic panel grid lines on top
                     if (pvOpacity > 0.02) {
                         ctx.globalCompositeOperation = 'multiply';
                         ctx.globalAlpha = Math.min(1.0, pvOpacity * 0.75);

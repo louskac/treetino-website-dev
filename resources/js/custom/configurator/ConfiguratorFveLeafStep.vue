@@ -55,10 +55,34 @@
                     class="my-2 flex flex-col gap-3 rounded-lg border border-dashed border-black/20 bg-black/5 p-3 dark:border-white/20 dark:bg-white/5"
                 >
                     <div v-if="rawUserImage" class="flex flex-col gap-2.5">
-                        <!-- Header bar -->
-                        <div class="flex items-center justify-between text-xs text-black/70 dark:text-white/70">
-                            <span class="font-medium text-black dark:text-white">Posun myší na listech</span>
-                            <span class="text-[11px] opacity-75">Táhněte myší pro posun</span>
+                        <!-- Header bar & Mapping Mode Switch -->
+                        <div class="flex flex-col gap-1.5 border-b border-black/10 pb-2 dark:border-white/10">
+                            <div class="flex items-center justify-between text-xs text-black/70 dark:text-white/70">
+                                <span class="font-medium text-black dark:text-white">Režim mapování obrázku</span>
+                                <span class="text-[11px] opacity-75">Přepínač stylu</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-1 rounded-lg bg-black/10 p-1 dark:bg-white/10">
+                                <button
+                                    type="button"
+                                    @click="setMappingMode('branch')"
+                                    class="rounded px-2 py-1.5 text-center text-xs font-medium transition-all"
+                                    :class="mappingMode === 'branch'
+                                        ? 'bg-white text-black shadow-sm dark:bg-black dark:text-white'
+                                        : 'text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white'"
+                                >
+                                    Celá větev
+                                </button>
+                                <button
+                                    type="button"
+                                    @click="setMappingMode('individual')"
+                                    class="rounded px-2 py-1.5 text-center text-xs font-medium transition-all"
+                                    :class="mappingMode === 'individual'
+                                        ? 'bg-white text-black shadow-sm dark:bg-black dark:text-white'
+                                        : 'text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white'"
+                                >
+                                    Jednotlivé listy
+                                </button>
+                            </div>
                         </div>
 
                         <!-- Interactive Mouse Drag-and-Drop Viewport Pad -->
@@ -69,8 +93,9 @@
                             @wheel.prevent="onWheelZoom"
                             class="group relative aspect-square w-full cursor-grab overflow-hidden rounded-md border border-black/15 bg-white select-none active:cursor-grabbing dark:border-white/15 dark:bg-black"
                         >
-                            <!-- User Image inside Drag Pad -->
+                            <!-- User Image inside Drag Pad (Branch Mode) -->
                             <img
+                                v-if="mappingMode === 'branch'"
                                 :src="rawUserImage"
                                 alt="Vlastní obrázek"
                                 class="absolute max-w-none pointer-events-none transition-transform duration-75"
@@ -81,6 +106,14 @@
                                     top: (50 + posY - (50 * scale)) + '%',
                                     objectFit: 'cover'
                                 }"
+                            />
+
+                            <!-- Rendered Individual Leaves Preview inside Drag Pad (Individual Mode) -->
+                            <img
+                                v-else-if="customImage"
+                                :src="customImage"
+                                alt="Vlastní obrázek na listech"
+                                class="absolute inset-0 h-full w-full object-contain pointer-events-none"
                             />
 
                             <!-- Leaf Contour Mask Overlay (Default Black PV Panel Grid) -->
@@ -171,7 +204,7 @@
                             </svg>
                         </div>
                         <span class="font-medium">Nahrajte vlastní fotku nebo vzor</span>
-                        <span class="text-[10px] opacity-70">PNG, JPG, WebP (táhněte myší pro posun na listech)</span>
+                        <span class="text-[10px] opacity-70">PNG, JPG, WebP (bude naneseno na listy)</span>
                     </div>
                 </div>
             </template>
@@ -205,7 +238,8 @@ const rawUserImage = ref<string | null>(null);
 const posX = ref(0);
 const posY = ref(0);
 const scale = ref(1.0);
-const pvOpacity = ref(0.5);
+const pvOpacity = ref(0.6);
+const mappingMode = ref<'branch' | 'individual'>('branch');
 
 let isDragging = false;
 let startX = 0;
@@ -306,6 +340,11 @@ function triggerFileInput() {
     }
 }
 
+function setMappingMode(mode: 'branch' | 'individual') {
+    mappingMode.value = mode;
+    updateMappedTexture();
+}
+
 async function updateMappedTexture() {
     if (!rawUserImage.value) return;
     const mappedTexture = await generateMappedLeafTexture(rawUserImage.value, {
@@ -313,6 +352,7 @@ async function updateMappedTexture() {
         offsetY: posY.value,
         scale: scale.value,
         pvOpacity: pvOpacity.value,
+        mappingMode: mappingMode.value,
     });
     emit('update:customImage', mappedTexture);
 }
@@ -321,7 +361,7 @@ function resetPosition() {
     posX.value = 0;
     posY.value = 0;
     scale.value = 1.0;
-    pvOpacity.value = 0.5;
+    pvOpacity.value = 0.6;
     updateMappedTexture();
 }
 
