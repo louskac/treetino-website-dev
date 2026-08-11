@@ -1,12 +1,12 @@
 /**
  * Maps a user-uploaded image onto the FVE solar leaves mask template using HTML5 Canvas
- * with support for positioning (offset X/Y), scale (zoom), and photovoltaic undertone blending.
+ * with support for mouse dragging (offsetX/offsetY), scale (zoom), and photovoltaic cell grid overlay blending.
  */
 
 export type LeafTextureTransform = {
-    offsetX?: number; // -50 to +50 (% of width)
-    offsetY?: number; // -50 to +50 (% of height)
-    scale?: number; // 0.5 to 2.5
+    offsetX?: number; // -60 to +60 (% of width)
+    offsetY?: number; // -60 to +60 (% of height)
+    scale?: number; // 0.5 to 3.0
     pvOpacity?: number; // 0.0 to 1.0 (photovoltaic cell grid undertone strength)
 };
 
@@ -19,7 +19,7 @@ export async function generateMappedLeafTexture(
         offsetX = 0,
         offsetY = 0,
         scale = 1.0,
-        pvOpacity = 0.85,
+        pvOpacity = 0.6,
     } = transform;
 
     return new Promise((resolve) => {
@@ -49,7 +49,7 @@ export async function generateMappedLeafTexture(
                         return;
                     }
 
-                    // Calculate cover scale for user image
+                    // 1. Calculate cover dimensions for user image
                     const userAspect = userImg.width / userImg.height;
                     const canvasAspect = w / h;
                     let baseW = w;
@@ -66,22 +66,23 @@ export async function generateMappedLeafTexture(
                     const posX = (w - renderW) / 2 + (offsetX / 100) * w;
                     const posY = (h - renderH) / 2 + (offsetY / 100) * h;
 
-                    // 1. Draw base PV Solar Leaf Undertone Texture (original leaf contour with grid lines)
+                    // Step 1: Draw the user photo FIRST as full-color base (never turns dark/black)
                     ctx.globalCompositeOperation = 'source-over';
                     ctx.globalAlpha = 1.0;
-                    ctx.drawImage(maskImg, 0, 0, w, h);
-
-                    // 2. Blend user photo over the PV solar grid using multiply mode
-                    ctx.globalCompositeOperation = 'multiply';
-                    ctx.globalAlpha = Math.max(0.1, Math.min(1.0, pvOpacity));
                     ctx.drawImage(userImg, posX, posY, renderW, renderH);
 
-                    // 3. Add overlay highlight so bright picture details stay crisp
-                    ctx.globalCompositeOperation = 'overlay';
-                    ctx.globalAlpha = (1 - pvOpacity) * 0.4;
-                    ctx.drawImage(userImg, posX, posY, renderW, renderH);
+                    // Step 2: Overlay photovoltaic solar cell grid lines & veins on top
+                    if (pvOpacity > 0.02) {
+                        ctx.globalCompositeOperation = 'overlay';
+                        ctx.globalAlpha = Math.min(1.0, pvOpacity * 0.75);
+                        ctx.drawImage(maskImg, 0, 0, w, h);
 
-                    // 4. Crop output strictly to the solar leaf shape mask contour
+                        ctx.globalCompositeOperation = 'soft-light';
+                        ctx.globalAlpha = Math.min(1.0, pvOpacity * 0.45);
+                        ctx.drawImage(maskImg, 0, 0, w, h);
+                    }
+
+                    // Step 3: Trim output strictly to the solar leaf contour shape
                     ctx.globalCompositeOperation = 'destination-in';
                     ctx.globalAlpha = 1.0;
                     ctx.drawImage(maskImg, 0, 0, w, h);

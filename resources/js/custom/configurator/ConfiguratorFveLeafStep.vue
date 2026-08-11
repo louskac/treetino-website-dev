@@ -49,106 +49,113 @@
                     </span>
                 </button>
 
-                <!-- Custom Image Upload & Positioning Section -->
+                <!-- Custom Image Upload & Mouse Drag-and-Drop Pad -->
                 <div
                     v-if="option.isCustom && modelValue === 'custom'"
                     class="my-2 flex flex-col gap-3 rounded-lg border border-dashed border-black/20 bg-black/5 p-3 dark:border-white/20 dark:bg-white/5"
                 >
-                    <div v-if="customImage" class="flex flex-col gap-3">
-                        <!-- Header with Thumbnail & Change Photo -->
-                        <div class="flex items-center gap-3">
-                            <div class="relative h-12 w-12 shrink-0 overflow-hidden rounded-md border border-black/15 bg-white dark:border-white/15 dark:bg-black">
-                                <img :src="customImage" alt="Vlastní fotka FVE listů" class="h-full w-full object-cover" />
+                    <div v-if="rawUserImage" class="flex flex-col gap-2.5">
+                        <!-- Header bar -->
+                        <div class="flex items-center justify-between text-xs text-black/70 dark:text-white/70">
+                            <span class="font-medium text-black dark:text-white">Posun myší na listech</span>
+                            <span class="text-[11px] opacity-75">Táhněte myší pro posun</span>
+                        </div>
+
+                        <!-- Interactive Mouse Drag-and-Drop Viewport Pad -->
+                        <div
+                            ref="dragPad"
+                            @mousedown="startDrag"
+                            @touchstart.prevent="startTouchDrag"
+                            @wheel.prevent="onWheelZoom"
+                            class="group relative aspect-square w-full cursor-grab overflow-hidden rounded-md border border-black/15 bg-white select-none active:cursor-grabbing dark:border-white/15 dark:bg-black"
+                        >
+                            <!-- User Image inside Drag Pad -->
+                            <img
+                                :src="rawUserImage"
+                                alt="Vlastní obrázek"
+                                class="absolute max-w-none pointer-events-none transition-transform duration-75"
+                                :style="{
+                                    width: (100 * scale) + '%',
+                                    height: (100 * scale) + '%',
+                                    left: (50 + posX - (50 * scale)) + '%',
+                                    top: (50 + posY - (50 * scale)) + '%',
+                                    objectFit: 'cover'
+                                }"
+                            />
+
+                            <!-- Leaf Contour Mask Overlay -->
+                            <img
+                                src="/img/config-images/v1-config-compressed-webp/leaf-color/fve-design/fve_spring.webp"
+                                alt="FVE Listy vzor"
+                                class="absolute inset-0 h-full w-full object-contain mix-blend-overlay opacity-75 pointer-events-none"
+                            />
+
+                            <!-- Drag Instruction Badge -->
+                            <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between rounded bg-black/60 px-2 py-1 text-[10px] text-white backdrop-blur-sm opacity-90 transition-opacity group-hover:opacity-100">
+                                <span>🖱️ Táhněte myší</span>
+                                <span>🔍 Kolečko = Zoom ({{ Math.round(scale * 100) }}%)</span>
                             </div>
-                            <div class="flex-1 text-xs text-black/70 dark:text-white/70">
-                                <p class="font-medium text-black dark:text-white">Vlastní fotka namapována</p>
-                                <p class="text-[11px] opacity-75">S fotovoltaickým podtónem</p>
+
+                            <!-- Quick Action Overlay Buttons -->
+                            <div class="absolute top-2 right-2 flex items-center gap-1">
+                                <button
+                                    type="button"
+                                    @click.stop="zoomIn"
+                                    class="flex h-6 w-6 items-center justify-center rounded bg-black/60 text-white backdrop-blur-sm hover:bg-black/90"
+                                    title="Přiblížit"
+                                >
+                                    +
+                                </button>
+                                <button
+                                    type="button"
+                                    @click.stop="zoomOut"
+                                    class="flex h-6 w-6 items-center justify-center rounded bg-black/60 text-white backdrop-blur-sm hover:bg-black/90"
+                                    title="Oddálit"
+                                >
+                                    -
+                                </button>
+                                <button
+                                    type="button"
+                                    @click.stop="resetPosition"
+                                    class="flex h-6 w-6 items-center justify-center rounded bg-black/60 text-white backdrop-blur-sm hover:bg-black/90"
+                                    title="Obnovit pozici"
+                                >
+                                    ↺
+                                </button>
                             </div>
+                        </div>
+
+                        <!-- Photovoltaic Grid Undertone Control -->
+                        <div class="mt-1 flex flex-col gap-1 text-xs">
+                            <div class="flex items-center justify-between text-[11px] text-black/70 dark:text-white/70">
+                                <span>Fotovoltaický vzor / Mřížka listů</span>
+                                <span class="font-mono font-medium">{{ Math.round(pvOpacity * 100) }}%</span>
+                            </div>
+                            <input
+                                type="range"
+                                min="0.0"
+                                max="1.0"
+                                step="0.05"
+                                v-model.number="pvOpacity"
+                                @input="updateMappedTexture"
+                                class="h-1.5 w-full cursor-pointer appearance-none rounded-lg bg-black/20 accent-black dark:bg-white/20 dark:accent-white"
+                            />
+                        </div>
+
+                        <div class="flex items-center justify-between pt-1">
                             <button
                                 type="button"
                                 @click="triggerFileInput"
-                                class="rounded border border-black/20 px-2 py-1 text-xs font-medium text-black hover:bg-black/10 dark:border-white/20 dark:text-white dark:hover:bg-white/10"
+                                class="text-[11px] font-medium text-black/70 underline hover:text-black dark:text-white/70 dark:hover:text-white"
                             >
-                                Změnit
+                                Změnit fotku
                             </button>
-                        </div>
-
-                        <!-- Interactive Positioning & Undertone Controls -->
-                        <div class="mt-1 flex flex-col gap-2.5 border-t border-black/10 pt-2.5 dark:border-white/10">
-                            <!-- Scale / Zoom slider -->
-                            <div class="flex flex-col gap-1 text-xs">
-                                <div class="flex items-center justify-between text-[11px] text-black/70 dark:text-white/70">
-                                    <span>Velikost / Zoom</span>
-                                    <span class="font-mono font-medium">{{ Math.round(scale * 100) }}%</span>
-                                </div>
-                                <input
-                                    type="range"
-                                    min="0.5"
-                                    max="2.5"
-                                    step="0.05"
-                                    v-model.number="scale"
-                                    @input="updateMappedTexture"
-                                    class="h-1.5 w-full cursor-pointer appearance-none rounded-lg bg-black/20 accent-black dark:bg-white/20 dark:accent-white"
-                                />
-                            </div>
-
-                            <!-- Position X slider -->
-                            <div class="flex flex-col gap-1 text-xs">
-                                <div class="flex items-center justify-between text-[11px] text-black/70 dark:text-white/70">
-                                    <span>Posun Vodorovně (X)</span>
-                                    <span class="font-mono font-medium">{{ posX > 0 ? '+' + posX : posX }}%</span>
-                                </div>
-                                <input
-                                    type="range"
-                                    min="-50"
-                                    max="50"
-                                    step="1"
-                                    v-model.number="posX"
-                                    @input="updateMappedTexture"
-                                    class="h-1.5 w-full cursor-pointer appearance-none rounded-lg bg-black/20 accent-black dark:bg-white/20 dark:accent-white"
-                                />
-                            </div>
-
-                            <!-- Position Y slider -->
-                            <div class="flex flex-col gap-1 text-xs">
-                                <div class="flex items-center justify-between text-[11px] text-black/70 dark:text-white/70">
-                                    <span>Posun Svisle (Y)</span>
-                                    <span class="font-mono font-medium">{{ posY > 0 ? '+' + posY : posY }}%</span>
-                                </div>
-                                <input
-                                    type="range"
-                                    min="-50"
-                                    max="50"
-                                    step="1"
-                                    v-model.number="posY"
-                                    @input="updateMappedTexture"
-                                    class="h-1.5 w-full cursor-pointer appearance-none rounded-lg bg-black/20 accent-black dark:bg-white/20 dark:accent-white"
-                                />
-                            </div>
-
-                            <!-- Photovoltaic Grid Undertone slider -->
-                            <div class="flex flex-col gap-1 text-xs">
-                                <div class="flex items-center justify-between text-[11px] text-black/70 dark:text-white/70">
-                                    <span>FVE Vzor / Fotovoltaický podtón</span>
-                                    <span class="font-mono font-medium">{{ Math.round(pvOpacity * 100) }}%</span>
-                                </div>
-                                <input
-                                    type="range"
-                                    min="0.2"
-                                    max="1.0"
-                                    step="0.05"
-                                    v-model.number="pvOpacity"
-                                    @input="updateMappedTexture"
-                                    class="h-1.5 w-full cursor-pointer appearance-none rounded-lg bg-black/20 accent-black dark:bg-white/20 dark:accent-white"
-                                />
-                            </div>
-
                             <button
                                 type="button"
                                 @click="resetPosition"
-                                class="mt-0.5 text-right text-[11px] text-black/50 hover:text-black dark:text-white/50 dark:hover:text-white"
+                                class="text-[11px] text-black/50 hover:text-black dark:text-white/50 dark:hover:text-white"
                             >
-                                Obnovit výchozí pozici
+                                Vycentrovat
                             </button>
                         </div>
                     </div>
@@ -164,7 +171,7 @@
                             </svg>
                         </div>
                         <span class="font-medium">Nahrajte vlastní fotku nebo vzor</span>
-                        <span class="text-[10px] opacity-70">PNG, JPG, WebP (bude namapováno na listy)</span>
+                        <span class="text-[10px] opacity-70">PNG, JPG, WebP (táhněte myší pro posun na listech)</span>
                     </div>
                 </div>
             </template>
@@ -173,7 +180,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, onUnmounted } from 'vue';
 import { useStepFormatter } from '@/composables/useStepFormatter';
 import { ProductId } from '@/types/products';
 import { generateMappedLeafTexture } from './leafTextureMapper';
@@ -192,12 +199,19 @@ const emit = defineEmits<{
 
 const { formatStep } = useStepFormatter();
 const fileInput = ref<HTMLInputElement | null>(null);
+const dragPad = ref<HTMLElement | null>(null);
 
 const rawUserImage = ref<string | null>(null);
 const posX = ref(0);
 const posY = ref(0);
 const scale = ref(1.0);
-const pvOpacity = ref(0.85);
+const pvOpacity = ref(0.5);
+
+let isDragging = false;
+let startX = 0;
+let startY = 0;
+let startPosX = 0;
+let startPosY = 0;
 
 interface FveLeafOption {
     id: string;
@@ -278,7 +292,7 @@ const visibleOptions = computed(() =>
 
 function selectOption(id: string) {
     emit('update:modelValue', id);
-    if (id === 'custom' && !props.customImage) {
+    if (id === 'custom' && !rawUserImage.value) {
         triggerFileInput();
     }
 }
@@ -307,9 +321,94 @@ function resetPosition() {
     posX.value = 0;
     posY.value = 0;
     scale.value = 1.0;
-    pvOpacity.value = 0.85;
+    pvOpacity.value = 0.5;
     updateMappedTexture();
 }
+
+function zoomIn() {
+    scale.value = Math.min(3.0, scale.value + 0.15);
+    updateMappedTexture();
+}
+
+function zoomOut() {
+    scale.value = Math.max(0.4, scale.value - 0.15);
+    updateMappedTexture();
+}
+
+function onWheelZoom(event: WheelEvent) {
+    const delta = event.deltaY < 0 ? 0.08 : -0.08;
+    scale.value = Math.min(3.0, Math.max(0.4, scale.value + delta));
+    updateMappedTexture();
+}
+
+/* Mouse Dragging Logic */
+function startDrag(event: MouseEvent) {
+    isDragging = true;
+    startX = event.clientX;
+    startY = event.clientY;
+    startPosX = posX.value;
+    startPosY = posY.value;
+
+    window.addEventListener('mousemove', onDragMove);
+    window.addEventListener('mouseup', stopDrag);
+}
+
+function onDragMove(event: MouseEvent) {
+    if (!isDragging || !dragPad.value) return;
+    const rect = dragPad.value.getBoundingClientRect();
+    const deltaX = ((event.clientX - startX) / rect.width) * 100;
+    const deltaY = ((event.clientY - startY) / rect.height) * 100;
+
+    posX.value = Math.min(60, Math.max(-60, Math.round(startPosX + deltaX)));
+    posY.value = Math.min(60, Math.max(-60, Math.round(startPosY + deltaY)));
+
+    updateMappedTexture();
+}
+
+function stopDrag() {
+    isDragging = false;
+    window.removeEventListener('mousemove', onDragMove);
+    window.removeEventListener('mouseup', stopDrag);
+}
+
+/* Touch Dragging Logic */
+function startTouchDrag(event: TouchEvent) {
+    const touch = event.touches[0];
+    if (!touch) return;
+    isDragging = true;
+    startX = touch.clientX;
+    startY = touch.clientY;
+    startPosX = posX.value;
+    startPosY = posY.value;
+
+    window.addEventListener('touchmove', onTouchMove);
+    window.addEventListener('touchend', stopTouchDrag);
+}
+
+function onTouchMove(event: TouchEvent) {
+    if (!isDragging || !dragPad.value) return;
+    const touch = event.touches[0];
+    if (!touch) return;
+    const rect = dragPad.value.getBoundingClientRect();
+    const deltaX = ((touch.clientX - startX) / rect.width) * 100;
+    const deltaY = ((touch.clientY - startY) / rect.height) * 100;
+
+    posX.value = Math.min(60, Math.max(-60, Math.round(startPosX + deltaX)));
+    posY.value = Math.min(60, Math.max(-60, Math.round(startPosY + deltaY)));
+
+    updateMappedTexture();
+}
+
+function stopTouchDrag() {
+    isDragging = false;
+    window.removeEventListener('touchmove', onTouchMove);
+    window.removeEventListener('touchend', stopTouchDrag);
+}
+
+onUnmounted(() => {
+    stopDrag();
+    stopTouchDrag();
+});
 
 async function onFileSelected(event: Event) {
     const target = event.target as HTMLInputElement;
@@ -321,7 +420,7 @@ async function onFileSelected(event: Event) {
         const dataUrl = e.target?.result as string;
         if (dataUrl) {
             rawUserImage.value = dataUrl;
-            await updateMappedTexture();
+            resetPosition();
         }
     };
     reader.readAsDataURL(file);
