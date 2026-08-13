@@ -204,11 +204,11 @@ const handlePayment = async () => {
 <template>
     <div class="fixed top-0 left-0 z-50 flex h-full w-full bg-black/70 p-6">
         <div
-            class="mx-auto my-auto flex min-h-140 w-full flex-col rounded-2xl bg-white lg:w-160"
+            class="mx-auto my-auto flex min-h-140 w-full flex-col rounded-2xl bg-white dark:bg-zinc-900 lg:w-160 shadow-xl overflow-hidden"
         >
-            <div class="bg-t-accent/10 p-6">
+            <div class="bg-t-accent/10 dark:bg-white/5 p-6 border-b border-black/10 dark:border-white/10">
                 <div class="flex items-baseline justify-between">
-                    <div class="text-sm text-black/70 dark:text-white/50">
+                    <div class="text-sm text-black/70 dark:text-white/70">
                         {{ $t('configurator.checkout.reserve_price') }}
                     </div>
                     <div
@@ -222,21 +222,21 @@ const handlePayment = async () => {
             <div class="flex flex-1 flex-col p-6">
                 <div v-if="step === 1" class="step-1">
                     <div class="">
-                        <label for="mail" class="mb-2 block text-sm">
+                        <label for="mail" class="mb-2 block text-sm font-medium text-black dark:text-white">
                             {{ $t('configurator.modal_checkout.email_label') }}
                         </label>
 
                         <input
                             v-model="email"
                             id="mail"
-                            class="w-full rounded-xl border bg-white px-4 py-3 text-black"
+                            class="w-full rounded-xl border border-black/15 dark:border-white/15 bg-white dark:bg-zinc-800 px-4 py-3 text-black dark:text-white placeholder:text-black/40 dark:placeholder:text-white/40 focus:outline-none focus:border-black dark:focus:border-white transition-colors"
                             type="email"
                             placeholder="jiri.dozvedel@domena.cz"
                             :disabled="isProcessing"
                         />
                     </div>
 
-                    <div class="pt-6 opacity-70">
+                    <div class="pt-6 text-xs text-black/60 dark:text-white/60 leading-relaxed">
                         {{ $t('configurator.modal_checkout.email_desc') }}
                     </div>
                 </div>
@@ -248,35 +248,35 @@ const handlePayment = async () => {
                         <div
                             class="relative my-6 flex items-center justify-center"
                         >
-                            <hr class="w-full border-black/10" />
+                            <hr class="w-full border-black/10 dark:border-white/10" />
                             <span
-                                class="absolute bg-white px-2 text-xs text-black/40"
+                                class="absolute bg-white dark:bg-zinc-900 px-2 text-xs text-black/40 dark:text-white/40"
                                 >{{ $t('configurator.modal_checkout.or_card') }}</span
                             >
                         </div>
                     </div>
 
-                    <label class="mb-2 block text-sm">{{ $t('configurator.modal_checkout.card_info') }}</label>
+                    <label class="mb-2 block text-sm font-medium text-black dark:text-white">{{ $t('configurator.modal_checkout.card_info') }}</label>
                     <div
                         id="card-element"
-                        class="w-full rounded-xl border bg-white px-4 py-4 text-black"
+                        class="w-full rounded-xl border border-black/15 dark:border-white/15 bg-white dark:bg-zinc-800 px-4 py-4 text-black dark:text-white"
                     ></div>
 
-                    <p v-if="errorMessage" class="mt-2 text-xs text-red-500">
+                    <p v-if="errorMessage" class="mt-2 text-xs text-red-500 font-medium">
                         {{ errorMessage }}
                     </p>
                 </div>
 
-                <div class="mt-auto pt-6">
+                <div class="mt-auto pt-6 border-t border-black/10 dark:border-white/10">
                     <div class="flex w-full justify-between pb-4">
                         <div
-                            class="text-xs tracking-widest text-black/50 uppercase"
+                            class="text-xs tracking-widest text-black/50 dark:text-white/50 uppercase"
                         >
                             {{ $t('configurator.title') }}
                         </div>
 
                         <div
-                            class="text-xs tracking-widest text-black/50 uppercase"
+                            class="text-xs tracking-widest text-black/50 dark:text-white/50 uppercase"
                         >
                             0{{ step }} / 02
                         </div>

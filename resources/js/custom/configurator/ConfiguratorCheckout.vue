@@ -154,16 +154,16 @@
 
         <div class="flex gap-3">
             <div class="">
-                <input type="checkbox" v-model="tosConsent" id="tosConsent" />
+                <input type="checkbox" v-model="tosConsent" id="tosConsent" class="cursor-pointer accent-black dark:accent-white" />
             </div>
             <div class="-mt-0.5">
-                <label for="tosConsent" class="text-sm">
+                <label for="tosConsent" class="cursor-pointer text-sm text-black/80 dark:text-white/80">
                     <i18n-t keypath="configurator.checkout.tos_agree" tag="span">
                         <template #tos>
-                            <a class="underline" :href="route('legal.tos')">{{ $t('configurator.checkout.tos_link') }}</a>
+                            <a class="underline text-black/90 hover:text-black dark:text-white/90 dark:hover:text-white" :href="route('legal.tos')" target="_blank" @click.stop>{{ $t('configurator.checkout.tos_link') }}</a>
                         </template>
                         <template #pp>
-                            <a class="underline" :href="route('legal.pp')">{{ $t('configurator.checkout.pp_link') }}</a>
+                            <a class="underline text-black/90 hover:text-black dark:text-white/90 dark:hover:text-white" :href="route('legal.pp')" target="_blank" @click.stop>{{ $t('configurator.checkout.pp_link') }}</a>
                         </template>
                     </i18n-t>
                 </label>
