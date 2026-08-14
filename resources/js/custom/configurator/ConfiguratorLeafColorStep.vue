@@ -1,13 +1,21 @@
 <template>
-    <ConfiguratorColorPicker :step-label="`${formatStep(stepNumber)} — ${$t('configurator.steps.leaf_color')}`" :colors="colors" :model-value="modelValue" @update:model-value="$emit('update:modelValue', $event)" />
+    <ConfiguratorColorPicker
+        :step-label="`${formatStep(stepNumber)} — ${$t('configurator.steps.leaf_color')}`"
+        :colors="colors"
+        :model-value="modelValue"
+        :custom-hex="customHex"
+        default-custom-hex="#00D2FF"
+        @update:model-value="$emit('update:modelValue', $event)"
+        @update:custom-hex="$emit('update:customHex', $event)"
+    />
 </template>
 
 <script setup lang="ts">
 import { useStepFormatter } from '@/composables/useStepFormatter';
 import ConfiguratorColorPicker, { type ColorOption } from './ConfiguratorColorPicker.vue';
 
-defineProps<{ modelValue: string, stepNumber: number }>();
-defineEmits<{ 'update:modelValue': [value: string] }>();
+defineProps<{ modelValue: string, stepNumber: number, customHex?: string }>();
+defineEmits<{ 'update:modelValue': [value: string], 'update:customHex': [value: string] }>();
 
 const { formatStep } = useStepFormatter();
 

@@ -130,6 +130,7 @@
                     <ConfiguratorColorStep
                         v-if="step.id === 'color'"
                         v-model="selectedColorId"
+                        v-model:custom-hex="customFrameColor"
                         :step-number="index + 1"
                     />
                     <ConfiguratorTreeDesignStep
@@ -155,11 +156,13 @@
                     <ConfiguratorTurbineColorStep
                         v-else-if="step.id === 'color-turbine'"
                         v-model="selectedColorId"
+                        v-model:custom-hex="customFrameColor"
                         :step-number="index + 1"
                     />
                     <ConfiguratorLeafColorStep
                         v-else-if="step.id === 'leaf'"
                         v-model="selectedLeafColorId"
+                        v-model:custom-hex="customLeafColor"
                         :step-number="index + 1"
                     />
                     <ConfiguratorFveLeafStep
@@ -349,7 +352,9 @@ watch(selectedProductId, (newProductId) => {
 });
 
 const selectedColorId = ref('white');
+const customFrameColor = ref('#FF6B00');
 const selectedLeafColorId = ref('green');
+const customLeafColor = ref('#00D2FF');
 const selectedFveLeafDesign = ref('spring');
 const customFveLeafImage = ref<string | null>(null);
 const selectedConnectivity = ref('none');
@@ -402,7 +407,9 @@ const currentSectionId = ref(getFirstSectionId());
 
 const previewSelection = computed<ConfiguratorPreviewSelection>(() => ({
     color: selectedColorId.value,
+    customFrameColor: customFrameColor.value,
     leafColor: selectedLeafColorId.value,
+    customLeafColor: customLeafColor.value,
     fveLeafDesign: selectedFveLeafDesign.value,
     customFveLeafImage: customFveLeafImage.value,
     connectivity: selectedConnectivity.value,
@@ -616,8 +623,8 @@ function buildConfiguration() {
         ConfigurationField,
         string | number | boolean
     > = {
-        color: selectedColorId.value,
-        leafColor: selectedLeafColorId.value,
+        color: selectedColorId.value === 'custom' ? `custom (${customFrameColor.value})` : selectedColorId.value,
+        leafColor: selectedLeafColorId.value === 'custom' ? `custom (${customLeafColor.value})` : selectedLeafColorId.value,
         fveLeafDesign: selectedFveLeafDesign.value,
         connectivity: selectedConnectivity.value,
         battery: selectedBattery.value,

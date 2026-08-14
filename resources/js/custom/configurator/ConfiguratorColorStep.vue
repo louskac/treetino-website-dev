@@ -1,5 +1,13 @@
 <template>
-    <ConfiguratorColorPicker :step-label="`${formatStep(stepNumber)} — ${$t('configurator.steps.color')}`" :colors="colors" :model-value="modelValue" @update:model-value="$emit('update:modelValue', $event)" />
+    <ConfiguratorColorPicker
+        :step-label="`${formatStep(stepNumber)} — ${$t('configurator.steps.color')}`"
+        :colors="colors"
+        :model-value="modelValue"
+        :custom-hex="customHex"
+        default-custom-hex="#FF6B00"
+        @update:model-value="$emit('update:modelValue', $event)"
+        @update:custom-hex="$emit('update:customHex', $event)"
+    />
 </template>
 
 <script setup lang="ts">
@@ -7,8 +15,8 @@ import ConfiguratorColorPicker, { type ColorOption } from './ConfiguratorColorPi
 import { useStepFormatter } from '@/composables/useStepFormatter';
 const { formatStep } = useStepFormatter();
 
-defineProps<{ modelValue: string, stepNumber: number }>();
-defineEmits<{ 'update:modelValue': [value: string] }>();
+defineProps<{ modelValue: string, stepNumber: number, customHex?: string }>();
+defineEmits<{ 'update:modelValue': [value: string], 'update:customHex': [value: string] }>();
 
 const colors: ColorOption[] = [
     { id: 'white',  label: 'Bílá',           labelKey: 'configurator.color.white',       hex: '#F0F0F0', price: null,           isCustom: false },
