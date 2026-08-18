@@ -9,8 +9,11 @@ import { createI18n } from 'vue-i18n';
 import '../css/app.css';
 import { ZiggyVue } from 'ziggy-js';
 import i18nMessages from './i18n_messages.json';
+import { initGA, updateGAConsent, trackPageView, trackEvent } from './analytics';
 
 const appName = 'Treetino';
+
+initGA();
 
 const ZiggyConfig = {
     url: typeof window !== 'undefined' ? window.location.origin : '',
@@ -23,6 +26,7 @@ const ZiggyConfig = {
         'products.turbine': { uri: 'products/turbine', methods: ['GET', 'HEAD'] },
         'configurator': { uri: 'configurator', methods: ['GET', 'HEAD'] },
         'configurator.product': { uri: 'configurator', methods: ['GET', 'HEAD'] },
+        'sales.index': { uri: 'sales', methods: ['GET', 'HEAD'] },
         'collaboration.index': { uri: 'collaboration', methods: ['GET', 'HEAD'] },
         'media.index': { uri: 'media', methods: ['GET', 'HEAD'] },
         'contact.index': { uri: 'contact', methods: ['GET', 'HEAD'] },
@@ -45,6 +49,7 @@ const staticRoutes: Record<string, string | ((param?: string) => string)> = {
     'products.turbine': '/products/turbine',
     'configurator': '/configurator',
     'configurator.product': (id?: string) => (id ? `/configurator?product=${id}` : '/configurator'),
+    'sales.index': '/sales',
     'collaboration.index': '/collaboration',
     'media.index': '/media',
     'contact.index': '/contact',
@@ -102,7 +107,16 @@ function makePageObject(url: string) {
 
 const cookieConfig = (t: (key: string) => string): CookieConsentConfig => ({
     autoShow: false,
-    guiOptions: { consentModal: { layout: 'box', position: 'bottom right' } },
+    guiOptions: {
+        consentModal: { layout: 'box', position: 'bottom right' },
+        preferencesModal: { layout: 'box', position: 'right' },
+    },
+    onConsent: ({ cookie }) => {
+        updateGAConsent(cookie.categories.includes('analytics'));
+    },
+    onChange: ({ cookie }) => {
+        updateGAConsent(cookie.categories.includes('analytics'));
+    },
     categories: {
         necessary: { readOnly: true, enabled: true },
         analytics: { enabled: false },
@@ -120,9 +134,34 @@ const cookieConfig = (t: (key: string) => string): CookieConsentConfig => ({
                 },
                 preferencesModal: {
                     title: t('common.cookie.settings'),
+                    acceptAllBtn: t('common.cookie.accept_all'),
+                    acceptNecessaryBtn: t('common.cookie.reject_all'),
+                    savePreferencesBtn: t('common.cookie.save'),
                     sections: [
-                        { title: t('common.cookie.reject_all'), linkedCategory: 'necessary' },
-                        { title: 'Analytics', linkedCategory: 'analytics' },
+                        {
+                            title: t('common.cookie.necessary_title'),
+                            description: t('common.cookie.necessary_desc'),
+                            linkedCategory: 'necessary',
+                        },
+                        {
+                            title: t('common.cookie.analytics_title'),
+                            description: t('common.cookie.analytics_desc'),
+                            linkedCategory: 'analytics',
+                            cookieTable: {
+                                headers: {
+                                    name: 'Cookie',
+                                    domain: 'Domain',
+                                    desc: 'Purpose',
+                                },
+                                body: [
+                                    {
+                                        name: '_ga, _ga_*',
+                                        domain: typeof window !== 'undefined' ? window.location.hostname : 'treetino.cz',
+                                        desc: 'Google Analytics 4',
+                                    },
+                                ],
+                            },
+                        },
                     ],
                 },
             },
@@ -179,6 +218,7 @@ createInertiaApp({
                 const targetUrl = event.detail.visit.url;
                 const path = typeof targetUrl === 'string' ? targetUrl : targetUrl?.pathname;
                 if (path && path.startsWith('/') && path !== window.location.pathname) {
+                    trackPageView(path);
                     event.preventDefault();
                     window.location.href = path;
                 }
@@ -202,19 +242,25 @@ createInertiaApp({
                     document.documentElement.lang = next.locale;
                 }
                 window.scrollTo({ top: 0, behavior: 'smooth' });
+                trackPageView(window.location.pathname + window.location.search, document.title);
             });
         }
 
         const app = createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(i18n)
-            .use(CookieConsentPlugin, cookieConfig((key) => String(i18n.global.t(key))))
-            .use(ZiggyVue, ZiggyConfig);
+            .use(CookieConsentPlugin, cookieConfig((key: string) => String(i18n.global.t(key))))
+            .use(ZiggyVue, ZiggyConfig as any);
 
         app.config.globalProperties.route = safeRoute;
         app.provide('route', safeRoute);
+        app.config.globalProperties.$analytics = { trackEvent, trackPageView };
+        app.provide('analytics', { trackEvent, trackPageView });
 
         app.mount(el);
+
+        // Initial SPA page view tracking
+        trackPageView(window.location.pathname + window.location.search, document.title);
     },
     progress: { color: '#4B5563' },
 });

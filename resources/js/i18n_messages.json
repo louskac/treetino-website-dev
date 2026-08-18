@@ -5,6 +5,7 @@
                 "home": "Domů",
                 "products": "Produkty",
                 "collaboration": "Spolupráce",
+                "sales": "Prodejci",
                 "media": "Média",
                 "contact": "Kontakt"
             },
@@ -40,10 +41,15 @@
             },
             "cookie": {
                 "title": "Nastavení cookies",
-                "description": "Používáme cookies pro správné fungování webu a anonymní analytiku.",
+                "description": "Používáme soubory cookie pro zajištění základní funkčnosti webu a po udělení vašeho souhlasu také pro anonymní analýzu návštěvnosti prostřednictvím Google Analytics.",
                 "accept_all": "Přijmout vše",
                 "reject_all": "Pouze nezbytné",
-                "settings": "Nastavení"
+                "settings": "Nastavení",
+                "save": "Uložit předvolby",
+                "necessary_title": "Nezbytné soubory cookie",
+                "necessary_desc": "Tyto soubory cookie jsou technicky nezbytné pro správné a bezpečné fungování webových stránek.",
+                "analytics_title": "Analytické cookies",
+                "analytics_desc": "Umožňují nám anonymně měřit návštěvnost a používání stránek pomocí služby Google Analytics 4, což nám pomáhá web neustále zlepšovat."
             }
         },
         "home": {
@@ -504,10 +510,6 @@
                 "winter": {
                     "label": "Zima",
                     "desc": "Sezonní design FVE listů pro zimní variantu stromu."
-                },
-                "custom": {
-                    "label": "Na míru",
-                    "desc": "Nahrajte vlastní fotku nebo grafiku pro potisk FVE listů."
                 }
             },
             "connectivity": {
@@ -647,6 +649,110 @@
                 "november": "listopad",
                 "december": "December"
             }
+        },
+        "sales": {
+            "audience": "PRODEJCI & OBCHODNÍ PARTNEŘI",
+            "title": "Prodávejte solární stromy s provizí až 10 %",
+            "lead": "Kompletní nástroj pro obchodníky. 3D zaměření na pozemku klienta, okamžitá kalkulace návratnosti, export hotové nabídky do 2 minut a realizace na klíč.",
+            "cta_primary": "Vyzkoušet prodejní aplikaci",
+            "cta_secondary": "Kolik můžete vydělat",
+            "numbers_badge": "PROVIZE & VÝDĚLKY",
+            "numbers_title": "Vysoké odměny z každé uzavřené zakázky",
+            "numbers_description": "S provizí až 10 % získáte z velkého stromu až 18 500 €, z menšího modelu 6 000 € a z větrné turbíny 450 €. Vy domluvíte klienta, o výrobu, montáž a servis se postaráme my.",
+            "stats": {
+                "1": {
+                    "val": "Až 10 %",
+                    "lbl": "Provize z každé zakázky (až 18 500 € \/ obchod)"
+                },
+                "2": {
+                    "val": "Až 18 500 €",
+                    "lbl": "Výdělek z 1 velkého stromu (185 000 €)"
+                },
+                "3": {
+                    "val": "2 minuty",
+                    "lbl": "Čas na vytvoření hotové nabídky pro klienta"
+                },
+                "4": {
+                    "val": "100 %",
+                    "lbl": "Realizace na klíč zajištěna Treetino"
+                }
+            },
+            "why_join": {
+                "badge": "PROČ PRODÁVAT TREETINO",
+                "title": "Vše, co potřebujete k uzavření obchodu",
+                "card1_title": "3D vizualizace přímo na schůzce",
+                "card1_desc": "Zadejte adresu klienta a ihned mu ukažte realistické usazení stromu na jeho pozemku ve 3D.",
+                "card2_title": "Hotová cenová nabídka do 2 minut",
+                "card2_desc": "Okamžitý výpočet roční úspory, návratnosti a export reprezentativního PDF pro klienta.",
+                "card3_title": "Přehledné CRM a sledování provizí",
+                "card3_desc": "Sledujte stav každého obchodu od podpisu smlouvy přes výrobu až po vyplacení vaší odměny.",
+                "card4_title": "Nulové starosti s realizací",
+                "card4_desc": "Veškerou technickou dokumentaci, výrobu, montáž i záruční servis kompletně kryje Treetino."
+            },
+            "network": {
+                "tag": "ROZVOJ OBCHODNÍ SÍTĚ",
+                "title": "Budujte svůj tým a získejte provize z celé sítě",
+                "text": "Přiveďte do Treetino další schopné obchodníky a získejte podíl z každého jejich uzavřeného obchodu. Vytvořte si dlouhodobý pasivní příjem vedle svých vlastních přímých prodejů — bez limitů a s plnou transparentností v CRM.",
+                "card1_title": "Meziprovize z týmu",
+                "card1_text": "Pravidelná odměna z každého stromu i turbíny, kterou vaši doporučení prodejci prodají.",
+                "card2_title": "Transparentní CRM",
+                "card2_text": "Kompletní přehled o struktuře vašeho týmu, obratech a vyplácených bonusech v reálném čase.",
+                "overlay_line1": "TÝMOVÁ",
+                "overlay_line2": "PROVIZE"
+            },
+            "portfolio": {
+                "badge": "PRODUKTOVÉ PORTFOLIO",
+                "title": "Produkty a vaše provize",
+                "v1_title": "Velký strom V1 (49,8 kW)",
+                "v1_price": "Cena modelu: 185 000 €",
+                "v1_commission": "Provize až 18 500 €",
+                "v1_tag": "Cena 185 000 € · Provize až 18 500 €",
+                "v1_desc": "Průmyslová hybridní elektrárna pro firmy, areály a města na ploše pouhého 1 m².",
+                "v2_title": "Kompaktní strom V2 (6–12 kW)",
+                "v2_price": "Cena modelu: 60 000 €",
+                "v2_commission": "Provize až 6 000 €",
+                "v2_tag": "Cena 60 000 € · Provize až 6 000 €",
+                "v2_desc": "Designové řešení pro prémiové rodinné domy, vily a hotely s tichými větrnými turbínami.",
+                "turbine_title": "Větrná turbína T1 (1–3 kW)",
+                "turbine_price": "Cena jednotky: 4 500 €",
+                "turbine_commission": "Provize až 450 €",
+                "turbine_tag": "Cena 4 500 € · Provize až 450 €",
+                "turbine_desc": "Vertikální tichá turbína pro střechy a sloupy. Celoroční výroba energie i v zimě."
+            },
+            "interactive_steps": {
+                "badge": "INTERAKTIVNÍ PRŮVODCE APLIKACÍ",
+                "step1_title": "Registrace a aktivace účtu",
+                "step1_desc": "Okamžitý přístup do Partner Portálu Treetino a nastavení provizní třídy.",
+                "step2_title": "Elektronické podpisy smluv",
+                "step2_desc": "Právně závazné podepsání NDA a provizní smlouvy přímo v rozhraní aplikace.",
+                "step3_title": "Video akademie & tutoriály",
+                "step3_desc": "Obchodní podklady a video tutoriály pro prezentaci solárních stromů a turbín klientům.",
+                "step4_title": "3D Google Maps zaměření",
+                "step4_desc": "Vizualizace umístění solárního stromu přímo na fotorealistické 3D mapě klienta.",
+                "step5_title": "Souhrn & výpočet návratnosti",
+                "step5_desc": "Kompletní kalkulace energetického výnosu v kWh, ESG úspor a finanční návratnosti.",
+                "step6_title": "PDF nabídka pro klienta",
+                "step6_desc": "Vygenerování a stažení profesionální cenové kalkulaci v PDF pro klienta do 2 minut.",
+                "step7_title": "Partner Portál & Provize",
+                "step7_desc": "Přehled rozpracovaných obchodů, provizních tříd a vyplacené odměny v real-time."
+            },
+            "datasheet": {
+                "badge": "PODMÍNKY SPOLUPRÁCE",
+                "title": "Přehled provizí a parametrů",
+                "row1_label": "Výše provize",
+                "row1_val": "Až 10 % z celkové ceny realizované zakázky",
+                "row2_label": "Příklady provizí z prodeje",
+                "row2_val": "Velký strom (185 000 €) → až 18 500 € · Malý strom (60 000 €) → až 6 000 € · Turbína (4 500 €) → až 450 €",
+                "row3_label": "Prodejní aplikace & CRM",
+                "row3_val": "Prodejní aplikace Treetino (3D zaměření na mapě, kalkulace návratnosti & PDF nabídka do 2 minut)",
+                "row4_label": "Výroba, doprava & instalace",
+                "row4_val": "100 % zajišťuje Treetino (kompletní dodání zákazníkovi na klíč)"
+            },
+            "banner": {
+                "title": "Začněte prodávat solární architekturu Treetino",
+                "subtitle": "Vyzkoušejte prodejní aplikaci, nasimulujte umístění na 3D mapě a přesvědčte se, jak snadno vytvoříte nabídku pro klienta.",
+                "cta": "Vyzkoušet prodejní aplikaci"
+            }
         }
     },
     "en": {
@@ -655,6 +761,7 @@
                 "home": "Home",
                 "products": "Products",
                 "collaboration": "Collaboration",
+                "sales": "Sales Partners",
                 "media": "Media",
                 "contact": "Contact"
             },
@@ -690,10 +797,15 @@
             },
             "cookie": {
                 "title": "Cookie consent",
-                "description": "We use cookies for site functionality and anonymous analytics.",
+                "description": "We use cookies to ensure essential website functionality and, with your consent, to anonymously analyze website traffic using Google Analytics.",
                 "accept_all": "Accept all",
                 "reject_all": "Necessary only",
-                "settings": "Settings"
+                "settings": "Settings",
+                "save": "Save preferences",
+                "necessary_title": "Essential cookies",
+                "necessary_desc": "These cookies are technically necessary for the correct and secure operation of the website.",
+                "analytics_title": "Analytics cookies",
+                "analytics_desc": "These cookies allow us to anonymously measure website traffic and user behavior via Google Analytics 4 to help us improve our services."
             }
         },
         "home": {
@@ -1154,10 +1266,6 @@
                 "winter": {
                     "label": "Winter",
                     "desc": "Seasonal PV leaf design for winter tree variant."
-                },
-                "custom": {
-                    "label": "Custom",
-                    "desc": "Upload your custom picture or graphics to print onto the PV leaves."
                 }
             },
             "connectivity": {
@@ -1295,6 +1403,110 @@
                 "september": "September",
                 "october": "October",
                 "november": "November"
+            }
+        },
+        "sales": {
+            "audience": "DEALERS & SALES PARTNERS",
+            "title": "Sell Solar Architecture with Up to 10% Commission",
+            "lead": "The complete sales toolkit. 3D site placement with clients, instant ROI calculations, branded PDF quotes in 2 minutes, and full turnkey fulfillment.",
+            "cta_primary": "Try Sales App",
+            "cta_secondary": "How Much You Can Earn",
+            "numbers_badge": "COMMISSIONS & EARNINGS",
+            "numbers_title": "High Payouts on Every Closed Deal",
+            "numbers_description": "With up to 10% commission, earn up to €18,500 on a large tree, €6,000 on a compact tree, and €450 on a wind turbine. You close the deal — we handle manufacturing, installation, and warranty.",
+            "stats": {
+                "1": {
+                    "val": "Up to 10%",
+                    "lbl": "Commission per deal (up to €18,500 \/ sale)"
+                },
+                "2": {
+                    "val": "Up to €18,500",
+                    "lbl": "Payout per 1 commercial tree (€185,000)"
+                },
+                "3": {
+                    "val": "2 Minutes",
+                    "lbl": "To generate a complete client PDF proposal"
+                },
+                "4": {
+                    "val": "100%",
+                    "lbl": "Turnkey delivery handled by Treetino"
+                }
+            },
+            "why_join": {
+                "badge": "WHY SELL TREETINO",
+                "title": "Everything You Need to Close Deals",
+                "card1_title": "Live 3D Visualization on Site",
+                "card1_desc": "Enter the client's address and show them the solar tree right on their land in photorealistic 3D.",
+                "card2_title": "Complete Proposal in 2 Minutes",
+                "card2_desc": "Instant calculation of annual energy yields, payback period, and branded client-ready PDF export.",
+                "card3_title": "Clear CRM & Commission Tracking",
+                "card3_desc": "Track every deal in real time from contract signing through manufacturing to commission payout.",
+                "card4_title": "Zero Installation Hassle",
+                "card4_desc": "Treetino covers all engineering, manufacturing, on-site installation, and long-term warranty support."
+            },
+            "network": {
+                "tag": "SALES NETWORK EXPANSION",
+                "title": "Build Your Sales Team & Earn Network Overrides",
+                "text": "Introduce new talented sales reps to Treetino and earn commission overrides on every deal they close. Build a recurring revenue stream alongside your direct sales — fully automated and transparent in your CRM dashboard.",
+                "card1_title": "Team Overrides",
+                "card1_text": "Earn a percentage on every solar tree and wind turbine sold by your recommended reps.",
+                "card2_title": "Automated CRM",
+                "card2_text": "Complete real-time visibility into your team structure, deal volume, and automated commission payouts.",
+                "overlay_line1": "NETWORK",
+                "overlay_line2": "PROFIT"
+            },
+            "portfolio": {
+                "badge": "PRODUCT PORTFOLIO",
+                "title": "Products & Your Commission",
+                "v1_title": "Commercial Tree V1 (49.8 kW)",
+                "v1_price": "Base price: €185,000",
+                "v1_commission": "Commission up to €18,500",
+                "v1_tag": "Price €185,000 · Commission up to €18,500",
+                "v1_desc": "High-yield commercial hybrid power plant for businesses, logistics parks, and cities on just 1 m².",
+                "v2_title": "Residential Tree V2 (6–12 kW)",
+                "v2_price": "Base price: €60,000",
+                "v2_commission": "Commission up to €6,000",
+                "v2_tag": "Price €60,000 · Commission up to €6,000",
+                "v2_desc": "Aesthetic solar tree for private residences, villas, and boutique hotels with microturbines.",
+                "turbine_title": "Wind Turbine T1 (1–3 kW)",
+                "turbine_price": "Base price: €4,500",
+                "turbine_commission": "Commission up to €450",
+                "turbine_tag": "Price €4,500 · Commission up to €450",
+                "turbine_desc": "Silent vertical axis turbine for rooftops and masts, generating power year-round."
+            },
+            "interactive_steps": {
+                "badge": "INTERACTIVE APP TOUR",
+                "step1_title": "Partner Sign-Up & Activation",
+                "step1_desc": "Instant access to the Treetino Partner Portal and your designated commission tier.",
+                "step2_title": "Digital Document Signatures",
+                "step2_desc": "Sign legally binding NDAs and mediation contracts directly inside the app interface.",
+                "step3_title": "Video Academy & Tutorials",
+                "step3_desc": "Access video tutorials and sales training materials to pitch solar trees and turbines.",
+                "step4_title": "3D Google Maps Site Inspection",
+                "step4_desc": "Position solar trees directly on a photorealistic 3D map during client meetings.",
+                "step5_title": "ROI & Energy Breakdown",
+                "step5_desc": "Complete breakdown of capacity, annual kWh generation, carbon savings, and payback.",
+                "step6_title": "Client PDF Proposal Export",
+                "step6_desc": "Generate and download a professional client PDF proposal in seconds.",
+                "step7_title": "Partner CRM & Commissions",
+                "step7_desc": "Track active deals, commission tiers, and paid rewards in real-time."
+            },
+            "datasheet": {
+                "badge": "PARTNERSHIP TERMS",
+                "title": "Commissions & Specifications",
+                "row1_label": "Commission Rate",
+                "row1_val": "Up to 10% of total fulfilled deal value",
+                "row2_label": "Commission Examples",
+                "row2_val": "Commercial Tree (€185,000) → up to €18,500 · Residential Tree (€60,000) → up to €6,000 · Turbine (€4,500) → up to €450",
+                "row3_label": "Sales App & CRM",
+                "row3_val": "Treetino Sales App (3D site scans, ROI calculation & instant 2-minute PDF quotes)",
+                "row4_label": "Manufacturing & Delivery",
+                "row4_val": "Handled 100% by Treetino (turnkey delivery and installation for the customer)"
+            },
+            "banner": {
+                "title": "Start Selling Treetino Solar Architecture",
+                "subtitle": "Launch the sales app, test 3D map placement, and see how fast you can prepare quotes for your clients.",
+                "cta": "Try Sales App"
             }
         }
     }

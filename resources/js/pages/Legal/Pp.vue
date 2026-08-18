@@ -35,7 +35,7 @@ const sections = [
         number: 1,
         title: 'SPRÁVCE OSOBNÍCH ÚDAJŮ',
         paragraphs: [
-            'Správcem osobních údajů je společnost Treetino corp s.r.o., IČO: 10800107, se sídlem Český Šternberk 9, 257 26 (dále jen „Správce“). Kontakt: e-mail info@wattino.eu, tel. 730 587 857.',
+            'Správcem osobních údajů je společnost Treetino corp s.r.o., IČO: 10800107, se sídlem Český Šternberk 9, 257 26 (dále jen „Správce“). Kontakt: e-mail info@treetino.cz, tel. 730 587 857.',
             'Správce nejmenoval pověřence pro ochranu osobních údajů; povinnost jmenování se na něj nevztahuje.',
         ],
     },
@@ -43,7 +43,7 @@ const sections = [
         number: 2,
         title: 'ROZSAH ZPRACOVÁVANÝCH ÚDAJŮ',
         paragraphs: [
-            'Správce zpracovává osobní údaje, které mu subjekt údajů sám poskytl v souvislosti s objednávkou služeb prostřednictvím e-shopu www.wattino.eu, poptávkou nebo uzavřením smlouvy, a údaje vzniklé při plnění smlouvy. Jde zejména o: identifikační údaje (jméno, příjmení, u podnikatelů IČO a DIČ), kontaktní údaje (e-mail, telefon, doručovací a fakturační adresa), adresu a popis objektu, na němž má být provedena prohlídka či dílo, dokumentaci pořízenou při prohlídce objektu (zaměření, fotografie objektu), platební a fakturační údaje a obsah vzájemné komunikace.',
+            'Správce zpracovává osobní údaje, které mu subjekt údajů sám poskytl v souvislosti s objednávkou služeb prostřednictvím webu www.treetino.cz, poptávkou nebo uzavřením smlouvy, a údaje vzniklé při plnění smlouvy. Jde zejména o: identifikační údaje (jméno, příjmení, u podnikatelů IČO a DIČ), kontaktní údaje (e-mail, telefon, doručovací a fakturační adresa), adresu a popis objektu, na němž má být provedena prohlídka či dílo, dokumentaci pořízenou při prohlídce objektu (zaměření, fotografie objektu), platební a fakturační údaje a obsah vzájemné komunikace.',
             'Fotografie a další dokumentace objektu mohou v jednotlivých případech zachycovat i prostory obytného domu; Správce je pořizuje a zpracovává výhradně v rozsahu nezbytném pro zpracování nabídky a provedení díla.',
         ],
     },
@@ -51,8 +51,8 @@ const sections = [
         number: 4,
         title: 'PŘÍJEMCI OSOBNÍCH ÚDAJŮ',
         paragraphs: [
-            'Správce předává osobní údaje pouze těmto kategoriím příjemců: provozovatel platební brány [●] (zpracování plateb), poskytovatel e-shopové platformy a hostingu [●], externí účetní kancelář [●], subdodavatelé podílející se na provedení prohlídky či díla (v rozsahu jméno, kontakt a adresa objektu) a poskytovatelé doručovacích služeb. S příjemci v postavení zpracovatelů má Správce uzavřeny smlouvy o zpracování osobních údajů dle čl. 28 GDPR.',
-            'Správce nepředává osobní údaje do třetích zemí mimo EU/EHP ani mezinárodním organizacím. Při zpracovávání osobních údajů nedochází k automatizovanému rozhodování ani profilování ve smyslu čl. 22 GDPR.',
+            'Správce předává osobní údaje pouze těmto kategoriím příjemců: provozovatel platební brány (Stripe), poskytovatel webového hostingu a cloudových služeb, poskytovatel analytických nástrojů (Google Ireland Limited – Google Analytics 4, v režimu anonymizovaného měření a na základě souhlasu uživatele), externí účetní kancelář, subdodavatelé podílející se na provedení prohlídky či díla (v rozsahu jméno, kontakt a adresa objektu) a poskytovatelé doručovacích služeb. S příjemci v postavení zpracovatelů má Správce uzavřeny smlouvy o zpracování osobních údajů dle čl. 28 GDPR (včetně standardních smluvních doložek EU).',
+            'Při zpracovávání osobních údajů nedochází k automatizovanému rozhodování ani profilování ve smyslu čl. 22 GDPR.',
         ],
     },
     {
@@ -60,7 +60,7 @@ const sections = [
         title: 'PRÁVA SUBJEKTU ÚDAJŮ',
         paragraphs: [
             'Subjekt údajů má právo na přístup ke svým osobním údajům (čl. 15 GDPR), na jejich opravu (čl. 16), výmaz (čl. 17), omezení zpracování (čl. 18), na přenositelnost údajů (čl. 20) a právo vznést námitku proti zpracování založenému na oprávněném zájmu, včetně přímého marketingu (čl. 21).',
-            'Je-li zpracování založeno na souhlasu, má subjekt údajů právo souhlas kdykoli odvolat, aniž je tím dotčena zákonnost zpracování před jeho odvoláním. Odvolání lze učinit e-mailem na info@wattino.eu nebo prostřednictvím odkazu v každém obchodním sdělení.',
+            'Je-li zpracování založeno na souhlasu, má subjekt údajů právo souhlas kdykoli odvolat, aniž je tím dotčena zákonnost zpracování před jeho odvoláním. Odvolání lze učinit e-mailem na info@treetino.cz nebo prostřednictvím odkazu v každém obchodním sdělení.',
             'Svá práva subjekt údajů uplatňuje u Správce na kontaktech uvedených v čl. 1. Správce vyřídí žádost bez zbytečného odkladu, nejpozději do jednoho měsíce od jejího obdržení; tuto lhůtu lze v odůvodněných případech prodloužit o další dva měsíce.',
             'Subjekt údajů má právo podat stížnost u dozorového úřadu, kterým je Úřad pro ochranu osobních údajů, Pplk. Sochora 27, 170 00 Praha 7, www.uoou.gov.cz.',
         ],
@@ -69,14 +69,15 @@ const sections = [
         number: 6,
         title: 'COOKIES',
         paragraphs: [
-            'Používání souborů cookies a obdobných technologií na www.wattino.eu se řídí samostatnými zásadami používání cookies dostupnými na [●]. Technické cookies nezbytné pro provoz e-shopu jsou zpracovávány na základě oprávněného zájmu; ostatní cookies pouze na základě souhlasu uděleného prostřednictvím cookies lišty.',
+            'Používání souborů cookies a obdobných technologií na www.treetino.cz se řídí předvolbami vyjádřenými v cookie liště. Technické cookies nezbytné pro provoz webu a uchování nákupního košíku či nastavení jsou zpracovávány na základě oprávněného zájmu (čl. 6 odst. 1 písm. f) GDPR).',
+            'Analytické cookies (zejména Google Analytics 4 pro vyhodnocování návštěvnosti a chování uživatelů) jsou ukládány a zpracovávány výhradně na základě vašeho dobrovolného souhlasu (čl. 6 odst. 1 písm. a) GDPR). Tento souhlas můžete kdykoli změnit či odvolat v patičce webu v sekci Nastavení cookies.',
         ],
     },
     {
         number: 7,
         title: 'ZÁVĚREČNÁ USTANOVENÍ',
         paragraphs: [
-            'Správce je oprávněn tyto zásady aktualizovat; aktuální znění je vždy dostupné na www.wattino.eu. Tyto zásady nabývají účinnosti dnem [●].',
+            'Správce je oprávněn tyto zásady aktualizovat; aktuální znění je vždy dostupné na www.treetino.cz.',
         ],
     },
 ];

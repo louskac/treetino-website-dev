@@ -62,6 +62,12 @@
                                         $t('common.nav.collaboration')
                                     }}</FooterLink
                                 >
+                                <FooterLink
+                                    :href="route('sales.index')"
+                                    >{{
+                                        $t('common.nav.sales')
+                                    }}</FooterLink
+                                >
                                 <FooterLink :href="route('media.index')">{{
                                     $t('common.nav.media')
                                 }}</FooterLink>

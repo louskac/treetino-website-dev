@@ -40,6 +40,13 @@
                             >{{ $t('common.nav.collaboration') }}</Link
                         >
                         <Link
+                            :href="route('sales.index')"
+                            class="text-sm font-medium transition-colors"
+                            :class="headerIsInverted ? 'text-black/80 hover:text-black' : 'text-white/80 hover:text-white'"
+                            @mouseenter="activeDropdown = null"
+                            >{{ $t('common.nav.sales') }}</Link
+                        >
+                        <Link
                             :href="route('media.index')"
                             class="text-sm font-medium transition-colors"
                             :class="headerIsInverted ? 'text-black/80 hover:text-black' : 'text-white/80 hover:text-white'"

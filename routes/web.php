@@ -10,6 +10,7 @@ use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\SalesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LegalController;
 
@@ -20,6 +21,10 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('/locale', LocaleController::class)->name('locale.update');
 Route::get('/configurator', [ConfiguratorController::class, 'index'])->name('configurator');
 Route::get('/configurator/{product}', [ConfiguratorController::class, 'index'])->name('configurator.product');
+
+Route::get('/sales', [SalesController::class, 'index'])->name('sales.index');
+Route::get('/crm', [SalesController::class, 'index']);
+Route::get('/cmr', [SalesController::class, 'index']);
 
 Route::prefix('products')->name('products.')->group(function () {
     Route::get('/treetino-v1', [ProductsController::class, 'treeV1'])->name('treeV1');
