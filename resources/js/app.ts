@@ -75,6 +75,7 @@ function getComponentForPath(path: string): string {
     if (p === '/products/treetino-v2' || p === '/products/strom-v2' || p === '/products/v2') return 'Products/V2';
     if (p === '/products/turbine' || p === '/products/turbina') return 'Products/Turbine';
     if (p.startsWith('/configurator')) return 'Configurator/Index';
+    if (p === '/sales' || p === '/crm' || p === '/cmr' || p === '/prodejci' || p === '/partners') return 'Sales/Index';
     if (p === '/collaboration') return 'Collaboration/Index';
     if (p === '/media') return 'Media/Index';
     if (p === '/contact') return 'Contact/Index';
