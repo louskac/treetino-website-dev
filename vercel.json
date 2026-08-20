@@ -3,7 +3,7 @@
     "outputDirectory": "public",
     "rewrites": [
         {
-            "source": "/((?!build|img|video|favicon.ico|apple-touch-icon.png|robots.txt).*)",
+            "source": "/((?!build|img|video|docs|models|.*\\.pdf$|favicon.ico|apple-touch-icon.png|robots.txt).*)",
             "destination": "/index.html"
         }
     ]

@@ -26,6 +26,16 @@ Route::get('/sales', [SalesController::class, 'index'])->name('sales.index');
 Route::get('/crm', [SalesController::class, 'index']);
 Route::get('/cmr', [SalesController::class, 'index']);
 
+Route::get('/pitch', function () {
+    return inertia('Pitch/Index');
+})->name('pitch.index');
+Route::get('/pitchdeck', function () {
+    return inertia('Pitch/Index');
+});
+Route::get('/deck', function () {
+    return inertia('Pitch/Index');
+});
+
 Route::prefix('products')->name('products.')->group(function () {
     Route::get('/treetino-v1', [ProductsController::class, 'treeV1'])->name('treeV1');
     Route::get('/treetino-v2', [ProductsController::class, 'treeV2'])->name('treeV2');

@@ -71,9 +71,12 @@
                                 <FooterLink :href="route('media.index')">{{
                                     $t('common.nav.media')
                                 }}</FooterLink>
-                                <FooterLink :href="route('media.index')">{{
+                                <FooterLink :href="route('contact.index')">{{
                                     $t('common.nav.contact')
                                 }}</FooterLink>
+                                <FooterLink :href="route('pitch.index')">
+                                    Pitch Deck
+                                </FooterLink>
                             </div>
                         </div>
 
