@@ -3,7 +3,8 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "php scripts/export_i18n.php && vite build && node scripts/build-static-index.js",
+        "build": "vite build && node scripts/build-static-index.js",
+        "i18n:export": "php scripts/export_i18n.php",
         "build:ssr": "vite build && vite build --ssr",
         "dev": "vite",
         "format": "prettier --write resources/",
