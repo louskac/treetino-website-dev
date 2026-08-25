@@ -1,5 +1,5 @@
 <template>
-    <Head title="Configurator" />
+    <Head :title="`${$t('configurator.title')} | Treetino`" />
 
     <div class="md:flex md:h-screen md:overflow-hidden">
         <div
@@ -83,7 +83,7 @@
                                     <div
                                         v-if="item.selected"
                                         class="flex h-6 w-6 items-center justify-center rounded-full bg-black text-white shadow-sm"
-                                        :aria-label="item.label + ' vybráno'"
+                                        :aria-label="item.label + ' ' + $t('common.actions.selected', 'vybráno')"
                                     >
                                         <Check class="h-4 w-4" />
                                     </div>

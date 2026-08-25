@@ -25,17 +25,13 @@ function processSection(&$cs, &$en, $prefix, $data) {
             if (isset($val['cs'])) setNestedValue($cs, $fullKey, $val['cs']);
             if (isset($val['en'])) setNestedValue($en, $fullKey, $val['en']);
         } elseif (is_array($val)) {
-            processSection($cs, $en, $prefix, $val);
+            processSection($cs, $en, $fullKey, $val);
         }
     }
 }
 
 foreach ($catalog as $section => $data) {
-    foreach ($data as $key => $val) {
-        $fullKey = "{$section}.{$key}";
-        if (isset($val['cs'])) setNestedValue($output['cs'], $fullKey, $val['cs']);
-        if (isset($val['en'])) setNestedValue($output['en'], $fullKey, $val['en']);
-    }
+    processSection($output['cs'], $output['en'], $section, $data);
 }
 
 $jsonPath = __DIR__ . '/../resources/js/i18n_messages.json';

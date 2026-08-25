@@ -23,7 +23,7 @@ const emit = defineEmits<{
                 <div
                     class="my-auto max-w-0 overflow-hidden transition-all duration-300 ease-in-out group-hover:max-w-xs pointer-events-none"
                 >
-                    <span class="whitespace-nowrap">Previous</span>
+                    <span class="whitespace-nowrap">{{ $t('common.actions.prev') }}</span>
                 </div>
             </button>
 
@@ -35,7 +35,7 @@ const emit = defineEmits<{
                 <div
                     class="my-auto max-w-0 overflow-hidden transition-all duration-300 ease-in-out group-hover:max-w-xs pointer-events-none"
                 >
-                    <span class="whitespace-nowrap">Next</span>
+                    <span class="whitespace-nowrap">{{ $t('common.actions.next') }}</span>
                 </div>
                 <FastArrowRight class="my-auto h-5 w-5 pointer-events-none" />
             </button>

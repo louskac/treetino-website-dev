@@ -21,10 +21,10 @@ if (fs.existsSync(manifestPath)) {
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     ${cssFiles}
     <style>
-        html, body { background-color: #09090b; color: #ffffff; margin: 0; padding: 0; }
+        html, body { background-color: #09090b; margin: 0; padding: 0; }
     </style>
 </head>
-<body class="font-sans antialiased bg-stone-950 text-white">
+<body class="font-sans antialiased bg-background text-foreground">
     <div id="app"></div>
     <script type="module" src="${jsFile}"></script>
 </body>

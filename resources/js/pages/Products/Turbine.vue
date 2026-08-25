@@ -1,5 +1,5 @@
 <template>
-    <Head title="Větrná Turbína | Treetino" />
+    <Head :title="`${$t('products.turbine.title')} | Treetino`" />
 
     <DefaultLayout :scroll="true">
         <!-- Hero Section - Clean & Minimalist (Identical structure to Homepage Hero) -->
@@ -181,7 +181,7 @@
                     <div class="relative h-[500px] w-full overflow-hidden">
                         <img
                             src="/img/stills/Still_Turbina.png"
-                            alt="Turbína"
+                            :alt="`Treetino ${$t('products.turbine.title')}`"
                             class="h-full w-full object-cover object-center transition-transform duration-1000 ease-out hover:scale-105"
                         />
                         <div class="absolute inset-0 bg-linear-to-r from-black/90 via-black/45 to-transparent"></div>
@@ -219,7 +219,7 @@
                         <div class="relative aspect-4/3 overflow-hidden">
                             <img
                                 src="/img/info/info-turbine-w.webp"
-                                alt="Turbína"
+                                :alt="$t('products.turbine.title')"
                                 class="h-full w-full object-cover transition-transform duration-700 ease-out hover:scale-105"
                             />
                             <!-- 2-Line Stacked Typography Overlay (AERO / 24/7) -->
@@ -403,6 +403,15 @@
             </div>
         </section>
 
+        <!-- Reused Shared HomeCtaGeneric Component with Prominent Configurator CTA Button (Placed First) -->
+        <HomeCtaGeneric
+            :title="$t('products.turbine.cta_title')"
+            :buttonText="$t('products.turbine.configure_label')"
+            :buttonHref="route('configurator.product', 'turbina')"
+            image1="/img/stills/Still_Turbina.png"
+            image2="/img/info/info-turbine-w.webp"
+        />
+
         <!-- Product Redirect / Navigation Section (Placed at the bottom) -->
         <section
             class="border-t border-black/10 bg-stone-50 py-20 text-black dark:border-white/10 dark:bg-zinc-950 dark:text-white"
@@ -429,7 +438,7 @@
                 >
                     <img
                         :src="previewImage"
-                        alt="Portfolio Treetino Větrná Turbína"
+                        :alt="`Portfolio Treetino ${$t('products.turbine.title')}`"
                         class="h-full w-full object-cover transition-all duration-500"
                     />
 
@@ -473,15 +482,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- Reused Shared HomeCtaGeneric Component with Prominent Configurator CTA Button -->
-        <HomeCtaGeneric
-            :title="$t('products.turbine.cta_title')"
-            :buttonText="$t('products.turbine.configure_label')"
-            :buttonHref="route('configurator.product', 'turbina')"
-            image1="/img/stills/Still_Turbina.png"
-            image2="/img/info/info-turbine-w.webp"
-        />
     </DefaultLayout>
 </template>
 

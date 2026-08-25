@@ -1,5 +1,5 @@
 <template>
-    <Head title="Strom V1 | Treetino" />
+    <Head :title="`${$t('products.v1.title')} | Treetino`" />
 
     <DefaultLayout :scroll="true">
         <!-- Hero Section - Clean & Minimalist (Identical structure to Homepage Hero) -->
@@ -181,7 +181,7 @@
                     <div class="relative h-[500px] w-full overflow-hidden">
                         <img
                             src="/img/stills/Still_Strom-v1.png"
-                            alt="Strom V1 Architektonická Scéna"
+                            :alt="`${$t('products.v1.title')} Showcase`"
                             class="h-full w-full object-cover object-center transition-transform duration-1000 ease-out hover:scale-105"
                         />
                         <div class="absolute inset-0 bg-linear-to-r from-black/90 via-black/45 to-transparent"></div>
@@ -219,7 +219,7 @@
                         <div class="relative aspect-4/3 overflow-hidden">
                             <img
                                 src="/img/info/night-detail-w.jpg"
-                                alt="Strom V1"
+                                :alt="$t('products.v1.title')"
                                 class="h-full w-full object-cover transition-transform duration-700 ease-out hover:scale-105"
                             />
                             <!-- 2-Line Stacked Typography Overlay (HYBRID / 24/7) -->
@@ -310,7 +310,7 @@
                             <tr class="bg-black/5 dark:bg-white/5">
                                 <td class="px-6 py-4 font-semibold">{{ $t('products.datasheet.model') }}</td>
                                 <td class="px-6 py-4 opacity-80">
-                                    Treetino Strom V1 (Big Tree B2B)
+                                    Treetino {{ $t('products.v1.title') }} (Big Tree B2B)
                                 </td>
                             </tr>
                             <tr>
@@ -326,7 +326,7 @@
                                     {{ $t('products.datasheet.pv') }}
                                 </td>
                                 <td class="px-6 py-4 opacity-80">
-                                    60 {{ $t('products.v2.stats.2') }} × 12 V (830 × 340 mm, TopCon, {{ $t('products.v1.stats.2') }})
+                                    300 {{ $t('products.datasheet.val_pcs', 'ks') }} × 12 V (830 × 340 mm, TopCon, {{ $t('products.v1.stats.2') }})
                                 </td>
                             </tr>
                             <tr>
@@ -334,7 +334,7 @@
                                     {{ $t('products.datasheet.wind') }}
                                 </td>
                                 <td class="px-6 py-4 opacity-80">
-                                    4 {{ $t('products.v2.stats.3') }} × 48 V (2.8 m / 1.4 m, 73 kg, {{ $t('products.v1.stats.3') }})
+                                    12 {{ $t('products.datasheet.val_pcs', 'ks') }} × 48 V (2.8 m / 1.4 m, 73 kg, {{ $t('products.v1.stats.3') }})
                                 </td>
                             </tr>
                             <tr class="bg-black/5 dark:bg-white/5">
@@ -398,6 +398,13 @@
                 </div>
             </div>
         </section>
+
+        <!-- Reused Shared HomeCtaGeneric Component with Prominent Configurator CTA Button (Placed First) -->
+        <HomeCtaGeneric
+            :title="$t('products.v1.cta_title')"
+            :buttonText="$t('products.v1.configure_label')"
+            :buttonHref="route('configurator.product', 'strom-v1')"
+        />
 
         <!-- Product Redirect / Navigation Section (Placed at the bottom) -->
         <section
@@ -469,13 +476,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- Reused Shared HomeCtaGeneric Component with Prominent Configurator CTA Button -->
-        <HomeCtaGeneric
-            :title="$t('products.v1.cta_title')"
-            :buttonText="$t('products.v1.configure_label')"
-            :buttonHref="route('configurator.product', 'strom-v1')"
-        />
     </DefaultLayout>
 </template>
 
@@ -519,18 +519,18 @@ const productStats = [
     },
     {
         icon: Leaf,
-        value: '60 ks',
+        value: '300 ks',
         valueKey: 'products.v1.stats_val.2',
         label: 'Solární listy',
-        description: 'Články TopCon s účinností 20,2 %',
+        description: '300 TopCon článků (20,2 %)',
         descriptionKey: 'products.v1.stats.2',
     },
     {
         icon: Wind,
-        value: '4 ks',
+        value: '12 ks',
         valueKey: 'products.v1.stats_val.3',
         label: 'Větrné turbíny',
-        description: 'Generátory 4× 3 kW (výška 2,8 m)',
+        description: '12× tiché vertikální turbíny',
         descriptionKey: 'products.v1.stats.3',
     },
     {
@@ -543,10 +543,10 @@ const productStats = [
     },
     {
         icon: Clock,
-        value: '3 měsíce',
+        value: '2 měsíce',
         valueKey: 'products.v1.stats_val.5',
         label: 'Rychlost výstavby',
-        description: 'Od předání staveniště po spuštění',
+        description: 'Výroba & dodání za 2 měsíce',
         descriptionKey: 'products.v1.stats.5',
     },
     {
@@ -554,7 +554,7 @@ const productStats = [
         value: '1 m²',
         valueKey: 'products.v1.stats_val.6',
         label: 'Zastavěná plocha',
-        description: 'Průměr kmenu 1,0 m u paty',
+        description: 'Průměr kmenu 1,0 m u paty (1 m²)',
         descriptionKey: 'products.v1.stats.6',
     },
 ];

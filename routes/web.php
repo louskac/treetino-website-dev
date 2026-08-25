@@ -27,13 +27,16 @@ Route::get('/crm', [SalesController::class, 'index']);
 Route::get('/cmr', [SalesController::class, 'index']);
 
 Route::get('/pitch', function () {
-    return inertia('Pitch/Index');
+    return redirect('/media#pitchdeck');
 })->name('pitch.index');
 Route::get('/pitchdeck', function () {
-    return inertia('Pitch/Index');
+    return redirect('/media#pitchdeck');
 });
 Route::get('/deck', function () {
-    return inertia('Pitch/Index');
+    return redirect('/media#pitchdeck');
+});
+Route::get('/presentation', function () {
+    return redirect('/media#pitchdeck');
 });
 
 Route::prefix('products')->name('products.')->group(function () {
@@ -62,7 +65,12 @@ Route::prefix('contact')->name('contact.')->group(function () {
 Route::prefix('legal')->name('legal.')->group(function () {
     Route::get('/terms-and-conditions', [LegalController::class, 'tos'])->name('tos');
     Route::get('/privacy-policy', [LegalController::class, 'pp'])->name('pp');
+    Route::get('/nda', [LegalController::class, 'nda'])->name('nda');
+    Route::get('/nda/download', [LegalController::class, 'downloadNda'])->name('nda.download');
 });
+
+Route::get('/sales/nda', [LegalController::class, 'nda']);
+Route::get('/sales/nda/download', [LegalController::class, 'downloadNda']);
 
 // Checkout
 Route::post('/checkout', [PreorderController::class, 'initiate'])->name('checkout-initiate');

@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <p v-if="isOverMaxDownPayment" class="text-[11px] text-red-500 font-medium">
-                        Maximální platba předem může být {{ formatPrice(discountedPrice - 1) }} Kč.
+                        {{ $t('configurator.modal_financing.max_down_payment', { amount: formatPrice(discountedPrice - 1) }) }}
                     </p>
 
                     <!-- Loan term -->

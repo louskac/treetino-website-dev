@@ -74,7 +74,7 @@
                                 <FooterLink :href="route('contact.index')">{{
                                     $t('common.nav.contact')
                                 }}</FooterLink>
-                                <FooterLink :href="route('pitch.index')">
+                                <FooterLink href="/media#pitchdeck">
                                     Pitch Deck
                                 </FooterLink>
                             </div>
@@ -128,6 +128,10 @@
                                     {{ $t('common.footer.privacy') }}
                                 </FooterLink>
 
+                                <FooterLink :href="route('legal.nda')">
+                                    {{ $t('common.footer.nda') }}
+                                </FooterLink>
+
                                 <div
                                     @click="openSettings"
                                     class="group relative w-fit cursor-pointer text-black/70 transition-colors duration-300 hover:text-black"
@@ -140,6 +144,29 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Clean Official CzechInvest Grant Acknowledgment Banner (Clean Link to Collaboration Page) -->
+                    <Link
+                        :href="route('collaboration.index')"
+                        class="group block border-y border-black/10 py-6 transition-colors hover:bg-black/[0.02]"
+                    >
+                        <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+                            <div class="flex flex-col sm:flex-row items-center gap-5 text-center sm:text-left">
+                                <img
+                                    src="/partners/image.png"
+                                    alt="Technologická inkubace & CzechInvest"
+                                    class="h-9 w-auto object-contain transition-transform group-hover:scale-105"
+                                />
+                                <p class="max-w-3xl text-xs sm:text-sm text-black/75 leading-relaxed">
+                                    {{ $t('common.footer.grant_acknowledgment') }}
+                                </p>
+                            </div>
+                            <div class="inline-flex items-center gap-1.5 text-xs font-semibold text-t-blue group-hover:text-t-blue/80 shrink-0">
+                                <span>{{ $t('common.footer.grant_learn_more') }}</span>
+                                <ArrowRight class="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                            </div>
+                        </div>
+                    </Link>
 
                     <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
                         <div
@@ -217,7 +244,7 @@
                                     <input
                                         class="min-w-0 flex-1 rounded-xl border border-black/10 bg-stone-100 px-4 py-3 text-black placeholder-black/40 focus:border-t-blue focus:outline-none"
                                         type="email"
-                                        placeholder="jiri.dozvedel@domena.cz"
+                                        :placeholder="$t('common.footer.email_placeholder')"
                                     />
 
                                     <ButtonPrimary
@@ -250,6 +277,7 @@ import {
     Mail,
     Building,
 } from '@iconoir/vue';
+import { ArrowRight } from 'lucide-vue-next';
 import { Link } from '@inertiajs/vue3';
 import { showPreferences } from 'vanilla-cookieconsent';
 import { route } from 'ziggy-js';

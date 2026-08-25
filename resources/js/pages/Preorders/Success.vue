@@ -2,11 +2,13 @@
 import { Download } from '@iconoir/vue';
 import { router } from '@inertiajs/vue3';
 import axios from 'axios';
-import { onMounted, onUnmounted, computed } from 'vue';
-import { ref } from 'vue';
+import { onMounted, onUnmounted, computed, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import PreviewImage from '@/custom/preorders/PreviewImage.vue';
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
 import { PRODUCTS } from '@/types/products';
+
+const { t } = useI18n();
 
 type Preorder = {
     uuid: string;
@@ -23,53 +25,10 @@ const product = computed(
     () => PRODUCTS.find((p) => p.id === props.preorder?.product_type) ?? null,
 );
 
-const configurationLabels: Record<string, string> = {
-    color: 'Barva konstrukce',
-    leafColor: 'Barva listů',
-    fveLeafDesign: 'Design FVE listů',
-    connectivity: 'Konektivita',
-    battery: 'Baterie',
-    evChargerCount: 'Počet EV nabíječek',
-    bikeChargerRequested: 'Nabíječka pro elektrokola',
-    windTurbines: 'Větrné turbíny',
-    turbineSize: 'Velikost turbíny',
-    turbineMount: 'Umístění turbíny',
-    treeDesign: 'Design stromu',
-    grant: 'Dotační program',
-    paymentMode: 'Způsob platby',
-};
-
-const configurationValueLabels: Record<string, Record<string, string>> = {
-    windTurbines: {
-        'with-turbines': 'S větrnými turbínami',
-        'without-turbines': 'Bez větrných turbín',
-    },
-    turbineSize: {
-        large: 'Velká (3 kW)',
-        medium: 'Střední (1,5 kW)',
-        small: 'Menší (1 kW)',
-    },
-    turbineMount: {
-        roof: 'Na střechu',
-        wall: 'Na zeď',
-        pole: 'Na sloup',
-    },
-    treeDesign: {
-        standard: 'Standardní',
-        cyber: 'Cyber',
-    },
-    fveLeafDesign: {
-        none: 'Bez designu',
-        spring: 'Jaro',
-        summer: 'Léto',
-        autumn: 'Podzim',
-        winter: 'Zima',
-    },
-    paymentMode: {
-        cash: 'Hotovost',
-        credit: 'Zelený úvěr',
-    },
-};
+const localizedProductName = computed(() => {
+    if (!product.value) return props.preorder?.product_type ?? '';
+    return product.value.labelKey ? t(product.value.labelKey, product.value.label) : product.value.label;
+});
 
 // Fields to skip when value is empty/zero/false
 const skipIfEmpty = new Set(['evChargerCount', 'bikeChargerRequested']);
@@ -81,6 +40,76 @@ const configurationRows = computed(() => {
         return [];
     }
 
+    const getLabel = (key: string): string => {
+        const labels: Record<string, string> = {
+            color: t('configurator.steps.color', 'Barva konstrukce'),
+            leafColor: t('configurator.steps.leaf_color', 'Barva listů'),
+            fveLeafDesign: t('configurator.steps.fve_leaf', 'Design FVE listů'),
+            connectivity: t('configurator.steps.connectivity', 'Konektivita'),
+            battery: t('configurator.steps.battery', 'Baterie'),
+            evChargerCount: t('configurator.addons.ev.label', 'Počet EV nabíječek'),
+            bikeChargerRequested: t('configurator.addons.bike.label', 'Nabíječka pro elektrokola'),
+            windTurbines: t('configurator.steps.wind_turbines', 'Větrné turbíny'),
+            turbineSize: t('configurator.steps.turbine_size', 'Velikost turbíny'),
+            turbineMount: t('configurator.steps.turbine_mount', 'Umístění turbíny'),
+            treeDesign: t('configurator.steps.tree_design', 'Design stromu'),
+            grant: t('configurator.steps.grant', 'Dotační program'),
+            paymentMode: t('configurator.steps.payment_mode', 'Způsob platby'),
+        };
+        return labels[key] ?? key;
+    };
+
+    const getValue = (key: string, val: unknown): string => {
+        if (val === true) return t('common.actions.yes', 'Ano');
+        if (val === false) return t('common.actions.no', 'Ne');
+
+        const str = String(val);
+        if (key === 'windTurbines') {
+            if (str === 'with-turbines') return t('configurator.wind_turbines.with.label', 'S větrnými turbínami');
+            if (str === 'without-turbines') return t('configurator.wind_turbines.without.label', 'Bez větrných turbín');
+        }
+        if (key === 'turbineSize') {
+            if (str === 'large') return `${t('configurator.turbine_size.large.label', 'Velká')} (3 kW)`;
+            if (str === 'medium') return `${t('configurator.turbine_size.medium.label', 'Střední')} (1,5 kW)`;
+            if (str === 'small') return `${t('configurator.turbine_size.small.label', 'Menší')} (1 kW)`;
+        }
+        if (key === 'turbineMount') {
+            if (str === 'roof') return t('configurator.turbine_mount.roof.label', 'Na střechu');
+            if (str === 'wall') return t('configurator.turbine_mount.wall.label', 'Na zeď');
+            if (str === 'pole') return t('configurator.turbine_mount.pole.label', 'Na sloup');
+        }
+        if (key === 'treeDesign') {
+            if (str === 'standard') return t('configurator.tree_design.standard.label', 'Standardní');
+            if (str === 'cyber') return t('configurator.tree_design.cyber.label', 'Cyber');
+        }
+        if (key === 'fveLeafDesign') {
+            if (str === 'none') return t('configurator.fve_leaf.none.label', 'Bez designu');
+            if (str === 'spring') return t('configurator.fve_leaf.spring.label', 'Jaro');
+            if (str === 'summer') return t('configurator.fve_leaf.summer.label', 'Léto');
+            if (str === 'autumn') return t('configurator.fve_leaf.autumn.label', 'Podzim');
+            if (str === 'winter') return t('configurator.fve_leaf.winter.label', 'Zima');
+        }
+        if (key === 'paymentMode') {
+            if (str === 'cash') return t('configurator.payment.cash', 'Hotovost');
+            if (str === 'credit') return t('configurator.payment.credit', 'Zelený úvěr');
+        }
+        if (key === 'color' || key === 'leafColor') {
+            const colorKeys: Record<string, string> = {
+                white: t('configurator.color.white', 'Bílá'),
+                silver: t('configurator.color.silver', 'Stříbrná'),
+                brown: t('configurator.color.brown', 'Hnědá'),
+                green: t('configurator.color.green', 'Lesní zelená'),
+                'dark-green': t('configurator.color.dark_green', 'Tmavě zelená'),
+                grey: t('configurator.color.grey', 'Šedá'),
+                orange: t('configurator.color.orange', 'Oranžová'),
+                transparent: t('configurator.color.transparent', 'Průhledná'),
+            };
+            if (colorKeys[str]) return colorKeys[str];
+        }
+
+        return str;
+    };
+
     return Object.entries(cfg)
         .filter(([key, value]) => {
             if (skipIfEmpty.has(key) && !value) {
@@ -89,21 +118,10 @@ const configurationRows = computed(() => {
 
             return true;
         })
-        .map(([key, value]) => {
-            const valueMap = configurationValueLabels[key];
-            const displayValue = valueMap
-                ? (valueMap[String(value)] ?? String(value))
-                : value === true
-                  ? 'Ano'
-                  : value === false
-                    ? 'Ne'
-                    : String(value);
-
-            return {
-                label: configurationLabels[key] ?? key,
-                value: displayValue,
-            };
-        });
+        .map(([key, value]) => ({
+            label: getLabel(key),
+            value: getValue(key, value),
+        }));
 });
 
 const formattedAmount = computed(() => {
@@ -220,27 +238,19 @@ const downloadInvoice = async () => {
 </script>
 
 <template>
-    <DefaultLayout :scroll="false" class="relative">
-        <div class="absolute h-90 w-full bg-blue-50">
+    <DefaultLayout :inverted="true">
+        <div class="relative overflow-hidden bg-white text-black pt-36 sm:pt-44">
             <div
-                class="absolute bottom-0 h-30 w-full bg-linear-to-b from-transparent to-white"
-            ></div>
-        </div>
-
-        <div class="buffer h-60 pb-12"></div>
-
-        <div class="success relative">
-            <div
-                class="absolute left-1/2 hidden h-full max-w-[1400px] -translate-x-1/2 border-r border-l border-r-black/20 border-l-black/20 [mask-image:linear-gradient(to_bottom,transparent_0%,black_100%)] sm:block sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)] dark:border-r-white/20 dark:border-l-white/20"
+                class="absolute left-1/2 hidden h-full max-w-[1400px] -translate-x-1/2 border-r border-l border-black/10 pointer-events-none sm:block sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
             ></div>
 
-            <div
-                class="relative mx-auto h-full w-full max-w-[1400px] px-6 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
+            <main
+                class="relative mx-auto h-full w-full max-w-[1400px] px-6 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)] text-black"
             >
                 <div class="pb-4.5">
-                    <div class="text-6xl">Pre-order Summary</div>
+                    <h1 class="text-4xl font-medium tracking-tight text-black sm:text-6xl">{{ $t('preorders.title') }}</h1>
 
-                    <div class="mt-1 text-xs opacity-70">
+                    <div class="mt-1 text-xs text-black/70">
                         ID: {{ preorder.uuid }}
                     </div>
                 </div>
@@ -249,7 +259,7 @@ const downloadInvoice = async () => {
                 <div class="hidden pb-6 sm:block">
                     <div class="flex gap-5">
                         <div
-                            class="flex w-fit rounded-xl border px-5 py-3 shadow-xl"
+                            class="flex w-fit rounded-xl border border-black/10 bg-white px-5 py-3 shadow-xl"
                         >
                             <div
                                 v-if="preorder.status === 'pending'"
@@ -263,8 +273,8 @@ const downloadInvoice = async () => {
                                         class="relative h-2 w-2 rounded-full bg-orange-600"
                                     ></div>
                                 </div>
-                                <div class="text-sm text-orange-600">
-                                    Payment Pending
+                                <div class="text-sm font-medium text-orange-600">
+                                    {{ $t('preorders.status.pending') }}
                                 </div>
                             </div>
 
@@ -277,8 +287,8 @@ const downloadInvoice = async () => {
                                         class="relative h-2 w-2 rounded-full bg-green-700"
                                     ></div>
                                 </div>
-                                <div class="text-sm text-green-700">
-                                    Payment Successful
+                                <div class="text-sm font-medium text-green-700">
+                                    {{ $t('preorders.status.paid') }}
                                 </div>
                             </div>
                         </div>
@@ -291,16 +301,16 @@ const downloadInvoice = async () => {
                                 <button
                                     @click="downloadInvoice"
                                     :disabled="isDownloading"
-                                    class="flex cursor-pointer gap-2 opacity-70 transition-all hover:opacity-100 disabled:opacity-50"
+                                    class="flex cursor-pointer gap-2 text-black/70 transition-all hover:text-black hover:opacity-100 disabled:opacity-50"
                                 >
                                     <div class="my-auto">
                                         <Download class="h-5 w-5" />
                                     </div>
-                                    <div class="my-auto text-sm">
+                                    <div class="my-auto text-sm font-medium">
                                         <span v-if="isDownloading"
-                                            >Generating...</span
+                                            >{{ $t('preorders.invoice.generating') }}</span
                                         >
-                                        <span v-else>Download Invoice</span>
+                                        <span v-else>{{ $t('preorders.invoice.download') }}</span>
                                     </div>
                                 </button>
                             </div>
@@ -312,12 +322,12 @@ const downloadInvoice = async () => {
                 <div class="grid grid-cols-1 gap-8 pb-16 lg:grid-cols-2">
                     <!-- Left: Product image with name overlay -->
                     <div
-                        class="relative aspect-square overflow-hidden rounded-2xl border bg-black/5 shadow-xl dark:bg-white/5"
+                        class="relative aspect-square overflow-hidden rounded-2xl border border-black/10 bg-black/5 shadow-xl dark:bg-white/5"
                     >
                         <PreviewImage
                             :product-type="preorder.product_type"
                             :configuration="preorder.configuration"
-                            :alt="product?.label ?? preorder.product_type"
+                            :alt="localizedProductName"
                         />
 
                         <!-- Product name gradient bottom -->
@@ -325,8 +335,8 @@ const downloadInvoice = async () => {
 
                         <!-- Product name overlay bottom-left -->
                         <div class="absolute bottom-0 left-0 p-6">
-                            <div class="text-5xl md:text-6xl lg:text-5xl xl:text-6xl">
-                                {{ product?.label ?? preorder.product_type }}
+                            <div class="text-5xl md:text-6xl lg:text-5xl xl:text-6xl font-medium text-black">
+                                {{ localizedProductName }}
                             </div>
                         </div>
                     </div>
@@ -335,39 +345,36 @@ const downloadInvoice = async () => {
                     <div class="flex flex-col gap-6">
                         <!-- Order info -->
                         <div class="">
-                            <div class="pb-4 text-4xl">
-                                Informace o objednávce
-                            </div>
+                            <h2 class="pb-4 text-3xl font-medium text-black">
+                                {{ $t('preorders.order_info') }}
+                            </h2>
 
                             <table class="w-full text-sm">
                                 <tbody>
-                                    <tr class="border-t first:border-t-0">
-                                        <td class="py-2 pr-6 opacity-60">
-                                            Datum vytvoření
+                                    <tr class="border-t border-black/10 first:border-t-0">
+                                        <td class="py-2 pr-6 text-black/60">
+                                            {{ $t('preorders.created_at') }}
                                         </td>
-                                        <td class="py-2 font-medium">
+                                        <td class="py-2 font-medium text-black">
                                             {{ formattedDate }}
                                         </td>
                                     </tr>
 
-                                    <tr class="border-t first:border-t-0">
-                                        <td class="py-2 pr-6 opacity-60">
-                                            Celková cena
+                                    <tr class="border-t border-black/10 first:border-t-0">
+                                        <td class="py-2 pr-6 text-black/60">
+                                            {{ $t('preorders.total_price') }}
                                         </td>
-                                        <td class="py-2 font-medium">
+                                        <td class="py-2 font-medium text-black">
                                             {{ formattedAmount }}
                                         </td>
                                     </tr>
 
-                                    <tr class="border-t first:border-t-0">
-                                        <td class="py-2 pr-6 opacity-60">
-                                            Produkt
+                                    <tr class="border-t border-black/10 first:border-t-0">
+                                        <td class="py-2 pr-6 text-black/60">
+                                            {{ $t('preorders.product') }}
                                         </td>
-                                        <td class="py-2 font-medium">
-                                            {{
-                                                product?.label ??
-                                                preorder.product_type
-                                            }}
+                                        <td class="py-2 font-medium text-black">
+                                            {{ localizedProductName }}
                                         </td>
                                     </tr>
                                 </tbody>
@@ -376,13 +383,13 @@ const downloadInvoice = async () => {
 
                         <!-- Configuration table -->
                         <div class="">
-                            <div class="pb-4 text-4xl">Konfigurace</div>
+                            <h2 class="pb-4 text-3xl font-medium text-black">{{ $t('preorders.configuration') }}</h2>
                             <table class="w-full text-sm">
                                 <tbody>
                                     <tr
                                         v-for="row in configurationRows"
                                         :key="row.label"
-                                        class="border-t first:border-t-0"
+                                        class="border-t border-black/10 first:border-t-0"
                                     >
                                         <td class="py-2 pr-6 opacity-60">
                                             {{ row.label }}
@@ -397,12 +404,12 @@ const downloadInvoice = async () => {
                                 v-if="configurationRows.length === 0"
                                 class="text-sm opacity-50"
                             >
-                                Žádná konfigurace
+                                {{ $t('preorders.no_configuration') }}
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </main>
         </div>
     </DefaultLayout>
 </template>

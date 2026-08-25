@@ -388,6 +388,28 @@
                         <div class="font-medium text-black dark:text-white">{{ $t('sales.datasheet.row4_label') }}</div>
                         <div class="md:col-span-2 text-black/80 dark:text-white/80">{{ $t('sales.datasheet.row4_val') }}</div>
                     </div>
+                    <div class="grid grid-cols-1 py-4 md:grid-cols-3">
+                        <div class="font-medium text-black dark:text-white">{{ $t('sales.datasheet.row5_label') }}</div>
+                        <div class="md:col-span-2 flex flex-wrap items-center gap-4 text-black/80 dark:text-white/80">
+                            <span>{{ $t('sales.datasheet.row5_val') }}</span>
+                            <div class="flex items-center gap-3">
+                                <a
+                                    href="/legal/nda/download"
+                                    class="inline-flex items-center gap-1 text-xs font-semibold text-t-blue hover:underline"
+                                >
+                                    <Download class="h-3.5 w-3.5" />
+                                    <span>{{ $t('sales.datasheet.download_nda') }}</span>
+                                </a>
+                                <span class="text-black/30 dark:text-white/30">&bull;</span>
+                                <a
+                                    href="/legal/nda"
+                                    class="text-xs font-medium text-black/60 hover:text-black hover:underline dark:text-white/60 dark:hover:text-white"
+                                >
+                                    {{ $t('sales.datasheet.view_online') }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -408,6 +430,7 @@ import { ref, computed } from 'vue';
 import {
     Clock,
     Coins,
+    Download,
     Flash,
     ShieldCheck,
 } from '@iconoir/vue';

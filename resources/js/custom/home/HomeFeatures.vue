@@ -75,7 +75,7 @@ import { SunLight, Leaf, Tree, RulerCombine, Wind } from '@iconoir/vue';
 import gsap from 'gsap';
 import { Observer } from 'gsap/Observer';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { nextTick, onMounted, onUnmounted, ref } from 'vue';
+import { computed, nextTick, onMounted, onUnmounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import HomeFeaturesCardMobile from '@/custom/home/features/HomeFeaturesCardMobile.vue';
 
@@ -97,7 +97,7 @@ gsap.registerPlugin(Observer, ScrollTrigger);
 
 const { t } = useI18n();
 
-const sections = [
+const sections = computed(() => [
     {
         icon: Tree,
         title: t('home.features.design.title'),
@@ -123,12 +123,13 @@ const sections = [
         title: t('home.features.balance.title'),
         text: t('home.features.balance.text'),
     },
-];
+]);
 
-const scrollStepCount = sections.length - 1 + EXIT_HOLD_STEPS;
+const SECTIONS_COUNT = 5;
+const scrollStepCount = SECTIONS_COUNT - 1 + EXIT_HOLD_STEPS;
 
-const sectionFrames = sections.map((_, i) =>
-    i === sections.length - 1 ? TOTAL_FRAMES - 1 : i * TRANSITION_FRAMES,
+const sectionFrames = Array.from({ length: SECTIONS_COUNT }, (_, i) =>
+    i === SECTIONS_COUNT - 1 ? TOTAL_FRAMES - 1 : i * TRANSITION_FRAMES,
 );
 
 const sectionRef = ref<HTMLElement | null>(null);
@@ -368,7 +369,7 @@ function getSectionScrollY(sectionIndex: number): number | null {
         return rawY + PINNED_SCROLL_EPSILON_PX;
     }
 
-    if (sectionIndex === sections.length - 1) {
+    if (sectionIndex === SECTIONS_COUNT - 1) {
         return Math.min(rawY, trigger.end - PINNED_SCROLL_EPSILON_PX);
     }
 
@@ -463,7 +464,7 @@ function snapIntoPinnedArea(): void {
 }
 
 function animateToSection(sectionIndex: number): void {
-    const nextSectionIndex = clamp(sectionIndex, 0, sections.length - 1);
+    const nextSectionIndex = clamp(sectionIndex, 0, SECTIONS_COUNT - 1);
 
     if (nextSectionIndex === currentSectionIndex.value && !isStepAnimating) {
         syncScrollToSection(nextSectionIndex);
@@ -500,7 +501,7 @@ function animateToSection(sectionIndex: number): void {
 }
 
 function getNextSectionForDirection(direction: 1 | -1): number | null {
-    const lastSectionIndex = sections.length - 1;
+    const lastSectionIndex = SECTIONS_COUNT - 1;
 
     if (direction > 0 && currentSectionIndex.value < lastSectionIndex) {
         return currentSectionIndex.value + 1;
@@ -537,7 +538,7 @@ function exitPinnedArea(direction: 1 | -1): void {
     suppressScrollTriggerEntryUntil = performance.now() + EXIT_REENTRY_LOCK_MS;
 
     if (direction > 0) {
-        setFrameToSection(sections.length - 1);
+        setFrameToSection(SECTIONS_COUNT - 1);
     } else {
         setFrameToSection(0);
     }
@@ -634,15 +635,15 @@ function setupScrollTrigger(): void {
             }
 
             cardVisible.value = true;
-            setFrameToSection(sections.length - 1);
+            setFrameToSection(SECTIONS_COUNT - 1);
             lockStepInput(ENTRY_SNAP_INPUT_LOCK_MS);
             enableInputObserver();
-            syncScrollToSection(sections.length - 1);
+            syncScrollToSection(SECTIONS_COUNT - 1);
         },
         onLeave: () => {
             cardVisible.value = false;
             disableInputObserver();
-            setFrameToSection(sections.length - 1);
+            setFrameToSection(SECTIONS_COUNT - 1);
         },
         onLeaveBack: () => {
             cardVisible.value = false;

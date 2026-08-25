@@ -27,12 +27,15 @@ const ZiggyConfig = {
         'configurator': { uri: 'configurator', methods: ['GET', 'HEAD'] },
         'configurator.product': { uri: 'configurator', methods: ['GET', 'HEAD'] },
         'sales.index': { uri: 'sales', methods: ['GET', 'HEAD'] },
+        'pitch.index': { uri: 'pitch', methods: ['GET', 'HEAD'] },
         'collaboration.index': { uri: 'collaboration', methods: ['GET', 'HEAD'] },
         'media.index': { uri: 'media', methods: ['GET', 'HEAD'] },
         'contact.index': { uri: 'contact', methods: ['GET', 'HEAD'] },
         'contact.store': { uri: 'contact', methods: ['POST'] },
         'legal.tos': { uri: 'legal/terms-and-conditions', methods: ['GET', 'HEAD'] },
         'legal.pp': { uri: 'legal/privacy-policy', methods: ['GET', 'HEAD'] },
+        'legal.nda': { uri: 'legal/nda', methods: ['GET', 'HEAD'] },
+        'legal.nda.download': { uri: 'legal/nda/download', methods: ['GET', 'HEAD'] },
         'checkout-initiate': { uri: 'api/checkout/initiate', methods: ['POST'] },
         'preorders.success': { uri: 'preorders/success', methods: ['GET', 'HEAD'] },
     },
@@ -50,13 +53,15 @@ const staticRoutes: Record<string, string | ((param?: string) => string)> = {
     'configurator': '/configurator',
     'configurator.product': (id?: string) => (id ? `/configurator?product=${id}` : '/configurator'),
     'sales.index': '/sales',
-    'pitch.index': '/pitch',
+    'pitch.index': '/media#pitchdeck',
     'collaboration.index': '/collaboration',
     'media.index': '/media',
     'contact.index': '/contact',
     'contact.store': '/contact',
     'legal.tos': '/legal/terms-and-conditions',
     'legal.pp': '/legal/privacy-policy',
+    'legal.nda': '/legal/nda',
+    'legal.nda.download': '/legal/nda/download',
 };
 
 function safeRoute(name?: string, params?: any): string {
@@ -77,12 +82,14 @@ function getComponentForPath(path: string): string {
     if (p === '/products/turbine' || p === '/products/turbina') return 'Products/Turbine';
     if (p.startsWith('/configurator')) return 'Configurator/Index';
     if (p === '/sales' || p === '/crm' || p === '/cmr' || p === '/prodejci' || p === '/partners') return 'Sales/Index';
-    if (p === '/pitch' || p === '/pitchdeck' || p === '/deck' || p === '/presentation') return 'Pitch/Index';
+    if (p === '/pitch' || p === '/pitchdeck' || p === '/deck' || p === '/presentation') return 'Media/Index';
     if (p === '/collaboration') return 'Collaboration/Index';
     if (p === '/media') return 'Media/Index';
     if (p === '/contact') return 'Contact/Index';
     if (p === '/legal/terms-and-conditions') return 'Legal/Tos';
     if (p === '/legal/privacy-policy') return 'Legal/Pp';
+    if (p === '/legal/nda' || p === '/sales/nda') return 'Legal/Nda';
+    if (p === '/preorders/success') return 'Preorders/Success';
     return 'Home/Index';
 }
 
@@ -252,7 +259,7 @@ createInertiaApp({
         const app = createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(i18n)
-            .use(CookieConsentPlugin, cookieConfig((key: string) => String(i18n.global.t(key))))
+            .use(CookieConsentPlugin, cookieConfig((key: string) => String((i18n.global as any).t(key))))
             .use(ZiggyVue, ZiggyConfig as any);
 
         app.config.globalProperties.route = safeRoute;

@@ -8,8 +8,8 @@
                 :class="[
                     activeDropdown === 'products' || mobileMenuOpen
                         ? 'border-transparent bg-white shadow-2xl text-black'
-                        : isScrolled
-                          ? 'border-black/10 bg-white/90 shadow-lg text-black'
+                        : isScrolled || !props.scroll || props.inverted
+                          ? 'border-black/10 bg-white/80 shadow-lg text-black'
                           : 'border-white/20 bg-black/20 text-white',
                 ]"
                 @mouseleave="activeDropdown = null"
@@ -129,30 +129,8 @@
                         v-if="mobileMenuOpen"
                         class="mt-6 border-t border-black/10 pt-6 xl:hidden"
                     >
-                        <!-- Nav links -->
-                        <nav class="flex flex-col gap-1">
-                            <Link
-                                :href="route('collaboration.index')"
-                                class="rounded-xl px-3 py-3 text-sm font-medium text-black/80 transition-colors hover:bg-black/5 hover:text-black"
-                                @click="mobileMenuOpen = false"
-                                >{{ $t('common.nav.collaboration') }}</Link
-                            >
-                            <Link
-                                :href="route('media.index')"
-                                class="rounded-xl px-3 py-3 text-sm font-medium text-black/80 transition-colors hover:bg-black/5 hover:text-black"
-                                @click="mobileMenuOpen = false"
-                                >{{ $t('common.nav.media') }}</Link
-                            >
-                            <Link
-                                :href="route('contact.index')"
-                                class="rounded-xl px-3 py-3 text-sm font-medium text-black/80 transition-colors hover:bg-black/5 hover:text-black"
-                                @click="mobileMenuOpen = false"
-                                >{{ $t('common.nav.contact') }}</Link
-                            >
-                        </nav>
-
-                        <!-- Products -->
-                        <div class="mt-4">
+                        <!-- Products Section (First in desktop order) -->
+                        <div class="mb-4">
                             <p
                                 class="mb-2 px-3 text-xs font-semibold tracking-[0.2em] text-black/40 uppercase"
                             >
@@ -166,29 +144,60 @@
                                 >
                                     <span
                                         class="text-sm font-medium text-black"
-                                        >{{ item.label }}</span
+                                        >{{ $t(item.labelKey, item.label) }}</span
                                     >
                                     <div class="flex gap-2">
-                                        <a
+                                        <Link
                                             :href="`/products/${item.detail}`"
-                                            class="rounded-lg border border-black/10 px-3 py-1 text-xs text-black/80 transition-colors hover:text-black"
+                                            class="rounded-lg border border-black/15 bg-white px-3 py-1 text-xs font-medium text-black/80 shadow-2xs transition hover:bg-black/5 hover:border-black/30"
                                             @click="mobileMenuOpen = false"
                                             >{{
                                                 $t('common.actions.info')
-                                            }}</a
+                                            }}</Link
                                         >
-                                        <a
+                                        <Link
                                             :href="`/configurator/${item.id}`"
-                                            class="rounded-lg bg-t-blue px-3 py-1 text-xs font-medium text-white transition-opacity hover:opacity-80"
+                                            class="rounded-lg bg-t-blue px-3 py-1 text-xs font-medium text-white shadow-2xs transition hover:bg-t-blue/90"
                                             @click="mobileMenuOpen = false"
                                             >{{
                                                 $t('common.actions.preorder')
-                                            }}</a
+                                            }}</Link
                                         >
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Divider -->
+                        <div class="my-3 border-t border-black/10"></div>
+
+                        <!-- Nav links in exact desktop order -->
+                        <nav class="flex flex-col gap-1">
+                            <Link
+                                :href="route('collaboration.index')"
+                                class="rounded-xl px-3 py-2.5 text-sm font-medium text-black/80 transition-colors hover:bg-black/5 hover:text-black"
+                                @click="mobileMenuOpen = false"
+                                >{{ $t('common.nav.collaboration') }}</Link
+                            >
+                            <Link
+                                :href="route('sales.index')"
+                                class="rounded-xl px-3 py-2.5 text-sm font-medium text-black/80 transition-colors hover:bg-black/5 hover:text-black"
+                                @click="mobileMenuOpen = false"
+                                >{{ $t('common.nav.sales') }}</Link
+                            >
+                            <Link
+                                :href="route('media.index')"
+                                class="rounded-xl px-3 py-2.5 text-sm font-medium text-black/80 transition-colors hover:bg-black/5 hover:text-black"
+                                @click="mobileMenuOpen = false"
+                                >{{ $t('common.nav.media') }}</Link
+                            >
+                            <Link
+                                :href="route('contact.index')"
+                                class="rounded-xl px-3 py-2.5 text-sm font-medium text-black/80 transition-colors hover:bg-black/5 hover:text-black"
+                                @click="mobileMenuOpen = false"
+                                >{{ $t('common.nav.contact') }}</Link
+                            >
+                        </nav>
 
                         <!-- CTA -->
                         <div class="mt-6">
@@ -217,6 +226,18 @@ import LogoType from '@/custom/LogoType.vue';
 import ProductCard from '@/custom/ProductCard.vue';
 import { PRODUCTS } from '@/types/products';
 import { Menu, Xmark } from '@iconoir/vue';
+import { route } from 'ziggy-js';
+
+const props = withDefaults(
+    defineProps<{
+        scroll?: boolean;
+        inverted?: boolean;
+    }>(),
+    {
+        scroll: true,
+        inverted: false,
+    },
+);
 
 const products = PRODUCTS;
 
@@ -226,6 +247,8 @@ const mobileMenuOpen = ref(false);
 
 const headerIsInverted = computed(() => {
     return (
+        props.inverted ||
+        !props.scroll ||
         activeDropdown.value === 'products' ||
         isScrolled.value ||
         mobileMenuOpen.value

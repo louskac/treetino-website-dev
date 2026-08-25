@@ -1,5 +1,5 @@
 <template>
-    <Head title="Strom V2 | Treetino" />
+    <Head :title="`${$t('products.v2.title')} | Treetino`" />
 
     <DefaultLayout :scroll="true">
         <!-- Hero Section - Clean & Minimalist (Identical structure to Homepage Hero) -->
@@ -31,10 +31,13 @@
                 class="relative mx-auto flex h-full w-full max-w-[1400px] flex-col px-6 pb-28 text-white sm:w-[500px] sm:pb-24 sm:px-0 md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
             >
                 <div class="mt-auto">
-                    <div
-                        class="text-sm font-semibold tracking-[0.25em] text-white/70 uppercase lg:text-base"
-                    >
-                        {{ $t('products.v2.audience') }}
+                    <div class="flex flex-wrap items-center gap-2 mb-3">
+                        <span class="text-sm font-semibold tracking-[0.25em] text-white/70 uppercase lg:text-base">
+                            {{ $t('products.v2.audience') }}
+                        </span>
+                        <span class="rounded-full bg-emerald-500/20 px-3 py-0.5 text-xs font-semibold text-emerald-300 backdrop-blur-md border border-emerald-500/30">
+                            ✓ {{ $t('products.v2.no_permit_badge', 'Bez nutnosti stavebního povolení') }}
+                        </span>
                     </div>
 
                     <h1
@@ -107,7 +110,7 @@
                     >
                         <div
                             v-for="stat in productStats"
-                            :key="stat.label + stat.value"
+                            :key="stat.icon + stat.value"
                         >
                             <div class="mb-2 flex items-center gap-3">
                                 <div
@@ -115,8 +118,8 @@
                                 >
                                     <component
                                         :is="stat.icon"
-                                        class="m-auto h-6 w-6"
                                         stroke-width="1.5"
+                                        class="m-auto h-6 w-6"
                                     />
                                 </div>
                                 <div
@@ -150,13 +153,13 @@
                     </div>
 
                     <div class="border-l border-black/15 pl-6 dark:border-white/15">
-                        <div class="text-3xl font-semibold tracking-tight text-black dark:text-white lg:text-4xl">2 {{ $t('products.datasheet.val_months') }}</div>
+                        <div class="text-3xl font-semibold tracking-tight text-black dark:text-white lg:text-4xl">1 {{ $t('products.datasheet.val_month', 'měsíc') }}</div>
                         <h3 class="mt-2 text-base font-semibold text-black dark:text-white">{{ $t('products.v2.tech.item2_title') }}</h3>
                         <p class="mt-2 text-sm leading-relaxed text-black/65 dark:text-white/65">{{ $t('products.v2.tech.item2_text') }}</p>
                     </div>
 
                     <div class="border-l border-black/15 pl-6 dark:border-white/15">
-                        <div class="text-3xl font-semibold tracking-tight text-black dark:text-white lg:text-4xl">0.5 m</div>
+                        <div class="text-3xl font-semibold tracking-tight text-black dark:text-white lg:text-4xl">1 m²</div>
                         <h3 class="mt-2 text-base font-semibold text-black dark:text-white">{{ $t('products.v2.tech.item3_title') }}</h3>
                         <p class="mt-2 text-sm leading-relaxed text-black/65 dark:text-white/65">{{ $t('products.v2.tech.item3_text') }}</p>
                     </div>
@@ -181,7 +184,7 @@
                     <div class="relative h-[500px] w-full overflow-hidden">
                         <img
                             src="/img/stills/Still_Strom-v2.png"
-                            alt="Treetino Strom V2"
+                            :alt="`Treetino ${$t('products.v2.title')}`"
                             class="h-full w-full object-cover object-center transition-transform duration-1000 ease-out hover:scale-105"
                         />
                         <div class="absolute inset-0 bg-linear-to-r from-black/90 via-black/45 to-transparent"></div>
@@ -219,7 +222,7 @@
                         <div class="relative aspect-4/3 overflow-hidden">
                             <img
                                 src="/img/info/info-strom-v2-w.webp"
-                                alt="Strom V2"
+                                :alt="$t('products.v2.title')"
                                 class="h-full w-full object-cover transition-transform duration-700 ease-out hover:scale-105"
                             />
                             <!-- 2-Line Stacked Typography Overlay (HYBRID / 24/7) -->
@@ -298,7 +301,7 @@
                     </p>
                 </div>
 
-                <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+                <div class="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:items-center">
                     <!-- Card 1: Spotlight Solar -->
                     <div class="group relative flex flex-col justify-between overflow-hidden rounded-3xl bg-black text-white shadow-2xl min-h-[480px]">
                         <div class="relative h-64 w-full overflow-hidden bg-zinc-900">
@@ -331,6 +334,14 @@
                                 <li class="flex items-center gap-2.5 text-white/60">
                                     <span class="h-1.5 w-1.5 rounded-full bg-white/30"></span>
                                     <span>{{ $t('products.v2.comp.operation') }} <strong class="text-white/70">{{ $t('products.v2.comp.daylight_only') }}</strong></span>
+                                </li>
+                                <li class="flex items-center gap-2.5 text-white/60">
+                                    <span class="h-1.5 w-1.5 rounded-full bg-white/30"></span>
+                                    <span>{{ $t('products.v2.comp.permit') }} <strong class="text-white/70">{{ $t('products.v2.comp.permit_required') }}</strong></span>
+                                </li>
+                                <li class="flex items-center gap-2.5 text-white/60">
+                                    <span class="h-1.5 w-1.5 rounded-full bg-white/30"></span>
+                                    <span>{{ $t('products.v2.comp.tracking') }} <strong class="text-white/70">{{ $t('products.v2.comp.tracking_none') }}</strong></span>
                                 </li>
                             </ul>
                         </div>
@@ -369,42 +380,61 @@
                                     <span class="h-1.5 w-1.5 rounded-full bg-white/30"></span>
                                     <span>{{ $t('products.v2.comp.operation') }} <strong class="text-white/70">{{ $t('products.v2.comp.daylight_only') }}</strong></span>
                                 </li>
+                                <li class="flex items-center gap-2.5 text-white/60">
+                                    <span class="h-1.5 w-1.5 rounded-full bg-white/30"></span>
+                                    <span>{{ $t('products.v2.comp.permit') }} <strong class="text-white/70">{{ $t('products.v2.comp.permit_required') }}</strong></span>
+                                </li>
+                                <li class="flex items-center gap-2.5 text-white/60">
+                                    <span class="h-1.5 w-1.5 rounded-full bg-white/30"></span>
+                                    <span>{{ $t('products.v2.comp.tracking') }} <strong class="text-white/70">{{ $t('products.v2.comp.tracking_none') }}</strong></span>
+                                </li>
                             </ul>
                         </div>
                     </div>
 
-                    <!-- Card 3: Treetino Strom V2 -->
-                    <div class="group relative flex flex-col justify-between overflow-hidden rounded-3xl bg-black text-white shadow-2xl min-h-[480px] border-2 border-t-blue/80">
+                    <!-- Card 3: Treetino Strom V2 (High-Impact Highlighted Card) -->
+                    <div class="group relative flex flex-col justify-between overflow-hidden rounded-3xl bg-linear-to-b from-zinc-900 to-black text-white shadow-2xl min-h-[520px] border-2 border-t-blue ring-4 ring-t-blue/30 lg:scale-105 z-10">
                         <div class="relative h-64 w-full overflow-hidden bg-zinc-900">
                             <img
                                 src="/img/stills/SM-still.webp"
-                                alt="Treetino Strom V2"
+                                :alt="`Treetino ${$t('products.v2.title')}`"
                                 class="h-full w-full object-cover object-center transition-transform duration-1000 ease-out group-hover:scale-105"
                             />
                             <div class="absolute inset-0 bg-linear-to-t from-black via-black/20 to-transparent"></div>
-                            <span class="absolute top-4 left-4 rounded-full bg-t-blue px-3.5 py-1 text-[10px] font-bold tracking-[0.2em] text-white uppercase backdrop-blur-md shadow-lg">
-                                {{ $t('products.v2.comp.winner') }}
+                            <span class="absolute top-4 left-4 rounded-full bg-t-blue px-4 py-1.5 text-[11px] font-bold tracking-[0.2em] text-white uppercase backdrop-blur-md shadow-xl ring-2 ring-white/30">
+                                🏆 {{ $t('products.v2.comp.winner') }}
                             </span>
                         </div>
 
                         <div class="p-8 pt-4 flex-1 flex flex-col justify-between">
                             <div>
-                                <h3 class="text-2xl font-black text-white">Treetino {{ $t('products.v2.title') }}</h3>
+                                <h3 class="text-2xl font-black text-white flex items-center justify-between">
+                                    <span>Treetino {{ $t('products.v2.title') }}</span>
+                                    <span class="text-xs font-mono font-bold text-sky-400 uppercase tracking-widest">6 – 12 kW</span>
+                                </h3>
                                 <div class="mt-1 text-3xl font-black text-white">$60,000</div>
                             </div>
 
                             <ul class="mt-6 space-y-2.5 border-t border-t-blue/40 pt-4 text-xs leading-relaxed text-white">
                                 <li class="flex items-center gap-2.5">
-                                    <span class="h-1.5 w-1.5 rounded-full bg-sky-400"></span>
-                                    <span>{{ $t('products.v2.comp.pv_leaves') }} <strong class="text-white">5.61 kWp TopCon</strong></span>
+                                    <span class="h-2 w-2 rounded-full bg-sky-400"></span>
+                                    <span>{{ $t('products.v2.comp.pv_leaves') }} <strong class="text-white font-semibold">6 kWp TopCon (124 ks)</strong></span>
                                 </li>
                                 <li class="flex items-center gap-2.5">
-                                    <span class="h-1.5 w-1.5 rounded-full bg-sky-400"></span>
-                                    <span>{{ $t('products.v2.comp.wind_turbine') }} <strong class="text-white">6 kW (6× 1 kW kit)</strong></span>
+                                    <span class="h-2 w-2 rounded-full bg-sky-400"></span>
+                                    <span>{{ $t('products.v2.comp.wind_turbine') }} <strong class="text-white font-semibold">6 kW (6× 1 kW aero kit)</strong></span>
                                 </li>
                                 <li class="flex items-center gap-2.5">
-                                    <span class="h-1.5 w-1.5 rounded-full bg-sky-400"></span>
+                                    <span class="h-2 w-2 rounded-full bg-sky-400"></span>
                                     <span>{{ $t('products.v2.comp.hybrid_op') }} <strong class="text-sky-300 font-bold">{{ $t('products.v2.comp.day_night') }}</strong></span>
+                                </li>
+                                <li class="flex items-center gap-2.5">
+                                    <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
+                                    <span>{{ $t('products.v2.comp.permit') }} <strong class="text-emerald-300 font-bold">{{ $t('products.v2.comp.permit_none') }}</strong></span>
+                                </li>
+                                <li class="flex items-center gap-2.5">
+                                    <span class="h-2 w-2 rounded-full bg-sky-400"></span>
+                                    <span>{{ $t('products.v2.comp.tracking') }} <strong class="text-sky-300 font-bold">{{ $t('products.v2.comp.tracking_val') }}</strong></span>
                                 </li>
                             </ul>
                         </div>
@@ -441,7 +471,7 @@
                             <tr class="bg-black/5 dark:bg-white/5">
                                 <td class="px-6 py-4 font-semibold">{{ $t('products.datasheet.model') }}</td>
                                 <td class="px-6 py-4 opacity-80">
-                                    Treetino Strom V2 (Small Tree B2C)
+                                    Treetino {{ $t('products.v2.title') }} (Small Tree B2C)
                                 </td>
                             </tr>
                             <tr>
@@ -457,7 +487,7 @@
                                     {{ $t('products.datasheet.pv') }}
                                 </td>
                                 <td class="px-6 py-4 opacity-80">
-                                    61 {{ $t('products.v2.stats.2') }} × 12 V (830 × 340 mm, TopCon, 20.2 %)
+                                    124 {{ $t('products.datasheet.val_pcs', 'ks') }} × 12 V (830 × 340 mm, TopCon, 20.2 %)
                                 </td>
                             </tr>
                             <tr>
@@ -530,6 +560,15 @@
             </div>
         </section>
 
+        <!-- Reused Shared HomeCtaGeneric Component with Prominent Configurator CTA Button (Placed First) -->
+        <HomeCtaGeneric
+            :title="$t('products.v2.cta_title')"
+            :buttonText="$t('products.v2.configure_label')"
+            :buttonHref="route('configurator.product', 'strom-v2')"
+            image1="/img/stills/Still_Strom-v2.png"
+            image2="/img/stills/SM-still.webp"
+        />
+
         <!-- Product Redirect / Navigation Section (Placed at the bottom) -->
         <section
             class="border-t border-black/10 bg-stone-50 py-20 text-black dark:border-white/10 dark:bg-zinc-950 dark:text-white"
@@ -556,7 +595,7 @@
                 >
                     <img
                         :src="previewImage"
-                        alt="Portfolio Treetino Strom V2"
+                        :alt="`Portfolio Treetino ${$t('products.v2.title')}`"
                         class="h-full w-full object-cover transition-all duration-500"
                     />
 
@@ -600,15 +639,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- Reused Shared HomeCtaGeneric Component with Prominent Configurator CTA Button -->
-        <HomeCtaGeneric
-            :title="$t('products.v2.cta_title')"
-            :buttonText="$t('products.v2.configure_label')"
-            :buttonHref="route('configurator.product', 'strom-v2')"
-            image1="/img/stills/Still_Strom-v2.png"
-            image2="/img/stills/SM-still.webp"
-        />
     </DefaultLayout>
 </template>
 
@@ -647,15 +677,15 @@ const productStats = [
         value: '6 – 12 kW',
         valueKey: 'products.v2.stats_val.1',
         label: 'Celkový Výkon',
-        description: '5,61 kWp FVE + 6 kW VTE kit',
+        description: '6 kWp FVE + 6 kW VTE',
         descriptionKey: 'products.v2.stats.1',
     },
     {
         icon: Leaf,
-        value: '61 ks',
+        value: '124 ks',
         valueKey: 'products.v2.stats_val.2',
         label: 'Solární listy',
-        description: 'Zabere jen 1 m² trávníku',
+        description: '124 TopCon solárních listů',
         descriptionKey: 'products.v2.stats.2',
     },
     {
@@ -676,7 +706,7 @@ const productStats = [
     },
     {
         icon: Clock,
-        value: '2 měsíce',
+        value: '1 měsíc',
         valueKey: 'products.v2.stats_val.5',
         label: 'Rychlost výstavby',
         description: 'Rychlá montáž za 1 den',
@@ -684,10 +714,10 @@ const productStats = [
     },
     {
         icon: TwoPointsCircle,
-        value: '< 1 m²',
+        value: '1 m²',
         valueKey: 'products.v2.stats_val.6',
         label: 'Zastavěná plocha',
-        description: 'Průměr kmenu 0,6 m u paty',
+        description: 'Zabere jen 1 m² trávníku',
         descriptionKey: 'products.v2.stats.6',
     },
 ];

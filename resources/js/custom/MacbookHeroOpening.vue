@@ -102,7 +102,7 @@
                     </div>
                 </div>
                 <div class="flex items-baseline justify-between pt-2.5 border-t border-zinc-100 dark:border-zinc-800 text-xs sm:text-sm">
-                    <span class="text-zinc-500 dark:text-zinc-400 font-mono">Provize:</span>
+                    <span class="text-zinc-500 dark:text-zinc-400 font-mono">{{ $t('app.macbook.commission') }}</span>
                     <span class="font-mono font-bold text-zinc-900 dark:text-white">+299 758 CZK</span>
                 </div>
             </div>
@@ -119,7 +119,7 @@
                         <FileText class="h-5 w-5" />
                     </div>
                     <div class="overflow-hidden">
-                        <span class="text-[11px] font-mono font-semibold tracking-wider text-t-blue uppercase block leading-none mb-1">Nabídka vygenerována</span>
+                        <span class="text-[11px] font-mono font-semibold tracking-wider text-t-blue uppercase block leading-none mb-1">{{ $t('app.macbook.offer_generated') }}</span>
                         <p class="text-sm sm:text-base font-bold text-zinc-900 dark:text-white truncate leading-tight">Commercial_Proposal.pdf</p>
                     </div>
                 </div>
@@ -127,7 +127,7 @@
                     <span class="font-mono font-bold text-zinc-900 dark:text-white">4 900 000 CZK</span>
                     <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-t-blue text-white text-[11px] font-mono font-medium shadow-sm">
                         <Download class="h-3.5 w-3.5" />
-                        Stáhnout PDF
+                        {{ $t('app.macbook.download_pdf') }}
                     </span>
                 </div>
             </div>
@@ -144,16 +144,16 @@
                         <div class="h-7 w-7 rounded-lg bg-t-blue/10 border border-t-blue/20 flex items-center justify-center text-t-blue">
                             <Zap class="h-4 w-4" />
                         </div>
-                        <span class="text-[11px] font-mono font-semibold tracking-wider text-t-blue uppercase">Výpočet Návratnosti</span>
+                        <span class="text-[11px] font-mono font-semibold tracking-wider text-t-blue uppercase">{{ $t('app.macbook.roi_calculation') }}</span>
                     </div>
-                    <span class="text-[11px] font-mono text-zinc-500 dark:text-zinc-400">16.3 let</span>
+                    <span class="text-[11px] font-mono text-zinc-500 dark:text-zinc-400">{{ $t('app.macbook.roi_years') }}</span>
                 </div>
                 
                 <div class="flex items-baseline justify-between gap-2 mb-2">
                     <div>
-                        <span class="text-[10px] text-zinc-400 uppercase font-mono block">Roční výroba</span>
+                        <span class="text-[10px] text-zinc-400 uppercase font-mono block">{{ $t('app.macbook.annual_production') }}</span>
                         <p class="text-base sm:text-lg font-bold font-mono text-zinc-900 dark:text-white tracking-tight">
-                            47 393 <span class="text-xs font-normal text-zinc-500">kWh/rok</span>
+                            47 393 <span class="text-xs font-normal text-zinc-500">{{ $t('app.macbook.kwh_year') }}</span>
                         </p>
                     </div>
                     
@@ -168,8 +168,8 @@
                 </div>
 
                 <div class="pt-2 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between text-[11px] font-mono text-zinc-500 dark:text-zinc-400">
-                    <span>CO₂ Úspora:</span>
-                    <span class="font-bold text-zinc-900 dark:text-white">11.8 tun / rok</span>
+                    <span>{{ $t('app.macbook.co2_savings') }}</span>
+                    <span class="font-bold text-zinc-900 dark:text-white">{{ $t('app.macbook.tons_year') }}</span>
                 </div>
             </div>
         </div>

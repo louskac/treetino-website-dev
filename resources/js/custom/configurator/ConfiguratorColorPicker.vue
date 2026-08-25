@@ -51,7 +51,7 @@
                     <!-- Hue Slider -->
                     <div class="space-y-1">
                         <div class="flex justify-between text-[10px] font-medium text-black/40 dark:text-white/40 uppercase tracking-wider">
-                            <span>Odstín</span>
+                            <span>{{ $t('configurator.color.hue', 'Odstín') }}</span>
                         </div>
                         <div class="relative flex items-center h-5 w-full">
                             <input

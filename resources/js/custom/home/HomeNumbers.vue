@@ -11,12 +11,12 @@
                 <img
                     class="hidden h-full w-full object-cover lg:block"
                     src="/img/info/night-detail-w.jpg"
-                    alt="Strom V1"
+                    :alt="$t('products.v1.title', 'Strom V1')"
                 />
                 <img
                     class="block h-full w-full object-cover lg:hidden"
                     src="/img/info/night-detail-l.jpg"
-                    alt="Strom V1"
+                    :alt="$t('products.v1.title', 'Strom V1')"
                 />
             </div>
 
@@ -25,12 +25,12 @@
                 <img
                     class="hidden h-full w-full object-cover lg:block"
                     src="/img/info/info-strom-v2-w.webp"
-                    alt="Strom V2"
+                    :alt="$t('products.v2.title', 'Strom V2')"
                 />
                 <img
                     class="block h-full w-full object-cover lg:hidden"
                     src="/img/info/info-strom-v2-l.webp"
-                    alt="Strom V2"
+                    :alt="$t('products.v2.title', 'Strom V2')"
                 />
             </div>
 
@@ -39,12 +39,12 @@
                 <img
                     class="hidden h-full w-full object-cover lg:block"
                     src="/img/info/info-turbine-w.webp"
-                    alt="Větrná turbína"
+                    :alt="$t('products.turbine.title', 'Větrná turbína')"
                 />
                 <img
                     class="block h-full w-full object-cover lg:hidden"
                     src="/img/info/info-turbine-l.webp"
-                    alt="Větrná turbína"
+                    :alt="$t('products.turbine.title', 'Větrná turbína')"
                 />
             </div>
 

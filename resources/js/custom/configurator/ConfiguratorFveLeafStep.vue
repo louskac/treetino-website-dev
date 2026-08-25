@@ -58,7 +58,7 @@
                         <!-- Mapping Mode Segmented Pill Switch -->
                         <div class="flex flex-col gap-1.5">
                             <span class="text-xs font-semibold text-black/80 dark:text-white/80">
-                                Režim potisku listů
+                                {{ $t('configurator.fve_leaf.custom.mode_title') }}
                             </span>
                             <div class="inline-flex w-full rounded-full border border-black/10 bg-black/5 p-1 dark:border-white/10 dark:bg-white/5">
                                 <button
@@ -69,7 +69,7 @@
                                         ? 'bg-t-blue text-white shadow-xs'
                                         : 'text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white'"
                                 >
-                                    Celá větev
+                                    {{ $t('configurator.fve_leaf.custom.mode_branch') }}
                                 </button>
                                 <button
                                     type="button"
@@ -79,7 +79,7 @@
                                         ? 'bg-t-blue text-white shadow-xs'
                                         : 'text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white'"
                                 >
-                                    Jednotlivé listy
+                                    {{ $t('configurator.fve_leaf.custom.mode_individual') }}
                                 </button>
                             </div>
                         </div>
@@ -96,7 +96,7 @@
                             <img
                                 v-if="customImage"
                                 :src="customImage"
-                                alt="Vlastní potisk FVE listů"
+                                :alt="$t('configurator.fve_leaf.custom.alt')"
                                 class="absolute inset-0 h-full w-full object-contain pointer-events-none p-2"
                             />
 
@@ -106,7 +106,7 @@
                                     type="button"
                                     @click.stop="zoomIn"
                                     class="flex h-7 w-7 items-center justify-center rounded-full text-xs font-semibold text-black hover:bg-t-blue hover:text-white dark:text-white transition-colors cursor-pointer"
-                                    title="Přiblížit"
+                                    :title="$t('configurator.fve_leaf.custom.zoom_in')"
                                 >
                                     +
                                 </button>
@@ -114,7 +114,7 @@
                                     type="button"
                                     @click.stop="zoomOut"
                                     class="flex h-7 w-7 items-center justify-center rounded-full text-xs font-semibold text-black hover:bg-t-blue hover:text-white dark:text-white transition-colors cursor-pointer"
-                                    title="Oddálit"
+                                    :title="$t('configurator.fve_leaf.custom.zoom_out')"
                                 >
                                     -
                                 </button>
@@ -122,7 +122,7 @@
                                     type="button"
                                     @click.stop="resetPosition"
                                     class="flex h-7 w-7 items-center justify-center rounded-full text-xs font-semibold text-black hover:bg-t-blue hover:text-white dark:text-white transition-colors cursor-pointer"
-                                    title="Obnovit pozici"
+                                    :title="$t('configurator.fve_leaf.custom.reset_pos')"
                                 >
                                     ↺
                                 </button>
@@ -131,7 +131,7 @@
                             <!-- Floating Glassmorphic Bottom Badge -->
                             <div class="absolute bottom-3 inset-x-3 flex items-center justify-center">
                                 <div class="rounded-full border border-black/10 bg-white/90 px-3.5 py-1 text-[11px] font-medium text-black/80 backdrop-blur-md dark:border-white/10 dark:bg-black/90 dark:text-white/80 shadow-xs">
-                                    Táhněte myší pro posun • Zoom {{ Math.round(scale * 100) }}%
+                                    {{ $t('configurator.fve_leaf.custom.drag_hint', { zoom: Math.round(scale * 100) }) }}
                                 </div>
                             </div>
                         </div>
@@ -139,7 +139,7 @@
                         <!-- Print Coverage / Opacity Slider over Photovoltaic Panel -->
                         <div class="flex flex-col gap-1.5">
                             <div class="flex items-center justify-between text-xs">
-                                <span class="font-medium text-black/80 dark:text-white/80">Krytí potisku FVE listů</span>
+                                <span class="font-medium text-black/80 dark:text-white/80">{{ $t('configurator.fve_leaf.custom.opacity_title') }}</span>
                                 <span class="rounded-md bg-t-blue/10 px-2 py-0.5 font-mono text-[11px] font-semibold text-t-blue dark:bg-white/10 dark:text-white">
                                     {{ Math.round(printOpacity * 100) }}%
                                 </span>
@@ -154,7 +154,7 @@
                                 class="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-black/10 accent-t-blue dark:bg-white/15 dark:accent-t-blue"
                             />
                             <p class="text-[11px] text-black/50 dark:text-white/50">
-                                Odhalte fotovoltaické články pod potiskem snížením krytí.
+                                {{ $t('configurator.fve_leaf.custom.opacity_desc') }}
                             </p>
                         </div>
 
@@ -165,14 +165,14 @@
                                 @click="triggerFileInput"
                                 class="text-xs font-semibold text-t-blue hover:underline cursor-pointer"
                             >
-                                Změnit obrázek
+                                {{ $t('configurator.fve_leaf.custom.change_image') }}
                             </button>
                             <button
                                 type="button"
                                 @click="resetPosition"
                                 class="text-xs text-black/50 hover:text-black dark:text-white/50 dark:hover:text-white cursor-pointer"
                             >
-                                Obnovit pozici
+                                {{ $t('configurator.fve_leaf.custom.reset_pos') }}
                             </button>
                         </div>
                     </div>
@@ -189,8 +189,8 @@
                             </svg>
                         </div>
                         <div>
-                            <p class="text-xs font-semibold text-black dark:text-white">Nahrajte vlastní obrázek nebo vzor</p>
-                            <p class="mt-0.5 text-[11px] text-black/55 dark:text-white/45">PNG, JPG, WebP — vytvořte unikátní potisk FVE listů</p>
+                            <p class="text-xs font-semibold text-black dark:text-white">{{ $t('configurator.fve_leaf.custom.upload_title') }}</p>
+                            <p class="mt-0.5 text-[11px] text-black/55 dark:text-white/45">{{ $t('configurator.fve_leaf.custom.upload_desc') }}</p>
                         </div>
                     </div>
                 </div>

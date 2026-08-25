@@ -8,7 +8,7 @@
             <img
                 class="h-full w-full rounded-2xl object-cover transition-all duration-600 group-hover:scale-110"
                 :src="product.image"
-                :alt="product.label"
+                :alt="$t(product.labelKey, product.label)"
             />
         </div>
 
@@ -18,7 +18,7 @@
 
         <div class="relative mt-auto text-white">
             <div class="relative mb-3 text-2xl font-medium sm:mb-4 sm:text-3xl">
-                {{ product.label }}
+                {{ $t(product.labelKey, product.label) }}
             </div>
 
             <div class="grid grid-cols-2 gap-2 items-stretch">
