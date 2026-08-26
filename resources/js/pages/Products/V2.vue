@@ -38,7 +38,7 @@
                             {{ $t('products.v2.audience') }}
                         </span>
                         <span
-                            class="rounded-full border border-emerald-500/30 bg-emerald-500/20 px-3 py-0.5 text-xs font-semibold text-emerald-300 backdrop-blur-md"
+                            class="rounded-full border border-white/20 bg-white/10 px-3.5 py-1 text-xs font-semibold text-white/90 backdrop-blur-md"
                         >
                             ✓
                             {{
@@ -423,113 +423,137 @@
                 </div>
 
                 <div
-                    class="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:items-center"
+                    class="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-3"
                 >
                     <!-- Card 1: Spotlight Solar -->
                     <div
-                        class="group relative flex min-h-[480px] flex-col justify-between overflow-hidden rounded-3xl bg-black text-white shadow-2xl"
+                        class="group relative flex min-h-[520px] flex-col justify-between overflow-hidden rounded-3xl border border-black/10 bg-zinc-950 text-white opacity-80 shadow-lg transition-opacity hover:opacity-100 dark:border-white/10"
                     >
                         <div
-                            class="relative h-64 w-full overflow-hidden bg-zinc-900"
+                            class="relative h-56 w-full overflow-hidden bg-zinc-900"
                         >
                             <img
                                 src="/img/competition/spotlight-solar-hq-crop.jpg"
                                 alt="Spotlight Solar"
-                                class="h-full w-full object-cover object-center transition-transform duration-1000 ease-out group-hover:scale-105"
+                                class="h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
                             />
                             <div
-                                class="absolute inset-0 bg-linear-to-t from-black via-black/20 to-transparent"
+                                class="absolute inset-0 bg-linear-to-t from-zinc-950 via-zinc-950/40 to-transparent"
                             ></div>
                             <span
-                                class="absolute top-4 left-4 rounded-full bg-white/20 px-3.5 py-1 text-[10px] font-bold tracking-[0.2em] text-white uppercase backdrop-blur-md"
+                                class="absolute top-4 left-4 rounded-full border border-white/20 bg-black/60 px-3 py-1 text-[10px] font-bold tracking-[0.2em] text-white/70 uppercase backdrop-blur-md"
                             >
                                 {{ $t('products.v2.comp.competitor') }}
                             </span>
                         </div>
 
                         <div
-                            class="flex flex-1 flex-col justify-between p-8 pt-4"
+                            class="flex flex-1 flex-col justify-between p-7 pt-3"
                         >
                             <div>
-                                <h3 class="text-2xl font-bold text-white">
+                                <h3 class="text-xl font-bold text-white">
                                     Spotlight Solar
                                 </h3>
+                                <p class="mt-0.5 text-xs text-white/50">
+                                    3 kWp · Pouze solární přístřešek
+                                </p>
                                 <div
-                                    class="mt-1 text-3xl font-black text-white"
+                                    class="mt-2 text-2xl font-black text-white"
                                 >
                                     $50,000
                                 </div>
                             </div>
 
                             <ul
-                                class="mt-6 space-y-2.5 border-t border-white/15 pt-4 text-xs leading-relaxed text-white/80"
+                                class="mt-5 space-y-2.5 border-t border-white/10 pt-4 text-xs leading-relaxed text-white/70"
                             >
                                 <li class="flex items-center gap-2.5">
                                     <span
-                                        class="h-1.5 w-1.5 rounded-full bg-white/50"
-                                    ></span>
-                                    <span
-                                        >{{ $t('products.v2.comp.pv_panels') }}
-                                        <strong class="text-white"
-                                            >3 kWp</strong
-                                        ></span
+                                        class="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-white/10 text-[10px] font-bold text-white/60"
+                                        >•</span
                                     >
+                                    <span>
+                                        {{ $t('products.v2.comp.pv_panels') }}
+                                        <strong class="font-semibold text-white"
+                                            >3 kWp</strong
+                                        >
+                                    </span>
                                 </li>
                                 <li
-                                    class="flex items-center gap-2.5 text-white/60"
+                                    class="flex items-center gap-2.5 text-white/40"
                                 >
                                     <span
-                                        class="h-1.5 w-1.5 rounded-full bg-white/30"
-                                    ></span>
-                                    <span
-                                        >{{
+                                        class="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-white/5 text-[10px] font-bold text-white/30"
+                                        >✕</span
+                                    >
+                                    <span>
+                                        {{
                                             $t('products.v2.comp.wind_turbine')
                                         }}
-                                        <strong class="text-white/70">{{
-                                            $t('products.v2.comp.none')
-                                        }}</strong></span
-                                    >
+                                        <strong
+                                            class="font-normal text-white/50"
+                                            >{{
+                                                $t('products.v2.comp.none')
+                                            }}</strong
+                                        >
+                                    </span>
                                 </li>
                                 <li
-                                    class="flex items-center gap-2.5 text-white/60"
+                                    class="flex items-center gap-2.5 text-white/40"
                                 >
                                     <span
-                                        class="h-1.5 w-1.5 rounded-full bg-white/30"
-                                    ></span>
-                                    <span
-                                        >{{ $t('products.v2.comp.operation') }}
-                                        <strong class="text-white/70">{{
-                                            $t('products.v2.comp.daylight_only')
-                                        }}</strong></span
+                                        class="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-white/5 text-[10px] font-bold text-white/30"
+                                        >✕</span
                                     >
+                                    <span>
+                                        {{ $t('products.v2.comp.operation') }}
+                                        <strong
+                                            class="font-normal text-white/50"
+                                            >{{
+                                                $t(
+                                                    'products.v2.comp.daylight_only',
+                                                )
+                                            }}</strong
+                                        >
+                                    </span>
                                 </li>
                                 <li
-                                    class="flex items-center gap-2.5 text-white/60"
+                                    class="flex items-center gap-2.5 text-white/40"
                                 >
                                     <span
-                                        class="h-1.5 w-1.5 rounded-full bg-white/30"
-                                    ></span>
-                                    <span
-                                        >{{ $t('products.v2.comp.permit') }}
-                                        <strong class="text-white/70">{{
-                                            $t(
-                                                'products.v2.comp.permit_required',
-                                            )
-                                        }}</strong></span
+                                        class="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-white/5 text-[10px] font-bold text-white/30"
+                                        >✕</span
                                     >
+                                    <span>
+                                        {{ $t('products.v2.comp.permit') }}
+                                        <strong
+                                            class="font-normal text-white/50"
+                                            >{{
+                                                $t(
+                                                    'products.v2.comp.permit_required',
+                                                )
+                                            }}</strong
+                                        >
+                                    </span>
                                 </li>
                                 <li
-                                    class="flex items-center gap-2.5 text-white/60"
+                                    class="flex items-center gap-2.5 text-white/40"
                                 >
                                     <span
-                                        class="h-1.5 w-1.5 rounded-full bg-white/30"
-                                    ></span>
-                                    <span
-                                        >{{ $t('products.v2.comp.tracking') }}
-                                        <strong class="text-white/70">{{
-                                            $t('products.v2.comp.tracking_none')
-                                        }}</strong></span
+                                        class="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-white/5 text-[10px] font-bold text-white/30"
+                                        >✕</span
                                     >
+                                    <span>
+                                        {{ $t('products.v2.comp.tracking') }}
+                                        <strong
+                                            class="font-normal text-white/50"
+                                            >{{
+                                                $t(
+                                                    'products.v2.comp.tracking_none',
+                                                )
+                                            }}</strong
+                                        >
+                                    </span>
                                 </li>
                             </ul>
                         </div>
@@ -537,233 +561,264 @@
 
                     <!-- Card 2: Smartflower -->
                     <div
-                        class="group relative flex min-h-[480px] flex-col justify-between overflow-hidden rounded-3xl bg-black text-white shadow-2xl"
+                        class="group relative flex min-h-[520px] flex-col justify-between overflow-hidden rounded-3xl border border-black/10 bg-zinc-950 text-white opacity-80 shadow-lg transition-opacity hover:opacity-100 dark:border-white/10"
                     >
                         <div
-                            class="relative h-64 w-full overflow-hidden bg-zinc-900"
+                            class="relative h-56 w-full overflow-hidden bg-zinc-900"
                         >
                             <img
                                 src="/img/competition/smart-flower-hq-crop.jpg"
                                 alt="Smartflower"
-                                class="h-full w-full object-cover object-center transition-transform duration-1000 ease-out group-hover:scale-105"
+                                class="h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
                             />
                             <div
-                                class="absolute inset-0 bg-linear-to-t from-black via-black/20 to-transparent"
+                                class="absolute inset-0 bg-linear-to-t from-zinc-950 via-zinc-950/40 to-transparent"
                             ></div>
                             <span
-                                class="absolute top-4 left-4 rounded-full bg-white/20 px-3.5 py-1 text-[10px] font-bold tracking-[0.2em] text-white uppercase backdrop-blur-md"
+                                class="absolute top-4 left-4 rounded-full border border-white/20 bg-black/60 px-3 py-1 text-[10px] font-bold tracking-[0.2em] text-white/70 uppercase backdrop-blur-md"
                             >
                                 {{ $t('products.v2.comp.competitor') }}
                             </span>
                         </div>
 
                         <div
-                            class="flex flex-1 flex-col justify-between p-8 pt-4"
+                            class="flex flex-1 flex-col justify-between p-7 pt-3"
                         >
                             <div>
-                                <h3 class="text-2xl font-bold text-white">
+                                <h3 class="text-xl font-bold text-white">
                                     Smartflower
                                 </h3>
+                                <p class="mt-0.5 text-xs text-white/50">
+                                    2.4 kWp · Solární rozkládací květ
+                                </p>
                                 <div
-                                    class="mt-1 text-3xl font-black text-white"
+                                    class="mt-2 text-2xl font-black text-white"
                                 >
                                     $40,000
                                 </div>
                             </div>
 
                             <ul
-                                class="mt-6 space-y-2.5 border-t border-white/15 pt-4 text-xs leading-relaxed text-white/80"
+                                class="mt-5 space-y-2.5 border-t border-white/10 pt-4 text-xs leading-relaxed text-white/70"
                             >
                                 <li class="flex items-center gap-2.5">
                                     <span
-                                        class="h-1.5 w-1.5 rounded-full bg-white/50"
-                                    ></span>
-                                    <span
-                                        >{{ $t('products.v2.comp.pv_panels') }}
-                                        <strong class="text-white"
-                                            >2.4 kWp</strong
-                                        ></span
+                                        class="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-white/10 text-[10px] font-bold text-white/60"
+                                        >•</span
                                     >
+                                    <span>
+                                        {{ $t('products.v2.comp.pv_panels') }}
+                                        <strong class="font-semibold text-white"
+                                            >2.4 kWp</strong
+                                        >
+                                    </span>
                                 </li>
                                 <li
-                                    class="flex items-center gap-2.5 text-white/60"
+                                    class="flex items-center gap-2.5 text-white/40"
                                 >
                                     <span
-                                        class="h-1.5 w-1.5 rounded-full bg-white/30"
-                                    ></span>
-                                    <span
-                                        >{{
+                                        class="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-white/5 text-[10px] font-bold text-white/30"
+                                        >✕</span
+                                    >
+                                    <span>
+                                        {{
                                             $t('products.v2.comp.wind_turbine')
                                         }}
-                                        <strong class="text-white/70">{{
-                                            $t('products.v2.comp.none')
-                                        }}</strong></span
-                                    >
+                                        <strong
+                                            class="font-normal text-white/50"
+                                            >{{
+                                                $t('products.v2.comp.none')
+                                            }}</strong
+                                        >
+                                    </span>
                                 </li>
                                 <li
-                                    class="flex items-center gap-2.5 text-white/60"
+                                    class="flex items-center gap-2.5 text-white/40"
                                 >
                                     <span
-                                        class="h-1.5 w-1.5 rounded-full bg-white/30"
-                                    ></span>
-                                    <span
-                                        >{{ $t('products.v2.comp.operation') }}
-                                        <strong class="text-white/70">{{
-                                            $t('products.v2.comp.daylight_only')
-                                        }}</strong></span
+                                        class="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-white/5 text-[10px] font-bold text-white/30"
+                                        >✕</span
                                     >
+                                    <span>
+                                        {{ $t('products.v2.comp.operation') }}
+                                        <strong
+                                            class="font-normal text-white/50"
+                                            >{{
+                                                $t(
+                                                    'products.v2.comp.daylight_only',
+                                                )
+                                            }}</strong
+                                        >
+                                    </span>
                                 </li>
                                 <li
-                                    class="flex items-center gap-2.5 text-white/60"
+                                    class="flex items-center gap-2.5 text-white/40"
                                 >
                                     <span
-                                        class="h-1.5 w-1.5 rounded-full bg-white/30"
-                                    ></span>
-                                    <span
-                                        >{{ $t('products.v2.comp.permit') }}
-                                        <strong class="text-white/70">{{
-                                            $t(
-                                                'products.v2.comp.permit_required',
-                                            )
-                                        }}</strong></span
+                                        class="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-white/5 text-[10px] font-bold text-white/30"
+                                        >✕</span
                                     >
+                                    <span>
+                                        {{ $t('products.v2.comp.permit') }}
+                                        <strong
+                                            class="font-normal text-white/50"
+                                            >{{
+                                                $t(
+                                                    'products.v2.comp.permit_required',
+                                                )
+                                            }}</strong
+                                        >
+                                    </span>
                                 </li>
                                 <li
-                                    class="flex items-center gap-2.5 text-white/60"
+                                    class="flex items-center gap-2.5 text-white/40"
                                 >
                                     <span
-                                        class="h-1.5 w-1.5 rounded-full bg-white/30"
-                                    ></span>
-                                    <span
-                                        >{{ $t('products.v2.comp.tracking') }}
-                                        <strong class="text-white/70">{{
-                                            $t('products.v2.comp.tracking_none')
-                                        }}</strong></span
+                                        class="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-white/5 text-[10px] font-bold text-white/30"
+                                        >✕</span
                                     >
+                                    <span>
+                                        {{ $t('products.v2.comp.tracking') }}
+                                        <strong
+                                            class="font-normal text-white/50"
+                                            >{{
+                                                $t(
+                                                    'products.v2.comp.tracking_none',
+                                                )
+                                            }}</strong
+                                        >
+                                    </span>
                                 </li>
                             </ul>
                         </div>
                     </div>
 
-                    <!-- Card 3: Treetino Strom V2 (High-Impact Highlighted Card) -->
+                    <!-- Card 3: Treetino Strom V2 (High-Impact Featured Choice) -->
                     <div
-                        class="group relative z-10 flex min-h-[520px] flex-col justify-between overflow-hidden rounded-3xl border-2 border-t-blue bg-linear-to-b from-zinc-900 to-black text-white shadow-2xl ring-4 ring-t-blue/30 lg:scale-105"
+                        class="group relative z-10 flex min-h-[540px] flex-col justify-between overflow-hidden rounded-3xl border-2 border-t-blue bg-black text-white shadow-2xl ring-1 shadow-t-blue/20 ring-t-blue/30 lg:-my-3"
                     >
                         <div
-                            class="relative h-64 w-full overflow-hidden bg-zinc-900"
+                            class="relative h-56 w-full overflow-hidden bg-zinc-900"
                         >
                             <img
                                 src="/img/stills/SM-still.webp"
                                 :alt="`Treetino ${$t('products.v2.title')}`"
-                                class="h-full w-full object-cover object-center transition-transform duration-1000 ease-out group-hover:scale-105"
+                                class="h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
                             />
                             <div
                                 class="absolute inset-0 bg-linear-to-t from-black via-black/20 to-transparent"
                             ></div>
                             <span
-                                class="absolute top-4 left-4 rounded-full bg-t-blue px-4 py-1.5 text-[11px] font-bold tracking-[0.2em] text-white uppercase shadow-xl ring-2 ring-white/30 backdrop-blur-md"
+                                class="absolute top-4 left-4 rounded-full bg-t-blue px-3.5 py-1 text-[11px] font-bold tracking-wider text-white uppercase shadow-md"
                             >
-                                🏆 {{ $t('products.v2.comp.winner') }}
+                                {{ $t('products.v2.comp.winner') }}
                             </span>
                         </div>
 
                         <div
-                            class="flex flex-1 flex-col justify-between p-8 pt-4"
+                            class="flex flex-1 flex-col justify-between p-7 pt-2"
                         >
                             <div>
-                                <h3
-                                    class="flex items-center justify-between text-2xl font-black text-white"
-                                >
-                                    <span
-                                        >Treetino
-                                        {{ $t('products.v2.title') }}</span
-                                    >
-                                    <span
-                                        class="font-mono text-xs font-bold tracking-widest text-sky-400 uppercase"
-                                        >6 – 12 kW</span
-                                    >
+                                <h3 class="text-2xl font-bold text-white">
+                                    Treetino {{ $t('products.v2.title') }}
                                 </h3>
+                                <p
+                                    class="mt-0.5 text-xs font-semibold tracking-wide text-white/80"
+                                >
+                                    6 – 12 kW · Hybridní solární & větrný strom
+                                </p>
                                 <div
-                                    class="mt-1 text-3xl font-black text-white"
+                                    class="mt-2 text-3xl font-black text-white"
                                 >
                                     $60,000
                                 </div>
                             </div>
 
                             <ul
-                                class="mt-6 space-y-2.5 border-t border-t-blue/40 pt-4 text-xs leading-relaxed text-white"
+                                class="mt-5 space-y-2.5 border-t border-white/15 pt-4 text-xs leading-relaxed text-white"
                             >
                                 <li class="flex items-center gap-2.5">
                                     <span
-                                        class="h-2 w-2 rounded-full bg-sky-400"
-                                    ></span>
-                                    <span
-                                        >{{ $t('products.v2.comp.pv_leaves') }}
-                                        <strong class="font-semibold text-white"
-                                            >6 kWp TopCon (124 ks)</strong
-                                        ></span
+                                        class="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-t-blue text-[10px] font-bold text-white"
+                                        >✓</span
                                     >
+                                    <span>
+                                        {{ $t('products.v2.comp.pv_leaves') }}
+                                        <strong class="font-bold text-white"
+                                            >6 kWp TopCon (124 ks)</strong
+                                        >
+                                    </span>
                                 </li>
                                 <li class="flex items-center gap-2.5">
                                     <span
-                                        class="h-2 w-2 rounded-full bg-sky-400"
-                                    ></span>
-                                    <span
-                                        >{{
+                                        class="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-t-blue text-[10px] font-bold text-white"
+                                        >✓</span
+                                    >
+                                    <span>
+                                        {{
                                             $t('products.v2.comp.wind_turbine')
                                         }}
-                                        <strong class="font-semibold text-white"
+                                        <strong class="font-bold text-white"
                                             >6 kW (6× 1 kW aero kit)</strong
-                                        ></span
-                                    >
+                                        >
+                                    </span>
                                 </li>
                                 <li class="flex items-center gap-2.5">
                                     <span
-                                        class="h-2 w-2 rounded-full bg-sky-400"
-                                    ></span>
-                                    <span
-                                        >{{ $t('products.v2.comp.hybrid_op') }}
-                                        <strong
-                                            class="font-bold text-sky-300"
-                                            >{{
-                                                $t('products.v2.comp.day_night')
-                                            }}</strong
-                                        ></span
+                                        class="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-t-blue text-[10px] font-bold text-white"
+                                        >✓</span
                                     >
+                                    <span>
+                                        {{ $t('products.v2.comp.hybrid_op') }}
+                                        <strong class="font-bold text-white">{{
+                                            $t('products.v2.comp.day_night')
+                                        }}</strong>
+                                    </span>
                                 </li>
                                 <li class="flex items-center gap-2.5">
                                     <span
-                                        class="h-2 w-2 rounded-full bg-emerald-400"
-                                    ></span>
-                                    <span
-                                        >{{ $t('products.v2.comp.permit') }}
-                                        <strong
-                                            class="font-bold text-emerald-300"
-                                            >{{
-                                                $t(
-                                                    'products.v2.comp.permit_none',
-                                                )
-                                            }}</strong
-                                        ></span
+                                        class="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-t-blue text-[10px] font-bold text-white"
+                                        >✓</span
                                     >
+                                    <span>
+                                        {{ $t('products.v2.comp.permit') }}
+                                        <strong class="font-bold text-white">{{
+                                            $t('products.v2.comp.permit_none')
+                                        }}</strong>
+                                    </span>
                                 </li>
                                 <li class="flex items-center gap-2.5">
                                     <span
-                                        class="h-2 w-2 rounded-full bg-sky-400"
-                                    ></span>
-                                    <span
-                                        >{{ $t('products.v2.comp.tracking') }}
-                                        <strong
-                                            class="font-bold text-sky-300"
-                                            >{{
-                                                $t(
-                                                    'products.v2.comp.tracking_val',
-                                                )
-                                            }}</strong
-                                        ></span
+                                        class="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-t-blue text-[10px] font-bold text-white"
+                                        >✓</span
                                     >
+                                    <span>
+                                        {{ $t('products.v2.comp.tracking') }}
+                                        <strong class="font-bold text-white">{{
+                                            $t('products.v2.comp.tracking_val')
+                                        }}</strong>
+                                    </span>
                                 </li>
                             </ul>
+
+                            <div class="mt-6 pt-2">
+                                <ButtonPrimary
+                                    :href="
+                                        route(
+                                            'configurator.product',
+                                            'strom-v2',
+                                        )
+                                    "
+                                    class="w-full justify-center py-3 text-center text-sm font-semibold shadow-lg"
+                                >
+                                    {{
+                                        $t(
+                                            'products.v2.configure_label',
+                                            'Konfigurovat Strom V2',
+                                        )
+                                    }}
+                                </ButtonPrimary>
+                            </div>
                         </div>
                     </div>
                 </div>

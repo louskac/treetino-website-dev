@@ -251,7 +251,7 @@ return [
         'v2.comp.title' => ['cs' => 'Srovnání s Konkurencí', 'en' => 'Comparison with Competition'],
         'v2.comp.subtitle' => ['cs' => 'Porovnání instalovaného výkonu, technologie a investice Treetino V2 s předními světovými výrobci solární architektury.', 'en' => 'Comparing installed capacity, technology, and investment of Treetino V2 with leading solar architecture manufacturers.'],
         'v2.comp.competitor' => ['cs' => 'Konkurence', 'en' => 'Competitor'],
-        'v2.comp.winner' => ['cs' => 'Vítěz Výkonu (5× Vyšší)', 'en' => 'Output Winner (5× Higher)'],
+        'v2.comp.winner' => ['cs' => 'Doporučená volba · 5× vyšší výkon', 'en' => 'Recommended · 5× Higher Output'],
         'v2.comp.pv_panels' => ['cs' => 'FVE Solární panely:', 'en' => 'PV Solar Panels:'],
         'v2.comp.pv_leaves' => ['cs' => 'FVE Solární listy:', 'en' => 'PV Solar Leaves:'],
         'v2.comp.wind_turbine' => ['cs' => 'Větrná turbína:', 'en' => 'Wind Turbine:'],
