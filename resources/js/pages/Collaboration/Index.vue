@@ -15,7 +15,7 @@ const partners = [
     },
     {
         name: 'ČVUT v Praze',
-        logo: '/partners/Cvut.svg',
+        logo: '/partners/cvut.svg',
         url: 'https://www.cvut.cz',
     },
     {
