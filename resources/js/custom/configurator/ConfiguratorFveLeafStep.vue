@@ -3,7 +3,7 @@
         <p
             class="mb-4 text-xs tracking-widest text-black/70 uppercase dark:text-white/50"
         >
-            {{ formatStep(stepNumber) }} — {{ $t('configurator.steps.fve_leaf') }}
+            {{ formatStep(stepNumber) }} — {{ $t('configurator.steps.fve_leaf', 'Design FVE listů') }}
         </p>
 
         <!-- Hidden File Input for Custom Image Upload -->
@@ -49,7 +49,7 @@
                     </span>
                 </button>
 
-                <!-- Custom Image Upload & Redesigned Interactive Editor Panel -->
+                <!-- Custom Image Upload & Interactive Editor Panel -->
                 <div
                     v-if="option.isCustom && modelValue === 'custom'"
                     class="my-2.5 flex flex-col gap-4 rounded-2xl border border-black/10 bg-black/3 p-4 dark:border-white/10 dark:bg-white/4"
@@ -58,7 +58,7 @@
                         <!-- Mapping Mode Segmented Pill Switch -->
                         <div class="flex flex-col gap-1.5">
                             <span class="text-xs font-semibold text-black/80 dark:text-white/80">
-                                {{ $t('configurator.fve_leaf.custom.mode_title') }}
+                                {{ $t('configurator.fve_leaf.custom.mode_title', 'Režim potisku listů') }}
                             </span>
                             <div class="inline-flex w-full rounded-full border border-black/10 bg-black/5 p-1 dark:border-white/10 dark:bg-white/5">
                                 <button
@@ -69,7 +69,7 @@
                                         ? 'bg-t-blue text-white shadow-xs'
                                         : 'text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white'"
                                 >
-                                    {{ $t('configurator.fve_leaf.custom.mode_branch') }}
+                                    {{ $t('configurator.fve_leaf.custom.mode_branch', 'Celá větev') }}
                                 </button>
                                 <button
                                     type="button"
@@ -79,100 +79,83 @@
                                         ? 'bg-t-blue text-white shadow-xs'
                                         : 'text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white'"
                                 >
-                                    {{ $t('configurator.fve_leaf.custom.mode_individual') }}
+                                    {{ $t('configurator.fve_leaf.custom.mode_individual', 'Jednotlivé listy') }}
                                 </button>
                             </div>
                         </div>
 
-                        <!-- Interactive Viewport Drag Pad -->
+                        <!-- Interactive Viewport Drag Pad (Focused & Enlarged PV Leaves) -->
                         <div
                             ref="dragPad"
-                            @mousedown="startDrag"
-                            @touchstart.prevent="startTouchDrag"
+                            @mousedown.prevent="startDrag"
+                            @touchstart="onTouchStart"
                             @wheel.prevent="onWheelZoom"
-                            class="group relative aspect-square w-full cursor-grab overflow-hidden rounded-2xl border border-black/10 bg-stone-100 select-none active:cursor-grabbing dark:border-white/10 dark:bg-zinc-900/80 shadow-xs"
+                            class="group relative aspect-square sm:aspect-[4/3] w-full cursor-grab overflow-hidden rounded-2xl border border-black/10 bg-gradient-to-b from-stone-50 to-stone-100 select-none active:cursor-grabbing dark:border-white/10 dark:from-zinc-900 dark:to-zinc-950 shadow-sm"
                         >
-                            <!-- Rendered Mapped Leaf Texture (Exact WYSIWYG Canvas Output) -->
+                            <!-- Rendered Mapped Leaf Texture (Exact 5 Leaves Framed Viewport) -->
                             <img
-                                v-if="customImage"
-                                :src="customImage"
-                                :alt="$t('configurator.fve_leaf.custom.alt')"
-                                class="absolute inset-0 h-full w-full object-contain pointer-events-none p-2"
+                                v-if="editorImage"
+                                :src="editorImage"
+                                :alt="$t('configurator.fve_leaf.custom.alt', 'Vlastní potisk FVE listů')"
+                                class="absolute inset-0 h-full w-full object-contain p-3 pointer-events-none"
                             />
 
-                            <!-- Floating Glassmorphic Top Controls -->
-                            <div class="absolute top-3 right-3 flex items-center gap-1 rounded-full border border-black/10 bg-white/85 p-1 backdrop-blur-md dark:border-white/10 dark:bg-black/85 shadow-xs">
+                            <!-- Prominent Glassmorphic Controls Toolbar -->
+                            <div class="absolute top-3 right-3 flex items-center gap-1.5 rounded-2xl border border-black/10 bg-white/90 p-1.5 backdrop-blur-md dark:border-white/15 dark:bg-black/85 shadow-md z-10">
                                 <button
                                     type="button"
                                     @click.stop="zoomIn"
-                                    class="flex h-7 w-7 items-center justify-center rounded-full text-xs font-semibold text-black hover:bg-t-blue hover:text-white dark:text-white transition-colors cursor-pointer"
-                                    :title="$t('configurator.fve_leaf.custom.zoom_in')"
+                                    class="flex h-9 w-9 items-center justify-center rounded-xl bg-black/5 hover:bg-t-blue hover:text-white dark:bg-white/10 dark:hover:bg-t-blue text-black dark:text-white transition-all font-semibold cursor-pointer active:scale-95 shadow-2xs"
+                                    :title="$t('configurator.fve_leaf.custom.zoom_in', 'Přiblížit')"
                                 >
-                                    +
+                                    <ZoomIn class="h-4.5 w-4.5" />
                                 </button>
                                 <button
                                     type="button"
                                     @click.stop="zoomOut"
-                                    class="flex h-7 w-7 items-center justify-center rounded-full text-xs font-semibold text-black hover:bg-t-blue hover:text-white dark:text-white transition-colors cursor-pointer"
-                                    :title="$t('configurator.fve_leaf.custom.zoom_out')"
+                                    class="flex h-9 w-9 items-center justify-center rounded-xl bg-black/5 hover:bg-t-blue hover:text-white dark:bg-white/10 dark:hover:bg-t-blue text-black dark:text-white transition-all font-semibold cursor-pointer active:scale-95 shadow-2xs"
+                                    :title="$t('configurator.fve_leaf.custom.zoom_out', 'Oddálit')"
                                 >
-                                    -
+                                    <ZoomOut class="h-4.5 w-4.5" />
                                 </button>
                                 <button
                                     type="button"
                                     @click.stop="resetPosition"
-                                    class="flex h-7 w-7 items-center justify-center rounded-full text-xs font-semibold text-black hover:bg-t-blue hover:text-white dark:text-white transition-colors cursor-pointer"
-                                    :title="$t('configurator.fve_leaf.custom.reset_pos')"
+                                    class="flex h-9 w-9 items-center justify-center rounded-xl bg-black/5 hover:bg-t-blue hover:text-white dark:bg-white/10 dark:hover:bg-t-blue text-black dark:text-white transition-all cursor-pointer active:scale-95 shadow-2xs"
+                                    :title="$t('configurator.fve_leaf.custom.reset_pos', 'Vycentrovat fotku')"
                                 >
-                                    ↺
+                                    <RotateCcw class="h-4 w-4" />
                                 </button>
-                            </div>
-
-                            <!-- Floating Glassmorphic Bottom Badge -->
-                            <div class="absolute bottom-3 inset-x-3 flex items-center justify-center">
-                                <div class="rounded-full border border-black/10 bg-white/90 px-3.5 py-1 text-[11px] font-medium text-black/80 backdrop-blur-md dark:border-white/10 dark:bg-black/90 dark:text-white/80 shadow-xs">
-                                    {{ $t('configurator.fve_leaf.custom.drag_hint', { zoom: Math.round(scale * 100) }) }}
-                                </div>
                             </div>
                         </div>
 
-                        <!-- Print Coverage / Opacity Slider over Photovoltaic Panel -->
-                        <div class="flex flex-col gap-1.5">
-                            <div class="flex items-center justify-between text-xs">
-                                <span class="font-medium text-black/80 dark:text-white/80">{{ $t('configurator.fve_leaf.custom.opacity_title') }}</span>
-                                <span class="rounded-md bg-t-blue/10 px-2 py-0.5 font-mono text-[11px] font-semibold text-t-blue dark:bg-white/10 dark:text-white">
-                                    {{ Math.round(printOpacity * 100) }}%
-                                </span>
-                            </div>
-                            <input
-                                type="range"
-                                min="0.0"
-                                max="1.0"
-                                step="0.05"
-                                v-model.number="printOpacity"
-                                @input="updateMappedTexture"
-                                class="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-black/10 accent-t-blue dark:bg-white/15 dark:accent-t-blue"
-                            />
-                            <p class="text-[11px] text-black/50 dark:text-white/50">
-                                {{ $t('configurator.fve_leaf.custom.opacity_desc') }}
-                            </p>
+                        <!-- Non-Intrusive Helper Instruction Bar (Placed below dragPad so leaves are 100% uncovered) -->
+                        <div class="flex items-center justify-between px-1 text-xs text-black/60 dark:text-white/60">
+                            <span class="flex items-center gap-1.5">
+                                <span>{{ $t('configurator.fve_leaf.drag_instruction', 'Táhněte pro posun • Pinch / Kolečko pro zoom') }}</span>
+                            </span>
+                            <span class="font-mono text-[11px] font-semibold text-t-blue dark:text-blue-400 bg-t-blue/10 dark:bg-blue-400/15 px-2 py-0.5 rounded-full">
+                                {{ Math.round(scale * 100) }}%
+                            </span>
                         </div>
 
                         <!-- Uploaded Photo Action Bar -->
-                        <div class="flex items-center justify-between pt-2 border-t border-black/10 dark:border-white/10">
+                        <div class="flex items-center justify-between pt-1 border-t border-black/10 dark:border-white/10">
                             <button
                                 type="button"
                                 @click="triggerFileInput"
-                                class="text-xs font-semibold text-t-blue hover:underline cursor-pointer"
+                                class="flex items-center gap-1.5 text-xs font-semibold text-t-blue hover:underline cursor-pointer"
                             >
-                                {{ $t('configurator.fve_leaf.custom.change_image') }}
+                                <Upload class="h-3.5 w-3.5" />
+                                {{ $t('configurator.fve_leaf.custom.change_image', 'Změnit obrázek') }}
                             </button>
                             <button
                                 type="button"
                                 @click="resetPosition"
-                                class="text-xs text-black/50 hover:text-black dark:text-white/50 dark:hover:text-white cursor-pointer"
+                                class="flex items-center gap-1.5 text-xs font-medium text-black/60 hover:text-black dark:text-white/60 dark:hover:text-white cursor-pointer transition-colors"
                             >
-                                {{ $t('configurator.fve_leaf.custom.reset_pos') }}
+                                <RotateCcw class="h-3.5 w-3.5" />
+                                {{ $t('configurator.fve_leaf.custom.reset_pos', 'Vycentrovat fotku') }}
                             </button>
                         </div>
                     </div>
@@ -181,16 +164,18 @@
                     <div
                         v-else
                         @click="triggerFileInput"
-                        class="flex cursor-pointer flex-col items-center justify-center gap-2.5 py-6 text-center transition-all hover:opacity-90"
+                        class="flex cursor-pointer flex-col items-center justify-center gap-2.5 py-7 text-center transition-all hover:opacity-90 border-2 border-dashed border-black/15 rounded-2xl dark:border-white/15"
                     >
-                        <div class="flex h-11 w-11 items-center justify-center rounded-full bg-t-blue/10 text-t-blue dark:bg-white/10 dark:text-white shadow-xs">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                            </svg>
+                        <div class="flex h-12 w-12 items-center justify-center rounded-full bg-t-blue/10 text-t-blue dark:bg-white/10 dark:text-white shadow-xs">
+                            <Upload class="h-6 w-6" />
                         </div>
                         <div>
-                            <p class="text-xs font-semibold text-black dark:text-white">{{ $t('configurator.fve_leaf.custom.upload_title') }}</p>
-                            <p class="mt-0.5 text-[11px] text-black/55 dark:text-white/45">{{ $t('configurator.fve_leaf.custom.upload_desc') }}</p>
+                            <p class="text-xs font-semibold text-black dark:text-white">
+                                {{ $t('configurator.fve_leaf.custom.upload_title', 'Nahrajte vlastní obrázek nebo vzor') }}
+                            </p>
+                            <p class="mt-0.5 text-[11px] text-black/55 dark:text-white/45">
+                                {{ $t('configurator.fve_leaf.custom.upload_desc', 'PNG, JPG, WebP — vytvořte unikátní potisk FVE listů') }}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -200,6 +185,7 @@
 </template>
 
 <script setup lang="ts">
+import { RotateCcw, Upload, ZoomIn, ZoomOut } from 'lucide-vue-next';
 import { ref, computed, onUnmounted } from 'vue';
 import { useStepFormatter } from '@/composables/useStepFormatter';
 import { ProductId } from '@/types/products';
@@ -222,17 +208,20 @@ const fileInput = ref<HTMLInputElement | null>(null);
 const dragPad = ref<HTMLElement | null>(null);
 
 const rawUserImage = ref<string | null>(null);
+const editorImage = ref<string | null>(null);
 const posX = ref(0);
 const posY = ref(0);
 const scale = ref(1.0);
-const printOpacity = ref(0.8);
-const mappingMode = ref<'branch' | 'individual'>('branch');
+const mappingMode = ref<'branch' | 'individual'>('individual');
 
 let isDragging = false;
 let startX = 0;
 let startY = 0;
 let startPosX = 0;
 let startPosY = 0;
+
+let touchStartDist = 0;
+let startScale = 1.0;
 
 interface FveLeafOption {
     id: string;
@@ -334,42 +323,61 @@ function setMappingMode(mode: 'branch' | 'individual') {
 
 async function updateMappedTexture() {
     if (!rawUserImage.value) return;
-    const mappedTexture = await generateMappedLeafTexture(rawUserImage.value, {
+    const { fullTexture, editorTexture } = await generateMappedLeafTexture(rawUserImage.value, {
         offsetX: posX.value,
         offsetY: posY.value,
         scale: scale.value,
-        printOpacity: printOpacity.value,
         mappingMode: mappingMode.value,
     });
-    emit('update:customImage', mappedTexture);
+    editorImage.value = editorTexture;
+    emit('update:customImage', fullTexture);
 }
 
 function resetPosition() {
     posX.value = 0;
     posY.value = 0;
     scale.value = 1.0;
-    printOpacity.value = 0.8;
     updateMappedTexture();
 }
 
 function zoomIn() {
-    scale.value = Math.min(3.0, scale.value + 0.15);
+    scale.value = Math.min(3.0, Number((scale.value + 0.15).toFixed(2)));
     updateMappedTexture();
 }
 
 function zoomOut() {
-    scale.value = Math.max(0.4, scale.value - 0.15);
+    scale.value = Math.max(0.4, Number((scale.value - 0.15).toFixed(2)));
     updateMappedTexture();
 }
 
 function onWheelZoom(event: WheelEvent) {
-    const delta = event.deltaY < 0 ? 0.08 : -0.08;
-    scale.value = Math.min(3.0, Math.max(0.4, scale.value + delta));
+    if (event.ctrlKey) {
+        // Touchpad pinch gesture
+        const zoomFactor = -event.deltaY * 0.008;
+        scale.value = Math.min(3.0, Math.max(0.4, Number((scale.value + zoomFactor).toFixed(3))));
+    } else {
+        // Mouse wheel scroll
+        const delta = event.deltaY < 0 ? 0.1 : -0.1;
+        scale.value = Math.min(3.0, Math.max(0.4, Number((scale.value + delta).toFixed(2))));
+    }
     updateMappedTexture();
+}
+
+/* Helper to safely unwrap Vue 3 template ref (which is an Array when inside v-for) */
+function getDragPadElement(): HTMLElement | null {
+    if (!dragPad.value) return null;
+    if (Array.isArray(dragPad.value)) {
+        return (dragPad.value[0] as HTMLElement) || null;
+    }
+    const el = dragPad.value as any;
+    if (el.$el) return el.$el as HTMLElement;
+    if (typeof el.getBoundingClientRect === 'function') return el as HTMLElement;
+    return null;
 }
 
 /* Mouse Dragging Logic */
 function startDrag(event: MouseEvent) {
+    if (event.button !== 0) return;
     isDragging = true;
     startX = event.clientX;
     startY = event.clientY;
@@ -381,13 +389,19 @@ function startDrag(event: MouseEvent) {
 }
 
 function onDragMove(event: MouseEvent) {
-    if (!isDragging || !dragPad.value) return;
-    const rect = dragPad.value.getBoundingClientRect();
+    if (!isDragging) return;
+
+    const padEl = getDragPadElement();
+    if (!padEl) return;
+
+    const rect = padEl.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+
     const deltaX = ((event.clientX - startX) / rect.width) * 100;
     const deltaY = ((event.clientY - startY) / rect.height) * 100;
 
-    posX.value = Math.min(80, Math.max(-80, Math.round(startPosX + deltaX)));
-    posY.value = Math.min(80, Math.max(-80, Math.round(startPosY + deltaY)));
+    posX.value = Math.min(100, Math.max(-100, Number((startPosX + deltaX).toFixed(2))));
+    posY.value = Math.min(100, Math.max(-100, Number((startPosY + deltaY).toFixed(2))));
 
     updateMappedTexture();
 }
@@ -398,36 +412,62 @@ function stopDrag() {
     window.removeEventListener('mouseup', stopDrag);
 }
 
-/* Touch Dragging Logic */
-function startTouchDrag(event: TouchEvent) {
-    const touch = event.touches[0];
-    if (!touch) return;
-    isDragging = true;
-    startX = touch.clientX;
-    startY = touch.clientY;
-    startPosX = posX.value;
-    startPosY = posY.value;
+/* Touch & Touchpad Gesture Logic */
+function onTouchStart(event: TouchEvent) {
+    if (event.touches.length === 2) {
+        const t1 = event.touches[0];
+        const t2 = event.touches[1];
+        if (t1 && t2) {
+            touchStartDist = Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY);
+            startScale = scale.value;
+        }
+    } else if (event.touches.length === 1) {
+        const touch = event.touches[0];
+        if (!touch) return;
+        isDragging = true;
+        startX = touch.clientX;
+        startY = touch.clientY;
+        startPosX = posX.value;
+        startPosY = posY.value;
 
-    window.addEventListener('touchmove', onTouchMove);
-    window.addEventListener('touchend', stopTouchDrag);
+        window.addEventListener('touchmove', onTouchMove, { passive: false });
+        window.addEventListener('touchend', stopTouchDrag);
+    }
 }
 
 function onTouchMove(event: TouchEvent) {
-    if (!isDragging || !dragPad.value) return;
-    const touch = event.touches[0];
-    if (!touch) return;
-    const rect = dragPad.value.getBoundingClientRect();
-    const deltaX = ((touch.clientX - startX) / rect.width) * 100;
-    const deltaY = ((touch.clientY - startY) / rect.height) * 100;
+    if (event.touches.length === 2 && touchStartDist > 0) {
+        event.preventDefault();
+        const t1 = event.touches[0];
+        const t2 = event.touches[1];
+        if (t1 && t2) {
+            const dist = Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY);
+            const factor = dist / touchStartDist;
+            scale.value = Math.min(3.0, Math.max(0.4, Number((startScale * factor).toFixed(2))));
+            updateMappedTexture();
+        }
+    } else if (event.touches.length === 1 && isDragging) {
+        event.preventDefault();
+        const touch = event.touches[0];
+        if (!touch) return;
+        const padEl = getDragPadElement();
+        if (!padEl) return;
+        const rect = padEl.getBoundingClientRect();
+        if (!rect.width || !rect.height) return;
 
-    posX.value = Math.min(80, Math.max(-80, Math.round(startPosX + deltaX)));
-    posY.value = Math.min(80, Math.max(-80, Math.round(startPosY + deltaY)));
+        const deltaX = ((touch.clientX - startX) / rect.width) * 100;
+        const deltaY = ((touch.clientY - startY) / rect.height) * 100;
 
-    updateMappedTexture();
+        posX.value = Math.min(100, Math.max(-100, Number((startPosX + deltaX).toFixed(2))));
+        posY.value = Math.min(100, Math.max(-100, Number((startPosY + deltaY).toFixed(2))));
+
+        updateMappedTexture();
+    }
 }
 
 function stopTouchDrag() {
     isDragging = false;
+    touchStartDist = 0;
     window.removeEventListener('touchmove', onTouchMove);
     window.removeEventListener('touchend', stopTouchDrag);
 }

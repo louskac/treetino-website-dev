@@ -1,160 +1,365 @@
 /**
  * Maps a user-uploaded image onto FVE solar leaves with authentic photovoltaic panel undertones.
  * Supports continuous branch mapping and upright individual leaf mapping with exact leaf rotations,
- * interactive position dragging (offsetX/offsetY), scale (zoom), and print opacity / PV cell transparency control.
+ * interactive position dragging (offsetX/offsetY), and scale (zoom).
  */
 
 export type LeafTextureTransform = {
     offsetX?: number; // -80 to +80 (%)
     offsetY?: number; // -80 to +80 (%)
     scale?: number; // 0.4 to 3.0
-    printOpacity?: number; // 0.0 to 1.0 (print opacity over underlying PV solar panel)
     mappingMode?: 'branch' | 'individual'; // 'branch' (Celá větev) vs 'individual' (Jednotlivé listy)
 };
 
-// Exact centers, dimensions, and rotation angles for the 5 solar leaves on the branch (1500x1500px canvas)
-const LEAF_CONFIGS = [
-    { cx: 503, cy: 547, w: 240, h: 170, angleDeg: 29.4 },  // Leaf 1 (top right)
-    { cx: 347, cy: 620, w: 260, h: 160, angleDeg: 21.4 },  // Leaf 2 (top left)
-    { cx: 652, cy: 779, w: 160, h: 270, angleDeg: -77.6 }, // Leaf 3 (middle right)
-    { cx: 464, cy: 817, w: 210, h: 270, angleDeg: -62.3 }, // Leaf 4 (middle left)
-    { cx: 235, cy: 802, w: 300, h: 210, angleDeg: -29.5 }, // Leaf 5 (bottom left)
+export type MappedLeafResult = {
+    fullTexture: string;   // 1500x1500px full tree branch texture
+    editorTexture: string; // 716x550px cropped texture focused on the 5 leaves
+};
+
+// Exact stem-to-tip centers, dimensions (2.67:1 aspect ratio -> 0% deformation), and rotation angles (100% coverage)
+const LEAF_AXIS_CONFIGS = [
+    { cx: 503, cy: 547, w: 325, h: 122, angleDeg: 25.5 },   // Leaf 1 (top right)
+    { cx: 347, cy: 620, w: 365, h: 137, angleDeg: 14.3 },   // Leaf 2 (top left)
+    { cx: 651, cy: 779, w: 380, h: 142, angleDeg: -82.4 },  // Leaf 3 (middle right)
+    { cx: 464, cy: 817, w: 380, h: 142, angleDeg: -60.1 },  // Leaf 4 (middle left)
+    { cx: 235, cy: 802, w: 375, h: 140, angleDeg: -27.6 },  // Leaf 5 (bottom left)
 ];
+
+// Preloaded image cache for synchronous, 60 FPS fast canvas updates during drag/pinch
+const imageCache = new Map<string, HTMLImageElement>();
+
+function loadCachedImg(src: string): Promise<HTMLImageElement> {
+    const existing = imageCache.get(src);
+    if (existing && existing.complete && existing.naturalWidth > 0) {
+        return Promise.resolve(existing);
+    }
+
+    return new Promise((resolve) => {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = () => {
+            imageCache.set(src, img);
+            resolve(img);
+        };
+        img.onerror = () => {
+            resolve(img);
+        };
+        img.src = src;
+    });
+}
+
+/**
+ * Draws a horizontal single geometric leaf path (rounded stem base on right, pointy triangle tip on left).
+ */
+export function drawHorizontalSingleLeafPath(
+    ctx: CanvasRenderingContext2D,
+    cx: number,
+    cy: number,
+    w: number,
+    h: number,
+    r: number = 22,
+) {
+    const halfW = w / 2;
+    const halfH = h / 2;
+    const left = cx - halfW;
+    const right = cx + halfW;
+    const top = cy - halfH;
+    const bottom = cy + halfH;
+    const shoulderX = cx - halfW * 0.25;
+
+    ctx.beginPath();
+    ctx.moveTo(right - r, top);
+    ctx.lineTo(shoulderX, top);
+    ctx.arcTo(shoulderX, top, left, cy, r);
+    ctx.arcTo(left, cy, shoulderX, bottom, r * 0.7);
+    ctx.lineTo(shoulderX, bottom);
+    ctx.lineTo(right - r, bottom);
+    ctx.arcTo(right, bottom, right, top, r);
+    ctx.arcTo(right, top, shoulderX, top, r);
+    ctx.closePath();
+}
+
+/**
+ * Helper to render a single horizontal solar leaf element (dark PV surface, user image, solar grid lines, outline).
+ */
+function renderSingleHorizontalLeaf(
+    ctx: CanvasRenderingContext2D,
+    userImg: HTMLImageElement,
+    cx: number,
+    cy: number,
+    w: number,
+    h: number,
+    transform: { offsetX: number; offsetY: number; scale: number },
+    r: number = 20,
+    clipToPath: boolean = true,
+) {
+    const { offsetX, offsetY, scale } = transform;
+    const userAspect = (userImg.width || 1) / (userImg.height || 1);
+
+    ctx.save();
+
+    if (clipToPath) {
+        // 1. Clip region to horizontal leaf path for editor preview box
+        drawHorizontalSingleLeafPath(ctx, cx, cy, w, h, r);
+        ctx.clip();
+    }
+
+    // 2. Fill authentic dark Photovoltaic Panel background (deep black-slate silicon)
+    const bgGrad = ctx.createLinearGradient(cx - w / 2, cy, cx + w / 2, cy);
+    bgGrad.addColorStop(0, '#0c1017');
+    bgGrad.addColorStop(0.5, '#101722');
+    bgGrad.addColorStop(1, '#0c1017');
+    ctx.fillStyle = bgGrad;
+    ctx.fillRect(cx - w, cy - h, w * 2, h * 2);
+
+    // 3. Draw user custom photo over PV panel with 0.88 opacity
+    const leafAspect = w / h;
+    let baseW = w;
+    let baseH = h;
+
+    if (userAspect > leafAspect) {
+        baseW = h * userAspect;
+    } else {
+        baseH = w / userAspect;
+    }
+
+    const renderW = baseW * scale;
+    const renderH = baseH * scale;
+
+    const drawX = cx - renderW / 2 + (offsetX / 100) * w;
+    const drawY = cy - renderH / 2 + (offsetY / 100) * h;
+
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.globalAlpha = 0.88;
+    ctx.drawImage(userImg, drawX, drawY, renderW, renderH);
+
+    // 4. Overlay authentic Photovoltaic solar cell grid & busbars
+    const left = cx - w / 2;
+    const right = cx + w / 2;
+    const top = cy - h / 2;
+    const bottom = cy + h / 2;
+    const shoulderX = cx - (w / 2) * 0.25;
+
+    // A. Main body vertical PV fingers (dense parallel solar cell lines)
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.globalAlpha = 0.35;
+    ctx.strokeStyle = '#64748b';
+    ctx.lineWidth = 1.2;
+
+    const stepX = 11;
+    for (let x = shoulderX + 4; x < right - 18; x += stepX) {
+        ctx.beginPath();
+        ctx.moveTo(x, top + 6);
+        ctx.lineTo(x, bottom - 6);
+        ctx.stroke();
+    }
+
+    // B. Tip triangular area longitudinal solar lines (running toward tip)
+    ctx.globalAlpha = 0.35;
+    const tipLines = 5;
+    for (let i = 1; i <= tipLines; i++) {
+        const t = i / (tipLines + 1);
+        const yOffset = (t - 0.5) * (h - 24);
+        const startY = cy + yOffset;
+        const fraction = 1 - Math.abs(t - 0.5) * 1.6;
+        const lineLen = (shoulderX - left - 12) * Math.max(0.2, fraction);
+        ctx.beginPath();
+        ctx.moveTo(shoulderX + 2, startY);
+        ctx.lineTo(shoulderX - lineLen, cy + yOffset * 0.3);
+        ctx.stroke();
+    }
+
+    // C. Horizontal solar panel busbars across main body
+    ctx.globalAlpha = 0.55;
+    ctx.strokeStyle = '#94a3b8';
+    ctx.lineWidth = 2.2;
+
+    // Center busbar running full length through main body
+    ctx.beginPath();
+    ctx.moveTo(right - 14, cy);
+    ctx.lineTo(shoulderX - 10, cy);
+    ctx.stroke();
+
+    // Upper and lower secondary busbars
+    const busbarOffset = h * 0.22;
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(right - 20, cy - busbarOffset);
+    ctx.lineTo(shoulderX + 6, cy - busbarOffset);
+    ctx.moveTo(right - 20, cy + busbarOffset);
+    ctx.lineTo(shoulderX + 6, cy + busbarOffset);
+    ctx.stroke();
+
+    // D. Circular tip mounting hole / notch with silver rim
+    const holeX = left + 18;
+    const holeY = cy;
+    const holeRadius = 5.5;
+
+    ctx.globalAlpha = 0.9;
+    ctx.fillStyle = '#06080c';
+    ctx.beginPath();
+    ctx.arc(holeX, holeY, holeRadius, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.strokeStyle = '#94a3b8';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.arc(holeX, holeY, holeRadius, 0, Math.PI * 2);
+    ctx.stroke();
+
+    if (clipToPath) {
+        // 5. Draw crisp solar panel edge border outline
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.globalAlpha = 0.85;
+        ctx.strokeStyle = '#0f172a';
+        ctx.lineWidth = 3;
+        drawHorizontalSingleLeafPath(ctx, cx, cy, w, h, r);
+        ctx.stroke();
+    }
+
+    ctx.restore();
+}
 
 export async function generateMappedLeafTexture(
     userImageUrl: string,
     transform: LeafTextureTransform = {},
     maskUrl: string = '/img/config-images/v1-config-compressed-webp/leaf-color/fve-design/fve_black_pv_mask.png',
     pvBaseUrl: string = '/img/config-images/v1-config-compressed-webp/leaf-color/fve-design/fve_real_pv_panel_base.png',
-): Promise<string> {
+): Promise<MappedLeafResult> {
     const {
         offsetX = 0,
         offsetY = 0,
         scale = 1.0,
-        printOpacity = 0.8,
-        mappingMode = 'branch',
+        mappingMode = 'individual',
     } = transform;
 
-    return new Promise((resolve) => {
-        if (typeof window === 'undefined' || typeof document === 'undefined') {
-            resolve(userImageUrl);
-            return;
+    const emptyResult: MappedLeafResult = {
+        fullTexture: userImageUrl,
+        editorTexture: userImageUrl,
+    };
+
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+        return emptyResult;
+    }
+
+    try {
+        const [maskImg, pvBaseImg, userImg] = await Promise.all([
+            loadCachedImg(maskUrl),
+            loadCachedImg(pvBaseUrl),
+            loadCachedImg(userImageUrl),
+        ]);
+
+        const canvas = document.createElement('canvas');
+        const w = maskImg.width || 1500;
+        const h = maskImg.height || 1500;
+        canvas.width = w;
+        canvas.height = h;
+
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return emptyResult;
+
+        const userAspect = (userImg.width || 1) / (userImg.height || 1);
+
+        if (mappingMode === 'individual') {
+            // --- MODE B: Render ONE MASTER SINGLE LEAF and map it IDENTICALLY onto each of the 5 leaves ---
+            const masterW = 440;
+            const masterH = 165;
+            const masterCanvas = document.createElement('canvas');
+            masterCanvas.width = masterW;
+            masterCanvas.height = masterH;
+
+            const masterCtx = masterCanvas.getContext('2d');
+            if (masterCtx) {
+                renderSingleHorizontalLeaf(masterCtx, userImg, masterW / 2, masterH / 2, masterW, masterH, { offsetX, offsetY, scale }, 24, false);
+            }
+
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.globalAlpha = 1.0;
+            ctx.drawImage(pvBaseImg, 0, 0, w, h);
+
+            for (const leaf of LEAF_AXIS_CONFIGS) {
+                ctx.save();
+                ctx.translate(leaf.cx, leaf.cy);
+                ctx.rotate((leaf.angleDeg * Math.PI) / 180);
+
+                ctx.drawImage(masterCanvas, -leaf.w / 2, -leaf.h / 2, leaf.w, leaf.h);
+
+                ctx.restore();
+            }
+        } else {
+            // --- MODE A: Map user image continuously across FULL BRANCH ---
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.globalAlpha = 1.0;
+            ctx.drawImage(pvBaseImg, 0, 0, w, h);
+
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.globalAlpha = 0.88;
+
+            const canvasAspect = w / h;
+            let baseW = w;
+            let baseH = h;
+
+            if (userAspect > canvasAspect) {
+                baseW = h * userAspect;
+            } else {
+                baseH = w / userAspect;
+            }
+
+            const renderW = baseW * scale;
+            const renderH = baseH * scale;
+
+            const drawX = (w - renderW) / 2 + (offsetX / 100) * 716;
+            const drawY = (h - renderH) / 2 + (offsetY / 100) * 550;
+
+            ctx.drawImage(userImg, drawX, drawY, renderW, renderH);
+
+            ctx.globalCompositeOperation = 'overlay';
+            ctx.globalAlpha = 0.35;
+            ctx.drawImage(pvBaseImg, 0, 0, w, h);
+
+            ctx.globalCompositeOperation = 'multiply';
+            ctx.globalAlpha = 0.20;
+            ctx.drawImage(pvBaseImg, 0, 0, w, h);
         }
 
-        const maskImg = new Image();
-        maskImg.crossOrigin = 'anonymous';
+        // STEP 4: Trim everything outside leaf shape contours using maskImg alpha channel
+        ctx.globalCompositeOperation = 'destination-in';
+        ctx.globalAlpha = 1.0;
+        ctx.drawImage(maskImg, 0, 0, w, h);
 
-        maskImg.onload = () => {
-            const pvBaseImg = new Image();
-            pvBaseImg.crossOrigin = 'anonymous';
+        const fullTexture = canvas.toDataURL('image/png');
 
-            pvBaseImg.onload = () => {
-                const userImg = new Image();
-                userImg.crossOrigin = 'anonymous';
+        // STEP 5: Create editorTexture DataURL for the editor viewport
+        const editorCanvas = document.createElement('canvas');
+        const cropW = 716;
+        const cropH = 550;
+        editorCanvas.width = cropW;
+        editorCanvas.height = cropH;
 
-                userImg.onload = () => {
-                    try {
-                        const canvas = document.createElement('canvas');
-                        const w = maskImg.width || 1500;
-                        const h = maskImg.height || 1500;
-                        canvas.width = w;
-                        canvas.height = h;
+        const editorCtx = editorCanvas.getContext('2d');
+        if (!editorCtx) {
+            return { fullTexture, editorTexture: fullTexture };
+        }
 
-                        const ctx = canvas.getContext('2d');
-                        if (!ctx) {
-                            resolve(userImageUrl);
-                            return;
-                        }
+        if (mappingMode === 'individual') {
+            // --- SINGLE HORIZONTAL GEOMETRIC LEAF EDITOR VIEWPORT FOR INDIVIDUAL MODE ---
+            const cx = cropW / 2; // 358
+            const cy = cropH / 2; // 275
+            const leafW = 540;
+            const leafH = 202;
 
-                        // STEP 1: Draw the base Photovoltaic Panel texture (real 3D rendered black PV solar panel)
-                        ctx.globalCompositeOperation = 'source-over';
-                        ctx.globalAlpha = 1.0;
-                        ctx.drawImage(pvBaseImg, 0, 0, w, h);
+            renderSingleHorizontalLeaf(editorCtx, userImg, cx, cy, leafW, leafH, { offsetX, offsetY, scale }, 26, true);
+        } else {
+            // --- 5-LEAF BRANCH EDITOR VIEWPORT FOR BRANCH MODE ---
+            const cropX = 49;
+            const cropY = 435;
+            editorCtx.drawImage(canvas, cropX, cropY, cropW, cropH, 0, 0, cropW, cropH);
+        }
 
-                        // STEP 2: Draw user custom photo over PV panel with printOpacity
-                        if (printOpacity > 0.001) {
-                            const userAspect = userImg.width / userImg.height;
-                            ctx.globalAlpha = Math.max(0.0, Math.min(1.0, printOpacity));
+        const editorTexture = editorCanvas.toDataURL('image/png');
 
-                            if (mappingMode === 'individual') {
-                                // --- MODE B: Map user image onto EACH INDIVIDUAL LEAF upright aligned with leaf angle ---
-                                for (const leaf of LEAF_CONFIGS) {
-                                    ctx.save();
-                                    ctx.translate(leaf.cx, leaf.cy);
-                                    ctx.rotate((leaf.angleDeg * Math.PI) / 180);
-
-                                    const leafAspect = leaf.w / leaf.h;
-                                    let baseW = leaf.w;
-                                    let baseH = leaf.h;
-
-                                    if (userAspect > leafAspect) {
-                                        baseW = leaf.h * userAspect;
-                                    } else {
-                                        baseH = leaf.w / userAspect;
-                                    }
-
-                                    const renderW = baseW * scale;
-                                    const renderH = baseH * scale;
-
-                                    const drawX = -renderW / 2 + (offsetX / 100) * leaf.w;
-                                    const drawY = -renderH / 2 + (offsetY / 100) * leaf.h;
-
-                                    ctx.drawImage(userImg, drawX, drawY, renderW, renderH);
-                                    ctx.restore();
-                                }
-                            } else {
-                                // --- MODE A: Map user image continuously across FULL BRANCH ---
-                                const canvasAspect = w / h;
-                                let baseW = w;
-                                let baseH = h;
-
-                                if (userAspect > canvasAspect) {
-                                    baseW = h * userAspect;
-                                } else {
-                                    baseH = w / userAspect;
-                                }
-
-                                const renderW = baseW * scale;
-                                const renderH = baseH * scale;
-
-                                const drawX = (w - renderW) / 2 + (offsetX / 100) * w;
-                                const drawY = (h - renderH) / 2 + (offsetY / 100) * h;
-
-                                ctx.drawImage(userImg, drawX, drawY, renderW, renderH);
-                            }
-                        }
-
-                        // STEP 3: Overlay photovoltaic cell grid lines and busbars (multiply & overlay)
-                        if (printOpacity > 0.05) {
-                            ctx.globalCompositeOperation = 'multiply';
-                            ctx.globalAlpha = 0.35 * printOpacity;
-                            ctx.drawImage(maskImg, 0, 0, w, h);
-
-                            ctx.globalCompositeOperation = 'overlay';
-                            ctx.globalAlpha = 0.25 * printOpacity;
-                            ctx.drawImage(maskImg, 0, 0, w, h);
-                        }
-
-                        // STEP 4: Trim everything outside leaf shape contours using maskImg alpha channel
-                        ctx.globalCompositeOperation = 'destination-in';
-                        ctx.globalAlpha = 1.0;
-                        ctx.drawImage(maskImg, 0, 0, w, h);
-
-                        resolve(canvas.toDataURL('image/png'));
-                    } catch {
-                        resolve(userImageUrl);
-                    }
-                };
-
-                userImg.onerror = () => resolve(userImageUrl);
-                userImg.src = userImageUrl;
-            };
-
-            pvBaseImg.onerror = () => resolve(userImageUrl);
-            pvBaseImg.src = pvBaseUrl;
-        };
-
-        maskImg.onerror = () => resolve(userImageUrl);
-        maskImg.src = maskUrl;
-    });
+        return { fullTexture, editorTexture };
+    } catch {
+        return emptyResult;
+    }
 }
