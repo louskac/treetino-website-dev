@@ -211,7 +211,7 @@ const configuratorPreviewProducts: Partial<
             ),
             battery: getAddonsPreview(
                 '/img/config-images/v1-config-compressed-webp/addons',
-                ),
+            ),
             addons: getAddonsPreview(
                 '/img/config-images/v1-config-compressed-webp/addons',
             ),
@@ -379,7 +379,10 @@ export function getConfiguratorPreview(
                     selection.customFrameColor
                 ) {
                     const baseSrc = `${section.basePath}/${layer.dir}/color_custom.webp`;
-                    const tintedSrc = getTintedTextureUrl(baseSrc, selection.customFrameColor);
+                    const tintedSrc = getTintedTextureUrl(
+                        baseSrc,
+                        selection.customFrameColor,
+                    );
 
                     return [
                         {
@@ -395,7 +398,10 @@ export function getConfiguratorPreview(
                     selection.customLeafColor
                 ) {
                     const baseSrc = `${section.basePath}/${layer.dir}/leaf_custom.webp`;
-                    const tintedSrc = getTintedTextureUrl(baseSrc, selection.customLeafColor);
+                    const tintedSrc = getTintedTextureUrl(
+                        baseSrc,
+                        selection.customLeafColor,
+                    );
 
                     return [
                         {
@@ -466,9 +472,15 @@ export function getTintedTextureUrl(src: string, targetHex: string): string {
             const brightness = (data[i] + data[i + 1] + data[i + 2]) / 3;
             if (brightness < 248) {
                 const weight = Math.min(1.0, (248 - brightness) / 30);
-                data[i] = Math.round(data[i] * (1 - weight) + data[i] * r * weight);
-                data[i + 1] = Math.round(data[i + 1] * (1 - weight) + data[i + 1] * g * weight);
-                data[i + 2] = Math.round(data[i + 2] * (1 - weight) + data[i + 2] * b * weight);
+                data[i] = Math.round(
+                    data[i] * (1 - weight) + data[i] * r * weight,
+                );
+                data[i + 1] = Math.round(
+                    data[i + 1] * (1 - weight) + data[i + 1] * g * weight,
+                );
+                data[i + 2] = Math.round(
+                    data[i + 2] * (1 - weight) + data[i + 2] * b * weight,
+                );
             }
         }
     }
@@ -481,7 +493,10 @@ export function getTintedTextureUrl(src: string, targetHex: string): string {
 
 const turbineTintCache = new Map<string, string>();
 
-export function getTintedTurbineUrl(customSrc: string, targetHex: string): string {
+export function getTintedTurbineUrl(
+    customSrc: string,
+    targetHex: string,
+): string {
     if (typeof window === 'undefined') {
         return customSrc;
     }
@@ -496,8 +511,10 @@ export function getTintedTurbineUrl(customSrc: string, targetHex: string): strin
     const clearImg = loadHtmlImage(clearSrc);
 
     if (
-        !customImg.complete || customImg.naturalWidth === 0 ||
-        !clearImg.complete || clearImg.naturalWidth === 0
+        !customImg.complete ||
+        customImg.naturalWidth === 0 ||
+        !clearImg.complete ||
+        clearImg.naturalWidth === 0
     ) {
         const onLoaded = () => {
             if (customImg.complete && clearImg.complete) {
@@ -565,9 +582,15 @@ export function getTintedTurbineUrl(customSrc: string, targetHex: string): strin
                 const diffWeight = Math.min(1.0, (totalDiff - 20) / 30);
                 const weight = spatialWeight * diffWeight;
 
-                dataC[i] = Math.round(dataC[i] * (1 - weight) + dataC[i] * r * weight);
-                dataC[i + 1] = Math.round(dataC[i + 1] * (1 - weight) + dataC[i + 1] * g * weight);
-                dataC[i + 2] = Math.round(dataC[i + 2] * (1 - weight) + dataC[i + 2] * b * weight);
+                dataC[i] = Math.round(
+                    dataC[i] * (1 - weight) + dataC[i] * r * weight,
+                );
+                dataC[i + 1] = Math.round(
+                    dataC[i + 1] * (1 - weight) + dataC[i + 1] * g * weight,
+                );
+                dataC[i + 2] = Math.round(
+                    dataC[i + 2] * (1 - weight) + dataC[i + 2] * b * weight,
+                );
             }
         }
     }
@@ -580,12 +603,15 @@ export function getTintedTurbineUrl(customSrc: string, targetHex: string): strin
 
 const v1TreeTintCache = new Map<string, string>();
 
-export function getTintedV1TreeUrl(selection: ConfiguratorPreviewSelection): string {
+export function getTintedV1TreeUrl(
+    selection: ConfiguratorPreviewSelection,
+): string {
     if (typeof window === 'undefined') {
         return '/img/config-images/v1-config-compressed-webp/color_white_green.webp';
     }
 
-    const leafColor = selection.leafColor === 'custom' ? 'green' : selection.leafColor;
+    const leafColor =
+        selection.leafColor === 'custom' ? 'green' : selection.leafColor;
     const targetHex = selection.customFrameColor || '#FF6B00';
 
     const whiteSrc = `/img/config-images/v1-config-compressed-webp/color_white_${leafColor}.webp`;
@@ -600,8 +626,10 @@ export function getTintedV1TreeUrl(selection: ConfiguratorPreviewSelection): str
     const brownImg = loadHtmlImage(brownSrc);
 
     if (
-        !whiteImg.complete || whiteImg.naturalWidth === 0 ||
-        !brownImg.complete || brownImg.naturalWidth === 0
+        !whiteImg.complete ||
+        whiteImg.naturalWidth === 0 ||
+        !brownImg.complete ||
+        brownImg.naturalWidth === 0
     ) {
         const onLoaded = () => {
             if (whiteImg.complete && brownImg.complete) {
@@ -665,9 +693,15 @@ export function getTintedV1TreeUrl(selection: ConfiguratorPreviewSelection): str
                 const targetG = Math.min(255, Math.round(255 * g * normLum));
                 const targetB = Math.min(255, Math.round(255 * b * normLum));
 
-                dataW[i] = Math.round(dataW[i] * (1 - weight) + targetR * weight);
-                dataW[i + 1] = Math.round(dataW[i + 1] * (1 - weight) + targetG * weight);
-                dataW[i + 2] = Math.round(dataW[i + 2] * (1 - weight) + targetB * weight);
+                dataW[i] = Math.round(
+                    dataW[i] * (1 - weight) + targetR * weight,
+                );
+                dataW[i + 1] = Math.round(
+                    dataW[i + 1] * (1 - weight) + targetG * weight,
+                );
+                dataW[i + 2] = Math.round(
+                    dataW[i + 2] * (1 - weight) + targetB * weight,
+                );
             }
         }
     }

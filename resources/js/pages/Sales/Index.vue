@@ -2,50 +2,41 @@
     <Head :title="$t('sales.audience') + ' | Treetino'" />
 
     <DefaultLayout :scroll="true">
-        <!-- Hero Section - Dark Atmospheric Studio Hero (Matching V1/V2 Product Page Aesthetic) -->
-        <section class="hero relative overflow-hidden bg-zinc-950 pt-36 pb-16 text-white">
-            <!-- Background Layer 1: Topographic Contour Map Overlay -->
-            <div class="pointer-events-none absolute inset-0 opacity-[0.14] invert mix-blend-screen overflow-hidden">
-                <img
-                    src="/img/treetino-vrstevnice.png"
-                    alt=""
-                    class="h-full w-full object-cover scale-125"
-                />
-            </div>
-
-            <!-- Background Layer 2: Ambient Blue Radial Spotlight Studio Glow -->
-            <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_75%_60%_at_50%_35%,rgba(14,165,233,0.22),rgba(0,0,0,0))]"></div>
-
-            <!-- Background Layer 3: Secondary Warm Spotlight Depth Accent -->
-            <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_50%_75%,rgba(14,165,233,0.12),rgba(0,0,0,0))]"></div>
-
-            <!-- Background Layer 4: Soft Smooth Bottom Transition Gradient from Dark Studio into #fdfdfd -->
-            <div class="pointer-events-none absolute bottom-0 inset-x-0 h-64 sm:h-80 bg-gradient-to-b from-transparent via-[#fdfdfd]/30 to-[#fdfdfd] z-0"></div>
+        <!-- Hero Section - Dark Atmospheric Studio Hero with Minimalist City Map Blueprint -->
+        <section
+            class="hero relative overflow-hidden bg-zinc-950 pt-36 pb-20 text-white"
+        >
+            <!-- Minimalist City Map Vector Background with Animated Architectural Blue Lines -->
+            <SalesHeroCityMap />
 
             <div
-                class="relative mx-auto flex w-full max-w-[1400px] flex-col items-center px-6 text-center sm:w-[500px] sm:px-0 md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)] z-10"
+                class="relative z-10 mx-auto flex w-full max-w-[1400px] flex-col items-center px-6 text-center sm:w-[500px] sm:px-0 md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
             >
                 <!-- Audience Badge -->
-                <div class="text-xs sm:text-sm font-semibold tracking-[0.25em] text-white/70 uppercase lg:text-base">
+                <div
+                    class="text-xs font-semibold tracking-[0.25em] text-white/70 uppercase sm:text-sm lg:text-base"
+                >
                     {{ $t('sales.audience') }}
                 </div>
 
                 <!-- Main Title -->
                 <h1
-                    class="mt-3 max-w-5xl text-4xl font-medium tracking-tight text-white sm:text-6xl lg:text-7xl xl:text-8xl leading-[1.08]"
+                    class="mt-3 max-w-5xl text-4xl leading-[1.08] font-medium tracking-tight text-white sm:text-6xl lg:text-7xl xl:text-8xl"
                 >
                     {{ $t('sales.title') }}
                 </h1>
 
                 <!-- Lead Paragraph -->
                 <p
-                    class="mt-5 max-w-2xl text-base text-white/80 sm:text-lg lg:text-xl leading-relaxed"
+                    class="mt-5 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg lg:text-xl"
                 >
                     {{ $t('sales.lead') }}
                 </p>
 
                 <!-- Action Buttons -->
-                <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+                <div
+                    class="mt-8 flex flex-wrap items-center justify-center gap-4"
+                >
                     <ButtonPrimary
                         :href="pricingAppUrl"
                         target="_blank"
@@ -55,8 +46,8 @@
                         {{ $t('sales.cta_primary') }}
                     </ButtonPrimary>
                     <ButtonWhite
-                        href="#numbers"
-                        @click.prevent="scrollToSection('numbers')"
+                        href="#opportunities"
+                        @click.prevent="scrollToSection('opportunities')"
                         class="px-7 py-3.5 text-sm font-medium sm:text-base"
                     >
                         {{ $t('sales.cta_secondary') }}
@@ -64,7 +55,7 @@
                 </div>
 
                 <!-- 3D MacBook Pro Device Frame with scroll opening lid animation -->
-                <div class="mt-8 w-full relative z-10">
+                <div class="relative z-10 mt-14 w-full">
                     <MacbookHeroOpening
                         screenSrc="/img/cta/cta-pos-1.webp"
                         alt="Treetino Pricing App 3D Google Maps & Partner Portal"
@@ -76,37 +67,42 @@
         <!-- 7-Step Interactive Pinned 3D MacBook App Tour -->
         <SalesAppShowcase3D />
 
+        <!-- Sales Opportunities & Target Clients Showcase (Signature Split Carousel matching V2.vue style) -->
+        <SalesOpportunitiesShowcase />
+
         <!-- Informace & čísla (Databook Stats Grid) -->
         <section
             id="numbers"
-            class="relative bg-white py-20 text-black dark:bg-zinc-950 dark:text-white scroll-mt-24"
+            class="relative scroll-mt-24 bg-white py-20 text-black dark:bg-zinc-950 dark:text-white"
         >
             <div
                 class="relative mx-auto max-w-[1400px] px-6 sm:w-[500px] sm:px-0 md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
             >
                 <!-- Stats Grid -->
                 <div
-                    class="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16 items-start"
+                    class="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-16"
                 >
-                    <div class="lg:col-span-5 flex flex-col items-start">
+                    <div class="flex flex-col items-start lg:col-span-4">
                         <span
                             class="text-xs font-semibold tracking-[0.2em] text-t-blue uppercase"
                             >{{ $t('sales.numbers_badge') }}</span
                         >
                         <h2
-                            class="mt-3 text-3xl font-medium sm:text-4xl lg:text-5xl leading-tight text-black dark:text-white"
+                            class="mt-3 text-3xl leading-tight font-medium text-black sm:text-4xl dark:text-white"
                         >
                             {{ $t('sales.numbers_title') }}
                         </h2>
-                        <p class="mt-5 text-base leading-relaxed text-black/70 dark:text-white/70 max-w-md">
+                        <p
+                            class="mt-4 text-base leading-relaxed text-black/70 dark:text-white/70"
+                        >
                             {{ $t('sales.numbers_description') }}
                         </p>
-                        <div class="pt-8 w-full sm:w-auto">
+                        <div class="w-full pt-8 sm:w-auto">
                             <ButtonPrimary
                                 :href="pricingAppUrl"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                class="px-8 py-3.5 text-sm font-semibold sm:text-base w-full sm:w-auto text-center"
+                                class="w-full px-8 py-3.5 text-center text-sm font-semibold sm:w-auto sm:text-base"
                             >
                                 {{ $t('sales.cta_primary') }}
                             </ButtonPrimary>
@@ -114,7 +110,7 @@
                     </div>
 
                     <div
-                        class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10 lg:border-l lg:border-black/10 lg:pl-12 dark:lg:border-white/10"
+                        class="grid grid-cols-1 gap-x-10 gap-y-10 sm:grid-cols-2 lg:col-span-8 lg:border-l lg:border-black/10 lg:pl-16 dark:lg:border-white/10"
                     >
                         <div
                             v-for="stat in partnerStats"
@@ -131,12 +127,12 @@
                                     />
                                 </div>
                                 <div
-                                    class="text-2xl font-medium text-black whitespace-nowrap dark:text-white sm:text-3xl lg:text-3xl xl:text-4xl"
+                                    class="text-2xl font-medium whitespace-nowrap text-black sm:text-3xl lg:text-3xl xl:text-4xl dark:text-white"
                                 >
                                     {{ stat.value }}
                                 </div>
                             </div>
-                            <div class="text-sm opacity-75 leading-relaxed">
+                            <div class="text-sm leading-relaxed opacity-75">
                                 {{ stat.label }}
                             </div>
                         </div>
@@ -146,36 +142,105 @@
         </section>
 
         <!-- Borderless Minimalist List Highlights Section (Identical to V1.vue Design 3) -->
-        <section class="border-y border-black/10 bg-stone-50/50 py-20 text-black dark:border-white/10 dark:bg-stone-900/40 dark:text-white">
-            <div class="relative mx-auto max-w-[1400px] px-6 sm:w-[500px] sm:px-0 md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]">
+        <section
+            class="border-y border-black/10 bg-stone-50/50 py-20 text-black dark:border-white/10 dark:bg-stone-900/40 dark:text-white"
+        >
+            <div
+                class="relative mx-auto max-w-[1400px] px-6 sm:w-[500px] sm:px-0 md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
+            >
                 <div class="mb-14 text-center">
-                    <span class="text-xs font-semibold tracking-[0.2em] text-t-blue uppercase">{{ $t('sales.why_join.badge') }}</span>
-                    <h2 class="mt-2 text-3xl font-medium sm:text-4xl lg:text-5xl">{{ $t('sales.why_join.title') }}</h2>
+                    <span
+                        class="text-xs font-semibold tracking-[0.2em] text-t-blue uppercase"
+                        >{{ $t('sales.why_join.badge') }}</span
+                    >
+                    <h2
+                        class="mt-2 text-3xl font-medium sm:text-4xl lg:text-5xl"
+                    >
+                        {{ $t('sales.why_join.title') }}
+                    </h2>
                 </div>
 
-                <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-                    <div class="border-l border-black/15 pl-6 dark:border-white/15">
-                        <div class="text-3xl font-semibold tracking-tight text-black dark:text-white lg:text-4xl">01</div>
-                        <h3 class="mt-2 text-base font-semibold text-black dark:text-white">{{ $t('sales.why_join.card1_title') }}</h3>
-                        <p class="mt-2 text-sm leading-relaxed text-black/65 dark:text-white/65">{{ $t('sales.why_join.card1_desc') }}</p>
+                <div
+                    class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4"
+                >
+                    <div
+                        class="border-l border-black/15 pl-6 dark:border-white/15"
+                    >
+                        <div
+                            class="text-3xl font-semibold tracking-tight text-black lg:text-4xl dark:text-white"
+                        >
+                            01
+                        </div>
+                        <h3
+                            class="mt-2 text-base font-semibold text-black dark:text-white"
+                        >
+                            {{ $t('sales.why_join.card1_title') }}
+                        </h3>
+                        <p
+                            class="mt-2 text-sm leading-relaxed text-black/65 dark:text-white/65"
+                        >
+                            {{ $t('sales.why_join.card1_desc') }}
+                        </p>
                     </div>
 
-                    <div class="border-l border-black/15 pl-6 dark:border-white/15">
-                        <div class="text-3xl font-semibold tracking-tight text-black dark:text-white lg:text-4xl">02</div>
-                        <h3 class="mt-2 text-base font-semibold text-black dark:text-white">{{ $t('sales.why_join.card2_title') }}</h3>
-                        <p class="mt-2 text-sm leading-relaxed text-black/65 dark:text-white/65">{{ $t('sales.why_join.card2_desc') }}</p>
+                    <div
+                        class="border-l border-black/15 pl-6 dark:border-white/15"
+                    >
+                        <div
+                            class="text-3xl font-semibold tracking-tight text-black lg:text-4xl dark:text-white"
+                        >
+                            02
+                        </div>
+                        <h3
+                            class="mt-2 text-base font-semibold text-black dark:text-white"
+                        >
+                            {{ $t('sales.why_join.card2_title') }}
+                        </h3>
+                        <p
+                            class="mt-2 text-sm leading-relaxed text-black/65 dark:text-white/65"
+                        >
+                            {{ $t('sales.why_join.card2_desc') }}
+                        </p>
                     </div>
 
-                    <div class="border-l border-black/15 pl-6 dark:border-white/15">
-                        <div class="text-3xl font-semibold tracking-tight text-black dark:text-white lg:text-4xl">03</div>
-                        <h3 class="mt-2 text-base font-semibold text-black dark:text-white">{{ $t('sales.why_join.card3_title') }}</h3>
-                        <p class="mt-2 text-sm leading-relaxed text-black/65 dark:text-white/65">{{ $t('sales.why_join.card3_desc') }}</p>
+                    <div
+                        class="border-l border-black/15 pl-6 dark:border-white/15"
+                    >
+                        <div
+                            class="text-3xl font-semibold tracking-tight text-black lg:text-4xl dark:text-white"
+                        >
+                            03
+                        </div>
+                        <h3
+                            class="mt-2 text-base font-semibold text-black dark:text-white"
+                        >
+                            {{ $t('sales.why_join.card3_title') }}
+                        </h3>
+                        <p
+                            class="mt-2 text-sm leading-relaxed text-black/65 dark:text-white/65"
+                        >
+                            {{ $t('sales.why_join.card3_desc') }}
+                        </p>
                     </div>
 
-                    <div class="border-l border-black/15 pl-6 dark:border-white/15">
-                        <div class="text-3xl font-semibold tracking-tight text-black dark:text-white lg:text-4xl">04</div>
-                        <h3 class="mt-2 text-base font-semibold text-black dark:text-white">{{ $t('sales.why_join.card4_title') }}</h3>
-                        <p class="mt-2 text-sm leading-relaxed text-black/65 dark:text-white/65">{{ $t('sales.why_join.card4_desc') }}</p>
+                    <div
+                        class="border-l border-black/15 pl-6 dark:border-white/15"
+                    >
+                        <div
+                            class="text-3xl font-semibold tracking-tight text-black lg:text-4xl dark:text-white"
+                        >
+                            04
+                        </div>
+                        <h3
+                            class="mt-2 text-base font-semibold text-black dark:text-white"
+                        >
+                            {{ $t('sales.why_join.card4_title') }}
+                        </h3>
+                        <p
+                            class="mt-2 text-sm leading-relaxed text-black/65 dark:text-white/65"
+                        >
+                            {{ $t('sales.why_join.card4_desc') }}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -192,7 +257,9 @@
                     class="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center"
                 >
                     <!-- Signature Design Element -->
-                    <div class="relative overflow-hidden border-t-4 border-l-4 border-t-t-blue border-l-t-blue bg-black shadow-2xl">
+                    <div
+                        class="relative overflow-hidden border-t-4 border-l-4 border-t-t-blue border-l-t-blue bg-black shadow-2xl"
+                    >
                         <div class="relative aspect-4/3 overflow-hidden">
                             <img
                                 src="/img/stills/Still_Strom-v1.png"
@@ -200,11 +267,17 @@
                                 class="h-full w-full object-cover transition-transform duration-700 ease-out hover:scale-105"
                             />
                             <!-- 2-Line Stacked Typography Overlay -->
-                            <div class="absolute inset-0 flex flex-col justify-end p-8 sm:p-12 bg-linear-to-t from-black/85 via-black/20 to-transparent">
-                                <span class="text-5xl font-black tracking-tight text-white leading-none uppercase sm:text-7xl lg:text-8xl drop-shadow-2xl">
+                            <div
+                                class="absolute inset-0 flex flex-col justify-end bg-linear-to-t from-black/85 via-black/20 to-transparent p-8 sm:p-12"
+                            >
+                                <span
+                                    class="text-5xl leading-none font-black tracking-tight text-white uppercase drop-shadow-2xl sm:text-7xl lg:text-8xl"
+                                >
                                     {{ $t('sales.network.overlay_line1') }}
                                 </span>
-                                <span class="text-5xl font-black tracking-tight text-white leading-none uppercase sm:text-7xl lg:text-8xl drop-shadow-2xl mt-1">
+                                <span
+                                    class="mt-1 text-5xl leading-none font-black tracking-tight text-white uppercase drop-shadow-2xl sm:text-7xl lg:text-8xl"
+                                >
                                     {{ $t('sales.network.overlay_line2') }}
                                 </span>
                             </div>
@@ -217,7 +290,7 @@
                             >{{ $t('sales.network.tag') }}</span
                         >
                         <h2
-                            class="mt-3 text-4xl font-medium text-black dark:text-white sm:text-5xl"
+                            class="mt-3 text-4xl font-medium text-black sm:text-5xl dark:text-white"
                         >
                             {{ $t('sales.network.title') }}
                         </h2>
@@ -230,7 +303,7 @@
                         <!-- Info cards with vertical left blue border line -->
                         <div class="mt-8 grid grid-cols-2 gap-6">
                             <div
-                                class="border-l-2 border-t-blue pl-4 bg-white/60 p-4 shadow-xs dark:bg-white/5"
+                                class="border-l-2 border-t-blue bg-white/60 p-4 pl-4 shadow-xs dark:bg-white/5"
                             >
                                 <div class="text-lg font-bold text-t-blue">
                                     {{ $t('sales.network.card1_title') }}
@@ -242,7 +315,7 @@
                                 </div>
                             </div>
                             <div
-                                class="border-l-2 border-t-blue pl-4 bg-white/60 p-4 shadow-xs dark:bg-white/5"
+                                class="border-l-2 border-t-blue bg-white/60 p-4 pl-4 shadow-xs dark:bg-white/5"
                             >
                                 <div class="text-lg font-bold text-t-blue">
                                     {{ $t('sales.network.card2_title') }}
@@ -260,95 +333,178 @@
         </section>
 
         <!-- Dynamic Product Preview Hover Grid (Identical to V1.vue / V2.vue #products) -->
-        <section class="bg-white py-20 text-black dark:bg-zinc-950 dark:text-white">
-            <div class="relative mx-auto max-w-[1400px] px-6 sm:w-[500px] sm:px-0 md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]">
-                <div class="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
+        <section
+            class="bg-white py-20 text-black dark:bg-zinc-950 dark:text-white"
+        >
+            <div
+                class="relative mx-auto max-w-[1400px] px-6 sm:w-[500px] sm:px-0 md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
+            >
+                <div
+                    class="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center"
+                >
                     <!-- Left Column: Product Selection with Clear Cards & Big Profits (7 cols) -->
                     <div class="lg:col-span-7">
-                        <span class="text-xs font-semibold tracking-[0.2em] text-t-blue uppercase">{{ $t('sales.portfolio.badge') }}</span>
-                        <h2 class="mt-3 text-3xl font-medium sm:text-4xl lg:text-5xl leading-tight">{{ $t('sales.portfolio.title') }}</h2>
+                        <span
+                            class="text-xs font-semibold tracking-[0.2em] text-t-blue uppercase"
+                            >{{ $t('sales.portfolio.badge') }}</span
+                        >
+                        <h2
+                            class="mt-3 text-3xl leading-tight font-medium sm:text-4xl lg:text-5xl"
+                        >
+                            {{ $t('sales.portfolio.title') }}
+                        </h2>
 
                         <div class="mt-8 space-y-4">
                             <!-- V1 Commercial Tree -->
                             <div
                                 @mouseenter="hoveredProduct = 'v1'"
                                 @click="hoveredProduct = 'v1'"
-                                class="cursor-pointer rounded-2xl p-5 sm:p-6 transition-all duration-300 border"
-                                :class="hoveredProduct === 'v1' || !hoveredProduct
-                                    ? 'bg-t-blue/[0.04] border-t-blue/40 shadow-sm dark:bg-white/10 dark:border-t-blue/60'
-                                    : 'bg-stone-50/60 border-black/5 hover:border-black/15 hover:bg-stone-100/60 dark:bg-stone-900/40 dark:border-white/5 dark:hover:border-white/15'"
+                                class="cursor-pointer rounded-2xl border p-5 transition-all duration-300 sm:p-6"
+                                :class="
+                                    hoveredProduct === 'v1' || !hoveredProduct
+                                        ? 'border-t-blue/40 bg-t-blue/[0.04] shadow-sm dark:border-t-blue/60 dark:bg-white/10'
+                                        : 'border-black/5 bg-stone-50/60 hover:border-black/15 hover:bg-stone-100/60 dark:border-white/5 dark:bg-stone-900/40 dark:hover:border-white/15'
+                                "
                             >
-                                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                                <div
+                                    class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
+                                >
                                     <div>
-                                        <h3 class="text-xl font-semibold text-black dark:text-white">{{ $t('sales.portfolio.v1_title') }}</h3>
-                                        <div class="text-xs text-black/50 dark:text-white/50 mt-0.5">
+                                        <h3
+                                            class="text-xl font-semibold text-black dark:text-white"
+                                        >
+                                            {{ $t('sales.portfolio.v1_title') }}
+                                        </h3>
+                                        <div
+                                            class="mt-0.5 text-xs text-black/50 dark:text-white/50"
+                                        >
                                             {{ $t('sales.portfolio.v1_price') }}
                                         </div>
                                     </div>
                                     <div class="shrink-0">
-                                        <span class="inline-block rounded-xl bg-t-blue/10 px-4 py-2 text-sm font-bold text-t-blue dark:bg-t-blue/20">
-                                            {{ $t('sales.portfolio.v1_commission') }}
+                                        <span
+                                            class="inline-block rounded-xl bg-t-blue/10 px-4 py-2 text-sm font-bold text-t-blue dark:bg-t-blue/20"
+                                        >
+                                            {{
+                                                $t(
+                                                    'sales.portfolio.v1_commission',
+                                                )
+                                            }}
                                         </span>
                                     </div>
                                 </div>
-                                <p class="mt-3 text-sm text-black/70 dark:text-white/70 leading-relaxed">{{ $t('sales.portfolio.v1_desc') }}</p>
+                                <p
+                                    class="mt-3 text-sm leading-relaxed text-black/70 dark:text-white/70"
+                                >
+                                    {{ $t('sales.portfolio.v1_desc') }}
+                                </p>
                             </div>
 
                             <!-- V2 Residential Tree -->
                             <div
                                 @mouseenter="hoveredProduct = 'v2'"
                                 @click="hoveredProduct = 'v2'"
-                                class="cursor-pointer rounded-2xl p-5 sm:p-6 transition-all duration-300 border"
-                                :class="hoveredProduct === 'v2'
-                                    ? 'bg-t-blue/[0.04] border-t-blue/40 shadow-sm dark:bg-white/10 dark:border-t-blue/60'
-                                    : 'bg-stone-50/60 border-black/5 hover:border-black/15 hover:bg-stone-100/60 dark:bg-stone-900/40 dark:border-white/5 dark:hover:border-white/15'"
+                                class="cursor-pointer rounded-2xl border p-5 transition-all duration-300 sm:p-6"
+                                :class="
+                                    hoveredProduct === 'v2'
+                                        ? 'border-t-blue/40 bg-t-blue/[0.04] shadow-sm dark:border-t-blue/60 dark:bg-white/10'
+                                        : 'border-black/5 bg-stone-50/60 hover:border-black/15 hover:bg-stone-100/60 dark:border-white/5 dark:bg-stone-900/40 dark:hover:border-white/15'
+                                "
                             >
-                                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                                <div
+                                    class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
+                                >
                                     <div>
-                                        <h3 class="text-xl font-semibold text-black dark:text-white">{{ $t('sales.portfolio.v2_title') }}</h3>
-                                        <div class="text-xs text-black/50 dark:text-white/50 mt-0.5">
+                                        <h3
+                                            class="text-xl font-semibold text-black dark:text-white"
+                                        >
+                                            {{ $t('sales.portfolio.v2_title') }}
+                                        </h3>
+                                        <div
+                                            class="mt-0.5 text-xs text-black/50 dark:text-white/50"
+                                        >
                                             {{ $t('sales.portfolio.v2_price') }}
                                         </div>
                                     </div>
                                     <div class="shrink-0">
-                                        <span class="inline-block rounded-xl bg-t-blue/10 px-4 py-2 text-sm font-bold text-t-blue dark:bg-t-blue/20">
-                                            {{ $t('sales.portfolio.v2_commission') }}
+                                        <span
+                                            class="inline-block rounded-xl bg-t-blue/10 px-4 py-2 text-sm font-bold text-t-blue dark:bg-t-blue/20"
+                                        >
+                                            {{
+                                                $t(
+                                                    'sales.portfolio.v2_commission',
+                                                )
+                                            }}
                                         </span>
                                     </div>
                                 </div>
-                                <p class="mt-3 text-sm text-black/70 dark:text-white/70 leading-relaxed">{{ $t('sales.portfolio.v2_desc') }}</p>
+                                <p
+                                    class="mt-3 text-sm leading-relaxed text-black/70 dark:text-white/70"
+                                >
+                                    {{ $t('sales.portfolio.v2_desc') }}
+                                </p>
                             </div>
 
                             <!-- Turbine T1 -->
                             <div
                                 @mouseenter="hoveredProduct = 'turbine'"
                                 @click="hoveredProduct = 'turbine'"
-                                class="cursor-pointer rounded-2xl p-5 sm:p-6 transition-all duration-300 border"
-                                :class="hoveredProduct === 'turbine'
-                                    ? 'bg-t-blue/[0.04] border-t-blue/40 shadow-sm dark:bg-white/10 dark:border-t-blue/60'
-                                    : 'bg-stone-50/60 border-black/5 hover:border-black/15 hover:bg-stone-100/60 dark:bg-stone-900/40 dark:border-white/5 dark:hover:border-white/15'"
+                                class="cursor-pointer rounded-2xl border p-5 transition-all duration-300 sm:p-6"
+                                :class="
+                                    hoveredProduct === 'turbine'
+                                        ? 'border-t-blue/40 bg-t-blue/[0.04] shadow-sm dark:border-t-blue/60 dark:bg-white/10'
+                                        : 'border-black/5 bg-stone-50/60 hover:border-black/15 hover:bg-stone-100/60 dark:border-white/5 dark:bg-stone-900/40 dark:hover:border-white/15'
+                                "
                             >
-                                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                                <div
+                                    class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
+                                >
                                     <div>
-                                        <h3 class="text-xl font-semibold text-black dark:text-white">{{ $t('sales.portfolio.turbine_title') }}</h3>
-                                        <div class="text-xs text-black/50 dark:text-white/50 mt-0.5">
-                                            {{ $t('sales.portfolio.turbine_price') }}
+                                        <h3
+                                            class="text-xl font-semibold text-black dark:text-white"
+                                        >
+                                            {{
+                                                $t(
+                                                    'sales.portfolio.turbine_title',
+                                                )
+                                            }}
+                                        </h3>
+                                        <div
+                                            class="mt-0.5 text-xs text-black/50 dark:text-white/50"
+                                        >
+                                            {{
+                                                $t(
+                                                    'sales.portfolio.turbine_price',
+                                                )
+                                            }}
                                         </div>
                                     </div>
                                     <div class="shrink-0">
-                                        <span class="inline-block rounded-xl bg-t-blue/10 px-4 py-2 text-sm font-bold text-t-blue dark:bg-t-blue/20">
-                                            {{ $t('sales.portfolio.turbine_commission') }}
+                                        <span
+                                            class="inline-block rounded-xl bg-t-blue/10 px-4 py-2 text-sm font-bold text-t-blue dark:bg-t-blue/20"
+                                        >
+                                            {{
+                                                $t(
+                                                    'sales.portfolio.turbine_commission',
+                                                )
+                                            }}
                                         </span>
                                     </div>
                                 </div>
-                                <p class="mt-3 text-sm text-black/70 dark:text-white/70 leading-relaxed">{{ $t('sales.portfolio.turbine_desc') }}</p>
+                                <p
+                                    class="mt-3 text-sm leading-relaxed text-black/70 dark:text-white/70"
+                                >
+                                    {{ $t('sales.portfolio.turbine_desc') }}
+                                </p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Right Column: Smaller, balanced preview image (5 cols) -->
+                    <!-- Right Column: Balanced preview image (5 cols) -->
                     <div class="lg:col-span-5">
-                        <div class="relative aspect-[4/3] overflow-hidden rounded-3xl border border-black/10 dark:border-white/10 bg-zinc-100 dark:bg-zinc-900 shadow-2xl">
+                        <div
+                            class="relative aspect-[4/3] overflow-hidden rounded-3xl border border-black/10 bg-zinc-100 shadow-2xl dark:border-white/10 dark:bg-zinc-900"
+                        >
                             <Transition name="fade" mode="out-in">
                                 <img
                                     :key="previewImage"
@@ -364,33 +520,74 @@
         </section>
 
         <!-- Datasheet / Partnership Specs Table (Identical to V1.vue / V2.vue #datasheet) -->
-        <section class="border-t border-black/10 bg-white py-20 text-black dark:border-white/10 dark:bg-zinc-950 dark:text-white">
-            <div class="relative mx-auto max-w-[1400px] px-6 sm:w-[500px] sm:px-0 md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]">
+        <section
+            class="border-t border-black/10 bg-white py-20 text-black dark:border-white/10 dark:bg-zinc-950 dark:text-white"
+        >
+            <div
+                class="relative mx-auto max-w-[1400px] px-6 sm:w-[500px] sm:px-0 md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
+            >
                 <div class="mb-12">
-                    <span class="text-xs font-semibold tracking-[0.2em] text-t-blue uppercase">{{ $t('sales.datasheet.badge') }}</span>
-                    <h2 class="mt-2 text-3xl font-medium sm:text-4xl lg:text-5xl">{{ $t('sales.datasheet.title') }}</h2>
+                    <span
+                        class="text-xs font-semibold tracking-[0.2em] text-t-blue uppercase"
+                        >{{ $t('sales.datasheet.badge') }}</span
+                    >
+                    <h2
+                        class="mt-2 text-3xl font-medium sm:text-4xl lg:text-5xl"
+                    >
+                        {{ $t('sales.datasheet.title') }}
+                    </h2>
                 </div>
 
-                <div class="divide-y divide-black/10 border-y border-black/10 dark:divide-white/10 dark:border-white/10">
+                <div
+                    class="divide-y divide-black/10 border-y border-black/10 dark:divide-white/10 dark:border-white/10"
+                >
                     <div class="grid grid-cols-1 py-4 md:grid-cols-3">
-                        <div class="font-medium text-black dark:text-white">{{ $t('sales.datasheet.row1_label') }}</div>
-                        <div class="md:col-span-2 text-black/80 dark:text-white/80">{{ $t('sales.datasheet.row1_val') }}</div>
+                        <div class="font-medium text-black dark:text-white">
+                            {{ $t('sales.datasheet.row1_label') }}
+                        </div>
+                        <div
+                            class="text-black/80 md:col-span-2 dark:text-white/80"
+                        >
+                            {{ $t('sales.datasheet.row1_val') }}
+                        </div>
                     </div>
                     <div class="grid grid-cols-1 py-4 md:grid-cols-3">
-                        <div class="font-medium text-black dark:text-white">{{ $t('sales.datasheet.row2_label') }}</div>
-                        <div class="md:col-span-2 text-black/80 dark:text-white/80">{{ $t('sales.datasheet.row2_val') }}</div>
+                        <div class="font-medium text-black dark:text-white">
+                            {{ $t('sales.datasheet.row2_label') }}
+                        </div>
+                        <div
+                            class="text-black/80 md:col-span-2 dark:text-white/80"
+                        >
+                            {{ $t('sales.datasheet.row2_val') }}
+                        </div>
                     </div>
                     <div class="grid grid-cols-1 py-4 md:grid-cols-3">
-                        <div class="font-medium text-black dark:text-white">{{ $t('sales.datasheet.row3_label') }}</div>
-                        <div class="md:col-span-2 text-black/80 dark:text-white/80">{{ $t('sales.datasheet.row3_val') }}</div>
+                        <div class="font-medium text-black dark:text-white">
+                            {{ $t('sales.datasheet.row3_label') }}
+                        </div>
+                        <div
+                            class="text-black/80 md:col-span-2 dark:text-white/80"
+                        >
+                            {{ $t('sales.datasheet.row3_val') }}
+                        </div>
                     </div>
                     <div class="grid grid-cols-1 py-4 md:grid-cols-3">
-                        <div class="font-medium text-black dark:text-white">{{ $t('sales.datasheet.row4_label') }}</div>
-                        <div class="md:col-span-2 text-black/80 dark:text-white/80">{{ $t('sales.datasheet.row4_val') }}</div>
+                        <div class="font-medium text-black dark:text-white">
+                            {{ $t('sales.datasheet.row4_label') }}
+                        </div>
+                        <div
+                            class="text-black/80 md:col-span-2 dark:text-white/80"
+                        >
+                            {{ $t('sales.datasheet.row4_val') }}
+                        </div>
                     </div>
                     <div class="grid grid-cols-1 py-4 md:grid-cols-3">
-                        <div class="font-medium text-black dark:text-white">{{ $t('sales.datasheet.row5_label') }}</div>
-                        <div class="md:col-span-2 flex flex-wrap items-center gap-4 text-black/80 dark:text-white/80">
+                        <div class="font-medium text-black dark:text-white">
+                            {{ $t('sales.datasheet.row5_label') }}
+                        </div>
+                        <div
+                            class="flex flex-wrap items-center gap-4 text-black/80 md:col-span-2 dark:text-white/80"
+                        >
                             <span>{{ $t('sales.datasheet.row5_val') }}</span>
                             <div class="flex items-center gap-3">
                                 <a
@@ -398,9 +595,13 @@
                                     class="inline-flex items-center gap-1 text-xs font-semibold text-t-blue hover:underline"
                                 >
                                     <Download class="h-3.5 w-3.5" />
-                                    <span>{{ $t('sales.datasheet.download_nda') }}</span>
+                                    <span>{{
+                                        $t('sales.datasheet.download_nda')
+                                    }}</span>
                                 </a>
-                                <span class="text-black/30 dark:text-white/30">&bull;</span>
+                                <span class="text-black/30 dark:text-white/30"
+                                    >&bull;</span
+                                >
                                 <a
                                     href="/legal/nda"
                                     class="text-xs font-medium text-black/60 hover:text-black hover:underline dark:text-white/60 dark:hover:text-white"
@@ -427,27 +628,28 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import {
-    Clock,
-    Coins,
-    Download,
-    Flash,
-    ShieldCheck,
-} from '@iconoir/vue';
+import { Clock, Coins, Download, Flash, ShieldCheck } from '@iconoir/vue';
 import { Head } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import ButtonWhite from '@/custom/ButtonWhite.vue';
 import HomeCtaGeneric from '@/custom/home/HomeCtaGeneric.vue';
 import MacbookHeroOpening from '@/custom/MacbookHeroOpening.vue';
-import Macbook3D from '@/custom/Macbook3D.vue';
 import SalesAppShowcase3D from '@/custom/sales/SalesAppShowcase3D.vue';
+import SalesHeroCityMap from '@/custom/sales/SalesHeroCityMap.vue';
+import SalesOpportunitiesShowcase from '@/custom/sales/SalesOpportunitiesShowcase.vue';
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
+import { SALES_OPPORTUNITIES } from '@/types/sales';
 
 const { t } = useI18n();
 
+const opportunities = SALES_OPPORTUNITIES;
+
 const pricingAppUrl = computed(() => {
-    return (import.meta.env.VITE_PRICING_APP_URL as string) || 'https://treetino-pricing.vercel.app';
+    return (
+        (import.meta.env.VITE_PRICING_APP_URL as string) ||
+        'https://treetino-pricing.vercel.app'
+    );
 });
 
 const hoveredProduct = ref<string | null>(null);

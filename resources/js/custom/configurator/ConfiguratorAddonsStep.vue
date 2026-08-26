@@ -9,9 +9,9 @@
             <!-- EV Charger -->
             <div class="rounded px-3 py-3">
                 <div class="mb-1 flex items-center justify-between">
-                    <span class="text-sm text-black dark:text-white"
-                        >{{ $t('configurator.addons.ev.label') }}</span
-                    >
+                    <span class="text-sm text-black dark:text-white">{{
+                        $t('configurator.addons.ev.label')
+                    }}</span>
                     <span
                         class="text-xs font-semibold text-black dark:text-white/40"
                         >11 kW</span
@@ -40,7 +40,8 @@
                     >
                         +
                     </button>
-                    <span class="ml-1 text-xs text-black/60 dark:text-white/40"
+                    <span
+                        class="ml-1 text-xs text-black/60 dark:text-white/40"
                         >{{ $t('configurator.pcs') }}</span
                     >
                 </div>
@@ -54,9 +55,9 @@
                 @click="bikeEnabled = !bikeEnabled"
             >
                 <div class="mb-1 flex items-center justify-between">
-                    <span class="text-sm text-black dark:text-white"
-                        >{{ $t('configurator.addons.bike.label') }}</span
-                    >
+                    <span class="text-sm text-black dark:text-white">{{
+                        $t('configurator.addons.bike.label')
+                    }}</span>
                     <span
                         class="flex items-center gap-1.5 text-xs transition-colors duration-200"
                         :class="
@@ -66,7 +67,11 @@
                         "
                     >
                         <CheckCircle v-if="bikeEnabled" />
-                        {{ bikeEnabled ? $t('configurator.added') : $t('configurator.add') }}
+                        {{
+                            bikeEnabled
+                                ? $t('configurator.added')
+                                : $t('configurator.add')
+                        }}
                     </span>
                 </div>
                 <p

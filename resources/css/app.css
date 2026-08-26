@@ -11,8 +11,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
-    --font-sans:
-        'DM Sans';
+    --font-sans: 'DM Sans';
 
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
@@ -274,5 +273,3 @@
         justify-content: center !important;
     }
 }
-
-

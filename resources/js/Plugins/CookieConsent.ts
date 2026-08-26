@@ -1,5 +1,5 @@
-import { run  } from 'vanilla-cookieconsent';
-import type {CookieConsentConfig} from 'vanilla-cookieconsent';
+import { run } from 'vanilla-cookieconsent';
+import type { CookieConsentConfig } from 'vanilla-cookieconsent';
 import type { App } from 'vue';
 
 export default {

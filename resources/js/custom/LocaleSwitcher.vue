@@ -16,13 +16,17 @@ const isOpen = ref(false);
 const dropdownRef = ref<HTMLElement | null>(null);
 
 const activeLocale = ref<string>(
-    (typeof window !== 'undefined' ? localStorage.getItem('app_locale') : null) ||
-    (page.props.i18n?.locale as string) ||
-    'cs'
+    (typeof window !== 'undefined'
+        ? localStorage.getItem('app_locale')
+        : null) ||
+        (page.props.i18n?.locale as string) ||
+        'cs',
 );
 
 const locale = computed(() => activeLocale.value);
-const locales = computed(() => (page.props.i18n?.locales as string[]) || ['cs', 'en']);
+const locales = computed(
+    () => (page.props.i18n?.locales as string[]) || ['cs', 'en'],
+);
 
 const formatLocale = (value: string) => value.toUpperCase();
 
@@ -40,7 +44,9 @@ const changeLocale = (targetLocale: string) => {
 
     // 2. Instantly update reactive i18n state on client
     activeLocale.value = targetLocale;
-    const msgs = (i18nMessages as Record<string, any>)[targetLocale] || (i18nMessages as Record<string, any>)['cs'];
+    const msgs =
+        (i18nMessages as Record<string, any>)[targetLocale] ||
+        (i18nMessages as Record<string, any>)['cs'];
     setLocaleMessage(targetLocale, msgs);
     vueI18nLocale.value = targetLocale;
 
@@ -52,7 +58,9 @@ const changeLocale = (targetLocale: string) => {
 
     // 3. Dispatch global custom event for any non-reactive listeners
     if (typeof window !== 'undefined') {
-        window.dispatchEvent(new CustomEvent('locale-changed', { detail: targetLocale }));
+        window.dispatchEvent(
+            new CustomEvent('locale-changed', { detail: targetLocale }),
+        );
     }
 
     // 4. Try POST request if backend is present, ignoring errors on static hosts
@@ -64,7 +72,7 @@ const changeLocale = (targetLocale: string) => {
                 preserveScroll: true,
                 onError: () => {},
                 onFinish: () => {},
-            }
+            },
         );
     } catch (e) {
         // static deployment fallback

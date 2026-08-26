@@ -1,32 +1,62 @@
 <template>
-    <section ref="sectionRef" class="sales-showcase-desktop relative bg-[#fdfdfd] text-black">
-        <div ref="pinRef" class="showcase-pin h-screen w-full flex items-center relative overflow-hidden">
-            <div class="relative mx-auto w-full max-w-[1500px] h-full px-6 flex items-center justify-between sm:w-full lg:w-[calc(100%-100px)] xl:w-[calc(100%-160px)]">
-                
+    <section
+        ref="sectionRef"
+        class="sales-showcase-desktop relative bg-[#fdfdfd] text-black"
+    >
+        <div
+            ref="pinRef"
+            class="showcase-pin relative flex h-screen w-full items-center overflow-hidden"
+        >
+            <div
+                class="relative mx-auto flex h-full w-full max-w-[1500px] items-center justify-between px-6 sm:w-full lg:w-[calc(100%-100px)] xl:w-[calc(100%-160px)]"
+            >
                 <!-- Left Column (Identical to HomeFeatures.vue) -->
-                <div class="w-full lg:w-5/12 text-left z-20">
+                <div class="z-20 w-full text-left lg:w-5/12">
                     <Transition name="section-content" mode="out-in">
-                        <div :key="currentSectionIndex" class="flex flex-col gap-4 max-w-lg">
+                        <div
+                            :key="currentSectionIndex"
+                            class="flex max-w-lg flex-col gap-4"
+                        >
                             <!-- Top Grey Counter (01 / 07) -->
-                            <span class="text-sm font-medium text-black/40 font-mono tabular-nums">
-                                {{ String(currentSectionIndex + 1).padStart(2, '0') }} / {{ String(sections.length).padStart(2, '0') }}
+                            <span
+                                class="font-mono text-sm font-medium text-black/40 tabular-nums"
+                            >
+                                {{
+                                    String(currentSectionIndex + 1).padStart(
+                                        2,
+                                        '0',
+                                    )
+                                }}
+                                / {{ String(sections.length).padStart(2, '0') }}
                             </span>
 
                             <!-- Clean Title (No numbers) -->
-                            <h2 class="text-4xl font-medium leading-tight text-black sm:text-5xl">
-                                {{ $t(`sales.interactive_steps.step${currentSectionIndex + 1}_title`) }}
+                            <h2
+                                class="text-4xl leading-tight font-medium text-black sm:text-5xl"
+                            >
+                                {{
+                                    $t(
+                                        `sales.interactive_steps.step${currentSectionIndex + 1}_title`,
+                                    )
+                                }}
                             </h2>
 
                             <!-- Clean Lead Paragraph -->
                             <p class="text-2xl leading-tight text-black/75">
-                                {{ $t(`sales.interactive_steps.step${currentSectionIndex + 1}_desc`) }}
+                                {{
+                                    $t(
+                                        `sales.interactive_steps.step${currentSectionIndex + 1}_desc`,
+                                    )
+                                }}
                             </p>
                         </div>
                     </Transition>
                 </div>
 
                 <!-- Right Column: 3D MacBook Pro Component (Macbook3D.vue) -->
-                <div class="hidden lg:flex lg:w-7/12 h-full items-center justify-center relative z-10 pl-4">
+                <div
+                    class="relative z-10 hidden h-full items-center justify-center pl-4 lg:flex lg:w-7/12"
+                >
                     <div class="w-full max-w-5xl">
                         <Macbook3D
                             :screen-src="sections[currentSectionIndex].screen"

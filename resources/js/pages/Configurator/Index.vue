@@ -70,7 +70,7 @@
                                     class="w-full translate-y-6 object-contain transition-opacity duration-300 md:translate-y-0"
                                     :class="[
                                         preview.items.length === 1
-                                            ? 'h-[22vh] max-w-[min(72vw,72vh,560px)] md:h-auto md:aspect-square'
+                                            ? 'h-[22vh] max-w-[min(72vw,72vh,560px)] md:aspect-square md:h-auto'
                                             : 'aspect-square max-w-[180px] md:max-w-[240px]',
                                         item.selected
                                             ? 'opacity-100'
@@ -83,7 +83,14 @@
                                     <div
                                         v-if="item.selected"
                                         class="flex h-6 w-6 items-center justify-center rounded-full bg-black text-white shadow-sm"
-                                        :aria-label="item.label + ' ' + $t('common.actions.selected', 'vybráno')"
+                                        :aria-label="
+                                            item.label +
+                                            ' ' +
+                                            $t(
+                                                'common.actions.selected',
+                                                'vybráno',
+                                            )
+                                        "
                                     >
                                         <Check class="h-4 w-4" />
                                     </div>
@@ -623,8 +630,14 @@ function buildConfiguration() {
         ConfigurationField,
         string | number | boolean
     > = {
-        color: selectedColorId.value === 'custom' ? `custom (${customFrameColor.value})` : selectedColorId.value,
-        leafColor: selectedLeafColorId.value === 'custom' ? `custom (${customLeafColor.value})` : selectedLeafColorId.value,
+        color:
+            selectedColorId.value === 'custom'
+                ? `custom (${customFrameColor.value})`
+                : selectedColorId.value,
+        leafColor:
+            selectedLeafColorId.value === 'custom'
+                ? `custom (${customLeafColor.value})`
+                : selectedLeafColorId.value,
         fveLeafDesign: selectedFveLeafDesign.value,
         connectivity: selectedConnectivity.value,
         battery: selectedBattery.value,

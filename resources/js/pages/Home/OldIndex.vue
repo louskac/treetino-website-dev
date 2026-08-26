@@ -2,7 +2,7 @@
     <Head title="Home" />
 
     <DefaultLayout>
-        <section class="hero relative h-220 w-full z-10">
+        <section class="hero relative z-10 h-220 w-full">
             <div class="bg absolute top-0 h-full w-full bg-t-dark">
                 <video
                     ref="video"
@@ -54,7 +54,9 @@
                 <div class="grid grid-cols-3 gap-6">
                     <div
                         ref="leftCardEl"
-                        :style="{ transform: 'translateY(' + leftTranslateY + 'px)' }"
+                        :style="{
+                            transform: 'translateY(' + leftTranslateY + 'px)',
+                        }"
                         class="mt-26"
                     >
                         <div
@@ -63,9 +65,7 @@
                             <div class="">
                                 <Tree class="h-8 w-8" stroke-width="2" />
                             </div>
-                            <h2 class="mt-2 text-4xl">
-                                World-class design
-                            </h2>
+                            <h2 class="mt-2 text-4xl">World-class design</h2>
                             <p class="mt-2 mb-3">
                                 Lorem ipsum dolor sit amet, consectetur
                                 adipiscing elit. Integer at tortor est. Sed
@@ -75,10 +75,10 @@
                             </p>
 
                             <p>
-                                Vivamus at convallis quam. Etiam
-                                pellentesque augue nec lectus pulvinar
-                                accumsan. Duis volutpat ullamcorper
-                                dignissim. Donec mattis, enim a malesuada
+                                Vivamus at convallis quam. Etiam pellentesque
+                                augue nec lectus pulvinar accumsan. Duis
+                                volutpat ullamcorper dignissim. Donec mattis,
+                                enim a malesuada
                             </p>
                         </div>
                     </div>
@@ -107,18 +107,18 @@
 
                     <div
                         ref="rightCardEl"
-                        :style="{ transform: 'translateY(' + rightTranslateY + 'px)' }"
+                        :style="{
+                            transform: 'translateY(' + rightTranslateY + 'px)',
+                        }"
                         class="mt-26"
                     >
                         <div
-                            class="w-full rounded-2xl border border-black/20 p-6 shadow-xl reveal reveal-right"
+                            class="reveal reveal-right w-full rounded-2xl border border-black/20 p-6 shadow-xl"
                         >
                             <div class="">
                                 <Tree class="h-8 w-8" stroke-width="2" />
                             </div>
-                            <h2 class="mt-2 text-4xl">
-                                U I U A A
-                            </h2>
+                            <h2 class="mt-2 text-4xl">U I U A A</h2>
                             <p class="mt-2 mb-3">
                                 Lorem ipsum dolor sit amet, consectetur
                                 adipiscing elit. Integer at tortor est. Sed
@@ -128,10 +128,10 @@
                             </p>
 
                             <p>
-                                Vivamus at convallis quam. Etiam
-                                pellentesque augue nec lectus pulvinar
-                                accumsan. Duis volutpat ullamcorper
-                                dignissim. Donec mattis, enim a malesuada
+                                Vivamus at convallis quam. Etiam pellentesque
+                                augue nec lectus pulvinar accumsan. Duis
+                                volutpat ullamcorper dignissim. Donec mattis,
+                                enim a malesuada
                             </p>
                         </div>
                     </div>

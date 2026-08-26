@@ -57,39 +57,64 @@ async function formProcess() {
     <Head :title="$t('contact.title')" />
 
     <DefaultLayout :inverted="true">
-        <div class="relative overflow-hidden bg-white text-black selection:bg-t-blue selection:text-white pt-36 sm:pt-44">
+        <div
+            class="relative overflow-hidden bg-white pt-36 text-black selection:bg-t-blue selection:text-white sm:pt-44"
+        >
             <!-- Ambient Boundary Lines Matching Site Layout -->
             <div
-                class="absolute left-1/2 hidden h-full max-w-[1400px] -translate-x-1/2 border-r border-l border-r-black/10 border-l-black/10 pointer-events-none sm:block sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
+                class="pointer-events-none absolute left-1/2 hidden h-full max-w-[1400px] -translate-x-1/2 border-r border-l border-r-black/10 border-l-black/10 sm:block sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
             ></div>
 
-            <main class="relative mx-auto max-w-[1400px] px-6 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]">
+            <main
+                class="relative mx-auto max-w-[1400px] px-6 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
+            >
                 <!-- Hero Header -->
-                <div class="pb-16 sm:pb-20 border-b border-black/10">
-                    <span class="text-xs font-semibold tracking-[0.2em] text-t-blue uppercase">
+                <div class="border-b border-black/10 pb-16 sm:pb-20">
+                    <span
+                        class="text-xs font-semibold tracking-[0.2em] text-t-blue uppercase"
+                    >
                         {{ $t('contact.tag') }}
                     </span>
-                    <h1 class="mt-3 text-4xl font-medium tracking-tight text-black sm:text-5xl lg:text-6xl">
+                    <h1
+                        class="mt-3 text-4xl font-medium tracking-tight text-black sm:text-5xl lg:text-6xl"
+                    >
                         {{ $t('contact.title') }}
                     </h1>
-                    <p class="mt-4 max-w-3xl text-lg sm:text-xl text-black/70 leading-relaxed">
+                    <p
+                        class="mt-4 max-w-3xl text-lg leading-relaxed text-black/70 sm:text-xl"
+                    >
                         {{ $t('contact.lead') }}
                     </p>
                 </div>
 
                 <!-- Contact Details & Form Section (Split Editorial Grid) -->
                 <section class="py-20 lg:py-28">
-                    <div class="grid grid-cols-1 gap-16 lg:grid-cols-12 lg:gap-16">
+                    <div
+                        class="grid grid-cols-1 gap-16 lg:grid-cols-12 lg:gap-16"
+                    >
                         <!-- Left Column: Company & Direct Channels (Vertical Accent Blocks) -->
-                        <div class="lg:col-span-5 flex flex-col justify-between space-y-10">
+                        <div
+                            class="flex flex-col justify-between space-y-10 lg:col-span-5"
+                        >
                             <div class="space-y-8">
                                 <div class="border-l-2 border-t-blue pl-6">
-                                    <div class="flex items-center gap-3 text-t-blue mb-2">
+                                    <div
+                                        class="mb-2 flex items-center gap-3 text-t-blue"
+                                    >
                                         <MapPin class="h-5 w-5" />
-                                        <span class="text-xs font-semibold uppercase tracking-wider">{{ $t('contact.headquarters_tag') }}</span>
+                                        <span
+                                            class="text-xs font-semibold tracking-wider uppercase"
+                                            >{{
+                                                $t('contact.headquarters_tag')
+                                            }}</span
+                                        >
                                     </div>
-                                    <h3 class="text-xl font-medium text-black">Treetino Corp s.r.o.</h3>
-                                    <p class="mt-2 text-sm sm:text-base text-black/70 leading-relaxed">
+                                    <h3 class="text-xl font-medium text-black">
+                                        Treetino Corp s.r.o.
+                                    </h3>
+                                    <p
+                                        class="mt-2 text-sm leading-relaxed text-black/70 sm:text-base"
+                                    >
                                         Bílá – Vlčetín 62<br />
                                         463 43 Bílá – Vlčetín<br />
                                         Česká republika
@@ -100,13 +125,18 @@ async function formProcess() {
                                 </div>
 
                                 <div class="border-l-2 border-black/10 pl-6">
-                                    <div class="flex items-center gap-3 text-t-blue mb-2">
+                                    <div
+                                        class="mb-2 flex items-center gap-3 text-t-blue"
+                                    >
                                         <Mail class="h-5 w-5" />
-                                        <span class="text-xs font-semibold uppercase tracking-wider">{{ $t('contact.email_tag') }}</span>
+                                        <span
+                                            class="text-xs font-semibold tracking-wider uppercase"
+                                            >{{ $t('contact.email_tag') }}</span
+                                        >
                                     </div>
                                     <a
                                         href="mailto:info@treetino.com"
-                                        class="text-xl font-medium text-black hover:text-t-blue transition-colors"
+                                        class="text-xl font-medium text-black transition-colors hover:text-t-blue"
                                     >
                                         info@treetino.com
                                     </a>
@@ -116,11 +146,20 @@ async function formProcess() {
                                 </div>
 
                                 <div class="border-l-2 border-black/10 pl-6">
-                                    <div class="flex items-center gap-3 text-t-blue mb-2">
+                                    <div
+                                        class="mb-2 flex items-center gap-3 text-t-blue"
+                                    >
                                         <Clock class="h-5 w-5" />
-                                        <span class="text-xs font-semibold uppercase tracking-wider">{{ $t('contact.response_tag') }}</span>
+                                        <span
+                                            class="text-xs font-semibold tracking-wider uppercase"
+                                            >{{
+                                                $t('contact.response_tag')
+                                            }}</span
+                                        >
                                     </div>
-                                    <p class="text-sm sm:text-base text-black/70 leading-relaxed">
+                                    <p
+                                        class="text-sm leading-relaxed text-black/70 sm:text-base"
+                                    >
                                         {{ $t('contact.response_time') }}
                                     </p>
                                 </div>
@@ -129,25 +168,31 @@ async function formProcess() {
 
                         <!-- Right Column: Clean Minimalist Contact Form -->
                         <div class="lg:col-span-7">
-                            <div class="relative rounded-3xl border border-black/10 bg-zinc-50/50 p-8 sm:p-10 shadow-xs">
+                            <div
+                                class="relative rounded-3xl border border-black/10 bg-zinc-50/50 p-8 shadow-xs sm:p-10"
+                            >
                                 <div class="relative grid gap-6">
                                     <div>
                                         <label
                                             for="name"
-                                            class="mb-2 block text-xs font-semibold uppercase tracking-wider text-black/70"
+                                            class="mb-2 block text-xs font-semibold tracking-wider text-black/70 uppercase"
                                         >
                                             {{ $t('contact.form.name') }}
                                         </label>
                                         <input
-                                            class="w-full rounded-xl border border-black/15 bg-white px-4 py-3.5 text-black placeholder:text-black/35 focus:border-t-blue focus:ring-2 focus:ring-t-blue/20 focus:outline-none transition-all"
+                                            class="w-full rounded-xl border border-black/15 bg-white px-4 py-3.5 text-black transition-all placeholder:text-black/35 focus:border-t-blue focus:ring-2 focus:ring-t-blue/20 focus:outline-none"
                                             type="text"
                                             id="name"
                                             v-model="name"
-                                            :placeholder="$t('contact.form.name_placeholder')"
+                                            :placeholder="
+                                                $t(
+                                                    'contact.form.name_placeholder',
+                                                )
+                                            "
                                         />
                                         <div
                                             v-if="formErrors.name"
-                                            class="pt-1.5 text-xs text-red-500 font-medium"
+                                            class="pt-1.5 text-xs font-medium text-red-500"
                                         >
                                             {{ formErrors.name[0] }}
                                         </div>
@@ -156,20 +201,24 @@ async function formProcess() {
                                     <div>
                                         <label
                                             for="email"
-                                            class="mb-2 block text-xs font-semibold uppercase tracking-wider text-black/70"
+                                            class="mb-2 block text-xs font-semibold tracking-wider text-black/70 uppercase"
                                         >
                                             {{ $t('contact.form.email') }}
                                         </label>
                                         <input
-                                            class="w-full rounded-xl border border-black/15 bg-white px-4 py-3.5 text-black placeholder:text-black/35 focus:border-t-blue focus:ring-2 focus:ring-t-blue/20 focus:outline-none transition-all"
+                                            class="w-full rounded-xl border border-black/15 bg-white px-4 py-3.5 text-black transition-all placeholder:text-black/35 focus:border-t-blue focus:ring-2 focus:ring-t-blue/20 focus:outline-none"
                                             type="email"
                                             id="email"
                                             v-model="mail"
-                                            :placeholder="$t('contact.form.email_placeholder')"
+                                            :placeholder="
+                                                $t(
+                                                    'contact.form.email_placeholder',
+                                                )
+                                            "
                                         />
                                         <div
                                             v-if="formErrors.mail"
-                                            class="pt-1.5 text-xs text-red-500 font-medium"
+                                            class="pt-1.5 text-xs font-medium text-red-500"
                                         >
                                             {{ formErrors.mail[0] }}
                                         </div>
@@ -178,20 +227,24 @@ async function formProcess() {
                                     <div>
                                         <label
                                             for="message"
-                                            class="mb-2 block text-xs font-semibold uppercase tracking-wider text-black/70"
+                                            class="mb-2 block text-xs font-semibold tracking-wider text-black/70 uppercase"
                                         >
                                             {{ $t('contact.form.message') }}
                                         </label>
                                         <textarea
                                             rows="5"
-                                            class="w-full rounded-xl border border-black/15 bg-white px-4 py-3.5 text-black placeholder:text-black/35 focus:border-t-blue focus:ring-2 focus:ring-t-blue/20 focus:outline-none transition-all resize-y"
+                                            class="w-full resize-y rounded-xl border border-black/15 bg-white px-4 py-3.5 text-black transition-all placeholder:text-black/35 focus:border-t-blue focus:ring-2 focus:ring-t-blue/20 focus:outline-none"
                                             id="message"
                                             v-model="message"
-                                            :placeholder="$t('contact.form.message_placeholder')"
+                                            :placeholder="
+                                                $t(
+                                                    'contact.form.message_placeholder',
+                                                )
+                                            "
                                         />
                                         <div
                                             v-if="formErrors.message"
-                                            class="pt-1.5 text-xs text-red-500 font-medium"
+                                            class="pt-1.5 text-xs font-medium text-red-500"
                                         >
                                             {{ formErrors.message[0] }}
                                         </div>
@@ -199,24 +252,32 @@ async function formProcess() {
 
                                     <div class="pt-2">
                                         <ButtonPrimary
-                                            class="w-full cursor-pointer text-center py-4"
+                                            class="w-full cursor-pointer py-4 text-center"
                                             @click="formProcess"
                                         >
-                                            <div class="flex items-center justify-center gap-2">
+                                            <div
+                                                class="flex items-center justify-center gap-2"
+                                            >
                                                 <Send class="h-4 w-4" />
-                                                <span>{{ $t('contact.form.submit') }}</span>
+                                                <span>{{
+                                                    $t('contact.form.submit')
+                                                }}</span>
                                             </div>
                                         </ButtonPrimary>
                                     </div>
 
-                                    <div class="text-xs text-black/50 text-center">
+                                    <div
+                                        class="text-center text-xs text-black/50"
+                                    >
                                         {{ $t('contact.privacy_consent') }}
                                         <Link
-                                            class="underline hover:text-black ml-1 text-black/70"
+                                            class="ml-1 text-black/70 underline hover:text-black"
                                             :href="route('legal.pp')"
                                         >
-                                            {{ $t('contact.privacy_link') }}
-                                        </Link>.
+                                            {{
+                                                $t('contact.privacy_link')
+                                            }} </Link
+                                        >.
                                     </div>
                                 </div>
 
@@ -224,9 +285,9 @@ async function formProcess() {
                                 <Transition>
                                     <div
                                         v-if="formSending || formSent"
-                                        class="absolute inset-0 flex items-center justify-center rounded-3xl bg-white/95 backdrop-blur-sm p-8 text-black z-20"
+                                        class="absolute inset-0 z-20 flex items-center justify-center rounded-3xl bg-white/95 p-8 text-black backdrop-blur-sm"
                                     >
-                                        <div class="text-center space-y-3">
+                                        <div class="space-y-3 text-center">
                                             <Refresh
                                                 v-if="formSending"
                                                 class="mx-auto h-10 w-10 animate-spin text-t-blue"
@@ -235,8 +296,18 @@ async function formProcess() {
                                                 v-if="formSent"
                                                 class="mx-auto h-12 w-12 text-green-600"
                                             />
-                                            <div class="text-lg font-medium text-black">
-                                                {{ formSending ? $t('contact.form.sending') : $t('contact.form.success') }}
+                                            <div
+                                                class="text-lg font-medium text-black"
+                                            >
+                                                {{
+                                                    formSending
+                                                        ? $t(
+                                                              'contact.form.sending',
+                                                          )
+                                                        : $t(
+                                                              'contact.form.success',
+                                                          )
+                                                }}
                                             </div>
                                         </div>
                                     </div>
@@ -247,23 +318,33 @@ async function formProcess() {
                 </section>
 
                 <!-- Team & Founders Section -->
-                <section class="py-20 lg:py-28 border-t border-black/10">
+                <section class="border-t border-black/10 py-20 lg:py-28">
                     <div class="mb-14">
-                        <span class="text-xs font-semibold tracking-[0.2em] text-t-blue uppercase">
+                        <span
+                            class="text-xs font-semibold tracking-[0.2em] text-t-blue uppercase"
+                        >
                             {{ $t('contact.team_tag') }}
                         </span>
-                        <h2 class="mt-3 text-3xl font-medium tracking-tight text-black sm:text-4xl lg:text-5xl">
+                        <h2
+                            class="mt-3 text-3xl font-medium tracking-tight text-black sm:text-4xl lg:text-5xl"
+                        >
                             {{ $t('contact.team_title') }}
                         </h2>
-                        <p class="mt-4 max-w-3xl text-base sm:text-lg text-black/70 leading-relaxed">
+                        <p
+                            class="mt-4 max-w-3xl text-base leading-relaxed text-black/70 sm:text-lg"
+                        >
                             {{ $t('contact.team_lead') }}
                         </p>
                     </div>
 
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-                        <!-- Left: Team Photo & Credentials (6 Cols) -->
-                        <div class="lg:col-span-5 space-y-6">
-                            <div class="group relative overflow-hidden rounded-3xl border border-black/10 bg-black shadow-2xl">
+                    <div
+                        class="grid grid-cols-1 items-start gap-12 lg:grid-cols-12"
+                    >
+                        <!-- Left: Team Photo & Credentials (5 Cols) -->
+                        <div class="lg:col-span-5">
+                            <div
+                                class="group relative overflow-hidden rounded-3xl border border-black/10 bg-black shadow-2xl"
+                            >
                                 <div class="aspect-4/3 overflow-hidden">
                                     <img
                                         src="/img/team/founders-leaf.jpg"
@@ -271,42 +352,36 @@ async function formProcess() {
                                         class="h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
                                     />
                                 </div>
-                                <div class="absolute inset-0 bg-linear-to-t from-black/85 via-black/20 to-transparent pointer-events-none"></div>
-                                <div class="absolute bottom-0 inset-x-0 p-6 text-white text-xs leading-relaxed opacity-95">
+                                <div
+                                    class="pointer-events-none absolute inset-0 bg-linear-to-t from-black/85 via-black/20 to-transparent"
+                                ></div>
+                                <div
+                                    class="absolute inset-x-0 bottom-0 p-6 text-xs leading-relaxed text-white opacity-95"
+                                >
                                     <p>{{ $t('contact.team_caption') }}</p>
-                                </div>
-                            </div>
-
-                            <!-- Quote & Badges Block -->
-                            <div class="rounded-2xl border border-black/10 bg-zinc-50 p-6 space-y-4">
-                                <p class="text-xs sm:text-sm font-medium italic text-black/80 leading-relaxed">
-                                    {{ $t('contact.team_quote') }}
-                                </p>
-                                <div class="flex flex-wrap items-center gap-2 pt-3 border-t border-black/10">
-                                    <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700 border border-emerald-200">
-                                        ✓ CzechInvest Inkubace
-                                    </span>
-                                    <span class="inline-flex items-center gap-1.5 rounded-full bg-sky-50 px-3 py-1 text-xs font-semibold text-t-blue border border-sky-200">
-                                        ✓ Patent EP 4 664 750
-                                    </span>
-                                    <span class="inline-flex items-center gap-1.5 rounded-full bg-zinc-100 px-3 py-1 text-xs font-semibold text-black/70 border border-black/10">
-                                        {{ $t('contact.badge_rnd') }}
-                                    </span>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Right: Founders & Key Team Profiles (7 Cols) -->
-                        <div class="lg:col-span-7 space-y-8">
+                        <div class="space-y-8 lg:col-span-7">
                             <!-- Founder: Dominik Mašek -->
                             <div class="border-l-2 border-t-blue pl-6">
                                 <div class="flex items-center gap-2.5">
-                                    <h3 class="text-xl sm:text-2xl font-bold text-black">{{ $t('contact.team_dominik_name') }}</h3>
-                                    <span class="rounded-full bg-t-blue/10 px-2.5 py-0.5 text-xs font-semibold text-t-blue">
+                                    <h3
+                                        class="text-xl font-bold text-black sm:text-2xl"
+                                    >
+                                        {{ $t('contact.team_dominik_name') }}
+                                    </h3>
+                                    <span
+                                        class="rounded-full bg-t-blue/10 px-2.5 py-0.5 text-xs font-semibold text-t-blue"
+                                    >
                                         {{ $t('contact.team_dominik_role') }}
                                     </span>
                                 </div>
-                                <p class="mt-2 text-xs sm:text-sm text-black/75 leading-relaxed">
+                                <p
+                                    class="mt-2 text-xs leading-relaxed text-black/75 sm:text-sm"
+                                >
                                     {{ $t('contact.team_dominik_desc') }}
                                 </p>
                             </div>
@@ -314,12 +389,20 @@ async function formProcess() {
                             <!-- Founder: Jakub Lustyk -->
                             <div class="border-l-2 border-t-blue pl-6">
                                 <div class="flex items-center gap-2.5">
-                                    <h3 class="text-xl sm:text-2xl font-bold text-black">{{ $t('contact.team_jakub_name') }}</h3>
-                                    <span class="rounded-full bg-t-blue/10 px-2.5 py-0.5 text-xs font-semibold text-t-blue">
+                                    <h3
+                                        class="text-xl font-bold text-black sm:text-2xl"
+                                    >
+                                        {{ $t('contact.team_jakub_name') }}
+                                    </h3>
+                                    <span
+                                        class="rounded-full bg-t-blue/10 px-2.5 py-0.5 text-xs font-semibold text-t-blue"
+                                    >
                                         {{ $t('contact.team_jakub_role') }}
                                     </span>
                                 </div>
-                                <p class="mt-2 text-xs sm:text-sm text-black/75 leading-relaxed">
+                                <p
+                                    class="mt-2 text-xs leading-relaxed text-black/75 sm:text-sm"
+                                >
                                     {{ $t('contact.team_jakub_desc') }}
                                 </p>
                             </div>
@@ -327,12 +410,20 @@ async function formProcess() {
                             <!-- Key Team: Radim Novotný -->
                             <div class="border-l-2 border-black/20 pl-6">
                                 <div class="flex items-center gap-2.5">
-                                    <h3 class="text-lg sm:text-xl font-bold text-black">{{ $t('contact.team_radim_name') }}</h3>
-                                    <span class="rounded-full bg-zinc-100 px-2.5 py-0.5 text-xs font-semibold text-black/70 border border-black/10">
+                                    <h3
+                                        class="text-lg font-bold text-black sm:text-xl"
+                                    >
+                                        {{ $t('contact.team_radim_name') }}
+                                    </h3>
+                                    <span
+                                        class="rounded-full border border-black/10 bg-zinc-100 px-2.5 py-0.5 text-xs font-semibold text-black/70"
+                                    >
                                         {{ $t('contact.team_radim_role') }}
                                     </span>
                                 </div>
-                                <p class="mt-2 text-xs sm:text-sm text-black/75 leading-relaxed">
+                                <p
+                                    class="mt-2 text-xs leading-relaxed text-black/75 sm:text-sm"
+                                >
                                     {{ $t('contact.team_radim_desc') }}
                                 </p>
                             </div>

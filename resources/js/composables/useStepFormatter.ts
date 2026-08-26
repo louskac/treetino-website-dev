@@ -5,6 +5,6 @@ export function useStepFormatter() {
     };
 
     return {
-        formatStep
+        formatStep,
     };
 }

@@ -3,7 +3,8 @@
         <p
             class="mb-4 text-xs tracking-widest text-black/70 uppercase dark:text-white/50"
         >
-            {{ formatStep(stepNumber) }} — {{ $t('configurator.steps.battery') }}
+            {{ formatStep(stepNumber) }} —
+            {{ $t('configurator.steps.battery') }}
         </p>
         <div class="flex flex-col gap-1">
             <button
@@ -30,7 +31,11 @@
                         "
                     >
                         <CheckCircle v-if="modelValue === option.id" />
-                        {{ modelValue === option.id ? $t('configurator.added') : $t('configurator.add') }}
+                        {{
+                            modelValue === option.id
+                                ? $t('configurator.added')
+                                : $t('configurator.add')
+                        }}
                     </span>
                 </div>
                 <p
@@ -91,7 +96,7 @@ const options = computed(() => {
             price: 'Zdarma',
             priceKey: 'configurator.free',
             roi: null,
-            description: t("configurator.preview.addons.battery.none"),
+            description: t('configurator.preview.addons.battery.none'),
         },
         {
             id: 'battery',
@@ -99,7 +104,7 @@ const options = computed(() => {
             labelKey: 'configurator.battery.battery.label',
             roi: 14,
             price: null,
-            description: t("configurator.preview.addons.battery.text"),
+            description: t('configurator.preview.addons.battery.text'),
         },
     ];
 });

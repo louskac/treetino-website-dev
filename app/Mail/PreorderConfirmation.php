@@ -73,9 +73,9 @@ class PreorderConfirmation extends Mailable
                 'without-turbines' => 'Bez větrných turbín',
             ],
             'turbineSize' => [
-                'large' => 'Velká (3 kW)',
-                'medium' => 'Střední (1,5 kW)',
-                'small' => 'Menší (1 kW)',
+                'large' => 'Velká (3 kW / 2,8 m)',
+                'medium' => 'Střední (2 kW / 1,8 m)',
+                'small' => 'Menší (1 kW / 1,2 m)',
             ],
             'turbineMount' => [
                 'roof' => 'Na střechu',

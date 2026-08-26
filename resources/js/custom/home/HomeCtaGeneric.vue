@@ -38,7 +38,7 @@ defineProps<{
             <div class="flex h-full w-full p-6">
                 <div class="mx-auto my-auto text-center text-white">
                     <h1
-                        class="text-center text-4xl font-medium sm:text-6xl lg:text-7xl leading-tight"
+                        class="text-center text-4xl leading-tight font-medium sm:text-6xl lg:text-7xl"
                         v-html="title || $t('home.cta.generic')"
                     ></h1>
 

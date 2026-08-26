@@ -27,7 +27,9 @@ const product = computed(
 
 const localizedProductName = computed(() => {
     if (!product.value) return props.preorder?.product_type ?? '';
-    return product.value.labelKey ? t(product.value.labelKey, product.value.label) : product.value.label;
+    return product.value.labelKey
+        ? t(product.value.labelKey, product.value.label)
+        : product.value.label;
 });
 
 // Fields to skip when value is empty/zero/false
@@ -47,11 +49,26 @@ const configurationRows = computed(() => {
             fveLeafDesign: t('configurator.steps.fve_leaf', 'Design FVE listů'),
             connectivity: t('configurator.steps.connectivity', 'Konektivita'),
             battery: t('configurator.steps.battery', 'Baterie'),
-            evChargerCount: t('configurator.addons.ev.label', 'Počet EV nabíječek'),
-            bikeChargerRequested: t('configurator.addons.bike.label', 'Nabíječka pro elektrokola'),
-            windTurbines: t('configurator.steps.wind_turbines', 'Větrné turbíny'),
-            turbineSize: t('configurator.steps.turbine_size', 'Velikost turbíny'),
-            turbineMount: t('configurator.steps.turbine_mount', 'Umístění turbíny'),
+            evChargerCount: t(
+                'configurator.addons.ev.label',
+                'Počet EV nabíječek',
+            ),
+            bikeChargerRequested: t(
+                'configurator.addons.bike.label',
+                'Nabíječka pro elektrokola',
+            ),
+            windTurbines: t(
+                'configurator.steps.wind_turbines',
+                'Větrné turbíny',
+            ),
+            turbineSize: t(
+                'configurator.steps.turbine_size',
+                'Velikost turbíny',
+            ),
+            turbineMount: t(
+                'configurator.steps.turbine_mount',
+                'Umístění turbíny',
+            ),
             treeDesign: t('configurator.steps.tree_design', 'Design stromu'),
             grant: t('configurator.steps.grant', 'Dotační program'),
             paymentMode: t('configurator.steps.payment_mode', 'Způsob platby'),
@@ -65,33 +82,59 @@ const configurationRows = computed(() => {
 
         const str = String(val);
         if (key === 'windTurbines') {
-            if (str === 'with-turbines') return t('configurator.wind_turbines.with.label', 'S větrnými turbínami');
-            if (str === 'without-turbines') return t('configurator.wind_turbines.without.label', 'Bez větrných turbín');
+            if (str === 'with-turbines')
+                return t(
+                    'configurator.wind_turbines.with.label',
+                    'S větrnými turbínami',
+                );
+            if (str === 'without-turbines')
+                return t(
+                    'configurator.wind_turbines.without.label',
+                    'Bez větrných turbín',
+                );
         }
         if (key === 'turbineSize') {
-            if (str === 'large') return `${t('configurator.turbine_size.large.label', 'Velká')} (3 kW)`;
-            if (str === 'medium') return `${t('configurator.turbine_size.medium.label', 'Střední')} (1,5 kW)`;
-            if (str === 'small') return `${t('configurator.turbine_size.small.label', 'Menší')} (1 kW)`;
+            if (str === 'large')
+                return `${t('configurator.turbine_size.large.label', 'Velká')} (${t('configurator.turbine_size.large.power', '3 kW (2,8 m)')})`;
+            if (str === 'medium')
+                return `${t('configurator.turbine_size.medium.label', 'Střední')} (${t('configurator.turbine_size.medium.power', '2 kW (1,8 m)')})`;
+            if (str === 'small')
+                return `${t('configurator.turbine_size.small.label', 'Menší')} (${t('configurator.turbine_size.small.power', '1 kW (1,2 m)')})`;
         }
         if (key === 'turbineMount') {
-            if (str === 'roof') return t('configurator.turbine_mount.roof.label', 'Na střechu');
-            if (str === 'wall') return t('configurator.turbine_mount.wall.label', 'Na zeď');
-            if (str === 'pole') return t('configurator.turbine_mount.pole.label', 'Na sloup');
+            if (str === 'roof')
+                return t('configurator.turbine_mount.roof.label', 'Na střechu');
+            if (str === 'wall')
+                return t('configurator.turbine_mount.wall.label', 'Na zeď');
+            if (str === 'pole')
+                return t('configurator.turbine_mount.pole.label', 'Na sloup');
         }
         if (key === 'treeDesign') {
-            if (str === 'standard') return t('configurator.tree_design.standard.label', 'Standardní');
-            if (str === 'cyber') return t('configurator.tree_design.cyber.label', 'Cyber');
+            if (str === 'standard')
+                return t(
+                    'configurator.tree_design.standard.label',
+                    'Standardní',
+                );
+            if (str === 'cyber')
+                return t('configurator.tree_design.cyber.label', 'Cyber');
         }
         if (key === 'fveLeafDesign') {
-            if (str === 'none') return t('configurator.fve_leaf.none.label', 'Bez designu');
-            if (str === 'spring') return t('configurator.fve_leaf.spring.label', 'Jaro');
-            if (str === 'summer') return t('configurator.fve_leaf.summer.label', 'Léto');
-            if (str === 'autumn') return t('configurator.fve_leaf.autumn.label', 'Podzim');
-            if (str === 'winter') return t('configurator.fve_leaf.winter.label', 'Zima');
+            if (str === 'none')
+                return t('configurator.fve_leaf.none.label', 'Bez designu');
+            if (str === 'spring')
+                return t('configurator.fve_leaf.spring.label', 'Jaro');
+            if (str === 'summer')
+                return t('configurator.fve_leaf.summer.label', 'Léto');
+            if (str === 'autumn')
+                return t('configurator.fve_leaf.autumn.label', 'Podzim');
+            if (str === 'winter')
+                return t('configurator.fve_leaf.winter.label', 'Zima');
         }
         if (key === 'paymentMode') {
-            if (str === 'cash') return t('configurator.payment.cash', 'Hotovost');
-            if (str === 'credit') return t('configurator.payment.credit', 'Zelený úvěr');
+            if (str === 'cash')
+                return t('configurator.payment.cash', 'Hotovost');
+            if (str === 'credit')
+                return t('configurator.payment.credit', 'Zelený úvěr');
         }
         if (key === 'color' || key === 'leafColor') {
             const colorKeys: Record<string, string> = {
@@ -99,7 +142,10 @@ const configurationRows = computed(() => {
                 silver: t('configurator.color.silver', 'Stříbrná'),
                 brown: t('configurator.color.brown', 'Hnědá'),
                 green: t('configurator.color.green', 'Lesní zelená'),
-                'dark-green': t('configurator.color.dark_green', 'Tmavě zelená'),
+                'dark-green': t(
+                    'configurator.color.dark_green',
+                    'Tmavě zelená',
+                ),
                 grey: t('configurator.color.grey', 'Šedá'),
                 orange: t('configurator.color.orange', 'Oranžová'),
                 transparent: t('configurator.color.transparent', 'Průhledná'),
@@ -239,16 +285,22 @@ const downloadInvoice = async () => {
 
 <template>
     <DefaultLayout :inverted="true">
-        <div class="relative overflow-hidden bg-white text-black pt-36 sm:pt-44">
+        <div
+            class="relative overflow-hidden bg-white pt-36 text-black sm:pt-44"
+        >
             <div
-                class="absolute left-1/2 hidden h-full max-w-[1400px] -translate-x-1/2 border-r border-l border-black/10 pointer-events-none sm:block sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
+                class="pointer-events-none absolute left-1/2 hidden h-full max-w-[1400px] -translate-x-1/2 border-r border-l border-black/10 sm:block sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
             ></div>
 
             <main
-                class="relative mx-auto h-full w-full max-w-[1400px] px-6 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)] text-black"
+                class="relative mx-auto h-full w-full max-w-[1400px] px-6 text-black sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
             >
                 <div class="pb-4.5">
-                    <h1 class="text-4xl font-medium tracking-tight text-black sm:text-6xl">{{ $t('preorders.title') }}</h1>
+                    <h1
+                        class="text-4xl font-medium tracking-tight text-black sm:text-6xl"
+                    >
+                        {{ $t('preorders.title') }}
+                    </h1>
 
                     <div class="mt-1 text-xs text-black/70">
                         ID: {{ preorder.uuid }}
@@ -273,7 +325,9 @@ const downloadInvoice = async () => {
                                         class="relative h-2 w-2 rounded-full bg-orange-600"
                                     ></div>
                                 </div>
-                                <div class="text-sm font-medium text-orange-600">
+                                <div
+                                    class="text-sm font-medium text-orange-600"
+                                >
                                     {{ $t('preorders.status.pending') }}
                                 </div>
                             </div>
@@ -307,10 +361,12 @@ const downloadInvoice = async () => {
                                         <Download class="h-5 w-5" />
                                     </div>
                                     <div class="my-auto text-sm font-medium">
-                                        <span v-if="isDownloading"
-                                            >{{ $t('preorders.invoice.generating') }}</span
-                                        >
-                                        <span v-else>{{ $t('preorders.invoice.download') }}</span>
+                                        <span v-if="isDownloading">{{
+                                            $t('preorders.invoice.generating')
+                                        }}</span>
+                                        <span v-else>{{
+                                            $t('preorders.invoice.download')
+                                        }}</span>
                                     </div>
                                 </button>
                             </div>
@@ -331,11 +387,15 @@ const downloadInvoice = async () => {
                         />
 
                         <!-- Product name gradient bottom -->
-                        <div class="absolute bottom-0 w-full h-35 bg-linear-to-b from-transparent to-white"></div>
+                        <div
+                            class="absolute bottom-0 h-35 w-full bg-linear-to-b from-transparent to-white"
+                        ></div>
 
                         <!-- Product name overlay bottom-left -->
                         <div class="absolute bottom-0 left-0 p-6">
-                            <div class="text-5xl md:text-6xl lg:text-5xl xl:text-6xl font-medium text-black">
+                            <div
+                                class="text-5xl font-medium text-black md:text-6xl lg:text-5xl xl:text-6xl"
+                            >
                                 {{ localizedProductName }}
                             </div>
                         </div>
@@ -351,7 +411,9 @@ const downloadInvoice = async () => {
 
                             <table class="w-full text-sm">
                                 <tbody>
-                                    <tr class="border-t border-black/10 first:border-t-0">
+                                    <tr
+                                        class="border-t border-black/10 first:border-t-0"
+                                    >
                                         <td class="py-2 pr-6 text-black/60">
                                             {{ $t('preorders.created_at') }}
                                         </td>
@@ -360,7 +422,9 @@ const downloadInvoice = async () => {
                                         </td>
                                     </tr>
 
-                                    <tr class="border-t border-black/10 first:border-t-0">
+                                    <tr
+                                        class="border-t border-black/10 first:border-t-0"
+                                    >
                                         <td class="py-2 pr-6 text-black/60">
                                             {{ $t('preorders.total_price') }}
                                         </td>
@@ -369,7 +433,9 @@ const downloadInvoice = async () => {
                                         </td>
                                     </tr>
 
-                                    <tr class="border-t border-black/10 first:border-t-0">
+                                    <tr
+                                        class="border-t border-black/10 first:border-t-0"
+                                    >
                                         <td class="py-2 pr-6 text-black/60">
                                             {{ $t('preorders.product') }}
                                         </td>
@@ -383,7 +449,9 @@ const downloadInvoice = async () => {
 
                         <!-- Configuration table -->
                         <div class="">
-                            <h2 class="pb-4 text-3xl font-medium text-black">{{ $t('preorders.configuration') }}</h2>
+                            <h2 class="pb-4 text-3xl font-medium text-black">
+                                {{ $t('preorders.configuration') }}
+                            </h2>
                             <table class="w-full text-sm">
                                 <tbody>
                                     <tr

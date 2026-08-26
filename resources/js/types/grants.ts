@@ -16,7 +16,8 @@ export const GRANTS: Grant[] = [
         percentage: 65,
         eligibility: 'Pro firmy',
         eligibilityKey: 'configurator.grants.optak.eligibility',
-        description: 'Operační program Technologie a aplikace pro konkurenceschopnost.',
+        description:
+            'Operační program Technologie a aplikace pro konkurenceschopnost.',
         descriptionKey: 'configurator.grants.optak.desc',
     },
     {
@@ -25,7 +26,8 @@ export const GRANTS: Grant[] = [
         percentage: 50,
         eligibility: 'Pro obce a města',
         eligibilityKey: 'configurator.grants.res_plus.eligibility',
-        description: 'Podpora komunitní energetiky a obecních obnovitelných zdrojů.',
+        description:
+            'Podpora komunitní energetiky a obecních obnovitelných zdrojů.',
         descriptionKey: 'configurator.grants.res_plus.desc',
     },
     {
@@ -34,7 +36,8 @@ export const GRANTS: Grant[] = [
         percentage: 30,
         eligibility: 'Pro fyzické osoby',
         eligibilityKey: 'configurator.grants.nzu.eligibility',
-        description: 'Nová zelená úsporám - podpora pro domácnosti a fyzické osoby.',
+        description:
+            'Nová zelená úsporám - podpora pro domácnosti a fyzické osoby.',
         descriptionKey: 'configurator.grants.nzu.desc',
     },
     {
@@ -43,7 +46,8 @@ export const GRANTS: Grant[] = [
         percentage: 90,
         eligibility: 'Komplexní městské projekty',
         eligibilityKey: 'configurator.grants.irop.eligibility',
-        description: 'Integrovaný regionální operační program pro rozsáhlé projekty.',
+        description:
+            'Integrovaný regionální operační program pro rozsáhlé projekty.',
         descriptionKey: 'configurator.grants.irop.desc',
     },
     {

@@ -7,9 +7,9 @@
                 class="flex w-full flex-col rounded-2xl border p-6 backdrop-blur-2xl transition-all duration-550"
                 :class="[
                     activeDropdown === 'products' || mobileMenuOpen
-                        ? 'border-transparent bg-white shadow-2xl text-black'
+                        ? 'border-transparent bg-white text-black shadow-2xl'
                         : isScrolled || !props.scroll || props.inverted
-                          ? 'border-black/10 bg-white/80 shadow-lg text-black'
+                          ? 'border-black/10 bg-white/80 text-black shadow-lg'
                           : 'border-white/20 bg-black/20 text-white',
                 ]"
                 @mouseleave="activeDropdown = null"
@@ -19,7 +19,11 @@
                         <Link :href="route('home')">
                             <LogoType
                                 class="fill-current transition-colors duration-350"
-                                :class="headerIsInverted ? 'text-black' : 'text-white'"
+                                :class="
+                                    headerIsInverted
+                                        ? 'text-black'
+                                        : 'text-white'
+                                "
                             />
                         </Link>
                     </div>
@@ -28,35 +32,55 @@
                         <Link
                             href="#"
                             class="text-sm font-medium transition-colors"
-                            :class="headerIsInverted ? 'text-black/80 hover:text-black' : 'text-white/80 hover:text-white'"
+                            :class="
+                                headerIsInverted
+                                    ? 'text-black/80 hover:text-black'
+                                    : 'text-white/80 hover:text-white'
+                            "
                             @mouseenter="activeDropdown = 'products'"
                             >{{ $t('common.nav.products') }}</Link
                         >
                         <Link
                             :href="route('collaboration.index')"
                             class="text-sm font-medium transition-colors"
-                            :class="headerIsInverted ? 'text-black/80 hover:text-black' : 'text-white/80 hover:text-white'"
+                            :class="
+                                headerIsInverted
+                                    ? 'text-black/80 hover:text-black'
+                                    : 'text-white/80 hover:text-white'
+                            "
                             @mouseenter="activeDropdown = null"
                             >{{ $t('common.nav.collaboration') }}</Link
                         >
                         <Link
                             :href="route('sales.index')"
                             class="text-sm font-medium transition-colors"
-                            :class="headerIsInverted ? 'text-black/80 hover:text-black' : 'text-white/80 hover:text-white'"
+                            :class="
+                                headerIsInverted
+                                    ? 'text-black/80 hover:text-black'
+                                    : 'text-white/80 hover:text-white'
+                            "
                             @mouseenter="activeDropdown = null"
                             >{{ $t('common.nav.sales') }}</Link
                         >
                         <Link
                             :href="route('media.index')"
                             class="text-sm font-medium transition-colors"
-                            :class="headerIsInverted ? 'text-black/80 hover:text-black' : 'text-white/80 hover:text-white'"
+                            :class="
+                                headerIsInverted
+                                    ? 'text-black/80 hover:text-black'
+                                    : 'text-white/80 hover:text-white'
+                            "
                             @mouseenter="activeDropdown = null"
                             >{{ $t('common.nav.media') }}</Link
                         >
                         <Link
                             :href="route('contact.index')"
                             class="text-sm font-medium transition-colors"
-                            :class="headerIsInverted ? 'text-black/80 hover:text-black' : 'text-white/80 hover:text-white'"
+                            :class="
+                                headerIsInverted
+                                    ? 'text-black/80 hover:text-black'
+                                    : 'text-white/80 hover:text-white'
+                            "
                             @mouseenter="activeDropdown = null"
                             >{{ $t('common.nav.contact') }}</Link
                         >
@@ -70,7 +94,11 @@
                                 <button
                                     type="button"
                                     class="-m-1 cursor-pointer p-1"
-                                    :class="headerIsInverted ? 'text-black' : 'text-white'"
+                                    :class="
+                                        headerIsInverted
+                                            ? 'text-black'
+                                            : 'text-white'
+                                    "
                                     @click="mobileMenuOpen = !mobileMenuOpen"
                                 >
                                     <Xmark
@@ -144,12 +172,14 @@
                                 >
                                     <span
                                         class="text-sm font-medium text-black"
-                                        >{{ $t(item.labelKey, item.label) }}</span
+                                        >{{
+                                            $t(item.labelKey, item.label)
+                                        }}</span
                                     >
                                     <div class="flex gap-2">
                                         <Link
                                             :href="`/products/${item.detail}`"
-                                            class="rounded-lg border border-black/15 bg-white px-3 py-1 text-xs font-medium text-black/80 shadow-2xs transition hover:bg-black/5 hover:border-black/30"
+                                            class="rounded-lg border border-black/15 bg-white px-3 py-1 text-xs font-medium text-black/80 shadow-2xs transition hover:border-black/30 hover:bg-black/5"
                                             @click="mobileMenuOpen = false"
                                             >{{
                                                 $t('common.actions.info')

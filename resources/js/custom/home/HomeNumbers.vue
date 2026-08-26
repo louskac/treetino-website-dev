@@ -7,7 +7,10 @@
             class="relative mx-6 aspect-3/2 overflow-hidden rounded-3xl border border-black/10 bg-stone-100 shadow-2xl sm:mx-0 lg:aspect-3/1 dark:border-white/10 dark:bg-stone-900"
         >
             <!-- Strom V1 -->
-            <div v-if="selectedProductId === ProductId.StromV1" class="h-full w-full">
+            <div
+                v-if="selectedProductId === ProductId.StromV1"
+                class="h-full w-full"
+            >
                 <img
                     class="hidden h-full w-full object-cover lg:block"
                     src="/img/info/night-detail-w.jpg"
@@ -21,7 +24,10 @@
             </div>
 
             <!-- Strom V2 -->
-            <div v-else-if="selectedProductId === ProductId.StromV2" class="h-full w-full">
+            <div
+                v-else-if="selectedProductId === ProductId.StromV2"
+                class="h-full w-full"
+            >
                 <img
                     class="hidden h-full w-full object-cover lg:block"
                     src="/img/info/info-strom-v2-w.webp"
@@ -56,7 +62,7 @@
                     <button
                         v-for="product in PRODUCTS"
                         :key="product.id"
-                        class="rounded-full px-5 py-2 text-xs font-medium transition-all sm:text-sm cursor-pointer"
+                        class="cursor-pointer rounded-full px-5 py-2 text-xs font-medium transition-all sm:text-sm"
                         :class="
                             selectedProductId === product.id
                                 ? 'bg-t-blue text-white shadow-md'
@@ -77,17 +83,29 @@
             <div class="col-span-1 flex flex-col">
                 <span
                     class="text-xs font-semibold tracking-[0.2em] text-t-blue uppercase"
-                    >{{ $t('home.features.key_parameters', 'Klíčové Parametry') }}</span
+                    >{{
+                        $t('home.features.key_parameters', 'Klíčové Parametry')
+                    }}</span
                 >
                 <h2
-                    class="mt-3 text-4xl font-medium leading-tight text-black lg:text-5xl"
+                    class="mt-3 text-4xl leading-tight font-medium text-black lg:text-5xl"
                 >
-                    {{ $t(selectedProduct.numbersTitleKey, selectedProduct.numbersTitle) }}
+                    {{
+                        $t(
+                            selectedProduct.numbersTitleKey,
+                            selectedProduct.numbersTitle,
+                        )
+                    }}
                 </h2>
                 <p class="mt-4 text-sm text-black/70">
-                    {{ $t(selectedProduct.numbersDescriptionKey, selectedProduct.numbersDescription) }}
+                    {{
+                        $t(
+                            selectedProduct.numbersDescriptionKey,
+                            selectedProduct.numbersDescription,
+                        )
+                    }}
                 </p>
-                <div class="mt-auto pt-6 flex flex-col gap-2.5 sm:flex-row">
+                <div class="mt-auto flex flex-col gap-2.5 pt-6 sm:flex-row">
                     <ButtonSecondary
                         :href="`/products/${selectedProduct.detail}`"
                         class="w-full text-center sm:w-1/2"
@@ -95,10 +113,17 @@
                         {{ $t('common.actions.info') }}
                     </ButtonSecondary>
                     <ButtonPrimary
-                        :href="route('configurator.product', selectedProduct.id)"
+                        :href="
+                            route('configurator.product', selectedProduct.id)
+                        "
                         class="w-full text-center sm:w-1/2"
                     >
-                        {{ $t(selectedProduct.configureLabelKey, selectedProduct.configureLabel) }}
+                        {{
+                            $t(
+                                selectedProduct.configureLabelKey,
+                                selectedProduct.configureLabel,
+                            )
+                        }}
                     </ButtonPrimary>
                 </div>
             </div>
@@ -121,7 +146,7 @@
                             />
                         </div>
                         <div
-                            class="text-2xl font-medium text-black whitespace-nowrap sm:text-3xl lg:text-3xl xl:text-4xl"
+                            class="text-2xl font-medium whitespace-nowrap text-black sm:text-3xl lg:text-3xl xl:text-4xl"
                         >
                             {{ stat.value }}
                         </div>

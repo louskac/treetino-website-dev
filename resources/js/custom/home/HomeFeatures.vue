@@ -1,5 +1,8 @@
 <template>
-    <section ref="sectionRef" class="features-desktop relative bg-[#fdfdfd] text-black">
+    <section
+        ref="sectionRef"
+        class="features-desktop relative bg-[#fdfdfd] text-black"
+    >
         <div ref="pinRef" class="features-pin h-screen w-full overflow-hidden">
             <div
                 class="absolute inset-0 overflow-hidden lg:right-0 lg:left-auto lg:w-7/12"
@@ -43,7 +46,9 @@
                                     }}
                                 </span>
 
-                                <h2 class="text-4xl font-medium leading-tight text-black">
+                                <h2
+                                    class="text-4xl leading-tight font-medium text-black"
+                                >
                                     {{ sections[currentSectionIndex].title }}
                                 </h2>
 

@@ -1,7 +1,7 @@
 <template>
-    <div class="min-h-screen bg-background text-foreground flex flex-col">
+    <div class="flex min-h-screen flex-col bg-background text-foreground">
         <!-- Rendered only once globally to achieve better performance -->
-        <LiquidGlassFilter/>
+        <LiquidGlassFilter />
 
         <Header :scroll="props.scroll" :inverted="props.inverted" />
 
@@ -9,9 +9,9 @@
             <slot />
         </main>
 
-        <Footer class="mt-auto"/>
+        <Footer class="mt-auto" />
 
-        <CookieBanner/>
+        <CookieBanner />
     </div>
 </template>
 

@@ -46,20 +46,24 @@ const handleOpenSettings = () => {
             <div
                 class="pointer-events-auto flex w-full max-w-sm flex-col items-center gap-3 rounded-2xl border border-zinc-200/90 bg-white p-3.5 shadow-2xl backdrop-blur-xl sm:w-auto sm:max-w-none sm:flex-row sm:px-4"
             >
-                <div class="w-full text-center text-xs font-semibold text-zinc-900 sm:w-auto sm:text-left sm:text-sm">
+                <div
+                    class="w-full text-center text-xs font-semibold text-zinc-900 sm:w-auto sm:text-left sm:text-sm"
+                >
                     {{ $t('common.cookie.title') }}
                 </div>
-                <div class="flex h-10 w-full items-center justify-center gap-2 sm:w-auto">
+                <div
+                    class="flex h-10 w-full items-center justify-center gap-2 sm:w-auto"
+                >
                     <button
                         type="button"
-                        class="flex h-10 flex-1 cursor-pointer items-center justify-center rounded-xl bg-blue-600 px-4 text-center text-xs font-semibold text-white whitespace-nowrap transition-all hover:bg-blue-700 active:scale-95 sm:flex-none sm:text-sm"
+                        class="flex h-10 flex-1 cursor-pointer items-center justify-center rounded-xl bg-blue-600 px-4 text-center text-xs font-semibold whitespace-nowrap text-white transition-all hover:bg-blue-700 active:scale-95 sm:flex-none sm:text-sm"
                         @click="handleAcceptAll"
                     >
                         {{ $t('common.cookie.accept_all') }}
                     </button>
                     <button
                         type="button"
-                        class="flex h-10 flex-1 cursor-pointer items-center justify-center rounded-xl bg-zinc-950 px-4 text-center text-xs font-semibold text-white whitespace-nowrap transition-all hover:bg-black active:scale-95 sm:flex-none sm:text-sm"
+                        class="flex h-10 flex-1 cursor-pointer items-center justify-center rounded-xl bg-zinc-950 px-4 text-center text-xs font-semibold whitespace-nowrap text-white transition-all hover:bg-black active:scale-95 sm:flex-none sm:text-sm"
                         @click="handleRejectAll"
                     >
                         {{ $t('common.cookie.reject_all') }}

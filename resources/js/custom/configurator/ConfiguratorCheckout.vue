@@ -80,7 +80,11 @@
             <p
                 class="mt-1 text-xs leading-relaxed text-black/38 dark:text-white/30"
             >
-                {{ $t('configurator.checkout.savings_5yr_notice', { savings: formatPrice(monthlySavings * 60) }) }}
+                {{
+                    $t('configurator.checkout.savings_5yr_notice', {
+                        savings: formatPrice(monthlySavings * 60),
+                    })
+                }}
             </p>
         </div>
         <div v-else class="flex flex-col gap-1">
@@ -99,12 +103,20 @@
                 >
             </p>
             <p class="mt-0.5 text-xs text-black/35 dark:text-white/25">
-                {{ $t('configurator.checkout.for_months', { months: loanMonths }) }}
+                {{
+                    $t('configurator.checkout.for_months', {
+                        months: loanMonths,
+                    })
+                }}
             </p>
             <p
                 class="mt-1 text-xs leading-relaxed text-black/38 dark:text-white/30"
             >
-                {{ $t('configurator.checkout.monthly_savings_notice', { savings: formatPrice(monthlySavings) }) }}
+                {{
+                    $t('configurator.checkout.monthly_savings_notice', {
+                        savings: formatPrice(monthlySavings),
+                    })
+                }}
             </p>
             <button
                 @click="modalFinancing = true"
@@ -148,22 +160,52 @@
                 class="h-5 w-5 shrink-0 text-orange-600 dark:text-orange-400"
             />
             <p class="text-xs font-medium text-orange-700 dark:text-orange-300">
-                {{ $t('configurator.checkout.urgency', { month: currentMonthTranslated, reserved: urgency.reserved, total: urgency.total, unit: urgencyTranslatedUnit }) }}
+                {{
+                    $t('configurator.checkout.urgency', {
+                        month: currentMonthTranslated,
+                        reserved: urgency.reserved,
+                        total: urgency.total,
+                        unit: urgencyTranslatedUnit,
+                    })
+                }}
             </p>
         </div>
 
         <div class="flex gap-3">
             <div class="">
-                <input type="checkbox" v-model="tosConsent" id="tosConsent" class="cursor-pointer accent-black dark:accent-white" />
+                <input
+                    type="checkbox"
+                    v-model="tosConsent"
+                    id="tosConsent"
+                    class="cursor-pointer accent-black dark:accent-white"
+                />
             </div>
             <div class="-mt-0.5">
-                <label for="tosConsent" class="cursor-pointer text-sm text-black/80 dark:text-white/80">
-                    <i18n-t keypath="configurator.checkout.tos_agree" tag="span">
+                <label
+                    for="tosConsent"
+                    class="cursor-pointer text-sm text-black/80 dark:text-white/80"
+                >
+                    <i18n-t
+                        keypath="configurator.checkout.tos_agree"
+                        tag="span"
+                    >
                         <template #tos>
-                            <a class="underline text-black/90 hover:text-black dark:text-white/90 dark:hover:text-white" :href="route('legal.tos')" target="_blank" @click.stop>{{ $t('configurator.checkout.tos_link') }}</a>
+                            <a
+                                class="text-black/90 underline hover:text-black dark:text-white/90 dark:hover:text-white"
+                                :href="route('legal.tos')"
+                                target="_blank"
+                                @click.stop
+                                >{{ $t('configurator.checkout.tos_link') }}</a
+                            >
                         </template>
                         <template #pp>
-                            <a class="underline text-black/90 hover:text-black dark:text-white/90 dark:hover:text-white" :href="route('legal.pp')" target="_blank" @click.stop>{{ $t('configurator.checkout.pp_link') }}</a>
+                            <a
+                                class="text-black/90 underline hover:text-black dark:text-white/90 dark:hover:text-white"
+                                :href="route('legal.pp')"
+                                target="_blank"
+                                @click.stop
+                                >{{ $t('configurator.checkout.pp_link') }}</a
+                            >
                         </template>
                     </i18n-t>
                 </label>
@@ -281,9 +323,21 @@ const URGENCY_DATA: Record<
     string,
     { reserved: number; total: number; unitKey: string }
 > = {
-    [ProductId.StromV1]: { reserved: 3, total: 5, unitKey: 'configurator.checkout.units.trees' },
-    [ProductId.StromV2]: { reserved: 2, total: 10, unitKey: 'configurator.checkout.units.trees' },
-    [ProductId.Turbina]: { reserved: 14, total: 20, unitKey: 'configurator.checkout.units.turbines' },
+    [ProductId.StromV1]: {
+        reserved: 3,
+        total: 5,
+        unitKey: 'configurator.checkout.units.trees',
+    },
+    [ProductId.StromV2]: {
+        reserved: 2,
+        total: 10,
+        unitKey: 'configurator.checkout.units.trees',
+    },
+    [ProductId.Turbina]: {
+        reserved: 14,
+        total: 20,
+        unitKey: 'configurator.checkout.units.turbines',
+    },
 };
 
 const urgency = computed(

@@ -1,25 +1,32 @@
 <template>
     <div
         ref="containerRef"
-        class="relative w-full max-w-full mx-auto h-[550px] sm:h-[650px] md:h-[720px] lg:h-[800px] flex items-center justify-center select-none cursor-grab active:cursor-grabbing overflow-visible"
+        class="relative mx-auto flex h-[550px] w-full max-w-full cursor-grab items-center justify-center overflow-visible select-none active:cursor-grabbing sm:h-[650px] md:h-[720px] lg:h-[800px]"
         @mousemove="handleMouseMove"
         @mouseleave="handleMouseLeave"
     >
         <!-- Ambient Backlight Spotlight -->
         <div
-            class="absolute inset-0 rounded-full bg-t-blue/20 blur-3xl transition-opacity duration-500 pointer-events-none"
+            class="pointer-events-none absolute inset-0 rounded-full bg-t-blue/20 blur-3xl transition-opacity duration-500"
         ></div>
 
         <!-- Three.js 3D WebGL Canvas -->
-        <canvas ref="canvasRef" class="w-full h-full block relative z-10 overflow-visible"></canvas>
+        <canvas
+            ref="canvasRef"
+            class="relative z-10 block h-full w-full overflow-visible"
+        ></canvas>
 
         <!-- Loading indicator until 3D GLTF model is ready -->
         <div
             v-if="isLoading"
-            class="absolute inset-0 flex items-center justify-center bg-zinc-950/20 backdrop-blur-sm rounded-3xl z-20 transition-opacity duration-300 pointer-events-none"
+            class="pointer-events-none absolute inset-0 z-20 flex items-center justify-center rounded-3xl bg-zinc-950/20 backdrop-blur-sm transition-opacity duration-300"
         >
-            <div class="flex items-center gap-3 px-4 py-2 rounded-full bg-zinc-900/90 text-white/80 border border-white/10 text-xs font-mono shadow-xl">
-                <span class="h-2 w-2 rounded-full bg-t-blue animate-ping"></span>
+            <div
+                class="flex items-center gap-3 rounded-full border border-white/10 bg-zinc-900/90 px-4 py-2 font-mono text-xs text-white/80 shadow-xl"
+            >
+                <span
+                    class="h-2 w-2 animate-ping rounded-full bg-t-blue"
+                ></span>
                 Loading 3D MacBook Pro...
             </div>
         </div>
@@ -48,7 +55,7 @@ const props = withDefaults(
         rotateX: 0,
         scale: 1,
         interactive: true,
-    }
+    },
 );
 
 const containerRef = ref<HTMLElement | null>(null);
@@ -93,8 +100,11 @@ function updateScreenTexture(src: string) {
         texture.center.set(0, 0);
         texture.rotation = 0;
         texture.repeat.set(1, 1);
-        
-        const mat = new THREE.MeshBasicMaterial({ map: texture, toneMapped: false });
+
+        const mat = new THREE.MeshBasicMaterial({
+            map: texture,
+            toneMapped: false,
+        });
         screenMesh!.material = mat;
     });
 }
@@ -114,7 +124,7 @@ function updateCameraFrustum() {
     const fov = camera.fov * (Math.PI / 180);
 
     // Camera distance 1.38 provides big, bold model scale with complete clearance on all sides
-    const cameraDistance = Math.abs((maxDim / 2) / Math.tan(fov / 2)) * 1.38;
+    const cameraDistance = Math.abs(maxDim / 2 / Math.tan(fov / 2)) * 1.38;
 
     // Offset camera slightly downward (-0.03) to elevate front laptop base comfortably above bottom edge
     camera.position.set(0, -maxDim * 0.03, cameraDistance);
@@ -161,7 +171,9 @@ function initThreeScene() {
 
     // 5. Load GLTF 3D Model
     const dracoLoader = new DRACOLoader();
-    dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.7/');
+    dracoLoader.setDecoderPath(
+        'https://www.gstatic.com/draco/versioned/decoders/1.5.7/',
+    );
 
     const gltfLoader = new GLTFLoader();
     gltfLoader.setDRACOLoader(dracoLoader);
@@ -199,7 +211,9 @@ function initThreeScene() {
             });
 
             if (!screenMesh) {
-                const found = modelGroup.getObjectByName('matte') || modelGroup.getObjectByName('screen');
+                const found =
+                    modelGroup.getObjectByName('matte') ||
+                    modelGroup.getObjectByName('screen');
                 if (found && (found as THREE.Mesh).isMesh) {
                     screenMesh = found as THREE.Mesh;
                 }
@@ -215,7 +229,7 @@ function initThreeScene() {
         (error) => {
             console.error('Error loading 3D MacBook model:', error);
             isLoading.value = false;
-        }
+        },
     );
 
     // Render loop with smooth rotation interpolation
@@ -223,8 +237,10 @@ function initThreeScene() {
         animationFrameId = requestAnimationFrame(animate);
 
         if (pivotGroup) {
-            const targetY = (props.rotateY || 0) * (Math.PI / 180) + mouseX.value;
-            const targetX = (props.rotateX || 0) * (Math.PI / 180) + mouseY.value;
+            const targetY =
+                (props.rotateY || 0) * (Math.PI / 180) + mouseX.value;
+            const targetX =
+                (props.rotateX || 0) * (Math.PI / 180) + mouseY.value;
 
             // Smooth spring damping interpolation
             currentRotateY.value += (targetY - currentRotateY.value) * 0.08;
@@ -251,7 +267,7 @@ watch(
         if (newSrc) {
             updateScreenTexture(newSrc);
         }
-    }
+    },
 );
 
 onMounted(() => {
@@ -271,5 +287,4 @@ onUnmounted(() => {
 });
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

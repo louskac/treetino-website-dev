@@ -49,11 +49,11 @@
                         {{ $t('home.info.design.text') }}
                     </p>
 
-<!--                    <p>-->
-<!--                        Kombinace 300 solárních listů a transparentních turbín-->
-<!--                        obohacuje veřejný prostor. Zcela neslyšný chod umožňuje-->
-<!--                        bezpečnou integraci přímo mezi lidi.-->
-<!--                    </p>-->
+                    <!--                    <p>-->
+                    <!--                        Kombinace 300 solárních listů a transparentních turbín-->
+                    <!--                        obohacuje veřejný prostor. Zcela neslyšný chod umožňuje-->
+                    <!--                        bezpečnou integraci přímo mezi lidi.-->
+                    <!--                    </p>-->
                 </div>
 
                 <div
@@ -76,11 +76,11 @@
                         {{ $t('home.info.forest.text') }}
                     </p>
 
-<!--                    <p>-->
-<!--                        Technologie blockchain umožňuje bezpečné a-->
-<!--                        automatizované sdílení energie s okolím. Definujeme tak-->
-<!--                        standardy pro novou, decentralizovanou energetiku.-->
-<!--                    </p>-->
+                    <!--                    <p>-->
+                    <!--                        Technologie blockchain umožňuje bezpečné a-->
+                    <!--                        automatizované sdílení energie s okolím. Definujeme tak-->
+                    <!--                        standardy pro novou, decentralizovanou energetiku.-->
+                    <!--                    </p>-->
                 </div>
             </div>
 

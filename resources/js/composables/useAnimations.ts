@@ -1,4 +1,4 @@
-import { onMounted, onUnmounted, ref } from "vue";
+import { onMounted, onUnmounted, ref } from 'vue';
 
 export function useParallax(strength = 0.15) {
     const el = ref<HTMLElement | null>(null);

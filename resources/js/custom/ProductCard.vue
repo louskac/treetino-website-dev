@@ -21,7 +21,7 @@
                 {{ $t(product.labelKey, product.label) }}
             </div>
 
-            <div class="grid grid-cols-2 gap-2 items-stretch">
+            <div class="grid grid-cols-2 items-stretch gap-2">
                 <ButtonWhite
                     :href="`/products/${product.detail}`"
                     variant="slim"

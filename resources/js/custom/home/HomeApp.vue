@@ -135,7 +135,9 @@
 
                 <div class="col-span-1 flex xl:col-span-3">
                     <div class="my-auto">
-                        <h2 class="mb-6 text-5xl font-medium text-black lg:text-6xl">
+                        <h2
+                            class="mb-6 text-5xl font-medium text-black lg:text-6xl"
+                        >
                             Treetino <br />
                             <span class="text-t-blue">{{
                                 $t('app.title')
@@ -162,7 +164,9 @@
                                 </div>
 
                                 <div class="my-auto">
-                                    <div class="mb-1 leading-5 tracking-tight text-black font-medium">
+                                    <div
+                                        class="mb-1 leading-5 font-medium tracking-tight text-black"
+                                    >
                                         {{ $t('app.energy.title') }}
                                     </div>
                                     <div
@@ -184,7 +188,9 @@
                                 </div>
 
                                 <div class="my-auto">
-                                    <div class="mb-1 leading-5 tracking-tight text-black font-medium">
+                                    <div
+                                        class="mb-1 leading-5 font-medium tracking-tight text-black"
+                                    >
                                         {{ $t('app.weather.title') }}
                                     </div>
                                     <div
@@ -206,7 +212,9 @@
                                 </div>
 
                                 <div class="my-auto">
-                                    <div class="mb-1 leading-5 tracking-tight text-black font-medium">
+                                    <div
+                                        class="mb-1 leading-5 font-medium tracking-tight text-black"
+                                    >
                                         {{ $t('app.lights.title') }}
                                     </div>
                                     <div
@@ -228,7 +236,9 @@
                                 </div>
 
                                 <div class="my-auto">
-                                    <div class="mb-1 leading-5 tracking-tight text-black font-medium">
+                                    <div
+                                        class="mb-1 leading-5 font-medium tracking-tight text-black"
+                                    >
                                         {{ $t('app.reports.title') }}
                                     </div>
                                     <div
@@ -250,7 +260,9 @@
                                 </div>
 
                                 <div class="my-auto">
-                                    <div class="mb-1 leading-5 tracking-tight text-black font-medium">
+                                    <div
+                                        class="mb-1 leading-5 font-medium tracking-tight text-black"
+                                    >
                                         {{ $t('app.notifications.title') }}
                                     </div>
                                     <div

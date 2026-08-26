@@ -1,5 +1,5 @@
 <template>
-    <section class="hero h-screen w-full bg-zinc-950 relative">
+    <section class="hero relative h-screen w-full bg-zinc-950">
         <HomeHeroBackground
             ref="backgroundRef"
             class=""
@@ -25,8 +25,10 @@
             aria-label="Play background video"
             @click="playBackgroundVideo"
         >
-            <div class="h-20 w-20 bg-t rounded-full bg-white/10 backdrop-blur-lg border border-white/20 flex hover:scale-105 transition-all cursor-pointer">
-                <Play class="h-12 w-12 text-white m-auto pl-1" />
+            <div
+                class="bg-t flex h-20 w-20 cursor-pointer rounded-full border border-white/20 bg-white/10 backdrop-blur-lg transition-all hover:scale-105"
+            >
+                <Play class="m-auto h-12 w-12 pl-1 text-white" />
             </div>
         </button>
 

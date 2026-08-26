@@ -332,7 +332,7 @@
                     "1": "Max. výkon jedné turbíny",
                     "2": "Tichý provoz s nízkým startem",
                     "3": "Odolnost vůči větru až 45 m\/s",
-                    "4": "Transparentní polymerový design",
+                    "4": "Transparentní polykarbonátový design",
                     "5": "Snadná montáž na stožár i střechu",
                     "6": "Bezúdržbový provoz s životností 20 let"
                 },
@@ -341,25 +341,25 @@
                     "2": "3 varianty",
                     "3": "1,8 m\/s",
                     "4": "Bezpečné",
-                    "5": "2 měsíce",
-                    "6": "3 roky"
+                    "5": "< 1 měsíc",
+                    "6": "2 roky"
                 },
                 "tech": {
                     "tag": "Bezpečná & Tichá Větrná Energie",
-                    "title": "Patentovaný Tvar Kapky",
+                    "title": "Chráněný Tvar Kapky",
                     "item1_title": "Nízký startovací vítr",
                     "item1_text": "Začíná vyrábět energii už při mírném vánku 1.8 m\/s s 21% jmenovitou účinností.",
                     "item2_title": "Ochrana ptactva",
                     "item2_text": "Svislá osa rotace a souvislý tvar kapky minimalizují riziko pro ptactvo.",
                     "item3_title": "Flexibilní kotvení",
                     "item3_text": "Montáž na samostatný 5m sloup, zeď\/fasádu budovy nebo střechu.",
-                    "item4_title": "Rychlost výstavby",
-                    "item4_text": "Instalace od předání staveniště připravena k provozu za pouhé 2 měsíce."
+                    "item4_title": "Rychlost dodání",
+                    "item4_text": "Dodání i instalace připravena k provozu do 1 měsíce."
                 },
                 "showcase1": {
                     "tag": "Aerodynamika 2. generace",
                     "title": "Transparentní turbíny 2. generace",
-                    "lead": "Svislá osa rotace a lehký transparentní polymer vytváří nerušivý design, který přirozeně splyne s libovolnou fasádou či sloupem. Nezávislé na směru větru."
+                    "lead": "Svislá osa rotace a lehký transparentní polykarbonát vytváří nerušivý design, který přirozeně splyne s libovolnou fasádou či sloupem. Nezávislé na směru větru."
                 },
                 "showcase2": {
                     "tag": "Instalační Variabilita",
@@ -382,6 +382,7 @@
                 "wind": "VTE Větrné Turbíny",
                 "wind_speed": "Startovací \/ Jmenovitá Rychlost Větru",
                 "dimensions": "Rozměry & Zastavěná Plocha",
+                "weight": "Hmotnost",
                 "voltage": "Max. Provozní Napětí DC",
                 "warranty_steel": "Záruka Ocelový Skelet",
                 "warranty_pv": "Záruka FVE Produkt & Výkon",
@@ -390,10 +391,13 @@
                 "val_3months": "3 měsíce od předání staveniště",
                 "val_2months": "2 měsíce od předání staveniště",
                 "val_1month": "1 měsíc od objednání (montáž 1 den)",
+                "val_1month_turbine": "Do 1 měsíce od objednání",
+                "val_turbine_dimensions": "1 kW (1,2 m) \/ 2 kW (1,8 m) \/ 3 kW (2,8 m)",
+                "val_turbine_weight": "1 kW (36 kg) \/ 2 kW (48 kg) \/ 3 kW (73 kg)",
                 "val_steel_warranty": "15 let (Obal konstrukce 5 let)",
                 "val_pv_warranty": "12 let fyzický produkt \/ 25 let lineární výkon (85 %)",
                 "val_elec_warranty": "5 let Victron Energy & kabeláže",
-                "val_turbine_warranty": "3 roky na turbínu a mechaniku",
+                "val_turbine_warranty": "2 roky na turbínu a mechaniku",
                 "val_years": "let",
                 "val_months": "měsíce",
                 "val_month": "měsíc",
@@ -593,14 +597,17 @@
             "turbine_size": {
                 "large": {
                     "label": "Velká",
+                    "power": "3 kW (2,8 m)",
                     "desc": "Maximální výkon pro průmyslové a firemní instalace s vysokou spotřebou."
                 },
                 "medium": {
                     "label": "Střední",
+                    "power": "2 kW (1,8 m)",
                     "desc": "Vyvážený poměr výkonu a rozměrů, vhodný pro obce a větší budovy."
                 },
                 "small": {
                     "label": "Menší",
+                    "power": "1 kW (1,2 m)",
                     "desc": "Kompaktní turbína pro menší instalace a lokality s omezeným prostorem."
                 }
             },
@@ -796,21 +803,21 @@
         },
         "sales": {
             "audience": "PRODEJCI & OBCHODNÍ PARTNEŘI",
-            "title": "Prodávejte solární stromy s provizí až 10 %",
+            "title": "Prodávejte solární stromy s provizí až 450 000 Kč",
             "lead": "Kompletní nástroj pro obchodníky. 3D zaměření na pozemku klienta, okamžitá kalkulace návratnosti, export hotové nabídky do 2 minut a realizace na klíč.",
             "cta_primary": "Vyzkoušet prodejní aplikaci",
             "cta_secondary": "Kolik můžete vydělat",
             "numbers_badge": "PROVIZE & VÝDĚLKY",
             "numbers_title": "Vysoké odměny z každé uzavřené zakázky",
-            "numbers_description": "S provizí až 10 % získáte z velkého stromu až 450 000 Kč, z menšího modelu 150 000 Kč a z větrné turbíny 11 250 Kč. Vy domluvíte klienta, o výrobu, montáž a servis se postaráme my.",
+            "numbers_description": "Získejte provizi až 450 000 Kč z velkého stromu V1, 150 000 Kč z modelu V2 a 11 250 Kč z větrné turbíny. Vy domluvíte klienta, o výrobu, montáž a servis se postaráme my.",
             "stats": {
                 "1": {
-                    "val": "Až 10 %",
-                    "lbl": "Provize z každé zakázky (až 450 000 Kč \/ obchod)"
+                    "val": "Až 450 000 Kč",
+                    "lbl": "Provize z 1 velkého komerčního stromu V1"
                 },
                 "2": {
-                    "val": "Až 450 000 Kč",
-                    "lbl": "Výdělek z 1 velkého stromu (4 500 000 Kč)"
+                    "val": "Až 150 000 Kč",
+                    "lbl": "Provize z kompaktního modelu V2"
                 },
                 "3": {
                     "val": "2 minuty",
@@ -820,6 +827,43 @@
                     "val": "100 %",
                     "lbl": "Realizace na klíč zajištěna Treetino"
                 }
+            },
+            "ideas": {
+                "badge": "PŘÍLEŽITOSTI PRO VAŠE OBCHODY",
+                "title": "Kde můžete prodávat a vydělávat",
+                "subtitle": "Konkrétní příklady instalací s vysokou přidanou hodnotou pro klienta a maximální provizí pro vás.",
+                "commission_label": "Vaše provize",
+                "recommended_model": "Doporučený model",
+                "zoo_segment": "Veřejný prostor · Vysoká návštěvnost",
+                "zoo_title": "Zoologické zahrady & Safari parky",
+                "zoo_desc": "Edukativní zelená dominanta u hlavního vchodu doplněná o střešní větrné mikroturbíny. Výrazný symbol udržitelnosti a čisté energie pro tisíce návštěvníků denně.",
+                "zoo_model": "1× Strom V1 + 4× Aero Turbíny",
+                "zoo_payout": "495 000 Kč",
+                "dev_segment": "Novostavby · Moderní čtvrti",
+                "dev_title": "Rezidenční developerské projekty",
+                "dev_desc": "Instalace dvou dominantních stromů na centrálním náměstí a promenádě nové čtvrti. Zvyšuje prestiž projektu, zajišťuje ESG certifikaci a napájí rezidentní dobíjecí stanice.",
+                "dev_model": "2× Strom V1 (celkem 100 kW)",
+                "dev_payout": "900 000 Kč",
+                "metal_segment": "Těžký průmysl · 24\/7 provoz",
+                "metal_title": "Hutní & strojírenské výrobní areály",
+                "metal_desc": "Energeticky náročný nepřetržitý provoz vyžadující vysoký stabilní výkon. Průmyslový cluster tří velkých stromů pro masivní snížení denních i nočních odběrů z distribuční sítě.",
+                "metal_model": "3× Strom V1 (150 kW průmyslový cluster)",
+                "metal_payout": "1 350 000 Kč",
+                "bank_segment": "Komerční HQ · Firemní kampusy",
+                "bank_title": "Banky & korporátní centrály",
+                "bank_desc": "Prestižní reprezentativní dominanta u hlavního vchodu bankovního kampusu. Rychlé nabíjení pro management, firemní flotilu a VIP klienty.",
+                "bank_model": "1× Strom V1 (49,8 kW) + EV Hub",
+                "bank_payout": "450 000 Kč",
+                "community_segment": "Bytové domy · Komunity",
+                "community_title": "Komunitní bydlení & bytová družstva",
+                "community_desc": "Kombinovaný komunitní balíček: kompaktní strom V2 v zahradě a 4 větrné turbíny na střeše domu. Zajišťuje sdílenou čistou energii a znatelně snižuje měsíční platby obyvatel.",
+                "community_model": "1× Strom V2 + 4× Aero Turbíny",
+                "community_payout": "195 000 Kč",
+                "retail_segment": "Komerční plochy · Parkoviště",
+                "retail_title": "Logistická centra & Retail parky",
+                "retail_desc": "Komplexní řešení pro retail parky a logistické areály: dva stromy V1 na parkovišti zákazníků napojené na rychlonabíječky plus šest turbín na střešní atice haly.",
+                "retail_model": "2× Strom V1 + 6× Aero Turbíny",
+                "retail_payout": "967 500 Kč"
             },
             "why_join": {
                 "badge": "PROČ PRODÁVAT TREETINO",
@@ -884,9 +928,9 @@
                 "badge": "PODMÍNKY SPOLUPRÁCE",
                 "title": "Přehled provizí a parametrů",
                 "row1_label": "Výše provize",
-                "row1_val": "Až 10 % z celkové ceny realizované zakázky",
+                "row1_val": "Až 450 000 Kč z každé realizované zakázky velkého stromu",
                 "row2_label": "Příklady provizí z prodeje",
-                "row2_val": "Velký strom (4 500 000 Kč) → až 450 000 Kč · Malý strom (1 500 000 Kč) → až 150 000 Kč · Turbína (112 500 Kč) → až 11 250 Kč",
+                "row2_val": "Velký strom V1 (4 500 000 Kč) → až 450 000 Kč · Kompaktní strom V2 (1 500 000 Kč) → až 150 000 Kč · Turbína (112 500 Kč) → až 11 250 Kč",
                 "row3_label": "Prodejní aplikace & CRM",
                 "row3_val": "Prodejní aplikace Treetino (3D zaměření na mapě, kalkulace návratnosti & PDF nabídka do 2 minut)",
                 "row4_label": "Výroba, doprava & instalace",
@@ -1285,7 +1329,7 @@
                     "1": "Max output per turbine",
                     "2": "Quiet operation with low startup",
                     "3": "Wind resistance up to 45 m\/s",
-                    "4": "Transparent polymer design",
+                    "4": "Transparent polycarbonate design",
                     "5": "Easy mounting on pole or roof",
                     "6": "Maintenance-free with 20-year lifespan"
                 },
@@ -1294,25 +1338,25 @@
                     "2": "3 options",
                     "3": "1.8 m\/s",
                     "4": "Safe",
-                    "5": "2 months",
-                    "6": "3 years"
+                    "5": "< 1 month",
+                    "6": "2 years"
                 },
                 "tech": {
                     "tag": "Safe & Quiet Wind Energy",
-                    "title": "Patented Teardrop Shape",
+                    "title": "Protected Teardrop Shape",
                     "item1_title": "Low Startup Wind",
                     "item1_text": "Starts generating power at a light breeze of 1.8 m\/s with 21% rated efficiency.",
                     "item2_title": "Bird Safety",
                     "item2_text": "Vertical rotation axis and continuous teardrop form eliminate hazard to birds.",
                     "item3_title": "Flexible Mounting",
                     "item3_text": "Mounting on standalone 5m pole, building wall\/facade, or rooftop.",
-                    "item4_title": "Construction Speed",
-                    "item4_text": "Installation ready for operation within 2 months from site handover."
+                    "item4_title": "Delivery Speed",
+                    "item4_text": "Delivery and installation ready for operation in under 1 month."
                 },
                 "showcase1": {
                     "tag": "2nd Gen Aerodynamics",
                     "title": "2nd Gen Transparent Turbines",
-                    "lead": "Vertical rotation axis and lightweight transparent polymer create a non-intrusive aesthetic that blends into facades and pillars."
+                    "lead": "Vertical rotation axis and lightweight transparent polycarbonate create a non-intrusive aesthetic that blends into facades and pillars."
                 },
                 "showcase2": {
                     "tag": "Installation Options",
@@ -1335,6 +1379,7 @@
                 "wind": "Wind Turbines",
                 "wind_speed": "Startup \/ Rated Wind Speed",
                 "dimensions": "Dimensions & Footprint",
+                "weight": "Weight",
                 "voltage": "Max Operating Voltage DC",
                 "warranty_steel": "Steel Skeleton Warranty",
                 "warranty_pv": "PV Product & Yield Warranty",
@@ -1343,10 +1388,13 @@
                 "val_3months": "3 months from site handover",
                 "val_2months": "2 months from site handover",
                 "val_1month": "1 month from order (1-day installation)",
+                "val_1month_turbine": "Under 1 month from order",
+                "val_turbine_dimensions": "1 kW (1.2 m) \/ 2 kW (1.8 m) \/ 3 kW (2.8 m)",
+                "val_turbine_weight": "1 kW (36 kg) \/ 2 kW (48 kg) \/ 3 kW (73 kg)",
                 "val_steel_warranty": "15 years (Structure cladding 5 years)",
                 "val_pv_warranty": "12-year physical product \/ 25-year linear output (85%)",
                 "val_elec_warranty": "5 years Victron Energy & cabling",
-                "val_turbine_warranty": "3 years on turbine & mechanics",
+                "val_turbine_warranty": "2 years on turbine & mechanics",
                 "val_years": "years",
                 "val_months": "months",
                 "val_month": "month",
@@ -1546,14 +1594,17 @@
             "turbine_size": {
                 "large": {
                     "label": "Large",
+                    "power": "3 kW (2.8 m)",
                     "desc": "Maximum output for industrial and commercial installations with high consumption."
                 },
                 "medium": {
                     "label": "Medium",
+                    "power": "2 kW (1.8 m)",
                     "desc": "Balanced ratio of output and size, suitable for municipalities and larger buildings."
                 },
                 "small": {
                     "label": "Small",
+                    "power": "1 kW (1.2 m)",
                     "desc": "Compact turbine for smaller installations and space-constrained sites."
                 }
             },
@@ -1749,21 +1800,21 @@
         },
         "sales": {
             "audience": "DEALERS & SALES PARTNERS",
-            "title": "Sell Solar Architecture with Up to 10% Commission",
+            "title": "Sell Solar Trees with Commissions Up to €18,500",
             "lead": "The complete sales toolkit. 3D site placement with clients, instant ROI calculations, branded PDF quotes in 2 minutes, and full turnkey fulfillment.",
             "cta_primary": "Try Sales App",
             "cta_secondary": "How Much You Can Earn",
             "numbers_badge": "COMMISSIONS & EARNINGS",
             "numbers_title": "High Payouts on Every Closed Deal",
-            "numbers_description": "With up to 10% commission, earn up to 450,000 CZK on a commercial tree, 150,000 CZK on a compact tree, and 11,250 CZK on a wind turbine. You close the deal — we handle manufacturing, installation, and warranty.",
+            "numbers_description": "Earn up to €18,500 on a commercial tree V1, €6,200 on a compact tree V2, and €460 on a wind turbine. You close the deal — we handle manufacturing, installation, and warranty.",
             "stats": {
                 "1": {
-                    "val": "Up to 10%",
-                    "lbl": "Commission per deal (up to 450,000 CZK \/ sale)"
+                    "val": "Up to €18,500",
+                    "lbl": "Commission per commercial tree V1"
                 },
                 "2": {
-                    "val": "Up to 450,000 CZK",
-                    "lbl": "Payout per 1 commercial tree (4,500,000 CZK)"
+                    "val": "Up to €6,200",
+                    "lbl": "Payout per compact tree V2"
                 },
                 "3": {
                     "val": "2 Minutes",
@@ -1773,6 +1824,43 @@
                     "val": "100%",
                     "lbl": "Turnkey delivery handled by Treetino"
                 }
+            },
+            "ideas": {
+                "badge": "SALES OPPORTUNITIES & TARGET CLIENTS",
+                "title": "Where You Can Sell & Earn High Commissions",
+                "subtitle": "High-yield project types with proven client demand and substantial partner commissions.",
+                "commission_label": "Your Commission",
+                "recommended_model": "Recommended Model",
+                "zoo_segment": "Public Space · High Footfall",
+                "zoo_title": "Zoo & Safari Parks",
+                "zoo_desc": "Educational green centerpiece at the main visitor entrance combined with rooftop wind micro-turbines. Strong symbol of clean power for thousands of daily visitors.",
+                "zoo_model": "1× Tree V1 + 4× Aero Turbines",
+                "zoo_payout": "€20,340",
+                "dev_segment": "New Developments · Urban Quarters",
+                "dev_title": "Residential Development Projects",
+                "dev_desc": "Installation of two landmark solar trees in the central pedestrian plaza and promenade. Enhances property value, secures ESG ratings, and powers residential EV chargers.",
+                "dev_model": "2× Tree V1 (100 kW total)",
+                "dev_payout": "€37,000",
+                "metal_segment": "Heavy Industry · 24\/7 Operation",
+                "metal_title": "Metalworks & Manufacturing Plants",
+                "metal_desc": "Energy-intensive 24\/7 manufacturing requiring continuous high output. An industrial cluster of 3 commercial trees providing massive peak shaving and grid independence.",
+                "metal_model": "3× Tree V1 (150 kW industrial cluster)",
+                "metal_payout": "€55,500",
+                "bank_segment": "Corporate HQ · Enterprise Campuses",
+                "bank_title": "Banks & Corporate Headquarters",
+                "bank_desc": "Prestigious entrance centerpiece at the bank corporate campus. High-speed charging amenity for executive fleet, employees, and visiting clients.",
+                "bank_model": "1× Tree V1 (49.8 kW) + EV Hub",
+                "bank_payout": "€18,500",
+                "community_segment": "Residential · Co-housing",
+                "community_title": "Community Living & Co-housing",
+                "community_desc": "Combined community package: 1 compact V2 tree on the lawn and 4 rooftop wind turbines. Generates shared clean power and reduces monthly energy fees for all residents.",
+                "community_model": "1× Tree V2 + 4× Aero Turbines",
+                "community_payout": "€8,040",
+                "retail_segment": "Commercial Hubs · Parking Plazas",
+                "retail_title": "Logistics Hubs & Retail Parks",
+                "retail_desc": "Turnkey solution for retail and logistics hubs: two commercial V1 trees in customer parking linked to fast EV chargers, plus six parapet-mounted wind turbines.",
+                "retail_model": "2× Tree V1 + 6× Aero Turbines",
+                "retail_payout": "€39,760"
             },
             "why_join": {
                 "badge": "WHY SELL TREETINO",
@@ -1801,19 +1889,19 @@
                 "badge": "PRODUCT PORTFOLIO",
                 "title": "Products & Your Commission",
                 "v1_title": "Commercial Tree V1 (49.8 kW)",
-                "v1_price": "Base price: 4,500,000 CZK",
-                "v1_commission": "Commission up to 450,000 CZK",
-                "v1_tag": "Price 4,500,000 CZK · Commission up to 450,000 CZK",
+                "v1_price": "Base price: €185,000",
+                "v1_commission": "Commission up to €18,500",
+                "v1_tag": "Price €185,000 · Commission up to €18,500",
                 "v1_desc": "High-yield commercial hybrid power plant for businesses, logistics parks, and cities on just 1 m².",
                 "v2_title": "Residential Tree V2 (6–12 kW)",
-                "v2_price": "Base price: 1,500,000 CZK",
-                "v2_commission": "Commission up to 150,000 CZK",
-                "v2_tag": "Price 1,500,000 CZK · Commission up to 150,000 CZK",
+                "v2_price": "Base price: €62,000",
+                "v2_commission": "Commission up to €6,200",
+                "v2_tag": "Price €62,000 · Commission up to €6,200",
                 "v2_desc": "Aesthetic solar tree for private residences, villas, and boutique hotels with microturbines.",
                 "turbine_title": "Wind Turbine T1 (1–3 kW)",
-                "turbine_price": "Base price: 112,500 CZK",
-                "turbine_commission": "Commission up to 11,250 CZK",
-                "turbine_tag": "Price 112,500 CZK · Commission up to 11,250 CZK",
+                "turbine_price": "Base price: €4,600",
+                "turbine_commission": "Commission up to €460",
+                "turbine_tag": "Price €4,600 · Commission up to €460",
                 "turbine_desc": "Silent vertical axis turbine for rooftops and masts, generating power year-round."
             },
             "interactive_steps": {
@@ -1837,9 +1925,9 @@
                 "badge": "PARTNERSHIP TERMS",
                 "title": "Commissions & Specifications",
                 "row1_label": "Commission Rate",
-                "row1_val": "Up to 10% of total fulfilled deal value",
+                "row1_val": "Up to €18,500 per commercial tree installation",
                 "row2_label": "Commission Examples",
-                "row2_val": "Commercial Tree (4,500,000 CZK) → up to 450,000 CZK · Residential Tree (1,500,000 CZK) → up to 150,000 CZK · Turbine (112,500 CZK) → up to 11,250 CZK",
+                "row2_val": "Commercial Tree V1 (€185,000) → up to €18,500 · Residential Tree V2 (€62,000) → up to €6,200 · Turbine (€4,600) → up to €460",
                 "row3_label": "Sales App & CRM",
                 "row3_val": "Treetino Sales App (3D site scans, ROI calculation & instant 2-minute PDF quotes)",
                 "row4_label": "Manufacturing & Delivery",

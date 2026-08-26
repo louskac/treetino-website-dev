@@ -11,15 +11,19 @@
                 <div class="w-full pb-6">
                     <div class="flex justify-between">
                         <div class="logo flex">
-                            <LogoType
-                                class="fill-current text-black"
-                            />
+                            <LogoType class="fill-current text-black" />
                         </div>
 
                         <div class="socials my-auto flex gap-5 text-black/70">
-                            <Instagram class="h-5 w-5 transition-colors hover:text-black" />
-                            <Linkedin class="h-5 w-5 transition-colors hover:text-black" />
-                            <X class="h-5 w-5 transition-colors hover:text-black" />
+                            <Instagram
+                                class="h-5 w-5 transition-colors hover:text-black"
+                            />
+                            <Linkedin
+                                class="h-5 w-5 transition-colors hover:text-black"
+                            />
+                            <X
+                                class="h-5 w-5 transition-colors hover:text-black"
+                            />
                         </div>
                     </div>
                 </div>
@@ -43,7 +47,11 @@
                                     />
                                 </div>
 
-                                <h2 class="my-auto text-xl font-medium text-black">{{ $t('common.footer.links') }}</h2>
+                                <h2
+                                    class="my-auto text-xl font-medium text-black"
+                                >
+                                    {{ $t('common.footer.links') }}
+                                </h2>
                             </div>
 
                             <div class="mt-6 flex flex-col gap-2">
@@ -53,21 +61,21 @@
                                 <FooterLink :href="route('configurator')">{{
                                     $t('configurator.title')
                                 }}</FooterLink>
-                                <FooterLink :href="route('collaboration.index')">{{
-                                    $t('common.footer.grants')
-                                }}</FooterLink>
+                                <FooterLink
+                                    :href="route('collaboration.index')"
+                                    >{{
+                                        $t('common.footer.grants')
+                                    }}</FooterLink
+                                >
                                 <FooterLink
                                     :href="route('collaboration.index')"
                                     >{{
                                         $t('common.nav.collaboration')
                                     }}</FooterLink
                                 >
-                                <FooterLink
-                                    :href="route('sales.index')"
-                                    >{{
-                                        $t('common.nav.sales')
-                                    }}</FooterLink
-                                >
+                                <FooterLink :href="route('sales.index')">{{
+                                    $t('common.nav.sales')
+                                }}</FooterLink>
                                 <FooterLink :href="route('media.index')">{{
                                     $t('common.nav.media')
                                 }}</FooterLink>
@@ -93,11 +101,17 @@
                                     />
                                 </div>
 
-                                <h2 class="my-auto text-xl font-medium text-black">{{ $t('common.footer.community') }}</h2>
+                                <h2
+                                    class="my-auto text-xl font-medium text-black"
+                                >
+                                    {{ $t('common.footer.community') }}
+                                </h2>
                             </div>
 
                             <div class="mt-6 flex flex-col gap-2">
-                                <div class="w-fit cursor-not-allowed text-black/50">
+                                <div
+                                    class="w-fit cursor-not-allowed text-black/50"
+                                >
                                     {{ $t('common.status.coming_soon') }}
                                 </div>
                             </div>
@@ -116,7 +130,11 @@
                                     />
                                 </div>
 
-                                <h2 class="my-auto text-xl font-medium text-black">{{ $t('common.footer.legal') }}</h2>
+                                <h2
+                                    class="my-auto text-xl font-medium text-black"
+                                >
+                                    {{ $t('common.footer.legal') }}
+                                </h2>
                             </div>
 
                             <div class="mt-6 flex flex-col gap-2">
@@ -136,7 +154,11 @@
                                     @click="openSettings"
                                     class="group relative w-fit cursor-pointer text-black/70 transition-colors duration-300 hover:text-black"
                                 >
-                                    <div class="relative">{{ $t('common.footer.cookie_settings') }}</div>
+                                    <div class="relative">
+                                        {{
+                                            $t('common.footer.cookie_settings')
+                                        }}
+                                    </div>
                                     <div
                                         class="absolute bottom-0 left-0 h-[1px] w-0 bg-black transition-all duration-300 group-hover:w-full"
                                     ></div>
@@ -150,20 +172,34 @@
                         :href="route('collaboration.index')"
                         class="group block border-y border-black/10 py-6 transition-colors hover:bg-black/[0.02]"
                     >
-                        <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
-                            <div class="flex flex-col sm:flex-row items-center gap-5 text-center sm:text-left">
+                        <div
+                            class="flex flex-col items-center justify-between gap-6 sm:flex-row"
+                        >
+                            <div
+                                class="flex flex-col items-center gap-5 text-center sm:flex-row sm:text-left"
+                            >
                                 <img
                                     src="/partners/image.png"
                                     alt="Technologická inkubace & CzechInvest"
                                     class="h-9 w-auto object-contain transition-transform group-hover:scale-105"
                                 />
-                                <p class="max-w-3xl text-xs sm:text-sm text-black/75 leading-relaxed">
-                                    {{ $t('common.footer.grant_acknowledgment') }}
+                                <p
+                                    class="max-w-3xl text-xs leading-relaxed text-black/75 sm:text-sm"
+                                >
+                                    {{
+                                        $t('common.footer.grant_acknowledgment')
+                                    }}
                                 </p>
                             </div>
-                            <div class="inline-flex items-center gap-1.5 text-xs font-semibold text-t-blue group-hover:text-t-blue/80 shrink-0">
-                                <span>{{ $t('common.footer.grant_learn_more') }}</span>
-                                <ArrowRight class="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                            <div
+                                class="inline-flex shrink-0 items-center gap-1.5 text-xs font-semibold text-t-blue group-hover:text-t-blue/80"
+                            >
+                                <span>{{
+                                    $t('common.footer.grant_learn_more')
+                                }}</span>
+                                <ArrowRight
+                                    class="h-3.5 w-3.5 transition-transform group-hover:translate-x-1"
+                                />
                             </div>
                         </div>
                     </Link>
@@ -190,10 +226,14 @@
                             </div>
 
                             <div class="mt-3 text-white">
-                                <h2 class="text-3xl font-medium">Treetino Corp s.r.o.</h2>
+                                <h2 class="text-3xl font-medium">
+                                    Treetino Corp s.r.o.
+                                </h2>
 
                                 <p class="mt-1 text-white/80">IČO: 10800107</p>
-                                <p class="mt-1 text-white/80">DIČ: CZ10800107</p>
+                                <p class="mt-1 text-white/80">
+                                    DIČ: CZ10800107
+                                </p>
 
                                 <p class="mt-2 text-white/80">
                                     Bílá - Vlčetín 62, <br />
@@ -232,10 +272,14 @@
                             </div>
 
                             <div class="mt-3">
-                                <h2 class="text-3xl font-medium text-black">{{ $t('common.footer.get_updates') }}</h2>
+                                <h2 class="text-3xl font-medium text-black">
+                                    {{ $t('common.footer.get_updates') }}
+                                </h2>
 
                                 <p class="mt-1 text-black/70">
-                                    {{ $t('common.footer.newsletter_subtitle') }}
+                                    {{
+                                        $t('common.footer.newsletter_subtitle')
+                                    }}
                                 </p>
                             </div>
 
@@ -244,7 +288,11 @@
                                     <input
                                         class="min-w-0 flex-1 rounded-xl border border-black/10 bg-stone-100 px-4 py-3 text-black placeholder-black/40 focus:border-t-blue focus:outline-none"
                                         type="email"
-                                        :placeholder="$t('common.footer.email_placeholder')"
+                                        :placeholder="
+                                            $t(
+                                                'common.footer.email_placeholder',
+                                            )
+                                        "
                                     />
 
                                     <ButtonPrimary
@@ -256,7 +304,11 @@
                             </div>
 
                             <div class="text-xs text-black/60">
-                                <Link class="underline hover:text-black" :href="route('legal.pp')">{{ $t('common.footer.privacy') }}</Link>
+                                <Link
+                                    class="underline hover:text-black"
+                                    :href="route('legal.pp')"
+                                    >{{ $t('common.footer.privacy') }}</Link
+                                >
                             </div>
                         </div>
                     </div>

@@ -1,83 +1,124 @@
 <template>
     <div>
-        <p class="text-xs uppercase tracking-widest text-black/70 dark:text-white/50 mb-4">
+        <p
+            class="mb-4 text-xs tracking-widest text-black/70 uppercase dark:text-white/50"
+        >
             {{ stepLabel }}
         </p>
         <div class="flex flex-col gap-1">
             <template v-for="color in colors" :key="color.id">
                 <button
                     @click="$emit('update:modelValue', color.id)"
-                    class="flex items-center gap-3 w-full py-2.5 px-2 rounded-xl transition-all duration-200"
-                    :class="modelValue === color.id ? 'opacity-100 bg-stone-50 dark:bg-zinc-900/60' : 'opacity-60 hover:opacity-100'"
+                    class="flex w-full items-center gap-3 rounded-xl px-2 py-2.5 transition-all duration-200"
+                    :class="
+                        modelValue === color.id
+                            ? 'bg-stone-50 opacity-100 dark:bg-zinc-900/60'
+                            : 'opacity-60 hover:opacity-100'
+                    "
                 >
                     <div
-                        class="w-6 h-6 rounded-full shrink-0 border border-black/15 dark:border-white/15 transition-all duration-200 shadow-xs"
+                        class="h-6 w-6 shrink-0 rounded-full border border-black/15 shadow-xs transition-all duration-200 dark:border-white/15"
                         :class="[
-                            color.isCustom && (!customHex || modelValue !== color.id) ? 'bg-[conic-gradient(red,yellow,lime,cyan,blue,magenta,red)]' : '',
-                            color.isTransparent ? 'bg-[repeating-conic-gradient(#ccc_0%_25%,white_0%_50%)] bg-size-[8px_8px]' : '',
-                            modelValue === color.id ? 'ring-2 ring-black dark:ring-white ring-offset-1 ring-offset-white dark:ring-offset-black scale-105' : '',
+                            color.isCustom &&
+                            (!customHex || modelValue !== color.id)
+                                ? 'bg-[conic-gradient(red,yellow,lime,cyan,blue,magenta,red)]'
+                                : '',
+                            color.isTransparent
+                                ? 'bg-[repeating-conic-gradient(#ccc_0%_25%,white_0%_50%)] bg-size-[8px_8px]'
+                                : '',
+                            modelValue === color.id
+                                ? 'scale-105 ring-2 ring-black ring-offset-1 ring-offset-white dark:ring-white dark:ring-offset-black'
+                                : '',
                         ]"
-                        :style="color.isCustom && customHex && modelValue === color.id ? { background: customHex } : (color.hex ? { background: color.hex } : {})"
+                        :style="
+                            color.isCustom &&
+                            customHex &&
+                            modelValue === color.id
+                                ? { background: customHex }
+                                : color.hex
+                                  ? { background: color.hex }
+                                  : {}
+                        "
                     />
-                    <span class="flex-1 text-sm text-left font-medium text-black dark:text-white">
+                    <span
+                        class="flex-1 text-left text-sm font-medium text-black dark:text-white"
+                    >
                         {{ color.labelKey ? $t(color.labelKey) : color.label }}
                     </span>
                     <span class="text-xs text-black/70 dark:text-white/70">
-                        {{ color.priceKey ? $t(color.priceKey) : (color.price ?? $t('configurator.free')) }}
+                        {{
+                            color.priceKey
+                                ? $t(color.priceKey)
+                                : (color.price ?? $t('configurator.free'))
+                        }}
                     </span>
                 </button>
 
                 <!-- Custom Treetino App Color Picker Widget -->
                 <div
                     v-if="color.isCustom && modelValue === color.id"
-                    class="mt-1 mb-3 ml-2 mr-1 p-3.5 rounded-2xl bg-stone-100/90 dark:bg-zinc-900/90 border border-black/10 dark:border-white/10 shadow-sm space-y-3"
+                    class="mt-1 mr-1 mb-3 ml-2 space-y-3 rounded-2xl border border-black/10 bg-stone-100/90 p-3.5 shadow-sm dark:border-white/10 dark:bg-zinc-900/90"
                 >
                     <!-- Swatch & Hex Display Badge -->
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-2.5">
                             <div
-                                class="w-6 h-6 rounded-full border-2 border-white shadow-md transition-colors duration-150 shrink-0"
+                                class="h-6 w-6 shrink-0 rounded-full border-2 border-white shadow-md transition-colors duration-150"
                                 :style="{ backgroundColor: activeHex }"
                             />
-                            <span class="text-xs font-semibold tracking-wide text-black/80 dark:text-white/80">
-                                {{ color.labelKey ? $t(color.labelKey) : color.label }}
+                            <span
+                                class="text-xs font-semibold tracking-wide text-black/80 dark:text-white/80"
+                            >
+                                {{
+                                    color.labelKey
+                                        ? $t(color.labelKey)
+                                        : color.label
+                                }}
                             </span>
                         </div>
-                        <span class="px-2.5 py-1 text-xs font-mono font-bold rounded-lg bg-white dark:bg-zinc-800 text-black dark:text-white border border-black/10 dark:border-white/15 shadow-xs">
+                        <span
+                            class="rounded-lg border border-black/10 bg-white px-2.5 py-1 font-mono text-xs font-bold text-black shadow-xs dark:border-white/15 dark:bg-zinc-800 dark:text-white"
+                        >
                             {{ activeHex }}
                         </span>
                     </div>
 
                     <!-- Hue Slider -->
                     <div class="space-y-1">
-                        <div class="flex justify-between text-[10px] font-medium text-black/40 dark:text-white/40 uppercase tracking-wider">
-                            <span>{{ $t('configurator.color.hue', 'Odstín') }}</span>
+                        <div
+                            class="flex justify-between text-[10px] font-medium tracking-wider text-black/40 uppercase dark:text-white/40"
+                        >
+                            <span>{{
+                                $t('configurator.color.hue', 'Odstín')
+                            }}</span>
                         </div>
-                        <div class="relative flex items-center h-5 w-full">
+                        <div class="relative flex h-5 w-full items-center">
                             <input
                                 type="range"
                                 min="0"
                                 max="360"
                                 :value="hue"
                                 @input="updateHue"
-                                class="treetino-hue-slider w-full h-3.5 rounded-full appearance-none cursor-pointer outline-none shadow-inner"
+                                class="treetino-hue-slider h-3.5 w-full cursor-pointer appearance-none rounded-full shadow-inner outline-none"
                             />
                         </div>
                     </div>
 
                     <!-- Lightness Slider -->
                     <div class="space-y-1">
-                        <div class="flex justify-between text-[10px] font-medium text-black/40 dark:text-white/40 uppercase tracking-wider">
+                        <div
+                            class="flex justify-between text-[10px] font-medium tracking-wider text-black/40 uppercase dark:text-white/40"
+                        >
                             <span>Jas</span>
                         </div>
-                        <div class="relative flex items-center h-5 w-full">
+                        <div class="relative flex h-5 w-full items-center">
                             <input
                                 type="range"
                                 min="20"
                                 max="80"
                                 :value="lightness"
                                 @input="updateLightness"
-                                class="treetino-lightness-slider w-full h-3.5 rounded-full appearance-none cursor-pointer outline-none shadow-inner"
+                                class="treetino-lightness-slider h-3.5 w-full cursor-pointer appearance-none rounded-full shadow-inner outline-none"
                                 :style="lightnessSliderStyle"
                             />
                         </div>
@@ -113,7 +154,7 @@ const props = withDefaults(
     {
         customHex: '#00D2FF',
         defaultCustomHex: '#00D2FF',
-    }
+    },
 );
 
 const emit = defineEmits<{
@@ -132,7 +173,10 @@ const saturation = ref(100);
 function hexToHsl(hex: string): { h: number; s: number; l: number } {
     let cleanHex = hex.replace('#', '');
     if (cleanHex.length === 3) {
-        cleanHex = cleanHex.split('').map(c => c + c).join('');
+        cleanHex = cleanHex
+            .split('')
+            .map((c) => c + c)
+            .join('');
     }
     const r = parseInt(cleanHex.substring(0, 2) || '00', 16) / 255;
     const g = parseInt(cleanHex.substring(2, 4) || '00', 16) / 255;
@@ -148,9 +192,15 @@ function hexToHsl(hex: string): { h: number; s: number; l: number } {
         const d = max - min;
         s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
         switch (max) {
-            case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-            case g: h = (b - r) / d + 2; break;
-            case b: h = (r - g) / d + 4; break;
+            case r:
+                h = (g - b) / d + (g < b ? 6 : 0);
+                break;
+            case g:
+                h = (b - r) / d + 2;
+                break;
+            case b:
+                h = (r - g) / d + 4;
+                break;
         }
         h /= 6;
     }
@@ -169,7 +219,9 @@ function hslToHex(h: number, s: number, l: number): string {
     const f = (n: number) => {
         const k = (n + h / 30) % 12;
         const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
-        return Math.round(255 * color).toString(16).padStart(2, '0');
+        return Math.round(255 * color)
+            .toString(16)
+            .padStart(2, '0');
     };
     return `#${f(0)}${f(8)}${f(4)}`.toUpperCase();
 }
@@ -185,7 +237,7 @@ watch(
             lightness.value = Math.max(20, Math.min(80, hsl.l));
         }
     },
-    { immediate: true }
+    { immediate: true },
 );
 
 function updateHue(e: Event) {

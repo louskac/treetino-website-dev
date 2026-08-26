@@ -2,21 +2,21 @@
     <Head :title="$t('home.meta.title')" />
 
     <DefaultLayout>
-        <HomeHero/>
+        <HomeHero />
 
-        <HomeCtaTop/>
+        <HomeCtaTop />
 
         <HomeFeatures />
 
-        <HomeApp/>
+        <HomeApp />
 
-        <HomeInfo/>
+        <HomeInfo />
 
-        <HomeNumbers/>
+        <HomeNumbers />
 
-        <HomeCtaGeneric/>
+        <HomeCtaGeneric />
 
-<!--        <DefaultConfig/>-->
+        <!--        <DefaultConfig/>-->
     </DefaultLayout>
 </template>
 

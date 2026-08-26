@@ -12,17 +12,17 @@ export type LeafTextureTransform = {
 };
 
 export type MappedLeafResult = {
-    fullTexture: string;   // 1500x1500px full tree branch texture
+    fullTexture: string; // 1500x1500px full tree branch texture
     editorTexture: string; // 716x550px cropped texture focused on the 5 leaves
 };
 
 // Exact stem-to-tip centers, dimensions (sleek aspect ratio matching real leaves -> 0% deformation), and rotation angles (100% coverage)
 const LEAF_AXIS_CONFIGS = [
-    { cx: 503, cy: 547, w: 345, h: 122, angleDeg: 25.5 },   // Leaf 1 (top right)
-    { cx: 347, cy: 620, w: 375, h: 130, angleDeg: 14.3 },   // Leaf 2 (top left)
-    { cx: 651, cy: 779, w: 380, h: 135, angleDeg: -82.4 },  // Leaf 3 (middle right)
-    { cx: 464, cy: 817, w: 385, h: 135, angleDeg: -60.1 },  // Leaf 4 (middle left)
-    { cx: 235, cy: 802, w: 385, h: 130, angleDeg: -27.6 },  // Leaf 5 (bottom left)
+    { cx: 503, cy: 547, w: 345, h: 122, angleDeg: 25.5 }, // Leaf 1 (top right)
+    { cx: 347, cy: 620, w: 375, h: 130, angleDeg: 14.3 }, // Leaf 2 (top left)
+    { cx: 651, cy: 779, w: 380, h: 135, angleDeg: -82.4 }, // Leaf 3 (middle right)
+    { cx: 464, cy: 817, w: 385, h: 135, angleDeg: -60.1 }, // Leaf 4 (middle left)
+    { cx: 235, cy: 802, w: 385, h: 130, angleDeg: -27.6 }, // Leaf 5 (bottom left)
 ];
 
 // Preloaded image cache for synchronous, 60 FPS fast canvas updates during drag/pinch
@@ -66,7 +66,7 @@ export function drawHorizontalSingleLeafPath(
     const right = cx + halfW;
     const top = cy - halfH;
     const bottom = cy + halfH;
-    const shoulderX = cx - halfW * 0.30;
+    const shoulderX = cx - halfW * 0.3;
 
     ctx.beginPath();
     ctx.moveTo(right - r, top);
@@ -139,7 +139,7 @@ function renderSingleHorizontalLeaf(
     const right = cx + w / 2;
     const top = cy - h / 2;
     const bottom = cy + h / 2;
-    const shoulderX = cx - (w / 2) * 0.30;
+    const shoulderX = cx - (w / 2) * 0.3;
 
     // A. Main body vertical PV fingers (dense parallel solar cell lines)
     ctx.globalCompositeOperation = 'source-over';
@@ -271,7 +271,17 @@ export async function generateMappedLeafTexture(
 
             const masterCtx = masterCanvas.getContext('2d');
             if (masterCtx) {
-                renderSingleHorizontalLeaf(masterCtx, userImg, masterW / 2, masterH / 2, masterW, masterH, { offsetX, offsetY, scale }, 18, false);
+                renderSingleHorizontalLeaf(
+                    masterCtx,
+                    userImg,
+                    masterW / 2,
+                    masterH / 2,
+                    masterW,
+                    masterH,
+                    { offsetX, offsetY, scale },
+                    18,
+                    false,
+                );
             }
 
             ctx.globalCompositeOperation = 'source-over';
@@ -283,7 +293,13 @@ export async function generateMappedLeafTexture(
                 ctx.translate(leaf.cx, leaf.cy);
                 ctx.rotate((leaf.angleDeg * Math.PI) / 180);
 
-                ctx.drawImage(masterCanvas, -leaf.w / 2, -leaf.h / 2, leaf.w, leaf.h);
+                ctx.drawImage(
+                    masterCanvas,
+                    -leaf.w / 2,
+                    -leaf.h / 2,
+                    leaf.w,
+                    leaf.h,
+                );
 
                 ctx.restore();
             }
@@ -319,7 +335,7 @@ export async function generateMappedLeafTexture(
             ctx.drawImage(pvBaseImg, 0, 0, w, h);
 
             ctx.globalCompositeOperation = 'multiply';
-            ctx.globalAlpha = 0.20;
+            ctx.globalAlpha = 0.2;
             ctx.drawImage(pvBaseImg, 0, 0, w, h);
         }
 
@@ -349,12 +365,32 @@ export async function generateMappedLeafTexture(
             const leafW = 500;
             const leafH = 145;
 
-            renderSingleHorizontalLeaf(editorCtx, userImg, cx, cy, leafW, leafH, { offsetX, offsetY, scale }, 18, true);
+            renderSingleHorizontalLeaf(
+                editorCtx,
+                userImg,
+                cx,
+                cy,
+                leafW,
+                leafH,
+                { offsetX, offsetY, scale },
+                18,
+                true,
+            );
         } else {
             // --- 5-LEAF BRANCH EDITOR VIEWPORT FOR BRANCH MODE ---
             const cropX = 49;
             const cropY = 435;
-            editorCtx.drawImage(canvas, cropX, cropY, cropW, cropH, 0, 0, cropW, cropH);
+            editorCtx.drawImage(
+                canvas,
+                cropX,
+                cropY,
+                cropW,
+                cropH,
+                0,
+                0,
+                cropW,
+                cropH,
+            );
         }
 
         const editorTexture = editorCanvas.toDataURL('image/png');

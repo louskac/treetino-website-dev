@@ -1,14 +1,12 @@
 <template>
     <div
-        class="relative inline-flex items-center justify-center overflow-hidden
-               rounded-3xl border border-white/30
-               bg-linear-to-br from-white/20 via-white/8 to-white/5
-               transition-transform duration-700
-               [backdrop-filter:url(#liquid-glass)]
-               ease-[cubic-bezier(0.175,0.885,0.32,2.2)]"
+        class="relative inline-flex items-center justify-center overflow-hidden rounded-3xl border border-white/30 bg-linear-to-br from-white/20 via-white/8 to-white/5 [backdrop-filter:url(#liquid-glass)] transition-transform duration-700 ease-[cubic-bezier(0.175,0.885,0.32,2.2)]"
         :style="{ WebkitBackdropFilter: 'url(#liquid-glass)' }"
     >
-        <span aria-hidden="true" class="lg-noise pointer-events-none absolute inset-0 z-1 rounded-[inherit] opacity-[0.03]" />
+        <span
+            aria-hidden="true"
+            class="lg-noise pointer-events-none absolute inset-0 z-1 rounded-[inherit] opacity-[0.03]"
+        />
 
         <div class="relative z-2 p-6">
             <slot>Placeholder</slot>

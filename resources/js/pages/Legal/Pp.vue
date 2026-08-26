@@ -115,15 +115,19 @@ const checkoutTexts = [
     <Head :title="`${$t('legal.privacy.title')} | Treetino`" />
 
     <DefaultLayout :inverted="true">
-        <div class="relative overflow-hidden bg-white text-black pt-36 sm:pt-44">
+        <div
+            class="relative overflow-hidden bg-white pt-36 text-black sm:pt-44"
+        >
             <div
-                class="absolute left-1/2 hidden h-full max-w-[1400px] -translate-x-1/2 border-r border-l border-black/10 pointer-events-none sm:block sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
+                class="pointer-events-none absolute left-1/2 hidden h-full max-w-[1400px] -translate-x-1/2 border-r border-l border-black/10 sm:block sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
             ></div>
 
             <main
                 class="relative mx-auto h-full w-full max-w-[1400px] px-6 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
             >
-                <h1 class="text-4xl leading-tight font-medium sm:text-6xl text-slate-950 dark:text-white">
+                <h1
+                    class="text-4xl leading-tight font-medium text-slate-950 sm:text-6xl dark:text-white"
+                >
                     {{ $t('legal.privacy.title') }}
                 </h1>
 

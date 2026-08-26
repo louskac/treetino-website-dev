@@ -15,7 +15,7 @@ defineProps({
         :href="href"
     >
         <div class="relative">
-            <slot/>
+            <slot />
         </div>
         <div
             class="absolute bottom-0 left-0 h-[1px] w-0 bg-black transition-all duration-300 group-hover:w-full"

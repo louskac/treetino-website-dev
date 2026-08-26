@@ -5,7 +5,8 @@ declare global {
     }
 }
 
-export const GA_MEASUREMENT_ID = (import.meta.env.VITE_GA_MEASUREMENT_ID as string) || 'G-97K6933LVC';
+export const GA_MEASUREMENT_ID =
+    (import.meta.env.VITE_GA_MEASUREMENT_ID as string) || 'G-97K6933LVC';
 
 /**
  * Initialize Google Analytics with Google Consent Mode v2.
@@ -84,7 +85,10 @@ export function trackPageView(url?: string, title?: string): void {
 /**
  * Track custom event in GA4.
  */
-export function trackEvent(eventName: string, params: Record<string, any> = {}): void {
+export function trackEvent(
+    eventName: string,
+    params: Record<string, any> = {},
+): void {
     if (typeof window === 'undefined' || !window.gtag) {
         return;
     }

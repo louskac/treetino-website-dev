@@ -50,9 +50,9 @@
                         </p>
                     </div>
 
-<!--                    <div class="mt-auto">-->
-<!--                        <ButtonSecondary>Předobjednat</ButtonSecondary>-->
-<!--                    </div>-->
+                    <!--                    <div class="mt-auto">-->
+                    <!--                        <ButtonSecondary>Předobjednat</ButtonSecondary>-->
+                    <!--                    </div>-->
                 </div>
             </Transition>
 

@@ -28,15 +28,25 @@
             ></div>
 
             <div
-                class="relative mx-auto flex h-full w-full max-w-[1400px] flex-col px-6 pb-28 text-white sm:w-[500px] sm:pb-24 sm:px-0 md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
+                class="relative mx-auto flex h-full w-full max-w-[1400px] flex-col px-6 pb-28 text-white sm:w-[500px] sm:px-0 sm:pb-24 md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
             >
                 <div class="mt-auto">
-                    <div class="flex flex-wrap items-center gap-2 mb-3">
-                        <span class="text-sm font-semibold tracking-[0.25em] text-white/70 uppercase lg:text-base">
+                    <div class="mb-3 flex flex-wrap items-center gap-2">
+                        <span
+                            class="text-sm font-semibold tracking-[0.25em] text-white/70 uppercase lg:text-base"
+                        >
                             {{ $t('products.v2.audience') }}
                         </span>
-                        <span class="rounded-full bg-emerald-500/20 px-3 py-0.5 text-xs font-semibold text-emerald-300 backdrop-blur-md border border-emerald-500/30">
-                            ✓ {{ $t('products.v2.no_permit_badge', 'Bez nutnosti stavebního povolení') }}
+                        <span
+                            class="rounded-full border border-emerald-500/30 bg-emerald-500/20 px-3 py-0.5 text-xs font-semibold text-emerald-300 backdrop-blur-md"
+                        >
+                            ✓
+                            {{
+                                $t(
+                                    'products.v2.no_permit_badge',
+                                    'Bez nutnosti stavebního povolení',
+                                )
+                            }}
                         </span>
                     </div>
 
@@ -73,7 +83,7 @@
         <!-- Informace & čísla (Databook Stats Grid) -->
         <section
             id="numbers"
-            class="relative bg-white py-20 text-black dark:bg-zinc-950 dark:text-white scroll-mt-24"
+            class="relative scroll-mt-24 bg-white py-20 text-black dark:bg-zinc-950 dark:text-white"
         >
             <div
                 class="relative mx-auto max-w-[1400px] px-6 sm:w-[500px] sm:px-0 md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
@@ -85,19 +95,28 @@
                     <div class="col-span-1 flex flex-col">
                         <span
                             class="text-xs font-semibold tracking-[0.2em] text-t-blue uppercase"
-                            >{{ $t('home.features.key_parameters', 'Klíčové Parametry') }}</span
+                            >{{
+                                $t(
+                                    'home.features.key_parameters',
+                                    'Klíčové Parametry',
+                                )
+                            }}</span
                         >
                         <h2
-                            class="mt-3 text-4xl font-medium leading-tight lg:text-5xl"
+                            class="mt-3 text-4xl leading-tight font-medium lg:text-5xl"
                         >
                             {{ $t('products.v2.numbers_title') }}
                         </h2>
-                        <p class="mt-4 text-sm text-black/70 dark:text-white/70">
+                        <p
+                            class="mt-4 text-sm text-black/70 dark:text-white/70"
+                        >
                             {{ $t('products.v2.numbers_description') }}
                         </p>
                         <div class="mt-auto pt-6">
                             <ButtonPrimary
-                                :href="route('configurator.product', 'strom-v2')"
+                                :href="
+                                    route('configurator.product', 'strom-v2')
+                                "
                                 class="w-full text-center"
                             >
                                 {{ $t('products.v2.configure_label') }}
@@ -123,9 +142,13 @@
                                     />
                                 </div>
                                 <div
-                                    class="text-2xl font-medium text-black whitespace-nowrap dark:text-white sm:text-3xl lg:text-3xl xl:text-4xl"
+                                    class="text-2xl font-medium whitespace-nowrap text-black sm:text-3xl lg:text-3xl xl:text-4xl dark:text-white"
                                 >
-                                    {{ stat.valueKey ? $t(stat.valueKey, stat.value) : stat.value }}
+                                    {{
+                                        stat.valueKey
+                                            ? $t(stat.valueKey, stat.value)
+                                            : stat.value
+                                    }}
                                 </div>
                             </div>
                             <div class="text-sm opacity-75">
@@ -138,36 +161,105 @@
         </section>
 
         <!-- Design 3: Borderless Minimalist List Highlights Section -->
-        <section class="border-y border-black/10 bg-stone-50/50 py-20 text-black dark:border-white/10 dark:bg-stone-900/40 dark:text-white">
-            <div class="relative mx-auto max-w-[1400px] px-6 sm:w-[500px] sm:px-0 md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]">
+        <section
+            class="border-y border-black/10 bg-stone-50/50 py-20 text-black dark:border-white/10 dark:bg-stone-900/40 dark:text-white"
+        >
+            <div
+                class="relative mx-auto max-w-[1400px] px-6 sm:w-[500px] sm:px-0 md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
+            >
                 <div class="mb-14 text-center">
-                    <span class="text-xs font-semibold tracking-[0.2em] text-t-blue uppercase">{{ $t('products.v2.tech.tag') }}</span>
-                    <h2 class="mt-2 text-3xl font-medium sm:text-4xl lg:text-5xl">{{ $t('products.v2.tech.title') }}</h2>
+                    <span
+                        class="text-xs font-semibold tracking-[0.2em] text-t-blue uppercase"
+                        >{{ $t('products.v2.tech.tag') }}</span
+                    >
+                    <h2
+                        class="mt-2 text-3xl font-medium sm:text-4xl lg:text-5xl"
+                    >
+                        {{ $t('products.v2.tech.title') }}
+                    </h2>
                 </div>
 
-                <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-                    <div class="border-l border-black/15 pl-6 dark:border-white/15">
-                        <div class="text-3xl font-semibold tracking-tight text-black dark:text-white lg:text-4xl">5.0 m</div>
-                        <h3 class="mt-2 text-base font-semibold text-black dark:text-white">{{ $t('products.v2.tech.item1_title') }}</h3>
-                        <p class="mt-2 text-sm leading-relaxed text-black/65 dark:text-white/65">{{ $t('products.v2.tech.item1_text') }}</p>
+                <div
+                    class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4"
+                >
+                    <div
+                        class="border-l border-black/15 pl-6 dark:border-white/15"
+                    >
+                        <div
+                            class="text-3xl font-semibold tracking-tight text-black lg:text-4xl dark:text-white"
+                        >
+                            5.0 m
+                        </div>
+                        <h3
+                            class="mt-2 text-base font-semibold text-black dark:text-white"
+                        >
+                            {{ $t('products.v2.tech.item1_title') }}
+                        </h3>
+                        <p
+                            class="mt-2 text-sm leading-relaxed text-black/65 dark:text-white/65"
+                        >
+                            {{ $t('products.v2.tech.item1_text') }}
+                        </p>
                     </div>
 
-                    <div class="border-l border-black/15 pl-6 dark:border-white/15">
-                        <div class="text-3xl font-semibold tracking-tight text-black dark:text-white lg:text-4xl">1 {{ $t('products.datasheet.val_month', 'měsíc') }}</div>
-                        <h3 class="mt-2 text-base font-semibold text-black dark:text-white">{{ $t('products.v2.tech.item2_title') }}</h3>
-                        <p class="mt-2 text-sm leading-relaxed text-black/65 dark:text-white/65">{{ $t('products.v2.tech.item2_text') }}</p>
+                    <div
+                        class="border-l border-black/15 pl-6 dark:border-white/15"
+                    >
+                        <div
+                            class="text-3xl font-semibold tracking-tight text-black lg:text-4xl dark:text-white"
+                        >
+                            1 {{ $t('products.datasheet.val_month', 'měsíc') }}
+                        </div>
+                        <h3
+                            class="mt-2 text-base font-semibold text-black dark:text-white"
+                        >
+                            {{ $t('products.v2.tech.item2_title') }}
+                        </h3>
+                        <p
+                            class="mt-2 text-sm leading-relaxed text-black/65 dark:text-white/65"
+                        >
+                            {{ $t('products.v2.tech.item2_text') }}
+                        </p>
                     </div>
 
-                    <div class="border-l border-black/15 pl-6 dark:border-white/15">
-                        <div class="text-3xl font-semibold tracking-tight text-black dark:text-white lg:text-4xl">1 m²</div>
-                        <h3 class="mt-2 text-base font-semibold text-black dark:text-white">{{ $t('products.v2.tech.item3_title') }}</h3>
-                        <p class="mt-2 text-sm leading-relaxed text-black/65 dark:text-white/65">{{ $t('products.v2.tech.item3_text') }}</p>
+                    <div
+                        class="border-l border-black/15 pl-6 dark:border-white/15"
+                    >
+                        <div
+                            class="text-3xl font-semibold tracking-tight text-black lg:text-4xl dark:text-white"
+                        >
+                            1 m²
+                        </div>
+                        <h3
+                            class="mt-2 text-base font-semibold text-black dark:text-white"
+                        >
+                            {{ $t('products.v2.tech.item3_title') }}
+                        </h3>
+                        <p
+                            class="mt-2 text-sm leading-relaxed text-black/65 dark:text-white/65"
+                        >
+                            {{ $t('products.v2.tech.item3_text') }}
+                        </p>
                     </div>
 
-                    <div class="border-l border-black/15 pl-6 dark:border-white/15">
-                        <div class="text-3xl font-semibold tracking-tight text-black dark:text-white lg:text-4xl">25 {{ $t('products.datasheet.val_years') }}</div>
-                        <h3 class="mt-2 text-base font-semibold text-black dark:text-white">{{ $t('products.v2.tech.item4_title') }}</h3>
-                        <p class="mt-2 text-sm leading-relaxed text-black/65 dark:text-white/65">{{ $t('products.v2.tech.item4_text') }}</p>
+                    <div
+                        class="border-l border-black/15 pl-6 dark:border-white/15"
+                    >
+                        <div
+                            class="text-3xl font-semibold tracking-tight text-black lg:text-4xl dark:text-white"
+                        >
+                            25 {{ $t('products.datasheet.val_years') }}
+                        </div>
+                        <h3
+                            class="mt-2 text-base font-semibold text-black dark:text-white"
+                        >
+                            {{ $t('products.v2.tech.item4_title') }}
+                        </h3>
+                        <p
+                            class="mt-2 text-sm leading-relaxed text-black/65 dark:text-white/65"
+                        >
+                            {{ $t('products.v2.tech.item4_text') }}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -180,25 +272,37 @@
             <div
                 class="relative mx-auto max-w-[1400px] px-6 sm:w-[500px] sm:px-0 md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
             >
-                <div class="relative overflow-hidden rounded-3xl bg-black shadow-2xl">
+                <div
+                    class="relative overflow-hidden rounded-3xl bg-black shadow-2xl"
+                >
                     <div class="relative h-[500px] w-full overflow-hidden">
                         <img
                             src="/img/stills/Still_Strom-v2.png"
                             :alt="`Treetino ${$t('products.v2.title')}`"
                             class="h-full w-full object-cover object-center transition-transform duration-1000 ease-out hover:scale-105"
                         />
-                        <div class="absolute inset-0 bg-linear-to-r from-black/90 via-black/45 to-transparent"></div>
+                        <div
+                            class="absolute inset-0 bg-linear-to-r from-black/90 via-black/45 to-transparent"
+                        ></div>
                     </div>
 
-                    <div class="absolute inset-y-0 left-0 flex items-center p-8 sm:p-14 lg:w-7/12">
+                    <div
+                        class="absolute inset-y-0 left-0 flex items-center p-8 sm:p-14 lg:w-7/12"
+                    >
                         <div class="max-w-xl">
-                            <span class="inline-block rounded-full bg-white/10 px-4 py-1 text-xs font-semibold tracking-[0.2em] text-white uppercase backdrop-blur-md">
+                            <span
+                                class="inline-block rounded-full bg-white/10 px-4 py-1 text-xs font-semibold tracking-[0.2em] text-white uppercase backdrop-blur-md"
+                            >
                                 {{ $t('products.v2.showcase1.tag') }}
                             </span>
-                            <h3 class="mt-4 text-3xl font-medium text-white sm:text-4xl lg:text-5xl">
+                            <h3
+                                class="mt-4 text-3xl font-medium text-white sm:text-4xl lg:text-5xl"
+                            >
                                 {{ $t('products.v2.showcase1.title') }}
                             </h3>
-                            <p class="mt-4 text-base leading-relaxed text-white/85 sm:text-lg">
+                            <p
+                                class="mt-4 text-base leading-relaxed text-white/85 sm:text-lg"
+                            >
                                 {{ $t('products.v2.showcase1.lead') }}
                             </p>
                         </div>
@@ -218,7 +322,9 @@
                     class="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center"
                 >
                     <!-- Signature Design Element -->
-                    <div class="relative overflow-hidden border-t-4 border-l-4 border-t-t-blue border-l-t-blue bg-black shadow-2xl">
+                    <div
+                        class="relative overflow-hidden border-t-4 border-l-4 border-t-t-blue border-l-t-blue bg-black shadow-2xl"
+                    >
                         <div class="relative aspect-4/3 overflow-hidden">
                             <img
                                 src="/img/info/info-strom-v2-w.webp"
@@ -226,11 +332,17 @@
                                 class="h-full w-full object-cover transition-transform duration-700 ease-out hover:scale-105"
                             />
                             <!-- 2-Line Stacked Typography Overlay (HYBRID / 24/7) -->
-                            <div class="absolute inset-0 flex flex-col justify-end p-8 sm:p-12 bg-linear-to-t from-black/85 via-black/20 to-transparent">
-                                <span class="text-5xl font-black tracking-tight text-white leading-none uppercase sm:text-7xl lg:text-8xl drop-shadow-2xl">
+                            <div
+                                class="absolute inset-0 flex flex-col justify-end bg-linear-to-t from-black/85 via-black/20 to-transparent p-8 sm:p-12"
+                            >
+                                <span
+                                    class="text-5xl leading-none font-black tracking-tight text-white uppercase drop-shadow-2xl sm:text-7xl lg:text-8xl"
+                                >
                                     HYBRID
                                 </span>
-                                <span class="text-5xl font-black tracking-tight text-white leading-none uppercase sm:text-7xl lg:text-8xl drop-shadow-2xl mt-1">
+                                <span
+                                    class="mt-1 text-5xl leading-none font-black tracking-tight text-white uppercase drop-shadow-2xl sm:text-7xl lg:text-8xl"
+                                >
                                     24/7
                                 </span>
                             </div>
@@ -243,7 +355,7 @@
                             >{{ $t('products.v2.showcase2.tag') }}</span
                         >
                         <h2
-                            class="mt-3 text-4xl font-medium text-black dark:text-white sm:text-5xl"
+                            class="mt-3 text-4xl font-medium text-black sm:text-5xl dark:text-white"
                         >
                             {{ $t('products.v2.showcase2.title') }}
                         </h2>
@@ -256,7 +368,7 @@
                         <!-- Info cards with vertical left blue border line -->
                         <div class="mt-8 grid grid-cols-2 gap-6">
                             <div
-                                class="border-l-2 border-t-blue pl-4 bg-white/60 p-4 shadow-xs dark:bg-white/5"
+                                class="border-l-2 border-t-blue bg-white/60 p-4 pl-4 shadow-xs dark:bg-white/5"
                             >
                                 <div class="text-lg font-bold text-t-blue">
                                     TreeApp
@@ -268,7 +380,7 @@
                                 </div>
                             </div>
                             <div
-                                class="border-l-2 border-t-blue pl-4 bg-white/60 p-4 shadow-xs dark:bg-white/5"
+                                class="border-l-2 border-t-blue bg-white/60 p-4 pl-4 shadow-xs dark:bg-white/5"
                             >
                                 <div class="text-lg font-bold text-t-blue">
                                     Victron Energy
@@ -294,147 +406,362 @@
                 class="relative mx-auto max-w-[1400px] px-6 sm:w-[500px] sm:px-0 md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
             >
                 <div class="mb-14 text-center">
-                    <span class="text-xs font-semibold tracking-[0.2em] text-t-blue uppercase">{{ $t('products.v2.comp.tag') }}</span>
-                    <h2 class="mt-2 text-3xl font-medium sm:text-4xl lg:text-5xl">{{ $t('products.v2.comp.title') }}</h2>
-                    <p class="mt-3 text-base text-black/70 dark:text-white/70 max-w-2xl mx-auto">
+                    <span
+                        class="text-xs font-semibold tracking-[0.2em] text-t-blue uppercase"
+                        >{{ $t('products.v2.comp.tag') }}</span
+                    >
+                    <h2
+                        class="mt-2 text-3xl font-medium sm:text-4xl lg:text-5xl"
+                    >
+                        {{ $t('products.v2.comp.title') }}
+                    </h2>
+                    <p
+                        class="mx-auto mt-3 max-w-2xl text-base text-black/70 dark:text-white/70"
+                    >
                         {{ $t('products.v2.comp.subtitle') }}
                     </p>
                 </div>
 
-                <div class="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:items-center">
+                <div
+                    class="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:items-center"
+                >
                     <!-- Card 1: Spotlight Solar -->
-                    <div class="group relative flex flex-col justify-between overflow-hidden rounded-3xl bg-black text-white shadow-2xl min-h-[480px]">
-                        <div class="relative h-64 w-full overflow-hidden bg-zinc-900">
+                    <div
+                        class="group relative flex min-h-[480px] flex-col justify-between overflow-hidden rounded-3xl bg-black text-white shadow-2xl"
+                    >
+                        <div
+                            class="relative h-64 w-full overflow-hidden bg-zinc-900"
+                        >
                             <img
                                 src="/img/competition/spotlight-solar-hq-crop.jpg"
                                 alt="Spotlight Solar"
                                 class="h-full w-full object-cover object-center transition-transform duration-1000 ease-out group-hover:scale-105"
                             />
-                            <div class="absolute inset-0 bg-linear-to-t from-black via-black/20 to-transparent"></div>
-                            <span class="absolute top-4 left-4 rounded-full bg-white/20 px-3.5 py-1 text-[10px] font-bold tracking-[0.2em] text-white uppercase backdrop-blur-md">
+                            <div
+                                class="absolute inset-0 bg-linear-to-t from-black via-black/20 to-transparent"
+                            ></div>
+                            <span
+                                class="absolute top-4 left-4 rounded-full bg-white/20 px-3.5 py-1 text-[10px] font-bold tracking-[0.2em] text-white uppercase backdrop-blur-md"
+                            >
                                 {{ $t('products.v2.comp.competitor') }}
                             </span>
                         </div>
 
-                        <div class="p-8 pt-4 flex-1 flex flex-col justify-between">
+                        <div
+                            class="flex flex-1 flex-col justify-between p-8 pt-4"
+                        >
                             <div>
-                                <h3 class="text-2xl font-bold text-white">Spotlight Solar</h3>
-                                <div class="mt-1 text-3xl font-black text-white">$50,000</div>
+                                <h3 class="text-2xl font-bold text-white">
+                                    Spotlight Solar
+                                </h3>
+                                <div
+                                    class="mt-1 text-3xl font-black text-white"
+                                >
+                                    $50,000
+                                </div>
                             </div>
 
-                            <ul class="mt-6 space-y-2.5 border-t border-white/15 pt-4 text-xs leading-relaxed text-white/80">
+                            <ul
+                                class="mt-6 space-y-2.5 border-t border-white/15 pt-4 text-xs leading-relaxed text-white/80"
+                            >
                                 <li class="flex items-center gap-2.5">
-                                    <span class="h-1.5 w-1.5 rounded-full bg-white/50"></span>
-                                    <span>{{ $t('products.v2.comp.pv_panels') }} <strong class="text-white">3 kWp</strong></span>
+                                    <span
+                                        class="h-1.5 w-1.5 rounded-full bg-white/50"
+                                    ></span>
+                                    <span
+                                        >{{ $t('products.v2.comp.pv_panels') }}
+                                        <strong class="text-white"
+                                            >3 kWp</strong
+                                        ></span
+                                    >
                                 </li>
-                                <li class="flex items-center gap-2.5 text-white/60">
-                                    <span class="h-1.5 w-1.5 rounded-full bg-white/30"></span>
-                                    <span>{{ $t('products.v2.comp.wind_turbine') }} <strong class="text-white/70">{{ $t('products.v2.comp.none') }}</strong></span>
+                                <li
+                                    class="flex items-center gap-2.5 text-white/60"
+                                >
+                                    <span
+                                        class="h-1.5 w-1.5 rounded-full bg-white/30"
+                                    ></span>
+                                    <span
+                                        >{{
+                                            $t('products.v2.comp.wind_turbine')
+                                        }}
+                                        <strong class="text-white/70">{{
+                                            $t('products.v2.comp.none')
+                                        }}</strong></span
+                                    >
                                 </li>
-                                <li class="flex items-center gap-2.5 text-white/60">
-                                    <span class="h-1.5 w-1.5 rounded-full bg-white/30"></span>
-                                    <span>{{ $t('products.v2.comp.operation') }} <strong class="text-white/70">{{ $t('products.v2.comp.daylight_only') }}</strong></span>
+                                <li
+                                    class="flex items-center gap-2.5 text-white/60"
+                                >
+                                    <span
+                                        class="h-1.5 w-1.5 rounded-full bg-white/30"
+                                    ></span>
+                                    <span
+                                        >{{ $t('products.v2.comp.operation') }}
+                                        <strong class="text-white/70">{{
+                                            $t('products.v2.comp.daylight_only')
+                                        }}</strong></span
+                                    >
                                 </li>
-                                <li class="flex items-center gap-2.5 text-white/60">
-                                    <span class="h-1.5 w-1.5 rounded-full bg-white/30"></span>
-                                    <span>{{ $t('products.v2.comp.permit') }} <strong class="text-white/70">{{ $t('products.v2.comp.permit_required') }}</strong></span>
+                                <li
+                                    class="flex items-center gap-2.5 text-white/60"
+                                >
+                                    <span
+                                        class="h-1.5 w-1.5 rounded-full bg-white/30"
+                                    ></span>
+                                    <span
+                                        >{{ $t('products.v2.comp.permit') }}
+                                        <strong class="text-white/70">{{
+                                            $t(
+                                                'products.v2.comp.permit_required',
+                                            )
+                                        }}</strong></span
+                                    >
                                 </li>
-                                <li class="flex items-center gap-2.5 text-white/60">
-                                    <span class="h-1.5 w-1.5 rounded-full bg-white/30"></span>
-                                    <span>{{ $t('products.v2.comp.tracking') }} <strong class="text-white/70">{{ $t('products.v2.comp.tracking_none') }}</strong></span>
+                                <li
+                                    class="flex items-center gap-2.5 text-white/60"
+                                >
+                                    <span
+                                        class="h-1.5 w-1.5 rounded-full bg-white/30"
+                                    ></span>
+                                    <span
+                                        >{{ $t('products.v2.comp.tracking') }}
+                                        <strong class="text-white/70">{{
+                                            $t('products.v2.comp.tracking_none')
+                                        }}</strong></span
+                                    >
                                 </li>
                             </ul>
                         </div>
                     </div>
 
                     <!-- Card 2: Smartflower -->
-                    <div class="group relative flex flex-col justify-between overflow-hidden rounded-3xl bg-black text-white shadow-2xl min-h-[480px]">
-                        <div class="relative h-64 w-full overflow-hidden bg-zinc-900">
+                    <div
+                        class="group relative flex min-h-[480px] flex-col justify-between overflow-hidden rounded-3xl bg-black text-white shadow-2xl"
+                    >
+                        <div
+                            class="relative h-64 w-full overflow-hidden bg-zinc-900"
+                        >
                             <img
                                 src="/img/competition/smart-flower-hq-crop.jpg"
                                 alt="Smartflower"
                                 class="h-full w-full object-cover object-center transition-transform duration-1000 ease-out group-hover:scale-105"
                             />
-                            <div class="absolute inset-0 bg-linear-to-t from-black via-black/20 to-transparent"></div>
-                            <span class="absolute top-4 left-4 rounded-full bg-white/20 px-3.5 py-1 text-[10px] font-bold tracking-[0.2em] text-white uppercase backdrop-blur-md">
+                            <div
+                                class="absolute inset-0 bg-linear-to-t from-black via-black/20 to-transparent"
+                            ></div>
+                            <span
+                                class="absolute top-4 left-4 rounded-full bg-white/20 px-3.5 py-1 text-[10px] font-bold tracking-[0.2em] text-white uppercase backdrop-blur-md"
+                            >
                                 {{ $t('products.v2.comp.competitor') }}
                             </span>
                         </div>
 
-                        <div class="p-8 pt-4 flex-1 flex flex-col justify-between">
+                        <div
+                            class="flex flex-1 flex-col justify-between p-8 pt-4"
+                        >
                             <div>
-                                <h3 class="text-2xl font-bold text-white">Smartflower</h3>
-                                <div class="mt-1 text-3xl font-black text-white">$40,000</div>
+                                <h3 class="text-2xl font-bold text-white">
+                                    Smartflower
+                                </h3>
+                                <div
+                                    class="mt-1 text-3xl font-black text-white"
+                                >
+                                    $40,000
+                                </div>
                             </div>
 
-                            <ul class="mt-6 space-y-2.5 border-t border-white/15 pt-4 text-xs leading-relaxed text-white/80">
+                            <ul
+                                class="mt-6 space-y-2.5 border-t border-white/15 pt-4 text-xs leading-relaxed text-white/80"
+                            >
                                 <li class="flex items-center gap-2.5">
-                                    <span class="h-1.5 w-1.5 rounded-full bg-white/50"></span>
-                                    <span>{{ $t('products.v2.comp.pv_panels') }} <strong class="text-white">2.4 kWp</strong></span>
+                                    <span
+                                        class="h-1.5 w-1.5 rounded-full bg-white/50"
+                                    ></span>
+                                    <span
+                                        >{{ $t('products.v2.comp.pv_panels') }}
+                                        <strong class="text-white"
+                                            >2.4 kWp</strong
+                                        ></span
+                                    >
                                 </li>
-                                <li class="flex items-center gap-2.5 text-white/60">
-                                    <span class="h-1.5 w-1.5 rounded-full bg-white/30"></span>
-                                    <span>{{ $t('products.v2.comp.wind_turbine') }} <strong class="text-white/70">{{ $t('products.v2.comp.none') }}</strong></span>
+                                <li
+                                    class="flex items-center gap-2.5 text-white/60"
+                                >
+                                    <span
+                                        class="h-1.5 w-1.5 rounded-full bg-white/30"
+                                    ></span>
+                                    <span
+                                        >{{
+                                            $t('products.v2.comp.wind_turbine')
+                                        }}
+                                        <strong class="text-white/70">{{
+                                            $t('products.v2.comp.none')
+                                        }}</strong></span
+                                    >
                                 </li>
-                                <li class="flex items-center gap-2.5 text-white/60">
-                                    <span class="h-1.5 w-1.5 rounded-full bg-white/30"></span>
-                                    <span>{{ $t('products.v2.comp.operation') }} <strong class="text-white/70">{{ $t('products.v2.comp.daylight_only') }}</strong></span>
+                                <li
+                                    class="flex items-center gap-2.5 text-white/60"
+                                >
+                                    <span
+                                        class="h-1.5 w-1.5 rounded-full bg-white/30"
+                                    ></span>
+                                    <span
+                                        >{{ $t('products.v2.comp.operation') }}
+                                        <strong class="text-white/70">{{
+                                            $t('products.v2.comp.daylight_only')
+                                        }}</strong></span
+                                    >
                                 </li>
-                                <li class="flex items-center gap-2.5 text-white/60">
-                                    <span class="h-1.5 w-1.5 rounded-full bg-white/30"></span>
-                                    <span>{{ $t('products.v2.comp.permit') }} <strong class="text-white/70">{{ $t('products.v2.comp.permit_required') }}</strong></span>
+                                <li
+                                    class="flex items-center gap-2.5 text-white/60"
+                                >
+                                    <span
+                                        class="h-1.5 w-1.5 rounded-full bg-white/30"
+                                    ></span>
+                                    <span
+                                        >{{ $t('products.v2.comp.permit') }}
+                                        <strong class="text-white/70">{{
+                                            $t(
+                                                'products.v2.comp.permit_required',
+                                            )
+                                        }}</strong></span
+                                    >
                                 </li>
-                                <li class="flex items-center gap-2.5 text-white/60">
-                                    <span class="h-1.5 w-1.5 rounded-full bg-white/30"></span>
-                                    <span>{{ $t('products.v2.comp.tracking') }} <strong class="text-white/70">{{ $t('products.v2.comp.tracking_none') }}</strong></span>
+                                <li
+                                    class="flex items-center gap-2.5 text-white/60"
+                                >
+                                    <span
+                                        class="h-1.5 w-1.5 rounded-full bg-white/30"
+                                    ></span>
+                                    <span
+                                        >{{ $t('products.v2.comp.tracking') }}
+                                        <strong class="text-white/70">{{
+                                            $t('products.v2.comp.tracking_none')
+                                        }}</strong></span
+                                    >
                                 </li>
                             </ul>
                         </div>
                     </div>
 
                     <!-- Card 3: Treetino Strom V2 (High-Impact Highlighted Card) -->
-                    <div class="group relative flex flex-col justify-between overflow-hidden rounded-3xl bg-linear-to-b from-zinc-900 to-black text-white shadow-2xl min-h-[520px] border-2 border-t-blue ring-4 ring-t-blue/30 lg:scale-105 z-10">
-                        <div class="relative h-64 w-full overflow-hidden bg-zinc-900">
+                    <div
+                        class="group relative z-10 flex min-h-[520px] flex-col justify-between overflow-hidden rounded-3xl border-2 border-t-blue bg-linear-to-b from-zinc-900 to-black text-white shadow-2xl ring-4 ring-t-blue/30 lg:scale-105"
+                    >
+                        <div
+                            class="relative h-64 w-full overflow-hidden bg-zinc-900"
+                        >
                             <img
                                 src="/img/stills/SM-still.webp"
                                 :alt="`Treetino ${$t('products.v2.title')}`"
                                 class="h-full w-full object-cover object-center transition-transform duration-1000 ease-out group-hover:scale-105"
                             />
-                            <div class="absolute inset-0 bg-linear-to-t from-black via-black/20 to-transparent"></div>
-                            <span class="absolute top-4 left-4 rounded-full bg-t-blue px-4 py-1.5 text-[11px] font-bold tracking-[0.2em] text-white uppercase backdrop-blur-md shadow-xl ring-2 ring-white/30">
+                            <div
+                                class="absolute inset-0 bg-linear-to-t from-black via-black/20 to-transparent"
+                            ></div>
+                            <span
+                                class="absolute top-4 left-4 rounded-full bg-t-blue px-4 py-1.5 text-[11px] font-bold tracking-[0.2em] text-white uppercase shadow-xl ring-2 ring-white/30 backdrop-blur-md"
+                            >
                                 🏆 {{ $t('products.v2.comp.winner') }}
                             </span>
                         </div>
 
-                        <div class="p-8 pt-4 flex-1 flex flex-col justify-between">
+                        <div
+                            class="flex flex-1 flex-col justify-between p-8 pt-4"
+                        >
                             <div>
-                                <h3 class="text-2xl font-black text-white flex items-center justify-between">
-                                    <span>Treetino {{ $t('products.v2.title') }}</span>
-                                    <span class="text-xs font-mono font-bold text-sky-400 uppercase tracking-widest">6 – 12 kW</span>
+                                <h3
+                                    class="flex items-center justify-between text-2xl font-black text-white"
+                                >
+                                    <span
+                                        >Treetino
+                                        {{ $t('products.v2.title') }}</span
+                                    >
+                                    <span
+                                        class="font-mono text-xs font-bold tracking-widest text-sky-400 uppercase"
+                                        >6 – 12 kW</span
+                                    >
                                 </h3>
-                                <div class="mt-1 text-3xl font-black text-white">$60,000</div>
+                                <div
+                                    class="mt-1 text-3xl font-black text-white"
+                                >
+                                    $60,000
+                                </div>
                             </div>
 
-                            <ul class="mt-6 space-y-2.5 border-t border-t-blue/40 pt-4 text-xs leading-relaxed text-white">
+                            <ul
+                                class="mt-6 space-y-2.5 border-t border-t-blue/40 pt-4 text-xs leading-relaxed text-white"
+                            >
                                 <li class="flex items-center gap-2.5">
-                                    <span class="h-2 w-2 rounded-full bg-sky-400"></span>
-                                    <span>{{ $t('products.v2.comp.pv_leaves') }} <strong class="text-white font-semibold">6 kWp TopCon (124 ks)</strong></span>
+                                    <span
+                                        class="h-2 w-2 rounded-full bg-sky-400"
+                                    ></span>
+                                    <span
+                                        >{{ $t('products.v2.comp.pv_leaves') }}
+                                        <strong class="font-semibold text-white"
+                                            >6 kWp TopCon (124 ks)</strong
+                                        ></span
+                                    >
                                 </li>
                                 <li class="flex items-center gap-2.5">
-                                    <span class="h-2 w-2 rounded-full bg-sky-400"></span>
-                                    <span>{{ $t('products.v2.comp.wind_turbine') }} <strong class="text-white font-semibold">6 kW (6× 1 kW aero kit)</strong></span>
+                                    <span
+                                        class="h-2 w-2 rounded-full bg-sky-400"
+                                    ></span>
+                                    <span
+                                        >{{
+                                            $t('products.v2.comp.wind_turbine')
+                                        }}
+                                        <strong class="font-semibold text-white"
+                                            >6 kW (6× 1 kW aero kit)</strong
+                                        ></span
+                                    >
                                 </li>
                                 <li class="flex items-center gap-2.5">
-                                    <span class="h-2 w-2 rounded-full bg-sky-400"></span>
-                                    <span>{{ $t('products.v2.comp.hybrid_op') }} <strong class="text-sky-300 font-bold">{{ $t('products.v2.comp.day_night') }}</strong></span>
+                                    <span
+                                        class="h-2 w-2 rounded-full bg-sky-400"
+                                    ></span>
+                                    <span
+                                        >{{ $t('products.v2.comp.hybrid_op') }}
+                                        <strong
+                                            class="font-bold text-sky-300"
+                                            >{{
+                                                $t('products.v2.comp.day_night')
+                                            }}</strong
+                                        ></span
+                                    >
                                 </li>
                                 <li class="flex items-center gap-2.5">
-                                    <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
-                                    <span>{{ $t('products.v2.comp.permit') }} <strong class="text-emerald-300 font-bold">{{ $t('products.v2.comp.permit_none') }}</strong></span>
+                                    <span
+                                        class="h-2 w-2 rounded-full bg-emerald-400"
+                                    ></span>
+                                    <span
+                                        >{{ $t('products.v2.comp.permit') }}
+                                        <strong
+                                            class="font-bold text-emerald-300"
+                                            >{{
+                                                $t(
+                                                    'products.v2.comp.permit_none',
+                                                )
+                                            }}</strong
+                                        ></span
+                                    >
                                 </li>
                                 <li class="flex items-center gap-2.5">
-                                    <span class="h-2 w-2 rounded-full bg-sky-400"></span>
-                                    <span>{{ $t('products.v2.comp.tracking') }} <strong class="text-sky-300 font-bold">{{ $t('products.v2.comp.tracking_val') }}</strong></span>
+                                    <span
+                                        class="h-2 w-2 rounded-full bg-sky-400"
+                                    ></span>
+                                    <span
+                                        >{{ $t('products.v2.comp.tracking') }}
+                                        <strong
+                                            class="font-bold text-sky-300"
+                                            >{{
+                                                $t(
+                                                    'products.v2.comp.tracking_val',
+                                                )
+                                            }}</strong
+                                        ></span
+                                    >
                                 </li>
                             </ul>
                         </div>
@@ -469,16 +796,22 @@
                             class="divide-y divide-black/10 dark:divide-white/10"
                         >
                             <tr class="bg-black/5 dark:bg-white/5">
-                                <td class="px-6 py-4 font-semibold">{{ $t('products.datasheet.model') }}</td>
+                                <td class="px-6 py-4 font-semibold">
+                                    {{ $t('products.datasheet.model') }}
+                                </td>
                                 <td class="px-6 py-4 opacity-80">
-                                    Treetino {{ $t('products.v2.title') }} (Small Tree B2C)
+                                    Treetino
+                                    {{ $t('products.v2.title') }} (Small Tree
+                                    B2C)
                                 </td>
                             </tr>
                             <tr>
                                 <td class="px-6 py-4 font-semibold">
                                     {{ $t('products.datasheet.power') }}
                                 </td>
-                                <td class="px-6 py-4 opacity-80 font-bold text-t-blue">
+                                <td
+                                    class="px-6 py-4 font-bold text-t-blue opacity-80"
+                                >
                                     {{ $t('products.v2.stats.1') }}
                                 </td>
                             </tr>
@@ -487,7 +820,9 @@
                                     {{ $t('products.datasheet.pv') }}
                                 </td>
                                 <td class="px-6 py-4 opacity-80">
-                                    124 {{ $t('products.datasheet.val_pcs', 'ks') }} × 12 V (830 × 340 mm, TopCon, 20.2 %)
+                                    124
+                                    {{ $t('products.datasheet.val_pcs', 'ks') }}
+                                    × 12 V (830 × 340 mm, TopCon, 20.2 %)
                                 </td>
                             </tr>
                             <tr>
@@ -495,7 +830,8 @@
                                     {{ $t('products.datasheet.wind') }}
                                 </td>
                                 <td class="px-6 py-4 opacity-80">
-                                    6 {{ $t('products.v2.stats.3') }} × 48 V (1.5 m / 1.0 m, 48 kg, 1 kW)
+                                    6 {{ $t('products.v2.stats.3') }} × 48 V
+                                    (1.5 m / 1.0 m, 48 kg, 1 kW)
                                 </td>
                             </tr>
                             <tr class="bg-black/5 dark:bg-white/5">
@@ -511,7 +847,8 @@
                                     {{ $t('products.datasheet.dimensions') }}
                                 </td>
                                 <td class="px-6 py-4 opacity-80">
-                                    5,0 m / {{ $t('products.v2.stats.6') }} (&lt; 1 m²)
+                                    5,0 m /
+                                    {{ $t('products.v2.stats.6') }} (&lt; 1 m²)
                                 </td>
                             </tr>
                             <tr class="bg-black/5 dark:bg-white/5">
@@ -524,10 +861,16 @@
                             </tr>
                             <tr>
                                 <td class="px-6 py-4 font-semibold">
-                                    {{ $t('products.datasheet.warranty_steel') }}
+                                    {{
+                                        $t('products.datasheet.warranty_steel')
+                                    }}
                                 </td>
                                 <td class="px-6 py-4 opacity-80">
-                                    {{ $t('products.datasheet.val_steel_warranty') }}
+                                    {{
+                                        $t(
+                                            'products.datasheet.val_steel_warranty',
+                                        )
+                                    }}
                                 </td>
                             </tr>
                             <tr class="bg-black/5 dark:bg-white/5">
@@ -535,7 +878,9 @@
                                     {{ $t('products.datasheet.warranty_pv') }}
                                 </td>
                                 <td class="px-6 py-4 opacity-80">
-                                    {{ $t('products.datasheet.val_pv_warranty') }}
+                                    {{
+                                        $t('products.datasheet.val_pv_warranty')
+                                    }}
                                 </td>
                             </tr>
                             <tr>
@@ -543,7 +888,11 @@
                                     {{ $t('products.datasheet.warranty_elec') }}
                                 </td>
                                 <td class="px-6 py-4 opacity-80">
-                                    {{ $t('products.datasheet.val_elec_warranty') }}
+                                    {{
+                                        $t(
+                                            'products.datasheet.val_elec_warranty',
+                                        )
+                                    }}
                                 </td>
                             </tr>
                             <tr class="bg-black/5 dark:bg-white/5">
@@ -551,7 +900,9 @@
                                     {{ $t('products.datasheet.cert') }}
                                 </td>
                                 <td class="px-6 py-4 opacity-80">
-                                    ČSN EN 1991-1-4, ČSN EN 61400-2, ČSN EN 1993-1-1, ČSN EN 62305, ČSN EN 61215, ČSN EN 61730
+                                    ČSN EN 1991-1-4, ČSN EN 61400-2, ČSN EN
+                                    1993-1-1, ČSN EN 62305, ČSN EN 61215, ČSN EN
+                                    61730
                                 </td>
                             </tr>
                         </tbody>

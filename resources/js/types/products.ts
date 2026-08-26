@@ -4,7 +4,7 @@ export const ProductId = {
     Turbina: 'turbina',
 } as const;
 
-export type ProductId = typeof ProductId[keyof typeof ProductId];
+export type ProductId = (typeof ProductId)[keyof typeof ProductId];
 
 export type ConfigurationField =
     | 'color'
@@ -71,13 +71,18 @@ export const PRODUCTS: Product[] = [
         image: '/img/stills/LG-still.webp',
         numbersTitle: 'Strom V1 v číslech',
         numbersTitleKey: 'products.v1.numbers_title',
-        numbersDescription: 'Navrženo pro byznys centra, průmyslové parky, městská náměstí a EV nabíjecí huby.',
+        numbersDescription:
+            'Navrženo pro byznys centra, průmyslové parky, městská náměstí a EV nabíjecí huby.',
         numbersDescriptionKey: 'products.v1.numbers_description',
         configureLabel: 'Konfigurovat Strom V1',
         configureLabelKey: 'products.v1.configure_label',
         params: {
             variants: {
-                default: { power: '49,8 kW', dailyProduction: '350-450 kWh', roi: 'configurator.header.roi_value.v1' },
+                default: {
+                    power: '49,8 kW',
+                    dailyProduction: '350-450 kWh',
+                    roi: 'configurator.header.roi_value.v1',
+                },
             },
         },
         steps: [
@@ -116,12 +121,42 @@ export const PRODUCTS: Product[] = [
         monthlySavings: 5700,
         reservationPrice: 12000,
         stats: [
-            { icon: 'flash', value: '49,8 kW', description: '13,8 kWp FVE + 36 kW VTE', descriptionKey: 'products.v1.stats.1' },
-            { icon: 'leaf', value: '300 ks', description: '300 TopCon článků (20,2 %)', descriptionKey: 'products.v1.stats.2' },
-            { icon: 'wind', value: '12 ks', description: '12× tiché vertikální turbíny', descriptionKey: 'products.v1.stats.3' },
-            { icon: 'shield-check', value: 'Až 90 %', description: 'Dotační programy pro firmy a město', descriptionKey: 'products.v1.stats.4' },
-            { icon: 'clock', value: '2 měsíce', description: 'Výroba & dodání za 2 měsíce', descriptionKey: 'products.v1.stats.5' },
-            { icon: 'two-points-circle', value: '1 m²', description: 'Průměr kmenu 1,0 m u paty (1 m²)', descriptionKey: 'products.v1.stats.6' },
+            {
+                icon: 'flash',
+                value: '49,8 kW',
+                description: '13,8 kWp FVE + 36 kW VTE',
+                descriptionKey: 'products.v1.stats.1',
+            },
+            {
+                icon: 'leaf',
+                value: '300 ks',
+                description: '300 TopCon článků (20,2 %)',
+                descriptionKey: 'products.v1.stats.2',
+            },
+            {
+                icon: 'wind',
+                value: '12 ks',
+                description: '12× tiché vertikální turbíny',
+                descriptionKey: 'products.v1.stats.3',
+            },
+            {
+                icon: 'shield-check',
+                value: 'Až 90 %',
+                description: 'Dotační programy pro firmy a město',
+                descriptionKey: 'products.v1.stats.4',
+            },
+            {
+                icon: 'clock',
+                value: '2 měsíce',
+                description: 'Výroba & dodání za 2 měsíce',
+                descriptionKey: 'products.v1.stats.5',
+            },
+            {
+                icon: 'two-points-circle',
+                value: '1 m²',
+                description: 'Průměr kmenu 1,0 m u paty (1 m²)',
+                descriptionKey: 'products.v1.stats.6',
+            },
         ],
     },
     {
@@ -132,15 +167,24 @@ export const PRODUCTS: Product[] = [
         image: '/img/stills/SM-still.webp',
         numbersTitle: 'Strom V2 v číslech',
         numbersTitleKey: 'products.v2.numbers_title',
-        numbersDescription: 'Ideální řešení pro dokonalé proporce na zahradě bez zabírání trávníku.',
+        numbersDescription:
+            'Ideální řešení pro dokonalé proporce na zahradě bez zabírání trávníku.',
         numbersDescriptionKey: 'products.v2.numbers_description',
         configureLabel: 'Konfigurovat Strom V2',
         configureLabelKey: 'products.v2.configure_label',
         params: {
             configField: 'windTurbines',
             variants: {
-                'with-turbines': { power: '15 kW', dailyProduction: '110-135 kWh', roi: 'configurator.header.roi_value.v2_with' },
-                'without-turbines': { power: '12 kW', dailyProduction: '85-115 kWh', roi: 'configurator.header.roi_value.v2_without' },
+                'with-turbines': {
+                    power: '15 kW',
+                    dailyProduction: '110-135 kWh',
+                    roi: 'configurator.header.roi_value.v2_with',
+                },
+                'without-turbines': {
+                    power: '12 kW',
+                    dailyProduction: '85-115 kWh',
+                    roi: 'configurator.header.roi_value.v2_without',
+                },
             },
         },
         steps: [
@@ -189,12 +233,42 @@ export const PRODUCTS: Product[] = [
         monthlySavings: 7350,
         reservationPrice: 12000,
         stats: [
-            { icon: 'flash', value: '6 – 12 kW', description: '6 kWp FVE + 6 kW VTE', descriptionKey: 'products.v2.stats.1' },
-            { icon: 'leaf', value: '124 ks', description: '124 TopCon solárních listů', descriptionKey: 'products.v2.stats.2' },
-            { icon: 'wind', value: '6 ks', description: '6× tiché vertikální turbíny', descriptionKey: 'products.v2.stats.3' },
-            { icon: 'shield-check', value: 'Až 90 %', description: 'Pro rodinné domy a vily', descriptionKey: 'products.v2.stats.4' },
-            { icon: 'clock', value: '1 měsíc', description: 'Rychlá montáž za 1 den', descriptionKey: 'products.v2.stats.5' },
-            { icon: 'two-points-circle', value: '1 m²', description: 'Zabere jen 1 m² trávníku', descriptionKey: 'products.v2.stats.6' },
+            {
+                icon: 'flash',
+                value: '6 – 12 kW',
+                description: '6 kWp FVE + 6 kW VTE',
+                descriptionKey: 'products.v2.stats.1',
+            },
+            {
+                icon: 'leaf',
+                value: '124 ks',
+                description: '124 TopCon solárních listů',
+                descriptionKey: 'products.v2.stats.2',
+            },
+            {
+                icon: 'wind',
+                value: '6 ks',
+                description: '6× tiché vertikální turbíny',
+                descriptionKey: 'products.v2.stats.3',
+            },
+            {
+                icon: 'shield-check',
+                value: 'Až 90 %',
+                description: 'Pro rodinné domy a vily',
+                descriptionKey: 'products.v2.stats.4',
+            },
+            {
+                icon: 'clock',
+                value: '1 měsíc',
+                description: 'Rychlá montáž za 1 den',
+                descriptionKey: 'products.v2.stats.5',
+            },
+            {
+                icon: 'two-points-circle',
+                value: '1 m²',
+                description: 'Zabere jen 1 m² trávníku',
+                descriptionKey: 'products.v2.stats.6',
+            },
         ],
     },
     {
@@ -205,16 +279,29 @@ export const PRODUCTS: Product[] = [
         image: '/img/stills/Still_Turbina.png',
         numbersTitle: 'Větrná Turbína v číslech',
         numbersTitleKey: 'products.turbine.numbers_title',
-        numbersDescription: 'Ideální doplněk pro střechy budov, parkovací domy nebo městskou infrastrukturu.',
+        numbersDescription:
+            'Ideální doplněk pro střechy budov, parkovací domy nebo městskou infrastrukturu.',
         numbersDescriptionKey: 'products.turbine.numbers_description',
         configureLabel: 'Konfigurovat Turbínu',
         configureLabelKey: 'products.turbine.configure_label',
         params: {
             configField: 'turbineSize',
             variants: {
-                large: { power: '3 kW', dailyProduction: '12 kWh', roi: 'configurator.header.roi_value.turb_large' },
-                medium: { power: '1,5 kW', dailyProduction: '6 kWh', roi: 'configurator.header.roi_value.turb_medium' },
-                small: { power: '1 kW', dailyProduction: '4 kWh', roi: 'configurator.header.roi_value.turb_small' },
+                large: {
+                    power: '3 kW',
+                    dailyProduction: '12 kWh',
+                    roi: 'configurator.header.roi_value.turb_large',
+                },
+                medium: {
+                    power: '2 kW',
+                    dailyProduction: '8 kWh',
+                    roi: 'configurator.header.roi_value.turb_medium',
+                },
+                small: {
+                    power: '1 kW',
+                    dailyProduction: '4 kWh',
+                    roi: 'configurator.header.roi_value.turb_small',
+                },
             },
         },
         steps: [
@@ -238,12 +325,42 @@ export const PRODUCTS: Product[] = [
         monthlySavings: 1300,
         reservationPrice: 6000,
         stats: [
-            { icon: 'flash', value: '1 – 3 kW', description: 'Max. výkon jedné turbíny', descriptionKey: 'products.turbine.stats.1' },
-            { icon: 'map-pin', value: '3 varianty', description: 'Tichý provoz s nízkým startem', descriptionKey: 'products.turbine.stats.2' },
-            { icon: 'wind', value: '1,8 m/s', description: 'Odolnost vůči větru až 45 m/s', descriptionKey: 'products.turbine.stats.3' },
-            { icon: 'shield-check', value: 'Bezpečné', description: 'Transparentní polymerový design', descriptionKey: 'products.turbine.stats.4' },
-            { icon: 'clock', value: '2 měsíce', description: 'Snadná montáž na stožár i střechu', descriptionKey: 'products.turbine.stats.5' },
-            { icon: 'cube', value: '3 roky', description: 'Bezúdržbový provoz s životností 20 let', descriptionKey: 'products.turbine.stats.6' },
+            {
+                icon: 'flash',
+                value: '1 – 3 kW',
+                description: 'Max. výkon jedné turbíny',
+                descriptionKey: 'products.turbine.stats.1',
+            },
+            {
+                icon: 'map-pin',
+                value: '3 varianty',
+                description: 'Tichý provoz s nízkým startem',
+                descriptionKey: 'products.turbine.stats.2',
+            },
+            {
+                icon: 'wind',
+                value: '1,8 m/s',
+                description: 'Odolnost vůči větru až 45 m/s',
+                descriptionKey: 'products.turbine.stats.3',
+            },
+            {
+                icon: 'shield-check',
+                value: 'Bezpečné',
+                description: 'Transparentní polykarbonátový design',
+                descriptionKey: 'products.turbine.stats.4',
+            },
+            {
+                icon: 'clock',
+                value: '< 1 měsíc',
+                description: 'Snadná montáž na stožár i střechu',
+                descriptionKey: 'products.turbine.stats.5',
+            },
+            {
+                icon: 'cube',
+                value: '2 roky',
+                description: 'Bezúdržbový provoz s životností 20 let',
+                descriptionKey: 'products.turbine.stats.6',
+            },
         ],
     },
 ];
