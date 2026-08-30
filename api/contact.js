@@ -236,6 +236,39 @@ export default async function handler(req, res) {
             }
         }
 
+        // 4. Try SMTP (e.g. Seznam EmailProfi, Gmail, Custom SMTP) if configured
+        if (!emailSent && ((process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS) || (process.env.MAIL_HOST && process.env.MAIL_USERNAME && process.env.MAIL_PASSWORD))) {
+            try {
+                const nodemailer = await import('nodemailer');
+                const host = process.env.SMTP_HOST || process.env.MAIL_HOST;
+                const port = parseInt(process.env.SMTP_PORT || process.env.MAIL_PORT || '465', 10);
+                const user = process.env.SMTP_USER || process.env.MAIL_USERNAME;
+                const pass = process.env.SMTP_PASS || process.env.MAIL_PASSWORD;
+                const isSecure = port === 465;
+
+                const transporter = nodemailer.createTransport({
+                    host,
+                    port,
+                    secure: isSecure,
+                    auth: { user, pass },
+                });
+
+                await transporter.sendMail({
+                    from: process.env.SMTP_FROM || `"${senderName}" <${user}>`,
+                    to: toEmail,
+                    replyTo: senderEmail,
+                    subject: `Nová zpráva z webu od ${senderName}`,
+                    html: htmlContent,
+                    text: plainTextContent,
+                });
+
+                emailSent = true;
+                providerUsed = 'smtp';
+            } catch (err) {
+                console.error('SMTP dispatch failed:', err);
+            }
+        }
+
         console.log(`Contact message processed from ${senderEmail}. Delivery status: ${emailSent} (Provider: ${providerUsed})`);
 
         return res.status(200).json({
