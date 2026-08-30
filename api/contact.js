@@ -168,6 +168,34 @@ export default async function handler(req, res) {
                 } else {
                     const errBody = await resendRes.text();
                     console.error('Resend API error:', errBody);
+
+                    // If Resend failed because recipient requires verified domain, try account owner fallback
+                    if (errBody.includes('only send testing emails to your own email address')) {
+                        const match = errBody.match(/\(([^)]+@.+?)\)/);
+                        const accountEmail = match ? match[1] : 'lustykjakub@gmail.com';
+                        const fallbackRes = await fetch('https://api.resend.com/emails', {
+                            method: 'POST',
+                            headers: {
+                                Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                from: resendFrom,
+                                to: [accountEmail],
+                                reply_to: senderEmail,
+                                subject: `[Treetino Web] Nová zpráva od ${senderName}`,
+                                html: htmlContent,
+                                text: plainTextContent,
+                            }),
+                        });
+
+                        if (fallbackRes.ok) {
+                            emailSent = true;
+                            providerUsed = 'resend-fallback';
+                        } else {
+                            console.error('Resend fallback failed:', await fallbackRes.text());
+                        }
+                    }
                 }
             } catch (err) {
                 console.error('Resend dispatch failed:', err);
