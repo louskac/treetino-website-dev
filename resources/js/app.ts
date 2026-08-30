@@ -8,13 +8,13 @@ import { createApp, h, computed } from 'vue';
 import { createI18n } from 'vue-i18n';
 import '../css/app.css';
 import { ZiggyVue } from 'ziggy-js';
-import i18nMessages from './i18n_messages.json';
 import {
     initGA,
     updateGAConsent,
     trackPageView,
     trackEvent,
 } from './analytics';
+import i18nMessages from './i18n_messages.json';
 
 const appName = 'Treetino';
 
@@ -51,7 +51,7 @@ const ZiggyConfig = {
         },
         'media.index': { uri: 'media', methods: ['GET', 'HEAD'] },
         'contact.index': { uri: 'contact', methods: ['GET', 'HEAD'] },
-        'contact.store': { uri: 'contact', methods: ['POST'] },
+        'contact.store': { uri: 'api/contact', methods: ['POST'] },
         'legal.tos': {
             uri: 'legal/terms-and-conditions',
             methods: ['GET', 'HEAD'],
@@ -90,7 +90,7 @@ const staticRoutes: Record<string, string | ((param?: string) => string)> = {
     'collaboration.index': '/collaboration',
     'media.index': '/media',
     'contact.index': '/contact',
-    'contact.store': '/contact',
+    'contact.store': '/api/contact',
     'legal.tos': '/legal/terms-and-conditions',
     'legal.pp': '/legal/privacy-policy',
     'legal.nda': '/legal/nda',
@@ -98,15 +98,24 @@ const staticRoutes: Record<string, string | ((param?: string) => string)> = {
 };
 
 function safeRoute(name?: string, params?: any): string {
-    if (!name) return window.location.pathname;
+    if (!name) {
+        return window.location.pathname;
+    }
+
     const r = staticRoutes[name];
-    if (typeof r === 'function')
+
+    if (typeof r === 'function') {
         return r(
             typeof params === 'string' || typeof params === 'number'
                 ? String(params)
                 : params?.id,
         );
-    if (typeof r === 'string') return r;
+    }
+
+    if (typeof r === 'string') {
+        return r;
+    }
+
     return '/' + name.replace(/\./g, '/');
 }
 
@@ -114,44 +123,82 @@ function safeRoute(name?: string, params?: any): string {
 
 function getComponentForPath(path: string): string {
     const p = path.split('?')[0].replace(/\/$/, '') || '/';
-    if (p === '/' || p === '/home') return 'Home/Index';
+
+    if (p === '/' || p === '/home') {
+        return 'Home/Index';
+    }
+
     if (
         p === '/products/treetino-v1' ||
         p === '/products/strom-v1' ||
         p === '/products/v1'
-    )
+    ) {
         return 'Products/V1';
+    }
+
     if (
         p === '/products/treetino-v2' ||
         p === '/products/strom-v2' ||
         p === '/products/v2'
-    )
+    ) {
         return 'Products/V2';
-    if (p === '/products/turbine' || p === '/products/turbina')
+    }
+
+    if (p === '/products/turbine' || p === '/products/turbina') {
         return 'Products/Turbine';
-    if (p.startsWith('/configurator')) return 'Configurator/Index';
+    }
+
+    if (p.startsWith('/configurator')) {
+        return 'Configurator/Index';
+    }
+
     if (
         p === '/sales' ||
         p === '/crm' ||
         p === '/cmr' ||
         p === '/prodejci' ||
         p === '/partners'
-    )
+    ) {
         return 'Sales/Index';
+    }
+
     if (
         p === '/pitch' ||
         p === '/pitchdeck' ||
         p === '/deck' ||
         p === '/presentation'
-    )
+    ) {
         return 'Media/Index';
-    if (p === '/collaboration') return 'Collaboration/Index';
-    if (p === '/media') return 'Media/Index';
-    if (p === '/contact') return 'Contact/Index';
-    if (p === '/legal/terms-and-conditions') return 'Legal/Tos';
-    if (p === '/legal/privacy-policy') return 'Legal/Pp';
-    if (p === '/legal/nda' || p === '/sales/nda') return 'Legal/Nda';
-    if (p === '/preorders/success') return 'Preorders/Success';
+    }
+
+    if (p === '/collaboration') {
+        return 'Collaboration/Index';
+    }
+
+    if (p === '/media') {
+        return 'Media/Index';
+    }
+
+    if (p === '/contact') {
+        return 'Contact/Index';
+    }
+
+    if (p === '/legal/terms-and-conditions') {
+        return 'Legal/Tos';
+    }
+
+    if (p === '/legal/privacy-policy') {
+        return 'Legal/Pp';
+    }
+
+    if (p === '/legal/nda' || p === '/sales/nda') {
+        return 'Legal/Nda';
+    }
+
+    if (p === '/preorders/success') {
+        return 'Preorders/Success';
+    }
+
     return 'Home/Index';
 }
 
@@ -165,6 +212,7 @@ function makePageObject(url: string) {
     const msgs =
         (i18nMessages as Record<string, any>)[lang] ||
         (i18nMessages as Record<string, any>)['cs'];
+
     return {
         component: comp,
         props: {
@@ -306,6 +354,7 @@ createInertiaApp({
                     typeof targetUrl === 'string'
                         ? targetUrl
                         : targetUrl?.pathname;
+
                 if (
                     path &&
                     path.startsWith('/') &&
@@ -325,6 +374,7 @@ createInertiaApp({
                 const targetUrl = detailUrl
                     ? new URL(detailUrl, window.location.origin).pathname
                     : window.location.pathname;
+
                 if (targetUrl !== window.location.pathname) {
                     window.location.href = targetUrl;
                 }
@@ -333,12 +383,14 @@ createInertiaApp({
             router.on('navigate', (event) => {
                 const next = event.detail.page.props
                     .i18n as typeof shared.value;
+
                 if (next && next.locale) {
                     i18n.global.setLocaleMessage(next.locale, next.messages);
                     i18n.global.fallbackLocale.value = next.fallbackLocale;
                     i18n.global.locale.value = next.locale;
                     document.documentElement.lang = next.locale;
                 }
+
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 trackPageView(
                     window.location.pathname + window.location.search,

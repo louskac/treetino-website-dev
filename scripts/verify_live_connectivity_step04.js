@@ -19,6 +19,7 @@ import { chromium } from 'playwright';
   // Scroll right panel down
   await page.evaluate(() => {
     const panels = document.querySelectorAll('div');
+
     for (const p of panels) {
       if (p.scrollHeight > 1500) {
         p.scrollTop = 1600;

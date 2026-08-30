@@ -85,12 +85,12 @@ index.form = indexForm
 * @see app/Http/Controllers/ContactController.php:31
 * @route '/contact'
 */
-export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
-    url: store.url(options),
+const store36402f3b102b68b92616e946647e00cf = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: store36402f3b102b68b92616e946647e00cf.url(options),
     method: 'post',
 })
 
-store.definition = {
+store36402f3b102b68b92616e946647e00cf.definition = {
     methods: ["post"],
     url: '/contact',
 } satisfies RouteDefinition<["post"]>
@@ -100,8 +100,8 @@ store.definition = {
 * @see app/Http/Controllers/ContactController.php:31
 * @route '/contact'
 */
-store.url = (options?: RouteQueryOptions) => {
-    return store.definition.url + queryParams(options)
+store36402f3b102b68b92616e946647e00cf.url = (options?: RouteQueryOptions) => {
+    return store36402f3b102b68b92616e946647e00cf.definition.url + queryParams(options)
 }
 
 /**
@@ -109,8 +109,8 @@ store.url = (options?: RouteQueryOptions) => {
 * @see app/Http/Controllers/ContactController.php:31
 * @route '/contact'
 */
-store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
-    url: store.url(options),
+store36402f3b102b68b92616e946647e00cf.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: store36402f3b102b68b92616e946647e00cf.url(options),
     method: 'post',
 })
 
@@ -119,8 +119,8 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 * @see app/Http/Controllers/ContactController.php:31
 * @route '/contact'
 */
-const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store.url(options),
+const store36402f3b102b68b92616e946647e00cfForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: store36402f3b102b68b92616e946647e00cf.url(options),
     method: 'post',
 })
 
@@ -129,12 +129,72 @@ const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => 
 * @see app/Http/Controllers/ContactController.php:31
 * @route '/contact'
 */
-storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-    action: store.url(options),
+store36402f3b102b68b92616e946647e00cfForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: store36402f3b102b68b92616e946647e00cf.url(options),
     method: 'post',
 })
 
-store.form = storeForm
+store36402f3b102b68b92616e946647e00cf.form = store36402f3b102b68b92616e946647e00cfForm
+/**
+* @see \App\Http\Controllers\ContactController::store
+* @see app/Http/Controllers/ContactController.php:31
+* @route '/api/contact'
+*/
+const store33b413cc12b7e3b28f5a57216b04763f = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: store33b413cc12b7e3b28f5a57216b04763f.url(options),
+    method: 'post',
+})
+
+store33b413cc12b7e3b28f5a57216b04763f.definition = {
+    methods: ["post"],
+    url: '/api/contact',
+} satisfies RouteDefinition<["post"]>
+
+/**
+* @see \App\Http\Controllers\ContactController::store
+* @see app/Http/Controllers/ContactController.php:31
+* @route '/api/contact'
+*/
+store33b413cc12b7e3b28f5a57216b04763f.url = (options?: RouteQueryOptions) => {
+    return store33b413cc12b7e3b28f5a57216b04763f.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\ContactController::store
+* @see app/Http/Controllers/ContactController.php:31
+* @route '/api/contact'
+*/
+store33b413cc12b7e3b28f5a57216b04763f.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: store33b413cc12b7e3b28f5a57216b04763f.url(options),
+    method: 'post',
+})
+
+/**
+* @see \App\Http\Controllers\ContactController::store
+* @see app/Http/Controllers/ContactController.php:31
+* @route '/api/contact'
+*/
+const store33b413cc12b7e3b28f5a57216b04763fForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: store33b413cc12b7e3b28f5a57216b04763f.url(options),
+    method: 'post',
+})
+
+/**
+* @see \App\Http\Controllers\ContactController::store
+* @see app/Http/Controllers/ContactController.php:31
+* @route '/api/contact'
+*/
+store33b413cc12b7e3b28f5a57216b04763fForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    action: store33b413cc12b7e3b28f5a57216b04763f.url(options),
+    method: 'post',
+})
+
+store33b413cc12b7e3b28f5a57216b04763f.form = store33b413cc12b7e3b28f5a57216b04763fForm
+
+export const store = {
+    '/contact': store36402f3b102b68b92616e946647e00cf,
+    '/api/contact': store33b413cc12b7e3b28f5a57216b04763f,
+}
 
 const ContactController = { index, store }
 

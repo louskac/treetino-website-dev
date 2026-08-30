@@ -20,7 +20,10 @@ import { chromium } from 'playwright';
   await page.evaluate(() => {
     const headings = Array.from(document.querySelectorAll('p'));
     const conn = headings.find(h => h.textContent && h.textContent.includes('PREMIUM CONNECTIVITY'));
-    if (conn) conn.scrollIntoView();
+
+    if (conn) {
+conn.scrollIntoView();
+}
   });
   await page.waitForTimeout(1000);
 

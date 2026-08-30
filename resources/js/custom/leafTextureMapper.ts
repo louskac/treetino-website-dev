@@ -30,6 +30,7 @@ const imageCache = new Map<string, HTMLImageElement>();
 
 function loadCachedImg(src: string): Promise<HTMLImageElement> {
     const existing = imageCache.get(src);
+
     if (existing && existing.complete && existing.naturalWidth > 0) {
         return Promise.resolve(existing);
     }
@@ -148,6 +149,7 @@ function renderSingleHorizontalLeaf(
     ctx.lineWidth = 1.2;
 
     const stepX = 11;
+
     for (let x = shoulderX + 4; x < right - 16; x += stepX) {
         ctx.beginPath();
         ctx.moveTo(x, top + 4);
@@ -158,6 +160,7 @@ function renderSingleHorizontalLeaf(
     // B. Tip triangular area longitudinal solar lines (running toward tip)
     ctx.globalAlpha = 0.35;
     const tipLines = 5;
+
     for (let i = 1; i <= tipLines; i++) {
         const t = i / (tipLines + 1);
         const yOffset = (t - 0.5) * (h - 18);
@@ -257,7 +260,10 @@ export async function generateMappedLeafTexture(
         canvas.height = h;
 
         const ctx = canvas.getContext('2d');
-        if (!ctx) return emptyResult;
+
+        if (!ctx) {
+            return emptyResult;
+        }
 
         const userAspect = (userImg.width || 1) / (userImg.height || 1);
 
@@ -270,6 +276,7 @@ export async function generateMappedLeafTexture(
             masterCanvas.height = masterH;
 
             const masterCtx = masterCanvas.getContext('2d');
+
             if (masterCtx) {
                 renderSingleHorizontalLeaf(
                     masterCtx,
@@ -354,6 +361,7 @@ export async function generateMappedLeafTexture(
         editorCanvas.height = cropH;
 
         const editorCtx = editorCanvas.getContext('2d');
+
         if (!editorCtx) {
             return { fullTexture, editorTexture: fullTexture };
         }

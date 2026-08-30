@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Head } from '@inertiajs/vue3';
 import { Download, Printer } from '@iconoir/vue';
+import { Head } from '@inertiajs/vue3';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import ButtonWhite from '@/custom/ButtonWhite.vue';
 import DefaultLayout from '@/layouts/DefaultLayout.vue';

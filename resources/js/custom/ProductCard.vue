@@ -44,10 +44,10 @@
 </template>
 
 <script setup lang="ts">
+import type { PropType } from 'vue';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import ButtonWhite from '@/custom/ButtonWhite.vue';
 import type { Product } from '@/types/products';
-import type { PropType } from 'vue';
 
 defineProps({
     product: {

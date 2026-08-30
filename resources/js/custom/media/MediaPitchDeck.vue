@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from 'vue';
 import {
     Download,
     Maximize2,
@@ -8,6 +7,7 @@ import {
     ChevronRight,
     Check,
 } from 'lucide-vue-next';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import ButtonSecondary from '@/custom/ButtonSecondary.vue';
 import ButtonWhite from '@/custom/ButtonWhite.vue';
@@ -67,7 +67,10 @@ const goToSlide = (index: number) => {
 
 const toggleFullscreen = () => {
     const elem = document.getElementById('media-pitchdeck-container');
-    if (!elem) return;
+
+    if (!elem) {
+        return;
+    }
 
     if (!document.fullscreenElement) {
         elem.requestFullscreen()
@@ -93,7 +96,11 @@ const handleFullscreenChange = () => {
 const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === 'ArrowRight' || e.key === 'Space') {
         const target = e.target as HTMLElement;
-        if (target && ['INPUT', 'TEXTAREA'].includes(target.tagName)) return;
+
+        if (target && ['INPUT', 'TEXTAREA'].includes(target.tagName)) {
+            return;
+        }
+
         if (
             document.fullscreenElement ||
             isElementInViewport(
@@ -104,7 +111,11 @@ const handleKeyDown = (e: KeyboardEvent) => {
         }
     } else if (e.key === 'ArrowLeft') {
         const target = e.target as HTMLElement;
-        if (target && ['INPUT', 'TEXTAREA'].includes(target.tagName)) return;
+
+        if (target && ['INPUT', 'TEXTAREA'].includes(target.tagName)) {
+            return;
+        }
+
         if (
             document.fullscreenElement ||
             isElementInViewport(
@@ -117,8 +128,12 @@ const handleKeyDown = (e: KeyboardEvent) => {
 };
 
 const isElementInViewport = (el: HTMLElement | null) => {
-    if (!el) return false;
+    if (!el) {
+        return false;
+    }
+
     const rect = el.getBoundingClientRect();
+
     return (
         rect.top >= -100 &&
         rect.top <=

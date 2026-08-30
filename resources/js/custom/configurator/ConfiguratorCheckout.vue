@@ -245,17 +245,17 @@
 </template>
 
 <script setup lang="ts">
+import { Flash } from '@iconoir/vue';
 import { ref, computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { route } from 'ziggy-js';
+import { calcMonthlyPayment, formatPrice } from '@/composables/useFinancing';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import ButtonSecondary from '@/custom/ButtonSecondary.vue';
 import ConfiguratorModalFinancing from '@/custom/configurator/ConfiguratorModalFinancing.vue';
 import { getGrantById } from '@/types/grants';
-import { Flash } from '@iconoir/vue';
-import { calcMonthlyPayment, formatPrice } from '@/composables/useFinancing';
 
 import { ProductId } from '@/types/products';
-import { route } from 'ziggy-js';
 
 const { t } = useI18n();
 
@@ -282,13 +282,21 @@ const grantInfo = computed(() => getGrantById(props.grant));
 const grantPct = computed(() => getGrantById(props.grant)?.percentage ?? 0);
 const grantLabel = computed(() => {
     const info = getGrantById(props.grant);
-    if (!info) return '';
+
+    if (!info) {
+        return '';
+    }
+
     return info.labelKey ? t(info.labelKey, info.label) : info.label;
 });
 
 const discountedPrice = computed(() => {
     const pct = grantInfo.value?.percentage;
-    if (!pct) return props.basePrice;
+
+    if (!pct) {
+        return props.basePrice;
+    }
+
     return Math.round(props.basePrice * (1 - pct / 100));
 });
 
@@ -369,6 +377,7 @@ const monthKeys = [
 const currentMonthTranslated = computed(() => {
     const now = new Date();
     const key = monthKeys[now.getMonth()];
+
     return t(`configurator.months.${key}`);
 });
 

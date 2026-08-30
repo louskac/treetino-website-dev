@@ -60,6 +60,7 @@ Route::prefix('contact')->name('contact.')->group(function () {
     Route::get('/', [ContactController::class, 'index'])->name('index');
     Route::post('/', [ContactController::class, 'store'])->name('store');
 });
+Route::post('/api/contact', [ContactController::class, 'store'])->name('api.contact');
 
 // Legal
 Route::prefix('legal')->name('legal.')->group(function () {

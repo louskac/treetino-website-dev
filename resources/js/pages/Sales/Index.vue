@@ -627,9 +627,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
 import { Clock, Coins, Download, Flash, ShieldCheck } from '@iconoir/vue';
 import { Head } from '@inertiajs/vue3';
+import { ref, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import ButtonWhite from '@/custom/ButtonWhite.vue';
@@ -656,8 +656,15 @@ const hoveredProduct = ref<string | null>(null);
 
 const previewImage = computed(() => {
     const p = hoveredProduct.value || 'v1';
-    if (p === 'v2') return '/img/stills/Still_Strom-v2.png';
-    if (p === 'turbine') return '/img/stills/Still_Turbina.png';
+
+    if (p === 'v2') {
+        return '/img/stills/Still_Strom-v2.png';
+    }
+
+    if (p === 'turbine') {
+        return '/img/stills/Still_Turbina.png';
+    }
+
     return '/img/stills/Still_Strom-v1.png';
 });
 
@@ -686,7 +693,10 @@ const partnerStats = computed(() => [
 
 function scrollToSection(id: string) {
     const el = document.getElementById(id);
-    if (!el) return;
+
+    if (!el) {
+        return;
+    }
 
     window.dispatchEvent(
         new CustomEvent('suppress-3d-pin', { detail: { duration: 2500 } }),

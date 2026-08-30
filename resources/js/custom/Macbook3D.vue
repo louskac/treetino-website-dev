@@ -34,10 +34,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, watch } from 'vue';
 import * as THREE from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { ref, onMounted, onUnmounted, watch } from 'vue';
 
 const props = withDefaults(
     defineProps<{
@@ -78,7 +78,10 @@ const currentRotateY = ref(0);
 const currentRotateX = ref(0);
 
 function handleMouseMove(e: MouseEvent) {
-    if (!props.interactive || !containerRef.value) return;
+    if (!props.interactive || !containerRef.value) {
+        return;
+    }
+
     const rect = containerRef.value.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
@@ -92,7 +95,10 @@ function handleMouseLeave() {
 }
 
 function updateScreenTexture(src: string) {
-    if (!screenMesh) return;
+    if (!screenMesh) {
+        return;
+    }
+
     textureLoader.load(src, (texture) => {
         texture.colorSpace = THREE.SRGBColorSpace;
         texture.flipY = true;
@@ -110,7 +116,10 @@ function updateScreenTexture(src: string) {
 }
 
 function updateCameraFrustum() {
-    if (!containerRef.value || !renderer || !camera || !modelGroup) return;
+    if (!containerRef.value || !renderer || !camera || !modelGroup) {
+        return;
+    }
+
     const width = containerRef.value.clientWidth;
     const height = containerRef.value.clientHeight;
 
@@ -134,7 +143,9 @@ function updateCameraFrustum() {
 }
 
 function initThreeScene() {
-    if (!canvasRef.value || !containerRef.value) return;
+    if (!canvasRef.value || !containerRef.value) {
+        return;
+    }
 
     const width = containerRef.value.clientWidth;
     const height = containerRef.value.clientHeight;
@@ -204,6 +215,7 @@ function initThreeScene() {
             modelGroup.traverse((child) => {
                 if ((child as THREE.Mesh).isMesh) {
                     const mesh = child as THREE.Mesh;
+
                     if (mesh.name === 'matte' || mesh.name === 'screen') {
                         screenMesh = mesh;
                     }
@@ -214,6 +226,7 @@ function initThreeScene() {
                 const found =
                     modelGroup.getObjectByName('matte') ||
                     modelGroup.getObjectByName('screen');
+
                 if (found && (found as THREE.Mesh).isMesh) {
                     screenMesh = found as THREE.Mesh;
                 }
@@ -278,9 +291,11 @@ onUnmounted(() => {
     if (animationFrameId !== null) {
         cancelAnimationFrame(animationFrameId);
     }
+
     if (resizeObserver && containerRef.value) {
         resizeObserver.unobserve(containerRef.value);
     }
+
     if (renderer) {
         renderer.dispose();
     }

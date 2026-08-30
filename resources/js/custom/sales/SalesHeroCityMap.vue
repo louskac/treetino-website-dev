@@ -211,7 +211,6 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, onMounted, onUnmounted } from 'vue';
 import {
     Building2,
     Compass,
@@ -220,6 +219,7 @@ import {
     Home,
     Truck,
 } from 'lucide-vue-next';
+import { reactive, onMounted, onUnmounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 const { locale } = useI18n();
@@ -303,6 +303,7 @@ const nodes = reactive<MapNode[]>([
 
 function getCashoutAmount(node: MapNode) {
     const l = (locale.value || 'cs') as 'cs' | 'en';
+
     return l === 'cs' ? node.amountCs : node.amountEn;
 }
 
@@ -311,21 +312,33 @@ let isRunning = false;
 
 // Trigger lifecycle: Location -> Cash-Out Float -> Idle
 function triggerNode(index: number) {
-    if (!isRunning) return;
+    if (!isRunning) {
+        return;
+    }
+
     const node = nodes[index];
-    if (!node || node.stage !== 'idle') return;
+
+    if (!node || node.stage !== 'idle') {
+        return;
+    }
 
     // Step 1: Display big blue icon + location title in matching blue
     node.stage = 'location';
 
     // Step 2: After 2.3s, switch to game cashout animation
     const cashoutTimeout = setTimeout(() => {
-        if (!isRunning) return;
+        if (!isRunning) {
+            return;
+        }
+
         node.stage = 'cashout';
 
         // Step 3: After float-up animation completes (1.4s), reset to idle
         const resetTimeout = setTimeout(() => {
-            if (!isRunning) return;
+            if (!isRunning) {
+                return;
+            }
+
             node.stage = 'idle';
         }, 1400);
 
@@ -337,7 +350,9 @@ function triggerNode(index: number) {
 
 // Organic loop scheduling random inactive nodes at staggered delays
 function scheduleNextOrganic() {
-    if (!isRunning) return;
+    if (!isRunning) {
+        return;
+    }
 
     const idleIndices = nodes
         .map((n, idx) => (n.stage === 'idle' ? idx : -1))

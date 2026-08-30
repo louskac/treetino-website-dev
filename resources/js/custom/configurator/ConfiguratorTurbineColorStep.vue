@@ -8,10 +8,9 @@
 </template>
 
 <script setup lang="ts">
-import ConfiguratorColorPicker, {
-    type ColorOption,
-} from './ConfiguratorColorPicker.vue';
 import { useStepFormatter } from '@/composables/useStepFormatter';
+import ConfiguratorColorPicker from './ConfiguratorColorPicker.vue';
+import type { ColorOption } from './ConfiguratorColorPicker.vue';
 const { formatStep } = useStepFormatter();
 
 defineProps<{ modelValue: string; stepNumber: number }>();

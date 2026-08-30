@@ -24,6 +24,7 @@ async function check() {
     try {
       const ips = await resolve4(d.apex);
       console.log(`[${d.apex}] A record IPs: ${ips.join(', ')}`);
+
       if (ips.includes(VERCEL_IP)) {
         apexOk = true;
       }
@@ -35,6 +36,7 @@ async function check() {
     try {
       const ips = await resolve4(d.www);
       console.log(`[${d.www}] Resolved IPs: ${ips.join(', ')}`);
+
       if (ips.some(isVercel)) {
         wwwOk = true;
       }

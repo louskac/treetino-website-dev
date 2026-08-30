@@ -265,8 +265,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { CheckCircle2, FileText, Download, Zap } from 'lucide-vue-next';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 
 const props = withDefaults(
     defineProps<{
@@ -281,6 +281,7 @@ const props = withDefaults(
 
 function handleImageError(event: Event) {
     const target = event.target as HTMLImageElement;
+
     if (target && target.src !== '/img/cta/cta-pos-1.webp') {
         target.src = '/img/cta/cta-pos-1.webp';
     }
@@ -292,7 +293,9 @@ const smoothProgress = ref(0);
 let animationFrameId: number | null = null;
 
 function updateScrollProgress() {
-    if (!containerRef.value) return;
+    if (!containerRef.value) {
+        return;
+    }
 
     const rect = containerRef.value.getBoundingClientRect();
     const windowHeight =
@@ -316,6 +319,7 @@ function handleScroll() {
     if (animationFrameId !== null) {
         cancelAnimationFrame(animationFrameId);
     }
+
     animationFrameId = requestAnimationFrame(updateScrollProgress);
 }
 
@@ -326,6 +330,7 @@ onMounted(() => {
 
 onUnmounted(() => {
     window.removeEventListener('scroll', handleScroll);
+
     if (animationFrameId !== null) {
         cancelAnimationFrame(animationFrameId);
     }

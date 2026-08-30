@@ -72,10 +72,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, nextTick } from 'vue';
 import gsap from 'gsap';
 import { Observer } from 'gsap/Observer';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ref, onMounted, onUnmounted, nextTick } from 'vue';
 import Macbook3D from '@/custom/Macbook3D.vue';
 
 const EXIT_HOLD_STEPS = 1;
@@ -162,14 +162,17 @@ function getPinnedViewportHeight(): number {
 
 function getStepDistance(): number {
     const trigger = scrollTriggerInstance;
+
     if (!trigger) {
         return getPinnedViewportHeight();
     }
+
     return (trigger.end - trigger.start) / scrollStepCount;
 }
 
 function getSectionScrollY(sectionIndex: number): number | null {
     const trigger = scrollTriggerInstance;
+
     if (!trigger) {
         return null;
     }
@@ -196,6 +199,7 @@ function setStepToSection(sectionIndex: number): void {
 
 function syncScrollToSection(sectionIndex: number): void {
     const targetY = getSectionScrollY(sectionIndex);
+
     if (targetY === null) {
         return;
     }
@@ -261,6 +265,7 @@ function snapScrollToY(targetY: number): void {
 
 function snapIntoPinnedArea(): void {
     const targetY = getSectionScrollY(0);
+
     if (
         targetY === null ||
         isEntrySnapping ||
@@ -269,6 +274,7 @@ function snapIntoPinnedArea(): void {
     ) {
         return;
     }
+
     snapScrollToY(targetY);
 }
 
@@ -277,6 +283,7 @@ function animateToSection(sectionIndex: number): void {
 
     if (nextSectionIndex === currentSectionIndex.value && !isStepAnimating) {
         syncScrollToSection(nextSectionIndex);
+
         return;
     }
 
@@ -323,6 +330,7 @@ function disableInputObserver(): void {
 
 function exitPinnedArea(direction: 1 | -1): void {
     const trigger = scrollTriggerInstance;
+
     if (!trigger) {
         return;
     }
@@ -375,6 +383,7 @@ function handleStepInput(self: Observer): void {
 
     if (nextSectionIndex === null) {
         exitPinnedArea(direction);
+
         return;
     }
 

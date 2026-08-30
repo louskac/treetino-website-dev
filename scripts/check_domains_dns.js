@@ -9,6 +9,7 @@ let allVerified = true;
 for (const domain of ['treetino.eu', 'treetino.com', 'treetino.cz']) {
   try {
     const output = execSync(`npx vercel domains inspect ${domain}`, { encoding: 'utf8' });
+
     if (output.includes('WARNING! This Domain is not configured properly')) {
       console.log(`❌ ${domain}: Not yet pointing to Vercel (76.76.21.21)`);
       allVerified = false;

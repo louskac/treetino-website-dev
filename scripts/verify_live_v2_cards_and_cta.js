@@ -19,7 +19,10 @@ import { chromium } from 'playwright';
   // Scroll to #comparison
   await page.evaluate(() => {
     const el = document.getElementById('comparison');
-    if (el) el.scrollIntoView();
+
+    if (el) {
+el.scrollIntoView();
+}
   });
   await page.waitForTimeout(1000);
 

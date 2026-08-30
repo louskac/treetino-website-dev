@@ -3,52 +3,65 @@ import { CheckCircle, Refresh } from '@iconoir/vue';
 import { Head, Link } from '@inertiajs/vue3';
 import axios from 'axios';
 import type { AxiosError } from 'axios';
+import { Mail, MapPin, Clock, Send } from 'lucide-vue-next';
 import { ref } from 'vue';
 import { route } from 'ziggy-js';
-import { Mail, MapPin, Clock, Send } from 'lucide-vue-next';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
-import DefaultLayout from '@/layouts/DefaultLayout.vue';
 import HomeCtaGeneric from '@/custom/home/HomeCtaGeneric.vue';
+import DefaultLayout from '@/layouts/DefaultLayout.vue';
 
 // Contact Form
 const name = ref('');
 const mail = ref('');
 const message = ref('');
+const botcheck = ref('');
 
 const formSending = ref(false);
 const formSent = ref(false);
 const formErrors = ref<Record<string, string[]>>({});
+const generalError = ref('');
 
 async function formProcess() {
     try {
         formSending.value = true;
         formErrors.value = {};
+        generalError.value = '';
 
-        const response = await axios({
-            url: route('contact.store'),
-            method: 'POST',
-            data: {
-                name: name.value,
-                mail: mail.value,
-                message: message.value,
-            },
+        const response = await axios.post('/api/contact', {
+            name: name.value,
+            mail: mail.value,
+            message: message.value,
+            botcheck: botcheck.value,
         });
 
-        formSent.value = true;
-        formSending.value = false;
-        console.log(response.data);
+        if (response.data?.status === 'success' || response.status === 200) {
+            formSent.value = true;
+            name.value = '';
+            mail.value = '';
+            message.value = '';
+            setTimeout(() => {
+                formSent.value = false;
+            }, 6000);
+        }
     } catch (error) {
         const requestError = error as AxiosError<{
-            errors: Record<string, string[]>;
+            errors?: Record<string, string[]>;
+            message?: string;
         }>;
 
-        if (requestError.response && requestError.response.data?.errors) {
+        if (requestError.response?.data?.errors) {
             formErrors.value = requestError.response.data.errors;
+        } else if (requestError.response?.data?.message) {
+            generalError.value = requestError.response.data.message;
+        } else {
+            generalError.value =
+                'Nepodařilo se odeslat zprávu. Zkontrolujte prosím připojení k internetu.';
         }
 
-        formSending.value = false;
         formSent.value = false;
-        console.error('Process failed:', formErrors.value);
+        console.error('Contact form submission failed:', error);
+    } finally {
+        formSending.value = false;
     }
 }
 </script>
@@ -248,6 +261,24 @@ async function formProcess() {
                                         >
                                             {{ formErrors.message[0] }}
                                         </div>
+                                    </div>
+
+                                    <!-- Honeypot anti-spam field -->
+                                    <div class="hidden" aria-hidden="true">
+                                        <input
+                                            type="text"
+                                            name="botcheck"
+                                            v-model="botcheck"
+                                            tabindex="-1"
+                                            autocomplete="off"
+                                        />
+                                    </div>
+
+                                    <div
+                                        v-if="generalError"
+                                        class="rounded-xl border border-red-200 bg-red-50 p-3 text-xs text-red-600"
+                                    >
+                                        {{ generalError }}
                                     </div>
 
                                     <div class="pt-2">

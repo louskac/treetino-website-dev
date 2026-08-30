@@ -172,12 +172,14 @@ const saturation = ref(100);
 // Initialize HSL from activeHex
 function hexToHsl(hex: string): { h: number; s: number; l: number } {
     let cleanHex = hex.replace('#', '');
+
     if (cleanHex.length === 3) {
         cleanHex = cleanHex
             .split('')
             .map((c) => c + c)
             .join('');
     }
+
     const r = parseInt(cleanHex.substring(0, 2) || '00', 16) / 255;
     const g = parseInt(cleanHex.substring(2, 4) || '00', 16) / 255;
     const b = parseInt(cleanHex.substring(4, 6) || '00', 16) / 255;
@@ -191,6 +193,7 @@ function hexToHsl(hex: string): { h: number; s: number; l: number } {
     if (max !== min) {
         const d = max - min;
         s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+
         switch (max) {
             case r:
                 h = (g - b) / d + (g < b ? 6 : 0);
@@ -202,6 +205,7 @@ function hexToHsl(hex: string): { h: number; s: number; l: number } {
                 h = (r - g) / d + 4;
                 break;
         }
+
         h /= 6;
     }
 
@@ -219,10 +223,12 @@ function hslToHex(h: number, s: number, l: number): string {
     const f = (n: number) => {
         const k = (n + h / 30) % 12;
         const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+
         return Math.round(255 * color)
             .toString(16)
             .padStart(2, '0');
     };
+
     return `#${f(0)}${f(8)}${f(4)}`.toUpperCase();
 }
 
@@ -257,6 +263,7 @@ function emitColor() {
 
 const lightnessSliderStyle = computed(() => {
     const pureHueHex = hslToHex(hue.value, 100, 50);
+
     return {
         background: `linear-gradient(to right, #000000 0%, ${pureHueHex} 50%, #ffffff 100%)`,
     };

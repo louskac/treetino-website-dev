@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { Settings } from '@iconoir/vue';
 import {
     acceptCategory,
     validCookie,
     showPreferences,
 } from 'vanilla-cookieconsent';
-import { Settings } from '@iconoir/vue';
+import { ref, onMounted } from 'vue';
 
 const isVisible = ref(false);
 

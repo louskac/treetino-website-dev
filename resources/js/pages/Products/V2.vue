@@ -1049,7 +1049,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
 import {
     ArrowRight,
     Clock,
@@ -1062,6 +1061,7 @@ import {
     Wind,
 } from '@iconoir/vue';
 import { Head, Link } from '@inertiajs/vue3';
+import { ref, computed } from 'vue';
 import { route } from 'ziggy-js';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import ButtonWhite from '@/custom/ButtonWhite.vue';
@@ -1072,8 +1072,15 @@ const hoveredProduct = ref<string | null>(null);
 
 const previewImage = computed(() => {
     const p = hoveredProduct.value || 'v2';
-    if (p === 'v1') return '/img/info/night-detail-w.jpg';
-    if (p === 'turbine') return '/img/info/info-turbine-w.webp';
+
+    if (p === 'v1') {
+        return '/img/info/night-detail-w.jpg';
+    }
+
+    if (p === 'turbine') {
+        return '/img/info/info-turbine-w.webp';
+    }
+
     return '/img/info/info-strom-v2-w.webp';
 });
 

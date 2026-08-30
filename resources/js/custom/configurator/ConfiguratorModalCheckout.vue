@@ -94,6 +94,7 @@ const initStripe = async () => {
 
     if (!stripe.value) {
         errorMessage.value = 'Payment service could not be initialized.';
+
         return;
     }
 
@@ -161,11 +162,13 @@ const initStripe = async () => {
                 errorMessage.value = confirmError.message ?? 'Payment failed.';
             } else {
                 ev.complete('success');
+
                 if (paymentIntent.status === 'requires_action') {
                     const { error: actionError } =
                         await stripeInstance.confirmCardPayment(
                             clientSecret.value,
                         );
+
                     if (actionError) {
                         errorMessage.value =
                             actionError.message ?? 'Payment failed.';

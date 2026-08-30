@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import { Play, X, ExternalLink, Youtube } from 'lucide-vue-next';
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { Play, X, ExternalLink, Youtube } from 'lucide-vue-next';
 
 const { locale } = useI18n();
 
@@ -72,11 +72,13 @@ const activeVideo = ref<VideoItem | null>(null);
 
 const getVideoTitle = (video: VideoItem) => {
     const l = (locale.value || 'cs') as 'cs' | 'en';
+
     return video.title[l] || video.title.cs;
 };
 
 const getVideoDesc = (video: VideoItem) => {
     const l = (locale.value || 'cs') as 'cs' | 'en';
+
     return video.description[l] || video.description.cs;
 };
 

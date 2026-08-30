@@ -394,6 +394,7 @@ const visibleOptions = computed(() =>
 
 function selectOption(id: string) {
     emit('update:modelValue', id);
+
     if (id === 'custom' && !rawUserImage.value) {
         triggerFileInput();
     }
@@ -403,6 +404,7 @@ function triggerFileInput() {
     const el = Array.isArray(fileInput.value)
         ? (fileInput.value[0] as HTMLInputElement | undefined)
         : fileInput.value;
+
     if (el && typeof el.click === 'function') {
         el.click();
     }
@@ -414,7 +416,10 @@ function setMappingMode(mode: 'branch' | 'individual') {
 }
 
 async function updateMappedTexture() {
-    if (!rawUserImage.value) return;
+    if (!rawUserImage.value) {
+        return;
+    }
+
     const { fullTexture, editorTexture } = await generateMappedLeafTexture(
         rawUserImage.value,
         {
@@ -461,25 +466,39 @@ function onWheelZoom(event: WheelEvent) {
             Math.max(0.4, Number((scale.value + delta).toFixed(2))),
         );
     }
+
     updateMappedTexture();
 }
 
 /* Helper to safely unwrap Vue 3 template ref (which is an Array when inside v-for) */
 function getDragPadElement(): HTMLElement | null {
-    if (!dragPad.value) return null;
+    if (!dragPad.value) {
+        return null;
+    }
+
     if (Array.isArray(dragPad.value)) {
         return (dragPad.value[0] as HTMLElement) || null;
     }
+
     const el = dragPad.value as any;
-    if (el.$el) return el.$el as HTMLElement;
-    if (typeof el.getBoundingClientRect === 'function')
+
+    if (el.$el) {
+        return el.$el as HTMLElement;
+    }
+
+    if (typeof el.getBoundingClientRect === 'function') {
         return el as HTMLElement;
+    }
+
     return null;
 }
 
 /* Mouse Dragging Logic */
 function startDrag(event: MouseEvent) {
-    if (event.button !== 0) return;
+    if (event.button !== 0) {
+        return;
+    }
+
     isDragging = true;
     startX = event.clientX;
     startY = event.clientY;
@@ -491,13 +510,21 @@ function startDrag(event: MouseEvent) {
 }
 
 function onDragMove(event: MouseEvent) {
-    if (!isDragging) return;
+    if (!isDragging) {
+        return;
+    }
 
     const padEl = getDragPadElement();
-    if (!padEl) return;
+
+    if (!padEl) {
+        return;
+    }
 
     const rect = padEl.getBoundingClientRect();
-    if (!rect.width || !rect.height) return;
+
+    if (!rect.width || !rect.height) {
+        return;
+    }
 
     const deltaX = ((event.clientX - startX) / rect.width) * 100;
     const deltaY = ((event.clientY - startY) / rect.height) * 100;
@@ -525,6 +552,7 @@ function onTouchStart(event: TouchEvent) {
     if (event.touches.length === 2) {
         const t1 = event.touches[0];
         const t2 = event.touches[1];
+
         if (t1 && t2) {
             touchStartDist = Math.hypot(
                 t2.clientX - t1.clientX,
@@ -534,7 +562,11 @@ function onTouchStart(event: TouchEvent) {
         }
     } else if (event.touches.length === 1) {
         const touch = event.touches[0];
-        if (!touch) return;
+
+        if (!touch) {
+            return;
+        }
+
         isDragging = true;
         startX = touch.clientX;
         startY = touch.clientY;
@@ -551,6 +583,7 @@ function onTouchMove(event: TouchEvent) {
         event.preventDefault();
         const t1 = event.touches[0];
         const t2 = event.touches[1];
+
         if (t1 && t2) {
             const dist = Math.hypot(
                 t2.clientX - t1.clientX,
@@ -566,11 +599,22 @@ function onTouchMove(event: TouchEvent) {
     } else if (event.touches.length === 1 && isDragging) {
         event.preventDefault();
         const touch = event.touches[0];
-        if (!touch) return;
+
+        if (!touch) {
+            return;
+        }
+
         const padEl = getDragPadElement();
-        if (!padEl) return;
+
+        if (!padEl) {
+            return;
+        }
+
         const rect = padEl.getBoundingClientRect();
-        if (!rect.width || !rect.height) return;
+
+        if (!rect.width || !rect.height) {
+            return;
+        }
 
         const deltaX = ((touch.clientX - startX) / rect.width) * 100;
         const deltaY = ((touch.clientY - startY) / rect.height) * 100;
@@ -603,11 +647,15 @@ onUnmounted(() => {
 async function onFileSelected(event: Event) {
     const target = event.target as HTMLInputElement;
     const fileObj = target.files?.[0];
-    if (!fileObj) return;
+
+    if (!fileObj) {
+        return;
+    }
 
     const reader = new FileReader();
     reader.onload = async (e) => {
         const dataUrl = e.target?.result as string;
+
         if (dataUrl) {
             rawUserImage.value = dataUrl;
             resetPosition();

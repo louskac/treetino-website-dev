@@ -433,11 +433,13 @@ export function getTintedTextureUrl(src: string, targetHex: string): string {
     }
 
     const key = `${src}_${targetHex}`;
+
     if (tintCache.has(key)) {
         return tintCache.get(key)!;
     }
 
     let img = imgCache.get(src);
+
     if (!img) {
         img = new Image();
         img.crossOrigin = 'anonymous';
@@ -449,6 +451,7 @@ export function getTintedTextureUrl(src: string, targetHex: string): string {
         img.onload = () => {
             getTintedTextureUrl(src, targetHex);
         };
+
         return src;
     }
 
@@ -456,7 +459,10 @@ export function getTintedTextureUrl(src: string, targetHex: string): string {
     canvas.width = img.naturalWidth || 1500;
     canvas.height = img.naturalHeight || 1500;
     const ctx = canvas.getContext('2d');
-    if (!ctx) return src;
+
+    if (!ctx) {
+        return src;
+    }
 
     ctx.drawImage(img, 0, 0);
     const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
@@ -470,6 +476,7 @@ export function getTintedTextureUrl(src: string, targetHex: string): string {
     for (let i = 0; i < data.length; i += 4) {
         if (data[i + 3] > 0) {
             const brightness = (data[i] + data[i + 1] + data[i + 2]) / 3;
+
             if (brightness < 248) {
                 const weight = Math.min(1.0, (248 - brightness) / 30);
                 data[i] = Math.round(
@@ -488,6 +495,7 @@ export function getTintedTextureUrl(src: string, targetHex: string): string {
     ctx.putImageData(imgData, 0, 0);
     const dataUrl = canvas.toDataURL('image/png');
     tintCache.set(key, dataUrl);
+
     return dataUrl;
 }
 
@@ -502,6 +510,7 @@ export function getTintedTurbineUrl(
     }
 
     const key = `${customSrc}_${targetHex}`;
+
     if (turbineTintCache.has(key)) {
         return turbineTintCache.get(key)!;
     }
@@ -523,6 +532,7 @@ export function getTintedTurbineUrl(
         };
         customImg.onload = onLoaded;
         clearImg.onload = onLoaded;
+
         return customSrc;
     }
 
@@ -533,7 +543,10 @@ export function getTintedTurbineUrl(
     canvasCustom.width = width;
     canvasCustom.height = height;
     const ctxCustom = canvasCustom.getContext('2d');
-    if (!ctxCustom) return customSrc;
+
+    if (!ctxCustom) {
+        return customSrc;
+    }
 
     ctxCustom.drawImage(customImg, 0, 0);
     const customData = ctxCustom.getImageData(0, 0, width, height);
@@ -542,7 +555,10 @@ export function getTintedTurbineUrl(
     canvasClear.width = width;
     canvasClear.height = height;
     const ctxClear = canvasClear.getContext('2d');
-    if (!ctxClear) return customSrc;
+
+    if (!ctxClear) {
+        return customSrc;
+    }
 
     ctxClear.drawImage(clearImg, 0, 0);
     const clearData = ctxClear.getImageData(0, 0, width, height);
@@ -563,6 +579,7 @@ export function getTintedTurbineUrl(
 
     for (let y = 0; y < height; y++) {
         const dy = (y - cy) / ry;
+
         for (let x = 0; x < width; x++) {
             const dx = (x - cx) / rx;
             const dist = dx * dx + dy * dy;
@@ -598,6 +615,7 @@ export function getTintedTurbineUrl(
     ctxCustom.putImageData(customData, 0, 0);
     const dataUrl = canvasCustom.toDataURL('image/png');
     turbineTintCache.set(key, dataUrl);
+
     return dataUrl;
 }
 
@@ -618,6 +636,7 @@ export function getTintedV1TreeUrl(
     const brownSrc = `/img/config-images/v1-config-compressed-webp/color_brown_${leafColor}.webp`;
 
     const key = `${whiteSrc}_${targetHex}`;
+
     if (v1TreeTintCache.has(key)) {
         return v1TreeTintCache.get(key)!;
     }
@@ -638,6 +657,7 @@ export function getTintedV1TreeUrl(
         };
         whiteImg.onload = onLoaded;
         brownImg.onload = onLoaded;
+
         return whiteSrc;
     }
 
@@ -648,7 +668,10 @@ export function getTintedV1TreeUrl(
     canvasWhite.width = width;
     canvasWhite.height = height;
     const ctxWhite = canvasWhite.getContext('2d');
-    if (!ctxWhite) return whiteSrc;
+
+    if (!ctxWhite) {
+        return whiteSrc;
+    }
 
     ctxWhite.drawImage(whiteImg, 0, 0);
     const whiteData = ctxWhite.getImageData(0, 0, width, height);
@@ -657,7 +680,10 @@ export function getTintedV1TreeUrl(
     canvasBrown.width = width;
     canvasBrown.height = height;
     const ctxBrown = canvasBrown.getContext('2d');
-    if (!ctxBrown) return whiteSrc;
+
+    if (!ctxBrown) {
+        return whiteSrc;
+    }
 
     ctxBrown.drawImage(brownImg, 0, 0);
     const brownData = ctxBrown.getImageData(0, 0, width, height);
@@ -674,11 +700,15 @@ export function getTintedV1TreeUrl(
 
     for (let y = 0; y < cutoffY; y++) {
         const rowOffset = y * width * 4;
+
         for (let x = 0; x < width; x++) {
             const i = rowOffset + x * 4;
 
             const lum = (dataW[i] + dataW[i + 1] + dataW[i + 2]) / 3;
-            if (lum >= 248) continue;
+
+            if (lum >= 248) {
+                continue;
+            }
 
             const diffR = Math.abs(dataB[i] - dataW[i]);
             const diffG = Math.abs(dataB[i + 1] - dataW[i + 1]);
@@ -709,16 +739,19 @@ export function getTintedV1TreeUrl(
     ctxWhite.putImageData(whiteData, 0, 0);
     const dataUrl = canvasWhite.toDataURL('image/png');
     v1TreeTintCache.set(key, dataUrl);
+
     return dataUrl;
 }
 
 function loadHtmlImage(src: string): HTMLImageElement {
     let img = imgCache.get(src);
+
     if (!img) {
         img = new Image();
         img.crossOrigin = 'anonymous';
         img.src = src;
         imgCache.set(src, img);
     }
+
     return img;
 }

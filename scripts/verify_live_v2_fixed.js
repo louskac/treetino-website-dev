@@ -19,7 +19,10 @@ import { chromium } from 'playwright';
   // Scroll to #numbers
   await page.evaluate(() => {
     const el = document.getElementById('numbers');
-    if (el) el.scrollIntoView();
+
+    if (el) {
+el.scrollIntoView();
+}
   });
   await page.waitForTimeout(1000);
 

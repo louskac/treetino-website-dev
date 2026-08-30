@@ -5,7 +5,10 @@ export function useParallax(strength = 0.15) {
     const translateY = ref(0);
 
     function update() {
-        if (!el.value) return;
+        if (!el.value) {
+            return;
+        }
+
         const rect = el.value.getBoundingClientRect();
         const windowH = window.innerHeight;
 

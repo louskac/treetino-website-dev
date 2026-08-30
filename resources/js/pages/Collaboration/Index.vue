@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { Head } from '@inertiajs/vue3';
+import { Download, ArrowRight } from 'lucide-vue-next';
 import { route } from 'ziggy-js';
-import DefaultLayout from '@/layouts/DefaultLayout.vue';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import ButtonSecondary from '@/custom/ButtonSecondary.vue';
 import HomeCtaGeneric from '@/custom/home/HomeCtaGeneric.vue';
-import { Download, ArrowRight } from 'lucide-vue-next';
+import DefaultLayout from '@/layouts/DefaultLayout.vue';
 
 const partners = [
     {

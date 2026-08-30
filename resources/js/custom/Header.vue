@@ -247,16 +247,16 @@
 </template>
 
 <script setup lang="ts">
+import { Menu, Xmark } from '@iconoir/vue';
 import { Link } from '@inertiajs/vue3';
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 
+import { route } from 'ziggy-js';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import LocaleSwitcher from '@/custom/LocaleSwitcher.vue';
 import LogoType from '@/custom/LogoType.vue';
 import ProductCard from '@/custom/ProductCard.vue';
 import { PRODUCTS } from '@/types/products';
-import { Menu, Xmark } from '@iconoir/vue';
-import { route } from 'ziggy-js';
 
 const props = withDefaults(
     defineProps<{

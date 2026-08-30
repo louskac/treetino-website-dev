@@ -33,6 +33,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->preventRequestForgery(except: [
             'webhook',
+            'api/*',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

@@ -154,8 +154,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
 import { ChevronLeft, ChevronRight } from 'lucide-vue-next';
+import { ref, computed } from 'vue';
 import { SALES_OPPORTUNITIES } from '@/types/sales';
 
 const opportunities = SALES_OPPORTUNITIES;

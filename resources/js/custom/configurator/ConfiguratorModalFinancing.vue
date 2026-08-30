@@ -201,11 +201,11 @@
 </template>
 
 <script setup lang="ts">
+import { Xmark } from '@iconoir/vue';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { Xmark } from '@iconoir/vue';
-import { getGrantById } from '@/types/grants';
 import { calcMonthlyPayment, formatPrice } from '@/composables/useFinancing';
+import { getGrantById } from '@/types/grants';
 
 const { t } = useI18n();
 
@@ -228,13 +228,21 @@ const emit = defineEmits<{
 const grantPct = computed(() => getGrantById(props.grant)?.percentage ?? 0);
 const grantLabel = computed(() => {
     const info = getGrantById(props.grant);
-    if (!info) return '';
+
+    if (!info) {
+        return '';
+    }
+
     return info.labelKey ? t(info.labelKey, info.label) : info.label;
 });
 
 const discountedPrice = computed(() => {
     const pct = getGrantById(props.grant)?.percentage;
-    if (!pct) return props.basePrice;
+
+    if (!pct) {
+        return props.basePrice;
+    }
+
     return Math.round(props.basePrice * (1 - pct / 100));
 });
 

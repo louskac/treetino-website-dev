@@ -12,9 +12,8 @@
 
 <script setup lang="ts">
 import { useStepFormatter } from '@/composables/useStepFormatter';
-import ConfiguratorColorPicker, {
-    type ColorOption,
-} from './ConfiguratorColorPicker.vue';
+import ConfiguratorColorPicker from './ConfiguratorColorPicker.vue';
+import type { ColorOption } from './ConfiguratorColorPicker.vue';
 
 defineProps<{ modelValue: string; stepNumber: number; customHex?: string }>();
 defineEmits<{

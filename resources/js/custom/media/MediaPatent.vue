@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import { Award, Download, ExternalLink } from 'lucide-vue-next';
 import { onMounted, onUnmounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { Award, Download, ExternalLink } from 'lucide-vue-next';
 
 const { t, locale } = useI18n();
 
@@ -16,11 +16,13 @@ const frames: HTMLImageElement[] = [];
 // Preload frames
 const loadFrames = () => {
     let loadedCount = 0;
+
     for (let i = 1; i <= TOTAL_FRAMES; i++) {
         const img = new Image();
         img.src = `/img/features-frames/features_frame_${String(i).padStart(4, '0')}.webp`;
         img.onload = () => {
             loadedCount++;
+
             if (loadedCount >= 10 && !isLoaded.value) {
                 isLoaded.value = true;
                 drawFrame(currentFrame.value);
@@ -32,14 +34,23 @@ const loadFrames = () => {
 
 const drawFrame = (frameIndex: number) => {
     const canvas = canvasRef.value;
-    if (!canvas) return;
+
+    if (!canvas) {
+        return;
+    }
+
     const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+
+    if (!ctx) {
+        return;
+    }
 
     const img = frames[frameIndex];
+
     if (img && img.complete && img.naturalWidth > 0) {
         const dpr = window.devicePixelRatio || 1;
         const rect = canvas.getBoundingClientRect();
+
         if (
             canvas.width !== rect.width * dpr ||
             canvas.height !== rect.height * dpr
@@ -74,7 +85,10 @@ const drawFrame = (frameIndex: number) => {
 };
 
 const startPlay = () => {
-    if (animationTimer) clearInterval(animationTimer);
+    if (animationTimer) {
+        clearInterval(animationTimer);
+    }
+
     animationTimer = window.setInterval(() => {
         currentFrame.value = (currentFrame.value + 1) % TOTAL_FRAMES;
         drawFrame(currentFrame.value);
@@ -88,7 +102,10 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-    if (animationTimer) clearInterval(animationTimer);
+    if (animationTimer) {
+        clearInterval(animationTimer);
+    }
+
     window.removeEventListener('resize', () => drawFrame(currentFrame.value));
 });
 

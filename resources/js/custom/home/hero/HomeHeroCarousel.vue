@@ -35,7 +35,9 @@ const slideCount = computed(() => swiper.value?.slides.length ?? 0);
 
 // normalized progress per slide (0 → 1 within current slide)
 const localProgress = computed(() => {
-    if (!swiper.value || slideCount.value <= 1) return 0;
+    if (!swiper.value || slideCount.value <= 1) {
+        return 0;
+    }
 
     return (progress.value * (slideCount.value - 1)) % 1;
 });

@@ -26,7 +26,10 @@ const product = computed(
 );
 
 const localizedProductName = computed(() => {
-    if (!product.value) return props.preorder?.product_type ?? '';
+    if (!product.value) {
+        return props.preorder?.product_type ?? '';
+    }
+
     return product.value.labelKey
         ? t(product.value.labelKey, product.value.label)
         : product.value.label;
@@ -73,69 +76,110 @@ const configurationRows = computed(() => {
             grant: t('configurator.steps.grant', 'Dotační program'),
             paymentMode: t('configurator.steps.payment_mode', 'Způsob platby'),
         };
+
         return labels[key] ?? key;
     };
 
     const getValue = (key: string, val: unknown): string => {
-        if (val === true) return t('common.actions.yes', 'Ano');
-        if (val === false) return t('common.actions.no', 'Ne');
+        if (val === true) {
+            return t('common.actions.yes', 'Ano');
+        }
+
+        if (val === false) {
+            return t('common.actions.no', 'Ne');
+        }
 
         const str = String(val);
+
         if (key === 'windTurbines') {
-            if (str === 'with-turbines')
+            if (str === 'with-turbines') {
                 return t(
                     'configurator.wind_turbines.with.label',
                     'S větrnými turbínami',
                 );
-            if (str === 'without-turbines')
+            }
+
+            if (str === 'without-turbines') {
                 return t(
                     'configurator.wind_turbines.without.label',
                     'Bez větrných turbín',
                 );
+            }
         }
+
         if (key === 'turbineSize') {
-            if (str === 'large')
+            if (str === 'large') {
                 return `${t('configurator.turbine_size.large.label', 'Velká')} (${t('configurator.turbine_size.large.power', '3 kW (2,8 m)')})`;
-            if (str === 'medium')
+            }
+
+            if (str === 'medium') {
                 return `${t('configurator.turbine_size.medium.label', 'Střední')} (${t('configurator.turbine_size.medium.power', '2 kW (1,8 m)')})`;
-            if (str === 'small')
+            }
+
+            if (str === 'small') {
                 return `${t('configurator.turbine_size.small.label', 'Menší')} (${t('configurator.turbine_size.small.power', '1 kW (1,2 m)')})`;
+            }
         }
+
         if (key === 'turbineMount') {
-            if (str === 'roof')
+            if (str === 'roof') {
                 return t('configurator.turbine_mount.roof.label', 'Na střechu');
-            if (str === 'wall')
+            }
+
+            if (str === 'wall') {
                 return t('configurator.turbine_mount.wall.label', 'Na zeď');
-            if (str === 'pole')
+            }
+
+            if (str === 'pole') {
                 return t('configurator.turbine_mount.pole.label', 'Na sloup');
+            }
         }
+
         if (key === 'treeDesign') {
-            if (str === 'standard')
+            if (str === 'standard') {
                 return t(
                     'configurator.tree_design.standard.label',
                     'Standardní',
                 );
-            if (str === 'cyber')
+            }
+
+            if (str === 'cyber') {
                 return t('configurator.tree_design.cyber.label', 'Cyber');
+            }
         }
+
         if (key === 'fveLeafDesign') {
-            if (str === 'none')
+            if (str === 'none') {
                 return t('configurator.fve_leaf.none.label', 'Bez designu');
-            if (str === 'spring')
+            }
+
+            if (str === 'spring') {
                 return t('configurator.fve_leaf.spring.label', 'Jaro');
-            if (str === 'summer')
+            }
+
+            if (str === 'summer') {
                 return t('configurator.fve_leaf.summer.label', 'Léto');
-            if (str === 'autumn')
+            }
+
+            if (str === 'autumn') {
                 return t('configurator.fve_leaf.autumn.label', 'Podzim');
-            if (str === 'winter')
+            }
+
+            if (str === 'winter') {
                 return t('configurator.fve_leaf.winter.label', 'Zima');
+            }
         }
+
         if (key === 'paymentMode') {
-            if (str === 'cash')
+            if (str === 'cash') {
                 return t('configurator.payment.cash', 'Hotovost');
-            if (str === 'credit')
+            }
+
+            if (str === 'credit') {
                 return t('configurator.payment.credit', 'Zelený úvěr');
+            }
         }
+
         if (key === 'color' || key === 'leafColor') {
             const colorKeys: Record<string, string> = {
                 white: t('configurator.color.white', 'Bílá'),
@@ -150,7 +194,10 @@ const configurationRows = computed(() => {
                 orange: t('configurator.color.orange', 'Oranžová'),
                 transparent: t('configurator.color.transparent', 'Průhledná'),
             };
-            if (colorKeys[str]) return colorKeys[str];
+
+            if (colorKeys[str]) {
+                return colorKeys[str];
+            }
         }
 
         return str;

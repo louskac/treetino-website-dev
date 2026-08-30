@@ -52,6 +52,21 @@ class ContactController extends Controller
 
         Log::info('New message stored: '.$request->mail);
 
+        try {
+            if (config('mail.default') && config('mail.default') !== 'log') {
+                \Illuminate\Support\Facades\Mail::raw(
+                    "Nová zpráva z webu Treetino:\n\nOd: {$request->name} ({$request->mail})\n\nZpráva:\n{$request->message}",
+                    function ($m) use ($request) {
+                        $m->to('info@treetino.com')
+                            ->replyTo($request->mail, $request->name)
+                            ->subject('Nová zpráva z kontaktního formuláře: '.$request->name);
+                    }
+                );
+            }
+        } catch (\Throwable $e) {
+            Log::error('Failed to send contact email: '.$e->getMessage());
+        }
+
         return response()->json([
             'status' => 'success',
             'message' => __('contact.form.success'),

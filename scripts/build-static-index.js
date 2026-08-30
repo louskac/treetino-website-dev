@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 const manifestPath = path.resolve('public/build/manifest.json');
+
 if (fs.existsSync(manifestPath)) {
     const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
     const appEntry = manifest['resources/js/app.ts'];

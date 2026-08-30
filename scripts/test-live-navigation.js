@@ -1,5 +1,5 @@
-import { chromium } from 'playwright';
 import path from 'path';
+import { chromium } from 'playwright';
 
 const ARTIFACT_DIR = '/Users/jakub/.gemini/antigravity/brain/a6fed319-5e97-416f-875a-9903af9a80d1';
 

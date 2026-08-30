@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3';
-import { route } from 'ziggy-js';
 import {
     Download,
     ArrowRight,
@@ -10,13 +9,14 @@ import {
     Palette,
     Award,
 } from 'lucide-vue-next';
+import { route } from 'ziggy-js';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import ButtonSecondary from '@/custom/ButtonSecondary.vue';
-import DefaultLayout from '@/layouts/DefaultLayout.vue';
 import HomeCtaGeneric from '@/custom/home/HomeCtaGeneric.vue';
-import MediaVideos from '@/custom/media/MediaVideos.vue';
-import MediaPitchDeck from '@/custom/media/MediaPitchDeck.vue';
 import MediaPatent from '@/custom/media/MediaPatent.vue';
+import MediaPitchDeck from '@/custom/media/MediaPitchDeck.vue';
+import MediaVideos from '@/custom/media/MediaVideos.vue';
+import DefaultLayout from '@/layouts/DefaultLayout.vue';
 </script>
 
 <template>

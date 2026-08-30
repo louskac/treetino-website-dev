@@ -32,6 +32,7 @@ const formatLocale = (value: string) => value.toUpperCase();
 
 const changeLocale = (targetLocale: string) => {
     isOpen.value = false;
+
     if (targetLocale === activeLocale.value) {
         return;
     }
@@ -54,6 +55,7 @@ const changeLocale = (targetLocale: string) => {
         page.props.i18n.locale = targetLocale;
         page.props.i18n.messages = msgs;
     }
+
     document.documentElement.lang = targetLocale;
 
     // 3. Dispatch global custom event for any non-reactive listeners
@@ -88,6 +90,7 @@ const handleClickOutside = (event: MouseEvent) => {
 onMounted(() => {
     document.addEventListener('click', handleClickOutside);
     const saved = localStorage.getItem('app_locale');
+
     if (saved && saved !== activeLocale.value) {
         changeLocale(saved);
     }

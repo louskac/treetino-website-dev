@@ -329,8 +329,8 @@ import {
     Mail,
     Building,
 } from '@iconoir/vue';
-import { ArrowRight } from 'lucide-vue-next';
 import { Link } from '@inertiajs/vue3';
+import { ArrowRight } from 'lucide-vue-next';
 import { showPreferences } from 'vanilla-cookieconsent';
 import { route } from 'ziggy-js';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';

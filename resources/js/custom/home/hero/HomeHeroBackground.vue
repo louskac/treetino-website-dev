@@ -52,7 +52,10 @@ const playVideo = async () => {
     await nextTick();
 
     const video = videoRef.value;
-    if (!video) return;
+
+    if (!video) {
+        return;
+    }
 
     video.muted = true;
     video.defaultMuted = true;

@@ -19,6 +19,7 @@ import { chromium } from 'playwright';
   // Scroll right panel down
   await page.evaluate(() => {
     const panel = document.querySelector('.overflow-y-auto');
+
     if (panel) {
       panel.scrollTop = 900;
     }
