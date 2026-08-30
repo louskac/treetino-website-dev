@@ -499,6 +499,12 @@
                 "sending": "Odesílám zprávu...",
                 "success": "Zpráva byla úspěšně odeslána. Děkujeme!"
             },
+            "validation": {
+                "name_required": "Vyplňte prosím vaše jméno a příjmení.",
+                "email_required": "Vyplňte prosím vaši e-mailovou adresu.",
+                "email_invalid": "Zadejte prosím platnou e-mailovou adresu.",
+                "message_required": "Napište prosím text zprávy."
+            },
             "privacy_consent": "Odesláním formuláře souhlasíte se",
             "privacy_link": "zpracováním osobních údajů",
             "badge_rnd": "✓ R&D v ČR (FZÚ AV ČR \/ ČVUT)",
@@ -1495,6 +1501,12 @@
                 "submit": "Send Message",
                 "sending": "Sending message...",
                 "success": "Message successfully sent. Thank you!"
+            },
+            "validation": {
+                "name_required": "Please enter your name.",
+                "email_required": "Please enter your email address.",
+                "email_invalid": "Please enter a valid email address.",
+                "message_required": "Please enter your message."
             },
             "privacy_consent": "By submitting the form you agree to the",
             "privacy_link": "processing of personal data",

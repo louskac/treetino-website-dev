@@ -5,10 +5,13 @@ import axios from 'axios';
 import type { AxiosError } from 'axios';
 import { Mail, MapPin, Clock, Send } from 'lucide-vue-next';
 import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { route } from 'ziggy-js';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import HomeCtaGeneric from '@/custom/home/HomeCtaGeneric.vue';
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
+
+const { t } = useI18n();
 
 // Contact Form
 const name = ref('');
@@ -21,16 +24,46 @@ const formSent = ref(false);
 const formErrors = ref<Record<string, string[]>>({});
 const generalError = ref('');
 
+function validateForm(): boolean {
+    const errors: Record<string, string[]> = {};
+
+    const trimmedName = name.value.trim();
+    const trimmedMail = mail.value.trim();
+    const trimmedMessage = message.value.trim();
+
+    if (!trimmedName) {
+        errors.name = [t('contact.validation.name_required')];
+    }
+
+    if (!trimmedMail) {
+        errors.mail = [t('contact.validation.email_required')];
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedMail)) {
+        errors.mail = [t('contact.validation.email_invalid')];
+    }
+
+    if (!trimmedMessage) {
+        errors.message = [t('contact.validation.message_required')];
+    }
+
+    formErrors.value = errors;
+    return Object.keys(errors).length === 0;
+}
+
 async function formProcess() {
+    formErrors.value = {};
+    generalError.value = '';
+
+    if (!validateForm()) {
+        return;
+    }
+
     try {
         formSending.value = true;
-        formErrors.value = {};
-        generalError.value = '';
 
         const response = await axios.post('/api/contact', {
-            name: name.value,
-            mail: mail.value,
-            message: message.value,
+            name: name.value.trim(),
+            mail: mail.value.trim(),
+            message: message.value.trim(),
             botcheck: botcheck.value,
         });
 
@@ -191,12 +224,20 @@ async function formProcess() {
                                             class="mb-2 block text-xs font-semibold tracking-wider text-black/70 uppercase"
                                         >
                                             {{ $t('contact.form.name') }}
+                                            <span class="text-red-500">*</span>
                                         </label>
                                         <input
-                                            class="w-full rounded-xl border border-black/15 bg-white px-4 py-3.5 text-black transition-all placeholder:text-black/35 focus:border-t-blue focus:ring-2 focus:ring-t-blue/20 focus:outline-none"
+                                            class="w-full rounded-xl border bg-white px-4 py-3.5 text-black transition-all placeholder:text-black/35 focus:ring-2 focus:outline-none"
+                                            :class="
+                                                formErrors.name
+                                                    ? 'border-red-400 focus:border-red-500 focus:ring-red-200'
+                                                    : 'border-black/15 focus:border-t-blue focus:ring-t-blue/20'
+                                            "
                                             type="text"
                                             id="name"
+                                            required
                                             v-model="name"
+                                            @input="delete formErrors.name"
                                             :placeholder="
                                                 $t(
                                                     'contact.form.name_placeholder',
@@ -217,12 +258,20 @@ async function formProcess() {
                                             class="mb-2 block text-xs font-semibold tracking-wider text-black/70 uppercase"
                                         >
                                             {{ $t('contact.form.email') }}
+                                            <span class="text-red-500">*</span>
                                         </label>
                                         <input
-                                            class="w-full rounded-xl border border-black/15 bg-white px-4 py-3.5 text-black transition-all placeholder:text-black/35 focus:border-t-blue focus:ring-2 focus:ring-t-blue/20 focus:outline-none"
+                                            class="w-full rounded-xl border bg-white px-4 py-3.5 text-black transition-all placeholder:text-black/35 focus:ring-2 focus:outline-none"
+                                            :class="
+                                                formErrors.mail
+                                                    ? 'border-red-400 focus:border-red-500 focus:ring-red-200'
+                                                    : 'border-black/15 focus:border-t-blue focus:ring-t-blue/20'
+                                            "
                                             type="email"
                                             id="email"
+                                            required
                                             v-model="mail"
+                                            @input="delete formErrors.mail"
                                             :placeholder="
                                                 $t(
                                                     'contact.form.email_placeholder',
@@ -243,12 +292,20 @@ async function formProcess() {
                                             class="mb-2 block text-xs font-semibold tracking-wider text-black/70 uppercase"
                                         >
                                             {{ $t('contact.form.message') }}
+                                            <span class="text-red-500">*</span>
                                         </label>
                                         <textarea
                                             rows="5"
-                                            class="w-full resize-y rounded-xl border border-black/15 bg-white px-4 py-3.5 text-black transition-all placeholder:text-black/35 focus:border-t-blue focus:ring-2 focus:ring-t-blue/20 focus:outline-none"
+                                            class="w-full resize-y rounded-xl border bg-white px-4 py-3.5 text-black transition-all placeholder:text-black/35 focus:ring-2 focus:outline-none"
+                                            :class="
+                                                formErrors.message
+                                                    ? 'border-red-400 focus:border-red-500 focus:ring-red-200'
+                                                    : 'border-black/15 focus:border-t-blue focus:ring-t-blue/20'
+                                            "
                                             id="message"
+                                            required
                                             v-model="message"
+                                            @input="delete formErrors.message"
                                             :placeholder="
                                                 $t(
                                                     'contact.form.message_placeholder',
