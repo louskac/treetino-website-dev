@@ -140,7 +140,7 @@
                     }}</span>
                     <span
                         class="font-mono font-bold text-zinc-900 dark:text-white"
-                        >+299 758 CZK</span
+                        >{{ $t('app.macbook.commission_amount', '+299 758 Kč') }}</span
                     >
                 </div>
             </div>
@@ -177,7 +177,7 @@
                 >
                     <span
                         class="font-mono font-bold text-zinc-900 dark:text-white"
-                        >4 900 000 CZK</span
+                        >{{ $t('app.macbook.proposal_price', '4 900 000 Kč') }}</span
                     >
                     <span
                         class="inline-flex items-center gap-1.5 rounded-lg bg-t-blue px-2.5 py-1 font-mono text-[11px] font-medium text-white shadow-sm"

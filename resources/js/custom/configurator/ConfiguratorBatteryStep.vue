@@ -21,7 +21,7 @@
             >
                 <div class="flex items-center justify-between">
                     <span class="text-sm font-semibold text-black dark:text-white">
-                        {{ $t(option.labelKey, option.label) }}
+                        {{ option.id === 'battery' ? ($t(option.labelKey, 'Baterie') + (BATTERY_CAPACITY[productId] ? ' (' + BATTERY_CAPACITY[productId] + ')' : '')) : $t(option.labelKey, option.label) }}
                     </span>
                     <span
                         class="flex items-center gap-1.5 rounded-full px-2 py-0.5 text-xs transition-colors duration-200"

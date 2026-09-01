@@ -455,12 +455,12 @@
                                     Spotlight Solar
                                 </h3>
                                 <p class="mt-0.5 text-xs text-white/50">
-                                    3 kWp · Pouze solární přístřešek
+                                    {{ $t('products.v2.comp.spotlight_sub') }}
                                 </p>
                                 <div
                                     class="mt-2 text-2xl font-black text-white"
                                 >
-                                    $50,000
+                                    {{ $t('products.v2.comp.spotlight_price') }}
                                 </div>
                             </div>
 
@@ -589,12 +589,12 @@
                                     Smartflower
                                 </h3>
                                 <p class="mt-0.5 text-xs text-white/50">
-                                    2.4 kWp · Solární rozkládací květ
+                                    {{ $t('products.v2.comp.smartflower_sub') }}
                                 </p>
                                 <div
                                     class="mt-2 text-2xl font-black text-white"
                                 >
-                                    $40,000
+                                    {{ $t('products.v2.comp.smartflower_price') }}
                                 </div>
                             </div>
 
@@ -725,12 +725,12 @@
                                 <p
                                     class="mt-0.5 text-xs font-semibold tracking-wide text-white/80"
                                 >
-                                    6 – 12 kW · Hybridní solární & větrný strom
+                                    {{ $t('products.v2.comp.treetino_sub') }}
                                 </p>
                                 <div
                                     class="mt-2 text-3xl font-black text-white"
                                 >
-                                    $60,000
+                                    {{ $t('products.v2.comp.treetino_price') }}
                                 </div>
                             </div>
 
@@ -745,7 +745,7 @@
                                     <span>
                                         {{ $t('products.v2.comp.pv_leaves') }}
                                         <strong class="font-bold text-white"
-                                            >6 kWp TopCon (124 ks)</strong
+                                            >{{ $t('products.v2.comp.treetino_pv_val') }}</strong
                                         >
                                     </span>
                                 </li>
@@ -759,7 +759,7 @@
                                             $t('products.v2.comp.wind_turbine')
                                         }}
                                         <strong class="font-bold text-white"
-                                            >6 kW (6× 1 kW aero kit)</strong
+                                            >{{ $t('products.v2.comp.treetino_wind_val') }}</strong
                                         >
                                     </span>
                                 </li>

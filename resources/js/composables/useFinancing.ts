@@ -15,6 +15,19 @@ export function calcMonthlyPayment(principal: number, months: number): number {
     return (principal * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
 }
 
-export function formatPrice(v: number): string {
+export function formatPrice(v: number, locale: string = 'cs'): string {
+    if (locale === 'en') {
+        const eur = Math.round(v / 24.5);
+        return eur.toLocaleString('en-US');
+    }
     return Math.round(v).toLocaleString('cs-CZ');
 }
+
+export function formatCurrency(v: number, locale: string = 'cs'): string {
+    if (locale === 'en') {
+        const eur = Math.round(v / 24.5);
+        return `€${eur.toLocaleString('en-US')}`;
+    }
+    return `${Math.round(v).toLocaleString('cs-CZ')} Kč`;
+}
+

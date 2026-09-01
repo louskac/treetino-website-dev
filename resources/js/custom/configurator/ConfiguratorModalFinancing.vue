@@ -30,7 +30,7 @@
                     >
                         {{ $t('configurator.checkout.base_price') }}
                         <strong class="text-black dark:text-white"
-                            >{{ formatPrice(basePrice) }}&thinsp;Kč</strong
+                            >{{ formatCurrency(basePrice, locale) }}</strong
                         >
                         {{ $t('configurator.checkout.after_grant') }}
                         <strong class="text-t-blue"
@@ -38,8 +38,8 @@
                         >:
                         <strong class="text-black dark:text-white"
                             >{{
-                                formatPrice(discountedPrice)
-                            }}&thinsp;Kč</strong
+                                formatCurrency(discountedPrice, locale)
+                            }}</strong
                         >
                     </span>
                 </div>
@@ -74,7 +74,7 @@
                             />
                             <span
                                 class="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-xs text-black/35 dark:text-white/30"
-                                >Kč</span
+                                >{{ locale === 'en' ? '€' : 'Kč' }}</span
                             >
                         </div>
                     </div>
@@ -85,7 +85,7 @@
                         {{
                             $t(
                                 'configurator.modal_financing.max_down_payment',
-                                { amount: formatPrice(discountedPrice - 1) },
+                                { amount: formatCurrency(discountedPrice - 1, locale) },
                             )
                         }}
                     </p>
@@ -135,7 +135,7 @@
                     <p
                         class="text-3xl font-bold tracking-tight text-black dark:text-white"
                     >
-                        {{ formatPrice(adjustedMonthlyPayment) }}&thinsp;Kč
+                        {{ formatCurrency(adjustedMonthlyPayment, locale) }}
                         <span
                             class="text-base font-normal text-black/40 dark:text-white/30"
                             >{{ $t('configurator.checkout.per_month') }}</span
@@ -143,7 +143,7 @@
                     </p>
                     <p class="mt-0.5 text-xs text-black/35 dark:text-white/25">
                         {{ $t('configurator.modal_financing.loan_amount') }}
-                        {{ formatPrice(loanPrincipal) }}&thinsp;Kč ·
+                        {{ formatCurrency(loanPrincipal, locale) }} ·
                         {{ loanMonths }}&nbsp;{{
                             $t('configurator.modal_financing.months')
                         }}
@@ -188,7 +188,7 @@
                         {{ $t('configurator.modal_financing.include_savings') }}
                         <span class="mt-0.5 block font-medium"
                             >−{{
-                                props.monthlySavings.toLocaleString('cs-CZ')
+                                formatCurrency(props.monthlySavings, locale)
                             }}&nbsp;{{
                                 $t('configurator.modal_financing.per_month')
                             }}</span
@@ -204,10 +204,10 @@
 import { Xmark } from '@iconoir/vue';
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { calcMonthlyPayment, formatPrice } from '@/composables/useFinancing';
+import { calcMonthlyPayment, formatPrice, formatCurrency } from '@/composables/useFinancing';
 import { getGrantById } from '@/types/grants';
 
-const { t } = useI18n();
+const { t, locale } = useI18n();
 
 const props = defineProps<{
     basePrice: number;

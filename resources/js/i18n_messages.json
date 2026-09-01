@@ -191,10 +191,12 @@
                 "roi_calculation": "Výpočet Návratnosti",
                 "roi_years": "9 let",
                 "annual_production": "Roční výroba",
-                "kwh_year": "kWh\/rok",
+                "kwh_year": "kWh/rok",
                 "co2_savings": "CO₂ Úspora:",
-                "tons_year": "11,8 tun \/ rok",
-                "commission": "Provize:"
+                "tons_year": "11,8 tun / rok",
+                "commission": "Provize:",
+                "commission_amount": "+299 758 Kč",
+                "proposal_price": "4 900 000 Kč"
             }
         },
         "products": {
@@ -247,7 +249,7 @@
                     "card1": "Sledování výroby, režim čištění listů & světelná show",
                     "card2": "Integrované rychlonabíjení EV & elektrokol z přebytků"
                 },
-                "cta_title": "Proměňte prázdné místo ve vaší výhodu.<br \/>Společně s Treetino Strom V1"
+                "cta_title": "Proměňte prázdné místo ve vaší výhodu.<br />Společně s Treetino Strom V1"
             },
             "v2": {
                 "title": "Strom V2",
@@ -311,15 +313,22 @@
                     "operation": "Provoz:",
                     "daylight_only": "Pouze za denního slunce",
                     "hybrid_op": "Hybridní provoz:",
-                    "day_night": "24\/7 (Dne i Noci)",
+                    "day_night": "24/7 (Dne i Noci)",
                     "permit": "Stavební povolení:",
                     "permit_none": "Bez povolení (do 5 m)",
                     "permit_required": "Nutné stavební řízení",
                     "tracking": "Solar Tracking:",
                     "tracking_val": "+29 % Motorizovaný 2-osý",
-                    "tracking_none": "Základní \/ Pevný úhel"
+                    "spotlight_sub": "3 kWp · Pouze solární přístřešek",
+                    "spotlight_price": "1 250 000 Kč",
+                    "smartflower_sub": "2,4 kWp · Solární rozkládací květ",
+                    "smartflower_price": "990 000 Kč",
+                    "treetino_sub": "6 – 12 kW · Hybridní solární & větrný strom",
+                    "treetino_price": "1 000 000 Kč",
+                    "treetino_pv_val": "6 kWp TopCon (124 ks)",
+                    "treetino_wind_val": "6 kW (6× 1 kW aero kit)"
                 },
-                "cta_title": "Zažijte energetickou soběstačnost.<br \/>Nakonfigurujte si váš Treetino Strom V2"
+                "cta_title": "Zažijte energetickou soběstačnost.<br />Nakonfigurujte si váš Treetino Strom V2"
             },
             "turbine": {
                 "title": "Větrná Turbína",
@@ -331,7 +340,7 @@
                 "stats": {
                     "1": "Max. výkon jedné turbíny",
                     "2": "Tichý provoz s nízkým startem",
-                    "3": "Odolnost vůči větru až 45 m\/s",
+                    "3": "Odolnost vůči větru až 45 m/s",
                     "4": "Transparentní polykarbonátový design",
                     "5": "Snadná montáž na stožár i střechu",
                     "6": "Bezúdržbový provoz s životností 20 let"
@@ -339,7 +348,7 @@
                 "stats_val": {
                     "1": "1 – 3 kW",
                     "2": "3 varianty",
-                    "3": "1,8 m\/s",
+                    "3": "1,8 m/s",
                     "4": "Bezpečné",
                     "5": "< 1 měsíc",
                     "6": "2 roky"
@@ -348,11 +357,11 @@
                     "tag": "Bezpečná & Tichá Větrná Energie",
                     "title": "Chráněný Tvar Kapky",
                     "item1_title": "Nízký startovací vítr",
-                    "item1_text": "Začíná vyrábět energii už při mírném vánku 1.8 m\/s s 21% jmenovitou účinností.",
+                    "item1_text": "Začíná vyrábět energii už při mírném vánku 1.8 m/s s 21% jmenovitou účinností.",
                     "item2_title": "Ochrana ptactva",
                     "item2_text": "Svislá osa rotace a souvislý tvar kapky minimalizují riziko pro ptactvo.",
                     "item3_title": "Flexibilní kotvení",
-                    "item3_text": "Montáž na samostatný 5m sloup, zeď\/fasádu budovy nebo střechu.",
+                    "item3_text": "Montáž na samostatný 5m sloup, zeď/fasádu budovy nebo střechu.",
                     "item4_title": "Rychlost dodání",
                     "item4_text": "Dodání i instalace připravena k provozu do 1 měsíce."
                 },
@@ -372,7 +381,7 @@
                     "roof": "Střecha",
                     "roof_sub": "Výškové objekty"
                 },
-                "cta_title": "Tichá větrná energie pro váš objekt.<br \/>Nakonfigurujte si větrnou turbínu Treetino Aero"
+                "cta_title": "Tichá větrná energie pro váš objekt.<br />Nakonfigurujte si větrnou turbínu Treetino Aero"
             },
             "datasheet": {
                 "tag": "Oficiální Datasheet STC",
@@ -380,7 +389,7 @@
                 "power": "Nominální Max. Výkon (Pmax)",
                 "pv": "FVE Solární Články",
                 "wind": "VTE Větrné Turbíny",
-                "wind_speed": "Startovací \/ Jmenovitá Rychlost Větru",
+                "wind_speed": "Startovací / Jmenovitá Rychlost Větru",
                 "dimensions": "Rozměry & Zastavěná Plocha",
                 "weight": "Hmotnost",
                 "voltage": "Max. Provozní Napětí DC",
@@ -392,10 +401,10 @@
                 "val_2months": "2 měsíce od předání staveniště",
                 "val_1month": "1 měsíc od objednání (montáž 1 den)",
                 "val_1month_turbine": "Do 1 měsíce od objednání",
-                "val_turbine_dimensions": "1 kW (1,2 m) \/ 2 kW (1,8 m) \/ 3 kW (2,8 m)",
-                "val_turbine_weight": "1 kW (36 kg) \/ 2 kW (48 kg) \/ 3 kW (73 kg)",
+                "val_turbine_dimensions": "1 kW (1,2 m) / 2 kW (1,8 m) / 3 kW (2,8 m)",
+                "val_turbine_weight": "1 kW (36 kg) / 2 kW (48 kg) / 3 kW (73 kg)",
                 "val_steel_warranty": "15 let (Obal konstrukce 5 let)",
-                "val_pv_warranty": "12 let fyzický produkt \/ 25 let lineární výkon (85 %)",
+                "val_pv_warranty": "12 let fyzický produkt / 25 let lineární výkon (85 %)",
                 "val_elec_warranty": "5 let Victron Energy & kabeláže",
                 "val_turbine_warranty": "2 roky na turbínu a mechaniku",
                 "val_years": "let",
@@ -499,15 +508,9 @@
                 "sending": "Odesílám zprávu...",
                 "success": "Zpráva byla úspěšně odeslána. Děkujeme!"
             },
-            "validation": {
-                "name_required": "Vyplňte prosím vaše jméno a příjmení.",
-                "email_required": "Vyplňte prosím vaši e-mailovou adresu.",
-                "email_invalid": "Zadejte prosím platnou e-mailovou adresu.",
-                "message_required": "Napište prosím text zprávy."
-            },
             "privacy_consent": "Odesláním formuláře souhlasíte se",
             "privacy_link": "zpracováním osobních údajů",
-            "badge_rnd": "✓ R&D v ČR (FZÚ AV ČR \/ ČVUT)",
+            "badge_rnd": "✓ R&D v ČR (FZÚ AV ČR / ČVUT)",
             "team_tag": "Lidé za projektem Treetino",
             "team_title": "Zakladatelé & Tým Treetino",
             "team_lead": "Projekt Treetino vznikl spojením dlouholetých zkušeností v energetice, precizního strojírenství a moderního softwarového vývoje.",
@@ -531,7 +534,7 @@
             "selected": "Vybráno",
             "add": "Přidat",
             "added": "Přidáno",
-            "coming_soon": "Připravujeme",
+            "coming_soon": "Již brzy",
             "pcs": "ks",
             "header": {
                 "power": "Jmenovitý výkon",
@@ -762,10 +765,10 @@
                 "after_grant": "po odečtení dotace",
                 "total_price": "Cena celkem",
                 "monthly_from": "Měsíční splátka od",
-                "per_month": "\/měs.",
+                "per_month": "/měs.",
                 "for_months": "na {months} měsíců",
-                "savings_5yr_notice": "Cena nezahrnuje odhad 5leté úspory za výrobu energie ve výši {savings} Kč.",
-                "monthly_savings_notice": "Cena nezahrnuje odhadované měsíční úspory za výrobu energie ve výši {savings} Kč.",
+                "savings_5yr_notice": "Cena nezahrnuje odhad 5leté úspory za výrobu energie ve výši {savings}.",
+                "monthly_savings_notice": "Cena nezahrnuje odhadované měsíční úspory za výrobu energie ve výši {savings}.",
                 "edit_financing": "Upravit podmínky financování",
                 "reserve_price": "Rezervace prohlídky",
                 "custom_estimate_notice": "Vybrané individuální úpravy jsou v kalkulaci započteny v orientační výši. Finální cena bude upřesněna a může být vyšší.",
@@ -775,22 +778,6 @@
                     "turbines": "turbín",
                     "pcs": "kusů"
                 },
-                "inspection_benefits": [
-                    "Cena obsahuje měřicí stanici na 2 měsíce – pro zjištění návratnosti",
-                    "Náklady na cestu",
-                    "Náklady na montáž měřidla",
-                    "Konečnou cenovou nabídku",
-                    "Kalkulaci odhadované návratnosti zařízení",
-                    "Dotační poradenství",
-                    "Poznámka: Cena prohlídky se odečte od finální ceny zařízení"
-                ],
-                "benefit_1": "Cena obsahuje měřicí stanici na 2 měsíce – pro zjištění návratnosti",
-                "benefit_2": "Náklady na cestu",
-                "benefit_3": "Náklady na montáž měřidla",
-                "benefit_4": "Konečnou cenovou nabídku",
-                "benefit_5": "Kalkulaci odhadované návratnosti zařízení",
-                "benefit_6": "Dotační poradenství",
-                "benefit_7": "Poznámka: Cena prohlídky se odečte od finální ceny zařízení",
                 "tos_agree": "Seznámil(a) jsem se s {tos} a {pp} a souhlasím s nimi.",
                 "tos_link": "obchodními podmínkami",
                 "pp_link": "zásadami zpracování osobních údajů",
@@ -804,24 +791,23 @@
                 "months": "měsíců",
                 "loan_amount": "Výše úvěru",
                 "include_savings": "Zahrnout odhadované měsíční úspory za výrobu energie",
-                "per_month": "Kč\/měsíc",
-                "max_down_payment": "Maximální platba předem může být {amount} Kč."
+                "per_month": "/ měsíc",
+                "max_down_payment": "Maximální platba předem může být {amount}."
             },
             "modal_checkout": {
-                "title": "Dokončení objednávky",
+                "title": "Rezervace prohlídky",
                 "email_label": "E-mail",
-                "email_desc": "E-mailovou adresu potřebujeme pro zpracování konfigurace naším týmem. Konfigurace a faktura vám budou doručeny na tento e-mail.",
-                "card_info": "Informace o kartě",
+                "email_desc": "Zadejte prosím váš e-mail. Po dokončení rezervace vám zašleme shrnutí konfigurace a potvrzení.",
+                "card_info": "Platební karta",
                 "or_card": "NEBO ZAPLAŤTE KARTOU",
                 "step": "Krok",
                 "processing": "Zpracovávám...",
                 "continue": "Pokračovat",
-                "pay": "Zaplatit {amount} Kč"
+                "pay": "Zaplatit {amount}"
             },
             "modal_info": {
                 "title": "Získat více informací",
-                "body": "Více informací o vybraném dotačním programu nebo konfiguraci vám rádi poskytneme na vyžádání.",
-                "product_link_prefix": "Chcete se dozvědět více o technických parametrech a možnostech instalace?",
+                "product_link_prefix": "Chcete se dozvědět více o technických parametrech?",
                 "product_link_btn": "Přejít na detail produktu",
                 "form_title": "Máte dotaz nebo zájem o nabídku?",
                 "form_desc": "Napište nám a náš specialista se vám ozve do 24 hodin.",
@@ -833,7 +819,8 @@
                 "sending": "Odesílám...",
                 "sent_success": "Děkujeme za váš zájem! Zprávu jsme v pořádku přijali a brzy se vám ozveme.",
                 "sent_error": "Odeslání se nezdařilo. Zkuste to prosím znovu nebo nám napište na info@treetino.com.",
-                "send_another": "Odeslat další dotaz"
+                "send_another": "Odeslat další dotaz",
+                "body": "Více informací o vybraném dotačním programu nebo konfiguraci vám rádi poskytneme na vyžádání."
             },
             "months": {
                 "january": "leden",
@@ -858,14 +845,14 @@
             "cta_secondary": "Kolik můžete vydělat",
             "numbers_badge": "PROVIZE & VÝDĚLKY",
             "numbers_title": "Vysoké odměny z každé uzavřené zakázky",
-            "numbers_description": "Získejte provizi až 450 000 Kč z velkého stromu V1, 150 000 Kč z modelu V2 a 11 250 Kč z větrné turbíny. Vy domluvíte klienta, o výrobu, montáž a servis se postaráme my.",
+            "numbers_description": "Získejte provizi až 450 000 Kč z velkého stromu V1, 100 000 Kč z modelu V2 a 11 000 Kč z větrné turbíny. Vy domluvíte klienta, o výrobu, montáž a servis se postaráme my.",
             "stats": {
                 "1": {
                     "val": "Až 450 000 Kč",
                     "lbl": "Provize z 1 velkého komerčního stromu V1"
                 },
                 "2": {
-                    "val": "Až 150 000 Kč",
+                    "val": "Až 100 000 Kč",
                     "lbl": "Provize z kompaktního modelu V2"
                 },
                 "3": {
@@ -898,7 +885,7 @@
                 "zoo_desc": "Edukativní zelená dominanta u hlavního vchodu doplněná o střešní větrné mikroturbíny. Výrazný symbol udržitelnosti a čisté energie pro tisíce návštěvníků denně.",
                 "zoo_model": "1× Strom V1 + 4× Aero Turbíny",
                 "zoo_payout": "495 000 Kč",
-                "metal_segment": "Těžký průmysl · 24\/7 provoz",
+                "metal_segment": "Těžký průmysl · 24/7 provoz",
                 "metal_title": "Hutní & strojírenské výrobní areály",
                 "metal_desc": "Energeticky náročný nepřetržitý provoz vyžadující vysoký stabilní výkon. Průmyslový cluster tří velkých stromů pro masivní snížení denních i nočních odběrů z distribuční sítě.",
                 "metal_model": "3× Strom V1 (150 kW průmyslový cluster)",
@@ -951,14 +938,14 @@
                 "v1_tag": "Cena 4 500 000 Kč · Provize až 450 000 Kč",
                 "v1_desc": "Průmyslová hybridní elektrárna pro firmy, areály a města na ploše pouhého 1 m².",
                 "v2_title": "Kompaktní strom V2 (6–12 kW)",
-                "v2_price": "Cena modelu: 1 500 000 Kč",
-                "v2_commission": "Provize až 150 000 Kč",
-                "v2_tag": "Cena 1 500 000 Kč · Provize až 150 000 Kč",
+                "v2_price": "Cena modelu: 1 000 000 Kč",
+                "v2_commission": "Provize až 100 000 Kč",
+                "v2_tag": "Cena 1 000 000 Kč · Provize až 100 000 Kč",
                 "v2_desc": "Designové řešení pro prémiové rodinné domy, vily a hotely s tichými větrnými turbínami.",
                 "turbine_title": "Větrná turbína T1 (1–3 kW)",
-                "turbine_price": "Cena jednotky: 112 500 Kč",
-                "turbine_commission": "Provize až 11 250 Kč",
-                "turbine_tag": "Cena 112 500 Kč · Provize až 11 250 Kč",
+                "turbine_price": "Cena jednotky: 109 990 Kč",
+                "turbine_commission": "Provize až 11 000 Kč",
+                "turbine_tag": "Cena 109 990 Kč · Provize až 11 000 Kč",
                 "turbine_desc": "Vertikální tichá turbína pro střechy a sloupy. Celoroční výroba energie i v zimě."
             },
             "interactive_steps": {
@@ -984,7 +971,7 @@
                 "row1_label": "Výše provize",
                 "row1_val": "Až 450 000 Kč z každé realizované zakázky velkého stromu",
                 "row2_label": "Příklady provizí z prodeje",
-                "row2_val": "Velký strom V1 (4 500 000 Kč) → až 450 000 Kč · Kompaktní strom V2 (1 500 000 Kč) → až 150 000 Kč · Turbína (112 500 Kč) → až 11 250 Kč",
+                "row2_val": "Velký strom V1 (4 500 000 Kč) → až 450 000 Kč · Kompaktní strom V2 (1 000 000 Kč) → až 100 000 Kč · Turbína (109 990 Kč) → až 11 000 Kč",
                 "row3_label": "Prodejní aplikace & CRM",
                 "row3_val": "Prodejní aplikace Treetino (3D zaměření na mapě, kalkulace návratnosti & PDF nabídka do 2 minut)",
                 "row4_label": "Výroba, doprava & instalace",
@@ -1242,10 +1229,12 @@
                 "roi_calculation": "ROI Calculation",
                 "roi_years": "9 years",
                 "annual_production": "Annual Production",
-                "kwh_year": "kWh\/year",
+                "kwh_year": "kWh/year",
                 "co2_savings": "CO₂ Savings:",
-                "tons_year": "11.8 tons \/ year",
-                "commission": "Commission:"
+                "tons_year": "11.8 tons / year",
+                "commission": "Commission:",
+                "commission_amount": "+€12,300",
+                "proposal_price": "€198,000"
             }
         },
         "products": {
@@ -1298,7 +1287,7 @@
                     "card1": "Production tracking, leaf cleaning mode & light show",
                     "card2": "Integrated fast EV & e-bike charging from surplus"
                 },
-                "cta_title": "Turn empty space into your advantage.<br \/>Together with Treetino Tree V1"
+                "cta_title": "Turn empty space into your advantage.<br />Together with Treetino Tree V1"
             },
             "v2": {
                 "title": "Tree V2",
@@ -1362,15 +1351,22 @@
                     "operation": "Operation:",
                     "daylight_only": "Daylight only",
                     "hybrid_op": "Hybrid Operation:",
-                    "day_night": "24\/7 (Day & Night)",
+                    "day_night": "24/7 (Day & Night)",
                     "permit": "Building Permit:",
                     "permit_none": "None needed (under 5 m)",
                     "permit_required": "Permit required",
                     "tracking": "Solar Tracking:",
                     "tracking_val": "+29% Motorized Dual-Axis",
-                    "tracking_none": "Basic \/ Fixed angle"
+                    "spotlight_sub": "3 kWp · Solar canopy only",
+                    "spotlight_price": "€50,000",
+                    "smartflower_sub": "2.4 kWp · Deployable solar flower",
+                    "smartflower_price": "€40,000",
+                    "treetino_sub": "6 – 12 kW · Hybrid solar & wind tree",
+                    "treetino_price": "€41,000",
+                    "treetino_pv_val": "6 kWp TopCon (124 pcs)",
+                    "treetino_wind_val": "6 kW (6× 1 kW aero kit)"
                 },
-                "cta_title": "Experience energy independence.<br \/>Configure your Treetino Tree V2"
+                "cta_title": "Experience energy independence.<br />Configure your Treetino Tree V2"
             },
             "turbine": {
                 "title": "Wind Turbine",
@@ -1382,7 +1378,7 @@
                 "stats": {
                     "1": "Max output per turbine",
                     "2": "Quiet operation with low startup",
-                    "3": "Wind resistance up to 45 m\/s",
+                    "3": "Wind resistance up to 45 m/s",
                     "4": "Transparent polycarbonate design",
                     "5": "Easy mounting on pole or roof",
                     "6": "Maintenance-free with 20-year lifespan"
@@ -1390,7 +1386,7 @@
                 "stats_val": {
                     "1": "1 – 3 kW",
                     "2": "3 options",
-                    "3": "1.8 m\/s",
+                    "3": "1.8 m/s",
                     "4": "Safe",
                     "5": "< 1 month",
                     "6": "2 years"
@@ -1399,11 +1395,11 @@
                     "tag": "Safe & Quiet Wind Energy",
                     "title": "Protected Teardrop Shape",
                     "item1_title": "Low Startup Wind",
-                    "item1_text": "Starts generating power at a light breeze of 1.8 m\/s with 21% rated efficiency.",
+                    "item1_text": "Starts generating power at a light breeze of 1.8 m/s with 21% rated efficiency.",
                     "item2_title": "Bird Safety",
                     "item2_text": "Vertical rotation axis and continuous teardrop form eliminate hazard to birds.",
                     "item3_title": "Flexible Mounting",
-                    "item3_text": "Mounting on standalone 5m pole, building wall\/facade, or rooftop.",
+                    "item3_text": "Mounting on standalone 5m pole, building wall/facade, or rooftop.",
                     "item4_title": "Delivery Speed",
                     "item4_text": "Delivery and installation ready for operation in under 1 month."
                 },
@@ -1423,7 +1419,7 @@
                     "roof": "Roof",
                     "roof_sub": "High-rise structures"
                 },
-                "cta_title": "Silent wind energy for your building.<br \/>Configure your Treetino Aero wind turbine"
+                "cta_title": "Silent wind energy for your building.<br />Configure your Treetino Aero wind turbine"
             },
             "datasheet": {
                 "tag": "Official STC Datasheet",
@@ -1431,7 +1427,7 @@
                 "power": "Nominal Max Output (Pmax)",
                 "pv": "PV Solar Cells",
                 "wind": "Wind Turbines",
-                "wind_speed": "Startup \/ Rated Wind Speed",
+                "wind_speed": "Startup / Rated Wind Speed",
                 "dimensions": "Dimensions & Footprint",
                 "weight": "Weight",
                 "voltage": "Max Operating Voltage DC",
@@ -1443,10 +1439,10 @@
                 "val_2months": "2 months from site handover",
                 "val_1month": "1 month from order (1-day installation)",
                 "val_1month_turbine": "Under 1 month from order",
-                "val_turbine_dimensions": "1 kW (1.2 m) \/ 2 kW (1.8 m) \/ 3 kW (2.8 m)",
-                "val_turbine_weight": "1 kW (36 kg) \/ 2 kW (48 kg) \/ 3 kW (73 kg)",
+                "val_turbine_dimensions": "1 kW (1.2 m) / 2 kW (1.8 m) / 3 kW (2.8 m)",
+                "val_turbine_weight": "1 kW (36 kg) / 2 kW (48 kg) / 3 kW (73 kg)",
                 "val_steel_warranty": "15 years (Structure cladding 5 years)",
-                "val_pv_warranty": "12-year physical product \/ 25-year linear output (85%)",
+                "val_pv_warranty": "12-year physical product / 25-year linear output (85%)",
                 "val_elec_warranty": "5 years Victron Energy & cabling",
                 "val_turbine_warranty": "2 years on turbine & mechanics",
                 "val_years": "years",
@@ -1550,15 +1546,9 @@
                 "sending": "Sending message...",
                 "success": "Message successfully sent. Thank you!"
             },
-            "validation": {
-                "name_required": "Please enter your name.",
-                "email_required": "Please enter your email address.",
-                "email_invalid": "Please enter a valid email address.",
-                "message_required": "Please enter your message."
-            },
             "privacy_consent": "By submitting the form you agree to the",
             "privacy_link": "processing of personal data",
-            "badge_rnd": "✓ R&D in Czechia (FZU \/ CTU)",
+            "badge_rnd": "✓ R&D in Czechia (FZU / CTU)",
             "team_tag": "People Behind Treetino",
             "team_title": "Founders & Treetino Team",
             "team_lead": "The Treetino project was born from combining extensive energy market experience, precision mechanical engineering, and modern software development.",
@@ -1612,8 +1602,8 @@
                 "payment_mode": "Payment Mode"
             },
             "payment": {
-                "cash": "Cash \/ Direct Payment",
-                "credit": "Green Loan \/ Financing"
+                "cash": "Cash / Direct Payment",
+                "credit": "Green Loan / Financing"
             },
             "color": {
                 "white": "White",
@@ -1813,10 +1803,10 @@
                 "after_grant": "after grant deduction",
                 "total_price": "Total Price",
                 "monthly_from": "Monthly payment from",
-                "per_month": "\/mo.",
+                "per_month": "/mo.",
                 "for_months": "for {months} months",
-                "savings_5yr_notice": "Price excludes estimated 5-year energy production savings of {savings} CZK.",
-                "monthly_savings_notice": "Price excludes estimated monthly energy production savings of {savings} CZK.",
+                "savings_5yr_notice": "Price excludes estimated 5-year energy production savings of {savings}.",
+                "monthly_savings_notice": "Price excludes estimated monthly energy production savings of {savings}.",
                 "edit_financing": "Adjust financing terms",
                 "reserve_price": "Site Inspection Reservation",
                 "custom_estimate_notice": "Selected custom options are included at an estimated baseline. The final price will be specified and may be higher.",
@@ -1826,22 +1816,6 @@
                     "turbines": "turbines",
                     "pcs": "units"
                 },
-                "inspection_benefits": [
-                    "Includes measurement station deployment for 2 months to assess exact ROI",
-                    "Travel and logistics costs",
-                    "Measurement station installation and calibration",
-                    "Final binding commercial quote",
-                    "Detailed estimated ROI and yield calculation",
-                    "Subsidy and grant advisory",
-                    "Note: Inspection fee is fully deducted from the final purchase price"
-                ],
-                "benefit_1": "Includes measurement station deployment for 2 months to assess exact ROI",
-                "benefit_2": "Travel and logistics costs",
-                "benefit_3": "Measurement station installation and calibration",
-                "benefit_4": "Final binding commercial quote",
-                "benefit_5": "Detailed estimated ROI and yield calculation",
-                "benefit_6": "Subsidy and grant advisory",
-                "benefit_7": "Note: Inspection fee is fully deducted from the final purchase price",
                 "tos_agree": "I have read and agree to the {tos} and {pp}.",
                 "tos_link": "Terms of Service",
                 "pp_link": "Privacy Policy",
@@ -1855,8 +1829,8 @@
                 "months": "months",
                 "loan_amount": "Loan Amount",
                 "include_savings": "Include estimated monthly energy production savings",
-                "per_month": "CZK\/month",
-                "max_down_payment": "Maximum down payment is {amount} CZK."
+                "per_month": "/ month",
+                "max_down_payment": "Maximum down payment is {amount}."
             },
             "modal_checkout": {
                 "title": "Site Inspection Reservation",
@@ -1867,10 +1841,10 @@
                 "step": "Step",
                 "processing": "Processing...",
                 "continue": "Continue",
-                "pay": "Pay {amount} CZK"
+                "pay": "Pay {amount}"
             },
             "modal_info": {
-                "title": "More Information",
+                "title": "Get More Information",
                 "product_link_prefix": "Want to learn more about technical specs and dimensions?",
                 "product_link_btn": "Visit product page",
                 "form_title": "Have a question or request a custom quote?",
@@ -1883,7 +1857,8 @@
                 "sending": "Sending...",
                 "sent_success": "Thank you for your interest! We have received your inquiry and will get back to you shortly.",
                 "sent_error": "Failed to send inquiry. Please try again or email us directly at info@treetino.com.",
-                "send_another": "Send another inquiry"
+                "send_another": "Send another inquiry",
+                "body": "We are happy to provide more information about the selected grant program or configuration upon request."
             },
             "months": {
                 "january": "January",
@@ -1908,14 +1883,14 @@
             "cta_secondary": "How Much You Can Earn",
             "numbers_badge": "COMMISSIONS & EARNINGS",
             "numbers_title": "High Payouts on Every Closed Deal",
-            "numbers_description": "Earn up to €18,500 on a commercial tree V1, €6,200 on a compact tree V2, and €460 on a wind turbine. You close the deal — we handle manufacturing, installation, and warranty.",
+            "numbers_description": "Earn up to €18,500 on a commercial tree V1, €4,100 on a compact tree V2, and €440 on a wind turbine. You close the deal — we handle manufacturing, installation, and warranty.",
             "stats": {
                 "1": {
                     "val": "Up to €18,500",
                     "lbl": "Commission per commercial tree V1"
                 },
                 "2": {
-                    "val": "Up to €6,200",
+                    "val": "Up to €4,100",
                     "lbl": "Payout per compact tree V2"
                 },
                 "3": {
@@ -1948,9 +1923,9 @@
                 "zoo_desc": "Educational green centerpiece at the main visitor entrance combined with rooftop wind micro-turbines. Strong symbol of clean power for thousands of daily visitors.",
                 "zoo_model": "1× Tree V1 + 4× Aero Turbines",
                 "zoo_payout": "€20,340",
-                "metal_segment": "Heavy Industry · 24\/7 Operation",
+                "metal_segment": "Heavy Industry · 24/7 Operation",
                 "metal_title": "Metalworks & Manufacturing Plants",
-                "metal_desc": "Energy-intensive 24\/7 manufacturing requiring continuous high output. An industrial cluster of 3 commercial trees providing massive peak shaving and grid independence.",
+                "metal_desc": "Energy-intensive 24/7 manufacturing requiring continuous high output. An industrial cluster of 3 commercial trees providing massive peak shaving and grid independence.",
                 "metal_model": "3× Tree V1 (150 kW industrial cluster)",
                 "metal_payout": "€55,500",
                 "bank_segment": "Corporate HQ · Enterprise Campuses",
@@ -2001,14 +1976,14 @@
                 "v1_tag": "Price €185,000 · Commission up to €18,500",
                 "v1_desc": "High-yield commercial hybrid power plant for businesses, logistics parks, and cities on just 1 m².",
                 "v2_title": "Residential Tree V2 (6–12 kW)",
-                "v2_price": "Base price: €62,000",
-                "v2_commission": "Commission up to €6,200",
-                "v2_tag": "Price €62,000 · Commission up to €6,200",
+                "v2_price": "Base price: €41,000",
+                "v2_commission": "Commission up to €4,100",
+                "v2_tag": "Price €41,000 · Commission up to €4,100",
                 "v2_desc": "Aesthetic solar tree for private residences, villas, and boutique hotels with microturbines.",
                 "turbine_title": "Wind Turbine T1 (1–3 kW)",
-                "turbine_price": "Base price: €4,600",
-                "turbine_commission": "Commission up to €460",
-                "turbine_tag": "Price €4,600 · Commission up to €460",
+                "turbine_price": "Base price: €4,390",
+                "turbine_commission": "Commission up to €440",
+                "turbine_tag": "Price €4,390 · Commission up to €440",
                 "turbine_desc": "Silent vertical axis turbine for rooftops and masts, generating power year-round."
             },
             "interactive_steps": {
@@ -2034,7 +2009,7 @@
                 "row1_label": "Commission Rate",
                 "row1_val": "Up to €18,500 per commercial tree installation",
                 "row2_label": "Commission Examples",
-                "row2_val": "Commercial Tree V1 (€185,000) → up to €18,500 · Residential Tree V2 (€62,000) → up to €6,200 · Turbine (€4,600) → up to €460",
+                "row2_val": "Commercial Tree V1 (€185,000) → up to €18,500 · Residential Tree V2 (€41,000) → up to €4,100 · Turbine (€4,390) → up to €440",
                 "row3_label": "Sales App & CRM",
                 "row3_val": "Treetino Sales App (3D site scans, ROI calculation & instant 2-minute PDF quotes)",
                 "row4_label": "Manufacturing & Delivery",

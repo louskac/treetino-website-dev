@@ -16,8 +16,9 @@ import { route } from 'ziggy-js';
 
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import ButtonSecondary from '@/custom/ButtonSecondary.vue';
+import { formatCurrency } from '@/composables/useFinancing';
 
-const { t } = useI18n();
+const { t, locale } = useI18n();
 
 const props = defineProps({
     productId: {
@@ -246,7 +247,7 @@ const handlePayment = async () => {
                     <div
                         class="text-xl font-semibold text-black dark:text-white"
                     >
-                        {{ reservationPrice.toLocaleString('cs-CZ') }}&thinsp;Kč
+                        {{ formatCurrency(reservationPrice, locale) }}
                     </div>
                 </div>
             </div>
@@ -358,8 +359,9 @@ const handlePayment = async () => {
                                             'configurator.modal_checkout.continue',
                                         )
                                       : $t('configurator.modal_checkout.pay', {
-                                            amount: reservationPrice.toLocaleString(
-                                                'cs-CZ',
+                                            amount: formatCurrency(
+                                                reservationPrice,
+                                                locale,
                                             ),
                                         })
                             }}

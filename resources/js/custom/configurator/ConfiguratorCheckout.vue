@@ -52,14 +52,14 @@
                 >
                     {{ $t('configurator.checkout.base_price') }}
                     <strong class="text-black dark:text-white"
-                        >{{ formatPrice(basePrice) }}&thinsp;Kč</strong
+                        >{{ formatCurrency(basePrice, locale) }}</strong
                     >
                     {{ $t('configurator.checkout.after_grant') }}
                     <strong class="text-t-blue"
                         >{{ grantLabel }} −{{ grantPct }}&thinsp;%</strong
                     >:
                     <strong class="text-black dark:text-white"
-                        >{{ formatPrice(discountedPrice) }}&thinsp;Kč</strong
+                        >{{ formatCurrency(discountedPrice, locale) }}</strong
                     >
                 </span>
             </template>
@@ -75,7 +75,7 @@
             <p
                 class="text-3xl font-bold tracking-tight text-black dark:text-white"
             >
-                {{ formatPrice(discountedPrice) }}&thinsp;Kč
+                {{ formatCurrency(discountedPrice, locale) }}
             </p>
             <p
                 v-if="hasCustomOptions"
@@ -88,7 +88,7 @@
             >
                 {{
                     $t('configurator.checkout.savings_5yr_notice', {
-                        savings: formatPrice(monthlySavings * 60),
+                        savings: formatCurrency(monthlySavings * 60, locale),
                     })
                 }}
             </p>
@@ -102,7 +102,7 @@
             <p
                 class="text-3xl font-bold tracking-tight text-black dark:text-white"
             >
-                {{ formatPrice(adjustedMonthlyPayment) }}&thinsp;Kč
+                {{ formatCurrency(adjustedMonthlyPayment, locale) }}
                 <span
                     class="text-base font-normal text-black/40 dark:text-white/30"
                     >{{ $t('configurator.checkout.per_month') }}</span
@@ -126,7 +126,7 @@
             >
                 {{
                     $t('configurator.checkout.monthly_savings_notice', {
-                        savings: formatPrice(monthlySavings),
+                        savings: formatCurrency(monthlySavings, locale),
                     })
                 }}
             </p>
@@ -146,7 +146,7 @@
                     {{ $t('configurator.checkout.reserve_price', 'Rezervace prohlídky') }}
                 </div>
                 <div class="text-xl font-semibold text-black dark:text-white">
-                    {{ formatPrice(reservationPrice) }}&thinsp;Kč
+                    {{ formatCurrency(reservationPrice, locale) }}
                 </div>
             </div>
             <ul class="flex flex-col gap-1.5">
@@ -261,7 +261,7 @@ import { Flash } from '@iconoir/vue';
 import { ref, computed, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { route } from 'ziggy-js';
-import { calcMonthlyPayment, formatPrice } from '@/composables/useFinancing';
+import { calcMonthlyPayment, formatPrice, formatCurrency } from '@/composables/useFinancing';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import ButtonSecondary from '@/custom/ButtonSecondary.vue';
 import ConfiguratorModalFinancing from '@/custom/configurator/ConfiguratorModalFinancing.vue';
