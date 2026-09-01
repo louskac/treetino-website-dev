@@ -1,58 +1,71 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../../wayfinder'
+import {
+    queryParams,
+    type RouteQueryOptions,
+    type RouteDefinition,
+    type RouteFormDefinition,
+} from './../../../../wayfinder';
 /**
-* @see \App\Http\Controllers\LocaleController::__invoke
-* @see app/Http/Controllers/LocaleController.php:11
-* @route '/locale'
-*/
-const LocaleController = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+ * @see \App\Http\Controllers\LocaleController::__invoke
+ * @see app/Http/Controllers/LocaleController.php:11
+ * @route '/locale'
+ */
+const LocaleController = (
+    options?: RouteQueryOptions,
+): RouteDefinition<'post'> => ({
     url: LocaleController.url(options),
     method: 'post',
-})
+});
 
 LocaleController.definition = {
-    methods: ["post"],
+    methods: ['post'],
     url: '/locale',
-} satisfies RouteDefinition<["post"]>
+} satisfies RouteDefinition<['post']>;
 
 /**
-* @see \App\Http\Controllers\LocaleController::__invoke
-* @see app/Http/Controllers/LocaleController.php:11
-* @route '/locale'
-*/
+ * @see \App\Http\Controllers\LocaleController::__invoke
+ * @see app/Http/Controllers/LocaleController.php:11
+ * @route '/locale'
+ */
 LocaleController.url = (options?: RouteQueryOptions) => {
-    return LocaleController.definition.url + queryParams(options)
-}
+    return LocaleController.definition.url + queryParams(options);
+};
 
 /**
-* @see \App\Http\Controllers\LocaleController::__invoke
-* @see app/Http/Controllers/LocaleController.php:11
-* @route '/locale'
-*/
-LocaleController.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+ * @see \App\Http\Controllers\LocaleController::__invoke
+ * @see app/Http/Controllers/LocaleController.php:11
+ * @route '/locale'
+ */
+LocaleController.post = (
+    options?: RouteQueryOptions,
+): RouteDefinition<'post'> => ({
     url: LocaleController.url(options),
     method: 'post',
-})
+});
 
 /**
-* @see \App\Http\Controllers\LocaleController::__invoke
-* @see app/Http/Controllers/LocaleController.php:11
-* @route '/locale'
-*/
-const LocaleControllerForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+ * @see \App\Http\Controllers\LocaleController::__invoke
+ * @see app/Http/Controllers/LocaleController.php:11
+ * @route '/locale'
+ */
+const LocaleControllerForm = (
+    options?: RouteQueryOptions,
+): RouteFormDefinition<'post'> => ({
     action: LocaleController.url(options),
     method: 'post',
-})
+});
 
 /**
-* @see \App\Http\Controllers\LocaleController::__invoke
-* @see app/Http/Controllers/LocaleController.php:11
-* @route '/locale'
-*/
-LocaleControllerForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+ * @see \App\Http\Controllers\LocaleController::__invoke
+ * @see app/Http/Controllers/LocaleController.php:11
+ * @route '/locale'
+ */
+LocaleControllerForm.post = (
+    options?: RouteQueryOptions,
+): RouteFormDefinition<'post'> => ({
     action: LocaleController.url(options),
     method: 'post',
-})
+});
 
-LocaleController.form = LocaleControllerForm
+LocaleController.form = LocaleControllerForm;
 
-export default LocaleController
+export default LocaleController;

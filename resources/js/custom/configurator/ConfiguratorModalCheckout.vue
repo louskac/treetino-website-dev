@@ -78,7 +78,10 @@ const handleContinue = async () => {
         await initStripe();
     } catch (error) {
         const requestError = error as AxiosError<{ message?: string }>;
-        console.log(error);
+        console.log(
+            'Checkout Error details:',
+            JSON.stringify(requestError.response?.data),
+        );
         errorMessage.value =
             requestError.response?.data?.message || 'Something went wrong.';
     } finally {
@@ -90,7 +93,15 @@ const handleContinue = async () => {
  * Step 2: Initialize Stripe Elements
  */
 const initStripe = async () => {
-    stripe.value = await loadStripe(import.meta.env.VITE_STRIPE_KEY);
+    const stripeKey = import.meta.env.VITE_STRIPE_KEY;
+    if (!stripeKey) {
+        errorMessage.value =
+            'Payment service public key is not configured (VITE_STRIPE_KEY).';
+
+        return;
+    }
+
+    stripe.value = await loadStripe(stripeKey);
 
     if (!stripe.value) {
         errorMessage.value = 'Payment service could not be initialized.';
@@ -191,21 +202,31 @@ const handlePayment = async () => {
     isProcessing.value = true;
     errorMessage.value = '';
 
-    const { paymentIntent, error } = await stripe.value.confirmCardPayment(
-        clientSecret.value,
-        {
-            payment_method: {
-                card: cardElement.value,
-                billing_details: { email: email.value },
+    try {
+        const { paymentIntent, error } = await stripe.value.confirmCardPayment(
+            clientSecret.value,
+            {
+                payment_method: {
+                    card: cardElement.value,
+                    billing_details: { email: email.value },
+                },
             },
-        },
-    );
+        );
 
-    if (error) {
-        errorMessage.value = error.message ?? 'Payment failed.';
+        if (error) {
+            errorMessage.value = error.message ?? 'Payment failed.';
+        } else if (
+            paymentIntent.status === 'succeeded' ||
+            paymentIntent.status === 'processing'
+        ) {
+            emit('success', preorderUuid.value);
+        } else {
+            errorMessage.value = `Payment status: ${paymentIntent.status}`;
+        }
+    } catch (e: any) {
+        errorMessage.value = e?.message || 'Payment failed.';
+    } finally {
         isProcessing.value = false;
-    } else if (paymentIntent.status === 'succeeded') {
-        emit('success', preorderUuid.value);
     }
 };
 </script>
@@ -255,6 +276,13 @@ const handlePayment = async () => {
                     >
                         {{ $t('configurator.modal_checkout.email_desc') }}
                     </div>
+
+                    <p
+                        v-if="errorMessage"
+                        class="mt-3 text-xs font-medium text-red-500"
+                    >
+                        {{ errorMessage }}
+                    </p>
                 </div>
 
                 <div v-if="step === 2" class="step-2">

@@ -1,62 +1,73 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../wayfinder'
+import {
+    queryParams,
+    type RouteQueryOptions,
+    type RouteDefinition,
+    type RouteFormDefinition,
+} from './../../wayfinder';
 /**
-* @see \App\Http\Controllers\LocaleController::__invoke
-* @see app/Http/Controllers/LocaleController.php:11
-* @route '/locale'
-*/
-export const update = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+ * @see \App\Http\Controllers\LocaleController::__invoke
+ * @see app/Http/Controllers/LocaleController.php:11
+ * @route '/locale'
+ */
+export const update = (
+    options?: RouteQueryOptions,
+): RouteDefinition<'post'> => ({
     url: update.url(options),
     method: 'post',
-})
+});
 
 update.definition = {
-    methods: ["post"],
+    methods: ['post'],
     url: '/locale',
-} satisfies RouteDefinition<["post"]>
+} satisfies RouteDefinition<['post']>;
 
 /**
-* @see \App\Http\Controllers\LocaleController::__invoke
-* @see app/Http/Controllers/LocaleController.php:11
-* @route '/locale'
-*/
+ * @see \App\Http\Controllers\LocaleController::__invoke
+ * @see app/Http/Controllers/LocaleController.php:11
+ * @route '/locale'
+ */
 update.url = (options?: RouteQueryOptions) => {
-    return update.definition.url + queryParams(options)
-}
+    return update.definition.url + queryParams(options);
+};
 
 /**
-* @see \App\Http\Controllers\LocaleController::__invoke
-* @see app/Http/Controllers/LocaleController.php:11
-* @route '/locale'
-*/
+ * @see \App\Http\Controllers\LocaleController::__invoke
+ * @see app/Http/Controllers/LocaleController.php:11
+ * @route '/locale'
+ */
 update.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: update.url(options),
     method: 'post',
-})
+});
 
 /**
-* @see \App\Http\Controllers\LocaleController::__invoke
-* @see app/Http/Controllers/LocaleController.php:11
-* @route '/locale'
-*/
-const updateForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+ * @see \App\Http\Controllers\LocaleController::__invoke
+ * @see app/Http/Controllers/LocaleController.php:11
+ * @route '/locale'
+ */
+const updateForm = (
+    options?: RouteQueryOptions,
+): RouteFormDefinition<'post'> => ({
     action: update.url(options),
     method: 'post',
-})
+});
 
 /**
-* @see \App\Http\Controllers\LocaleController::__invoke
-* @see app/Http/Controllers/LocaleController.php:11
-* @route '/locale'
-*/
-updateForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+ * @see \App\Http\Controllers\LocaleController::__invoke
+ * @see app/Http/Controllers/LocaleController.php:11
+ * @route '/locale'
+ */
+updateForm.post = (
+    options?: RouteQueryOptions,
+): RouteFormDefinition<'post'> => ({
     action: update.url(options),
     method: 'post',
-})
+});
 
-update.form = updateForm
+update.form = updateForm;
 
 const locale = {
     update: Object.assign(update, update),
-}
+};
 
-export default locale
+export default locale;

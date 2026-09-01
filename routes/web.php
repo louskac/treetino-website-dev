@@ -75,6 +75,8 @@ Route::get('/sales/nda/download', [LegalController::class, 'downloadNda']);
 
 // Checkout
 Route::post('/checkout', [PreorderController::class, 'initiate'])->name('checkout-initiate');
+Route::post('/api/checkout', [PreorderController::class, 'initiate'])->name('api.checkout');
+Route::post('/api/checkout/initiate', [PreorderController::class, 'initiate'])->name('api.checkout.initiate');
 
 // Orders
 Route::prefix('preorders')->name('preorders.')->group(function () {

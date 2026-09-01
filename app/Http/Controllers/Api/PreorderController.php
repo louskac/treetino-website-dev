@@ -8,6 +8,7 @@ use App\Models\Preorder;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Stripe\Customer;
 use Stripe\PaymentIntent;
@@ -24,6 +25,13 @@ class PreorderController extends Controller
             'configuration' => 'required|array',
         ]);
 
+        $stripeSecret = config('services.stripe.secret') ?: env('STRIPE_SECRET');
+        if (empty($stripeSecret)) {
+            return response()->json([
+                'message' => 'Stripe secret key is not configured. Please set STRIPE_SECRET in your .env file.',
+            ], 500);
+        }
+
         $productMapping = [
             'strom-v1' => 'prod_ULthweDdqBE4ew',
             'strom-v2' => 'prod_ULthcqQBQuS7TS',
@@ -32,7 +40,7 @@ class PreorderController extends Controller
 
         $stripeProductId = $productMapping[$request->type];
 
-        Stripe::setApiKey(config('services.stripe.secret'));
+        Stripe::setApiKey($stripeSecret);
 
         // 1. Find or Create User
         $user = User::firstOrCreate(
@@ -83,10 +91,14 @@ class PreorderController extends Controller
         // 6. UPDATE PREORDER WITH INTENT ID (Using local update)
         $preorder->update(['stripe_payment_intent_id' => $intent->id]);
 
-        Mail::to($user->email)->send(new PreorderConfirmation(
-            $preorder->uuid,
-            $preorder->configuration,
-        ));
+        try {
+            Mail::to($user->email)->send(new PreorderConfirmation(
+                $preorder->uuid,
+                $preorder->configuration,
+            ));
+        } catch (\Throwable $e) {
+            Log::warning('Could not send preorder confirmation email during checkout initiation: '.$e->getMessage());
+        }
 
         // 7. Return the Client Secret to Vue
         return response()->json([

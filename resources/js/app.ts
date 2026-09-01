@@ -63,12 +63,13 @@ const ZiggyConfig = {
             methods: ['GET', 'HEAD'],
         },
         'checkout-initiate': {
-            uri: 'api/checkout/initiate',
+            uri: 'checkout',
             methods: ['POST'],
         },
         'preorders.success': {
-            uri: 'preorders/success',
+            uri: 'preorders/{uuid}',
             methods: ['GET', 'HEAD'],
+            parameters: ['uuid'],
         },
     },
 };
@@ -77,7 +78,7 @@ if (typeof window !== 'undefined') {
     (window as any).Ziggy = ZiggyConfig;
 }
 
-const staticRoutes: Record<string, string | ((param?: string) => string)> = {
+const staticRoutes: Record<string, string | ((param?: any) => string)> = {
     home: '/',
     'products.treeV1': '/products/treetino-v1',
     'products.treeV2': '/products/treetino-v2',
@@ -95,6 +96,14 @@ const staticRoutes: Record<string, string | ((param?: string) => string)> = {
     'legal.pp': '/legal/privacy-policy',
     'legal.nda': '/legal/nda',
     'legal.nda.download': '/legal/nda/download',
+    'checkout-initiate': '/checkout',
+    'preorders.success': (params?: any) => {
+        const uuid =
+            typeof params === 'string' || typeof params === 'number'
+                ? String(params)
+                : params?.uuid;
+        return uuid ? `/preorders/${uuid}` : '/preorders';
+    },
 };
 
 function safeRoute(name?: string, params?: any): string {
@@ -195,7 +204,7 @@ function getComponentForPath(path: string): string {
         return 'Legal/Nda';
     }
 
-    if (p === '/preorders/success') {
+    if (p === '/preorders/success' || p.startsWith('/preorders/')) {
         return 'Preorders/Success';
     }
 

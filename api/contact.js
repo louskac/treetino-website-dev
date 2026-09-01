@@ -79,7 +79,12 @@ export default async function handler(req, res) {
             });
         }
 
-        const toEmail = process.env.CONTACT_TO_EMAIL || 'info@treetino.com';
+        const recipientEmailsRaw = process.env.CONTACT_TO_EMAIL || 'info@treetino.com,lustykjakub@gmail.com';
+        const toEmails = recipientEmailsRaw
+            .split(',')
+            .map(e => e.trim())
+            .filter(Boolean);
+        const toEmail = toEmails[0] || 'info@treetino.com';
         const dateStr = new Date().toLocaleString('cs-CZ', {
             timeZone: 'Europe/Prague',
             dateStyle: 'full',
@@ -339,7 +344,7 @@ export default async function handler(req, res) {
                     },
                     body: JSON.stringify({
                         from: resendFrom,
-                        to: [toEmail],
+                        to: toEmails,
                         reply_to: senderEmail,
                         subject: `Nová zpráva z webu od ${senderName}`,
                         html: htmlContent,
