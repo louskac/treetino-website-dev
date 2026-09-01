@@ -579,11 +579,11 @@
             },
             "price": {
                 "individual": "Individuální",
-                "plus_45k": "+45 000 Kč",
-                "plus_58k": "+58 000 Kč",
-                "plus_112k": "+112 000 Kč",
-                "from_380k": "Od 380 000 Kč",
-                "connectivity_monthly": "3 měsíce zdarma, poté 7 999 Kč / měs."
+                "plus_45k": "+44 990 Kč",
+                "plus_58k": "+57 990 Kč",
+                "plus_112k": "+111 990 Kč",
+                "from_380k": "Od 379 990 Kč",
+                "connectivity_monthly": "3 měsíce zdarma, poté 7 990 Kč / měs."
             },
             "tree_design": {
                 "standard": {
@@ -681,7 +681,7 @@
                 "premium": {
                     "label": "Premium Connectivity"
                 },
-                "monthly_sub": "3 měsíce zdarma, poté 7 999 Kč / měs."
+                "monthly_sub": "3 měsíce zdarma, poté 7 990 Kč / měs."
             },
             "preview": {
                 "connectivity": {
@@ -1598,11 +1598,11 @@
             },
             "price": {
                 "individual": "Individual",
-                "plus_45k": "+€1,800",
-                "plus_58k": "+€2,300",
-                "plus_112k": "+€4,500",
-                "from_380k": "From €15,200",
-                "connectivity_monthly": "3 months free, then €320 / mo"
+                "plus_45k": "+€1,790",
+                "plus_58k": "+€2,290",
+                "plus_112k": "+€4,490",
+                "from_380k": "From €15,190",
+                "connectivity_monthly": "3 months free, then €319 / mo"
             },
             "tree_design": {
                 "standard": {
@@ -1700,7 +1700,7 @@
                 "premium": {
                     "label": "Premium Connectivity"
                 },
-                "monthly_sub": "3 months free, then €320 / mo"
+                "monthly_sub": "3 months free, then €319 / mo"
             },
             "preview": {
                 "connectivity": {

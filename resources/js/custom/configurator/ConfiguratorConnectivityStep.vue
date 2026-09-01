@@ -94,7 +94,7 @@ const options = computed(() => [
         id: 'premium',
         label: 'Premium Connectivity (Treetino App)',
         labelKey: 'configurator.connectivity.premium.label',
-        price: '3 měsíce zdarma, poté 7 999 Kč / měs.',
+        price: '3 měsíce zdarma, poté 7 990 Kč / měs.',
         priceKey: 'configurator.price.connectivity_monthly',
         tag: 'AI Optimalizace & Vyšší výnosy',
         description: t('configurator.preview.connectivity.premium.text'),

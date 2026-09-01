@@ -498,11 +498,11 @@ return [
         'price.individual' => ['cs' => 'Individuální', 'en' => 'Individual'],
 
         'price.individual' => ['cs' => 'Individuální', 'en' => 'Individual'],
-        'price.plus_45k' => ['cs' => '+45 000 Kč', 'en' => '+€1,800'],
-        'price.plus_58k' => ['cs' => '+58 000 Kč', 'en' => '+€2,300'],
-        'price.plus_112k' => ['cs' => '+112 000 Kč', 'en' => '+€4,500'],
-        'price.from_380k' => ['cs' => 'Od 380 000 Kč', 'en' => 'From €15,200'],
-        'price.connectivity_monthly' => ['cs' => '3 měsíce zdarma, poté 7 999 Kč / měs.', 'en' => '3 months free, then €320 / mo'],
+        'price.plus_45k' => ['cs' => '+44 990 Kč', 'en' => '+€1,790'],
+        'price.plus_58k' => ['cs' => '+57 990 Kč', 'en' => '+€2,290'],
+        'price.plus_112k' => ['cs' => '+111 990 Kč', 'en' => '+€4,490'],
+        'price.from_380k' => ['cs' => 'Od 379 990 Kč', 'en' => 'From €15,190'],
+        'price.connectivity_monthly' => ['cs' => '3 měsíce zdarma, poté 7 990 Kč / měs.', 'en' => '3 months free, then €319 / mo'],
 
         'tree_design.standard.label' => ['cs' => 'Standardní', 'en' => 'Standard'],
         'tree_design.standard.desc' => ['cs' => 'Klasický design s organickými tvary inspirovanými přírodou. Přirozeně zapadne do každého prostředí.', 'en' => 'Classic design with organic nature-inspired shapes. Fits naturally into any environment.'],
@@ -558,7 +558,7 @@ return [
 
         'connectivity.none.label' => ['cs' => 'Bez předplatného', 'en' => 'No Subscription'],
         'connectivity.premium.label' => ['cs' => 'Premium Connectivity', 'en' => 'Premium Connectivity'],
-        'connectivity.monthly_sub' => ['cs' => '3 měsíce zdarma, poté 7 999 Kč / měs.', 'en' => '3 months free, then €320 / mo'],
+        'connectivity.monthly_sub' => ['cs' => '3 měsíce zdarma, poté 7 990 Kč / měs.', 'en' => '3 months free, then €319 / mo'],
 
         'preview.connectivity.premium.text' => ['cs' => 'Příplatkové inteligentní řízení výroby pomocí AI pro vyšší výnosy, TREElight show, sdílení energie a vzdálený monitoring.', 'en' => 'AI-driven generation management for higher energy yields, TREElight show, energy sharing, and remote monitoring.'],
         'preview.connectivity.premium.none' => ['cs' => 'Standardní automatické i manuální řízení bez doplňkových funkcí.', 'en' => 'Standard automatic and manual control without predictive features.'],

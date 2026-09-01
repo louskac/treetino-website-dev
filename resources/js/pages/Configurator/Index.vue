@@ -416,46 +416,46 @@ const basePrice = computed(() => {
 
     // V1 option pricing
     if (selectedProductId.value === ProductId.StromV1) {
-        // Frame color (white = 0, other colors / custom = 45 000 CZK)
+        // Frame color (white = 0, other colors / custom = 44 990 CZK)
         if (selectedColorId.value && selectedColorId.value !== 'white') {
-            price += 45000;
+            price += 44990;
         }
 
-        // Leaf color (green = 0, other colors / custom = 58 000 CZK)
+        // Leaf color (green = 0, other colors / custom = 57 990 CZK)
         if (selectedLeafColorId.value && selectedLeafColorId.value !== 'green') {
-            price += 58000;
+            price += 57990;
         }
 
-        // FVE leaf design (spring / none = 0, other seasonal / custom = 112 000 CZK)
+        // FVE leaf design (spring / none = 0, other seasonal / custom = 111 990 CZK)
         if (
             selectedFveLeafDesign.value &&
             selectedFveLeafDesign.value !== 'spring' &&
             selectedFveLeafDesign.value !== 'none'
         ) {
-            price += 112000;
+            price += 111990;
         }
 
-        // Battery (battery = 380 000 CZK)
+        // Battery (battery = 379 990 CZK)
         if (selectedBattery.value === 'battery') {
-            price += 380000;
+            price += 379990;
         }
     } else if (selectedProductId.value === ProductId.StromV2) {
         // V2 option pricing
         if (selectedColorId.value && selectedColorId.value !== 'white') {
-            price += 45000;
+            price += 44990;
         }
         if (selectedLeafColorId.value && selectedLeafColorId.value !== 'green') {
-            price += 58000;
+            price += 57990;
         }
         if (
             selectedFveLeafDesign.value &&
             selectedFveLeafDesign.value !== 'spring' &&
             selectedFveLeafDesign.value !== 'none'
         ) {
-            price += 112000;
+            price += 111990;
         }
         if (selectedBattery.value === 'battery') {
-            price += 380000;
+            price += 379990;
         }
     }
 
