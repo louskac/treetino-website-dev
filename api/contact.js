@@ -248,17 +248,8 @@ export default async function handler(req, res) {
   <div class="wrapper">
     <div class="card">
       <div class="header">
-        <a href="https://treetino.com" class="header-logo" target="_blank">
-          <table border="0" cellpadding="0" cellspacing="0">
-            <tr>
-              <td style="vertical-align: middle;">
-                <img src="https://treetino.com/img/branding/logo-icon.svg" width="20" height="20" alt="Treetino" style="display: block; width: 20px; height: 20px; border: 0;">
-              </td>
-              <td style="vertical-align: middle; padding-left: 10px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 15px; font-weight: 800; letter-spacing: 0.08em; color: #111827;">
-                TREETINO
-              </td>
-            </tr>
-          </table>
+        <a href="https://treetino.com" style="display: inline-block; text-decoration: none;" target="_blank">
+          <img src="https://treetino.com/img/branding/treetino-logo.png" width="140" height="26.6" alt="Treetino" style="display: block; width: 140px; max-width: 140px; height: auto; border: 0;">
         </a>
       </div>
 
