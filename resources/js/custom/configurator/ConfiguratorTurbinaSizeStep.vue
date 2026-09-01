@@ -10,47 +10,61 @@
             <button
                 v-for="option in options"
                 :key="option.id"
+                type="button"
                 @click="$emit('update:modelValue', option.id)"
-                class="w-full rounded-lg border-2 px-4 py-3.5 text-left transition-all duration-200"
+                class="relative w-full rounded-xl border p-4 text-left transition-all duration-200 cursor-pointer"
                 :class="
                     modelValue === option.id
-                        ? 'border-black bg-black/4 dark:border-white dark:bg-white/6'
-                        : 'border-black/15 hover:border-black/35 dark:border-white/15 dark:hover:border-white/35'
+                        ? 'border-black/30 bg-stone-50/90 shadow-xs dark:border-white/30 dark:bg-zinc-900/80'
+                        : 'border-black/10 bg-transparent opacity-75 hover:border-black/20 hover:opacity-100 dark:border-white/10 dark:hover:border-white/20'
                 "
             >
                 <div class="mb-1 flex items-center justify-between">
-                    <span
-                        class="text-sm font-medium text-black dark:text-white"
-                        >{{ $t(option.labelKey, option.label) }}</span
-                    >
-                    <span class="flex items-center gap-2">
+                    <div class="flex items-baseline gap-2">
                         <span
-                            class="text-xs font-semibold text-black/60 dark:text-white/50"
-                            >{{
+                            class="text-sm font-semibold text-black dark:text-white"
+                        >
+                            {{ $t(option.labelKey, option.label) }}
+                        </span>
+                        <span
+                            v-if="option.priceKey"
+                            class="text-xs font-semibold text-t-blue dark:text-blue-400"
+                        >
+                            {{ $t(option.priceKey, option.price) }}
+                        </span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span
+                            class="text-xs font-medium text-black/60 dark:text-white/50"
+                        >
+                            {{
                                 option.powerKey
                                     ? $t(option.powerKey, option.power)
                                     : option.power
-                            }}</span
-                        >
-                        <span
-                            class="flex items-center gap-1.5 text-xs transition-colors duration-200"
-                            :class="
-                                modelValue === option.id
-                                    ? 'font-semibold text-black dark:text-white'
-                                    : 'text-black/35 dark:text-white/35'
-                            "
-                        >
-                            <CheckCircle v-if="modelValue === option.id" />
-                            {{
-                                modelValue === option.id
-                                    ? $t('configurator.selected')
-                                    : $t('configurator.select')
                             }}
                         </span>
-                    </span>
+                        <span
+                            class="flex items-center gap-1.5 rounded-full px-2 py-0.5 text-xs transition-colors duration-200"
+                            :class="
+                                modelValue === option.id
+                                    ? 'bg-t-blue text-white font-medium shadow-2xs'
+                                    : 'bg-black/5 text-black/60 dark:bg-white/10 dark:text-white/60'
+                            "
+                        >
+                            <CheckCircle
+                                v-if="modelValue === option.id"
+                                class="h-3.5 w-3.5"
+                            />
+                            {{
+                                modelValue === option.id
+                                    ? $t('configurator.selected', 'Vybráno')
+                                    : $t('configurator.select', 'Vybrat')
+                            }}
+                        </span>
+                    </div>
                 </div>
                 <p
-                    class="text-xs leading-relaxed text-black/55 dark:text-white/40"
+                    class="text-xs leading-relaxed text-black/60 dark:text-white/45"
                 >
                     {{ $t(option.descKey, option.description) }}
                 </p>
@@ -78,6 +92,8 @@ const options = [
         id: 'large',
         label: 'Velká',
         labelKey: 'configurator.turbine_size.large.label',
+        price: '149 990 Kč',
+        priceKey: 'configurator.price.150k',
         power: '3 kW (2,8 m)',
         powerKey: 'configurator.turbine_size.large.power',
         description:
@@ -88,6 +104,8 @@ const options = [
         id: 'medium',
         label: 'Střední',
         labelKey: 'configurator.turbine_size.medium.label',
+        price: '109 990 Kč',
+        priceKey: 'configurator.price.110k',
         power: '2 kW (1,8 m)',
         powerKey: 'configurator.turbine_size.medium.power',
         description:
@@ -98,6 +116,8 @@ const options = [
         id: 'small',
         label: 'Menší',
         labelKey: 'configurator.turbine_size.small.label',
+        price: '79 990 Kč',
+        priceKey: 'configurator.price.80k',
         power: '1 kW (1,2 m)',
         powerKey: 'configurator.turbine_size.small.power',
         description:

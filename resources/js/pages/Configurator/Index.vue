@@ -459,6 +459,29 @@ const basePrice = computed(() => {
         if (selectedBattery.value === 'battery') {
             price += 379990;
         }
+    } else if (selectedProductId.value === ProductId.Turbina) {
+        // Turbina size: large (149 990), medium (109 990), small (79 990)
+        if (selectedTurbineSize.value === 'small') {
+            price = 79990;
+        } else if (selectedTurbineSize.value === 'medium') {
+            price = 109990;
+        } else {
+            price = 149990;
+        }
+
+        // Turbina mount: roof (+14 990), wall (+24 990), pole (+34 990)
+        if (selectedTurbineMount.value === 'roof') {
+            price += 14990;
+        } else if (selectedTurbineMount.value === 'wall') {
+            price += 24990;
+        } else if (selectedTurbineMount.value === 'pole') {
+            price += 34990;
+        }
+
+        // Turbina color: white (free), transparent/colors (+14 990)
+        if (selectedColorId.value && selectedColorId.value !== 'white') {
+            price += 14990;
+        }
     }
 
     return price;

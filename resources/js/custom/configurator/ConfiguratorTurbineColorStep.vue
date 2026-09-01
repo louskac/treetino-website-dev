@@ -18,15 +18,6 @@ defineEmits<{ 'update:modelValue': [value: string] }>();
 
 const colors: ColorOption[] = [
     {
-        id: 'transparent',
-        label: 'Průhledná',
-        labelKey: 'configurator.color.transparent',
-        hex: null,
-        price: null,
-        isCustom: false,
-        isTransparent: true,
-    },
-    {
         id: 'white',
         label: 'Bílá',
         labelKey: 'configurator.color.white',
@@ -35,11 +26,22 @@ const colors: ColorOption[] = [
         isCustom: false,
     },
     {
+        id: 'transparent',
+        label: 'Průhledná',
+        labelKey: 'configurator.color.transparent',
+        hex: null,
+        price: '+14 990 Kč',
+        priceKey: 'configurator.price.plus_15k',
+        isCustom: false,
+        isTransparent: true,
+    },
+    {
         id: 'grey',
         label: 'Šedá',
         labelKey: 'configurator.color.grey',
-        hex: '#A8A9AD',
-        price: '+2 900 Kč',
+        hex: '#8A8A8A',
+        price: '+14 990 Kč',
+        priceKey: 'configurator.price.plus_15k',
         isCustom: false,
     },
     {
@@ -47,7 +49,8 @@ const colors: ColorOption[] = [
         label: 'Tmavě zelená',
         labelKey: 'configurator.color.dark_green',
         hex: '#3A5F3A',
-        price: '+2 900 Kč',
+        price: '+14 990 Kč',
+        priceKey: 'configurator.price.plus_15k',
         isCustom: false,
     },
     {

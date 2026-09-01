@@ -498,7 +498,12 @@ return [
         'price.individual' => ['cs' => 'Individuální', 'en' => 'Individual'],
 
         'price.individual' => ['cs' => 'Individuální', 'en' => 'Individual'],
+        'price.150k' => ['cs' => '149 990 Kč', 'en' => '€5,990'],
+        'price.110k' => ['cs' => '109 990 Kč', 'en' => '€4,390'],
+        'price.80k' => ['cs' => '79 990 Kč', 'en' => '€3,190'],
+        'price.plus_15k' => ['cs' => '+14 990 Kč', 'en' => '+€590'],
         'price.plus_25k' => ['cs' => '+24 990 Kč', 'en' => '+€990'],
+        'price.plus_35k' => ['cs' => '+34 990 Kč', 'en' => '+€1,390'],
         'price.plus_40k' => ['cs' => '+39 990 Kč', 'en' => '+€1,590'],
         'price.plus_45k' => ['cs' => '+44 990 Kč', 'en' => '+€1,790'],
         'price.plus_58k' => ['cs' => '+57 990 Kč', 'en' => '+€2,290'],

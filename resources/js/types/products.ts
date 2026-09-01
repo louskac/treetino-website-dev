@@ -321,7 +321,7 @@ export const PRODUCTS: Product[] = [
                 configurationFields: ['color'],
             },
         ],
-        basePrice: 150000,
+        basePrice: 149990,
         monthlySavings: 1300,
         reservationPrice: 6000,
         stats: [
