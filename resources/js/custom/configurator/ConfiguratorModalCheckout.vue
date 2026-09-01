@@ -77,13 +77,13 @@ const handleContinue = async () => {
         await nextTick();
         await initStripe();
     } catch (error) {
-        const requestError = error as AxiosError<{ message?: string }>;
-        console.log(
-            'Checkout Error details:',
-            JSON.stringify(requestError.response?.data),
-        );
+        const requestError = error as AxiosError<{ message?: string; error?: string }>;
+        console.log('Checkout Error details:', JSON.stringify(requestError.response?.data));
         errorMessage.value =
-            requestError.response?.data?.message || 'Something went wrong.';
+            requestError.response?.data?.message ||
+            requestError.response?.data?.error ||
+            requestError.message ||
+            'Something went wrong.';
     } finally {
         isProcessing.value = false;
     }

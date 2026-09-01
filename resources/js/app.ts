@@ -63,7 +63,7 @@ const ZiggyConfig = {
             methods: ['GET', 'HEAD'],
         },
         'checkout-initiate': {
-            uri: 'checkout',
+            uri: 'api/checkout',
             methods: ['POST'],
         },
         'preorders.success': {
@@ -96,7 +96,7 @@ const staticRoutes: Record<string, string | ((param?: any) => string)> = {
     'legal.pp': '/legal/privacy-policy',
     'legal.nda': '/legal/nda',
     'legal.nda.download': '/legal/nda/download',
-    'checkout-initiate': '/checkout',
+    'checkout-initiate': '/api/checkout',
     'preorders.success': (params?: any) => {
         const uuid =
             typeof params === 'string' || typeof params === 'number'

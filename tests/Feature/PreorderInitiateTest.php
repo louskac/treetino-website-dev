@@ -33,12 +33,24 @@ class PreorderInitiateTest extends TestCase
     public function test_initiate_returns_clear_error_when_stripe_secret_is_missing(): void
     {
         Config::set('services.stripe.secret', null);
+        $originalEnv = $_ENV['STRIPE_SECRET'] ?? null;
+        $originalServer = $_SERVER['STRIPE_SECRET'] ?? null;
+        unset($_ENV['STRIPE_SECRET'], $_SERVER['STRIPE_SECRET']);
+        putenv('STRIPE_SECRET');
 
         $response = $this->postJson('/checkout', [
             'email' => 'test@example.com',
             'type' => 'strom-v1',
             'configuration' => ['color' => 'white'],
         ]);
+
+        if ($originalEnv) {
+            $_ENV['STRIPE_SECRET'] = $originalEnv;
+            putenv('STRIPE_SECRET='.$originalEnv);
+        }
+        if ($originalServer) {
+            $_SERVER['STRIPE_SECRET'] = $originalServer;
+        }
 
         $response->assertStatus(500)
             ->assertJson([
@@ -48,14 +60,13 @@ class PreorderInitiateTest extends TestCase
 
     public function test_api_checkout_alias_route_works(): void
     {
-        Config::set('services.stripe.secret', null);
-
         $response = $this->postJson('/api/checkout', [
-            'email' => 'test@example.com',
+            'email' => 'test-alias@example.com',
             'type' => 'strom-v1',
             'configuration' => ['color' => 'white'],
         ]);
 
-        $response->assertStatus(500);
+        $response->assertOk()
+            ->assertJsonStructure(['client_secret', 'preorder_uuid']);
     }
 }
