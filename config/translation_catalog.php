@@ -498,6 +498,8 @@ return [
         'price.individual' => ['cs' => 'Individuální', 'en' => 'Individual'],
 
         'price.individual' => ['cs' => 'Individuální', 'en' => 'Individual'],
+        'price.plus_25k' => ['cs' => '+24 990 Kč', 'en' => '+€990'],
+        'price.plus_40k' => ['cs' => '+39 990 Kč', 'en' => '+€1,590'],
         'price.plus_45k' => ['cs' => '+44 990 Kč', 'en' => '+€1,790'],
         'price.plus_58k' => ['cs' => '+57 990 Kč', 'en' => '+€2,290'],
         'price.plus_112k' => ['cs' => '+111 990 Kč', 'en' => '+€4,490'],

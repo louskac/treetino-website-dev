@@ -139,6 +139,7 @@
                         v-model="selectedColorId"
                         v-model:custom-hex="customFrameColor"
                         :step-number="index + 1"
+                        :product-id="selectedProductId"
                     />
                     <ConfiguratorTreeDesignStep
                         v-else-if="step.id === 'tree-design'"
@@ -171,6 +172,7 @@
                         v-model="selectedLeafColorId"
                         v-model:custom-hex="customLeafColor"
                         :step-number="index + 1"
+                        :product-id="selectedProductId"
                     />
                     <ConfiguratorFveLeafStep
                         v-else-if="step.id === 'fve-leaf'"
@@ -440,19 +442,19 @@ const basePrice = computed(() => {
             price += 379990;
         }
     } else if (selectedProductId.value === ProductId.StromV2) {
-        // V2 option pricing
+        // V2 option pricing (03 color: 24 990, 04 leaf: 24 990, 05 fve-leaf: 39 990, battery: 379 990)
         if (selectedColorId.value && selectedColorId.value !== 'white') {
-            price += 44990;
+            price += 24990;
         }
         if (selectedLeafColorId.value && selectedLeafColorId.value !== 'green') {
-            price += 57990;
+            price += 24990;
         }
         if (
             selectedFveLeafDesign.value &&
             selectedFveLeafDesign.value !== 'spring' &&
             selectedFveLeafDesign.value !== 'none'
         ) {
-            price += 111990;
+            price += 39990;
         }
         if (selectedBattery.value === 'battery') {
             price += 379990;

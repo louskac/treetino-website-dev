@@ -393,30 +393,17 @@ const currentMonthTranslated = computed(() => {
     return t(`configurator.months.${key}`);
 });
 
+const benefitKeys = [
+    'configurator.checkout.benefit_1',
+    'configurator.checkout.benefit_2',
+    'configurator.checkout.benefit_3',
+    'configurator.checkout.benefit_4',
+    'configurator.checkout.benefit_5',
+    'configurator.checkout.benefit_6',
+    'configurator.checkout.benefit_7',
+];
+
 const reservationBenefits = computed<string[]>(() => {
-    try {
-        const list = tm('configurator.checkout.inspection_benefits');
-        if (Array.isArray(list) && list.length > 0) {
-            return list as string[];
-        }
-    } catch {
-        // fallback
-    }
-
-    const currentLocale = locale.value || 'cs';
-    const locMsgs = (messages.value as any)?.[currentLocale]?.configurator?.checkout?.inspection_benefits;
-    if (Array.isArray(locMsgs)) {
-        return locMsgs;
-    }
-
-    return [
-        'Cena obsahuje měřicí stanici na 2 měsíce – pro zjištění návratnosti',
-        'Náklady na cestu',
-        'Náklady na montáž měřidla',
-        'Konečnou cenovou nabídku',
-        'Kalkulaci odhadované návratnosti zařízení',
-        'Dotační poradenství',
-        'Poznámka: Cena prohlídky se odečte od finální ceny zařízení',
-    ];
+    return benefitKeys.map((key) => t(key));
 });
 </script>

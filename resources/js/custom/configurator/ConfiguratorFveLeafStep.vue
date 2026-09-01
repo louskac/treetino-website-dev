@@ -341,73 +341,81 @@ interface FveLeafOption {
     isCustom?: boolean;
 }
 
-const options: FveLeafOption[] = [
-    {
-        id: 'none',
-        label: 'Bez designu',
-        labelKey: 'configurator.fve_leaf.none.label',
-        swatch: '#E5E7EB',
-        price: null,
-        description: 'FVE listy bez sezonního designu.',
-        descKey: 'configurator.fve_leaf.none.desc',
-    },
-    {
-        id: 'spring',
-        label: 'Jaro',
-        labelKey: 'configurator.fve_leaf.spring.label',
-        swatch: 'linear-gradient(135deg, #E2F674 0%, #A3E635 50%, #4D7C0F 100%)',
-        price: null,
-        description: 'Sezonní design FVE listů pro jarní variantu stromu.',
-        descKey: 'configurator.fve_leaf.spring.desc',
-    },
-    {
-        id: 'summer',
-        label: 'Léto',
-        labelKey: 'configurator.fve_leaf.summer.label',
-        swatch: 'linear-gradient(135deg, #34D399 0%, #059669 50%, #064E3B 100%)',
-        price: '+111 990 Kč',
-        priceKey: 'configurator.price.plus_112k',
-        description: 'Sezonní design FVE listů pro letní variantu stromu.',
-        descKey: 'configurator.fve_leaf.summer.desc',
-    },
-    {
-        id: 'autumn',
-        label: 'Podzim',
-        labelKey: 'configurator.fve_leaf.autumn.label',
-        swatch: 'linear-gradient(135deg, #F2B84B 0%, #C85D2A 50%, #7A3B20 100%)',
-        price: '+111 990 Kč',
-        priceKey: 'configurator.price.plus_112k',
-        description: 'Sezonní design FVE listů pro podzimní variantu stromu.',
-        descKey: 'configurator.fve_leaf.autumn.desc',
-    },
-    {
-        id: 'winter',
-        label: 'Zima',
-        labelKey: 'configurator.fve_leaf.winter.label',
-        swatch: 'linear-gradient(135deg, #F3F7FA 0%, #B8D1E0 50%, #6E8798 100%)',
-        price: '+111 990 Kč',
-        priceKey: 'configurator.price.plus_112k',
-        description: 'Sezonní design FVE listů pro zimní variantu stromu.',
-        descKey: 'configurator.fve_leaf.winter.desc',
-    },
-    {
-        id: 'custom',
-        label: 'Na míru',
-        labelKey: 'configurator.fve_leaf.custom.label',
-        swatch: 'conic-gradient(from 180deg at 50% 50%, #FF0000 0deg, #FFFF00 60deg, #00FF00 120deg, #00FFFF 180deg, #0000FF 240deg, #FF00FF 300deg, #FF0000 360deg)',
-        price: 'Individuální',
-        priceKey: 'configurator.price.individual',
-        description:
-            'Nahrajte vlastní fotku nebo grafiku pro potisk FVE listů.',
-        descKey: 'configurator.fve_leaf.custom.desc',
-        isCustom: true,
-    },
-];
+const options = computed<FveLeafOption[]>(() => {
+    const isV2 = props.productId === ProductId.StromV2;
+    const seasonalPrice = isV2 ? '+39 990 Kč' : '+111 990 Kč';
+    const seasonalPriceKey = isV2
+        ? 'configurator.price.plus_40k'
+        : 'configurator.price.plus_112k';
+
+    return [
+        {
+            id: 'none',
+            label: 'Bez designu',
+            labelKey: 'configurator.fve_leaf.none.label',
+            swatch: '#E5E7EB',
+            price: null,
+            description: 'FVE listy bez sezonního designu.',
+            descKey: 'configurator.fve_leaf.none.desc',
+        },
+        {
+            id: 'spring',
+            label: 'Jaro',
+            labelKey: 'configurator.fve_leaf.spring.label',
+            swatch: 'linear-gradient(135deg, #E2F674 0%, #A3E635 50%, #4D7C0F 100%)',
+            price: null,
+            description: 'Sezonní design FVE listů pro jarní variantu stromu.',
+            descKey: 'configurator.fve_leaf.spring.desc',
+        },
+        {
+            id: 'summer',
+            label: 'Léto',
+            labelKey: 'configurator.fve_leaf.summer.label',
+            swatch: 'linear-gradient(135deg, #34D399 0%, #059669 50%, #064E3B 100%)',
+            price: seasonalPrice,
+            priceKey: seasonalPriceKey,
+            description: 'Sezonní design FVE listů pro letní variantu stromu.',
+            descKey: 'configurator.fve_leaf.summer.desc',
+        },
+        {
+            id: 'autumn',
+            label: 'Podzim',
+            labelKey: 'configurator.fve_leaf.autumn.label',
+            swatch: 'linear-gradient(135deg, #F2B84B 0%, #C85D2A 50%, #7A3B20 100%)',
+            price: seasonalPrice,
+            priceKey: seasonalPriceKey,
+            description: 'Sezonní design FVE listů pro podzimní variantu stromu.',
+            descKey: 'configurator.fve_leaf.autumn.desc',
+        },
+        {
+            id: 'winter',
+            label: 'Zima',
+            labelKey: 'configurator.fve_leaf.winter.label',
+            swatch: 'linear-gradient(135deg, #F3F7FA 0%, #B8D1E0 50%, #6E8798 100%)',
+            price: seasonalPrice,
+            priceKey: seasonalPriceKey,
+            description: 'Sezonní design FVE listů pro zimní variantu stromu.',
+            descKey: 'configurator.fve_leaf.winter.desc',
+        },
+        {
+            id: 'custom',
+            label: 'Na míru',
+            labelKey: 'configurator.fve_leaf.custom.label',
+            swatch: 'conic-gradient(from 180deg at 50% 50%, #FF0000 0deg, #FFFF00 60deg, #00FF00 120deg, #00FFFF 180deg, #0000FF 240deg, #FF00FF 300deg, #FF0000 360deg)',
+            price: 'Individuální',
+            priceKey: 'configurator.price.individual',
+            description:
+                'Nahrajte vlastní fotku nebo grafiku pro potisk FVE listů.',
+            descKey: 'configurator.fve_leaf.custom.desc',
+            isCustom: true,
+        },
+    ];
+});
 
 const visibleOptions = computed(() =>
     props.productId === ProductId.StromV1
-        ? options
-        : options.filter((option) => option.id !== 'none'),
+        ? options.value
+        : options.value.filter((option) => option.id !== 'none'),
 );
 
 function selectOption(id: string) {
