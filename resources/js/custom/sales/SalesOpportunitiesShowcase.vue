@@ -125,7 +125,7 @@
                         <div
                             class="font-mono text-xs font-semibold text-black/50 dark:text-white/50"
                         >
-                            {{ currentOpp.tag }} / 0{{ opportunities.length }}
+                            {{ currentOpp.tag }} / {{ String(opportunities.length).padStart(2, '0') }}
                         </div>
 
                         <div class="flex items-center gap-2">

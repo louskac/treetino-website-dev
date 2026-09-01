@@ -161,7 +161,7 @@ return [
         'macbook.offer_generated' => ['cs' => 'Nabídka vygenerována', 'en' => 'Proposal Generated'],
         'macbook.download_pdf' => ['cs' => 'Stáhnout PDF', 'en' => 'Download PDF'],
         'macbook.roi_calculation' => ['cs' => 'Výpočet Návratnosti', 'en' => 'ROI Calculation'],
-        'macbook.roi_years' => ['cs' => '16,3 roku', 'en' => '16.3 years'],
+        'macbook.roi_years' => ['cs' => '9 let', 'en' => '9 years'],
         'macbook.annual_production' => ['cs' => 'Roční výroba', 'en' => 'Annual Production'],
         'macbook.kwh_year' => ['cs' => 'kWh/rok', 'en' => 'kWh/year'],
         'macbook.co2_savings' => ['cs' => 'CO₂ Úspora:', 'en' => 'CO₂ Savings:'],
@@ -697,17 +697,23 @@ return [
         'ideas.commission_label' => ['cs' => 'Vaše provize', 'en' => 'Your Commission'],
         'ideas.recommended_model' => ['cs' => 'Doporučený model', 'en' => 'Recommended Model'],
 
-        'ideas.zoo_segment' => ['cs' => 'Veřejný prostor · Vysoká návštěvnost', 'en' => 'Public Space · High Footfall'],
-        'ideas.zoo_title' => ['cs' => 'Zoologické zahrady & Safari parky', 'en' => 'Zoo & Safari Parks'],
-        'ideas.zoo_desc' => ['cs' => 'Edukativní zelená dominanta u hlavního vchodu doplněná o střešní větrné mikroturbíny. Výrazný symbol udržitelnosti a čisté energie pro tisíce návštěvníků denně.', 'en' => 'Educational green centerpiece at the main visitor entrance combined with rooftop wind micro-turbines. Strong symbol of clean power for thousands of daily visitors.'],
-        'ideas.zoo_model' => ['cs' => '1× Strom V1 + 4× Aero Turbíny', 'en' => '1× Tree V1 + 4× Aero Turbines'],
-        'ideas.zoo_payout' => ['cs' => '495 000 Kč', 'en' => '€20,340'],
-
         'ideas.dev_segment' => ['cs' => 'Novostavby · Moderní čtvrti', 'en' => 'New Developments · Urban Quarters'],
         'ideas.dev_title' => ['cs' => 'Rezidenční developerské projekty', 'en' => 'Residential Development Projects'],
         'ideas.dev_desc' => ['cs' => 'Instalace dvou dominantních stromů na centrálním náměstí a promenádě nové čtvrti. Zvyšuje prestiž projektu, zajišťuje ESG certifikaci a napájí rezidentní dobíjecí stanice.', 'en' => 'Installation of two landmark solar trees in the central pedestrian plaza and promenade. Enhances property value, secures ESG ratings, and powers residential EV chargers.'],
         'ideas.dev_model' => ['cs' => '2× Strom V1 (celkem 100 kW)', 'en' => '2× Tree V1 (100 kW total)'],
         'ideas.dev_payout' => ['cs' => '900 000 Kč', 'en' => '€37,000'],
+
+        'ideas.village_segment' => ['cs' => 'Obce & města · Veřejná prostranství', 'en' => 'Municipalities · Public Spaces'],
+        'ideas.village_title' => ['cs' => 'Města, obce a vesnice', 'en' => 'Cities, Towns & Villages'],
+        'ideas.village_desc' => ['cs' => 'Instalace solárního stromu na náves, náměstí nebo k obecnímu úřadu. Vytváří reprezentativní komunitní bod s lavičkami a nabíjením pro elektrokola občanů i turistů, krytý z dotačních programů.', 'en' => 'Solar tree installation on village greens, town squares, or near municipal offices. Creates a landmark community hub with public seating and e-bike charging, heavily backed by municipal green grants.'],
+        'ideas.village_model' => ['cs' => '1× Strom V1 (49,8 kW) + e-Bike Hub', 'en' => '1× Tree V1 (49.8 kW) + e-Bike Hub'],
+        'ideas.village_payout' => ['cs' => '450 000 Kč', 'en' => '€18,500'],
+
+        'ideas.zoo_segment' => ['cs' => 'Veřejný prostor · Vysoká návštěvnost', 'en' => 'Public Space · High Footfall'],
+        'ideas.zoo_title' => ['cs' => 'Zoologické zahrady & Safari parky', 'en' => 'Zoo & Safari Parks'],
+        'ideas.zoo_desc' => ['cs' => 'Edukativní zelená dominanta u hlavního vchodu doplněná o střešní větrné mikroturbíny. Výrazný symbol udržitelnosti a čisté energie pro tisíce návštěvníků denně.', 'en' => 'Educational green centerpiece at the main visitor entrance combined with rooftop wind micro-turbines. Strong symbol of clean power for thousands of daily visitors.'],
+        'ideas.zoo_model' => ['cs' => '1× Strom V1 + 4× Aero Turbíny', 'en' => '1× Tree V1 + 4× Aero Turbines'],
+        'ideas.zoo_payout' => ['cs' => '495 000 Kč', 'en' => '€20,340'],
 
         'ideas.metal_segment' => ['cs' => 'Těžký průmysl · 24/7 provoz', 'en' => 'Heavy Industry · 24/7 Operation'],
         'ideas.metal_title' => ['cs' => 'Hutní & strojírenské výrobní areály', 'en' => 'Metalworks & Manufacturing Plants'],
@@ -728,8 +734,8 @@ return [
         'ideas.community_payout' => ['cs' => '195 000 Kč', 'en' => '€8,040'],
 
         'ideas.retail_segment' => ['cs' => 'Komerční plochy · Parkoviště', 'en' => 'Commercial Hubs · Parking Plazas'],
-        'ideas.retail_title' => ['cs' => 'Logistická centra & Retail parky', 'en' => 'Logistics Hubs & Retail Parks'],
-        'ideas.retail_desc' => ['cs' => 'Komplexní řešení pro retail parky a logistické areály: dva stromy V1 na parkovišti zákazníků napojené na rychlonabíječky plus šest turbín na střešní atice haly.', 'en' => 'Turnkey solution for retail and logistics hubs: two commercial V1 trees in customer parking linked to fast EV chargers, plus six parapet-mounted wind turbines.'],
+        'ideas.retail_title' => ['cs' => 'Logistická centra & Obchodní parky', 'en' => 'Logistics Hubs & Business Parks'],
+        'ideas.retail_desc' => ['cs' => 'Komplexní řešení pro obchodní parky a logistické areály: dva stromy V1 na parkovišti zákazníků napojené na rychlonabíječky plus šest turbín na střešní atice haly.', 'en' => 'Turnkey solution for business parks and logistics hubs: two commercial V1 trees in customer parking linked to fast EV chargers, plus six parapet-mounted wind turbines.'],
         'ideas.retail_model' => ['cs' => '2× Strom V1 + 6× Aero Turbíny', 'en' => '2× Tree V1 + 6× Aero Turbines'],
         'ideas.retail_payout' => ['cs' => '967 500 Kč', 'en' => '€39,760'],
 
