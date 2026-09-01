@@ -96,232 +96,215 @@ export default async function handler(req, res) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nová zpráva z kontaktního formuláře • Treetino</title>
+  <title>Nová zpráva z formuláře • Treetino</title>
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      background-color: #f8fafc;
+      background-color: #f4f5f7;
       margin: 0;
-      padding: 32px 16px;
-      color: #0f172a;
+      padding: 36px 16px;
+      color: #111827;
       -webkit-font-smoothing: antialiased;
     }
     .wrapper {
-      max-width: 600px;
+      max-width: 580px;
       margin: 0 auto;
-    }
-    .brand-header {
-      text-align: center;
-      margin-bottom: 24px;
-    }
-    .brand-pill {
-      display: inline-block;
-      background-color: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 9999px;
-      padding: 10px 24px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
-      text-decoration: none;
     }
     .card {
       background-color: #ffffff;
-      border-radius: 24px;
-      border: 1px solid #e2e8f0;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 12px 36px -8px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
     }
-    .hero {
-      background-color: #0a0f1d;
-      padding: 36px 36px 32px;
-      color: #ffffff;
-      border-top: 4px solid #2563eb;
+    .header {
+      padding: 24px 32px;
+      border-bottom: 1px solid #f3f4f6;
+      background-color: #ffffff;
     }
-    .hero-tag {
-      color: #60a5fa;
+    .header-logo {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: #111827;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .content {
+      padding: 32px 32px 28px;
+    }
+    .tag {
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      margin-bottom: 10px;
+      color: #183d89;
+      margin-bottom: 8px;
     }
-    .hero-title {
-      margin: 0 0 6px;
+    .title {
       font-size: 24px;
-      font-weight: 700;
-      letter-spacing: -0.025em;
-      color: #ffffff;
-      line-height: 1.25;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #000000;
+      margin: 0 0 6px 0;
+      line-height: 1.3;
     }
-    .hero-subtitle {
-      margin: 0;
-      color: #94a3b8;
-      font-size: 13px;
+    .subtitle {
+      font-size: 14px;
+      color: #6b7280;
+      margin: 0 0 28px 0;
       line-height: 1.5;
     }
-    .body-content {
-      padding: 32px 36px;
-    }
     .info-card {
-      background-color: #f8fafc;
-      border-left: 3px solid #2563eb;
-      border-radius: 12px;
-      padding: 20px 22px;
-      margin-bottom: 28px;
+      background-color: #f9fafb;
+      border-left: 3px solid #183d89;
+      border-radius: 6px;
+      padding: 18px 20px;
+      margin-bottom: 24px;
     }
-    .info-row {
+    .info-group {
       margin-bottom: 14px;
     }
-    .info-row:last-child {
+    .info-group:last-child {
       margin-bottom: 0;
     }
     .info-label {
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 700;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: #64748b;
+      color: #6b7280;
       margin-bottom: 4px;
     }
     .info-value {
       font-size: 15px;
       font-weight: 600;
-      color: #0f172a;
+      color: #111827;
     }
     .badge {
       display: inline-block;
-      background-color: #eff6ff;
-      color: #1d4ed8;
-      border: 1px solid #bfdbfe;
+      background-color: #e8eef8;
+      color: #183d89;
       font-size: 11px;
-      font-weight: 700;
-      padding: 2px 10px;
-      border-radius: 9999px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
       margin-left: 8px;
       vertical-align: middle;
     }
-    .section-title {
-      font-size: 11px;
+    .section-label {
+      font-size: 10px;
       font-weight: 700;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: #64748b;
-      margin-bottom: 10px;
-    }
-    .message-container {
-      background-color: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 16px;
-      padding: 22px 24px;
-      font-size: 15px;
-      line-height: 1.7;
-      color: #1e293b;
-      white-space: pre-wrap;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
-      margin-bottom: 28px;
-    }
-    .cta-container {
-      text-align: center;
-      padding-top: 4px;
+      color: #6b7280;
       margin-bottom: 8px;
     }
-    .cta-btn {
+    .message-box {
+      background-color: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      padding: 18px 20px;
+      font-size: 15px;
+      line-height: 1.65;
+      color: #1f2937;
+      white-space: pre-wrap;
+      margin-bottom: 28px;
+    }
+    .cta-button {
       display: inline-block;
-      background-color: #1d4ed8;
+      background-color: #183d89;
       color: #ffffff !important;
-      font-weight: 700;
       font-size: 14px;
+      font-weight: 600;
       text-decoration: none;
-      padding: 14px 28px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(29, 78, 216, 0.25);
+      padding: 12px 24px;
+      border-radius: 6px;
+      text-align: center;
     }
     .footer {
-      text-align: center;
-      padding: 28px 20px 12px;
+      border-top: 1px solid #f3f4f6;
+      padding: 24px 32px 28px;
+      background-color: #ffffff;
       font-size: 12px;
+      color: #9ca3af;
       line-height: 1.6;
-      color: #94a3b8;
     }
     .footer a {
-      color: #64748b;
-      text-decoration: underline;
+      color: #183d89;
+      text-decoration: none;
+      font-weight: 500;
     }
-    .footer-badge {
-      display: inline-block;
-      margin-top: 8px;
-      background-color: #f1f5f9;
-      color: #475569;
-      padding: 4px 12px;
-      border-radius: 9999px;
-      font-size: 11px;
-      font-weight: 600;
+    .footer-note {
+      margin-top: 6px;
+      color: #6b7280;
     }
   </style>
 </head>
 <body>
   <div class="wrapper">
-    <div class="brand-header">
-      <a href="https://treetino.com" class="brand-pill" target="_blank">
-        <table align="center" border="0" cellpadding="0" cellspacing="0" style="margin: 0 auto;">
-          <tr>
-            <td style="vertical-align: middle;">
-              <img src="https://treetino.com/img/branding/logo-icon.svg" width="22" height="22" alt="Treetino" style="display: block; width: 22px; height: 22px; border: 0;">
-            </td>
-            <td style="vertical-align: middle; padding-left: 10px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 15px; font-weight: 800; letter-spacing: 0.08em; color: #09090b;">
-              TREETINO
-            </td>
-          </tr>
-        </table>
-      </a>
-    </div>
-
     <div class="card">
-      <div class="hero">
-        <div class="hero-tag">Treetino • Webový Kontakt</div>
-        <h1 class="hero-title">Nová zpráva z formuláře</h1>
-        <p class="hero-subtitle">Zákazník odeslal poptávku prostřednictvím webových stránek treetino.com</p>
+      <div class="header">
+        <a href="https://treetino.com" class="header-logo" target="_blank">
+          <table border="0" cellpadding="0" cellspacing="0">
+            <tr>
+              <td style="vertical-align: middle;">
+                <img src="https://treetino.com/img/branding/logo-icon.svg" width="20" height="20" alt="Treetino" style="display: block; width: 20px; height: 20px; border: 0;">
+              </td>
+              <td style="vertical-align: middle; padding-left: 10px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 15px; font-weight: 800; letter-spacing: 0.08em; color: #111827;">
+                TREETINO
+              </td>
+            </tr>
+          </table>
+        </a>
       </div>
 
-      <div class="body-content">
+      <div class="content">
+        <div class="tag">Kontakt z webu</div>
+        <h1 class="title">Nová zpráva z formuláře</h1>
+        <p class="subtitle">Zákazník odeslal poptávku prostřednictvím webových stránek treetino.com</p>
+
         <div class="info-card">
-          <div class="info-row">
+          <div class="info-group">
             <div class="info-label">Jméno a Příjmení</div>
             <div class="info-value">
               ${escapeHtml(senderName)}
               <span class="badge">Zájemce</span>
             </div>
           </div>
-          <div class="info-row">
+          <div class="info-group">
             <div class="info-label">E-mailová Adresa</div>
             <div class="info-value">
-              <a href="mailto:${escapeHtml(senderEmail)}" style="color: #2563eb; text-decoration: none;">
+              <a href="mailto:${escapeHtml(senderEmail)}" style="color: #183d89; text-decoration: none;">
                 ${escapeHtml(senderEmail)}
               </a>
             </div>
           </div>
-          <div class="info-row">
+          <div class="info-group">
             <div class="info-label">Čas Odeslání</div>
-            <div class="info-value" style="font-size: 14px; font-weight: 500; color: #475569;">
+            <div class="info-value" style="font-size: 13px; font-weight: 500; color: #4b5563;">
               ${dateStr}
             </div>
           </div>
         </div>
 
-        <div class="section-title">Text Zprávy</div>
-        <div class="message-container">${escapeHtml(senderMessage)}</div>
+        <div class="section-label">Text Zprávy</div>
+        <div class="message-box">${escapeHtml(senderMessage)}</div>
 
-        <div class="cta-container">
-          <a href="mailto:${escapeHtml(senderEmail)}?subject=Re: Treetino - Odpověď na vaši zprávu" class="cta-btn" target="_blank">
+        <div>
+          <a href="mailto:${escapeHtml(senderEmail)}?subject=Re: Treetino - Odpověď na vaši zprávu" class="cta-button" target="_blank">
             Odpovědět odesílateli (${escapeHtml(senderName)}) &rarr;
           </a>
         </div>
       </div>
-    </div>
 
-    <div class="footer">
-      <div>Tato zpráva byla odeslána přes kontaktní formulář na <a href="https://treetino.com">treetino.com</a>.</div>
-      <div>Odpovědí na tento e-mail kontaktujete přímo odesílatele.</div>
-      <div class="footer-badge">✓ R&D v ČR (FZÚ AV ČR / ČVUT) • Treetino</div>
+      <div class="footer">
+        <div>Tato zpráva byla odeslána přes kontaktní formulář na <a href="https://treetino.com">treetino.com</a>.</div>
+        <div class="footer-note">Treetino Corp s.r.o. • Výzkum a vývoj v ČR ve spolupráci s FZÚ AV ČR a ČVUT.</div>
+      </div>
     </div>
   </div>
 </body>
