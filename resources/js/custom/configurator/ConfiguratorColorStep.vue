@@ -36,7 +36,8 @@ const colors: ColorOption[] = [
         label: 'Stříbrná',
         labelKey: 'configurator.color.silver',
         hex: '#A8A9AD',
-        price: '+2 900 Kč',
+        price: '+45 000 Kč',
+        priceKey: 'configurator.price.plus_45k',
         isCustom: false,
     },
     {
@@ -44,7 +45,8 @@ const colors: ColorOption[] = [
         label: 'Hnědá',
         labelKey: 'configurator.color.brown',
         hex: '#7B4B2A',
-        price: '+3 900 Kč',
+        price: '+45 000 Kč',
+        priceKey: 'configurator.price.plus_45k',
         isCustom: false,
     },
     {
@@ -52,7 +54,8 @@ const colors: ColorOption[] = [
         label: 'Lesní zelená',
         labelKey: 'configurator.color.green',
         hex: '#3A5F3A',
-        price: '+4 500 Kč',
+        price: '+45 000 Kč',
+        priceKey: 'configurator.price.plus_45k',
         isCustom: false,
     },
     {

@@ -37,7 +37,8 @@ const colors: ColorOption[] = [
         label: 'Oranžová',
         labelKey: 'configurator.color.orange',
         hex: '#C1541A',
-        price: '+1 900 Kč',
+        price: '+58 000 Kč',
+        priceKey: 'configurator.price.plus_58k',
         isCustom: false,
     },
     {
@@ -45,7 +46,8 @@ const colors: ColorOption[] = [
         label: 'Šedá',
         labelKey: 'configurator.color.grey',
         hex: '#8A8A8A',
-        price: '+1 900 Kč',
+        price: '+58 000 Kč',
+        priceKey: 'configurator.price.plus_58k',
         isCustom: false,
     },
     {

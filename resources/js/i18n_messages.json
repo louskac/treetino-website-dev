@@ -578,7 +578,12 @@
                 "hue": "Odstín"
             },
             "price": {
-                "individual": "Individuální"
+                "individual": "Individuální",
+                "plus_45k": "+45 000 Kč",
+                "plus_58k": "+58 000 Kč",
+                "plus_112k": "+112 000 Kč",
+                "from_380k": "Od 380 000 Kč",
+                "connectivity_monthly": "3 měsíce zdarma, poté 7 999 Kč / měs."
             },
             "tree_design": {
                 "standard": {
@@ -652,6 +657,7 @@
                     "label": "Zima",
                     "desc": "Sezonní design FVE listů pro zimní variantu stromu."
                 },
+                "efficiency_notice": "Designové a vlastní vzory FVE listů mohou mírně snížit celkovou účinnost a výkon fotovoltaických článků.",
                 "custom": {
                     "mode_title": "Režim potisku listů",
                     "mode_branch": "Celá větev",
@@ -675,18 +681,18 @@
                 "premium": {
                     "label": "Premium Connectivity"
                 },
-                "monthly_sub": "Měsíční předplatné"
+                "monthly_sub": "3 měsíce zdarma, poté 7 999 Kč / měs."
             },
             "preview": {
                 "connectivity": {
                     "premium": {
-                        "text": "Příplatkové řízení výroby pomocí AI, TREElight show, sdílení energie a další.",
+                        "text": "Příplatkové inteligentní řízení výroby pomocí AI pro vyšší výnosy, TREElight show, sdílení energie a vzdálený monitoring.",
                         "none": "Standardní automatické i manuální řízení bez doplňkových funkcí."
                     }
                 },
                 "addons": {
                     "battery": {
-                        "text": "Nabízíme bateriová úložiště s kapacitou od 100 kWh do 2 MWh.",
+                        "text": "Nabízíme špičková bateriová úložiště s vysokou životností pro maximální energetickou nezávislost.",
                         "none": "Nevyužitá energie bude dodávána zpět do sítě jako přebytek."
                     },
                     "ev_charger": {
@@ -702,7 +708,7 @@
                     "label": "Bez baterie"
                 },
                 "battery": {
-                    "label": "Baterie"
+                    "label": "Fyzická baterie"
                 }
             },
             "addons": {
@@ -754,17 +760,27 @@
                 "savings_5yr_notice": "Cena nezahrnuje odhad 5leté úspory za výrobu energie ve výši {savings} Kč.",
                 "monthly_savings_notice": "Cena nezahrnuje odhadované měsíční úspory za výrobu energie ve výši {savings} Kč.",
                 "edit_financing": "Upravit podmínky financování",
-                "reserve_price": "Rezervační záloha",
+                "reserve_price": "Rezervace prohlídky",
+                "custom_estimate_notice": "Vybrané individuální úpravy jsou v kalkulaci započteny v orientační výši. Finální cena bude upřesněna a může být vyšší.",
                 "urgency": "Pro měsíc {month} bylo již rezervováno {reserved} z {total} {unit}.",
                 "units": {
                     "trees": "stromů",
                     "turbines": "turbín",
                     "pcs": "kusů"
                 },
+                "inspection_benefits": [
+                    "Cena obsahuje měřicí stanici na 2 měsíce – pro zjištění návratnosti",
+                    "Náklady na cestu",
+                    "Náklady na montáž měřidla",
+                    "Konečnou cenovou nabídku",
+                    "Kalkulaci odhadované návratnosti zařízení",
+                    "Dotační poradenství",
+                    "Poznámka: Cena prohlídky se odečte od finální ceny zařízení"
+                ],
                 "tos_agree": "Seznámil(a) jsem se s {tos} a {pp} a souhlasím s nimi.",
                 "tos_link": "obchodními podmínkami",
                 "pp_link": "zásadami zpracování osobních údajů",
-                "btn_order": "Závazně Objednat",
+                "btn_order": "Objednat prohlídku",
                 "btn_info": "Více Informací"
             },
             "modal_financing": {
@@ -1581,7 +1597,12 @@
                 "hue": "Hue"
             },
             "price": {
-                "individual": "Individual"
+                "individual": "Individual",
+                "plus_45k": "+€1,800",
+                "plus_58k": "+€2,300",
+                "plus_112k": "+€4,500",
+                "from_380k": "From €15,200",
+                "connectivity_monthly": "3 months free, then €320 / mo"
             },
             "tree_design": {
                 "standard": {
@@ -1655,6 +1676,7 @@
                     "label": "Winter",
                     "desc": "Seasonal PV leaf design for winter tree variant."
                 },
+                "efficiency_notice": "Custom patterns and decorative leaf designs may slightly reduce total PV panel power generation efficiency.",
                 "custom": {
                     "mode_title": "Leaf Print Mode",
                     "mode_branch": "Full Branch",
@@ -1678,18 +1700,18 @@
                 "premium": {
                     "label": "Premium Connectivity"
                 },
-                "monthly_sub": "Monthly subscription"
+                "monthly_sub": "3 months free, then €320 / mo"
             },
             "preview": {
                 "connectivity": {
                     "premium": {
-                        "text": "AI-driven production optimization, TREElight show, energy sharing, and more.",
+                        "text": "AI-driven generation management for higher energy yields, TREElight show, energy sharing, and remote monitoring.",
                         "none": "Standard automatic and manual control without predictive features."
                     }
                 },
                 "addons": {
                     "battery": {
-                        "text": "We offer battery storage with capacities ranging from 100 kWh to 2 MWh.",
+                        "text": "We offer premium battery storage systems with high cycle life for maximum energy independence.",
                         "none": "Unused energy will be fed back into the grid as surplus."
                     },
                     "ev_charger": {
@@ -1705,7 +1727,7 @@
                     "label": "No Battery"
                 },
                 "battery": {
-                    "label": "Battery"
+                    "label": "Physical Battery"
                 }
             },
             "addons": {
@@ -1757,17 +1779,27 @@
                 "savings_5yr_notice": "Price excludes estimated 5-year energy production savings of {savings} CZK.",
                 "monthly_savings_notice": "Price excludes estimated monthly energy production savings of {savings} CZK.",
                 "edit_financing": "Adjust financing terms",
-                "reserve_price": "Reservation Deposit",
+                "reserve_price": "Site Inspection Reservation",
+                "custom_estimate_notice": "Selected custom options are included at an estimated baseline. The final price will be specified and may be higher.",
                 "urgency": "For {month}, {reserved} of {total} {unit} have already been reserved.",
                 "units": {
                     "trees": "trees",
                     "turbines": "turbines",
                     "pcs": "units"
                 },
+                "inspection_benefits": [
+                    "Includes measurement station deployment for 2 months to assess exact ROI",
+                    "Travel and logistics costs",
+                    "Measurement station installation and calibration",
+                    "Final binding commercial quote",
+                    "Detailed estimated ROI and yield calculation",
+                    "Subsidy and grant advisory",
+                    "Note: Inspection fee is fully deducted from the final purchase price"
+                ],
                 "tos_agree": "I have read and agree to the {tos} and {pp}.",
                 "tos_link": "Terms of Service",
                 "pp_link": "Privacy Policy",
-                "btn_order": "Place Binding Order",
+                "btn_order": "Order Site Inspection",
                 "btn_info": "More Information"
             },
             "modal_financing": {
@@ -1781,10 +1813,10 @@
                 "max_down_payment": "Maximum down payment is {amount} CZK."
             },
             "modal_checkout": {
-                "title": "Complete Your Order",
+                "title": "Site Inspection Reservation",
                 "email_label": "E-mail",
-                "email_desc": "We need your email address to process your configuration. Your configuration details and invoice will be sent here.",
-                "card_info": "Card Information",
+                "email_desc": "Please enter your email. We will send you your configuration summary and confirmation upon booking.",
+                "card_info": "Payment Card",
                 "or_card": "OR PAY WITH CARD",
                 "step": "Step",
                 "processing": "Processing...",
@@ -1792,8 +1824,19 @@
                 "pay": "Pay {amount} CZK"
             },
             "modal_info": {
-                "title": "Get More Information",
-                "body": "We are happy to provide more information about the selected grant program or configuration upon request."
+                "title": "More Information",
+                "product_link_prefix": "Want to learn more about technical specs and dimensions?",
+                "product_link_btn": "Visit product page",
+                "form_title": "Have a question or request a custom quote?",
+                "form_desc": "Send us a message and our technical specialist will contact you within 24 hours.",
+                "name_label": "Full name",
+                "email_label": "E-mail",
+                "phone_label": "Phone (optional)",
+                "message_label": "Your message",
+                "send_btn": "Send Inquiry",
+                "sending": "Sending...",
+                "sent_success": "Thank you for your interest! We have received your inquiry and will get back to you shortly.",
+                "sent_error": "Failed to send inquiry. Please try again or email us directly at info@treetino.com."
             },
             "months": {
                 "january": "January",

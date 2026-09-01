@@ -6,52 +6,55 @@
             {{ formatStep(stepNumber) }} —
             {{ $t('configurator.steps.battery') }}
         </p>
-        <div class="flex flex-col gap-1">
+        <div class="flex flex-col gap-2">
             <button
                 v-for="option in options"
                 :key="option.id"
+                type="button"
                 @click="$emit('update:modelValue', option.id)"
-                class="w-full rounded px-3 py-3 text-left transition-opacity duration-200"
+                class="group relative flex w-full flex-col gap-1.5 rounded-xl border p-3.5 text-left transition-all duration-200"
                 :class="
                     modelValue === option.id
-                        ? 'opacity-100'
-                        : 'opacity-50 hover:opacity-100'
+                        ? 'border-black/30 bg-stone-50/90 shadow-xs dark:border-white/30 dark:bg-zinc-900/80'
+                        : 'border-black/10 bg-transparent opacity-70 hover:border-black/20 hover:opacity-100 dark:border-white/10 dark:hover:border-white/20'
                 "
             >
-                <div class="mb-1 flex items-center justify-between">
-                    <span class="text-sm text-black dark:text-white">{{
-                        $t(option.labelKey, option.label)
-                    }}</span>
+                <div class="flex items-center justify-between">
+                    <span class="text-sm font-semibold text-black dark:text-white">
+                        {{ $t(option.labelKey, option.label) }}
+                    </span>
                     <span
-                        class="flex items-center gap-1.5 text-xs transition-colors duration-200"
+                        class="flex items-center gap-1.5 rounded-full px-2 py-0.5 text-xs transition-colors duration-200"
                         :class="
                             modelValue === option.id
-                                ? 'font-medium text-black dark:text-white'
-                                : 'text-black dark:text-white/40'
+                                ? 'bg-t-blue text-white font-medium shadow-2xs'
+                                : 'bg-black/5 text-black/60 dark:bg-white/10 dark:text-white/60'
                         "
                     >
-                        <CheckCircle v-if="modelValue === option.id" />
+                        <CheckCircle v-if="modelValue === option.id" class="h-3.5 w-3.5" />
                         {{
                             modelValue === option.id
-                                ? $t('configurator.added')
-                                : $t('configurator.add')
+                                ? $t('configurator.selected', 'Vybráno')
+                                : $t('configurator.select', 'Vybrat')
                         }}
                     </span>
                 </div>
-                <p
-                    v-if="option.roi"
-                    class="w-18 rounded-full border border-t-blue bg-black/8 px-2 py-0.5 text-xs font-medium text-t-blue dark:bg-white/10 dark:text-t-blue"
-                >
-                    +{{ option.roi }} % ROI
-                </p>
-                <p
-                    class="text-xs leading-relaxed text-black dark:text-white/40"
-                >
+
+                <div v-if="option.roi" class="flex items-center gap-2">
+                    <span
+                        class="inline-flex rounded-md border border-t-blue/30 bg-t-blue/10 px-2 py-0.5 text-[11px] font-semibold text-t-blue dark:bg-blue-400/15 dark:text-blue-300"
+                    >
+                        +{{ option.roi }} % ROI
+                    </span>
+                </div>
+
+                <p class="text-xs leading-relaxed text-black/65 dark:text-white/55">
                     {{ option.description }}
                 </p>
+
                 <p
                     v-if="option.priceKey || option.price"
-                    class="mt-1 text-xs text-black/40 dark:text-white/40"
+                    class="mt-1 text-xs font-semibold text-black/80 dark:text-white/80"
                 >
                     {{ option.priceKey ? $t(option.priceKey) : option.price }}
                 </p>
@@ -103,7 +106,8 @@ const options = computed(() => {
             label: `Baterie${capacity ? ' ' + capacity : ''}`,
             labelKey: 'configurator.battery.battery.label',
             roi: 14,
-            price: null,
+            price: 'Od 380 000 Kč',
+            priceKey: 'configurator.price.from_380k',
             description: t('configurator.preview.addons.battery.text'),
         },
     ];

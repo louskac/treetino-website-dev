@@ -272,11 +272,26 @@
                 </div>
             </template>
         </div>
+
+        <!-- Solar Panel Efficiency Notice on Custom/Seasonal Designs -->
+        <div
+            class="mt-3 flex items-start gap-2.5 rounded-xl border border-black/8 bg-black/3 p-3 text-xs leading-relaxed text-black/65 dark:border-white/8 dark:bg-white/4 dark:text-white/65"
+        >
+            <Info class="mt-0.5 h-4 w-4 shrink-0 text-black/45 dark:text-white/45" />
+            <span>
+                {{
+                    $t(
+                        'configurator.fve_leaf.efficiency_notice',
+                        'Designové a vlastní vzory FVE listů mohou mírně snížit celkovou účinnost a výkon fotovoltaických článků.',
+                    )
+                }}
+            </span>
+        </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { RotateCcw, Upload, ZoomIn, ZoomOut } from 'lucide-vue-next';
+import { Info, RotateCcw, Upload, ZoomIn, ZoomOut } from 'lucide-vue-next';
 import { ref, computed, onUnmounted } from 'vue';
 import { useStepFormatter } from '@/composables/useStepFormatter';
 import { ProductId } from '@/types/products';
@@ -350,7 +365,8 @@ const options: FveLeafOption[] = [
         label: 'Léto',
         labelKey: 'configurator.fve_leaf.summer.label',
         swatch: 'linear-gradient(135deg, #34D399 0%, #059669 50%, #064E3B 100%)',
-        price: null,
+        price: '+112 000 Kč',
+        priceKey: 'configurator.price.plus_112k',
         description: 'Sezonní design FVE listů pro letní variantu stromu.',
         descKey: 'configurator.fve_leaf.summer.desc',
     },
@@ -359,7 +375,8 @@ const options: FveLeafOption[] = [
         label: 'Podzim',
         labelKey: 'configurator.fve_leaf.autumn.label',
         swatch: 'linear-gradient(135deg, #F2B84B 0%, #C85D2A 50%, #7A3B20 100%)',
-        price: null,
+        price: '+112 000 Kč',
+        priceKey: 'configurator.price.plus_112k',
         description: 'Sezonní design FVE listů pro podzimní variantu stromu.',
         descKey: 'configurator.fve_leaf.autumn.desc',
     },
@@ -368,7 +385,8 @@ const options: FveLeafOption[] = [
         label: 'Zima',
         labelKey: 'configurator.fve_leaf.winter.label',
         swatch: 'linear-gradient(135deg, #F3F7FA 0%, #B8D1E0 50%, #6E8798 100%)',
-        price: null,
+        price: '+112 000 Kč',
+        priceKey: 'configurator.price.plus_112k',
         description: 'Sezonní design FVE listů pro zimní variantu stromu.',
         descKey: 'configurator.fve_leaf.winter.desc',
     },

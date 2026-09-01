@@ -215,6 +215,7 @@
                         :monthly-savings="selectedProduct.monthlySavings"
                         :product-id="selectedProductId"
                         :reservation-price="selectedProduct.reservationPrice"
+                        :has-custom-options="hasCustomOptions"
                         @checkout="modalCheckoutOpen"
                         @info="modalInfoOpen"
                     />
@@ -238,7 +239,13 @@
 
     <!--  Info  -->
     <Transition>
-        <ConfiguratorModalInfo v-if="modalInfo" @close="modalInfoClose" />
+        <ConfiguratorModalInfo
+            v-if="modalInfo"
+            :product-id="selectedProductId"
+            :product-label="selectedProduct.label"
+            :product-detail="selectedProduct.detail"
+            @close="modalInfoClose"
+        />
     </Transition>
 </template>
 
@@ -396,7 +403,64 @@ const effectiveParams = computed(() => {
     return variants[key] ?? Object.values(variants)[0];
 });
 
-const basePrice = computed(() => selectedProduct.value.basePrice ?? 0);
+const hasCustomOptions = computed(() => {
+    return (
+        selectedColorId.value === 'custom' ||
+        selectedLeafColorId.value === 'custom' ||
+        selectedFveLeafDesign.value === 'custom'
+    );
+});
+
+const basePrice = computed(() => {
+    let price = selectedProduct.value.basePrice ?? 0;
+
+    // V1 option pricing
+    if (selectedProductId.value === ProductId.StromV1) {
+        // Frame color (white = 0, other colors / custom = 45 000 CZK)
+        if (selectedColorId.value && selectedColorId.value !== 'white') {
+            price += 45000;
+        }
+
+        // Leaf color (green = 0, other colors / custom = 58 000 CZK)
+        if (selectedLeafColorId.value && selectedLeafColorId.value !== 'green') {
+            price += 58000;
+        }
+
+        // FVE leaf design (spring / none = 0, other seasonal / custom = 112 000 CZK)
+        if (
+            selectedFveLeafDesign.value &&
+            selectedFveLeafDesign.value !== 'spring' &&
+            selectedFveLeafDesign.value !== 'none'
+        ) {
+            price += 112000;
+        }
+
+        // Battery (battery = 380 000 CZK)
+        if (selectedBattery.value === 'battery') {
+            price += 380000;
+        }
+    } else if (selectedProductId.value === ProductId.StromV2) {
+        // V2 option pricing
+        if (selectedColorId.value && selectedColorId.value !== 'white') {
+            price += 45000;
+        }
+        if (selectedLeafColorId.value && selectedLeafColorId.value !== 'green') {
+            price += 58000;
+        }
+        if (
+            selectedFveLeafDesign.value &&
+            selectedFveLeafDesign.value !== 'spring' &&
+            selectedFveLeafDesign.value !== 'none'
+        ) {
+            price += 112000;
+        }
+        if (selectedBattery.value === 'battery') {
+            price += 380000;
+        }
+    }
+
+    return price;
+});
 
 const configuratorPanel = ref<HTMLElement | null>(null);
 

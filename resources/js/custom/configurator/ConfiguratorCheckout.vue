@@ -78,6 +78,12 @@
                 {{ formatPrice(discountedPrice) }}&thinsp;Kč
             </p>
             <p
+                v-if="hasCustomOptions"
+                class="text-xs text-amber-600 dark:text-amber-400"
+            >
+                * {{ $t('configurator.checkout.custom_estimate_notice') }}
+            </p>
+            <p
                 class="mt-1 text-xs leading-relaxed text-black/38 dark:text-white/30"
             >
                 {{
@@ -101,6 +107,12 @@
                     class="text-base font-normal text-black/40 dark:text-white/30"
                     >{{ $t('configurator.checkout.per_month') }}</span
                 >
+            </p>
+            <p
+                v-if="hasCustomOptions"
+                class="text-xs text-amber-600 dark:text-amber-400"
+            >
+                * {{ $t('configurator.checkout.custom_estimate_notice') }}
             </p>
             <p class="mt-0.5 text-xs text-black/35 dark:text-white/25">
                 {{
@@ -130,8 +142,8 @@
             class="flex flex-col gap-4 rounded-xl border border-black/10 p-4 dark:border-white/10"
         >
             <div class="flex items-baseline justify-between">
-                <div class="text-sm text-black/70 dark:text-white/50">
-                    {{ $t('configurator.checkout.reserve_price') }}
+                <div class="text-sm font-medium text-black/80 dark:text-white/80">
+                    {{ $t('configurator.checkout.reserve_price', 'Rezervace prohlídky') }}
                 </div>
                 <div class="text-xl font-semibold text-black dark:text-white">
                     {{ formatPrice(reservationPrice) }}&thinsp;Kč
@@ -141,13 +153,13 @@
                 <li
                     v-for="item in reservationBenefits"
                     :key="item"
-                    class="flex items-start gap-2 text-xs text-black/50 dark:text-white/50"
+                    class="flex items-start gap-2 text-xs text-black/60 dark:text-white/60"
                 >
                     <span
                         class="mt-px shrink-0 text-black/30 dark:text-white/30"
                         >—</span
                     >
-                    {{ item }}
+                    <span>{{ item }}</span>
                 </li>
             </ul>
         </div>
@@ -218,11 +230,11 @@
                 @click="emit('checkout', paymentMode)"
                 class="cursor-pointer disabled:opacity-70"
             >
-                {{ $t('configurator.checkout.btn_order') }}
+                {{ $t('configurator.checkout.btn_order', 'Objednat prohlídku') }}
             </ButtonPrimary>
 
             <ButtonSecondary @click="emit('info')" class="cursor-pointer">
-                {{ $t('configurator.checkout.btn_info') }}
+                {{ $t('configurator.checkout.btn_info', 'Více Informací') }}
             </ButtonSecondary>
         </div>
     </div>
@@ -254,10 +266,9 @@ import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import ButtonSecondary from '@/custom/ButtonSecondary.vue';
 import ConfiguratorModalFinancing from '@/custom/configurator/ConfiguratorModalFinancing.vue';
 import { getGrantById } from '@/types/grants';
-
 import { ProductId } from '@/types/products';
 
-const { t } = useI18n();
+const { t, tm, messages, locale } = useI18n();
 
 const props = defineProps<{
     basePrice: number;
@@ -265,6 +276,7 @@ const props = defineProps<{
     monthlySavings: number;
     productId: string;
     reservationPrice: number;
+    hasCustomOptions?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -381,12 +393,30 @@ const currentMonthTranslated = computed(() => {
     return t(`configurator.months.${key}`);
 });
 
-const reservationBenefits = [
-    'Lorem ipsum dolor sit amet',
-    'Consectetur adipiscing elit sed do',
-    'Sed ut perspiciatis unde omnis',
-    'Ut enim ad minima veniam, quis nostrum',
-    'Neque porro quisquam est, qui dolorem ipsum',
-    'Vel illum qui dolorem eum fugiat quo',
-];
+const reservationBenefits = computed<string[]>(() => {
+    try {
+        const list = tm('configurator.checkout.inspection_benefits');
+        if (Array.isArray(list) && list.length > 0) {
+            return list as string[];
+        }
+    } catch {
+        // fallback
+    }
+
+    const currentLocale = locale.value || 'cs';
+    const locMsgs = (messages.value as any)?.[currentLocale]?.configurator?.checkout?.inspection_benefits;
+    if (Array.isArray(locMsgs)) {
+        return locMsgs;
+    }
+
+    return [
+        'Cena obsahuje měřicí stanici na 2 měsíce – pro zjištění návratnosti',
+        'Náklady na cestu',
+        'Náklady na montáž měřidla',
+        'Konečnou cenovou nabídku',
+        'Kalkulaci odhadované návratnosti zařízení',
+        'Dotační poradenství',
+        'Poznámka: Cena prohlídky se odečte od finální ceny zařízení',
+    ];
+});
 </script>
