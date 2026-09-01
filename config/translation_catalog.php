@@ -647,6 +647,7 @@ return [
         'modal_info.sending' => ['cs' => 'Odesílám...', 'en' => 'Sending...'],
         'modal_info.sent_success' => ['cs' => 'Děkujeme za váš zájem! Zprávu jsme v pořádku přijali a brzy se vám ozveme.', 'en' => 'Thank you for your interest! We have received your inquiry and will get back to you shortly.'],
         'modal_info.sent_error' => ['cs' => 'Odeslání se nezdařilo. Zkuste to prosím znovu nebo nám napište na info@treetino.com.', 'en' => 'Failed to send inquiry. Please try again or email us directly at info@treetino.com.'],
+        'modal_info.send_another' => ['cs' => 'Odeslat další dotaz', 'en' => 'Send another inquiry'],
 
         'modal_info.title' => ['cs' => 'Získat více informací', 'en' => 'Get More Information'],
         'modal_info.body' => ['cs' => 'Více informací o vybraném dotačním programu nebo konfiguraci vám rádi poskytneme na vyžádání.', 'en' => 'We are happy to provide more information about the selected grant program or configuration upon request.'],

@@ -815,7 +815,20 @@
             },
             "modal_info": {
                 "title": "Získat více informací",
-                "body": "Více informací o vybraném dotačním programu nebo konfiguraci vám rádi poskytneme na vyžádání."
+                "body": "Více informací o vybraném dotačním programu nebo konfiguraci vám rádi poskytneme na vyžádání.",
+                "product_link_prefix": "Chcete se dozvědět více o technických parametrech a možnostech instalace?",
+                "product_link_btn": "Přejít na detail produktu",
+                "form_title": "Máte dotaz nebo zájem o nabídku?",
+                "form_desc": "Napište nám a náš specialista se vám ozve do 24 hodin.",
+                "name_label": "Jméno a příjmení",
+                "email_label": "E-mail",
+                "phone_label": "Telefon (volitelné)",
+                "message_label": "Vaše zpráva",
+                "send_btn": "Odeslat dotaz",
+                "sending": "Odesílám...",
+                "sent_success": "Děkujeme za váš zájem! Zprávu jsme v pořádku přijali a brzy se vám ozveme.",
+                "sent_error": "Odeslání se nezdařilo. Zkuste to prosím znovu nebo nám napište na info@treetino.com.",
+                "send_another": "Odeslat další dotaz"
             },
             "months": {
                 "january": "leden",
@@ -1854,7 +1867,8 @@
                 "send_btn": "Send Inquiry",
                 "sending": "Sending...",
                 "sent_success": "Thank you for your interest! We have received your inquiry and will get back to you shortly.",
-                "sent_error": "Failed to send inquiry. Please try again or email us directly at info@treetino.com."
+                "sent_error": "Failed to send inquiry. Please try again or email us directly at info@treetino.com.",
+                "send_another": "Send another inquiry"
             },
             "months": {
                 "january": "January",

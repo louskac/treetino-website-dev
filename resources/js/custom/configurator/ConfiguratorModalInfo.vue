@@ -45,6 +45,37 @@ const productRoute = computed(() => {
     return '/products/treetino-v1';
 });
 
+const productVisual = computed(() => {
+    if (props.productId === 'strom-v2') {
+        return {
+            render: '/img/stills/Still_Strom-v2.png',
+            badge: '124 TopCon FVE + 6× VTE',
+            power: '6 – 12 kW',
+            specsKey: 'products.v2.numbers_description',
+            specsDefault:
+                'Ideální řešení pro dokonalé proporce na zahradě bez zabírání trávníku.',
+        };
+    }
+    if (props.productId === 'turbina') {
+        return {
+            render: '/img/stills/Still_Turbina.png',
+            badge: 'Tichá vertikální VTE',
+            power: '1 – 3 kW',
+            specsKey: 'products.turbine.numbers_description',
+            specsDefault:
+                'Ideální doplněk pro střechy budov, parkovací domy nebo městskou infrastrukturu.',
+        };
+    }
+    return {
+        render: '/img/stills/Still_Strom-v1.png',
+        badge: '300 TopCon FVE + 12× VTE',
+        power: '49,8 kW',
+        specsKey: 'products.v1.numbers_description',
+        specsDefault:
+            'Navrženo pro byznys centra, průmyslové parky, městská náměstí a EV nabíjecí huby.',
+    };
+});
+
 // Form state
 const name = ref('');
 const email = ref('');
@@ -177,41 +208,73 @@ async function handleSendInquiry() {
 
             <!-- Scrollable Body -->
             <div class="space-y-6 overflow-y-auto px-6 py-6">
-                <!-- Product Landing Page Link Card -->
+                <!-- Product Landing Page Link Card with Render -->
                 <div
-                    class="flex flex-col gap-3 rounded-2xl border border-t-blue/20 bg-t-blue/5 p-4 sm:flex-row sm:items-center sm:justify-between dark:border-blue-400/20 dark:bg-blue-500/10"
+                    class="relative overflow-hidden rounded-2xl border border-black/10 bg-linear-to-br from-stone-50 to-stone-100/70 p-4 sm:p-5 dark:border-white/10 dark:from-zinc-800/70 dark:to-zinc-900/80"
                 >
-                    <div class="space-y-1">
-                        <p
-                            class="text-xs font-medium text-black/60 dark:text-white/60"
+                    <div class="flex flex-col sm:flex-row items-center gap-4">
+                        <!-- Render Thumbnail -->
+                        <div
+                            class="relative flex h-28 w-28 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-black/5 bg-white p-2 shadow-2xs dark:border-white/10 dark:bg-black/40"
                         >
-                            {{
-                                $t(
-                                    'configurator.modal_info.product_link_prefix',
-                                    'Chcete se dozvědět více o technických parametrech?',
-                                )
-                            }}
-                        </p>
-                        <p
-                            class="text-sm font-semibold text-black dark:text-white"
+                            <img
+                                :src="productVisual.render"
+                                :alt="productLabel"
+                                class="h-full w-full object-contain drop-shadow-md transition-transform duration-300 hover:scale-105"
+                                loading="lazy"
+                            />
+                        </div>
+
+                        <!-- Info & Link -->
+                        <div
+                            class="flex flex-1 flex-col justify-between self-stretch text-center sm:text-left"
                         >
-                            {{ productLabel }} —
-                            {{ $t('common.nav.products', 'Produkty') }}
-                        </p>
+                            <div>
+                                <div
+                                    class="flex flex-wrap items-center justify-center gap-2 sm:justify-start"
+                                >
+                                    <h4
+                                        class="text-sm font-bold text-black dark:text-white"
+                                    >
+                                        {{ productLabel }}
+                                    </h4>
+                                    <span
+                                        class="rounded-md bg-t-blue/10 px-2 py-0.5 text-[11px] font-semibold text-t-blue dark:bg-blue-400/15 dark:text-blue-300"
+                                    >
+                                        {{ productVisual.power }}
+                                    </span>
+                                </div>
+                                <p
+                                    class="mt-1 text-xs leading-relaxed text-black/60 dark:text-white/60"
+                                >
+                                    {{
+                                        $t(
+                                            productVisual.specsKey,
+                                            productVisual.specsDefault,
+                                        )
+                                    }}
+                                </p>
+                            </div>
+
+                            <div
+                                class="mt-3 flex items-center justify-center sm:justify-start"
+                            >
+                                <Link
+                                    :href="productRoute"
+                                    target="_blank"
+                                    class="inline-flex items-center gap-1.5 rounded-xl bg-t-blue px-3.5 py-2 text-xs font-semibold text-white shadow-xs transition-all hover:bg-blue-600 active:scale-95"
+                                >
+                                    <span>{{
+                                        $t(
+                                            'configurator.modal_info.product_link_btn',
+                                            'Přejít na detail produktu',
+                                        )
+                                    }}</span>
+                                    <ExternalLink class="h-3.5 w-3.5" />
+                                </Link>
+                            </div>
+                        </div>
                     </div>
-                    <Link
-                        :href="productRoute"
-                        target="_blank"
-                        class="inline-flex shrink-0 items-center justify-center gap-1.5 rounded-xl bg-t-blue px-4 py-2.5 text-xs font-semibold text-white shadow-xs transition-all hover:bg-blue-600 active:scale-95"
-                    >
-                        <span>{{
-                            $t(
-                                'configurator.modal_info.product_link_btn',
-                                'Přejít na detail produktu',
-                            )
-                        }}</span>
-                        <ExternalLink class="h-3.5 w-3.5" />
-                    </Link>
                 </div>
 
                 <!-- Inquiry Form Section -->
@@ -271,7 +334,12 @@ async function handleSendInquiry() {
                             @click="isSent = false"
                             class="mt-2 text-xs font-semibold text-emerald-700 underline dark:text-emerald-400"
                         >
-                            Odeslat další dotaz
+                            {{
+                                $t(
+                                    'configurator.modal_info.send_another',
+                                    'Odeslat další dotaz',
+                                )
+                            }}
                         </button>
                     </div>
 
