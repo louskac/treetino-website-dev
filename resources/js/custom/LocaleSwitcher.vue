@@ -41,6 +41,7 @@ const changeLocale = (targetLocale: string) => {
     if (typeof window !== 'undefined') {
         localStorage.setItem('app_locale', targetLocale);
         document.cookie = `app_locale=${targetLocale};path=/;max-age=31536000`;
+        document.cookie = `locale=${targetLocale};path=/;max-age=31536000`;
     }
 
     // 2. Instantly update reactive i18n state on client

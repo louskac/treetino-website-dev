@@ -150,6 +150,10 @@
                                     {{ $t('common.footer.nda') }}
                                 </FooterLink>
 
+                                <FooterLink :href="route('legal.mediation')">
+                                    {{ $t('common.footer.mediation') }}
+                                </FooterLink>
+
                                 <div
                                     @click="openSettings"
                                     class="group relative w-fit cursor-pointer text-black/70 transition-colors duration-300 hover:text-black"

@@ -62,6 +62,14 @@ const ZiggyConfig = {
             uri: 'legal/nda/download',
             methods: ['GET', 'HEAD'],
         },
+        'legal.mediation': {
+            uri: 'legal/mediation',
+            methods: ['GET', 'HEAD'],
+        },
+        'legal.mediation.download': {
+            uri: 'legal/mediation/download',
+            methods: ['GET', 'HEAD'],
+        },
         'checkout-initiate': {
             uri: 'api/checkout',
             methods: ['POST'],
@@ -96,6 +104,8 @@ const staticRoutes: Record<string, string | ((param?: any) => string)> = {
     'legal.pp': '/legal/privacy-policy',
     'legal.nda': '/legal/nda',
     'legal.nda.download': '/legal/nda/download',
+    'legal.mediation': '/legal/mediation',
+    'legal.mediation.download': '/legal/mediation/download',
     'checkout-initiate': '/api/checkout',
     'preorders.success': (params?: any) => {
         const uuid =
@@ -202,6 +212,14 @@ function getComponentForPath(path: string): string {
 
     if (p === '/legal/nda' || p === '/sales/nda') {
         return 'Legal/Nda';
+    }
+
+    if (
+        p === '/legal/mediation' ||
+        p === '/sales/mediation' ||
+        p === '/legal/smlouva-o-zprostredkovani'
+    ) {
+        return 'Legal/Mediation';
     }
 
     if (p === '/preorders/success' || p.startsWith('/preorders/')) {

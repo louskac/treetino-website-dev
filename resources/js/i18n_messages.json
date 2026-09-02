@@ -39,6 +39,7 @@
                 "terms": "Obchodní podmínky",
                 "privacy": "Zásady ochrany osobních údajů",
                 "nda": "Dohoda o mlčenlivosti (NDA)",
+                "mediation": "Smlouva o zprostředkování",
                 "cookie_settings": "Nastavení cookies",
                 "newsletter": "Newsletter",
                 "get_updates": "Získejte novinky",
@@ -191,9 +192,9 @@
                 "roi_calculation": "Výpočet Návratnosti",
                 "roi_years": "9 let",
                 "annual_production": "Roční výroba",
-                "kwh_year": "kWh/rok",
+                "kwh_year": "kWh\/rok",
                 "co2_savings": "CO₂ Úspora:",
-                "tons_year": "11,8 tun / rok",
+                "tons_year": "11,8 tun \/ rok",
                 "commission": "Provize:",
                 "commission_amount": "+299 758 Kč",
                 "proposal_price": "4 900 000 Kč"
@@ -249,7 +250,7 @@
                     "card1": "Sledování výroby, režim čištění listů & světelná show",
                     "card2": "Integrované rychlonabíjení EV & elektrokol z přebytků"
                 },
-                "cta_title": "Proměňte prázdné místo ve vaší výhodu.<br />Společně s Treetino Strom V1"
+                "cta_title": "Proměňte prázdné místo ve vaší výhodu.<br \/>Společně s Treetino Strom V1"
             },
             "v2": {
                 "title": "Strom V2",
@@ -313,7 +314,7 @@
                     "operation": "Provoz:",
                     "daylight_only": "Pouze za denního slunce",
                     "hybrid_op": "Hybridní provoz:",
-                    "day_night": "24/7 (Dne i Noci)",
+                    "day_night": "24\/7 (Dne i Noci)",
                     "permit": "Stavební povolení:",
                     "permit_none": "Bez povolení (do 5 m)",
                     "permit_required": "Nutné stavební řízení",
@@ -328,7 +329,7 @@
                     "treetino_pv_val": "6 kWp TopCon (124 ks)",
                     "treetino_wind_val": "6 kW (6× 1 kW aero kit)"
                 },
-                "cta_title": "Zažijte energetickou soběstačnost.<br />Nakonfigurujte si váš Treetino Strom V2"
+                "cta_title": "Zažijte energetickou soběstačnost.<br \/>Nakonfigurujte si váš Treetino Strom V2"
             },
             "turbine": {
                 "title": "Větrná Turbína",
@@ -340,7 +341,7 @@
                 "stats": {
                     "1": "Max. výkon jedné turbíny",
                     "2": "Tichý provoz s nízkým startem",
-                    "3": "Odolnost vůči větru až 45 m/s",
+                    "3": "Odolnost vůči větru až 45 m\/s",
                     "4": "Transparentní polykarbonátový design",
                     "5": "Snadná montáž na stožár i střechu",
                     "6": "Bezúdržbový provoz s životností 20 let"
@@ -348,7 +349,7 @@
                 "stats_val": {
                     "1": "1 – 3 kW",
                     "2": "3 varianty",
-                    "3": "1,8 m/s",
+                    "3": "1,8 m\/s",
                     "4": "Bezpečné",
                     "5": "< 1 měsíc",
                     "6": "2 roky"
@@ -357,11 +358,11 @@
                     "tag": "Bezpečná & Tichá Větrná Energie",
                     "title": "Chráněný Tvar Kapky",
                     "item1_title": "Nízký startovací vítr",
-                    "item1_text": "Začíná vyrábět energii už při mírném vánku 1.8 m/s s 21% jmenovitou účinností.",
+                    "item1_text": "Začíná vyrábět energii už při mírném vánku 1.8 m\/s s 21% jmenovitou účinností.",
                     "item2_title": "Ochrana ptactva",
                     "item2_text": "Svislá osa rotace a souvislý tvar kapky minimalizují riziko pro ptactvo.",
                     "item3_title": "Flexibilní kotvení",
-                    "item3_text": "Montáž na samostatný 5m sloup, zeď/fasádu budovy nebo střechu.",
+                    "item3_text": "Montáž na samostatný 5m sloup, zeď\/fasádu budovy nebo střechu.",
                     "item4_title": "Rychlost dodání",
                     "item4_text": "Dodání i instalace připravena k provozu do 1 měsíce."
                 },
@@ -381,7 +382,7 @@
                     "roof": "Střecha",
                     "roof_sub": "Výškové objekty"
                 },
-                "cta_title": "Tichá větrná energie pro váš objekt.<br />Nakonfigurujte si větrnou turbínu Treetino Aero"
+                "cta_title": "Tichá větrná energie pro váš objekt.<br \/>Nakonfigurujte si větrnou turbínu Treetino Aero"
             },
             "datasheet": {
                 "tag": "Oficiální Datasheet STC",
@@ -389,7 +390,7 @@
                 "power": "Nominální Max. Výkon (Pmax)",
                 "pv": "FVE Solární Články",
                 "wind": "VTE Větrné Turbíny",
-                "wind_speed": "Startovací / Jmenovitá Rychlost Větru",
+                "wind_speed": "Startovací \/ Jmenovitá Rychlost Větru",
                 "dimensions": "Rozměry & Zastavěná Plocha",
                 "weight": "Hmotnost",
                 "voltage": "Max. Provozní Napětí DC",
@@ -401,10 +402,10 @@
                 "val_2months": "2 měsíce od předání staveniště",
                 "val_1month": "1 měsíc od objednání (montáž 1 den)",
                 "val_1month_turbine": "Do 1 měsíce od objednání",
-                "val_turbine_dimensions": "1 kW (1,2 m) / 2 kW (1,8 m) / 3 kW (2,8 m)",
-                "val_turbine_weight": "1 kW (36 kg) / 2 kW (48 kg) / 3 kW (73 kg)",
+                "val_turbine_dimensions": "1 kW (1,2 m) \/ 2 kW (1,8 m) \/ 3 kW (2,8 m)",
+                "val_turbine_weight": "1 kW (36 kg) \/ 2 kW (48 kg) \/ 3 kW (73 kg)",
                 "val_steel_warranty": "15 let (Obal konstrukce 5 let)",
-                "val_pv_warranty": "12 let fyzický produkt / 25 let lineární výkon (85 %)",
+                "val_pv_warranty": "12 let fyzický produkt \/ 25 let lineární výkon (85 %)",
                 "val_elec_warranty": "5 let Victron Energy & kabeláže",
                 "val_turbine_warranty": "2 roky na turbínu a mechaniku",
                 "val_years": "let",
@@ -482,7 +483,6 @@
             "nav_patent": "Patentovaná Technologie",
             "nav_pitch": "Pitch Deck",
             "nav_brand": "Brand Kit & Vizuály",
-            "nav_appearances": "Mediální výstupy",
             "direct_contact_tag": "Přímý tiskový kontakt",
             "press_tag": "Tisk & Zprávy",
             "press_title": "Dotazy médií & Kontakt",
@@ -511,7 +511,7 @@
             },
             "privacy_consent": "Odesláním formuláře souhlasíte se",
             "privacy_link": "zpracováním osobních údajů",
-            "badge_rnd": "✓ R&D v ČR (FZÚ AV ČR / ČVUT)",
+            "badge_rnd": "✓ R&D v ČR (FZÚ AV ČR \/ ČVUT)",
             "team_tag": "Lidé za projektem Treetino",
             "team_title": "Zakladatelé & Tým Treetino",
             "team_lead": "Projekt Treetino vznikl spojením dlouholetých zkušeností v energetice, precizního strojírenství a moderního softwarového vývoje.",
@@ -594,7 +594,7 @@
                 "plus_58k": "+58 000 Kč",
                 "plus_112k": "+112 000 Kč",
                 "from_380k": "Od 380 000 Kč",
-                "connectivity_monthly": "3 měsíce zdarma, poté 8 000 Kč / měs."
+                "connectivity_monthly": "3 měsíce zdarma, poté 8 000 Kč \/ měs."
             },
             "tree_design": {
                 "standard": {
@@ -692,7 +692,7 @@
                 "premium": {
                     "label": "Premium Connectivity"
                 },
-                "monthly_sub": "3 měsíce zdarma, poté 8 000 Kč / měs."
+                "monthly_sub": "3 měsíce zdarma, poté 8 000 Kč \/ měs."
             },
             "preview": {
                 "connectivity": {
@@ -766,7 +766,7 @@
                 "after_grant": "po odečtení dotace",
                 "total_price": "Cena celkem",
                 "monthly_from": "Měsíční splátka od",
-                "per_month": "/měs.",
+                "per_month": "\/měs.",
                 "for_months": "na {months} měsíců",
                 "savings_5yr_notice": "Cena nezahrnuje odhad 5leté úspory za výrobu energie ve výši {savings}.",
                 "monthly_savings_notice": "Cena nezahrnuje odhadované měsíční úspory za výrobu energie ve výši {savings}.",
@@ -799,7 +799,7 @@
                 "months": "měsíců",
                 "loan_amount": "Výše úvěru",
                 "include_savings": "Zahrnout odhadované měsíční úspory za výrobu energie",
-                "per_month": "/ měsíc",
+                "per_month": "\/ měsíc",
                 "max_down_payment": "Maximální platba předem může být {amount}."
             },
             "modal_checkout": {
@@ -893,7 +893,7 @@
                 "zoo_desc": "Edukativní zelená dominanta u hlavního vchodu doplněná o střešní větrné mikroturbíny. Výrazný symbol udržitelnosti a čisté energie pro tisíce návštěvníků denně.",
                 "zoo_model": "1× Strom V1 + 4× Aero Turbíny",
                 "zoo_payout": "534 000 Kč",
-                "metal_segment": "Těžký průmysl · 24/7 provoz",
+                "metal_segment": "Těžký průmysl · 24\/7 provoz",
                 "metal_title": "Hutní & strojírenské výrobní areály",
                 "metal_desc": "Energeticky náročný nepřetržitý provoz vyžadující vysoký stabilní výkon. Průmyslový cluster tří velkých stromů pro masivní snížení denních i nočních odběrů z distribuční sítě.",
                 "metal_model": "3× Strom V1 (150 kW průmyslový cluster)",
@@ -986,8 +986,11 @@
                 "row4_val": "100 % zajišťuje Treetino (kompletní dodání zákazníkovi na klíč)",
                 "row5_label": "Dohoda o mlčenlivosti (NDA)",
                 "row5_val": "Ochrana obchodního tajemství, know-how, ceníků a klientských dat",
+                "row6_label": "Smlouva o zprostředkování",
+                "row6_val": "Podmínky obchodního zastoupení, nárok na provizi a pravidla spolupráce",
                 "view_online": "Zobrazit online",
-                "download_nda": "Stáhnout vzor smlouvy (PDF)"
+                "download_nda": "Stáhnout vzor smlouvy (PDF)",
+                "download_mediation": "Stáhnout vzor smlouvy (PDF)"
             },
             "banner": {
                 "title": "Začněte prodávat solární architekturu Treetino",
@@ -1025,6 +1028,9 @@
             },
             "nda": {
                 "title": "Dohoda o mlčenlivosti (NDA)"
+            },
+            "mediation": {
+                "title": "Smlouva o zprostředkování"
             }
         },
         "preorders": {
@@ -1085,6 +1091,7 @@
                 "terms": "Terms & Conditions",
                 "privacy": "Privacy Policy",
                 "nda": "Non-Disclosure Agreement (NDA)",
+                "mediation": "Mediation Agreement",
                 "cookie_settings": "Cookie Settings",
                 "newsletter": "Newsletter",
                 "get_updates": "Get Updates",
@@ -1237,9 +1244,9 @@
                 "roi_calculation": "ROI Calculation",
                 "roi_years": "9 years",
                 "annual_production": "Annual Production",
-                "kwh_year": "kWh/year",
+                "kwh_year": "kWh\/year",
                 "co2_savings": "CO₂ Savings:",
-                "tons_year": "11.8 tons / year",
+                "tons_year": "11.8 tons \/ year",
                 "commission": "Commission:",
                 "commission_amount": "+€12,300",
                 "proposal_price": "€198,000"
@@ -1295,7 +1302,7 @@
                     "card1": "Production tracking, leaf cleaning mode & light show",
                     "card2": "Integrated fast EV & e-bike charging from surplus"
                 },
-                "cta_title": "Turn empty space into your advantage.<br />Together with Treetino Tree V1"
+                "cta_title": "Turn empty space into your advantage.<br \/>Together with Treetino Tree V1"
             },
             "v2": {
                 "title": "Tree V2",
@@ -1359,7 +1366,7 @@
                     "operation": "Operation:",
                     "daylight_only": "Daylight only",
                     "hybrid_op": "Hybrid Operation:",
-                    "day_night": "24/7 (Day & Night)",
+                    "day_night": "24\/7 (Day & Night)",
                     "permit": "Building Permit:",
                     "permit_none": "None needed (under 5 m)",
                     "permit_required": "Permit required",
@@ -1374,7 +1381,7 @@
                     "treetino_pv_val": "6 kWp TopCon (124 pcs)",
                     "treetino_wind_val": "6 kW (6× 1 kW aero kit)"
                 },
-                "cta_title": "Experience energy independence.<br />Configure your Treetino Tree V2"
+                "cta_title": "Experience energy independence.<br \/>Configure your Treetino Tree V2"
             },
             "turbine": {
                 "title": "Wind Turbine",
@@ -1386,7 +1393,7 @@
                 "stats": {
                     "1": "Max output per turbine",
                     "2": "Quiet operation with low startup",
-                    "3": "Wind resistance up to 45 m/s",
+                    "3": "Wind resistance up to 45 m\/s",
                     "4": "Transparent polycarbonate design",
                     "5": "Easy mounting on pole or roof",
                     "6": "Maintenance-free with 20-year lifespan"
@@ -1394,7 +1401,7 @@
                 "stats_val": {
                     "1": "1 – 3 kW",
                     "2": "3 options",
-                    "3": "1.8 m/s",
+                    "3": "1.8 m\/s",
                     "4": "Safe",
                     "5": "< 1 month",
                     "6": "2 years"
@@ -1403,11 +1410,11 @@
                     "tag": "Safe & Quiet Wind Energy",
                     "title": "Protected Teardrop Shape",
                     "item1_title": "Low Startup Wind",
-                    "item1_text": "Starts generating power at a light breeze of 1.8 m/s with 21% rated efficiency.",
+                    "item1_text": "Starts generating power at a light breeze of 1.8 m\/s with 21% rated efficiency.",
                     "item2_title": "Bird Safety",
                     "item2_text": "Vertical rotation axis and continuous teardrop form eliminate hazard to birds.",
                     "item3_title": "Flexible Mounting",
-                    "item3_text": "Mounting on standalone 5m pole, building wall/facade, or rooftop.",
+                    "item3_text": "Mounting on standalone 5m pole, building wall\/facade, or rooftop.",
                     "item4_title": "Delivery Speed",
                     "item4_text": "Delivery and installation ready for operation in under 1 month."
                 },
@@ -1427,7 +1434,7 @@
                     "roof": "Roof",
                     "roof_sub": "High-rise structures"
                 },
-                "cta_title": "Silent wind energy for your building.<br />Configure your Treetino Aero wind turbine"
+                "cta_title": "Silent wind energy for your building.<br \/>Configure your Treetino Aero wind turbine"
             },
             "datasheet": {
                 "tag": "Official STC Datasheet",
@@ -1435,7 +1442,7 @@
                 "power": "Nominal Max Output (Pmax)",
                 "pv": "PV Solar Cells",
                 "wind": "Wind Turbines",
-                "wind_speed": "Startup / Rated Wind Speed",
+                "wind_speed": "Startup \/ Rated Wind Speed",
                 "dimensions": "Dimensions & Footprint",
                 "weight": "Weight",
                 "voltage": "Max Operating Voltage DC",
@@ -1447,10 +1454,10 @@
                 "val_2months": "2 months from site handover",
                 "val_1month": "1 month from order (1-day installation)",
                 "val_1month_turbine": "Under 1 month from order",
-                "val_turbine_dimensions": "1 kW (1.2 m) / 2 kW (1.8 m) / 3 kW (2.8 m)",
-                "val_turbine_weight": "1 kW (36 kg) / 2 kW (48 kg) / 3 kW (73 kg)",
+                "val_turbine_dimensions": "1 kW (1.2 m) \/ 2 kW (1.8 m) \/ 3 kW (2.8 m)",
+                "val_turbine_weight": "1 kW (36 kg) \/ 2 kW (48 kg) \/ 3 kW (73 kg)",
                 "val_steel_warranty": "15 years (Structure cladding 5 years)",
-                "val_pv_warranty": "12-year physical product / 25-year linear output (85%)",
+                "val_pv_warranty": "12-year physical product \/ 25-year linear output (85%)",
                 "val_elec_warranty": "5 years Victron Energy & cabling",
                 "val_turbine_warranty": "2 years on turbine & mechanics",
                 "val_years": "years",
@@ -1528,7 +1535,6 @@
             "nav_patent": "Patented Technology",
             "nav_pitch": "Pitch Deck",
             "nav_brand": "Brand Kit & Visuals",
-            "nav_appearances": "Media Appearances",
             "direct_contact_tag": "Direct Press Contact",
             "press_tag": "Press & News",
             "press_title": "Media Inquiries & Contact",
@@ -1557,7 +1563,7 @@
             },
             "privacy_consent": "By submitting the form you agree to the",
             "privacy_link": "processing of personal data",
-            "badge_rnd": "✓ R&D in Czechia (FZU / CTU)",
+            "badge_rnd": "✓ R&D in Czechia (FZU \/ CTU)",
             "team_tag": "People Behind Treetino",
             "team_title": "Founders & Treetino Team",
             "team_lead": "The Treetino project was born from combining extensive energy market experience, precision mechanical engineering, and modern software development.",
@@ -1611,8 +1617,8 @@
                 "payment_mode": "Payment Mode"
             },
             "payment": {
-                "cash": "Cash / Direct Payment",
-                "credit": "Green Loan / Financing"
+                "cash": "Cash \/ Direct Payment",
+                "credit": "Green Loan \/ Financing"
             },
             "color": {
                 "white": "White",
@@ -1640,7 +1646,7 @@
                 "plus_58k": "+€2,300",
                 "plus_112k": "+€4,500",
                 "from_380k": "From €15,000",
-                "connectivity_monthly": "3 months free, then €320 / mo"
+                "connectivity_monthly": "3 months free, then €320 \/ mo"
             },
             "tree_design": {
                 "standard": {
@@ -1738,7 +1744,7 @@
                 "premium": {
                     "label": "Premium Connectivity"
                 },
-                "monthly_sub": "3 months free, then €320 / mo"
+                "monthly_sub": "3 months free, then €320 \/ mo"
             },
             "preview": {
                 "connectivity": {
@@ -1812,7 +1818,7 @@
                 "after_grant": "after grant deduction",
                 "total_price": "Total Price",
                 "monthly_from": "Monthly payment from",
-                "per_month": "/mo.",
+                "per_month": "\/mo.",
                 "for_months": "for {months} months",
                 "savings_5yr_notice": "Price excludes estimated 5-year energy production savings of {savings}.",
                 "monthly_savings_notice": "Price excludes estimated monthly energy production savings of {savings}.",
@@ -1845,7 +1851,7 @@
                 "months": "months",
                 "loan_amount": "Loan Amount",
                 "include_savings": "Include estimated monthly energy production savings",
-                "per_month": "/ month",
+                "per_month": "\/ month",
                 "max_down_payment": "Maximum down payment is {amount}."
             },
             "modal_checkout": {
@@ -1939,9 +1945,9 @@
                 "zoo_desc": "Educational green centerpiece at the main visitor entrance combined with rooftop wind micro-turbines. Strong symbol of clean power for thousands of daily visitors.",
                 "zoo_model": "1× Tree V1 + 4× Aero Turbines",
                 "zoo_payout": "€21,800",
-                "metal_segment": "Heavy Industry · 24/7 Operation",
+                "metal_segment": "Heavy Industry · 24\/7 Operation",
                 "metal_title": "Metalworks & Manufacturing Plants",
-                "metal_desc": "Energy-intensive 24/7 manufacturing requiring continuous high output. An industrial cluster of 3 commercial trees providing massive peak shaving and grid independence.",
+                "metal_desc": "Energy-intensive 24\/7 manufacturing requiring continuous high output. An industrial cluster of 3 commercial trees providing massive peak shaving and grid independence.",
                 "metal_model": "3× Tree V1 (150 kW industrial cluster)",
                 "metal_payout": "€60,000",
                 "bank_segment": "Corporate HQ · Enterprise Campuses",
@@ -2032,8 +2038,11 @@
                 "row4_val": "Handled 100% by Treetino (turnkey delivery and installation for the customer)",
                 "row5_label": "Non-Disclosure Agreement (NDA)",
                 "row5_val": "Protection of trade secrets, know-how, pricing and customer database",
+                "row6_label": "Mediation Agreement",
+                "row6_val": "Commercial agency terms, commission rules and partnership framework",
                 "view_online": "View online",
-                "download_nda": "Download Contract Template (PDF)"
+                "download_nda": "Download Contract Template (PDF)",
+                "download_mediation": "Download Contract Template (PDF)"
             },
             "banner": {
                 "title": "Start Selling Treetino Solar Architecture",
@@ -2071,6 +2080,9 @@
             },
             "nda": {
                 "title": "Non-Disclosure Agreement (NDA)"
+            },
+            "mediation": {
+                "title": "Mediation Agreement"
             }
         },
         "preorders": {

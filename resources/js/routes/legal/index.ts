@@ -1,5 +1,6 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../wayfinder'
 import nda1c7b84 from './nda'
+import mediation884cf8 from './mediation'
 /**
 * @see \App\Http\Controllers\LegalController::tos
 * @see app/Http/Controllers/LegalController.php:25
@@ -243,10 +244,92 @@ ndaForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 
 nda.form = ndaForm
 
+/**
+* @see \App\Http\Controllers\LegalController::mediation
+* @see app/Http/Controllers/LegalController.php:80
+* @route '/legal/mediation'
+*/
+export const mediation = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: mediation.url(options),
+    method: 'get',
+})
+
+mediation.definition = {
+    methods: ["get","head"],
+    url: '/legal/mediation',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\LegalController::mediation
+* @see app/Http/Controllers/LegalController.php:80
+* @route '/legal/mediation'
+*/
+mediation.url = (options?: RouteQueryOptions) => {
+    return mediation.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\LegalController::mediation
+* @see app/Http/Controllers/LegalController.php:80
+* @route '/legal/mediation'
+*/
+mediation.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: mediation.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\LegalController::mediation
+* @see app/Http/Controllers/LegalController.php:80
+* @route '/legal/mediation'
+*/
+mediation.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: mediation.url(options),
+    method: 'head',
+})
+
+/**
+* @see \App\Http\Controllers\LegalController::mediation
+* @see app/Http/Controllers/LegalController.php:80
+* @route '/legal/mediation'
+*/
+const mediationForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: mediation.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\LegalController::mediation
+* @see app/Http/Controllers/LegalController.php:80
+* @route '/legal/mediation'
+*/
+mediationForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: mediation.url(options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\LegalController::mediation
+* @see app/Http/Controllers/LegalController.php:80
+* @route '/legal/mediation'
+*/
+mediationForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: mediation.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+mediation.form = mediationForm
+
 const legal = {
     tos: Object.assign(tos, tos),
     pp: Object.assign(pp, pp),
     nda: Object.assign(nda, nda1c7b84),
+    mediation: Object.assign(mediation, mediation884cf8),
 }
 
 export default legal

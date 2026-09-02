@@ -76,4 +76,45 @@ class LegalController extends Controller
             'Content-Disposition' => 'attachment; filename="'.$filename.'"',
         ]);
     }
+
+    public function mediation(): Response
+    {
+        return ($this->renderPublic)('Legal/Mediation', [
+
+        ]);
+    }
+
+    /**
+     * Download or stream the Commercial Mediation Agreement PDF (supports both CS and EN).
+     */
+    public function downloadMediation(Request $request): HttpResponse|BinaryFileResponse
+    {
+        $lang = strtolower((string) $request->input('lang', 'cs'));
+        $isEnglish = in_array($lang, ['en', 'eng', 'english'], true);
+
+        $filename = $isEnglish
+            ? 'treetino-mediation-agreement-en.pdf'
+            : 'treetino-smlouva-zprostredkovani.pdf';
+
+        $viewName = $isEnglish ? 'pdf.mediation-en' : 'pdf.mediation';
+        $pdfPath = public_path('downloads/'.$filename);
+
+        if (file_exists($pdfPath) && ! $request->has('regenerate')) {
+            return response()->download(
+                $pdfPath,
+                $filename,
+                [
+                    'Content-Type' => 'application/pdf',
+                ]
+            );
+        }
+
+        $pdf = Pdf::loadView($viewName)
+            ->setPaper('a4', 'portrait');
+
+        return response($pdf->output(), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'attachment; filename="'.$filename.'"',
+        ]);
+    }
 }

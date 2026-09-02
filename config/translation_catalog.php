@@ -33,6 +33,7 @@ return [
         'footer.terms' => ['cs' => 'Obchodní podmínky', 'en' => 'Terms & Conditions'],
         'footer.privacy' => ['cs' => 'Zásady ochrany osobních údajů', 'en' => 'Privacy Policy'],
         'footer.nda' => ['cs' => 'Dohoda o mlčenlivosti (NDA)', 'en' => 'Non-Disclosure Agreement (NDA)'],
+        'footer.mediation' => ['cs' => 'Smlouva o zprostředkování', 'en' => 'Mediation Agreement'],
         'footer.cookie_settings' => ['cs' => 'Nastavení cookies', 'en' => 'Cookie Settings'],
         'footer.newsletter' => ['cs' => 'Newsletter', 'en' => 'Newsletter'],
         'footer.get_updates' => ['cs' => 'Získejte novinky', 'en' => 'Get Updates'],
@@ -822,8 +823,11 @@ return [
         'datasheet.row4_val' => ['cs' => '100 % zajišťuje Treetino (kompletní dodání zákazníkovi na klíč)', 'en' => 'Handled 100% by Treetino (turnkey delivery and installation for the customer)'],
         'datasheet.row5_label' => ['cs' => 'Dohoda o mlčenlivosti (NDA)', 'en' => 'Non-Disclosure Agreement (NDA)'],
         'datasheet.row5_val' => ['cs' => 'Ochrana obchodního tajemství, know-how, ceníků a klientských dat', 'en' => 'Protection of trade secrets, know-how, pricing and customer database'],
+        'datasheet.row6_label' => ['cs' => 'Smlouva o zprostředkování', 'en' => 'Mediation Agreement'],
+        'datasheet.row6_val' => ['cs' => 'Podmínky obchodního zastoupení, nárok na provizi a pravidla spolupráce', 'en' => 'Commercial agency terms, commission rules and partnership framework'],
         'datasheet.view_online' => ['cs' => 'Zobrazit online', 'en' => 'View online'],
         'datasheet.download_nda' => ['cs' => 'Stáhnout vzor smlouvy (PDF)', 'en' => 'Download Contract Template (PDF)'],
+        'datasheet.download_mediation' => ['cs' => 'Stáhnout vzor smlouvy (PDF)', 'en' => 'Download Contract Template (PDF)'],
 
         'banner.title' => ['cs' => 'Začněte prodávat solární architekturu Treetino', 'en' => 'Start Selling Treetino Solar Architecture'],
         'banner.subtitle' => ['cs' => 'Vyzkoušejte prodejní aplikaci, nasimulujte umístění na 3D mapě a přesvědčte se, jak snadno vytvoříte nabídku pro klienta.', 'en' => 'Launch the sales app, test 3D map placement, and see how fast you can prepare quotes for your clients.'],
@@ -854,6 +858,7 @@ return [
         'tos.title' => ['cs' => 'Obchodní podmínky', 'en' => 'Terms & Conditions'],
         'privacy.title' => ['cs' => 'Zásady zpracování osobních údajů', 'en' => 'Privacy Policy'],
         'nda.title' => ['cs' => 'Dohoda o mlčenlivosti (NDA)', 'en' => 'Non-Disclosure Agreement (NDA)'],
+        'mediation.title' => ['cs' => 'Smlouva o zprostředkování', 'en' => 'Mediation Agreement'],
     ],
 
     'preorders' => [

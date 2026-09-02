@@ -68,10 +68,15 @@ Route::prefix('legal')->name('legal.')->group(function () {
     Route::get('/privacy-policy', [LegalController::class, 'pp'])->name('pp');
     Route::get('/nda', [LegalController::class, 'nda'])->name('nda');
     Route::get('/nda/download', [LegalController::class, 'downloadNda'])->name('nda.download');
+    Route::get('/mediation', [LegalController::class, 'mediation'])->name('mediation');
+    Route::get('/mediation/download', [LegalController::class, 'downloadMediation'])->name('mediation.download');
+    Route::get('/smlouva-o-zprostredkovani', [LegalController::class, 'mediation']);
 });
 
 Route::get('/sales/nda', [LegalController::class, 'nda']);
 Route::get('/sales/nda/download', [LegalController::class, 'downloadNda']);
+Route::get('/sales/mediation', [LegalController::class, 'mediation']);
+Route::get('/sales/mediation/download', [LegalController::class, 'downloadMediation']);
 
 // Checkout
 Route::post('/checkout', [PreorderController::class, 'initiate'])->name('checkout-initiate');
