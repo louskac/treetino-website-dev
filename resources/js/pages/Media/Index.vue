@@ -8,11 +8,13 @@ import {
     Presentation,
     Palette,
     Award,
+    Newspaper,
 } from 'lucide-vue-next';
 import { route } from 'ziggy-js';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import ButtonSecondary from '@/custom/ButtonSecondary.vue';
 import HomeCtaGeneric from '@/custom/home/HomeCtaGeneric.vue';
+import MediaAppearances from '@/custom/media/MediaAppearances.vue';
 import MediaPatent from '@/custom/media/MediaPatent.vue';
 import MediaPitchDeck from '@/custom/media/MediaPitchDeck.vue';
 import MediaVideos from '@/custom/media/MediaVideos.vue';
@@ -81,6 +83,13 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue';
                         >
                             <Palette class="h-3.5 w-3.5 text-black/60" />
                             <span>{{ $t('media.nav_brand') }}</span>
+                        </a>
+                        <a
+                            href="#appearances"
+                            class="inline-flex items-center gap-2 rounded-full border border-black/15 bg-white px-4 py-2 text-xs font-medium text-black/80 shadow-xs transition hover:border-black/30 hover:bg-black/5"
+                        >
+                            <Newspaper class="h-3.5 w-3.5 text-t-blue" />
+                            <span>{{ $t('media.nav_appearances') }}</span>
                         </a>
                     </div>
                 </div>
@@ -209,6 +218,9 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue';
                         </div>
                     </div>
                 </section>
+
+                <!-- 5. MEDIA APPEARANCES TIMELINE (Television, Press, Podcasts, Expos) -->
+                <MediaAppearances />
             </main>
 
             <!-- Final CTA Banner -->

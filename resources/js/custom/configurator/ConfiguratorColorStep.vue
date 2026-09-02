@@ -38,7 +38,7 @@ defineEmits<{
 
 const colors = computed<ColorOption[]>(() => {
     const isV2 = props.productId === ProductId.StromV2;
-    const priceText = isV2 ? '+24 990 Kč' : '+44 990 Kč';
+    const priceText = isV2 ? '+25 000 Kč' : '+45 000 Kč';
     const priceKey = isV2
         ? 'configurator.price.plus_25k'
         : 'configurator.price.plus_45k';

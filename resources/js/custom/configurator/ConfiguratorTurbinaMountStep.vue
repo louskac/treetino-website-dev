@@ -81,7 +81,7 @@ const options = [
         id: 'roof',
         label: 'Na střechu',
         labelKey: 'configurator.turbine_mount.roof.label',
-        price: '+14 990 Kč',
+        price: '+15 000 Kč',
         priceKey: 'configurator.price.plus_15k',
         description:
             'Montáž na střešní konstrukci. Ideální pro maximální expozici větru bez překážek.',
@@ -91,7 +91,7 @@ const options = [
         id: 'wall',
         label: 'Na zeď',
         labelKey: 'configurator.turbine_mount.wall.label',
-        price: '+24 990 Kč',
+        price: '+25 000 Kč',
         priceKey: 'configurator.price.plus_25k',
         description:
             'Nástěnná montáž na fasádu budovy. Vhodné tam, kde střecha není dostupná.',
@@ -101,7 +101,7 @@ const options = [
         id: 'pole',
         label: 'Na sloup',
         labelKey: 'configurator.turbine_mount.pole.label',
-        price: '+34 990 Kč',
+        price: '+35 000 Kč',
         priceKey: 'configurator.price.plus_35k',
         description:
             'Volně stojící sloupová montáž. Nejuniverzálnější řešení pro libovolnou lokalitu.',

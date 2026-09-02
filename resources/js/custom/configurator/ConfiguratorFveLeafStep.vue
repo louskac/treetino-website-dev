@@ -343,7 +343,7 @@ interface FveLeafOption {
 
 const options = computed<FveLeafOption[]>(() => {
     const isV2 = props.productId === ProductId.StromV2;
-    const seasonalPrice = isV2 ? '+39 990 Kč' : '+111 990 Kč';
+    const seasonalPrice = isV2 ? '+40 000 Kč' : '+112 000 Kč';
     const seasonalPriceKey = isV2
         ? 'configurator.price.plus_40k'
         : 'configurator.price.plus_112k';

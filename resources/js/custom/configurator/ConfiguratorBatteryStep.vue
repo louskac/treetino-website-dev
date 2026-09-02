@@ -106,7 +106,7 @@ const options = computed(() => {
             label: `Baterie${capacity ? ' ' + capacity : ''}`,
             labelKey: 'configurator.battery.battery.label',
             roi: 14,
-            price: 'Od 379 990 Kč',
+            price: 'Od 380 000 Kč',
             priceKey: 'configurator.price.from_380k',
             description: t('configurator.preview.addons.battery.text'),
         },

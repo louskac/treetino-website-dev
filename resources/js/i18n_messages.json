@@ -582,18 +582,18 @@
             },
             "price": {
                 "individual": "Individuální",
-                "150k": "149 990 Kč",
-                "110k": "109 990 Kč",
-                "80k": "79 990 Kč",
-                "plus_15k": "+14 990 Kč",
-                "plus_25k": "+24 990 Kč",
-                "plus_35k": "+34 990 Kč",
-                "plus_40k": "+39 990 Kč",
-                "plus_45k": "+44 990 Kč",
-                "plus_58k": "+57 990 Kč",
-                "plus_112k": "+111 990 Kč",
-                "from_380k": "Od 379 990 Kč",
-                "connectivity_monthly": "3 měsíce zdarma, poté 7 990 Kč / měs."
+                "150k": "150 000 Kč",
+                "110k": "110 000 Kč",
+                "80k": "80 000 Kč",
+                "plus_15k": "+15 000 Kč",
+                "plus_25k": "+25 000 Kč",
+                "plus_35k": "+35 000 Kč",
+                "plus_40k": "+40 000 Kč",
+                "plus_45k": "+45 000 Kč",
+                "plus_58k": "+58 000 Kč",
+                "plus_112k": "+112 000 Kč",
+                "from_380k": "Od 380 000 Kč",
+                "connectivity_monthly": "3 měsíce zdarma, poté 8 000 Kč / měs."
             },
             "tree_design": {
                 "standard": {
@@ -691,7 +691,7 @@
                 "premium": {
                     "label": "Premium Connectivity"
                 },
-                "monthly_sub": "3 měsíce zdarma, poté 7 990 Kč / měs."
+                "monthly_sub": "3 měsíce zdarma, poté 8 000 Kč / měs."
             },
             "preview": {
                 "connectivity": {
@@ -846,16 +846,16 @@
         },
         "sales": {
             "audience": "PRODEJCI & OBCHODNÍ PARTNEŘI",
-            "title": "Prodávejte solární stromy s provizí až 450 000 Kč",
+            "title": "Prodávejte solární stromy s provizí až 490 000 Kč",
             "lead": "Kompletní nástroj pro obchodníky. 3D zaměření na pozemku klienta, okamžitá kalkulace návratnosti, export hotové nabídky do 2 minut a realizace na klíč.",
             "cta_primary": "Vyzkoušet prodejní aplikaci",
             "cta_secondary": "Kolik můžete vydělat",
             "numbers_badge": "PROVIZE & VÝDĚLKY",
             "numbers_title": "Vysoké odměny z každé uzavřené zakázky",
-            "numbers_description": "Získejte provizi až 450 000 Kč z velkého stromu V1, 100 000 Kč z modelu V2 a 11 000 Kč z větrné turbíny. Vy domluvíte klienta, o výrobu, montáž a servis se postaráme my.",
+            "numbers_description": "Získejte provizi až 490 000 Kč z velkého stromu V1, 100 000 Kč z modelu V2 a 11 000 Kč z větrné turbíny. Vy domluvíte klienta, o výrobu, montáž a servis se postaráme my.",
             "stats": {
                 "1": {
-                    "val": "Až 450 000 Kč",
+                    "val": "Až 490 000 Kč",
                     "lbl": "Provize z 1 velkého komerčního stromu V1"
                 },
                 "2": {
@@ -881,37 +881,37 @@
                 "dev_title": "Rezidenční developerské projekty",
                 "dev_desc": "Instalace dvou dominantních stromů na centrálním náměstí a promenádě nové čtvrti. Zvyšuje prestiž projektu, zajišťuje ESG certifikaci a napájí rezidentní dobíjecí stanice.",
                 "dev_model": "2× Strom V1 (celkem 100 kW)",
-                "dev_payout": "900 000 Kč",
+                "dev_payout": "980 000 Kč",
                 "village_segment": "Obce & města · Veřejná prostranství",
                 "village_title": "Města, obce a vesnice",
                 "village_desc": "Instalace solárního stromu na náves, náměstí nebo k obecnímu úřadu. Vytváří reprezentativní komunitní bod s lavičkami a nabíjením pro elektrokola občanů i turistů, krytý z dotačních programů.",
                 "village_model": "1× Strom V1 (49,8 kW) + e-Bike Hub",
-                "village_payout": "450 000 Kč",
+                "village_payout": "490 000 Kč",
                 "zoo_segment": "Veřejný prostor · Vysoká návštěvnost",
                 "zoo_title": "Zoologické zahrady & Safari parky",
                 "zoo_desc": "Edukativní zelená dominanta u hlavního vchodu doplněná o střešní větrné mikroturbíny. Výrazný symbol udržitelnosti a čisté energie pro tisíce návštěvníků denně.",
                 "zoo_model": "1× Strom V1 + 4× Aero Turbíny",
-                "zoo_payout": "495 000 Kč",
+                "zoo_payout": "534 000 Kč",
                 "metal_segment": "Těžký průmysl · 24/7 provoz",
                 "metal_title": "Hutní & strojírenské výrobní areály",
                 "metal_desc": "Energeticky náročný nepřetržitý provoz vyžadující vysoký stabilní výkon. Průmyslový cluster tří velkých stromů pro masivní snížení denních i nočních odběrů z distribuční sítě.",
                 "metal_model": "3× Strom V1 (150 kW průmyslový cluster)",
-                "metal_payout": "1 350 000 Kč",
+                "metal_payout": "1 470 000 Kč",
                 "bank_segment": "Komerční HQ · Firemní kampusy",
                 "bank_title": "Banky & korporátní centrály",
                 "bank_desc": "Prestižní reprezentativní dominanta u hlavního vchodu bankovního kampusu. Rychlé nabíjení pro management, firemní flotilu a VIP klienty.",
                 "bank_model": "1× Strom V1 (49,8 kW) + EV Hub",
-                "bank_payout": "450 000 Kč",
+                "bank_payout": "490 000 Kč",
                 "community_segment": "Bytové domy · Komunity",
                 "community_title": "Komunitní bydlení & bytová družstva",
                 "community_desc": "Kombinovaný komunitní balíček: kompaktní strom V2 v zahradě a 4 větrné turbíny na střeše domu. Zajišťuje sdílenou čistou energii a znatelně snižuje měsíční platby obyvatel.",
                 "community_model": "1× Strom V2 + 4× Aero Turbíny",
-                "community_payout": "195 000 Kč",
+                "community_payout": "144 000 Kč",
                 "retail_segment": "Komerční plochy · Parkoviště",
                 "retail_title": "Logistická centra & Obchodní parky",
                 "retail_desc": "Komplexní řešení pro obchodní parky a logistické areály: dva stromy V1 na parkovišti zákazníků napojené na rychlonabíječky plus šest turbín na střešní atice haly.",
                 "retail_model": "2× Strom V1 + 6× Aero Turbíny",
-                "retail_payout": "967 500 Kč"
+                "retail_payout": "1 046 000 Kč"
             },
             "why_join": {
                 "badge": "PROČ PRODÁVAT TREETINO",
@@ -940,9 +940,9 @@
                 "badge": "PRODUKTOVÉ PORTFOLIO",
                 "title": "Produkty a vaše provize",
                 "v1_title": "Velký strom V1 (49,8 kW)",
-                "v1_price": "Cena modelu: 4 500 000 Kč",
-                "v1_commission": "Provize až 450 000 Kč",
-                "v1_tag": "Cena 4 500 000 Kč · Provize až 450 000 Kč",
+                "v1_price": "Cena modelu: 4 900 000 Kč",
+                "v1_commission": "Provize až 490 000 Kč",
+                "v1_tag": "Cena 4 900 000 Kč · Provize až 490 000 Kč",
                 "v1_desc": "Průmyslová hybridní elektrárna pro firmy, areály a města na ploše pouhého 1 m².",
                 "v2_title": "Kompaktní strom V2 (6–12 kW)",
                 "v2_price": "Cena modelu: 1 000 000 Kč",
@@ -950,9 +950,9 @@
                 "v2_tag": "Cena 1 000 000 Kč · Provize až 100 000 Kč",
                 "v2_desc": "Designové řešení pro prémiové rodinné domy, vily a hotely s tichými větrnými turbínami.",
                 "turbine_title": "Větrná turbína T1 (1–3 kW)",
-                "turbine_price": "Cena jednotky: 109 990 Kč",
+                "turbine_price": "Cena jednotky: 110 000 Kč",
                 "turbine_commission": "Provize až 11 000 Kč",
-                "turbine_tag": "Cena 109 990 Kč · Provize až 11 000 Kč",
+                "turbine_tag": "Cena 110 000 Kč · Provize až 11 000 Kč",
                 "turbine_desc": "Vertikální tichá turbína pro střechy a sloupy. Celoroční výroba energie i v zimě."
             },
             "interactive_steps": {
@@ -976,9 +976,9 @@
                 "badge": "PODMÍNKY SPOLUPRÁCE",
                 "title": "Přehled provizí a parametrů",
                 "row1_label": "Výše provize",
-                "row1_val": "Až 450 000 Kč z každé realizované zakázky velkého stromu",
+                "row1_val": "Až 490 000 Kč z každé realizované zakázky velkého stromu",
                 "row2_label": "Příklady provizí z prodeje",
-                "row2_val": "Velký strom V1 (4 500 000 Kč) → až 450 000 Kč · Kompaktní strom V2 (1 000 000 Kč) → až 100 000 Kč · Turbína (109 990 Kč) → až 11 000 Kč",
+                "row2_val": "Velký strom V1 (4 900 000 Kč) → až 490 000 Kč · Kompaktní strom V2 (1 000 000 Kč) → až 100 000 Kč · Turbína (110 000 Kč) → až 11 000 Kč",
                 "row3_label": "Prodejní aplikace & CRM",
                 "row3_val": "Prodejní aplikace Treetino (3D zaměření na mapě, kalkulace návratnosti & PDF nabídka do 2 minut)",
                 "row4_label": "Výroba, doprava & instalace",
@@ -1627,18 +1627,18 @@
             },
             "price": {
                 "individual": "Individual",
-                "150k": "€5,990",
-                "110k": "€4,390",
-                "80k": "€3,190",
-                "plus_15k": "+€590",
-                "plus_25k": "+€990",
-                "plus_35k": "+€1,390",
-                "plus_40k": "+€1,590",
-                "plus_45k": "+€1,790",
-                "plus_58k": "+€2,290",
-                "plus_112k": "+€4,490",
-                "from_380k": "From €15,190",
-                "connectivity_monthly": "3 months free, then €319 / mo"
+                "150k": "€6,000",
+                "110k": "€4,400",
+                "80k": "€3,200",
+                "plus_15k": "+€600",
+                "plus_25k": "+€1,000",
+                "plus_35k": "+€1,400",
+                "plus_40k": "+€1,600",
+                "plus_45k": "+€1,800",
+                "plus_58k": "+€2,300",
+                "plus_112k": "+€4,500",
+                "from_380k": "From €15,000",
+                "connectivity_monthly": "3 months free, then €320 / mo"
             },
             "tree_design": {
                 "standard": {
@@ -1736,7 +1736,7 @@
                 "premium": {
                     "label": "Premium Connectivity"
                 },
-                "monthly_sub": "3 months free, then €319 / mo"
+                "monthly_sub": "3 months free, then €320 / mo"
             },
             "preview": {
                 "connectivity": {
@@ -1891,16 +1891,16 @@
         },
         "sales": {
             "audience": "DEALERS & SALES PARTNERS",
-            "title": "Sell Solar Trees with Commissions Up to €18,500",
+            "title": "Sell Solar Trees with Commissions Up to €20,000",
             "lead": "The complete sales toolkit. 3D site placement with clients, instant ROI calculations, branded PDF quotes in 2 minutes, and full turnkey fulfillment.",
             "cta_primary": "Try Sales App",
             "cta_secondary": "How Much You Can Earn",
             "numbers_badge": "COMMISSIONS & EARNINGS",
             "numbers_title": "High Payouts on Every Closed Deal",
-            "numbers_description": "Earn up to €18,500 on a commercial tree V1, €4,100 on a compact tree V2, and €440 on a wind turbine. You close the deal — we handle manufacturing, installation, and warranty.",
+            "numbers_description": "Earn up to €20,000 on a commercial tree V1, €4,100 on a compact tree V2, and €440 on a wind turbine. You close the deal — we handle manufacturing, installation, and warranty.",
             "stats": {
                 "1": {
-                    "val": "Up to €18,500",
+                    "val": "Up to €20,000",
                     "lbl": "Commission per commercial tree V1"
                 },
                 "2": {
@@ -1926,37 +1926,37 @@
                 "dev_title": "Residential Development Projects",
                 "dev_desc": "Installation of two landmark solar trees in the central pedestrian plaza and promenade. Enhances property value, secures ESG ratings, and powers residential EV chargers.",
                 "dev_model": "2× Tree V1 (100 kW total)",
-                "dev_payout": "€37,000",
+                "dev_payout": "€40,000",
                 "village_segment": "Municipalities · Public Spaces",
                 "village_title": "Cities, Towns & Villages",
                 "village_desc": "Solar tree installation on village greens, town squares, or near municipal offices. Creates a landmark community hub with public seating and e-bike charging, heavily backed by municipal green grants.",
                 "village_model": "1× Tree V1 (49.8 kW) + e-Bike Hub",
-                "village_payout": "€18,500",
+                "village_payout": "€20,000",
                 "zoo_segment": "Public Space · High Footfall",
                 "zoo_title": "Zoo & Safari Parks",
                 "zoo_desc": "Educational green centerpiece at the main visitor entrance combined with rooftop wind micro-turbines. Strong symbol of clean power for thousands of daily visitors.",
                 "zoo_model": "1× Tree V1 + 4× Aero Turbines",
-                "zoo_payout": "€20,340",
+                "zoo_payout": "€21,800",
                 "metal_segment": "Heavy Industry · 24/7 Operation",
                 "metal_title": "Metalworks & Manufacturing Plants",
                 "metal_desc": "Energy-intensive 24/7 manufacturing requiring continuous high output. An industrial cluster of 3 commercial trees providing massive peak shaving and grid independence.",
                 "metal_model": "3× Tree V1 (150 kW industrial cluster)",
-                "metal_payout": "€55,500",
+                "metal_payout": "€60,000",
                 "bank_segment": "Corporate HQ · Enterprise Campuses",
                 "bank_title": "Banks & Corporate Headquarters",
                 "bank_desc": "Prestigious entrance centerpiece at the bank corporate campus. High-speed charging amenity for executive fleet, employees, and visiting clients.",
                 "bank_model": "1× Tree V1 (49.8 kW) + EV Hub",
-                "bank_payout": "€18,500",
+                "bank_payout": "€20,000",
                 "community_segment": "Residential · Co-housing",
                 "community_title": "Community Living & Co-housing",
                 "community_desc": "Combined community package: 1 compact V2 tree on the lawn and 4 rooftop wind turbines. Generates shared clean power and reduces monthly energy fees for all residents.",
                 "community_model": "1× Tree V2 + 4× Aero Turbines",
-                "community_payout": "€8,040",
+                "community_payout": "€5,880",
                 "retail_segment": "Commercial Hubs · Parking Plazas",
                 "retail_title": "Logistics Hubs & Business Parks",
                 "retail_desc": "Turnkey solution for business parks and logistics hubs: two commercial V1 trees in customer parking linked to fast EV chargers, plus six parapet-mounted wind turbines.",
                 "retail_model": "2× Tree V1 + 6× Aero Turbines",
-                "retail_payout": "€39,760"
+                "retail_payout": "€42,700"
             },
             "why_join": {
                 "badge": "WHY SELL TREETINO",
@@ -1968,7 +1968,7 @@
                 "card3_title": "Clear CRM & Commission Tracking",
                 "card3_desc": "Track every deal in real time from contract signing through manufacturing to commission payout.",
                 "card4_title": "Zero Installation Hassle",
-                "card4_desc": "Treetino covers all engineering, manufacturing, on-site installation, and long-term warranty support."
+                "card4_desc": "Handled 100% by Treetino (turnkey delivery and installation for the customer)"
             },
             "network": {
                 "tag": "SALES NETWORK EXPANSION",
@@ -1985,9 +1985,9 @@
                 "badge": "PRODUCT PORTFOLIO",
                 "title": "Products & Your Commission",
                 "v1_title": "Commercial Tree V1 (49.8 kW)",
-                "v1_price": "Base price: €185,000",
-                "v1_commission": "Commission up to €18,500",
-                "v1_tag": "Price €185,000 · Commission up to €18,500",
+                "v1_price": "Base price: €200,000",
+                "v1_commission": "Commission up to €20,000",
+                "v1_tag": "Price €200,000 · Commission up to €20,000",
                 "v1_desc": "High-yield commercial hybrid power plant for businesses, logistics parks, and cities on just 1 m².",
                 "v2_title": "Residential Tree V2 (6–12 kW)",
                 "v2_price": "Base price: €41,000",
@@ -1995,9 +1995,9 @@
                 "v2_tag": "Price €41,000 · Commission up to €4,100",
                 "v2_desc": "Aesthetic solar tree for private residences, villas, and boutique hotels with microturbines.",
                 "turbine_title": "Wind Turbine T1 (1–3 kW)",
-                "turbine_price": "Base price: €4,390",
+                "turbine_price": "Base price: €4,400",
                 "turbine_commission": "Commission up to €440",
-                "turbine_tag": "Price €4,390 · Commission up to €440",
+                "turbine_tag": "Price €4,400 · Commission up to €440",
                 "turbine_desc": "Silent vertical axis turbine for rooftops and masts, generating power year-round."
             },
             "interactive_steps": {
@@ -2021,9 +2021,9 @@
                 "badge": "PARTNERSHIP TERMS",
                 "title": "Commissions & Specifications",
                 "row1_label": "Commission Rate",
-                "row1_val": "Up to €18,500 per commercial tree installation",
+                "row1_val": "Up to €20,000 per commercial tree installation",
                 "row2_label": "Commission Examples",
-                "row2_val": "Commercial Tree V1 (€185,000) → up to €18,500 · Residential Tree V2 (€41,000) → up to €4,100 · Turbine (€4,390) → up to €440",
+                "row2_val": "Commercial Tree V1 (€200,000) → up to €20,000 · Residential Tree V2 (€41,000) → up to €4,100 · Turbine (€4,400) → up to €440",
                 "row3_label": "Sales App & CRM",
                 "row3_val": "Treetino Sales App (3D site scans, ROI calculation & instant 2-minute PDF quotes)",
                 "row4_label": "Manufacturing & Delivery",

@@ -418,69 +418,69 @@ const basePrice = computed(() => {
 
     // V1 option pricing
     if (selectedProductId.value === ProductId.StromV1) {
-        // Frame color (white = 0, other colors / custom = 44 990 CZK)
+        // Frame color (white = 0, other colors / custom = 45 000 CZK)
         if (selectedColorId.value && selectedColorId.value !== 'white') {
-            price += 44990;
+            price += 45000;
         }
 
-        // Leaf color (green = 0, other colors / custom = 57 990 CZK)
+        // Leaf color (green = 0, other colors / custom = 58 000 CZK)
         if (selectedLeafColorId.value && selectedLeafColorId.value !== 'green') {
-            price += 57990;
+            price += 58000;
         }
 
-        // FVE leaf design (spring / none = 0, other seasonal / custom = 111 990 CZK)
+        // FVE leaf design (spring / none = 0, other seasonal / custom = 112 000 CZK)
         if (
             selectedFveLeafDesign.value &&
             selectedFveLeafDesign.value !== 'spring' &&
             selectedFveLeafDesign.value !== 'none'
         ) {
-            price += 111990;
+            price += 112000;
         }
 
-        // Battery (battery = 379 990 CZK)
+        // Battery (battery = 380 000 CZK)
         if (selectedBattery.value === 'battery') {
-            price += 379990;
+            price += 380000;
         }
     } else if (selectedProductId.value === ProductId.StromV2) {
-        // V2 option pricing (03 color: 24 990, 04 leaf: 24 990, 05 fve-leaf: 39 990, battery: 379 990)
+        // V2 option pricing (03 color: 25 000, 04 leaf: 25 000, 05 fve-leaf: 40 000, battery: 380 000)
         if (selectedColorId.value && selectedColorId.value !== 'white') {
-            price += 24990;
+            price += 25000;
         }
         if (selectedLeafColorId.value && selectedLeafColorId.value !== 'green') {
-            price += 24990;
+            price += 25000;
         }
         if (
             selectedFveLeafDesign.value &&
             selectedFveLeafDesign.value !== 'spring' &&
             selectedFveLeafDesign.value !== 'none'
         ) {
-            price += 39990;
+            price += 40000;
         }
         if (selectedBattery.value === 'battery') {
-            price += 379990;
+            price += 380000;
         }
     } else if (selectedProductId.value === ProductId.Turbina) {
-        // Turbina size: large (149 990), medium (109 990), small (79 990)
+        // Turbina size: large (150 000), medium (110 000), small (80 000)
         if (selectedTurbineSize.value === 'small') {
-            price = 79990;
+            price = 80000;
         } else if (selectedTurbineSize.value === 'medium') {
-            price = 109990;
+            price = 110000;
         } else {
-            price = 149990;
+            price = 150000;
         }
 
-        // Turbina mount: roof (+14 990), wall (+24 990), pole (+34 990)
+        // Turbina mount: roof (+15 000), wall (+25 000), pole (+35 000)
         if (selectedTurbineMount.value === 'roof') {
-            price += 14990;
+            price += 15000;
         } else if (selectedTurbineMount.value === 'wall') {
-            price += 24990;
+            price += 25000;
         } else if (selectedTurbineMount.value === 'pole') {
-            price += 34990;
+            price += 35000;
         }
 
-        // Turbina color: white (free), transparent/colors (+14 990)
+        // Turbina color: white (free), transparent/colors (+15 000)
         if (selectedColorId.value && selectedColorId.value !== 'white') {
-            price += 14990;
+            price += 15000;
         }
     }
 

@@ -117,7 +117,7 @@ export const PRODUCTS: Product[] = [
                 configurationFields: ['evChargerCount', 'bikeChargerRequested'],
             },
         ],
-        basePrice: 4500000,
+        basePrice: 4900000,
         monthlySavings: 5700,
         reservationPrice: 12000,
         stats: [
