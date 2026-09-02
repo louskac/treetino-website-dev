@@ -9,6 +9,7 @@ import {
     Instagram,
     Globe,
     Youtube,
+    Linkedin,
 } from 'lucide-vue-next';
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -23,30 +24,34 @@ export interface MediaPhoto {
 
 export interface MediaVideo {
     src: string;
+    youtubeId?: string;
     poster?: string;
     type: 'mp4' | 'youtube';
     duration?: string;
+    tag?: string;
     title?: { cs: string; en: string };
+    description?: { cs: string; en: string };
 }
 
 export interface AppearanceLink {
     url: string;
     label: { cs: string; en: string };
-    type?: 'instagram' | 'web' | 'youtube' | 'article' | 'external';
+    type?: 'instagram' | 'web' | 'youtube' | 'article' | 'external' | 'linkedin';
 }
 
 export interface AppearanceItem {
     id: string;
     date: { cs: string; en: string };
     year: string;
-    outlet: string;
+    outlet: { cs: string; en: string } | string;
     category: 'tv' | 'press' | 'interview' | 'conference';
     title: { cs: string; en: string };
     description: { cs: string; en: string };
     link?: AppearanceLink;
     secondaryLink?: AppearanceLink;
+    links?: AppearanceLink[];
     video?: MediaVideo;
-    photos?: MediaPhoto[]; // 0, 1, or 2 photos
+    photos?: MediaPhoto[]; // 0, 1, 2, or 3 photos
 }
 
 const appearances: AppearanceItem[] = [
@@ -68,10 +73,15 @@ const appearances: AppearanceItem[] = [
             src: '/video/media/praha-tv-september-2026.mp4',
             poster: '/img/media/praha-tv-poster.jpg',
             type: 'mp4',
+            tag: 'TV REPORTÁŽ',
             duration: '3:00',
             title: {
-                cs: 'Praha TV: Oficiální televizní reportáž Treetino (Září 2026)',
-                en: 'Praha TV: Official Treetino Television Feature (September 2026)',
+                cs: 'Praha TV: Oficiální televizní reportáž Treetino',
+                en: 'Praha TV: Official Treetino Television Feature',
+            },
+            description: {
+                cs: 'Návštěva televizního štábu ve vývojovém centru Treetino, představení prototypu a plánu pilotních instalací.',
+                en: 'Praha TV feature covering the working prototype, branch articulation mechanism, and pilot installations.',
             },
         },
         photos: [
@@ -103,7 +113,10 @@ const appearances: AppearanceItem[] = [
         id: 'vlada-cr-mpo-aug-2026',
         date: { cs: 'Srpen 2026', en: 'August 2026' },
         year: '2026',
-        outlet: 'Úřad vlády ČR & MPO',
+        outlet: {
+            cs: 'Úřad vlády ČR & MPO',
+            en: 'Office of the Government & MIT',
+        },
         category: 'conference',
         title: {
             cs: 'Vláda ČR: Představení Treetino premiérovi na Dnech MPO ve Strakově akademii',
@@ -134,6 +147,17 @@ const appearances: AppearanceItem[] = [
                 alt: {
                     cs: 'Ukázka prototypu Treetino premiérovi ČR',
                     en: 'Demonstrating Treetino prototype to the Prime Minister',
+                },
+            },
+            {
+                src: '/img/media/strakova-akademie-stanek-expozice.jpg',
+                caption: {
+                    cs: 'Výstavní expozice a stánek Treetino v zahradě Strakovy akademie (Úřad vlády ČR)',
+                    en: 'Treetino outdoor exhibition booth in the gardens of the Straka Academy (Office of the Government)',
+                },
+                alt: {
+                    cs: 'Výstavní stánek Treetino ve Strakově akademii',
+                    en: 'Treetino exhibition booth at Straka Academy',
                 },
             },
         ],
@@ -226,6 +250,231 @@ const appearances: AppearanceItem[] = [
             type: 'web',
         },
     },
+    {
+        id: 'start-it-csob-apr-2026',
+        date: { cs: 'Duben 2026', en: 'April 2026' },
+        year: '2026',
+        outlet: 'Start it @ČSOB',
+        category: 'conference',
+        title: {
+            cs: 'Start it @ČSOB: Úspěšné zakončení 16. vlny prestižního startupového akcelerátoru',
+            en: 'Start it @ČSOB: Successful Graduation from 16th Cohort of the Startup Accelerator',
+        },
+        description: {
+            cs: 'Úspěšné absolvování 5měsíčního akceleračního programu ČSOB zaměřeného na škálování byznys modelu, bankovní validaci a finální Demo Day v Praze.',
+            en: 'Graduation from the 5-month intensive ČSOB banking accelerator program focused on business model scaling, enterprise validation, and Demo Day in Prague.',
+        },
+        photos: [
+            {
+                src: '/img/media/start-it-csob-acceleration-2026.jpg',
+                caption: {
+                    cs: 'Tým Treetino s dalšími zakladateli a mentory na setkání 16. vlny akcelerátoru Start it @ČSOB v Praze',
+                    en: 'Treetino founder with cohort founders and mentors during the 16th wave of Start it @ČSOB accelerator in Prague',
+                },
+                alt: {
+                    cs: 'Akcelerátor Start it @ČSOB',
+                    en: 'Start it @ČSOB Accelerator Cohort',
+                },
+            },
+        ],
+        link: {
+            url: 'https://www.linkedin.com/posts/start-it-csob_akcelerace-activity-7455603853829238784-qrKc',
+            label: {
+                cs: 'Příspěvek na LinkedIn',
+                en: 'LinkedIn Announcement',
+            },
+            type: 'linkedin',
+        },
+    },
+    {
+        id: 'sxsw-austin-mar-2026',
+        date: { cs: 'Březen 2026', en: 'March 2026' },
+        year: '2026',
+        outlet: {
+            cs: 'Czech House SXSW | Vládní mise USA',
+            en: 'Czech House SXSW | US Trade Mission',
+        },
+        category: 'conference',
+        title: {
+            cs: 'SXSW Austin & Vládní mise USA: Expozice v Czech House a let vládním speciálem s ministrem',
+            en: 'SXSW Austin & US Trade Mission: Czech House Showcase and Government Special Flight with Minister',
+        },
+        description: {
+            cs: 'Účast na prestižním festivalu SXSW v Texasu v rámci české technologické delegace. Prezentace prototypu v Czech House a cesta vládním speciálem s ministrem průmyslu a obchodu.',
+            en: 'Representing Czech innovation at the SXSW festival in Texas as part of the official trade delegation. Prototyping showcase at Czech House and flight aboard the government aircraft with the Minister.',
+        },
+        photos: [
+            {
+                src: '/img/media/sxsw-austin-czech-house-2026.jpg',
+                caption: {
+                    cs: 'Expozice Treetino s funkčním modelem v Czech House na festivalu SXSW 2026 v Austinu v Texasu',
+                    en: 'Treetino exhibition with functional prototype at Czech House during SXSW 2026 in Austin, Texas',
+                },
+                alt: {
+                    cs: 'Czech House SXSW Austin expozice Treetino',
+                    en: 'Czech House SXSW Austin Treetino exhibition',
+                },
+            },
+            {
+                src: '/img/media/vladni-special-ministr-mpo-2026.jpg',
+                caption: {
+                    cs: 'Zakladatel Treetino na palubě vládního speciálu s ministrem průmyslu a obchodu během obchodní mise do USA',
+                    en: 'Treetino founder aboard the Czech government aircraft with the Minister of Industry and Trade during US trade mission',
+                },
+                alt: {
+                    cs: 'Let vládním speciálem s ministrem',
+                    en: 'Flight on government aircraft with Minister',
+                },
+            },
+            {
+                src: '/img/media/treetino-washington-monument-2026.jpg',
+                caption: {
+                    cs: 'Prezentace konceptu Treetino před Washingtonovým monumentem ve Washingtonu D.C.',
+                    en: 'Treetino concept showcase in front of the Washington Monument in Washington D.C.',
+                },
+                alt: {
+                    cs: 'Treetino u Washingtonova monumentu ve Washingtonu D.C.',
+                    en: 'Treetino at Washington Monument in Washington D.C.',
+                },
+            },
+        ],
+        link: {
+            url: 'https://www.sxsw.com',
+            label: {
+                cs: 'Web SXSW',
+                en: 'SXSW Website',
+            },
+            type: 'web',
+        },
+    },
+    {
+        id: 'protocol-labs-founders-forge-feb-2026',
+        date: { cs: 'Únor 2026', en: 'February 2026' },
+        year: '2026',
+        outlet: 'Protocol Labs | Founders Forge',
+        category: 'conference',
+        title: {
+            cs: 'Protocol Labs: Founders Forge Web3 akcelerátor & Demo Day v Dubaji',
+            en: 'Protocol Labs: Founders Forge Web3 Accelerator & Demo Day in Dubai',
+        },
+        description: {
+            cs: 'Prestižní globální Web3 & DePIN akcelerační program od Protocol Labs (IPFS, Filecoin). 8 vybraných týmů, Dubai Build Week a závěrečný Demo Day v Dubaji.',
+            en: 'Prestigious global Web3 & DePIN accelerator by Protocol Labs (IPFS, Filecoin). 8 selected startups, Dubai Build Week, and mainstage Demo Day in Dubai.',
+        },
+        video: {
+            src: '8L4wr9YIe88',
+            youtubeId: '8L4wr9YIe88',
+            poster: '/img/media/protocol-labs-founders-forge.webp',
+            type: 'youtube',
+            tag: 'WEB3 & DEPIN',
+            duration: '12:07',
+            title: {
+                cs: 'Founders Forge: Dokumentární film (Cohort 1, Dubaj)',
+                en: 'Founders Forge: The Documentary (Cohort 1, Dubai)',
+            },
+            description: {
+                cs: 'Dokumentární film o globálním akcelerátoru Founders Forge v Dubaji od Protocol Labs. 8 vybraných týmů z celého světa, Dubai Build Week a Demo Day.',
+                en: 'Documentary covering the Founders Forge accelerator in Dubai by Protocol Labs. 8 selected startups worldwide, Dubai Build Week, and mainstage Demo Day.',
+            },
+        },
+        photos: [
+            {
+                src: '/img/media/protocol-labs-dubai-pitch-stage.jpg',
+                caption: {
+                    cs: 'Prezentace klíčových parametrů a výkonu stromu Treetino na Demo Day Protocol Labs v Dubaji',
+                    en: 'Presenting Treetino key energy specs and footprint metrics on stage at Protocol Labs Demo Day in Dubai',
+                },
+                alt: {
+                    cs: 'Prezentace Treetino na Protocol Labs Demo Day v Dubaji',
+                    en: 'Treetino presentation at Protocol Labs Demo Day in Dubai',
+                },
+            },
+            {
+                src: '/img/media/protocol-labs-dubai-founder.jpg',
+                caption: {
+                    cs: 'Zakladatel Treetino během globálního akceleračního programu Founders Forge v Dubaji',
+                    en: 'Treetino founder during the Founders Forge global accelerator program in Dubai',
+                },
+                alt: {
+                    cs: 'Zakladatel Treetino na akcelerátoru v Dubaji',
+                    en: 'Treetino founder at Dubai accelerator',
+                },
+            },
+        ],
+        link: {
+            url: 'https://www.youtube.com/watch?v=8L4wr9YIe88',
+            label: {
+                cs: 'Dokument na YouTube (12:07)',
+                en: 'Watch Documentary on YouTube',
+            },
+            type: 'youtube',
+        },
+    },
+    {
+        id: 'make-iton-hw-inkubace',
+        date: { cs: 'Prosinec 2025', en: 'December 2025' },
+        year: '2025',
+        outlet: 'Make-iton | Maker Institute',
+        category: 'tv',
+        title: {
+            cs: 'Make-iton: Hardwarová inkubace prototypu, 3D tisk v HWLabu a cesta ke klientům',
+            en: 'Make-iton: Hardware Prototyping in HWLab & Scaling to Real-World Clients',
+        },
+        description: {
+            cs: 'Kompletní dokumentace z hardwarového inkubátoru Make-iton: stavba funkčního prototypu a 3D tisk v HWLabu a Next Zone, mentoring a posun projektu k reálným klientům.',
+            en: 'Full video coverage from the Make-iton hardware incubator: functional prototype fabrication and 3D printing in HWLab & Next Zone, mentoring, and scaling to infrastructure deployments.',
+        },
+        video: {
+            src: 'oA5reK7ao-4',
+            youtubeId: 'oA5reK7ao-4',
+            poster: '/img/media/make-iton-epizoda-3.webp',
+            type: 'youtube',
+            tag: 'HW INKUBACE',
+            duration: '8:27',
+            title: {
+                cs: 'Make-iton | Epizoda 3: Tohle není projekt do šuplíku (8:27)',
+                en: 'Make-iton | Episode 3: This is not a project for the drawer (8:27)',
+            },
+            description: {
+                cs: 'Epizoda 3: Zákulisí stavby a 3D tisku prototypu energetického stromu v HWLabu a Next Zone během akcelerace Make-iton.',
+                en: 'Episode 3: Inside the fabrication and 3D prototyping of Treetino smart energy tree in HWLab & Next Zone during Make-iton incubation.',
+            },
+        },
+        links: [
+            {
+                url: 'https://www.youtube.com/watch?v=oA5reK7ao-4',
+                label: {
+                    cs: 'Epizoda #3 na YouTube (8:27)',
+                    en: 'Episode #3 on YouTube (8:27)',
+                },
+                type: 'youtube',
+            },
+            {
+                url: 'https://www.youtube.com/shorts/YhcpdJfqPzc',
+                label: {
+                    cs: 'YouTube Short #2',
+                    en: 'YouTube Short #2',
+                },
+                type: 'youtube',
+            },
+            {
+                url: 'https://www.youtube.com/shorts/rJZwoj4hXgo',
+                label: {
+                    cs: 'YouTube Short #1',
+                    en: 'YouTube Short #1',
+                },
+                type: 'youtube',
+            },
+            {
+                url: 'https://www.makerinstitute.cz',
+                label: {
+                    cs: 'Web Maker Institute',
+                    en: 'Maker Institute Web',
+                },
+                type: 'web',
+            },
+        ],
+    },
 ];
 
 // Active Filter
@@ -261,9 +510,12 @@ const categoryCounts = computed(() => {
 });
 
 // Localization helper
-const getLocalized = (obj?: { cs: string; en: string }) => {
+const getLocalized = (obj?: { cs: string; en: string } | string) => {
     if (!obj) {
         return '';
+    }
+    if (typeof obj === 'string') {
+        return obj;
     }
 
     const l = (locale.value || 'cs') as 'cs' | 'en';
@@ -271,27 +523,28 @@ const getLocalized = (obj?: { cs: string; en: string }) => {
     return obj[l] || obj.cs;
 };
 
-// Card-level active photo index tracking for smooth full-width slider
-const cardPhotoIndices = ref<Record<string, number>>({});
-
-const getCardPhotoIndex = (id: string) => cardPhotoIndices.value[id] || 0;
-
-const setCardPhotoIndex = (id: string, index: number) => {
-    cardPhotoIndices.value[id] = index;
-};
-
-const nextCardPhoto = (id: string, total: number) => {
-    const current = getCardPhotoIndex(id);
-    cardPhotoIndices.value[id] = (current + 1) % total;
-};
-
-const prevCardPhoto = (id: string, total: number) => {
-    const current = getCardPhotoIndex(id);
-    cardPhotoIndices.value[id] = (current - 1 + total) % total;
-};
+// UI Label helpers
+const playReportageLabel = computed(() =>
+    locale.value === 'cs' ? 'Přehrát reportáž' : 'Play Feature'
+);
+const viewPhotosLabel = computed(() =>
+    locale.value === 'cs' ? 'Zobrazit fotografie' : 'View Photos'
+);
+const closeVideoLabel = computed(() =>
+    locale.value === 'cs' ? 'Zavřít video' : 'Close Video'
+);
+const closeLightboxLabel = computed(() =>
+    locale.value === 'cs' ? 'Zavřít' : 'Close'
+);
+const openOnYoutubeLabel = computed(() =>
+    locale.value === 'cs' ? 'Otevřít na YouTube' : 'Open on YouTube'
+);
 
 // Icon resolver helper for action links
 const getLinkIcon = (type?: string, url?: string) => {
+    if (type === 'linkedin' || url?.includes('linkedin.com')) {
+        return Linkedin;
+    }
     if (type === 'instagram' || url?.includes('instagram.com')) {
         return Instagram;
     }
@@ -303,6 +556,9 @@ const getLinkIcon = (type?: string, url?: string) => {
 
 // Aggregate links for each card item
 const getItemLinks = (item: AppearanceItem): AppearanceLink[] => {
+    if (item.links && item.links.length > 0) {
+        return item.links;
+    }
     const links: AppearanceLink[] = [];
     if (item.secondaryLink) {
         links.push(item.secondaryLink);
@@ -409,23 +665,23 @@ onUnmounted(() => {
                 <span
                     class="text-[10px] font-semibold tracking-[0.25em] text-t-blue uppercase"
                 >
-                    {{ $t('media.appearances_tag') }}
+                    {{ locale === 'cs' ? 'Časová osa & Výstupy' : 'Timeline & Coverage' }}
                 </span>
                 <h2
                     class="mt-2 text-2xl font-normal tracking-tight text-black sm:text-3xl"
                 >
-                    {{ $t('media.appearances_title') }}
+                    {{ locale === 'cs' ? 'Mediální výstupy & Vystoupení' : 'Media Appearances & Coverage' }}
                 </h2>
                 <p
                     class="mt-2 text-xs sm:text-sm leading-relaxed text-black/60"
                 >
-                    {{ $t('media.appearances_desc') }}
+                    {{ locale === 'cs' ? 'Přehled televizních reportáží, tiskových zpráv, rozhovorů a vystoupení zakladatelů projektu Treetino v médiích.' : 'A curated timeline of television features, press coverage, interviews, and public appearances by the Treetino founders.' }}
                 </p>
             </div>
 
             <!-- Total count indicator -->
             <div class="hidden text-[11px] font-mono text-black/40 md:block">
-                {{ appearances.length }} {{ $t('media.appearances_count') }}
+                {{ appearances.length }} {{ locale === 'cs' ? 'mediálních záznamů' : 'media entries' }}
             </div>
         </div>
 
@@ -443,7 +699,7 @@ onUnmounted(() => {
                         : 'text-black/45 hover:text-black'
                 "
             >
-                {{ $t('media.filter_all') }}
+                {{ locale === 'cs' ? 'Všechny výstupy' : 'All Appearances' }}
                 <span class="text-[10px] opacity-60">({{ categoryCounts.all }})</span>
             </button>
 
@@ -458,7 +714,7 @@ onUnmounted(() => {
                         : 'text-black/45 hover:text-black'
                 "
             >
-                {{ $t('media.filter_tv') }}
+                {{ locale === 'cs' ? 'TV & Video' : 'TV & Video' }}
                 <span class="text-[10px] opacity-60">({{ categoryCounts.tv }})</span>
             </button>
 
@@ -473,7 +729,7 @@ onUnmounted(() => {
                         : 'text-black/45 hover:text-black'
                 "
             >
-                {{ $t('media.filter_press') }}
+                {{ locale === 'cs' ? 'Tisk & Články' : 'Press & Articles' }}
                 <span class="text-[10px] opacity-60">({{ categoryCounts.press }})</span>
             </button>
 
@@ -488,7 +744,7 @@ onUnmounted(() => {
                         : 'text-black/45 hover:text-black'
                 "
             >
-                {{ $t('media.filter_interview') }}
+                {{ locale === 'cs' ? 'Rozhovory & Podcasty' : 'Interviews & Podcasts' }}
                 <span class="text-[10px] opacity-60">({{ categoryCounts.interview }})</span>
             </button>
 
@@ -503,7 +759,7 @@ onUnmounted(() => {
                         : 'text-black/45 hover:text-black'
                 "
             >
-                {{ $t('media.filter_conference') }}
+                {{ locale === 'cs' ? 'Eventy & Konference' : 'Events & Conferences' }}
                 <span class="text-[10px] opacity-60">({{ categoryCounts.conference }})</span>
             </button>
         </div>
@@ -554,7 +810,7 @@ onUnmounted(() => {
                             <!-- Date & Outlet Row -->
                             <div class="flex items-center justify-between text-[11px] tracking-wide">
                                 <span class="font-semibold uppercase text-black/85">
-                                    {{ item.outlet }}
+                                    {{ getLocalized(item.outlet) }}
                                 </span>
                                 <span class="font-mono text-[10px] text-t-blue font-medium">
                                     {{ getLocalized(item.date) }}
@@ -603,7 +859,7 @@ onUnmounted(() => {
                                     </div>
                                 </div>
 
-                                <!-- Supporting Photos Duo below Video (e.g. Praha TV BTS photos) -->
+                                <!-- Supporting Photos Duo below Video (e.g. Praha TV BTS photos, Protocol Labs photos) -->
                                 <div
                                     v-if="item.video && item.photos && item.photos.length > 0"
                                     class="grid grid-cols-2 gap-2"
@@ -627,65 +883,49 @@ onUnmounted(() => {
                                     </div>
                                 </div>
 
-                                <!-- Full-Width Photo Carousel (For items without video: 1 or 2+ photos) -->
-                                <div
-                                    v-else-if="item.photos && item.photos.length > 0"
-                                    class="group/photo relative aspect-16/9 w-full cursor-pointer overflow-hidden bg-zinc-900 select-none"
-                                    @click="openLightbox(item.photos!, getCardPhotoIndex(item.id), getLocalized(item.title))"
-                                >
-                                    <img
-                                        :src="item.photos[getCardPhotoIndex(item.id)].src"
-                                        :alt="getLocalized(item.photos[getCardPhotoIndex(item.id)].alt)"
-                                        class="h-full w-full object-cover opacity-90 transition-all duration-300 group-hover/photo:scale-103"
-                                        loading="lazy"
-                                    />
-                                    <div class="absolute inset-0 bg-black/0 transition-colors group-hover/photo:bg-black/10"></div>
-
-                                    <!-- Maximize icon badge -->
-                                    <div class="absolute top-2 right-2 flex h-5 w-5 items-center justify-center bg-black/60 text-white opacity-0 transition-opacity group-hover/photo:opacity-100">
-                                        <Maximize2 class="h-3 w-3" />
+                                <!-- Photo-only cards (NO slideshow: 1 Main 16:9 Photo + Companion Thumbnails below) -->
+                                <template v-else-if="item.photos && item.photos.length > 0">
+                                    <!-- Primary Main Photo (16:9 full width) -->
+                                    <div
+                                        @click="openLightbox(item.photos!, 0, getLocalized(item.title))"
+                                        class="group/photo relative aspect-16/9 w-full cursor-pointer overflow-hidden bg-zinc-900"
+                                    >
+                                        <img
+                                            :src="item.photos[0].src"
+                                            :alt="getLocalized(item.photos[0].alt)"
+                                            class="h-full w-full object-cover opacity-90 transition-transform duration-300 group-hover/photo:scale-103"
+                                            loading="lazy"
+                                        />
+                                        <div class="absolute inset-0 bg-black/0 transition-colors group-hover/photo:bg-black/10"></div>
+                                        <div class="absolute top-2 right-2 flex h-5 w-5 items-center justify-center bg-black/60 text-white opacity-0 transition-opacity group-hover/photo:opacity-100">
+                                            <Maximize2 class="h-3 w-3" />
+                                        </div>
                                     </div>
 
-                                    <!-- Multi-photo controls (when 2+ photos) -->
-                                    <template v-if="item.photos.length > 1">
-                                        <!-- Prev Arrow -->
-                                        <button
-                                            type="button"
-                                            @click.stop="prevCardPhoto(item.id, item.photos.length)"
-                                            class="absolute top-1/2 left-2 -translate-y-1/2 flex h-7 w-7 items-center justify-center rounded-full bg-black/60 text-white opacity-0 backdrop-blur-xs transition-all hover:bg-black/90 hover:scale-105 group-hover/photo:opacity-100 cursor-pointer"
-                                            aria-label="Previous photo"
+                                    <!-- Companion Photos below (Photos 2 & 3 in 16:9 grid) -->
+                                    <div
+                                        v-if="item.photos.length > 1"
+                                        class="grid grid-cols-2 gap-2"
+                                    >
+                                        <div
+                                            v-for="(photo, photoIdx) in item.photos.slice(1)"
+                                            :key="photo.src"
+                                            @click="openLightbox(item.photos!, photoIdx + 1, getLocalized(item.title))"
+                                            class="group/photo relative aspect-16/9 cursor-pointer overflow-hidden bg-zinc-900"
                                         >
-                                            <ChevronLeft class="h-4 w-4" />
-                                        </button>
-
-                                        <!-- Next Arrow -->
-                                        <button
-                                            type="button"
-                                            @click.stop="nextCardPhoto(item.id, item.photos.length)"
-                                            class="absolute top-1/2 right-2 -translate-y-1/2 flex h-7 w-7 items-center justify-center rounded-full bg-black/60 text-white opacity-0 backdrop-blur-xs transition-all hover:bg-black/90 hover:scale-105 group-hover/photo:opacity-100 cursor-pointer"
-                                            aria-label="Next photo"
-                                        >
-                                            <ChevronRight class="h-4 w-4" />
-                                        </button>
-
-                                        <!-- Bottom Dots Indicator / Photo Counter -->
-                                        <div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-1.5 rounded-full bg-black/60 px-2 py-0.5 backdrop-blur-xs">
-                                            <button
-                                                v-for="(_, dotIdx) in item.photos"
-                                                :key="dotIdx"
-                                                type="button"
-                                                @click.stop="setCardPhotoIndex(item.id, dotIdx)"
-                                                class="h-1.5 rounded-full transition-all cursor-pointer"
-                                                :class="getCardPhotoIndex(item.id) === dotIdx ? 'w-3.5 bg-white' : 'w-1.5 bg-white/40 hover:bg-white/70'"
-                                            ></button>
+                                            <img
+                                                :src="photo.src"
+                                                :alt="getLocalized(photo.alt)"
+                                                class="h-full w-full object-cover opacity-90 transition-transform duration-300 group-hover/photo:scale-103"
+                                                loading="lazy"
+                                            />
+                                            <div class="absolute inset-0 bg-black/0 transition-colors group-hover/photo:bg-black/15"></div>
+                                            <div class="absolute top-1.5 right-1.5 flex h-4 w-4 items-center justify-center bg-black/60 text-white opacity-0 transition-opacity group-hover/photo:opacity-100">
+                                                <Maximize2 class="h-2.5 w-2.5" />
+                                            </div>
                                         </div>
-
-                                        <!-- Photo count pill -->
-                                        <div class="absolute bottom-2 right-2 bg-black/70 px-1.5 py-0.5 font-mono text-[9px] text-white/90">
-                                            {{ getCardPhotoIndex(item.id) + 1 }} / {{ item.photos.length }}
-                                        </div>
-                                    </template>
-                                </div>
+                                    </div>
+                                </template>
                             </div>
                         </div>
 
@@ -699,16 +939,16 @@ onUnmounted(() => {
                                     class="inline-flex cursor-pointer items-center gap-1.5 font-medium text-t-blue hover:text-t-blue/80 hover:underline text-[11px]"
                                 >
                                     <Play class="h-3 w-3 fill-current" />
-                                    <span>{{ $t('media.play_reportage') }}</span>
+                                    <span>{{ playReportageLabel }}</span>
                                 </button>
                                 <button
                                     v-else-if="item.photos && item.photos.length > 0"
                                     type="button"
-                                    @click="openLightbox(item.photos, getCardPhotoIndex(item.id), getLocalized(item.title))"
+                                    @click="openLightbox(item.photos, 0, getLocalized(item.title))"
                                     class="inline-flex cursor-pointer items-center gap-1.5 font-medium text-black/75 hover:text-black hover:underline text-[11px]"
                                 >
                                     <Maximize2 class="h-3 w-3" />
-                                    <span>{{ locale === 'cs' ? 'Zobrazit fotografie' : 'View Photos' }}</span>
+                                    <span>{{ viewPhotosLabel }}</span>
                                 </button>
                             </div>
 
@@ -726,11 +966,13 @@ onUnmounted(() => {
                                         :is="getLinkIcon(lnk.type, lnk.url)"
                                         class="h-3 w-3 transition-transform duration-200 group-hover/lnk:scale-110"
                                         :class="
-                                            lnk.type === 'instagram' || lnk.url.includes('instagram.com')
-                                                ? 'text-pink-600'
-                                                : lnk.type === 'youtube' || lnk.url.includes('youtube.com')
-                                                  ? 'text-red-600'
-                                                  : 'text-t-blue'
+                                            lnk.type === 'linkedin' || lnk.url.includes('linkedin.com')
+                                                ? 'text-[#0a66c2]'
+                                                : lnk.type === 'instagram' || lnk.url.includes('instagram.com')
+                                                  ? 'text-pink-600'
+                                                  : lnk.type === 'youtube' || lnk.url.includes('youtube.com')
+                                                    ? 'text-red-600'
+                                                    : 'text-t-blue'
                                         "
                                     />
                                     <span>{{ getLocalized(lnk.label) }}</span>
@@ -743,57 +985,48 @@ onUnmounted(() => {
             </div>
         </div>
 
-        <!-- FULLSCREEN VIDEO PLAYER MODAL -->
+        <!-- Video Player Modal (Clean Light Mode matching earlier Media section) -->
         <Transition name="modal-fade">
             <div
                 v-if="activeVideo"
-                class="fixed inset-0 z-50 flex items-center justify-center bg-black/92 p-4 backdrop-blur-md sm:p-8"
+                class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm sm:p-6"
                 @click.self="closeVideoModal"
             >
-                <div class="relative flex w-full max-w-5xl flex-col overflow-hidden bg-zinc-950 text-white shadow-2xl">
-                    <!-- Modal Header Bar -->
-                    <div class="flex items-center justify-between border-b border-white/10 bg-zinc-900/90 px-6 py-4">
+                <div
+                    class="relative w-full max-w-4xl overflow-hidden rounded-3xl border border-black/10 bg-white text-black shadow-2xl"
+                >
+                    <!-- Modal Top Bar -->
+                    <div
+                        class="flex items-center justify-between border-b border-black/10 bg-white px-6 py-4"
+                    >
                         <div class="flex items-center gap-3">
-                            <span class="bg-t-blue px-2 py-0.5 text-[10px] font-bold tracking-wider text-white uppercase">
-                                VIDEO
+                            <span
+                                class="rounded-full bg-t-blue/10 px-2.5 py-0.5 text-[11px] font-bold tracking-wider text-t-blue uppercase"
+                            >
+                                {{ activeVideo.tag || 'VIDEO' }}
                             </span>
-                            <h4 class="max-w-[280px] truncate text-sm font-medium text-white sm:max-w-lg sm:text-base">
-                                {{ getLocalized(activeVideo.title) || $t('media.play_reportage') }}
+                            <h4
+                                class="max-w-[280px] truncate text-sm font-semibold text-black sm:max-w-md sm:text-base"
+                            >
+                                {{ getLocalized(activeVideo.title) || playReportageLabel }}
                             </h4>
                         </div>
                         <button
                             type="button"
                             @click="closeVideoModal"
-                            class="cursor-pointer p-2 text-white/70 transition hover:text-white"
-                            :title="$t('media.close_video')"
+                            class="cursor-pointer rounded-full bg-black/5 p-2 text-black/60 transition hover:bg-black/10 hover:text-black"
+                            :title="closeVideoLabel"
                         >
-                            <X class="h-5 w-5" />
+                            <X class="h-4 w-4" />
                         </button>
                     </div>
 
-                    <!-- Local MP4 Video Player -->
-                    <div
-                        v-if="activeVideo.type === 'mp4'"
-                        class="relative aspect-16/9 w-full bg-black"
-                    >
-                        <video
-                            ref="videoPlayerRef"
-                            :src="activeVideo.src"
-                            :poster="activeVideo.poster"
-                            controls
-                            autoplay
-                            playsinline
-                            class="h-full w-full object-contain"
-                        ></video>
-                    </div>
-
-                    <!-- YouTube Video Embed -->
-                    <div
-                        v-else
-                        class="relative aspect-16/9 w-full bg-black"
-                    >
+                    <!-- Video Container (16:9 Aspect Ratio with full controls) -->
+                    <div class="relative aspect-16/9 w-full bg-black">
+                        <!-- YouTube Embed with full playback & scrub controls -->
                         <iframe
-                            :src="`https://www.youtube.com/embed/${activeVideo.src}?autoplay=1&rel=0&modestbranding=1`"
+                            v-if="activeVideo.type === 'youtube' || activeVideo.youtubeId"
+                            :src="`https://www.youtube.com/embed/${activeVideo.youtubeId || activeVideo.src}?autoplay=1&rel=0&modestbranding=1&controls=1&enablejsapi=1`"
                             :title="getLocalized(activeVideo.title)"
                             class="absolute inset-0 h-full w-full border-0"
                             allow="
@@ -807,27 +1040,44 @@ onUnmounted(() => {
                             "
                             allowfullscreen
                         ></iframe>
+
+                        <!-- Local MP4 Player with native controls, scrubbing, pause -->
+                        <video
+                            v-else
+                            ref="videoPlayerRef"
+                            :src="activeVideo.src"
+                            :poster="activeVideo.poster"
+                            controls
+                            autoplay
+                            playsinline
+                            class="h-full w-full object-contain"
+                        ></video>
                     </div>
 
-                    <!-- Modal Footer Bar -->
-                    <div class="flex items-center justify-between border-t border-white/10 bg-zinc-900/90 px-6 py-3 text-xs text-white/70">
-                        <span>Treetino Media Coverage</span>
+                    <!-- Modal Description & Action Bar -->
+                    <div
+                        class="flex flex-col items-start justify-between gap-4 border-t border-black/5 bg-zinc-50 px-6 py-4 text-xs text-black/75 sm:flex-row sm:items-center sm:text-sm"
+                    >
+                        <p class="max-w-2xl leading-relaxed text-black/70">
+                            {{ getLocalized(activeVideo.description) || getLocalized(activeVideo.title) }}
+                        </p>
                         <a
-                            v-if="activeVideo.type === 'mp4'"
-                            :href="activeVideo.src"
-                            download
-                            class="inline-flex items-center gap-1.5 font-medium text-t-blue transition hover:underline"
-                        >
-                            <span>Stáhnout video (MP4)</span>
-                        </a>
-                        <a
-                            v-else
-                            :href="`https://www.youtube.com/watch?v=${activeVideo.src}`"
+                            v-if="activeVideo.type === 'youtube' || activeVideo.youtubeId"
+                            :href="`https://www.youtube.com/watch?v=${activeVideo.youtubeId || activeVideo.src}`"
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="inline-flex items-center gap-1.5 font-medium text-t-blue transition hover:underline"
+                            class="inline-flex shrink-0 items-center gap-1.5 text-xs font-semibold text-t-blue transition-colors hover:text-t-blue/80"
                         >
-                            <span>{{ $t('media.open_on_youtube') }}</span>
+                            <span>{{ openOnYoutubeLabel }}</span>
+                            <ExternalLink class="h-3.5 w-3.5" />
+                        </a>
+                        <a
+                            v-else-if="activeVideo.src"
+                            :href="activeVideo.src"
+                            download
+                            class="inline-flex shrink-0 items-center gap-1.5 text-xs font-semibold text-t-blue transition-colors hover:text-t-blue/80"
+                        >
+                            <span>{{ locale === 'cs' ? 'Stáhnout video (MP4)' : 'Download video (MP4)' }}</span>
                             <ExternalLink class="h-3.5 w-3.5" />
                         </a>
                     </div>
@@ -848,7 +1098,7 @@ onUnmounted(() => {
                         type="button"
                         @click="closeLightbox"
                         class="absolute -top-12 right-0 z-10 flex h-10 w-10 cursor-pointer items-center justify-center text-white/80 transition hover:text-white"
-                        :title="$t('media.close_lightbox')"
+                        :title="closeLightboxLabel"
                     >
                         <X class="h-6 w-6" />
                     </button>
