@@ -403,7 +403,44 @@ const benefitKeys = [
     'configurator.checkout.benefit_7',
 ];
 
+const benefitDefaults: Record<string, { cs: string; en: string }> = {
+    'configurator.checkout.benefit_1': {
+        cs: 'Cena obsahuje měřicí stanici na 2 měsíce – pro zjištění návratnosti',
+        en: 'Includes measurement station deployment for 2 months to assess exact ROI',
+    },
+    'configurator.checkout.benefit_2': {
+        cs: 'Náklady na cestu',
+        en: 'Travel and logistics costs',
+    },
+    'configurator.checkout.benefit_3': {
+        cs: 'Náklady na montáž měřidla',
+        en: 'Measurement station installation and calibration',
+    },
+    'configurator.checkout.benefit_4': {
+        cs: 'Konečnou cenovou nabídku',
+        en: 'Final binding commercial quote',
+    },
+    'configurator.checkout.benefit_5': {
+        cs: 'Kalkulaci odhadované návratnosti zařízení',
+        en: 'Detailed estimated ROI and yield calculation',
+    },
+    'configurator.checkout.benefit_6': {
+        cs: 'Dotační poradenství',
+        en: 'Subsidy and grant advisory',
+    },
+    'configurator.checkout.benefit_7': {
+        cs: 'Poznámka: Cena prohlídky se odečte od finální ceny zařízení',
+        en: 'Note: Inspection fee is fully deducted from the final purchase price',
+    },
+};
+
 const reservationBenefits = computed<string[]>(() => {
-    return benefitKeys.map((key) => t(key));
+    const isEn = locale.value === 'en';
+    return benefitKeys.map((key) => {
+        const fallback = isEn
+            ? benefitDefaults[key]?.en
+            : benefitDefaults[key]?.cs;
+        return t(key, fallback || '');
+    });
 });
 </script>
