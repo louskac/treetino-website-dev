@@ -5,7 +5,7 @@
     >
         <!-- Ambient Studio Lighting -->
         <div
-            class="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_30%,rgba(14,165,233,0.18),rgba(0,0,0,0))]"
+            class="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_30%,rgba(14,165,233,0.14),rgba(0,0,0,0))]"
         ></div>
         <div
             class="absolute inset-0 bg-[radial-gradient(circle_at_12%_40%,rgba(14,165,233,0.08),transparent_50%)]"
@@ -14,150 +14,19 @@
             class="absolute inset-0 bg-[radial-gradient(circle_at_88%_60%,rgba(14,165,233,0.08),transparent_50%)]"
         ></div>
 
-        <!-- Minimalist City Map Vector SVG Canvas -->
-        <svg
-            class="h-full w-full opacity-60"
-            viewBox="0 0 1600 1000"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            preserveAspectRatio="xMidYMid slice"
-        >
-            <defs>
-                <!-- Subtle Gradient for Roads -->
-                <linearGradient
-                    id="roadGrad"
-                    x1="0%"
-                    y1="0%"
-                    x2="100%"
-                    y2="100%"
-                >
-                    <stop offset="0%" stop-color="white" stop-opacity="0.03" />
-                    <stop offset="50%" stop-color="white" stop-opacity="0.06" />
-                    <stop
-                        offset="100%"
-                        stop-color="white"
-                        stop-opacity="0.03"
-                    />
-                </linearGradient>
-
-                <!-- Blue Glow Filter -->
-                <filter
-                    id="blueGlow"
-                    x="-30%"
-                    y="-30%"
-                    width="160%"
-                    height="160%"
-                >
-                    <feGaussianBlur stdDeviation="3" result="blur" />
-                    <feComposite
-                        in="SourceGraphic"
-                        in2="blur"
-                        operator="over"
-                    />
-                </filter>
-            </defs>
-
-            <!-- Minimal City River / Waterway Curve -->
-            <path
-                d="M -100 250 C 300 350, 500 150, 850 380 C 1200 600, 1400 450, 1750 600"
-                stroke="#0ea5e9"
-                stroke-opacity="0.07"
-                stroke-width="48"
-                stroke-linecap="round"
-                fill="none"
+        <!-- Authentic City Map Vector Layer (White on Dark Cartographic Street Network) -->
+        <div class="absolute inset-0 opacity-80 mix-blend-screen">
+            <img
+                src="/img/sales/city-map-blueprint.webp"
+                alt="City Map Blueprint"
+                class="h-full w-full object-cover object-bottom"
             />
-            <path
-                d="M -100 250 C 300 350, 500 150, 850 380 C 1200 600, 1400 450, 1750 600"
-                stroke="#0ea5e9"
-                stroke-opacity="0.12"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                fill="none"
-            />
+        </div>
 
-            <!-- City Grid: Major Arterial Streets (CAD Minimalist Lines) -->
-            <g
-                stroke="url(#roadGrad)"
-                stroke-width="1.2"
-                stroke-linecap="round"
-            >
-                <!-- Diagonal Arteries -->
-                <line x1="-100" y1="120" x2="1700" y2="780" />
-                <line x1="-100" y1="380" x2="1700" y2="920" />
-                <line x1="-100" y1="700" x2="1500" y2="-100" />
-                <line x1="200" y1="1100" x2="1750" y2="200" />
-
-                <!-- Horizontal & Vertical Grid Lines -->
-                <line
-                    x1="220"
-                    y1="0"
-                    x2="220"
-                    y2="1000"
-                    stroke-dasharray="6,8"
-                    stroke-opacity="0.04"
-                />
-                <line x1="450" y1="0" x2="450" y2="1000" />
-                <line
-                    x1="680"
-                    y1="0"
-                    x2="680"
-                    y2="1000"
-                    stroke-dasharray="4,6"
-                    stroke-opacity="0.03"
-                />
-                <line
-                    x1="920"
-                    y1="0"
-                    x2="920"
-                    y2="1000"
-                    stroke-dasharray="4,6"
-                    stroke-opacity="0.03"
-                />
-                <line x1="1150" y1="0" x2="1150" y2="1000" />
-                <line
-                    x1="1380"
-                    y1="0"
-                    x2="1380"
-                    y2="1000"
-                    stroke-dasharray="6,8"
-                    stroke-opacity="0.04"
-                />
-
-                <line x1="0" y1="180" x2="1600" y2="180" />
-                <line
-                    x1="0"
-                    y1="420"
-                    x2="1600"
-                    y2="420"
-                    stroke-dasharray="8,8"
-                    stroke-opacity="0.03"
-                />
-                <line x1="0" y1="650" x2="1600" y2="650" />
-                <line
-                    x1="0"
-                    y1="840"
-                    x2="1600"
-                    y2="840"
-                    stroke-dasharray="6,6"
-                    stroke-opacity="0.04"
-                />
-            </g>
-
-            <!-- Subtle City Block Rectangles -->
-            <g
-                stroke="white"
-                stroke-opacity="0.03"
-                stroke-width="1"
-                fill="none"
-            >
-                <rect x="260" y="240" width="100" height="70" rx="3" />
-                <rect x="280" y="480" width="90" height="110" rx="3" />
-                <rect x="1220" y="220" width="110" height="80" rx="3" />
-                <rect x="1230" y="490" width="90" height="90" rx="3" />
-                <rect x="440" y="700" width="140" height="70" rx="3" />
-                <rect x="1020" y="710" width="120" height="80" rx="3" />
-            </g>
-        </svg>
+        <!-- Center Readability Vignette (Softly dims the center to keep headline typography super crisp) -->
+        <div
+            class="absolute inset-0 bg-[radial-gradient(ellipse_70%_55%_at_50%_35%,rgba(9,9,11,0.85)_0%,rgba(9,9,11,0.4)_50%,transparent_100%)]"
+        ></div>
 
         <!-- HTML Overlay for Flank Locations (Strictly outside central text & laptop) -->
         <div
@@ -166,7 +35,7 @@
             class="pointer-events-none absolute hidden md:block"
             :style="node.positionStyle"
         >
-            <!-- Phase 1: Big Blue Icon + Blue Location Name (Same Matching Color, Zero Background) -->
+            <!-- Phase 1: White Icon + White Location Name (High Contrast against dark city map) -->
             <Transition name="fade-quick">
                 <div
                     v-if="node.stage === 'location'"
@@ -177,35 +46,35 @@
                             : 'flex-row text-left'
                     "
                 >
-                    <!-- Matching Blue Icon (Larger size) -->
+                    <!-- Pure White Icon -->
                     <component
                         :is="node.icon"
-                        class="h-6 w-6 shrink-0 text-t-blue drop-shadow-[0_0_12px_rgba(14,165,233,0.7)]"
+                        class="h-6 w-6 shrink-0 text-white drop-shadow-[0_0_12px_rgba(255,255,255,0.75)]"
                         stroke-width="2"
                     />
 
-                    <!-- Matching Blue Title -->
+                    <!-- Pure White Title -->
                     <span
-                        class="text-sm font-semibold tracking-tight whitespace-nowrap text-t-blue drop-shadow-[0_0_12px_rgba(14,165,233,0.5)] lg:text-base"
+                        class="text-sm font-semibold tracking-tight whitespace-nowrap text-white drop-shadow-[0_0_12px_rgba(255,255,255,0.6)] lg:text-base"
                     >
                         {{ $t(node.titleKey) }}
                     </span>
                 </div>
             </Transition>
 
-            <!-- Phase 2: Game-Like Cash-Out Float Up Animation (+450 000 Kč) -->
+            <!-- Phase 2: Game-Like Cash-Out Float Up Animation (+450 000 Kč) in Pure White -->
             <div
                 v-if="node.stage === 'cashout'"
-                class="cashout-number px-2 font-mono text-base font-bold tracking-wider whitespace-nowrap text-t-blue drop-shadow-[0_0_15px_rgba(14,165,233,0.9)] lg:text-lg"
+                class="cashout-number px-2 font-mono text-base font-bold tracking-wider whitespace-nowrap text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.95)] lg:text-lg"
                 :class="node.isRight ? 'text-right' : 'text-left'"
             >
                 {{ getCashoutAmount(node) }}
             </div>
         </div>
 
-        <!-- Bottom Fade to Light Body Background -->
+        <!-- Bottom Fade to Light Body Background directly aligning with base of Mac -->
         <div
-            class="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-gradient-to-b from-transparent via-[#fdfdfd]/20 to-[#fdfdfd] sm:h-64"
+            class="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-gradient-to-b from-transparent to-[#fdfdfd]"
         ></div>
     </div>
 </template>
@@ -265,7 +134,7 @@ const nodes = reactive<MapNode[]>([
         titleKey: 'sales.ideas.metal_title',
         amountCs: '+1 470 000 Kč',
         amountEn: '+€60,000',
-        positionStyle: { left: '2.5%', top: '48%' },
+        positionStyle: { left: '2.5%', top: '46%' },
         isRight: false,
         stage: 'idle',
     },
@@ -275,7 +144,7 @@ const nodes = reactive<MapNode[]>([
         titleKey: 'sales.ideas.bank_title',
         amountCs: '+490 000 Kč',
         amountEn: '+€20,000',
-        positionStyle: { right: '2.5%', top: '48%' },
+        positionStyle: { right: '2.5%', top: '46%' },
         isRight: true,
         stage: 'idle',
     },
@@ -285,7 +154,7 @@ const nodes = reactive<MapNode[]>([
         titleKey: 'sales.ideas.community_title',
         amountCs: '+144 000 Kč',
         amountEn: '+€5,880',
-        positionStyle: { left: '3.5%', top: '74%' },
+        positionStyle: { left: '3.5%', top: '64%' },
         isRight: false,
         stage: 'idle',
     },
@@ -295,7 +164,7 @@ const nodes = reactive<MapNode[]>([
         titleKey: 'sales.ideas.retail_title',
         amountCs: '+1 046 000 Kč',
         amountEn: '+€42,700',
-        positionStyle: { right: '3.5%', top: '74%' },
+        positionStyle: { right: '3.5%', top: '64%' },
         isRight: true,
         stage: 'idle',
     },
@@ -322,10 +191,10 @@ function triggerNode(index: number) {
         return;
     }
 
-    // Step 1: Display big blue icon + location title in matching blue
+    // Step 1: Display white icon + location title in pure white with glow
     node.stage = 'location';
 
-    // Step 2: After 2.3s, switch to game cashout animation
+    // Step 2: After 2.3s, switch to game cashout animation in pure white
     const cashoutTimeout = setTimeout(() => {
         if (!isRunning) {
             return;

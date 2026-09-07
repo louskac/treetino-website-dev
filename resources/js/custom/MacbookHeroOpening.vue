@@ -1,7 +1,7 @@
 <template>
     <div
         ref="containerRef"
-        class="perspective-1200 relative mx-auto w-full max-w-5xl pt-6 pb-8 select-none"
+        class="perspective-1200 relative mx-auto w-full max-w-5xl pt-6 pb-0 select-none"
     >
         <!-- Ambient Backlight Glow -->
         <div
@@ -89,7 +89,7 @@
 
             <!-- Laptop Reflection Shadow on Surface -->
             <div
-                class="h-10 w-[88%] rounded-full bg-black/90 blur-xl transition-all duration-300"
+                class="pointer-events-none -mb-10 h-10 w-[88%] rounded-full bg-black/90 blur-xl transition-all duration-300"
                 :style="{
                     transform: `scale(${0.8 + smoothProgress * 0.2})`,
                     opacity: 0.4 + smoothProgress * 0.6,
@@ -140,7 +140,9 @@
                     }}</span>
                     <span
                         class="font-mono font-bold text-zinc-900 dark:text-white"
-                        >{{ $t('app.macbook.commission_amount', '+299 758 Kč') }}</span
+                        >{{
+                            $t('app.macbook.commission_amount', '+299 758 Kč')
+                        }}</span
                     >
                 </div>
             </div>
@@ -177,7 +179,9 @@
                 >
                     <span
                         class="font-mono font-bold text-zinc-900 dark:text-white"
-                        >{{ $t('app.macbook.proposal_price', '4 900 000 Kč') }}</span
+                        >{{
+                            $t('app.macbook.proposal_price', '4 900 000 Kč')
+                        }}</span
                     >
                     <span
                         class="inline-flex items-center gap-1.5 rounded-lg bg-t-blue px-2.5 py-1 font-mono text-[11px] font-medium text-white shadow-sm"

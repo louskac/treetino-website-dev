@@ -4,7 +4,7 @@
     <DefaultLayout :scroll="true">
         <!-- Hero Section - Dark Atmospheric Studio Hero with Minimalist City Map Blueprint -->
         <section
-            class="hero relative overflow-hidden bg-zinc-950 pt-36 pb-20 text-white"
+            class="hero relative overflow-hidden bg-zinc-950 pt-36 pb-0 text-white"
         >
             <!-- Minimalist City Map Vector Background with Animated Architectural Blue Lines -->
             <SalesHeroCityMap />
