@@ -8,18 +8,18 @@
             class="showcase-pin relative flex h-screen w-full items-center overflow-hidden"
         >
             <div
-                class="relative mx-auto flex h-full w-full max-w-[1500px] items-center justify-between px-6 sm:w-full lg:w-[calc(100%-100px)] xl:w-[calc(100%-160px)]"
+                class="relative mx-auto flex h-full w-full max-w-[1500px] flex-col justify-center gap-4 px-6 sm:w-full lg:w-[calc(100%-100px)] lg:flex-row lg:items-center lg:justify-between lg:gap-0 xl:w-[calc(100%-160px)]"
             >
                 <!-- Left Column (Identical to HomeFeatures.vue) -->
-                <div class="z-20 w-full text-left lg:w-5/12">
+                <div class="z-20 w-full shrink-0 text-left lg:w-5/12">
                     <Transition name="section-content" mode="out-in">
                         <div
                             :key="currentSectionIndex"
-                            class="flex max-w-lg flex-col gap-4"
+                            class="flex max-w-lg flex-col gap-2 sm:gap-4"
                         >
                             <!-- Top Grey Counter (01 / 07) -->
                             <span
-                                class="font-mono text-sm font-medium text-black/40 tabular-nums"
+                                class="font-mono text-xs font-medium tabular-nums text-black/40 sm:text-sm"
                             >
                                 {{
                                     String(currentSectionIndex + 1).padStart(
@@ -32,7 +32,7 @@
 
                             <!-- Clean Title (No numbers) -->
                             <h2
-                                class="text-4xl leading-tight font-medium text-black sm:text-5xl"
+                                class="text-2xl font-medium leading-tight text-black sm:text-4xl lg:text-5xl"
                             >
                                 {{
                                     $t(
@@ -42,7 +42,9 @@
                             </h2>
 
                             <!-- Clean Lead Paragraph -->
-                            <p class="text-2xl leading-tight text-black/75">
+                            <p
+                                class="text-sm leading-snug text-black/75 sm:text-xl sm:leading-tight lg:text-2xl"
+                            >
                                 {{
                                     $t(
                                         `sales.interactive_steps.step${currentSectionIndex + 1}_desc`,
@@ -55,9 +57,9 @@
 
                 <!-- Right Column: 3D MacBook Pro Component (Macbook3D.vue) -->
                 <div
-                    class="relative z-10 hidden h-full items-center justify-center pl-4 lg:flex lg:w-7/12"
+                    class="relative z-10 flex w-full items-center justify-center lg:h-full lg:w-7/12 lg:pl-4"
                 >
-                    <div class="w-full max-w-5xl">
+                    <div class="w-full max-w-sm sm:max-w-xl lg:max-w-5xl">
                         <Macbook3D
                             :screen-src="sections[currentSectionIndex].screen"
                             :alt="sections[currentSectionIndex].alt"

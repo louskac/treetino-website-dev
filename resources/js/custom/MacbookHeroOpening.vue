@@ -108,11 +108,35 @@
 
         <!-- 1. Top-Left: B2B Deal Closed & Commission -->
         <div
-            class="absolute top-[8%] -left-2 z-30 transform-gpu transition-all duration-75 sm:-left-8 lg:-left-16"
+            class="absolute top-[3%] -left-1 z-30 transform-gpu transition-all duration-75 sm:top-[8%] sm:-left-8 lg:-left-16"
             :style="bubble1Style"
         >
+            <!-- Mobile Minimized Pill (<sm) -->
             <div
-                class="animate-float-1 w-[260px] rounded-2xl border border-zinc-200 bg-white p-4 shadow-[0_25px_60px_rgba(0,0,0,0.18)] sm:w-[300px] sm:p-5 dark:border-zinc-800 dark:bg-zinc-900"
+                class="animate-float-1 flex items-center gap-2 rounded-full border border-zinc-200/90 bg-white/95 px-3 py-1.5 shadow-lg backdrop-blur-md sm:hidden dark:border-zinc-800/90 dark:bg-zinc-900/95"
+            >
+                <div
+                    class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-t-blue/15 text-t-blue"
+                >
+                    <CheckCircle2 class="h-3.5 w-3.5" />
+                </div>
+                <div class="flex items-baseline gap-1.5 whitespace-nowrap">
+                    <span
+                        class="font-mono text-[10px] font-semibold text-zinc-400 uppercase"
+                        >CRM</span
+                    >
+                    <span
+                        class="font-mono text-xs font-bold text-zinc-900 dark:text-white"
+                        >{{
+                            $t('app.macbook.commission_amount', '+299 758 Kč')
+                        }}</span
+                    >
+                </div>
+            </div>
+
+            <!-- Desktop Full Card (sm+) -->
+            <div
+                class="animate-float-1 hidden w-[260px] rounded-2xl border border-zinc-200 bg-white p-4 shadow-[0_25px_60px_rgba(0,0,0,0.18)] sm:block sm:w-[300px] sm:p-5 dark:border-zinc-800 dark:bg-zinc-900"
             >
                 <div class="mb-2.5 flex items-center gap-3">
                     <div
@@ -150,11 +174,27 @@
 
         <!-- 2. Top-Right: PDF Commercial Proposal Export -->
         <div
-            class="absolute top-[6%] -right-2 z-30 transform-gpu transition-all duration-75 sm:-right-8 lg:-right-16"
+            class="absolute top-[3%] -right-1 z-30 transform-gpu transition-all duration-75 sm:top-[6%] sm:-right-8 lg:-right-16"
             :style="bubble2Style"
         >
+            <!-- Mobile Minimized Pill (<sm) -->
             <div
-                class="animate-float-2 w-[270px] rounded-2xl border border-zinc-200 bg-white p-4 shadow-[0_25px_60px_rgba(0,0,0,0.18)] sm:w-[310px] sm:p-5 dark:border-zinc-800 dark:bg-zinc-900"
+                class="animate-float-2 flex items-center gap-2 rounded-full border border-zinc-200/90 bg-white/95 px-3 py-1.5 shadow-lg backdrop-blur-md sm:hidden dark:border-zinc-800/90 dark:bg-zinc-900/95"
+            >
+                <div
+                    class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-t-blue/15 text-t-blue"
+                >
+                    <FileText class="h-3.5 w-3.5" />
+                </div>
+                <span
+                    class="font-mono text-xs font-bold whitespace-nowrap text-zinc-900 dark:text-white"
+                    >Proposal.pdf</span
+                >
+            </div>
+
+            <!-- Desktop Full Card (sm+) -->
+            <div
+                class="animate-float-2 hidden w-[270px] rounded-2xl border border-zinc-200 bg-white p-4 shadow-[0_25px_60px_rgba(0,0,0,0.18)] sm:block sm:w-[310px] sm:p-5 dark:border-zinc-800 dark:bg-zinc-900"
             >
                 <div class="mb-2.5 flex items-center gap-3">
                     <div
@@ -293,8 +333,15 @@ function handleImageError(event: Event) {
 
 const containerRef = ref<HTMLElement | null>(null);
 const smoothProgress = ref(0);
+const isMobile = ref(false);
 
 let animationFrameId: number | null = null;
+
+function updateDimensions() {
+    if (typeof window !== 'undefined') {
+        isMobile.value = window.innerWidth < 640;
+    }
+}
 
 function updateScrollProgress() {
     if (!containerRef.value) {
@@ -328,11 +375,14 @@ function handleScroll() {
 }
 
 onMounted(() => {
+    updateDimensions();
+    window.addEventListener('resize', updateDimensions, { passive: true });
     window.addEventListener('scroll', handleScroll, { passive: true });
     updateScrollProgress();
 });
 
 onUnmounted(() => {
+    window.removeEventListener('resize', updateDimensions);
     window.removeEventListener('scroll', handleScroll);
 
     if (animationFrameId !== null) {
@@ -341,8 +391,9 @@ onUnmounted(() => {
 });
 
 const lidTransformStyle = computed(() => {
-    // Starts partially open (-48deg) so the screen content is visible on page load, opens upright (0deg) on scroll
-    const closedAngle = -48;
+    // Starts partially open so screen content is visible, opens upright (0deg) on scroll.
+    // On mobile, start near-upright (-12deg) to prevent 3D perspective squashing.
+    const closedAngle = isMobile.value ? -12 : -48;
     const openAngle = 0;
     const currentAngle =
         closedAngle + (openAngle - closedAngle) * smoothProgress.value;
@@ -353,12 +404,12 @@ const lidTransformStyle = computed(() => {
 });
 
 const laptopTransformStyle = computed(() => {
-    const closedTilt = 22;
-    const openTilt = 8;
+    const closedTilt = isMobile.value ? 8 : 22;
+    const openTilt = isMobile.value ? 2 : 8;
     const currentTilt =
         closedTilt + (openTilt - closedTilt) * smoothProgress.value;
 
-    const closedScale = 0.92;
+    const closedScale = isMobile.value ? 0.96 : 0.92;
     const openScale = 1.0;
     const currentScale =
         closedScale + (openScale - closedScale) * smoothProgress.value;
@@ -402,8 +453,20 @@ function calculateBubbleSpring(
     };
 }
 
-const bubble1Style = computed(() => calculateBubbleSpring(0.7, 40, 50));
-const bubble2Style = computed(() => calculateBubbleSpring(0.76, -40, 50));
+const bubble1Style = computed(() =>
+    calculateBubbleSpring(
+        0.7,
+        isMobile.value ? 10 : 40,
+        isMobile.value ? 10 : 50,
+    ),
+);
+const bubble2Style = computed(() =>
+    calculateBubbleSpring(
+        0.76,
+        isMobile.value ? -10 : -40,
+        isMobile.value ? 10 : 50,
+    ),
+);
 const bubble3Style = computed(() => calculateBubbleSpring(0.82, -40, -40));
 </script>
 

@@ -1,7 +1,7 @@
 <template>
     <div
         ref="containerRef"
-        class="relative mx-auto flex h-[550px] w-full max-w-full cursor-grab items-center justify-center overflow-visible select-none active:cursor-grabbing sm:h-[650px] md:h-[720px] lg:h-[800px]"
+        class="relative mx-auto flex h-[260px] w-full max-w-full cursor-grab items-center justify-center overflow-visible select-none active:cursor-grabbing sm:h-[400px] md:h-[550px] lg:h-[720px] xl:h-[800px]"
         @mousemove="handleMouseMove"
         @mouseleave="handleMouseLeave"
     >
@@ -130,10 +130,15 @@ function updateCameraFrustum() {
     box.getSize(size);
 
     const maxDim = Math.max(size.x, size.y, size.z);
-    const fov = camera.fov * (Math.PI / 180);
+    const vFov = camera.fov * (Math.PI / 180);
+    const hFov = 2 * Math.atan(Math.tan(vFov / 2) * camera.aspect);
+
+    const distV = maxDim / 2 / Math.tan(vFov / 2);
+    const distH = maxDim / 2 / Math.tan(hFov / 2);
+    const baseDistance = Math.max(distV, distH);
 
     // Camera distance 1.38 provides big, bold model scale with complete clearance on all sides
-    const cameraDistance = Math.abs(maxDim / 2 / Math.tan(fov / 2)) * 1.38;
+    const cameraDistance = baseDistance * 1.38;
 
     // Offset camera slightly downward (-0.03) to elevate front laptop base comfortably above bottom edge
     camera.position.set(0, -maxDim * 0.03, cameraDistance);

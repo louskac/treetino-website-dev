@@ -993,31 +993,36 @@ onUnmounted(() => {
                 @click.self="closeVideoModal"
             >
                 <div
-                    class="relative w-full max-w-4xl overflow-hidden rounded-3xl border border-black/10 bg-white text-black shadow-2xl"
+                    class="relative w-full max-w-4xl overflow-hidden rounded-2xl border border-black/10 bg-white text-black shadow-2xl sm:rounded-3xl"
                 >
                     <!-- Modal Top Bar -->
                     <div
-                        class="flex items-center justify-between border-b border-black/10 bg-white px-6 py-4"
+                        class="flex items-center justify-between gap-3 border-b border-black/10 bg-white px-4 py-3 sm:px-6 sm:py-4"
                     >
-                        <div class="flex items-center gap-3">
+                        <div
+                            class="flex min-w-0 flex-1 items-center gap-2 sm:gap-3"
+                        >
                             <span
-                                class="rounded-full bg-t-blue/10 px-2.5 py-0.5 text-[11px] font-bold tracking-wider text-t-blue uppercase"
+                                class="shrink-0 whitespace-nowrap rounded-full bg-t-blue/10 px-2 py-0.5 text-[10px] font-bold tracking-wider text-t-blue uppercase sm:px-2.5 sm:text-[11px]"
                             >
                                 {{ activeVideo.tag || 'VIDEO' }}
                             </span>
                             <h4
-                                class="max-w-[280px] truncate text-sm font-semibold text-black sm:max-w-md sm:text-base"
+                                class="min-w-0 flex-1 truncate text-xs font-semibold text-black sm:text-base"
                             >
-                                {{ getLocalized(activeVideo.title) || playReportageLabel }}
+                                {{
+                                    getLocalized(activeVideo.title) ||
+                                    playReportageLabel
+                                }}
                             </h4>
                         </div>
                         <button
                             type="button"
                             @click="closeVideoModal"
-                            class="cursor-pointer rounded-full bg-black/5 p-2 text-black/60 transition hover:bg-black/10 hover:text-black"
+                            class="shrink-0 cursor-pointer rounded-full bg-black/5 p-2 text-black/60 transition hover:bg-black/10 hover:text-black"
                             :title="closeVideoLabel"
                         >
-                            <X class="h-4 w-4" />
+                            <X class="h-4 w-4 sm:h-5 sm:w-5" />
                         </button>
                     </div>
 

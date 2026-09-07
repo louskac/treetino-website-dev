@@ -163,9 +163,9 @@ const patentFeatures = [
             class="flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between"
         >
             <div class="max-w-3xl">
-                <div class="flex items-center gap-2">
+                <div class="flex flex-wrap items-center gap-2">
                     <span
-                        class="inline-flex items-center gap-1.5 rounded-full bg-t-blue/10 px-3 py-1 text-xs font-semibold tracking-wider text-t-blue uppercase"
+                        class="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-t-blue/10 px-3 py-1 text-xs font-semibold tracking-wider text-t-blue uppercase"
                     >
                         <Award class="h-3.5 w-3.5" />
                         <span>{{
@@ -173,12 +173,12 @@ const patentFeatures = [
                         }}</span>
                     </span>
                     <span
-                        class="rounded-full border border-black/10 bg-zinc-50 px-2.5 py-0.5 font-mono text-[11px] font-semibold text-black/70"
+                        class="whitespace-nowrap rounded-full border border-black/10 bg-zinc-50 px-2.5 py-0.5 font-mono text-[11px] font-semibold text-black/70"
                     >
                         EP 4 664 750 A1
                     </span>
                     <span
-                        class="rounded-full border border-black/10 bg-zinc-50 px-2.5 py-0.5 font-mono text-[11px] font-semibold text-black/70"
+                        class="whitespace-nowrap rounded-full border border-black/10 bg-zinc-50 px-2.5 py-0.5 font-mono text-[11px] font-semibold text-black/70"
                     >
                         WO 2025/256678 A1
                     </span>
