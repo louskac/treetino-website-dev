@@ -28,3 +28,11 @@ yarn-error.log
 .vercel
 .env*
 scratch/
+/public/app
+pricing/frontend/dist
+pricing/frontend/node_modules
+pricing/node_modules
+pricing/backend/venv
+pricing/**/__pycache__
+pricing/backend/uvicorn.log
+pricing/backend/db.sqlite

@@ -678,7 +678,7 @@ const opportunities = SALES_OPPORTUNITIES;
 const pricingAppUrl = computed(() => {
     return (
         (import.meta.env.VITE_PRICING_APP_URL as string) ||
-        'https://treetino-pricing.vercel.app'
+        '/app'
     );
 });
 

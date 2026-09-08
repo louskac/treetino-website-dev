@@ -1,0 +1,18 @@
+{
+    "buildCommand": "cd frontend && npm run build",
+    "outputDirectory": "frontend/dist",
+    "installCommand": "cd frontend && npm install",
+    "framework": "vite",
+    "functions": {
+        "api/**": {
+            "includeFiles": "backend/app/**",
+            "excludeFiles": "{frontend/**,node_modules/**,backend/venv/**,backend/static/**,backend/*.py,backend/*.png,backend/*.pdf,backend/*.sqlite,build_*.py,*.md}"
+        }
+    },
+    "rewrites": [
+        {
+            "source": "/api/(.*)",
+            "destination": "/api/index.py"
+        }
+    ]
+}

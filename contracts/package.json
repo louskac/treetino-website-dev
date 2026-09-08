@@ -1,0 +1,16 @@
+{
+  "name": "treetino-contracts",
+  "version": "1.0.0",
+  "description": "Treetino Creditcoin CC3 & Attestcoin Protocol Smart Contracts",
+  "scripts": {
+    "build": "forge build",
+    "test": "forge test",
+    "deploy:cc3": "forge script script/Deploy.s.sol:Deploy --rpc-url creditcoin_testnet --broadcast"
+  },
+  "dependencies": {
+    "@gluwa/usc-sdk": "^2.0.0"
+  },
+  "devDependencies": {
+    "ethers": "^6.13.0"
+  }
+}

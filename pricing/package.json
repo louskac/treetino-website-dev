@@ -1,0 +1,14 @@
+{
+    "name": "treetino-app-monorepo",
+    "private": true,
+    "scripts": {
+        "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+        "build": "npm run build:frontend",
+        "dev:backend": "cd backend && ./venv/bin/uvicorn app.main:app --port 8001 --reload",
+        "dev:frontend": "cd frontend && npm run dev",
+        "build:frontend": "cd frontend && npm run build"
+    },
+    "devDependencies": {
+        "concurrently": "^9.2.1"
+    }
+}

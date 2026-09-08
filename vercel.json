@@ -3,7 +3,19 @@
     "outputDirectory": "public",
     "rewrites": [
         {
-            "source": "/((?!api|build|img|video|docs|models|.*\\.pdf$|favicon.ico|apple-touch-icon.png|robots.txt).*)",
+            "source": "/app",
+            "destination": "/app/index.html"
+        },
+        {
+            "source": "/app/",
+            "destination": "/app/index.html"
+        },
+        {
+            "source": "/api/((?!checkout|contact).*)",
+            "destination": "https://treetino-pricing.vercel.app/api/$1"
+        },
+        {
+            "source": "/((?!api|app|build|img|video|docs|models|.*\\.pdf$|favicon.ico|apple-touch-icon.png|robots.txt).*)",
             "destination": "/index.html"
         }
     ]
