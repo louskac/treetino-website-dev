@@ -78,6 +78,24 @@ Route::get('/sales/nda/download', [LegalController::class, 'downloadNda']);
 Route::get('/sales/mediation', [LegalController::class, 'mediation']);
 Route::get('/sales/mediation/download', [LegalController::class, 'downloadMediation']);
 
+// Patents
+Route::get('/docs/patent-ep-4664750.pdf', function () {
+    $path = public_path('docs/patent-ep-4664750.pdf');
+    return file_exists($path) ? response()->file($path, ['Content-Type' => 'application/pdf']) : abort(404);
+});
+Route::get('/docs/patent-wo-2025256678.pdf', function () {
+    $path = public_path('docs/patent-wo-2025256678.pdf');
+    return file_exists($path) ? response()->file($path, ['Content-Type' => 'application/pdf']) : abort(404);
+});
+Route::get('/patent-ep-4664750.pdf', function () {
+    $path = public_path('patent-ep-4664750.pdf');
+    return file_exists($path) ? response()->file($path, ['Content-Type' => 'application/pdf']) : abort(404);
+});
+Route::get('/patent-wo-2025256678.pdf', function () {
+    $path = public_path('patent-wo-2025256678.pdf');
+    return file_exists($path) ? response()->file($path, ['Content-Type' => 'application/pdf']) : abort(404);
+});
+
 // Checkout
 Route::post('/checkout', [PreorderController::class, 'initiate'])->name('checkout-initiate');
 Route::post('/api/checkout', [PreorderController::class, 'initiate'])->name('api.checkout');
