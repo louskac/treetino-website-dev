@@ -69,14 +69,16 @@ function printPage() {
                     >
                         <template v-if="isEn">
                             <a
-                                href="/legal/mediation/download?lang=en"
+                                href="/downloads/treetino-mediation-agreement-en.pdf"
+                                download="treetino-mediation-agreement-en.pdf"
                                 class="inline-flex items-center gap-2 rounded-xl bg-t-blue px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-sky-600"
                             >
                                 <Download class="h-4 w-4" />
                                 <span>Download PDF (English)</span>
                             </a>
                             <a
-                                href="/legal/mediation/download?lang=cs"
+                                href="/downloads/treetino-smlouva-zprostredkovani.pdf"
+                                download="treetino-smlouva-zprostredkovani.pdf"
                                 class="inline-flex items-center gap-2 rounded-xl border border-black/15 bg-white px-4 py-3 text-sm font-semibold text-slate-800 shadow-2xs transition hover:bg-slate-50 dark:border-white/20 dark:bg-zinc-900 dark:text-white dark:hover:bg-zinc-800"
                             >
                                 <Download class="h-4 w-4" />
@@ -93,14 +95,16 @@ function printPage() {
                         </template>
                         <template v-else>
                             <a
-                                href="/legal/mediation/download?lang=cs"
+                                href="/downloads/treetino-smlouva-zprostredkovani.pdf"
+                                download="treetino-smlouva-zprostredkovani.pdf"
                                 class="inline-flex items-center gap-2 rounded-xl bg-t-blue px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-sky-600"
                             >
                                 <Download class="h-4 w-4" />
                                 <span>Stáhnout PDF (Česky)</span>
                             </a>
                             <a
-                                href="/legal/mediation/download?lang=en"
+                                href="/downloads/treetino-mediation-agreement-en.pdf"
+                                download="treetino-mediation-agreement-en.pdf"
                                 class="inline-flex items-center gap-2 rounded-xl border border-black/15 bg-white px-4 py-3 text-sm font-semibold text-slate-800 shadow-2xs transition hover:bg-slate-50 dark:border-white/20 dark:bg-zinc-900 dark:text-white dark:hover:bg-zinc-800"
                             >
                                 <Download class="h-4 w-4" />
@@ -974,14 +978,16 @@ function printPage() {
                         >
                             <template v-if="isEn">
                                 <a
-                                    href="/legal/mediation/download?lang=en"
+                                    href="/downloads/treetino-mediation-agreement-en.pdf"
+                                    download="treetino-mediation-agreement-en.pdf"
                                     class="inline-flex items-center gap-2 rounded-xl bg-t-blue px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-sky-600"
                                 >
                                     <Download class="h-4 w-4" />
                                     <span>Download PDF (English)</span>
                                 </a>
                                 <a
-                                    href="/legal/mediation/download?lang=cs"
+                                    href="/downloads/treetino-smlouva-zprostredkovani.pdf"
+                                    download="treetino-smlouva-zprostredkovani.pdf"
                                     class="inline-flex items-center gap-2 rounded-xl border border-black/15 bg-white px-5 py-3.5 text-sm font-semibold text-slate-800 shadow-2xs transition hover:bg-slate-50 dark:border-white/20 dark:bg-zinc-900 dark:text-white dark:hover:bg-zinc-800"
                                 >
                                     <Download class="h-4 w-4" />
@@ -998,14 +1004,16 @@ function printPage() {
                             </template>
                             <template v-else>
                                 <a
-                                    href="/legal/mediation/download?lang=cs"
+                                    href="/downloads/treetino-smlouva-zprostredkovani.pdf"
+                                    download="treetino-smlouva-zprostredkovani.pdf"
                                     class="inline-flex items-center gap-2 rounded-xl bg-t-blue px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-sky-600"
                                 >
                                     <Download class="h-4 w-4" />
                                     <span>Stáhnout PDF (Česky)</span>
                                 </a>
                                 <a
-                                    href="/legal/mediation/download?lang=en"
+                                    href="/downloads/treetino-mediation-agreement-en.pdf"
+                                    download="treetino-mediation-agreement-en.pdf"
                                     class="inline-flex items-center gap-2 rounded-xl border border-black/15 bg-white px-5 py-3.5 text-sm font-semibold text-slate-800 shadow-2xs transition hover:bg-slate-50 dark:border-white/20 dark:bg-zinc-900 dark:text-white dark:hover:bg-zinc-800"
                                 >
                                     <Download class="h-4 w-4" />

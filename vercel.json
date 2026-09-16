@@ -15,7 +15,67 @@
             "destination": "/app/index.html"
         },
         {
-            "source": "/((?!api|app|build|img|video|docs|models|.*\\.pdf$|favicon.ico|apple-touch-icon.png|robots.txt).*)",
+            "source": "/legal/nda/download",
+            "has": [
+                {
+                    "type": "query",
+                    "key": "lang",
+                    "value": "en"
+                }
+            ],
+            "destination": "/downloads/treetino-nda-sales-partner-en.pdf"
+        },
+        {
+            "source": "/legal/nda/download",
+            "destination": "/downloads/treetino-nda-obchodni-zastupce.pdf"
+        },
+        {
+            "source": "/sales/nda/download",
+            "has": [
+                {
+                    "type": "query",
+                    "key": "lang",
+                    "value": "en"
+                }
+            ],
+            "destination": "/downloads/treetino-nda-sales-partner-en.pdf"
+        },
+        {
+            "source": "/sales/nda/download",
+            "destination": "/downloads/treetino-nda-obchodni-zastupce.pdf"
+        },
+        {
+            "source": "/legal/mediation/download",
+            "has": [
+                {
+                    "type": "query",
+                    "key": "lang",
+                    "value": "en"
+                }
+            ],
+            "destination": "/downloads/treetino-mediation-agreement-en.pdf"
+        },
+        {
+            "source": "/legal/mediation/download",
+            "destination": "/downloads/treetino-smlouva-zprostredkovani.pdf"
+        },
+        {
+            "source": "/sales/mediation/download",
+            "has": [
+                {
+                    "type": "query",
+                    "key": "lang",
+                    "value": "en"
+                }
+            ],
+            "destination": "/downloads/treetino-mediation-agreement-en.pdf"
+        },
+        {
+            "source": "/sales/mediation/download",
+            "destination": "/downloads/treetino-smlouva-zprostredkovani.pdf"
+        },
+        {
+            "source": "/((?!api|app|build|img|video|docs|downloads|models|.*\\.pdf$|.*\\.zip$|favicon.ico|apple-touch-icon.png|robots.txt).*)",
             "destination": "/index.html"
         }
     ]

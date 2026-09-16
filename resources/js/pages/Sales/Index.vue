@@ -591,7 +591,9 @@
                             <span>{{ $t('sales.datasheet.row5_val') }}</span>
                             <div class="flex items-center gap-3">
                                 <a
-                                    href="/legal/nda/download"
+                                    :href="ndaDownloadUrl"
+                                    :download="ndaDownloadFilename"
+                                    target="_blank"
                                     class="inline-flex items-center gap-1 text-xs font-semibold text-t-blue hover:underline"
                                 >
                                     <Download class="h-3.5 w-3.5" />
@@ -621,7 +623,9 @@
                             <span>{{ $t('sales.datasheet.row6_val') }}</span>
                             <div class="flex items-center gap-3">
                                 <a
-                                    href="/legal/mediation/download"
+                                    :href="mediationDownloadUrl"
+                                    :download="mediationDownloadFilename"
+                                    target="_blank"
                                     class="inline-flex items-center gap-1 text-xs font-semibold text-t-blue hover:underline"
                                 >
                                     <Download class="h-3.5 w-3.5" />
@@ -671,7 +675,31 @@ import SalesOpportunitiesShowcase from '@/custom/sales/SalesOpportunitiesShowcas
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
 import { SALES_OPPORTUNITIES } from '@/types/sales';
 
-const { t } = useI18n();
+const { t, locale } = useI18n();
+
+const ndaDownloadUrl = computed(() => {
+    return locale.value === 'en'
+        ? '/downloads/treetino-nda-sales-partner-en.pdf'
+        : '/downloads/treetino-nda-obchodni-zastupce.pdf';
+});
+
+const ndaDownloadFilename = computed(() => {
+    return locale.value === 'en'
+        ? 'treetino-nda-sales-partner-en.pdf'
+        : 'treetino-nda-obchodni-zastupce.pdf';
+});
+
+const mediationDownloadUrl = computed(() => {
+    return locale.value === 'en'
+        ? '/downloads/treetino-mediation-agreement-en.pdf'
+        : '/downloads/treetino-smlouva-zprostredkovani.pdf';
+});
+
+const mediationDownloadFilename = computed(() => {
+    return locale.value === 'en'
+        ? 'treetino-mediation-agreement-en.pdf'
+        : 'treetino-smlouva-zprostredkovani.pdf';
+});
 
 const opportunities = SALES_OPPORTUNITIES;
 
