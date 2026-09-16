@@ -59,10 +59,13 @@ class TranslationService
                             continue;
                         }
 
+                        $rawValue = $values[$locale] ?? $values[config('app.fallback_locale')] ?? '';
+                        $value = is_array($rawValue) ? json_encode($rawValue, JSON_UNESCAPED_UNICODE) : (string) $rawValue;
+
                         $rows[] = [
                             'translation_key_id' => $translationKey->id,
                             'locale' => $locale,
-                            'value' => $values[$locale] ?? $values[config('app.fallback_locale')] ?? '',
+                            'value' => $value,
                             'synced_at' => $now,
                             'created_at' => $now,
                             'updated_at' => $now,

@@ -14,13 +14,16 @@ class SetLocale
 {
     public function handle(Request $request, Closure $next): Response
     {
-        $supported = config('localization.locales');
-        $locale = $request->cookie(config('localization.cookie'))
+        $supported = config('localization.locales', ['cs', 'en']);
+        $cookieName = config('localization.cookie', 'locale');
+
+        $locale = $request->cookie($cookieName)
+            ?? $request->cookie('app_locale')
             ?? $request->session()->get('locale')
-            ?? config('app.locale');
+            ?? config('app.locale', 'cs');
 
         if (! in_array($locale, $supported, true)) {
-            $locale = config('app.fallback_locale');
+            $locale = config('app.fallback_locale', 'en');
         }
 
         App::setLocale($locale);

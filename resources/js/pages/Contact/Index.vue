@@ -8,6 +8,7 @@ import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { route } from 'ziggy-js';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
+import FoundersSection from '@/custom/FoundersSection.vue';
 import HomeCtaGeneric from '@/custom/home/HomeCtaGeneric.vue';
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
 
@@ -46,6 +47,7 @@ function validateForm(): boolean {
     }
 
     formErrors.value = errors;
+
     return Object.keys(errors).length === 0;
 }
 
@@ -87,8 +89,7 @@ async function formProcess() {
         } else if (requestError.response?.data?.message) {
             generalError.value = requestError.response.data.message;
         } else {
-            generalError.value =
-                'Nepodařilo se odeslat zprávu. Zkontrolujte prosím připojení k internetu.';
+            generalError.value = t('contact.form.error_generic');
         }
 
         formSent.value = false;
@@ -163,7 +164,7 @@ async function formProcess() {
                                     >
                                         Bílá – Vlčetín 62<br />
                                         463 43 Bílá – Vlčetín<br />
-                                        Česká republika
+                                        {{ $t('contact.country') }}
                                     </p>
                                     <p class="mt-2 text-xs text-black/50">
                                         IČO: 10800107 • DIČ: CZ10800107
@@ -406,118 +407,9 @@ async function formProcess() {
                 </section>
 
                 <!-- Team & Founders Section -->
-                <section class="border-t border-black/10 py-20 lg:py-28">
-                    <div class="mb-14">
-                        <span
-                            class="text-xs font-semibold tracking-[0.2em] text-t-blue uppercase"
-                        >
-                            {{ $t('contact.team_tag') }}
-                        </span>
-                        <h2
-                            class="mt-3 text-3xl font-medium tracking-tight text-black sm:text-4xl lg:text-5xl"
-                        >
-                            {{ $t('contact.team_title') }}
-                        </h2>
-                        <p
-                            class="mt-4 max-w-3xl text-base leading-relaxed text-black/70 sm:text-lg"
-                        >
-                            {{ $t('contact.team_lead') }}
-                        </p>
-                    </div>
-
-                    <div
-                        class="grid grid-cols-1 items-start gap-12 lg:grid-cols-12"
-                    >
-                        <!-- Left: Team Photo & Credentials (5 Cols) -->
-                        <div class="lg:col-span-5">
-                            <div
-                                class="group relative overflow-hidden rounded-3xl border border-black/10 bg-black shadow-2xl"
-                            >
-                                <div class="aspect-4/3 overflow-hidden">
-                                    <img
-                                        src="/img/team/founders-leaf.jpg"
-                                        alt="Treetino Founders Dominik Mašek & Jakub Lustyk"
-                                        class="h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
-                                    />
-                                </div>
-                                <div
-                                    class="pointer-events-none absolute inset-0 bg-linear-to-t from-black/85 via-black/20 to-transparent"
-                                ></div>
-                                <div
-                                    class="absolute inset-x-0 bottom-0 p-6 text-xs leading-relaxed text-white opacity-95"
-                                >
-                                    <p>{{ $t('contact.team_caption') }}</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Right: Founders & Key Team Profiles (7 Cols) -->
-                        <div class="space-y-8 lg:col-span-7">
-                            <!-- Founder: Dominik Mašek -->
-                            <div class="border-l-2 border-t-blue pl-6">
-                                <div class="flex items-center gap-2.5">
-                                    <h3
-                                        class="text-xl font-bold text-black sm:text-2xl"
-                                    >
-                                        {{ $t('contact.team_dominik_name') }}
-                                    </h3>
-                                    <span
-                                        class="rounded-full bg-t-blue/10 px-2.5 py-0.5 text-xs font-semibold text-t-blue"
-                                    >
-                                        {{ $t('contact.team_dominik_role') }}
-                                    </span>
-                                </div>
-                                <p
-                                    class="mt-2 text-xs leading-relaxed text-black/75 sm:text-sm"
-                                >
-                                    {{ $t('contact.team_dominik_desc') }}
-                                </p>
-                            </div>
-
-                            <!-- Founder: Jakub Lustyk -->
-                            <div class="border-l-2 border-t-blue pl-6">
-                                <div class="flex items-center gap-2.5">
-                                    <h3
-                                        class="text-xl font-bold text-black sm:text-2xl"
-                                    >
-                                        {{ $t('contact.team_jakub_name') }}
-                                    </h3>
-                                    <span
-                                        class="rounded-full bg-t-blue/10 px-2.5 py-0.5 text-xs font-semibold text-t-blue"
-                                    >
-                                        {{ $t('contact.team_jakub_role') }}
-                                    </span>
-                                </div>
-                                <p
-                                    class="mt-2 text-xs leading-relaxed text-black/75 sm:text-sm"
-                                >
-                                    {{ $t('contact.team_jakub_desc') }}
-                                </p>
-                            </div>
-
-                            <!-- Key Team: Radim Novotný -->
-                            <div class="border-l-2 border-black/20 pl-6">
-                                <div class="flex items-center gap-2.5">
-                                    <h3
-                                        class="text-lg font-bold text-black sm:text-xl"
-                                    >
-                                        {{ $t('contact.team_radim_name') }}
-                                    </h3>
-                                    <span
-                                        class="rounded-full border border-black/10 bg-zinc-100 px-2.5 py-0.5 text-xs font-semibold text-black/70"
-                                    >
-                                        {{ $t('contact.team_radim_role') }}
-                                    </span>
-                                </div>
-                                <p
-                                    class="mt-2 text-xs leading-relaxed text-black/75 sm:text-sm"
-                                >
-                                    {{ $t('contact.team_radim_desc') }}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                <div class="border-t border-black/10">
+                    <FoundersSection />
+                </div>
             </main>
 
             <!-- Final CTA Banner -->
