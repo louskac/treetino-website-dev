@@ -13,7 +13,7 @@ class LocaleTest extends TestCase
     {
         $this->from('/')->post('/locale', ['locale' => 'en'])
             ->assertRedirect('/')
-            ->assertCookie('locale', 'en');
+            ->assertPlainCookie('locale', 'en');
     }
 
     public function test_unsupported_locale_is_rejected(): void

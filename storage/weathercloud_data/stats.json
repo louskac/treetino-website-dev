@@ -1,0 +1,367 @@
+{
+  "last_update": 1787230693,
+  "bar_current": [
+    1787230693,
+    984.6
+  ],
+  "bar_day_max": [
+    1787224695,
+    985.1
+  ],
+  "bar_day_min": [
+    1787189893,
+    980.9
+  ],
+  "bar_month_max": [
+    1786579693,
+    1001.5
+  ],
+  "bar_month_min": [
+    1787189893,
+    980.9
+  ],
+  "bar_year_max": [
+    1779700816,
+    1004.8
+  ],
+  "bar_year_min": [
+    1778826013,
+    972
+  ],
+  "wdir_current": [
+    1787230693,
+    252
+  ],
+  "wdir_day_max": [
+    1787191095,
+    354
+  ],
+  "wdir_day_min": [
+    1787195293,
+    6
+  ],
+  "wdir_month_max": [
+    1785598099,
+    359
+  ],
+  "wdir_month_min": [
+    1785634096,
+    0
+  ],
+  "wdir_year_max": [
+    1774487544,
+    359
+  ],
+  "wdir_year_min": [
+    1774425142,
+    0
+  ],
+  "wdiravg_current": [
+    1787230693,
+    252
+  ],
+  "wdiravg_day_max": [
+    1787191095,
+    354
+  ],
+  "wdiravg_day_min": [
+    1787195293,
+    6
+  ],
+  "wdiravg_month_max": [
+    1785598099,
+    359
+  ],
+  "wdiravg_month_min": [
+    1785634096,
+    0
+  ],
+  "wdiravg_year_max": [
+    1774487544,
+    359
+  ],
+  "wdiravg_year_min": [
+    1774425142,
+    0
+  ],
+  "wspd_current": [
+    1787230693,
+    1.1
+  ],
+  "wspd_day_max": [
+    1787232493,
+    4
+  ],
+  "wspd_day_min": [
+    1787184495,
+    0
+  ],
+  "wspd_month_max": [
+    1786391901,
+    6.7
+  ],
+  "wspd_month_min": [
+    1785552496,
+    0
+  ],
+  "wspd_year_max": [
+    1775472621,
+    8.4
+  ],
+  "wspd_year_min": [
+    1774368135,
+    0
+  ],
+  "wspdhi_current": [
+    1787230693,
+    1.1
+  ],
+  "wspdhi_day_max": [
+    1787232493,
+    4.2
+  ],
+  "wspdhi_day_min": [
+    1787184495,
+    0
+  ],
+  "wspdhi_month_max": [
+    1785547693,
+    7.6
+  ],
+  "wspdhi_month_min": [
+    1785552496,
+    0
+  ],
+  "wspdhi_year_max": [
+    1775472621,
+    10.1
+  ],
+  "wspdhi_year_min": [
+    1774368135,
+    0
+  ],
+  "rainrate_current": [
+    1787230693,
+    0
+  ],
+  "rainrate_day_max": [
+    1787194693,
+    0.4
+  ],
+  "rainrate_day_min": [
+    1787184495,
+    0
+  ],
+  "rainrate_month_max": [
+    1785952694,
+    7.2
+  ],
+  "rainrate_month_min": [
+    1785542896,
+    0
+  ],
+  "rainrate_year_max": [
+    1784302694,
+    21.6
+  ],
+  "rainrate_year_min": [
+    1774364539,
+    0
+  ],
+  "rain_current": [
+    1787230693,
+    0.8
+  ],
+  "rain_day_max": [
+    1787195293,
+    0.8
+  ],
+  "rain_day_total": [
+    1787184000,
+    0.8
+  ],
+  "rain_month_max": [
+    1785953298,
+    8
+  ],
+  "rain_month_total": [
+    1785542400,
+    28
+  ],
+  "rain_year_max": [
+    1782859845,
+    26.4
+  ],
+  "rain_year_total": [
+    1767225600,
+    288.4
+  ],
+  "temp_current": [
+    1787230693,
+    26.6
+  ],
+  "temp_day_max": [
+    1787235496,
+    28
+  ],
+  "temp_day_min": [
+    1787190496,
+    13.4
+  ],
+  "temp_month_max": [
+    1785861493,
+    36.9
+  ],
+  "temp_month_min": [
+    1786599495,
+    5.4
+  ],
+  "temp_year_max": [
+    1782668422,
+    37.8
+  ],
+  "temp_year_min": [
+    1777529413,
+    -5.1
+  ],
+  "chill_current": [
+    1787230693,
+    26.6
+  ],
+  "chill_day_max": [
+    1787235496,
+    28
+  ],
+  "chill_day_min": [
+    1787190496,
+    13.4
+  ],
+  "chill_month_max": [
+    1785861493,
+    36.9
+  ],
+  "chill_month_min": [
+    1786599495,
+    5.4
+  ],
+  "chill_year_max": [
+    1782668422,
+    37.8
+  ],
+  "chill_year_min": [
+    1774593675,
+    -5.2
+  ],
+  "hum_current": [
+    1787230693,
+    51
+  ],
+  "hum_day_max": [
+    1787207898,
+    96
+  ],
+  "hum_day_min": [
+    1787236096,
+    48
+  ],
+  "hum_month_max": [
+    1787097498,
+    96
+  ],
+  "hum_month_min": [
+    1786811893,
+    23
+  ],
+  "hum_year_max": [
+    1775355626,
+    99
+  ],
+  "hum_year_min": [
+    1775753414,
+    21
+  ],
+  "dew_current": [
+    1787230693,
+    15.6
+  ],
+  "dew_day_max": [
+    1787215696,
+    18.7
+  ],
+  "dew_day_min": [
+    1787190496,
+    12.3
+  ],
+  "dew_month_max": [
+    1786025295,
+    21.8
+  ],
+  "dew_month_min": [
+    1786599495,
+    3.5
+  ],
+  "dew_year_max": [
+    1786025295,
+    21.8
+  ],
+  "dew_year_min": [
+    1775753414,
+    -10.8
+  ],
+  "wspdavg_current": [
+    1787230693,
+    1.1
+  ],
+  "wspdavg_day_max": [
+    1787232493,
+    4
+  ],
+  "wspdavg_day_min": [
+    1787184495,
+    0
+  ],
+  "wspdavg_month_max": [
+    1786391901,
+    6.7
+  ],
+  "wspdavg_month_min": [
+    1785552496,
+    0
+  ],
+  "wspdavg_year_max": [
+    1775472621,
+    8.4
+  ],
+  "wspdavg_year_min": [
+    1774368135,
+    0
+  ],
+  "heat_current": [
+    1787230693,
+    27.1
+  ],
+  "heat_day_max": [
+    1787235496,
+    28.3
+  ],
+  "heat_day_min": [
+    1787224093,
+    26
+  ],
+  "heat_month_max": [
+    1785856094,
+    36.4
+  ],
+  "heat_month_min": [
+    1785550093,
+    26
+  ],
+  "heat_year_max": [
+    1782668422,
+    38.4
+  ],
+  "heat_year_min": [
+    1779647412,
+    26
+  ]
+}
