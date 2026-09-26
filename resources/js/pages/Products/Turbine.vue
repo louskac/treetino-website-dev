@@ -456,7 +456,11 @@
                             </tr>
                             <tr>
                                 <td class="px-6 py-4 font-semibold">
-                                    {{ $t('products.datasheet.dimensions') }}
+                                    {{
+                                        $t(
+                                            'products.datasheet.turbine_dimensions',
+                                        )
+                                    }}
                                 </td>
                                 <td class="px-6 py-4 opacity-80">
                                     {{

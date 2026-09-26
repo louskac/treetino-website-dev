@@ -35,5 +35,5 @@ foreach ($catalog as $section => $data) {
 }
 
 $jsonPath = __DIR__ . '/../resources/js/i18n_messages.json';
-file_put_contents($jsonPath, json_encode($output, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+file_put_contents($jsonPath, json_encode($output, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
 echo "Successfully exported " . count($catalog) . " catalog sections into resources/js/i18n_messages.json!\n";

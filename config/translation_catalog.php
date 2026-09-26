@@ -327,6 +327,7 @@ return [
         'datasheet.wind' => ['cs' => 'VTE Větrné Turbíny', 'en' => 'Wind Turbines'],
         'datasheet.wind_speed' => ['cs' => 'Startovací / Jmenovitá Rychlost Větru', 'en' => 'Startup / Rated Wind Speed'],
         'datasheet.dimensions' => ['cs' => 'Rozměry & Zastavěná Plocha', 'en' => 'Dimensions & Footprint'],
+        'datasheet.turbine_dimensions' => ['cs' => 'Výkon × Výška', 'en' => 'Power × Height'],
         'datasheet.weight' => ['cs' => 'Hmotnost', 'en' => 'Weight'],
         'datasheet.voltage' => ['cs' => 'Max. Provozní Napětí DC', 'en' => 'Max Operating Voltage DC'],
         'datasheet.warranty_steel' => ['cs' => 'Záruka Ocelový Skelet', 'en' => 'Steel Skeleton Warranty'],
