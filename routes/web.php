@@ -39,6 +39,16 @@ Route::get('/presentation', function () {
     return redirect('/media#pitchdeck');
 });
 
+Route::get('/im', function () {
+    return redirect('/media#memorandum');
+})->name('memorandum.index');
+Route::get('/memorandum', function () {
+    return redirect('/media#memorandum');
+});
+Route::get('/investment-memorandum', function () {
+    return redirect('/media#memorandum');
+});
+
 Route::prefix('products')->name('products.')->group(function () {
     Route::get('/treetino-v1', [ProductsController::class, 'treeV1'])->name('treeV1');
     Route::get('/treetino-v2', [ProductsController::class, 'treeV2'])->name('treeV2');
@@ -93,6 +103,16 @@ Route::get('/patent-ep-4664750.pdf', function () {
 });
 Route::get('/patent-wo-2025256678.pdf', function () {
     $path = public_path('patent-wo-2025256678.pdf');
+    return file_exists($path) ? response()->file($path, ['Content-Type' => 'application/pdf']) : abort(404);
+});
+
+// Investment Memorandum PDF
+Route::get('/docs/Treetino_Investment_Memorandum_2026.pdf', function () {
+    $path = public_path('docs/Treetino_Investment_Memorandum_2026.pdf');
+    return file_exists($path) ? response()->file($path, ['Content-Type' => 'application/pdf']) : abort(404);
+});
+Route::get('/Treetino_Investment_Memorandum_2026.pdf', function () {
+    $path = public_path('docs/Treetino_Investment_Memorandum_2026.pdf');
     return file_exists($path) ? response()->file($path, ['Content-Type' => 'application/pdf']) : abort(404);
 });
 

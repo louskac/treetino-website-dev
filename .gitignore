@@ -36,3 +36,6 @@ pricing/backend/venv
 pricing/**/__pycache__
 pricing/backend/uvicorn.log
 pricing/backend/db.sqlite
+__pycache__/
+*.pyc
+

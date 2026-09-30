@@ -9,12 +9,14 @@ import {
     Palette,
     Award,
     Newspaper,
+    FileText,
 } from 'lucide-vue-next';
 import { route } from 'ziggy-js';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import ButtonSecondary from '@/custom/ButtonSecondary.vue';
 import HomeCtaGeneric from '@/custom/home/HomeCtaGeneric.vue';
 import MediaAppearances from '@/custom/media/MediaAppearances.vue';
+import MediaMemorandum from '@/custom/media/MediaMemorandum.vue';
 import MediaPatent from '@/custom/media/MediaPatent.vue';
 import MediaPitchDeck from '@/custom/media/MediaPitchDeck.vue';
 import MediaVideos from '@/custom/media/MediaVideos.vue';
@@ -78,6 +80,13 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue';
                             <span>{{ $t('media.nav_pitch') }}</span>
                         </a>
                         <a
+                            href="#memorandum"
+                            class="inline-flex items-center gap-2 rounded-full border border-black/15 bg-white px-4 py-2 text-xs font-medium text-black/80 shadow-xs transition hover:border-black/30 hover:bg-black/5"
+                        >
+                            <FileText class="h-3.5 w-3.5 text-black/60" />
+                            <span>{{ $t('media.nav_memorandum') }}</span>
+                        </a>
+                        <a
                             href="#brandkit"
                             class="inline-flex items-center gap-2 rounded-full border border-black/15 bg-white px-4 py-2 text-xs font-medium text-black/80 shadow-xs transition hover:border-black/30 hover:bg-black/5"
                         >
@@ -103,7 +112,10 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue';
                 <!-- 3. INTERACTIVE PITCH DECK -->
                 <MediaPitchDeck />
 
-                <!-- 4. BRAND KIT & PRESS RESOURCES (2 Editorial Columns) -->
+                <!-- 4. INVESTMENT MEMORANDUM 2026 -->
+                <MediaMemorandum />
+
+                <!-- 5. BRAND KIT & PRESS RESOURCES (2 Editorial Columns) -->
                 <section id="brandkit" class="scroll-mt-32 py-20 lg:py-28">
                     <div
                         class="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16"
