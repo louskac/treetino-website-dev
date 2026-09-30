@@ -6,12 +6,10 @@ import {
     Check,
     Lock,
     ShieldCheck,
-    ArrowRight,
     FileDown,
 } from 'lucide-vue-next';
 import { useI18n } from 'vue-i18n';
 import { route } from 'ziggy-js';
-import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 
 const { t, locale } = useI18n();
 
@@ -125,14 +123,14 @@ const pdfUrl = '/docs/Treetino_Investment_Memorandum_2026.pdf';
             </div>
         </div>
 
-        <!-- Main Light Teaser Card: Download Showcase -->
+        <!-- Single Light Teaser Card: Clean Document Showcase & Download -->
         <div
-            class="mt-12 overflow-hidden rounded-3xl border border-black/10 bg-zinc-50 p-8 sm:p-10 lg:p-12"
+            class="mt-10 overflow-hidden rounded-3xl border border-black/10 bg-zinc-50 p-8 sm:p-10 lg:p-12"
         >
             <div
-                class="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-14"
+                class="grid grid-cols-1 items-start gap-10 lg:grid-cols-12 lg:gap-14"
             >
-                <!-- Left Details & Scope Column -->
+                <!-- Left: Scope, Highlights & Exactly ONE Button Set -->
                 <div class="lg:col-span-7">
                     <div class="flex flex-wrap items-center gap-2.5">
                         <span
@@ -197,27 +195,24 @@ const pdfUrl = '/docs/Treetino_Investment_Memorandum_2026.pdf';
                         </ul>
                     </div>
 
-                    <!-- Action buttons -->
-                    <div class="mt-8 flex flex-wrap items-center gap-4">
-                        <ButtonPrimary
+                    <!-- Exactly ONE Pair of Action Buttons (Identical dimensions & typography, side-by-side) -->
+                    <div class="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                        <a
                             :href="pdfUrl"
                             download="Treetino_Investment_Memorandum_2026.pdf"
                             target="_blank"
-                            class="text-center"
+                            class="inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-t-blue px-5 py-2.5 text-xs font-semibold whitespace-nowrap text-white shadow-sm transition hover:bg-t-blue/90"
                         >
-                            <div class="flex items-center gap-2">
-                                <Download class="h-4 w-4" />
-                                <span>{{ $t('media.im_download_btn') }}</span>
-                            </div>
-                        </ButtonPrimary>
+                            <Download class="h-3.5 w-3.5" />
+                            <span>{{ $t('media.im_download_btn') }}</span>
+                        </a>
 
                         <Link
                             :href="route('contact.index')"
-                            class="inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-black/15 bg-white px-5 py-2.5 text-xs font-medium text-black/80 shadow-xs transition hover:border-black/30 hover:bg-black/5"
+                            class="inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-black/15 bg-white px-5 py-2.5 text-xs font-semibold whitespace-nowrap text-black/80 shadow-xs transition hover:border-black/30 hover:bg-black/5"
                         >
                             <Lock class="h-3.5 w-3.5 text-black/60" />
                             <span>{{ $t('media.im_nda_btn') }}</span>
-                            <ArrowRight class="h-3 w-3 opacity-50" />
                         </Link>
                     </div>
 
@@ -226,8 +221,8 @@ const pdfUrl = '/docs/Treetino_Investment_Memorandum_2026.pdf';
                     </p>
                 </div>
 
-                <!-- Right Document Preview Card (Clickable Download) -->
-                <div class="lg:col-span-5">
+                <!-- Right: Clean Document Preview Card & Integrated Data Room Note -->
+                <div class="lg:col-span-5 flex flex-col gap-4">
                     <a
                         :href="pdfUrl"
                         download="Treetino_Investment_Memorandum_2026.pdf"
@@ -272,57 +267,14 @@ const pdfUrl = '/docs/Treetino_Investment_Memorandum_2026.pdf';
                             </span>
                         </div>
                     </a>
-                </div>
-            </div>
-        </div>
 
-        <!-- Data Room Diligence Banner (Clean light styling matching website) -->
-        <div
-            class="mt-8 rounded-2xl border border-black/10 bg-white p-6 sm:p-8"
-        >
-            <div
-                class="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between"
-            >
-                <div class="max-w-2xl">
-                    <div class="flex items-center gap-2 text-t-blue">
-                        <ShieldCheck class="h-4 w-4" />
-                        <span
-                            class="text-xs font-semibold tracking-wider uppercase"
-                        >
-                            Institutional Data Room
-                        </span>
+                    <!-- Integrated Data Room NDA Note -->
+                    <div class="flex items-start gap-3 rounded-xl border border-black/10 bg-white p-4">
+                        <ShieldCheck class="mt-0.5 h-4 w-4 shrink-0 text-t-blue" />
+                        <p class="text-xs leading-relaxed text-black/70">
+                            {{ $t('media.im_nda_note') }}
+                        </p>
                     </div>
-                    <h3 class="mt-2 text-xl font-medium text-black sm:text-2xl">
-                        {{
-                            locale === 'cs'
-                                ? '10 klíčových ověřovacích dokumentů pod NDA'
-                                : '10 Core Due Diligence Assets Under NDA'
-                        }}
-                    </h3>
-                    <p class="mt-2 text-sm leading-relaxed text-black/70">
-                        {{ $t('media.im_nda_note') }}
-                    </p>
-                </div>
-
-                <div class="flex shrink-0 flex-wrap items-center gap-3">
-                    <ButtonPrimary
-                        :href="pdfUrl"
-                        download="Treetino_Investment_Memorandum_2026.pdf"
-                        target="_blank"
-                    >
-                        <div class="flex items-center gap-2">
-                            <Download class="h-4 w-4" />
-                            <span>{{ $t('media.im_download_btn') }}</span>
-                        </div>
-                    </ButtonPrimary>
-
-                    <Link
-                        :href="route('contact.index')"
-                        class="inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-black/15 bg-white px-5 py-2.5 text-xs font-semibold text-black/80 shadow-xs transition hover:border-black/30 hover:bg-black/5"
-                    >
-                        <Lock class="h-3.5 w-3.5 text-black/60" />
-                        <span>{{ $t('media.im_nda_btn') }}</span>
-                    </Link>
                 </div>
             </div>
         </div>
