@@ -611,7 +611,7 @@ export default function OnboardingArchiveModal({ activeUser, onClose }: Props) {
                       </span>
                       <span className="text-xs font-bold text-black block">Dominik Mašek</span>
                       <div className="h-16 flex items-center justify-center py-1">
-                        <img src="/branding/signature_masek_2.png" alt="Dominik Mašek" className="h-14 object-contain mix-blend-multiply" />
+                        <img src={`${import.meta.env.BASE_URL}branding/signature_masek_2.png`} alt="Dominik Mašek" className="h-14 object-contain mix-blend-multiply" />
                       </div>
                       <span className="text-[9px] text-black/40 font-mono block">
                         {locale === 'en' ? 'In Prague electronically' : 'V Praze elektronicky'}
@@ -739,7 +739,7 @@ export default function OnboardingArchiveModal({ activeUser, onClose }: Props) {
                     <span className="text-[10px] text-black/50 uppercase font-semibold block">Za Treetino corp s.r.o.</span>
                     <span className="text-[10px] text-black/70 font-semibold block">Dominik Mašek, jednatel</span>
                     <div className="h-16 flex items-center justify-center py-1">
-                      <img src="/branding/signature_masek_2.png" alt="Dominik Mašek" className="h-14 object-contain mix-blend-multiply" />
+                      <img src={`${import.meta.env.BASE_URL}branding/signature_masek_2.png`} alt="Dominik Mašek" className="h-14 object-contain mix-blend-multiply" />
                     </div>
                     <span className="text-[9px] text-black/40 font-mono block">V Praze elektronicky</span>
                   </div>

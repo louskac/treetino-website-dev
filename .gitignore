@@ -29,6 +29,8 @@ yarn-error.log
 .env*
 scratch/
 /public/app
+/public/products
+/public/branding
 pricing/frontend/dist
 pricing/frontend/node_modules
 pricing/node_modules

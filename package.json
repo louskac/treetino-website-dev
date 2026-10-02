@@ -7,7 +7,7 @@
         "postinstall": "cd pricing/frontend && npm install",
         "build": "npm run build:website && npm run build:pricing",
         "build:website": "vite build && node scripts/build-static-index.js",
-        "build:pricing": "cd pricing/frontend && npm install && npm run build && mkdir -p ../../public/app && cp -R dist/* ../../public/app/",
+        "build:pricing": "cd pricing/frontend && npm install && npm run build && mkdir -p ../../public/app ../../public/products ../../public/branding && cp -R dist/* ../../public/app/ && cp -R dist/products/* ../../public/products/ && cp -R dist/branding/* ../../public/branding/",
         "build:ssr": "vite build && vite build --ssr",
         "dev": "vite",
         "dev:website": "vite",

@@ -15,6 +15,14 @@
             "destination": "https://treetino-pricing.vercel.app/api/$1"
         },
         {
+            "source": "/products/(.*)",
+            "destination": "/app/products/$1"
+        },
+        {
+            "source": "/branding/(.*)",
+            "destination": "/app/branding/$1"
+        },
+        {
             "source": "/app/(.*)",
             "destination": "/app/index.html"
         },
@@ -87,7 +95,7 @@
             "destination": "/docs/Treetino_Investment_Memorandum_2026.pdf"
         },
         {
-            "source": "/((?!api|app|build|img|video|docs|downloads|models|.*\\.pdf$|.*\\.zip$|favicon.ico|apple-touch-icon.png|robots.txt).*)",
+            "source": "/((?!api|app|build|img|video|docs|downloads|models|products|branding|.*\\.pdf$|.*\\.zip$|favicon.ico|apple-touch-icon.png|robots.txt).*)",
             "destination": "/index.html"
         }
     ]

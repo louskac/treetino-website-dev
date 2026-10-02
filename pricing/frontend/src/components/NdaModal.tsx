@@ -665,7 +665,7 @@ export default function NdaModal({ activeUser, onNdaSigned }: Props) {
                   </div>
                   <div className="mt-2 h-24 sm:h-28 flex items-center justify-center bg-stone-50/50 rounded-lg border border-dashed border-black/10 p-2">
                     <img 
-                      src="/branding/signature_masek_2.png" 
+                      src={`${import.meta.env.BASE_URL}branding/signature_masek_2.png`} 
                       alt="Podpis Dominik Mašek" 
                       className="h-20 sm:h-24 w-auto object-contain mix-blend-multiply pointer-events-none" 
                     />

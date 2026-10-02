@@ -53,7 +53,7 @@ export default function App() {
       id: 'main-tree', 
       name: t('products.mainTree.name'), 
       label: t('products.mainTree.label'), 
-      image: '/products/LG-still.webp',
+      image: `${import.meta.env.BASE_URL}products/LG-still.webp`,
       power: t('products.mainTree.power'),
       dailyProd: t('products.mainTree.dailyProd'),
       roi: t('products.mainTree.roi')
@@ -62,7 +62,7 @@ export default function App() {
       id: 'small-tree', 
       name: t('products.smallTree.name'), 
       label: t('products.smallTree.label'), 
-      image: '/products/SM-still.webp',
+      image: `${import.meta.env.BASE_URL}products/SM-still.webp`,
       power: t('products.smallTree.power'),
       dailyProd: t('products.smallTree.dailyProd'),
       roi: t('products.smallTree.roi')
@@ -71,7 +71,7 @@ export default function App() {
       id: 'standalone-turbine', 
       name: t('products.standaloneTurbine.name'), 
       label: t('products.standaloneTurbine.label'), 
-      image: '/products/info-turbine-w.webp',
+      image: `${import.meta.env.BASE_URL}products/info-turbine-w.webp`,
       power: t('products.standaloneTurbine.power'),
       dailyProd: t('products.standaloneTurbine.dailyProd'),
       roi: t('products.standaloneTurbine.roi')
