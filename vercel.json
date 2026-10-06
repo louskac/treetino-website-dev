@@ -2,6 +2,12 @@
     "buildCommand": "npm run build",
     "outputDirectory": "public",
     "redirects": [
+        { "source": "/products", "destination": "/products/treetino-v1", "permanent": false },
+        { "source": "/products/v1", "destination": "/products/treetino-v1", "permanent": false },
+        { "source": "/products/v2", "destination": "/products/treetino-v2", "permanent": false },
+        { "source": "/products/strom-v1", "destination": "/products/treetino-v1", "permanent": false },
+        { "source": "/products/strom-v2", "destination": "/products/treetino-v2", "permanent": false },
+        { "source": "/products/turbina", "destination": "/products/turbine", "permanent": false },
         { "source": "/im", "destination": "/media#memorandum", "permanent": false },
         { "source": "/memorandum", "destination": "/media#memorandum", "permanent": false },
         { "source": "/investment-memorandum", "destination": "/media#memorandum", "permanent": false },
@@ -13,10 +19,6 @@
         {
             "source": "/api/((?!checkout|contact).*)",
             "destination": "https://treetino-pricing.vercel.app/api/$1"
-        },
-        {
-            "source": "/products/(.*)",
-            "destination": "/app/products/$1"
         },
         {
             "source": "/branding/(.*)",
@@ -95,7 +97,7 @@
             "destination": "/docs/Treetino_Investment_Memorandum_2026.pdf"
         },
         {
-            "source": "/((?!api|app|build|img|video|docs|downloads|models|products|branding|.*\\.pdf$|.*\\.zip$|favicon.ico|apple-touch-icon.png|robots.txt).*)",
+            "source": "/((?!api|app|build|img|video|docs|downloads|models|branding|.*\\.pdf$|.*\\.zip$|favicon.ico|apple-touch-icon.png|robots.txt).*)",
             "destination": "/index.html"
         }
     ]

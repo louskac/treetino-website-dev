@@ -148,6 +148,7 @@ function getComponentForPath(path: string): string {
     }
 
     if (
+        p === '/products' ||
         p === '/products/treetino-v1' ||
         p === '/products/strom-v1' ||
         p === '/products/v1'

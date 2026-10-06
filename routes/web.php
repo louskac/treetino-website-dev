@@ -49,10 +49,19 @@ Route::get('/investment-memorandum', function () {
     return redirect('/media#memorandum');
 });
 
+Route::get('/products', function () {
+    return redirect()->route('products.treeV1');
+});
+
 Route::prefix('products')->name('products.')->group(function () {
     Route::get('/treetino-v1', [ProductsController::class, 'treeV1'])->name('treeV1');
     Route::get('/treetino-v2', [ProductsController::class, 'treeV2'])->name('treeV2');
     Route::get('/turbine', [ProductsController::class, 'turbine'])->name('turbine');
+    Route::get('/v1', fn () => redirect()->route('products.treeV1'));
+    Route::get('/v2', fn () => redirect()->route('products.treeV2'));
+    Route::get('/strom-v1', fn () => redirect()->route('products.treeV1'));
+    Route::get('/strom-v2', fn () => redirect()->route('products.treeV2'));
+    Route::get('/turbina', fn () => redirect()->route('products.turbine'));
 });
 
 // Spolupráce
