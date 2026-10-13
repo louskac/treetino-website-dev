@@ -1,3 +1,4 @@
+import Web3Controller from './Web3Controller'
 import HomeController from './HomeController'
 import LocaleController from './LocaleController'
 import ConfiguratorController from './ConfiguratorController'
@@ -13,6 +14,7 @@ import Settings from './Settings'
 import Admin from './Admin'
 
 const Controllers = {
+    Web3Controller: Object.assign(Web3Controller, Web3Controller),
     HomeController: Object.assign(HomeController, HomeController),
     LocaleController: Object.assign(LocaleController, LocaleController),
     ConfiguratorController: Object.assign(ConfiguratorController, ConfiguratorController),

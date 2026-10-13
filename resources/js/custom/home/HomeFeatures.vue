@@ -33,7 +33,7 @@
                                 class="flex flex-col gap-4"
                             >
                                 <span
-                                    class="text-sm font-medium text-black/40 tabular-nums"
+                                    class="text-sm font-semibold tracking-wider text-t-blue tabular-nums"
                                 >
                                     {{
                                         String(

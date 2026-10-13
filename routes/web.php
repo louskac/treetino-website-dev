@@ -13,6 +13,10 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SalesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LegalController;
+use App\Http\Controllers\Web3Controller;
+
+Route::get('/web3', [Web3Controller::class, 'index'])->name('web3.index');
+Route::get('/web3/video/{filename}', [Web3Controller::class, 'streamVideo'])->name('web3.video');
 
 Route::get('/home', function () {
     return redirect('/');

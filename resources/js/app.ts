@@ -50,6 +50,7 @@ const ZiggyConfig = {
             methods: ['GET', 'HEAD'],
         },
         'media.index': { uri: 'media', methods: ['GET', 'HEAD'] },
+        'web3.index': { uri: 'web3', methods: ['GET', 'HEAD'] },
         'contact.index': { uri: 'contact', methods: ['GET', 'HEAD'] },
         'contact.store': { uri: 'api/contact', methods: ['POST'] },
         'legal.tos': {
@@ -98,6 +99,7 @@ const staticRoutes: Record<string, string | ((param?: any) => string)> = {
     'pitch.index': '/media#pitchdeck',
     'collaboration.index': '/collaboration',
     'media.index': '/media',
+    'web3.index': '/web3',
     'contact.index': '/contact',
     'contact.store': '/api/contact',
     'legal.tos': '/legal/terms-and-conditions',
@@ -225,6 +227,10 @@ function getComponentForPath(path: string): string {
 
     if (p === '/preorders/success' || p.startsWith('/preorders/')) {
         return 'Preorders/Success';
+    }
+
+    if (p === '/web3') {
+        return 'Web3/Index';
     }
 
     return 'Home/Index';

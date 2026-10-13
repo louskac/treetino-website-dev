@@ -21,7 +21,7 @@
                 class="relative z-10 flex items-center justify-between px-5 pt-5"
             >
                 <span
-                    class="text-[0.65rem] font-medium tracking-[0.18em] text-white/60"
+                    class="text-[0.65rem] font-semibold tracking-[0.18em] text-cyan-300"
                 >
                     {{ String(currentSectionIndex + 1).padStart(2, '0') }} /
                     {{ String(sections.length).padStart(2, '0') }}

@@ -82,13 +82,12 @@
         >
             <div class="col-span-1 flex flex-col">
                 <span
-                    class="text-xs font-semibold tracking-[0.2em] text-t-blue uppercase"
-                    >{{
-                        $t('home.features.key_parameters', 'Klíčové Parametry')
-                    }}</span
+                    class="mb-4 inline-flex w-fit items-center rounded-full bg-slate-100 px-3 py-1 font-mono text-[11px] font-bold tracking-wider text-t-blue uppercase dark:bg-zinc-800 dark:text-blue-400"
                 >
+                    {{ $t('home.features.key_parameters', 'Klíčové Parametry') }}
+                </span>
                 <h2
-                    class="mt-3 text-4xl leading-tight font-medium text-black lg:text-5xl"
+                    class="text-4xl leading-tight font-medium text-black lg:text-5xl"
                 >
                     {{
                         $t(
@@ -105,10 +104,10 @@
                         )
                     }}
                 </p>
-                <div class="mt-auto flex flex-col gap-2.5 pt-6 sm:flex-row">
+                <div class="mt-auto flex flex-col gap-2.5 pt-6">
                     <ButtonSecondary
                         :href="`/products/${selectedProduct.detail}`"
-                        class="w-full text-center sm:w-1/2"
+                        class="w-full text-center"
                     >
                         {{ $t('common.actions.info') }}
                     </ButtonSecondary>
@@ -116,7 +115,7 @@
                         :href="
                             route('configurator.product', selectedProduct.id)
                         "
-                        class="w-full text-center sm:w-1/2"
+                        class="w-full text-center"
                     >
                         {{
                             $t(

@@ -9,7 +9,7 @@
         >
             <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:hidden">
                 <div
-                    class="relative col-span-2 aspect-square overflow-hidden rounded-2xl border bg-t-blue/5 shadow-xl sm:col-span-2"
+                    class="relative col-span-2 aspect-square overflow-hidden rounded-3xl border border-black/5 bg-white shadow-xl dark:border-white/10 dark:bg-zinc-900"
                 >
                     <img
                         src="/img/treetino-v1-isometric.png"
@@ -19,68 +19,47 @@
                 </div>
 
                 <div
-                    class="col-span-2 w-full rounded-2xl border border-black bg-zinc-800 p-6 shadow-xl dark:border-white dark:bg-zinc-200"
+                    class="col-span-2 w-full rounded-3xl bg-gradient-to-br from-[#0c1f44] via-[#0f2858] to-[#14377a] p-8 text-white shadow-xl"
                 >
-                    <p class="text-2xl text-secondary">
+                    <h3
+                        class="text-2xl font-normal leading-snug text-white sm:text-3xl"
+                    >
                         {{ $t('home.info.card.1') }}
-                        <span class="opacity-70">{{
-                            $t('home.info.card.1')
-                        }}</span>
-                    </p>
+                    </h3>
                 </div>
 
                 <div
-                    class="col-span-2 flex w-full flex-col rounded-2xl border p-6 shadow-xl"
+                    class="col-span-2 flex w-full flex-col rounded-3xl border border-black/5 bg-white p-8 shadow-xl dark:border-white/10 dark:bg-zinc-900"
                 >
-                    <div class="">
-                        <div
-                            class="flex aspect-square h-12 w-12 rounded-xl bg-t-blue text-white dark:text-primary"
-                        >
-                            <DesignPencil
-                                stroke-width="1.5"
-                                class="mx-auto my-auto h-6 w-6"
-                            />
-                        </div>
+                    <div class="mb-4 flex aspect-square h-12 w-12 rounded-xl bg-t-blue text-white shadow-sm">
+                        <DesignPencil
+                            stroke-width="1.5"
+                            class="mx-auto my-auto h-6 w-6"
+                        />
                     </div>
-                    <h2 class="mt-4 text-3xl sm:text-4xl">
+                    <h2 class="text-3xl font-medium tracking-tight text-black sm:text-4xl dark:text-white">
                         {{ $t('home.info.design.title') }}
                     </h2>
-                    <p class="mt-2 mb-3">
+                    <p class="mt-3 text-sm leading-relaxed text-black/70 sm:text-base dark:text-white/70">
                         {{ $t('home.info.design.text') }}
                     </p>
-
-                    <!--                    <p>-->
-                    <!--                        Kombinace 300 solárních listů a transparentních turbín-->
-                    <!--                        obohacuje veřejný prostor. Zcela neslyšný chod umožňuje-->
-                    <!--                        bezpečnou integraci přímo mezi lidi.-->
-                    <!--                    </p>-->
                 </div>
 
                 <div
-                    class="reveal reveal-right col-span-2 w-full rounded-2xl border p-6 shadow-xl"
+                    class="reveal reveal-right col-span-2 flex w-full flex-col rounded-3xl border border-black/5 bg-white p-8 shadow-xl dark:border-white/10 dark:bg-zinc-900"
                 >
-                    <div class="">
-                        <div
-                            class="flex aspect-square h-12 w-12 rounded-xl bg-t-blue text-white dark:text-primary"
-                        >
-                            <Network
-                                stroke-width="1.5"
-                                class="mx-auto my-auto h-6 w-6"
-                            />
-                        </div>
+                    <div class="mb-4 flex aspect-square h-12 w-12 rounded-xl bg-t-blue text-white shadow-sm">
+                        <Network
+                            stroke-width="1.5"
+                            class="mx-auto my-auto h-6 w-6"
+                        />
                     </div>
-                    <h2 class="mt-4 text-3xl sm:text-4xl">
+                    <h2 class="text-3xl font-medium tracking-tight text-black sm:text-4xl dark:text-white">
                         {{ $t('home.info.forest.title') }}
                     </h2>
-                    <p class="mt-2 mb-3">
+                    <p class="mt-3 text-sm leading-relaxed text-black/70 sm:text-base dark:text-white/70">
                         {{ $t('home.info.forest.text') }}
                     </p>
-
-                    <!--                    <p>-->
-                    <!--                        Technologie blockchain umožňuje bezpečné a-->
-                    <!--                        automatizované sdílení energie s okolím. Definujeme tak-->
-                    <!--                        standardy pro novou, decentralizovanou energetiku.-->
-                    <!--                    </p>-->
                 </div>
             </div>
 
@@ -92,46 +71,37 @@
                     }"
                     class="mt-26"
                 >
-                    <div class="w-full rounded-2xl border p-6 shadow-xl">
-                        <div class="">
-                            <div
-                                class="flex aspect-square h-12 w-12 rounded-xl bg-t-blue text-white dark:text-primary"
-                            >
-                                <DesignPencil
-                                    stroke-width="1.5"
-                                    class="mx-auto my-auto h-6 w-6"
-                                />
-                            </div>
+                    <div
+                        class="w-full rounded-3xl border border-black/5 bg-white p-8 shadow-xl dark:border-white/10 dark:bg-zinc-900"
+                    >
+                        <div class="mb-4 flex aspect-square h-12 w-12 rounded-xl bg-t-blue text-white shadow-sm">
+                            <DesignPencil
+                                stroke-width="1.5"
+                                class="mx-auto my-auto h-6 w-6"
+                            />
                         </div>
-                        <h2 class="mt-4 text-4xl">
+                        <h2 class="text-3xl font-medium tracking-tight text-black sm:text-4xl dark:text-white">
                             {{ $t('home.info.design.title') }}
                         </h2>
-                        <p class="mt-2 mb-3">
+                        <p class="mt-3 text-sm leading-relaxed text-black/70 sm:text-base dark:text-white/70">
                             {{ $t('home.info.design.text') }}
                         </p>
-
-                        <!--                        <p>-->
-                        <!--                            Kombinace 300 solárních listů a transparentních-->
-                        <!--                            turbín obohacuje veřejný prostor. Zcela neslyšný-->
-                        <!--                            chod umožňuje bezpečnou integraci přímo mezi lidi.-->
-                        <!--                        </p>-->
                     </div>
                 </div>
 
                 <div class="flex flex-col gap-6">
                     <div
-                        class="w-full rounded-2xl border border-black bg-zinc-800 p-6 shadow-xl dark:border-white dark:bg-zinc-200"
+                        class="w-full rounded-3xl bg-gradient-to-br from-[#0c1f44] via-[#0f2858] to-[#14377a] p-8 text-white shadow-xl"
                     >
-                        <p class="text-2xl text-secondary">
+                        <h3
+                            class="text-2xl font-normal leading-snug text-white sm:text-3xl"
+                        >
                             {{ $t('home.info.card.1') }}
-                            <span class="opacity-70">{{
-                                $t('home.info.card.1')
-                            }}</span>
-                        </p>
+                        </h3>
                     </div>
 
                     <div
-                        class="relative aspect-square overflow-hidden rounded-2xl border bg-t-blue/5 shadow-xl sm:col-span-2"
+                        class="relative aspect-square overflow-hidden rounded-3xl border border-black/5 bg-white shadow-xl dark:border-white/10 dark:bg-zinc-900"
                     >
                         <img
                             src="/img/treetino-v1-isometric.png"
@@ -149,31 +119,20 @@
                     class="mt-26"
                 >
                     <div
-                        class="reveal reveal-right w-full rounded-2xl border p-6 shadow-xl"
+                        class="reveal reveal-right w-full rounded-3xl border border-black/5 bg-white p-8 shadow-xl dark:border-white/10 dark:bg-zinc-900"
                     >
-                        <div class="">
-                            <div
-                                class="flex aspect-square h-12 w-12 rounded-xl bg-t-blue text-white dark:text-primary"
-                            >
-                                <Network
-                                    stroke-width="1.5"
-                                    class="mx-auto my-auto h-6 w-6"
-                                />
-                            </div>
+                        <div class="mb-4 flex aspect-square h-12 w-12 rounded-xl bg-t-blue text-white shadow-sm">
+                            <Network
+                                stroke-width="1.5"
+                                class="mx-auto my-auto h-6 w-6"
+                            />
                         </div>
-                        <h2 class="mt-4 text-4xl">
+                        <h2 class="text-3xl font-medium tracking-tight text-black sm:text-4xl dark:text-white">
                             {{ $t('home.info.forest.title') }}
                         </h2>
-                        <p class="mt-2 mb-3">
+                        <p class="mt-3 text-sm leading-relaxed text-black/70 sm:text-base dark:text-white/70">
                             {{ $t('home.info.forest.text') }}
                         </p>
-
-                        <!--                        <p>-->
-                        <!--                            Technologie blockchain umožňuje bezpečné a-->
-                        <!--                            automatizované sdílení energie s okolím. Definujeme-->
-                        <!--                            tak standardy pro novou, decentralizovanou-->
-                        <!--                            energetiku.-->
-                        <!--                        </p>-->
                     </div>
                 </div>
             </div>

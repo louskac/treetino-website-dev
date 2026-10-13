@@ -17,6 +17,10 @@
     ],
     "rewrites": [
         {
+            "source": "/web3/video/(.*)",
+            "destination": "/video/$1"
+        },
+        {
             "source": "/api/((?!checkout|contact).*)",
             "destination": "https://treetino-pricing.vercel.app/api/$1"
         },

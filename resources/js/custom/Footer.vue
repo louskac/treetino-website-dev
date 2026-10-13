@@ -15,15 +15,33 @@
                         </div>
 
                         <div class="socials my-auto flex gap-5 text-black/70">
-                            <Instagram
-                                class="h-5 w-5 transition-colors hover:text-black"
-                            />
-                            <Linkedin
-                                class="h-5 w-5 transition-colors hover:text-black"
-                            />
-                            <X
-                                class="h-5 w-5 transition-colors hover:text-black"
-                            />
+                            <a
+                                href="https://instagram.com/treetino_corp"
+                                target="_blank"
+                                rel="noreferrer"
+                                aria-label="Treetino on Instagram"
+                                class="transition-colors hover:text-black"
+                            >
+                                <Instagram class="h-5 w-5" />
+                            </a>
+                            <a
+                                href="https://linkedin.com/company/treetino"
+                                target="_blank"
+                                rel="noreferrer"
+                                aria-label="Treetino on LinkedIn"
+                                class="transition-colors hover:text-black"
+                            >
+                                <Linkedin class="h-5 w-5" />
+                            </a>
+                            <a
+                                href="https://x.com/treetino_corp"
+                                target="_blank"
+                                rel="noreferrer"
+                                aria-label="Treetino on X"
+                                class="transition-colors hover:text-black"
+                            >
+                                <X class="h-5 w-5" />
+                            </a>
                         </div>
                     </div>
                 </div>
