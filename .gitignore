@@ -52,4 +52,7 @@ __pycache__/
 /public/video/drone-shot.mp4
 /public/video/drone-shot-fast.mp4
 /public/video/drone-shot-web.mp4
-
+/public/video/web3-*.mp4
+remotion/
+remotion.config.ts
+scripts/tree-silhouette/

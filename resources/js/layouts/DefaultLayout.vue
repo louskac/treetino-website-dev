@@ -1,15 +1,18 @@
 <template>
-    <div class="flex min-h-screen flex-col bg-background text-foreground">
+    <div
+        class="flex min-h-screen flex-col transition-colors duration-300"
+        :class="props.dark ? 'dark bg-zinc-950 text-white' : 'bg-background text-foreground'"
+    >
         <!-- Rendered only once globally to achieve better performance -->
         <LiquidGlassFilter />
 
-        <Header :scroll="props.scroll" :inverted="props.inverted" />
+        <Header :scroll="props.scroll" :inverted="props.inverted" :dark="props.dark" />
 
         <main>
             <slot />
         </main>
 
-        <Footer class="mt-auto" />
+        <Footer class="mt-auto" :dark="props.dark" />
 
         <CookieBanner />
     </div>
@@ -25,10 +28,12 @@ const props = withDefaults(
     defineProps<{
         scroll?: boolean;
         inverted?: boolean;
+        dark?: boolean;
     }>(),
     {
         scroll: true,
         inverted: false,
+        dark: false,
     },
 );
 </script>

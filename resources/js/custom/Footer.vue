@@ -1,26 +1,28 @@
 <template>
-    <footer class="relative text-black">
+    <footer class="relative" :class="props.dark ? 'bg-zinc-950 text-white' : 'text-black'">
         <div
-            class="absolute left-1/2 hidden h-full max-w-[1400px] -translate-x-1/2 border-r border-l border-r-black/10 border-l-black/10 [mask-image:linear-gradient(to_bottom,black_0%,transparent_100%)] sm:block sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
+            class="absolute left-1/2 hidden h-full max-w-[1400px] -translate-x-1/2 border-r border-l [mask-image:linear-gradient(to_bottom,black_0%,transparent_100%)] sm:block sm:w-[500px] md:w-[calc(100%-140px)] md:max-w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
+            :class="props.dark ? 'border-r-white/10 border-l-white/10' : 'border-r-black/10 border-l-black/10'"
         ></div>
 
         <div
-            class="relative mx-auto w-full max-w-[1400px] justify-between px-6 sm:w-[500px] md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
+            class="relative mx-auto w-[calc(100%-72px)] max-w-[1400px] justify-between px-4 sm:px-6 sm:w-[500px] md:w-[calc(100%-140px)] md:max-w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
         >
             <div class="flex flex-col pt-16">
                 <div class="w-full pb-6">
                     <div class="flex justify-between">
                         <div class="logo flex">
-                            <LogoType class="fill-current text-black" />
+                            <LogoType class="fill-current" :class="props.dark ? 'text-white' : 'text-black'" />
                         </div>
 
-                        <div class="socials my-auto flex gap-5 text-black/70">
+                        <div class="socials my-auto flex gap-5" :class="props.dark ? 'text-white/70' : 'text-black/70'">
                             <a
                                 href="https://instagram.com/treetino_corp"
                                 target="_blank"
                                 rel="noreferrer"
                                 aria-label="Treetino on Instagram"
-                                class="transition-colors hover:text-black"
+                                class="transition-colors"
+                                :class="props.dark ? 'hover:text-white' : 'hover:text-black'"
                             >
                                 <Instagram class="h-5 w-5" />
                             </a>
@@ -29,7 +31,8 @@
                                 target="_blank"
                                 rel="noreferrer"
                                 aria-label="Treetino on LinkedIn"
-                                class="transition-colors hover:text-black"
+                                class="transition-colors"
+                                :class="props.dark ? 'hover:text-white' : 'hover:text-black'"
                             >
                                 <Linkedin class="h-5 w-5" />
                             </a>
@@ -38,7 +41,8 @@
                                 target="_blank"
                                 rel="noreferrer"
                                 aria-label="Treetino on X"
-                                class="transition-colors hover:text-black"
+                                class="transition-colors"
+                                :class="props.dark ? 'hover:text-white' : 'hover:text-black'"
                             >
                                 <X class="h-5 w-5" />
                             </a>
@@ -66,7 +70,8 @@
                                 </div>
 
                                 <h2
-                                    class="my-auto text-xl font-medium text-black"
+                                    class="my-auto text-xl font-medium"
+                                    :class="props.dark ? 'text-white' : 'text-black'"
                                 >
                                     {{ $t('common.footer.links') }}
                                 </h2>
@@ -120,7 +125,8 @@
                                 </div>
 
                                 <h2
-                                    class="my-auto text-xl font-medium text-black"
+                                    class="my-auto text-xl font-medium"
+                                    :class="props.dark ? 'text-white' : 'text-black'"
                                 >
                                     {{ $t('common.footer.community') }}
                                 </h2>
@@ -128,7 +134,8 @@
 
                             <div class="mt-6 flex flex-col gap-2">
                                 <div
-                                    class="w-fit cursor-not-allowed text-black/50"
+                                    class="w-fit cursor-not-allowed"
+                                    :class="props.dark ? 'text-white/40' : 'text-black/50'"
                                 >
                                     {{ $t('common.status.coming_soon') }}
                                 </div>
@@ -149,7 +156,8 @@
                                 </div>
 
                                 <h2
-                                    class="my-auto text-xl font-medium text-black"
+                                    class="my-auto text-xl font-medium"
+                                    :class="props.dark ? 'text-white' : 'text-black'"
                                 >
                                     {{ $t('common.footer.legal') }}
                                 </h2>
@@ -174,7 +182,8 @@
 
                                 <div
                                     @click="openSettings"
-                                    class="group relative w-fit cursor-pointer text-black/70 transition-colors duration-300 hover:text-black"
+                                    class="group relative w-fit cursor-pointer transition-colors duration-300"
+                                    :class="props.dark ? 'text-white/70 hover:text-white' : 'text-black/70 hover:text-black'"
                                 >
                                     <div class="relative">
                                         {{
@@ -182,7 +191,8 @@
                                         }}
                                     </div>
                                     <div
-                                        class="absolute bottom-0 left-0 h-[1px] w-0 bg-black transition-all duration-300 group-hover:w-full"
+                                        class="absolute bottom-0 left-0 h-[1px] w-0 transition-all duration-300 group-hover:w-full"
+                                        :class="props.dark ? 'bg-white' : 'bg-black'"
                                     ></div>
                                 </div>
                             </div>
@@ -192,7 +202,8 @@
                     <!-- Clean Official CzechInvest Grant Acknowledgment Banner (Clean Link to Collaboration Page) -->
                     <Link
                         :href="route('collaboration.index')"
-                        class="group block border-y border-black/10 py-6 transition-colors hover:bg-black/[0.02]"
+                        class="group block border-y py-6 transition-colors"
+                        :class="props.dark ? 'border-white/10 hover:bg-white/[0.02]' : 'border-black/10 hover:bg-black/[0.02]'"
                     >
                         <div
                             class="flex flex-col items-center justify-between gap-6 sm:flex-row"
@@ -206,7 +217,8 @@
                                     class="h-9 w-auto object-contain transition-transform group-hover:scale-105"
                                 />
                                 <p
-                                    class="max-w-3xl text-xs leading-relaxed text-black/75 sm:text-sm"
+                                    class="max-w-3xl text-xs leading-relaxed sm:text-sm"
+                                    :class="props.dark ? 'text-white/75' : 'text-black/75'"
                                 >
                                     {{
                                         $t('common.footer.grant_acknowledgment')
@@ -277,28 +289,31 @@
                         </div>
 
                         <div
-                            class="order-1 rounded-2xl border border-black/10 bg-white p-6 text-black shadow-xl lg:order-2"
+                            class="order-1 rounded-2xl border p-6 shadow-xl lg:order-2"
+                            :class="props.dark ? 'border-white/10 bg-zinc-900 text-white' : 'border-black/10 bg-white text-black'"
                         >
                             <div
                                 class="relative z-10 flex items-center justify-between"
                             >
                                 <span
-                                    class="text-xs font-semibold tracking-[0.2em] text-black/60 uppercase"
+                                    class="text-xs font-semibold tracking-[0.2em] uppercase"
+                                    :class="props.dark ? 'text-white/60' : 'text-black/60'"
                                     >{{ $t('common.footer.newsletter') }}</span
                                 >
                                 <span
-                                    class="text-xs font-medium tracking-widest text-black/60"
+                                    class="text-xs font-medium tracking-widest"
+                                    :class="props.dark ? 'text-white/60' : 'text-black/60'"
                                 >
                                     <Mail class="h-4 w-4" stroke-width="3" />
                                 </span>
                             </div>
 
                             <div class="mt-3">
-                                <h2 class="text-3xl font-medium text-black">
+                                <h2 class="text-3xl font-medium" :class="props.dark ? 'text-white' : 'text-black'">
                                     {{ $t('common.footer.get_updates') }}
                                 </h2>
 
-                                <p class="mt-1 text-black/70">
+                                <p class="mt-1" :class="props.dark ? 'text-white/70' : 'text-black/70'">
                                     {{
                                         $t('common.footer.newsletter_subtitle')
                                     }}
@@ -308,7 +323,8 @@
                             <div class="my-5">
                                 <div class="flex w-full items-stretch gap-2">
                                     <input
-                                        class="min-w-0 flex-1 rounded-xl border border-black/10 bg-stone-100 px-4 py-3 text-black placeholder-black/40 focus:border-t-blue focus:outline-none"
+                                        class="min-w-0 flex-1 rounded-xl border px-4 py-3 focus:border-t-blue focus:outline-none"
+                                        :class="props.dark ? 'border-white/10 bg-zinc-800 text-white placeholder-white/40' : 'border-black/10 bg-stone-100 text-black placeholder-black/40'"
                                         type="email"
                                         :placeholder="
                                             $t(
@@ -325,9 +341,10 @@
                                 </div>
                             </div>
 
-                            <div class="text-xs text-black/60">
+                            <div class="text-xs" :class="props.dark ? 'text-white/60' : 'text-black/60'">
                                 <Link
-                                    class="underline hover:text-black"
+                                    class="underline"
+                                    :class="props.dark ? 'hover:text-white' : 'hover:text-black'"
                                     :href="route('legal.pp')"
                                     >{{ $t('common.footer.privacy') }}</Link
                                 >
@@ -358,6 +375,15 @@ import { route } from 'ziggy-js';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import FooterLink from '@/custom/footer/FooterLink.vue';
 import LogoType from '@/custom/LogoType.vue';
+
+const props = withDefaults(
+    defineProps<{
+        dark?: boolean;
+    }>(),
+    {
+        dark: false,
+    },
+);
 
 const openSettings = () => {
     // This function will automatically find the active instance

@@ -1,16 +1,24 @@
 <template>
     <header class="fixed z-50 w-full">
         <div
-            class="mx-auto flex w-full max-w-[1400px] justify-between px-6 pt-6 sm:w-[500px] sm:px-0 md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
+            class="mx-auto flex w-[calc(100%-72px)] max-w-[1400px] justify-between pt-3 sm:pt-6 sm:w-[500px] md:w-[calc(100%-140px)] md:max-w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]"
         >
             <div
-                class="flex w-full flex-col rounded-2xl border p-6 backdrop-blur-2xl transition-all duration-550"
+                class="flex w-full flex-col rounded-2xl border px-4 py-2.5 sm:p-6 backdrop-blur-2xl transition-all duration-550"
                 :class="[
-                    activeDropdown === 'products' || mobileMenuOpen
-                        ? 'border-transparent bg-white text-black shadow-2xl'
-                        : isScrolled || !props.scroll || props.inverted
-                          ? 'border-black/10 bg-white/80 text-black shadow-lg'
-                          : 'border-white/20 bg-black/20 text-white',
+                    props.dark
+                        ? mobileMenuOpen
+                            ? 'border-white/15 bg-zinc-950/95 text-white shadow-2xl'
+                            : activeDropdown === 'products'
+                              ? 'border-white/15 bg-zinc-900 text-white shadow-2xl'
+                              : isScrolled || !props.scroll || props.inverted
+                                ? 'border-white/10 bg-zinc-950/80 text-white shadow-2xl'
+                                : 'border-white/20 bg-black/20 text-white'
+                        : activeDropdown === 'products' || mobileMenuOpen
+                          ? 'border-transparent bg-white text-black shadow-2xl'
+                          : isScrolled || !props.scroll || props.inverted
+                            ? 'border-black/10 bg-white/80 text-black shadow-lg'
+                            : 'border-white/20 bg-black/20 text-white',
                 ]"
                 @mouseleave="activeDropdown = null"
             >
@@ -104,7 +112,8 @@
                                     <Xmark
                                         v-if="mobileMenuOpen"
                                         stroke-width="2"
-                                        class="h-5 w-5 text-black"
+                                        class="h-5 w-5"
+                                        :class="props.dark ? 'text-white' : 'text-black'"
                                     />
                                     <Menu
                                         v-else
@@ -155,12 +164,14 @@
                 >
                     <div
                         v-if="mobileMenuOpen"
-                        class="mt-6 border-t border-black/10 pt-6 xl:hidden"
+                        class="mt-4 border-t pt-4 sm:mt-6 sm:pt-6 xl:hidden"
+                        :class="props.dark ? 'border-white/10' : 'border-black/10'"
                     >
                         <!-- Products Section (First in desktop order) -->
                         <div class="mb-4">
                             <p
-                                class="mb-2 px-3 text-xs font-semibold tracking-[0.2em] text-black/40 uppercase"
+                                class="mb-2 px-3 text-xs font-semibold tracking-[0.2em] uppercase"
+                                :class="props.dark ? 'text-white/40' : 'text-black/40'"
                             >
                                 {{ $t('common.nav.products') }}
                             </p>
@@ -168,10 +179,12 @@
                                 <div
                                     v-for="item in products"
                                     :key="item.id"
-                                    class="flex items-center justify-between rounded-xl px-3 py-2.5 transition-colors hover:bg-black/5"
+                                    class="flex items-center justify-between rounded-xl px-3 py-2.5 transition-colors"
+                                    :class="props.dark ? 'hover:bg-white/5' : 'hover:bg-black/5'"
                                 >
                                     <span
-                                        class="text-sm font-medium text-black"
+                                        class="text-sm font-medium"
+                                        :class="props.dark ? 'text-white' : 'text-black'"
                                         >{{
                                             $t(item.labelKey, item.label)
                                         }}</span
@@ -179,7 +192,8 @@
                                     <div class="flex gap-2">
                                         <Link
                                             :href="`/products/${item.detail}`"
-                                            class="rounded-lg border border-black/15 bg-white px-3 py-1 text-xs font-medium text-black/80 shadow-2xs transition hover:border-black/30 hover:bg-black/5"
+                                            class="rounded-lg border px-3 py-1 text-xs font-medium shadow-2xs transition"
+                                            :class="props.dark ? 'border-white/20 bg-white/10 text-white hover:bg-white/15' : 'border-black/15 bg-white text-black/80 hover:border-black/30 hover:bg-black/5'"
                                             @click="mobileMenuOpen = false"
                                             >{{
                                                 $t('common.actions.info')
@@ -199,31 +213,35 @@
                         </div>
 
                         <!-- Divider -->
-                        <div class="my-3 border-t border-black/10"></div>
+                        <div class="my-3 border-t" :class="props.dark ? 'border-white/10' : 'border-black/10'"></div>
 
                         <!-- Nav links in exact desktop order -->
                         <nav class="flex flex-col gap-1">
                             <Link
                                 :href="route('collaboration.index')"
-                                class="rounded-xl px-3 py-2.5 text-sm font-medium text-black/80 transition-colors hover:bg-black/5 hover:text-black"
+                                class="rounded-xl px-3 py-2.5 text-sm font-medium transition-colors"
+                                :class="props.dark ? 'text-white/80 hover:bg-white/5 hover:text-white' : 'text-black/80 hover:bg-black/5 hover:text-black'"
                                 @click="mobileMenuOpen = false"
                                 >{{ $t('common.nav.collaboration') }}</Link
                             >
                             <Link
                                 :href="route('sales.index')"
-                                class="rounded-xl px-3 py-2.5 text-sm font-medium text-black/80 transition-colors hover:bg-black/5 hover:text-black"
+                                class="rounded-xl px-3 py-2.5 text-sm font-medium transition-colors"
+                                :class="props.dark ? 'text-white/80 hover:bg-white/5 hover:text-white' : 'text-black/80 hover:bg-black/5 hover:text-black'"
                                 @click="mobileMenuOpen = false"
                                 >{{ $t('common.nav.sales') }}</Link
                             >
                             <Link
                                 :href="route('media.index')"
-                                class="rounded-xl px-3 py-2.5 text-sm font-medium text-black/80 transition-colors hover:bg-black/5 hover:text-black"
+                                class="rounded-xl px-3 py-2.5 text-sm font-medium transition-colors"
+                                :class="props.dark ? 'text-white/80 hover:bg-white/5 hover:text-white' : 'text-black/80 hover:bg-black/5 hover:text-black'"
                                 @click="mobileMenuOpen = false"
                                 >{{ $t('common.nav.media') }}</Link
                             >
                             <Link
                                 :href="route('contact.index')"
-                                class="rounded-xl px-3 py-2.5 text-sm font-medium text-black/80 transition-colors hover:bg-black/5 hover:text-black"
+                                class="rounded-xl px-3 py-2.5 text-sm font-medium transition-colors"
+                                :class="props.dark ? 'text-white/80 hover:bg-white/5 hover:text-white' : 'text-black/80 hover:bg-black/5 hover:text-black'"
                                 @click="mobileMenuOpen = false"
                                 >{{ $t('common.nav.contact') }}</Link
                             >
@@ -262,10 +280,12 @@ const props = withDefaults(
     defineProps<{
         scroll?: boolean;
         inverted?: boolean;
+        dark?: boolean;
     }>(),
     {
         scroll: true,
         inverted: false,
+        dark: false,
     },
 );
 
@@ -276,6 +296,9 @@ const activeDropdown = ref<'products' | null>(null);
 const mobileMenuOpen = ref(false);
 
 const headerIsInverted = computed(() => {
+    if (props.dark) {
+        return false;
+    }
     return (
         props.inverted ||
         !props.scroll ||

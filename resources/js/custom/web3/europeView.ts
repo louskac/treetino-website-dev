@@ -7,6 +7,7 @@ export const PARIS_NORD = { x: 245.5, y: 349.6 };
 
 // Aspect 1.6. Start: Scandinavia → Mediterranean. End: the battery site in Přeštice.
 const FROM = { cx: 345, cy: 262, w: 520 };
+const FROM_PORTRAIT = { cx: 338, cy: 308, w: 420 };
 const TO = { cx: PRESTICE.x + 0.5, cy: PRESTICE.y - 2, w: 62 };
 
 export interface ViewBox {
@@ -16,13 +17,14 @@ export interface ViewBox {
     h: number;
 }
 
-export function europeViewBox(zoom: number): ViewBox {
+export function europeViewBox(zoom: number, isPortrait = false): ViewBox {
+    const from = isPortrait ? FROM_PORTRAIT : FROM;
     // Interpolate in log-space for the width so the zoom feels linear to the eye
     const t = Math.min(1, Math.max(0, zoom));
-    const w = Math.exp(Math.log(FROM.w) + (Math.log(TO.w) - Math.log(FROM.w)) * t);
-    const k = (FROM.w - w) / (FROM.w - TO.w);
-    const cx = FROM.cx + (TO.cx - FROM.cx) * k;
-    const cy = FROM.cy + (TO.cy - FROM.cy) * k;
+    const w = Math.exp(Math.log(from.w) + (Math.log(TO.w) - Math.log(from.w)) * t);
+    const k = (from.w - w) / (from.w - TO.w);
+    const cx = from.cx + (TO.cx - from.cx) * k;
+    const cy = from.cy + (TO.cy - from.cy) * k;
     const h = w / 1.6;
 
     return { x: cx - w / 2, y: cy - h / 2, w, h };

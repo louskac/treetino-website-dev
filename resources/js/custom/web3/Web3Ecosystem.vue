@@ -325,21 +325,31 @@ function spriteTexture(ring: boolean): THREE.CanvasTexture {
     const g = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
 
     if (ring) {
-        ctx.strokeStyle = '#ffffff';
-        ctx.lineWidth = 6;
-        ctx.beginPath();
-        ctx.arc(32, 32, 20, 0, Math.PI * 2);
-        ctx.stroke();
+        ctx.strokeStyle = '#60a5fa';
         ctx.lineWidth = 4;
         ctx.beginPath();
-        ctx.arc(32, 32, 9, 0, Math.PI * 2);
+        ctx.arc(32, 32, 22, 0, Math.PI * 2);
         ctx.stroke();
-        g.addColorStop(0, 'rgba(255,255,255,0.35)');
-        g.addColorStop(1, 'rgba(255,255,255,0)');
+
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.arc(32, 32, 22, 0, Math.PI * 2);
+        ctx.stroke();
+
+        ctx.strokeStyle = '#93c5fd';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(32, 32, 10, 0, Math.PI * 2);
+        ctx.stroke();
+
+        g.addColorStop(0, 'rgba(96,165,250,0.15)');
+        g.addColorStop(0.7, 'rgba(96,165,250,0.3)');
+        g.addColorStop(1, 'rgba(96,165,250,0)');
     } else {
         g.addColorStop(0, 'rgba(255,255,255,1)');
-        g.addColorStop(0.25, 'rgba(255,255,255,0.9)');
-        g.addColorStop(1, 'rgba(255,255,255,0)');
+        g.addColorStop(0.25, 'rgba(251,191,36,0.9)');
+        g.addColorStop(1, 'rgba(251,191,36,0)');
     }
 
     ctx.fillStyle = g;
@@ -362,8 +372,10 @@ let moneyPoints: THREE.Points;
 let energyMat: THREE.PointsMaterial;
 let moneyMat: THREE.PointsMaterial;
 const disposables: { dispose: () => void }[] = [];
-const ENERGY_COUNT = 26;
-const MONEY_PER_ARC = 7;
+const MAX_ENERGY_COUNT = 26;
+const MAX_MONEY_PER_ARC = 7;
+let currentEnergyCount = 26;
+let currentMoneyPerArc = 7;
 const center = new THREE.Vector3(-0.6, 1.9, 0);
 let raf = 0;
 let resizeObserver: ResizeObserver | null = null;
@@ -380,7 +392,24 @@ function resize() {
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
     const tanV = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
-    camera.userData.distance = Math.max(10.6 / (tanV * camera.aspect), 3.8 / tanV);
+    const isPortrait = w < 640 || w < h;
+
+    if (isPortrait) {
+        // True geometric center of scene (tree extends to -6.8, car extends to +5.3)
+        center.set(-0.75, 1.25, 0);
+        camera.userData.distance = Math.max(7.7 / (tanV * camera.aspect), 4.2 / tanV);
+        if (moneyMat) moneyMat.size = 14;
+        if (energyMat) energyMat.size = 8;
+        currentMoneyPerArc = 4;
+        currentEnergyCount = 14;
+    } else {
+        camera.userData.distance = Math.max(10.6 / (tanV * camera.aspect), 3.8 / tanV);
+        center.set(-0.6, 1.9, 0);
+        if (moneyMat) moneyMat.size = 24;
+        if (energyMat) energyMat.size = 16;
+        currentMoneyPerArc = 7;
+        currentEnergyCount = 26;
+    }
     camera.updateProjectionMatrix();
 }
 
@@ -410,9 +439,12 @@ function frame(time: number) {
     if (flow > 0) {
         const ep = energyPoints.geometry.getAttribute('position') as THREE.BufferAttribute;
 
-        for (let i = 0; i < ENERGY_COUNT; i++) {
-            const t = (i / ENERGY_COUNT + time * 0.00009) % 1;
+        for (let i = 0; i < currentEnergyCount; i++) {
+            const t = (i / currentEnergyCount + time * 0.00009) % 1;
             ep.setXYZ(i, ...samplePolyline(ENERGY_PATH, t));
+        }
+        for (let i = currentEnergyCount; i < MAX_ENERGY_COUNT; i++) {
+            ep.setXYZ(i, 0, -999, 0);
         }
 
         ep.needsUpdate = true;
@@ -420,10 +452,13 @@ function frame(time: number) {
         let k = 0;
 
         for (const pts of MONEY_ARCS) {
-            for (let i = 0; i < MONEY_PER_ARC; i++) {
-                const t = (i / MONEY_PER_ARC + time * 0.00012) % 1;
+            for (let i = 0; i < currentMoneyPerArc; i++) {
+                const t = (i / currentMoneyPerArc + time * 0.00012) % 1;
                 mp.setXYZ(k++, ...samplePolyline(pts, t));
             }
+        }
+        while (k < MONEY_ARCS.length * MAX_MONEY_PER_ARC) {
+            mp.setXYZ(k++, 0, -999, 0);
         }
 
         mp.needsUpdate = true;
@@ -528,9 +563,9 @@ onMounted(() => {
     });
     disposables.push(energyMat, moneyMat);
     const eg = new THREE.BufferGeometry();
-    eg.setAttribute('position', new THREE.Float32BufferAttribute(new Float32Array(ENERGY_COUNT * 3), 3));
+    eg.setAttribute('position', new THREE.Float32BufferAttribute(new Float32Array(MAX_ENERGY_COUNT * 3), 3));
     const mg = new THREE.BufferGeometry();
-    mg.setAttribute('position', new THREE.Float32BufferAttribute(new Float32Array(MONEY_ARCS.length * MONEY_PER_ARC * 3), 3));
+    mg.setAttribute('position', new THREE.Float32BufferAttribute(new Float32Array(MONEY_ARCS.length * MAX_MONEY_PER_ARC * 3), 3));
     disposables.push(eg, mg);
     energyPoints = new THREE.Points(eg, energyMat);
     moneyPoints = new THREE.Points(mg, moneyMat);

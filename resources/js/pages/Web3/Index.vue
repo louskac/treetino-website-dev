@@ -15,7 +15,7 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue';
         <meta name="robots" content="noindex, nofollow" />
     </Head>
 
-    <DefaultLayout :scroll="true">
+    <DefaultLayout :scroll="true" :dark="true">
         <!-- 1. CINEMATIC 5-ACT STORY HERO (EUROPE MAP -> BESS -> WALLET -> SCADA -> ECOSYSTEM) -->
         <Web3HeroStory />
 

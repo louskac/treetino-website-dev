@@ -4,7 +4,7 @@
         <!-- PINNED FULLSCREEN DRONE SHOT SCROLL TRACK                             -->
         <!-- ===================================================================== -->
         <section ref="trackRef" class="relative bg-black" style="height: 460vh">
-            <div ref="stageRef" class="sticky top-0 h-screen w-full overflow-hidden bg-black">
+            <div ref="stageRef" class="sticky top-0 h-screen h-dvh w-full overflow-hidden bg-black">
                 <!-- Canvas element rendering pre-rendered WebP frames for instantaneous 0ms scrub -->
                 <canvas
                     ref="canvasRef"
@@ -29,8 +29,8 @@
                     <div :class="container" class="relative h-full">
                         <!-- SCENE 1: Ground Launch (Jakub with arms spread on the hill) -->
                         <Web3ScrollHeading
-                            class="absolute inset-x-0 top-36 sm:top-44 lg:top-48 xl:top-[23vh] max-w-4xl"
-                            lead-class="text-3xl leading-[1.06] font-medium tracking-[-0.04em] sm:text-5xl lg:text-[clamp(2.75rem,4.2vw,4rem)]"
+                            class="absolute inset-x-0 top-36 px-4 sm:px-0 sm:top-36 md:top-44 lg:top-48 xl:top-[23vh] max-w-4xl"
+                            lead-class="text-2xl leading-[1.12] font-medium tracking-[-0.035em] sm:text-4xl md:text-5xl lg:text-[clamp(2.75rem,4.2vw,4rem)]"
                             :segments="[
                                 { text: 'We have' },
                                 { text: 'government connections,', tone: 'accent' },
@@ -42,8 +42,8 @@
 
                         <!-- SCENE 2: Mid-Ascent (Revealing rolling hills & wind turbines) -->
                         <Web3ScrollHeading
-                            class="absolute inset-x-0 top-36 sm:top-44 lg:top-48 xl:top-[23vh] max-w-4xl"
-                            lead-class="text-3xl leading-[1.06] font-medium tracking-[-0.04em] sm:text-5xl lg:text-[clamp(2.75rem,4.2vw,4rem)]"
+                            class="absolute inset-x-0 top-36 px-4 sm:px-0 sm:top-36 md:top-44 lg:top-48 xl:top-[23vh] max-w-4xl"
+                            lead-class="text-2xl leading-[1.12] font-medium tracking-[-0.035em] sm:text-4xl md:text-5xl lg:text-[clamp(2.75rem,4.2vw,4rem)]"
                             :segments="[
                                 { text: 'With enough liquidity we can tokenize our trees, grid balancing batteries' },
                                 { text: 'or even these wind turbines.', tone: 'accent' },
@@ -54,46 +54,46 @@
 
                         <!-- SCENE 3: High Altitude Climax (Panoramic Wind Park + Demo CTA + Pitch Video Window) -->
                         <div
-                            class="absolute inset-x-0 top-28 sm:top-36 lg:top-1/2 lg:-translate-y-1/2 transition-all duration-300"
+                            class="absolute inset-x-0 top-[9.5rem] px-4 sm:px-0 sm:top-36 md:top-36 lg:top-1/2 lg:-translate-y-1/2 transition-all duration-300"
                             :style="{
                                 opacity: s.end,
                                 transform: `translateY(${(1 - s.end) * 24}px)`,
                                 visibility: s.end > 0.01 ? 'visible' : 'hidden',
                             }"
                         >
-                            <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-12">
+                            <div class="grid grid-cols-1 items-center gap-4 sm:gap-6 lg:grid-cols-12 lg:gap-12">
                                 <!-- Left Column: Final Pitch Statement & Action CTAs -->
                                 <div class="lg:col-span-5">
                                     <h3
-                                        class="text-3xl font-medium tracking-tight text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)] sm:text-5xl lg:text-[3.25rem] lg:leading-[1.08]"
+                                        class="text-2xl font-medium tracking-tight text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)] sm:text-4xl lg:text-[3.25rem] lg:leading-[1.08]"
                                     >
                                         Don't just watch us <span class="text-[#8ec5ff]">build it.</span>
                                     </h3>
 
-                                    <p class="mt-4 text-base font-light leading-relaxed text-white/75 sm:text-lg">
+                                    <p class="mt-1.5 text-xs font-light leading-relaxed text-white/75 sm:mt-4 sm:text-base">
                                         Explore the live deployed dApp on Solana devnet or watch the full founder pitch video.
                                     </p>
 
                                     <!-- Action Buttons -->
-                                    <div class="mt-8 flex flex-wrap items-center gap-3.5 sm:gap-4">
+                                    <div class="mt-3.5 flex flex-wrap items-center gap-2.5 sm:mt-8 sm:gap-4">
                                         <a
                                             href="https://loyal-empathy-production-823a.up.railway.app/"
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            class="pointer-events-auto group inline-flex items-center gap-2 rounded-xl bg-t-blue px-6 py-3.5 text-sm font-semibold text-white shadow-[0_0_32px_rgba(77,141,255,0.45)] transition-all duration-300 hover:scale-[1.02] hover:bg-t-blue/90 hover:shadow-[0_0_48px_rgba(77,141,255,0.7)] sm:text-base"
+                                            class="pointer-events-auto group inline-flex items-center gap-2 rounded-xl bg-t-blue px-4 py-2.5 text-xs font-semibold text-white shadow-[0_0_32px_rgba(77,141,255,0.45)] transition-all duration-300 hover:scale-[1.02] hover:bg-t-blue/90 hover:shadow-[0_0_48px_rgba(77,141,255,0.7)] sm:px-6 sm:py-3.5 sm:text-base"
                                         >
                                             <span>Try Demo</span>
-                                            <ExternalLink class="h-4 w-4 text-white/90 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                                            <ExternalLink class="h-3.5 w-3.5 sm:h-4 sm:w-4 text-white/90 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                                         </a>
 
                                         <a
                                             href="https://solscan.io/account/EEbZ5DVTQ9f4XeRwmSh4u2QPiMSSmQjqKPNEpDHoBU2n?cluster=devnet"
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            class="pointer-events-auto group inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-medium text-white backdrop-blur-md transition-all duration-300 hover:scale-[1.02] hover:border-white/40 hover:bg-white/10 sm:text-base"
+                                            class="pointer-events-auto group inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/5 px-4 py-2.5 text-xs font-medium text-white backdrop-blur-md transition-all duration-300 hover:scale-[1.02] hover:border-white/40 hover:bg-white/10 sm:px-6 sm:py-3.5 sm:text-base"
                                         >
                                             <span>Solana Contract</span>
-                                            <ExternalLink class="h-4 w-4 text-white/70 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                                            <ExternalLink class="h-3.5 w-3.5 sm:h-4 sm:w-4 text-white/70 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                                         </a>
                                     </div>
                                 </div>
@@ -102,7 +102,7 @@
                                 <div class="lg:col-span-7">
                                     <div
                                         id="pitch-video-container"
-                                        class="pointer-events-auto relative aspect-video w-full overflow-hidden rounded-3xl border border-white/20 bg-black shadow-[0_30px_70px_rgba(0,0,0,0.9)] backdrop-blur-2xl transition-all duration-500 hover:border-white/35"
+                                        class="pointer-events-auto relative aspect-video w-full max-w-[560px] mx-auto lg:max-w-none overflow-hidden rounded-2xl sm:rounded-3xl border border-white/20 bg-black shadow-[0_30px_70px_rgba(0,0,0,0.9)] backdrop-blur-2xl transition-all duration-500 hover:border-white/35"
                                         :class="{
                                             'ring-2 ring-t-blue/80 shadow-[0_0_50px_rgba(77,141,255,0.4)]': isVideoFocused,
                                         }"
@@ -151,7 +151,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 /** Same content width as the navbar and the rest of the site */
 const container =
-    'mx-auto w-full max-w-[1400px] px-6 sm:w-[500px] sm:px-0 md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]';
+    'mx-auto w-[calc(100%-72px)] sm:w-[500px] md:w-[calc(100%-140px)] md:max-w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)] max-w-[1400px]';
 
 const trackRef = ref<HTMLElement | null>(null);
 const stageRef = ref<HTMLElement | null>(null);

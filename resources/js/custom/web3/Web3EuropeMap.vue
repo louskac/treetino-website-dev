@@ -79,7 +79,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { EUROPE_COUNTRIES } from './europePaths';
 import { europeViewBox } from './europeView';
 
@@ -93,11 +93,26 @@ const props = withDefaults(
     { zoom: 0, dim: 0 },
 );
 
+const isPortrait = ref(false);
+
+const checkOrientation = () => {
+    isPortrait.value = window.innerWidth < 768 && window.innerHeight > window.innerWidth;
+};
+
+onMounted(() => {
+    checkOrientation();
+    window.addEventListener('resize', checkOrientation, { passive: true });
+});
+
+onUnmounted(() => {
+    window.removeEventListener('resize', checkOrientation);
+});
+
 const countries = EUROPE_COUNTRIES.filter((c) => c.id !== 'cz');
 const czech = EUROPE_COUNTRIES.find((c) => c.id === 'cz');
 
 const viewBoxAttr = computed(() => {
-    const vb = europeViewBox(props.zoom);
+    const vb = europeViewBox(props.zoom, isPortrait.value);
 
     return `${vb.x} ${vb.y} ${vb.w} ${vb.h}`;
 });

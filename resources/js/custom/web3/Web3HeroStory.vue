@@ -1,7 +1,7 @@
 <template>
     <!-- Tall scroll track; the stage inside stays pinned while scroll scrubs the story -->
     <section ref="sectionRef" class="relative bg-zinc-950 text-white" style="height: 880vh">
-        <div ref="stageRef" class="sticky top-0 h-screen w-full overflow-hidden">
+        <div ref="stageRef" class="sticky top-0 h-screen h-dvh w-full overflow-hidden">
             <!-- Background: real map of Europe, zooms onto Přeštice (CZ) -->
             <Web3EuropeMap :zoom="s.zoom" :dim="s.dim" />
             <!-- Wind, solar and EV assets building themselves on the map during the zoom -->
@@ -12,7 +12,7 @@
             <!-- ACT 2 battery  ·  ACT 4 control panel -->
             <div
                 ref="visualRef"
-                class="absolute inset-x-0 top-[23rem] bottom-[2vh] z-[5] mx-auto max-w-[1100px] px-4 sm:top-[25rem] lg:top-[26rem] xl:top-[43vh]"
+                class="absolute inset-x-0 top-[17rem] bottom-[2vh] z-[5] mx-auto max-w-[1100px] px-3 sm:top-[18rem] sm:px-4 md:top-[22rem] lg:top-[26rem] xl:top-[43vh]"
             >
                 <div class="relative h-full w-full">
                     <div class="absolute inset-0" :style="wireStyle">
@@ -42,7 +42,7 @@
                 <div :class="container" class="relative h-full">
                     <div
                         ref="phoneBoxRef"
-                        class="absolute inset-x-0 top-[42vh] bottom-[2vh] lg:top-[13vh] lg:bottom-[3vh] lg:left-auto lg:w-[54%]"
+                        class="absolute inset-x-0 top-[38vh] bottom-[2vh] sm:top-[36vh] lg:top-[13vh] lg:bottom-[3vh] lg:left-auto lg:w-[54%]"
                         :style="{
                             visibility: s.phone > 0 && s.phoneOut < 1 ? 'visible' : 'hidden',
                             opacity: s.phone * (1 - s.phoneOut),
@@ -61,7 +61,7 @@
 
             <!-- ACT 5 Treetino V1 + battery + EV charger -->
             <div
-                class="absolute inset-x-0 top-[23rem] bottom-0 z-[5] mx-auto max-w-[1320px] sm:top-[25rem] lg:top-[26rem] xl:top-[43vh]"
+                class="absolute inset-x-0 top-[17rem] bottom-[2vh] z-[5] mx-auto max-w-[1320px] px-1 sm:top-[19rem] sm:px-4 md:top-[23rem] lg:top-[26rem] xl:top-[43vh]"
                 :style="{ visibility: s.eco > 0 ? 'visible' : 'hidden', opacity: s.eco }"
             >
                 <Web3Ecosystem
@@ -77,11 +77,11 @@
                 <div :class="container" class="relative h-full">
                     <!-- ACT 1 -->
                     <div
-                        class="absolute inset-x-0 top-36 max-w-[32ch] sm:top-40 lg:top-44 xl:top-[20vh]"
+                        class="absolute inset-x-0 top-36 max-w-[32ch] px-4 sm:px-0 sm:top-36 lg:top-44 xl:top-[20vh]"
                     >
                         <Web3ScrollHeading
                             tag="h1"
-                            lead-class="text-[2.25rem] leading-[1.08] font-medium tracking-[-0.04em] sm:text-5xl lg:text-[clamp(2.75rem,4.2vw,4.25rem)]"
+                            lead-class="text-[1.75rem] leading-[1.14] font-medium tracking-[-0.035em] sm:text-4xl md:text-5xl lg:text-[clamp(2.75rem,4.2vw,4.25rem)]"
                             :segments="[
                                 { text: 'In the heart of Europe, the energy transition is creating' },
                                 { text: 'an investment opportunity unlike any other.', tone: 'accent' },
@@ -92,24 +92,24 @@
 
                         <!-- Act 1 CTAs (instant disappear on first scroll) -->
                         <div
-                            class="mt-8 flex flex-wrap items-center gap-3.5 sm:mt-10 sm:gap-4"
+                            class="mt-5 flex flex-wrap items-center gap-3 sm:mt-8 sm:gap-4"
                             :style="ctaStyle"
                         >
                             <a
                                 href="https://loyal-empathy-production-823a.up.railway.app/"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                class="pointer-events-auto group inline-flex items-center justify-center gap-2 rounded-xl bg-t-blue px-6 py-3.5 text-center text-sm font-semibold text-white shadow-[0_0_32px_rgba(77,141,255,0.45)] transition-all duration-300 hover:scale-[1.02] hover:bg-t-blue/90 hover:shadow-[0_0_48px_rgba(77,141,255,0.7)] sm:text-base"
+                                class="pointer-events-auto group inline-flex items-center justify-center gap-2 rounded-xl bg-t-blue px-5 py-3 text-center text-xs font-semibold text-white shadow-[0_0_32px_rgba(77,141,255,0.45)] transition-all duration-300 hover:scale-[1.02] hover:bg-t-blue/90 hover:shadow-[0_0_48px_rgba(77,141,255,0.7)] sm:px-6 sm:py-3.5 sm:text-base"
                             >
                                 <span>Try Demo</span>
-                                <ExternalLink class="h-4 w-4 text-white/90 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                                <ExternalLink class="h-3.5 w-3.5 sm:h-4 sm:w-4 text-white/90 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                             </a>
                             <a
                                 href="#pitch-video"
-                                class="pointer-events-auto group inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 px-6 py-3.5 text-center text-sm font-medium text-white backdrop-blur-md transition-all duration-300 hover:scale-[1.02] hover:border-white/40 hover:bg-white/10 sm:text-base"
+                                class="pointer-events-auto group inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-center text-xs font-medium text-white backdrop-blur-md transition-all duration-300 hover:scale-[1.02] hover:border-white/40 hover:bg-white/10 sm:px-6 sm:py-3.5 sm:text-base"
                                 @click="scrollToPitch"
                             >
-                                <Play class="h-4 w-4 fill-white text-white" />
+                                <Play class="h-3.5 w-3.5 sm:h-4 sm:w-4 fill-white text-white" />
                                 <span>Watch Pitch</span>
                             </a>
                         </div>
@@ -117,8 +117,8 @@
 
                     <!-- ACT 2 -->
                     <Web3ScrollHeading
-                        class="absolute inset-x-0 top-44 sm:top-52 lg:top-56 xl:top-[25vh]"
-                        lead-class="text-4xl leading-[1.02] font-medium tracking-[-0.04em] sm:text-5xl lg:text-[clamp(3rem,4.4vw,4.25rem)]"
+                        class="absolute inset-x-0 top-36 px-4 sm:px-0 sm:top-36 lg:top-48 xl:top-[22vh]"
+                        lead-class="text-[1.65rem] leading-[1.14] font-medium tracking-[-0.035em] sm:text-4xl md:text-5xl lg:text-[clamp(3rem,4.4vw,4.25rem)]"
                         :segments="[
                             { text: 'And ordinary investors like us?', break: true },
                             { text: 'Left completely on the sidelines.', tone: 'muted' },
@@ -129,8 +129,8 @@
 
                     <!-- ACT 3 -->
                     <Web3ScrollHeading
-                        class="absolute inset-x-0 top-36 sm:top-40 lg:top-1/2 lg:w-[46%] lg:-translate-y-1/2"
-                        lead-class="text-4xl leading-[1.02] font-medium tracking-[-0.04em] sm:text-5xl lg:text-[clamp(3rem,4.2vw,4rem)]"
+                        class="absolute inset-x-0 top-36 px-4 sm:px-0 sm:top-36 lg:top-1/2 lg:w-[46%] lg:-translate-y-1/2"
+                        lead-class="text-[1.65rem] leading-[1.14] font-medium tracking-[-0.035em] sm:text-4xl lg:text-[clamp(3rem,4.2vw,4rem)]"
                         :segments="[
                             { text: 'A new,' },
                             { text: 'greener economy', tone: 'green' },
@@ -143,8 +143,8 @@
 
                     <!-- ACT 4 -->
                     <Web3ScrollHeading
-                        class="absolute inset-x-0 top-44 sm:top-52 lg:top-56 xl:top-[25vh]"
-                        lead-class="text-4xl leading-[1.02] font-medium tracking-[-0.04em] sm:text-5xl lg:text-[clamp(2.75rem,3.9vw,3.75rem)]"
+                        class="absolute inset-x-0 top-36 px-4 sm:px-0 sm:top-36 lg:top-48 xl:top-[22vh]"
+                        lead-class="text-[1.65rem] leading-[1.14] font-medium tracking-[-0.035em] sm:text-4xl lg:text-[clamp(2.75rem,3.9vw,3.75rem)]"
                         :segments="[
                             { text: 'Every kWh, immutably on' },
                             { text: 'Solana.', tone: 'solana' },
@@ -156,8 +156,8 @@
 
                     <!-- ACT 5 -->
                     <Web3ScrollHeading
-                        class="absolute inset-x-0 top-44 sm:top-52 lg:top-56 xl:top-[25vh]"
-                        lead-class="text-4xl leading-[1.02] font-medium tracking-[-0.04em] sm:text-5xl lg:text-[clamp(2.75rem,3.9vw,3.75rem)]"
+                        class="absolute inset-x-0 top-36 px-4 sm:px-0 sm:top-36 lg:top-48 xl:top-[22vh]"
+                        lead-class="text-[1.65rem] leading-[1.14] font-medium tracking-[-0.035em] sm:text-4xl lg:text-[clamp(2.75rem,3.9vw,3.75rem)]"
                         :segments="[
                             { text: 'All connected through' },
                             { text: 'EURTree.', tone: 'green' },
@@ -188,7 +188,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 /** Same content width as the navbar and the rest of the site */
 const container =
-    'mx-auto w-full max-w-[1400px] px-6 sm:w-[500px] sm:px-0 md:w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)]';
+    'mx-auto w-[calc(100%-72px)] sm:w-[500px] md:w-[calc(100%-140px)] md:max-w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)] max-w-[1400px]';
 
 const sectionRef = ref<HTMLElement | null>(null);
 const stageRef = ref<HTMLElement | null>(null);

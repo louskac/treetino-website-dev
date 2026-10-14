@@ -150,8 +150,9 @@ function frame(time: number) {
         return;
     }
 
-    const vb = europeViewBox(props.zoom);
-    const vb0 = europeViewBox(0);
+    const isPortrait = width < 768 && height > width;
+    const vb = europeViewBox(props.zoom, isPortrait);
+    const vb0 = europeViewBox(0, isPortrait);
     const growth = (viewScale(vb, width, height) / viewScale(vb0, width, height)) ** 0.42;
 
     for (const a of assets) {

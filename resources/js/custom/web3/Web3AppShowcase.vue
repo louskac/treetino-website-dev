@@ -9,7 +9,7 @@
         <section ref="trackRef" class="relative bg-black" style="height: 440vh">
             <div
                 ref="stageRef"
-                class="sticky top-0 h-screen w-full overflow-hidden bg-black"
+                class="sticky top-0 h-screen h-dvh w-full overflow-hidden bg-black"
             >
                 <!-- Canvas element rendering pre-rendered WebP frames for instantaneous 0ms scrub -->
                 <canvas
@@ -22,9 +22,14 @@
                     class="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/85 via-black/20 to-black/85"
                 ></div>
 
-                <!-- Left dark gradient behind the text stack for flawless legibility -->
+                <!-- Left dark gradient behind the text stack for desktop -->
                 <div
-                    class="pointer-events-none absolute inset-y-0 left-0 w-full sm:w-[70%] lg:w-[55%] bg-gradient-to-r from-black via-black/85 to-transparent z-10"
+                    class="pointer-events-none absolute inset-y-0 left-0 hidden lg:block w-[55%] bg-gradient-to-r from-black via-black/85 to-transparent z-10"
+                ></div>
+
+                <!-- Top vignette for mobile readability -->
+                <div
+                    class="pointer-events-none absolute inset-x-0 top-0 h-80 bg-gradient-to-b from-black via-black/85 to-transparent z-10 lg:hidden"
                 ></div>
 
                 <!-- Hairline scrub progress bar at top of screen -->
@@ -37,8 +42,8 @@
                     ></div>
                 </div>
 
-                <!-- ================= SCROLL STORY OVERLAYS (ALL 3 POINTS ON THE LEFT) ================= -->
-                <div class="pointer-events-none absolute inset-0 z-20 flex items-center">
+                <!-- ================= DESKTOP: ALL 3 POINTS ON THE LEFT ================= -->
+                <div class="pointer-events-none absolute inset-0 z-20 hidden lg:flex items-center">
                     <div class="w-full px-6 sm:px-10 lg:px-12 xl:px-16">
                         <div class="max-w-[440px] lg:max-w-[480px] xl:max-w-[510px] space-y-7 sm:space-y-9 lg:space-y-11">
                             <div
@@ -80,6 +85,28 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- ================= MOBILE / TABLET: ACTIVE STEP TEXT (MATCHING DESKTOP DESIGN) ================= -->
+                <div class="pointer-events-none absolute inset-x-0 top-36 sm:top-36 z-20 flex lg:hidden">
+                    <div :class="container" class="relative">
+                        <div class="px-4 sm:px-0 max-w-[34ch] sm:max-w-md">
+                            <h3
+                                class="text-2xl leading-[1.14] font-medium tracking-[-0.035em] sm:text-3xl"
+                            >
+                                <span
+                                    class="block text-[#8ec5ff] [text-shadow:0_0_40px_rgba(77,141,255,0.45)] transition-all duration-300"
+                                >
+                                    {{ steps[activeStep].lead }}
+                                </span>
+                                <span
+                                    class="block text-white drop-shadow-[0_2px_16px_rgba(0,0,0,0.85)] mt-1.5 font-medium transition-all duration-300"
+                                >
+                                    {{ steps[activeStep].sub }}
+                                </span>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </div>
@@ -91,6 +118,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { onMounted, onUnmounted, ref } from 'vue';
 
 gsap.registerPlugin(ScrollTrigger);
+
+/** Same content width as the navbar and the rest of the site */
+const container =
+    'mx-auto w-[calc(100%-72px)] sm:w-[500px] md:w-[calc(100%-140px)] md:max-w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)] max-w-[1400px]';
 
 const trackRef = ref<HTMLElement | null>(null);
 const stageRef = ref<HTMLElement | null>(null);
@@ -167,8 +198,8 @@ function renderFrame(targetIndex: number) {
     ctx.clearRect(0, 0, w, h);
 
     const isDesktop = w >= 1024;
-    // Scale slightly on desktop so phone fills the right side heroically and has extra room to shift
-    const scale = isDesktop ? 1.25 : 1.0;
+    // Scale slightly on desktop so phone fills the right side heroically; scale nicely on mobile to fill canvas seamlessly
+    const scale = isDesktop ? 1.25 : 1.08;
 
     const imgRatio = img.naturalWidth / img.naturalHeight;
     const canvasRatio = w / h;
@@ -187,7 +218,7 @@ function renderFrame(targetIndex: number) {
 
     // On desktop, shift the phone to the right so it doesn't collide with the left text stack
     const xShift = isDesktop ? Math.min(w * 0.22, 320) : 0;
-    const yOffset = isDesktop ? Math.min(25, h * 0.03) : Math.min(60, h * 0.06);
+    const yOffset = isDesktop ? Math.min(25, h * 0.03) : Math.min(30, h * 0.04);
 
     ctx.drawImage(img, rx + xShift, ry + yOffset, rw, rh);
     ctx.restore();

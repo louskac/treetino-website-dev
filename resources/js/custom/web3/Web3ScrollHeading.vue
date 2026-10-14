@@ -15,12 +15,12 @@
                     :class="toneClass[w.tone]"
                     :style="wordStyle(i)"
                     >{{ w.text }}</span
-                ><br v-if="w.breakAfter" class="hidden sm:inline" />{{ w.breakAfter ? '' : (i < words.length - 1 ? ' ' : '') }}
+                ><br v-if="w.breakAfter" class="block" />{{ i < words.length - 1 ? ' ' : '' }}
             </template>
         </span>
         <span
             v-if="sub"
-            class="mt-5 block max-w-[34ch] text-lg leading-snug font-normal tracking-[-0.01em] text-white/60 sm:text-xl lg:mt-6 lg:text-[1.375rem]"
+            class="mt-3 block max-w-[34ch] text-sm leading-relaxed font-normal tracking-[-0.01em] text-white/70 sm:mt-5 sm:text-xl lg:mt-6 lg:text-[1.375rem]"
             :style="subStyle"
         >
             {{ sub }}
