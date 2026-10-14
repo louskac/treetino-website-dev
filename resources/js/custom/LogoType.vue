@@ -1,6 +1,6 @@
 <template>
     <svg
-        class="h-6 md:h-8"
+        class="h-6 w-auto shrink-0 md:h-8"
         id="Layer_1"
         data-name="Layer 1"
         xmlns="http://www.w3.org/2000/svg"

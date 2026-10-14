@@ -188,7 +188,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 /** Same content width as the navbar and the rest of the site */
 const container =
-    'mx-auto w-[calc(100%-72px)] sm:w-[500px] md:w-[calc(100%-140px)] md:max-w-[700px] lg:w-[calc(100%-200px)] xl:w-[calc(100%-400px)] max-w-[1400px]';
+    'mx-auto w-[calc(100%-72px)] sm:w-[500px] md:w-[calc(100%-140px)] md:max-w-[700px] lg:w-[calc(100%-200px)] lg:max-w-[1400px] xl:w-[calc(100%-400px)] max-w-[1400px]';
 
 const sectionRef = ref<HTMLElement | null>(null);
 const stageRef = ref<HTMLElement | null>(null);
