@@ -349,13 +349,14 @@ const partners = [
                         <figure class="rise" style="--d: 690ms">
                             <div class="photo">
                                 <img
-                                    src="/img/im/industrial-3d-printer-production.jpg"
-                                    alt="In-house 3D print farm"
+                                    src="/img/pitch/expo-booth-lois.jpg"
+                                    alt="Treetino expo booth"
+                                    style="object-position: 50% 42%"
                                 />
                             </div>
                             <figcaption>
-                                <p class="caption-value">16 weeks → 48 hours</p>
-                                <p class="stat-label !mt-[8px]">Tooling from our own 3D print farm</p>
+                                <p class="caption-value">$85M in signed LOIs</p>
+                                <p class="stat-label !mt-[8px]">Walked away from our last event</p>
                             </figcaption>
                         </figure>
                     </div>
@@ -387,8 +388,8 @@ const partners = [
                             <p class="stat-label">Signed contracts</p>
                         </div>
                         <div class="rise" style="--d: 700ms">
-                            <p class="stat-value-xl">€2.8M</p>
-                            <p class="stat-label">Pipeline from 16 signed LOIs</p>
+                            <p class="stat-value-xl">$85M</p>
+                            <p class="stat-label">Pipeline from signed LOIs</p>
                         </div>
                         <div class="rise" style="--d: 800ms">
                             <p class="stat-value-xl">€10M</p>
