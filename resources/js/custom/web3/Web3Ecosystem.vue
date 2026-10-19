@@ -289,10 +289,79 @@ function arc(a: V3, b: V3, h: number, n = 24): V3[] {
     return pts;
 }
 
-const MONEY_ARCS: V3[][] = [
-    arc([CAR_X, 1.6, CHARGER[2] + 0.3], [BATT_X + 2.2, 2.75, 0], 1.6),
-    arc([BATT_X - 2.2, 2.75, 0], [TREE_X + 0.5, 4.2, 0], 2.0),
+const FUNNEL_POS: V3 = [2.55, 3.05, 0];
+
+// Minted EURTree stablecoin arc emerging from the bottom spout of the funnel into the Tree (investors)
+const STABLE_ARC: V3[] = arc([FUNNEL_POS[0] - 0.25, FUNNEL_POS[1] - 0.42, 0], [TREE_X + 0.5, 4.1, 0], 1.95, 32);
+
+// Guide streams feeding from the Car & Charger up to the Funnel lip
+const FIAT_FEED_GUIDES: V3[][] = [
+    arc([CAR_X, 1.45, CHARGER[2] + 0.3], [FUNNEL_POS[0] + 0.75, FUNNEL_POS[1] + 0.85, 0.1], 1.15, 20),
+    arc([CHARGER[0], 1.45, CHARGER[2] + 0.21], [FUNNEL_POS[0] + 0.45, FUNNEL_POS[1] + 0.85, -0.15], 0.85, 20),
 ];
+
+/**
+ * 3D wireframe On-Ramp Funnel:
+ * Wide emerald-green top mouth where Fiat (€) pours in, tapering down to a blue EURTree mint spout.
+ */
+function onRampFunnel(): { staticPart: LineBuilder; rotorPart: LineBuilder } {
+    const s = new LineBuilder();
+    const r = new LineBuilder();
+    const green = new THREE.Color('#34d399');
+    const midColor = new THREE.Color('#a7f3d0');
+    const blue = new THREE.Color('#60a5fa');
+
+    // Funnel profile: u = 0 (top mouth, dy = +0.85, rad = 1.08) -> u = 1 (bottom spout, dy = -0.45, rad = 0.22)
+    const profileRadius = (u: number) => 0.22 + 0.86 * Math.pow(1 - u, 1.65);
+    const profileY = (u: number) => 0.85 - u * 1.3;
+
+    // Horizontal rings along the funnel height
+    const ringSteps = [
+        { u: 0.0, col: green, segs: 32 },
+        { u: 0.28, col: green.clone().lerp(midColor, 0.5), segs: 28 },
+        { u: 0.58, col: WIRE.white, segs: 24 },
+        { u: 0.82, col: blue.clone().lerp(WIRE.white, 0.3), segs: 20 },
+        { u: 1.0, col: blue, segs: 20 },
+    ];
+
+    for (const st of ringSteps) {
+        s.circle([0, profileY(st.u), 0], profileRadius(st.u), 'y', st.col, st.segs);
+    }
+
+    // 12 curved meridian ribs from top lip to bottom spout
+    const ribs = 12;
+    const steps = 12;
+
+    for (let i = 0; i < ribs; i++) {
+        const a = (i / ribs) * Math.PI * 2;
+        const ca = Math.cos(a);
+        const sa = Math.sin(a);
+
+        for (let k = 0; k < steps; k++) {
+            const u0 = k / steps;
+            const u1 = (k + 1) / steps;
+            const p0: V3 = [ca * profileRadius(u0), profileY(u0), sa * profileRadius(u0)];
+            const p1: V3 = [ca * profileRadius(u1), profileY(u1), sa * profileRadius(u1)];
+            const col = u0 < 0.45 ? green : u0 < 0.72 ? WIRE.white : blue;
+            s.seg(p0, p1, col);
+        }
+    }
+
+    // Spinning inner vortex ring inside the funnel throat
+    r.circle([0, 0.15, 0], 0.52, 'y', green, 18);
+    r.circle([0, -0.18, 0], 0.34, 'y', blue, 18);
+
+    for (let i = 0; i < 6; i++) {
+        const a = (i / 6) * Math.PI * 2;
+        r.seg(
+            [Math.cos(a) * 0.52, 0.15, Math.sin(a) * 0.52],
+            [Math.cos(a + 0.5) * 0.34, -0.18, Math.sin(a + 0.5) * 0.34],
+            WIRE.white,
+        );
+    }
+
+    return { staticPart: s, rotorPart: r };
+}
 
 function samplePolyline(pts: V3[], t: number): V3 {
     const lens: number[] = [0];
@@ -317,14 +386,33 @@ function samplePolyline(pts: V3[], t: number): V3 {
     ];
 }
 
-function spriteTexture(ring: boolean): THREE.CanvasTexture {
+function spriteTexture(kind: 'energy' | 'fiat' | 'stable'): THREE.CanvasTexture {
     const c = document.createElement('canvas');
     c.width = 64;
     c.height = 64;
     const ctx = c.getContext('2d')!;
     const g = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
 
-    if (ring) {
+    if (kind === 'fiat') {
+        g.addColorStop(0, 'rgba(52,211,153,0.4)');
+        g.addColorStop(0.75, 'rgba(52,211,153,0.12)');
+        g.addColorStop(1, 'rgba(52,211,153,0)');
+        ctx.fillStyle = g;
+        ctx.fillRect(0, 0, 64, 64);
+
+        // Rounded banknote / card badge
+        ctx.strokeStyle = '#34d399';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.roundRect(10, 15, 44, 34, 7);
+        ctx.stroke();
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 24px ui-sans-serif, system-ui, -apple-system, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('€', 32, 33);
+    } else if (kind === 'stable') {
         ctx.strokeStyle = '#60a5fa';
         ctx.lineWidth = 4;
         ctx.beginPath();
@@ -346,14 +434,15 @@ function spriteTexture(ring: boolean): THREE.CanvasTexture {
         g.addColorStop(0, 'rgba(96,165,250,0.15)');
         g.addColorStop(0.7, 'rgba(96,165,250,0.3)');
         g.addColorStop(1, 'rgba(96,165,250,0)');
+        ctx.fillStyle = g;
+        ctx.fillRect(0, 0, 64, 64);
     } else {
         g.addColorStop(0, 'rgba(255,255,255,1)');
         g.addColorStop(0.25, 'rgba(251,191,36,0.9)');
         g.addColorStop(1, 'rgba(251,191,36,0)');
+        ctx.fillStyle = g;
+        ctx.fillRect(0, 0, 64, 64);
     }
-
-    ctx.fillStyle = g;
-    ctx.fillRect(0, 0, 64, 64);
 
     return new THREE.CanvasTexture(c);
 }
@@ -367,15 +456,20 @@ let staticTotal = 0;
 let lineMat: THREE.LineBasicMaterial;
 let grid: THREE.LineSegments;
 const podMeshes: THREE.LineSegments[] = [];
+let funnelRotorMesh: THREE.LineSegments | null = null;
 let energyPoints: THREE.Points;
+let fiatPoints: THREE.Points;
 let moneyPoints: THREE.Points;
 let energyMat: THREE.PointsMaterial;
+let fiatMat: THREE.PointsMaterial;
 let moneyMat: THREE.PointsMaterial;
 const disposables: { dispose: () => void }[] = [];
 const MAX_ENERGY_COUNT = 26;
-const MAX_MONEY_PER_ARC = 7;
+const MAX_FIAT_COUNT = 18;
+const MAX_MONEY_COUNT = 11;
 let currentEnergyCount = 26;
-let currentMoneyPerArc = 7;
+let currentFiatCount = 18;
+let currentMoneyCount = 11;
 const center = new THREE.Vector3(-0.6, 1.9, 0);
 let raf = 0;
 let resizeObserver: ResizeObserver | null = null;
@@ -395,19 +489,22 @@ function resize() {
     const isPortrait = w < 640 || w < h;
 
     if (isPortrait) {
-        // True geometric center of scene (tree extends to -6.8, car extends to +5.3)
         center.set(-0.75, 1.25, 0);
         camera.userData.distance = Math.max(7.7 / (tanV * camera.aspect), 4.2 / tanV);
+        if (fiatMat) fiatMat.size = 16;
         if (moneyMat) moneyMat.size = 14;
         if (energyMat) energyMat.size = 8;
-        currentMoneyPerArc = 4;
+        currentFiatCount = 12;
+        currentMoneyCount = 7;
         currentEnergyCount = 14;
     } else {
         camera.userData.distance = Math.max(10.6 / (tanV * camera.aspect), 3.8 / tanV);
         center.set(-0.6, 1.9, 0);
+        if (fiatMat) fiatMat.size = 26;
         if (moneyMat) moneyMat.size = 24;
         if (energyMat) energyMat.size = 16;
-        currentMoneyPerArc = 7;
+        currentFiatCount = 18;
+        currentMoneyCount = 11;
         currentEnergyCount = 26;
     }
     camera.updateProjectionMatrix();
@@ -431,9 +528,16 @@ function frame(time: number) {
         m.rotation.y = time * 0.0012 * (i % 2 ? 1 : -1) + i;
     });
 
+    if (funnelRotorMesh) {
+        funnelRotorMesh.visible = podOn > 0;
+        funnelRotorMesh.scale.setScalar(Math.max(0.001, podOn));
+        funnelRotorMesh.rotation.y = -time * 0.0022;
+    }
+
     // flows
     const flow = Math.min(1, Math.max(0, props.flow));
     energyMat.opacity = flow;
+    fiatMat.opacity = flow;
     moneyMat.opacity = flow;
 
     if (flow > 0) {
@@ -448,17 +552,51 @@ function frame(time: number) {
         }
 
         ep.needsUpdate = true;
-        const mp = moneyPoints.geometry.getAttribute('position') as THREE.BufferAttribute;
-        let k = 0;
 
-        for (const pts of MONEY_ARCS) {
-            for (let i = 0; i < currentMoneyPerArc; i++) {
-                const t = (i / currentMoneyPerArc + time * 0.00012) % 1;
-                mp.setXYZ(k++, ...samplePolyline(pts, t));
-            }
+        // Stage 1: Fiat (€) being poured into the Funnel:
+        // First 8 particles stream from the Car/Charger up to the funnel lip,
+        // and the remaining 10 particles cascade & spiral down inside the funnel mouth like liquid being poured!
+        const fp = fiatPoints.geometry.getAttribute('position') as THREE.BufferAttribute;
+        const feedCount = Math.min(6, Math.floor(currentFiatCount * 0.35));
+        let fk = 0;
+
+        for (let i = 0; i < feedCount; i++) {
+            const guide = FIAT_FEED_GUIDES[i % FIAT_FEED_GUIDES.length];
+            const t = (i / feedCount + time * 0.00022) % 1;
+            fp.setXYZ(fk++, ...samplePolyline(guide, t));
         }
-        while (k < MONEY_ARCS.length * MAX_MONEY_PER_ARC) {
-            mp.setXYZ(k++, 0, -999, 0);
+
+        const pourCount = currentFiatCount - feedCount;
+
+        for (let i = 0; i < pourCount; i++) {
+            // p goes 0 (high above funnel mouth) -> 1 (deep inside funnel spout) with gravity acceleration
+            const phase = (i / pourCount + time * 0.00028) % 1;
+            const grav = phase * phase;
+            const y = FUNNEL_POS[1] + 1.55 - grav * 1.95;
+            // Spiral radius tightens as fiat pours down into the throat
+            const rad = (1 - phase) * 0.88 + 0.08;
+            const angle = i * 2.39996 + time * 0.0026 + phase * 4.2;
+            // Slight drift from right (+x) as it pours into the funnel center
+            const x = FUNNEL_POS[0] + (1 - phase) * 0.35 + Math.cos(angle) * rad;
+            const z = Math.sin(angle) * rad;
+            fp.setXYZ(fk++, x, y, z);
+        }
+
+        while (fk < MAX_FIAT_COUNT) {
+            fp.setXYZ(fk++, 0, -999, 0);
+        }
+
+        fp.needsUpdate = true;
+
+        // Stage 2: Minted EURTree stablecoin rings streaming out of the funnel spout into the Tree
+        const mp = moneyPoints.geometry.getAttribute('position') as THREE.BufferAttribute;
+
+        for (let i = 0; i < currentMoneyCount; i++) {
+            const t = (i / currentMoneyCount + time * 0.00012) % 1;
+            mp.setXYZ(i, ...samplePolyline(STABLE_ARC, t));
+        }
+        for (let i = currentMoneyCount; i < MAX_MONEY_COUNT; i++) {
+            mp.setXYZ(i, 0, -999, 0);
         }
 
         mp.needsUpdate = true;
@@ -513,8 +651,23 @@ onMounted(() => {
     b.colors.push(...tree.body.colors);
     // charger + car
     chargerAndCar(b);
-    // money arcs (faint guides)
-    MONEY_ARCS.forEach((pts) => b.poly(pts, WIRE.skin.clone().multiplyScalar(0.4)));
+
+    // 3D On-Ramp Funnel static body
+    const funnel = onRampFunnel();
+
+    for (let i = 0; i < funnel.staticPart.positions.length; i += 3) {
+        b.positions.push(
+            funnel.staticPart.positions[i] + FUNNEL_POS[0],
+            funnel.staticPart.positions[i + 1] + FUNNEL_POS[1],
+            funnel.staticPart.positions[i + 2] + FUNNEL_POS[2],
+        );
+    }
+
+    b.colors.push(...funnel.staticPart.colors);
+
+    // faint guides: emerald for fiat feed, blue for EURTree yield output
+    FIAT_FEED_GUIDES.forEach((pts) => b.poly(pts, WIRE.green.clone().multiplyScalar(0.32)));
+    b.poly(STABLE_ARC, WIRE.skin.clone().multiplyScalar(0.42));
 
     const g = b.geometry();
     disposables.push(g);
@@ -532,19 +685,37 @@ onMounted(() => {
         podMeshes.push(m);
     }
 
+    // spinning inner vortex ring inside the On-Ramp Funnel
+    const fgRotor = funnel.rotorPart.geometry();
+    disposables.push(fgRotor);
+    funnelRotorMesh = new THREE.LineSegments(fgRotor, lineMat);
+    funnelRotorMesh.position.set(FUNNEL_POS[0], FUNNEL_POS[1], FUNNEL_POS[2]);
+    scene.add(funnelRotorMesh);
+
     grid = fadingGrid(16, 1.2);
     grid.position.set(center.x, -0.16, 0);
     disposables.push(grid.geometry, grid.material as THREE.Material);
     scene.add(grid);
 
     // flow particles
-    const dotTex = spriteTexture(false);
-    const ringTex = spriteTexture(true);
-    disposables.push(dotTex, ringTex);
+    const dotTex = spriteTexture('energy');
+    const fiatTex = spriteTexture('fiat');
+    const ringTex = spriteTexture('stable');
+    disposables.push(dotTex, fiatTex, ringTex);
     energyMat = new THREE.PointsMaterial({
         map: dotTex,
         color: '#fbbf24',
         size: 16,
+        sizeAttenuation: false,
+        transparent: true,
+        opacity: 0,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+    });
+    fiatMat = new THREE.PointsMaterial({
+        map: fiatTex,
+        color: '#ffffff',
+        size: 26,
         sizeAttenuation: false,
         transparent: true,
         opacity: 0,
@@ -561,17 +732,21 @@ onMounted(() => {
         blending: THREE.AdditiveBlending,
         depthWrite: false,
     });
-    disposables.push(energyMat, moneyMat);
+    disposables.push(energyMat, fiatMat, moneyMat);
     const eg = new THREE.BufferGeometry();
     eg.setAttribute('position', new THREE.Float32BufferAttribute(new Float32Array(MAX_ENERGY_COUNT * 3), 3));
+    const fg = new THREE.BufferGeometry();
+    fg.setAttribute('position', new THREE.Float32BufferAttribute(new Float32Array(MAX_FIAT_COUNT * 3), 3));
     const mg = new THREE.BufferGeometry();
-    mg.setAttribute('position', new THREE.Float32BufferAttribute(new Float32Array(MONEY_ARCS.length * MAX_MONEY_PER_ARC * 3), 3));
-    disposables.push(eg, mg);
+    mg.setAttribute('position', new THREE.Float32BufferAttribute(new Float32Array(MAX_MONEY_COUNT * 3), 3));
+    disposables.push(eg, fg, mg);
     energyPoints = new THREE.Points(eg, energyMat);
+    fiatPoints = new THREE.Points(fg, fiatMat);
     moneyPoints = new THREE.Points(mg, moneyMat);
     energyPoints.frustumCulled = false;
+    fiatPoints.frustumCulled = false;
     moneyPoints.frustumCulled = false;
-    scene.add(energyPoints, moneyPoints);
+    scene.add(energyPoints, fiatPoints, moneyPoints);
 
     resize();
     resizeObserver = new ResizeObserver(resize);

@@ -16,7 +16,6 @@ import '@/custom/pitch/deck.css';
  */
 
 const TOTAL = 11;
-const DEMO_URL = 'http://localhost:5173';
 const TALK_SECONDS = 240;
 
 const current = ref(0);
@@ -171,7 +170,7 @@ const notes = [
     },
     {
         time: '1:25–1:55',
-        script: 'Specifically for peaq, we designed 4 tiers of funding — from $100k up to $1M — so we build trust step by step. We start with Tier 1 right here in Prague at SIC Smíchov: a $100k hub ($60k after grant) with one V2 tree, a 150 kWh battery and two EV chargers. And this exact Tier 1 project is what we have completely simulated in this hackathon.',
+        script: 'Specifically for peaq, we designed 4 tiers of funding — from $100k up to $1M — so we build trust step by step. We start with Tier 1 right here in Prague at SIC Smíchov: a $100k turnkey hub ($60k after grant) delivering $18.3k a year in net yield — that’s an 18.3% base APY, or 30.5% with the grant, paying back in 3.3 years. And this exact Tier 1 project is what we have completely simulated in this hackathon.',
     },
     {
         time: '1:55–2:20',
@@ -179,7 +178,7 @@ const notes = [
     },
     {
         time: '2:20–2:45',
-        script: 'Here’s the whole loop. Energy flows in amber from the tree into the battery and out to the charger. Every card payment flows back in blue as EURTree, through our on-ramp, into the on-chain vault.',
+        script: 'Here’s the whole loop. Energy flows in amber from the tree through the battery to the charger. When the driver pays by card, green fiat pours into our on-ramp gate, converts 1:1 into blue EURTree stablecoins, and streams straight into the tree’s vault.',
     },
     {
         time: '2:45–3:10',
@@ -418,17 +417,17 @@ const notes = [
 
                     <div class="flex items-end justify-between gap-[96px]">
                         <div class="grid flex-1 grid-cols-2 gap-x-[48px] gap-y-[48px]">
-                            <div class="rise border-t border-white/10 pt-[28px]" style="--d: 600ms">
-                                <p class="stat-value">$100k</p>
-                                <p class="stat-label">Turnkey · $60k after grant</p>
+                            <div class="rise border-t border-[#4d8dff]/60 pt-[28px]" style="--d: 600ms">
+                                <p class="stat-value tone-accent">18.3%</p>
+                                <p class="stat-label">Base APY · 30.5% with grant</p>
                             </div>
                             <div class="rise border-t border-white/10 pt-[28px]" style="--d: 700ms">
-                                <p class="stat-value">3.3 yrs</p>
-                                <p class="stat-label">Payback with the grant</p>
+                                <p class="stat-value">$18.3k</p>
+                                <p class="stat-label">Net annual yield · 3.3 yr payback</p>
                             </div>
                             <div class="rise border-t border-white/10 pt-[28px]" style="--d: 800ms">
-                                <p class="stat-value">$18.3k</p>
-                                <p class="stat-label">Net EBITDA per year</p>
+                                <p class="stat-value">$100k</p>
+                                <p class="stat-label">Turnkey · $60k after grant</p>
                             </div>
                             <div class="rise border-t border-white/10 pt-[28px]" style="--d: 900ms">
                                 <p class="stat-value">12 kW</p>
@@ -503,7 +502,7 @@ const notes = [
                     <span>{{ pad(7) }}<span class="text-white/20"> / {{ TOTAL }}</span></span>
                 </div>
 
-                <div class="img-in absolute inset-x-0 top-[340px] bottom-[96px]" style="--d: 200ms">
+                <div class="img-in absolute inset-x-0 top-[285px] bottom-[185px]" style="--d: 200ms">
                     <Web3Ecosystem :draw="1" :flow="1" :orbit="0.52" :active="true" />
                 </div>
 
@@ -513,15 +512,19 @@ const notes = [
                         :segments="[{ text: 'One loop,' }, { text: 'settled in EURTree.', tone: 'accent' }]"
                     />
 
-                    <div class="rise flex items-center gap-[72px] text-[24px] text-white/50" style="--d: 700ms">
-                        <span class="flex items-center gap-[16px]">
-                            <span class="h-[12px] w-[12px] rounded-full bg-[#fbbf24]"></span>
-                            <span><span class="text-white">Energy</span>&nbsp;&nbsp;tree → battery → charger → car</span>
-                        </span>
-                        <span class="flex items-center gap-[16px]">
-                            <span class="h-[12px] w-[12px] rounded-full bg-[#4d8dff]"></span>
-                            <span><span class="text-white">Money</span>&nbsp;&nbsp;card payment → EURTree → investors</span>
-                        </span>
+                    <div class="stats">
+                        <div class="rise !border-[#fbbf24]/50" style="--d: 650ms">
+                            <p class="stat-value">Energy</p>
+                            <p class="stat-label">Tree → battery → charger → car</p>
+                        </div>
+                        <div class="rise !border-[#34d399]/50" style="--d: 750ms">
+                            <p class="stat-value">Fiat</p>
+                            <p class="stat-label">Card payment in CZK or EUR → on-ramp</p>
+                        </div>
+                        <div class="rise !border-[#4d8dff]/60" style="--d: 850ms">
+                            <p class="stat-value tone-accent">EURTree</p>
+                            <p class="stat-label">Minted 1:1 → streamed to investors</p>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -592,32 +595,25 @@ const notes = [
                         ]"
                     />
 
-                    <div>
-                        <div class="grid grid-cols-3 gap-[64px]">
-                            <div class="rise border-t border-white/10 pt-[32px]" style="--d: 550ms">
-                                <p class="text-[22px] text-white/30 tabular-nums">01</p>
-                                <p class="mt-[20px] text-[56px] leading-none font-medium tracking-[-0.035em]">Charging</p>
-                                <p class="tone-accent mt-[24px] text-[32px] font-medium tracking-[-0.02em]">$7.7k / year</p>
-                                <p class="stat-label">30 MWh sold through two 22 kW chargers</p>
-                            </div>
-                            <div class="rise border-t border-white/10 pt-[32px]" style="--d: 670ms">
-                                <p class="text-[22px] text-white/30 tabular-nums">02</p>
-                                <p class="mt-[20px] text-[56px] leading-none font-medium tracking-[-0.035em]">Peak shaving</p>
-                                <p class="tone-accent mt-[24px] text-[32px] font-medium tracking-[-0.02em]">$7.2k / year</p>
-                                <p class="stat-label">35 kW cut from the SIC building’s peak demand</p>
-                            </div>
-                            <div class="rise border-t border-white/10 pt-[32px]" style="--d: 790ms">
-                                <p class="text-[22px] text-white/30 tabular-nums">03</p>
-                                <p class="mt-[20px] text-[56px] leading-none font-medium tracking-[-0.035em]">Spot trading</p>
-                                <p class="tone-accent mt-[24px] text-[32px] font-medium tracking-[-0.02em]">$5.8k / year</p>
-                                <p class="stat-label">Buys cheap at night, sells into the evening peak</p>
-                            </div>
+                    <div class="grid grid-cols-3 gap-[64px]">
+                        <div class="rise border-t border-white/10 pt-[32px]" style="--d: 550ms">
+                            <p class="text-[22px] text-white/30 tabular-nums">01</p>
+                            <p class="mt-[20px] text-[56px] leading-none font-medium tracking-[-0.035em]">Charging</p>
+                            <p class="tone-accent mt-[24px] text-[32px] font-medium tracking-[-0.02em]">$7.7k / year</p>
+                            <p class="stat-label">30 MWh sold through two 22 kW chargers</p>
                         </div>
-
-                        <p class="rise mt-[56px] text-[26px] tracking-[-0.01em] text-white/45" style="--d: 900ms">
-                            $20.6k revenue − $2.3k opex =
-                            <span class="font-medium text-white">$18.3k net EBITDA a year</span>, all paid into one vault.
-                        </p>
+                        <div class="rise border-t border-white/10 pt-[32px]" style="--d: 670ms">
+                            <p class="text-[22px] text-white/30 tabular-nums">02</p>
+                            <p class="mt-[20px] text-[56px] leading-none font-medium tracking-[-0.035em]">Peak shaving</p>
+                            <p class="tone-accent mt-[24px] text-[32px] font-medium tracking-[-0.02em]">$7.2k / year</p>
+                            <p class="stat-label">35 kW cut from the SIC building’s peak demand</p>
+                        </div>
+                        <div class="rise border-t border-white/10 pt-[32px]" style="--d: 790ms">
+                            <p class="text-[22px] text-white/30 tabular-nums">03</p>
+                            <p class="mt-[20px] text-[56px] leading-none font-medium tracking-[-0.035em]">Spot trading</p>
+                            <p class="tone-accent mt-[24px] text-[32px] font-medium tracking-[-0.02em]">$5.8k / year</p>
+                            <p class="stat-label">Buys cheap at night, sells into the evening peak</p>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -666,7 +662,7 @@ const notes = [
             </section>
 
             <!-- ============================================================ -->
-            <!-- 11 · CLOSE · LIVE DEMO                                       -->
+            <!-- 11 · CLOSE                                                   -->
             <!-- ============================================================ -->
             <section class="slide" :class="state(10)">
                 <div class="img-in absolute inset-0" style="--d: 0ms">
@@ -694,19 +690,10 @@ const notes = [
                             { text: 'Watch the yield land.', tone: 'accent' },
                         ]"
                     />
-                    <a
-                        :href="DEMO_URL"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="deck-ui rise relative z-30 mt-[56px] rounded-full bg-white px-[36px] py-[16px] text-[22px] font-medium text-zinc-950 transition hover:bg-white/85"
-                        style="--d: 800ms"
-                    >
-                        Live demo →
-                    </a>
-                    <p class="rise mt-[56px] text-[24px] text-white/45" style="--d: 900ms">
-                        Dominik Mašek, CEO&nbsp;&nbsp;·&nbsp;&nbsp;Jakub Lustyk, CTO
+                    <p class="rise mt-[56px] text-[26px] text-white/65" style="--d: 850ms">
+                        Dominik Mašek&nbsp;&nbsp;·&nbsp;&nbsp;Jakub Lustyk&nbsp;&nbsp;·&nbsp;&nbsp;Marian-Daniel Rolník
                     </p>
-                    <p class="rise mt-[12px] text-[24px] text-white/30" style="--d: 950ms">
+                    <p class="rise mt-[14px] text-[24px] text-white/35" style="--d: 920ms">
                         info@treetino.com&nbsp;&nbsp;·&nbsp;&nbsp;treetino.eu
                     </p>
                 </div>
