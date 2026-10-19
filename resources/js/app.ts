@@ -96,7 +96,7 @@ const staticRoutes: Record<string, string | ((param?: any) => string)> = {
     'configurator.product': (id?: string) =>
         id ? `/configurator?product=${id}` : '/configurator',
     'sales.index': '/sales',
-    'pitch.index': '/media#pitchdeck',
+    'pitch.index': '/pitch',
     'collaboration.index': '/collaboration',
     'media.index': '/media',
     'web3.index': '/web3',
@@ -190,7 +190,7 @@ function getComponentForPath(path: string): string {
         p === '/deck' ||
         p === '/presentation'
     ) {
-        return 'Media/Index';
+        return 'Pitch/Index';
     }
 
     if (p === '/collaboration') {

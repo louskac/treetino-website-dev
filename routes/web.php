@@ -31,16 +31,16 @@ Route::get('/crm', [SalesController::class, 'index']);
 Route::get('/cmr', [SalesController::class, 'index']);
 
 Route::get('/pitch', function () {
-    return redirect('/media#pitchdeck');
+    return \Inertia\Inertia::render('Pitch/Index');
 })->name('pitch.index');
 Route::get('/pitchdeck', function () {
-    return redirect('/media#pitchdeck');
+    return redirect()->route('pitch.index');
 });
 Route::get('/deck', function () {
-    return redirect('/media#pitchdeck');
+    return redirect()->route('pitch.index');
 });
 Route::get('/presentation', function () {
-    return redirect('/media#pitchdeck');
+    return redirect()->route('pitch.index');
 });
 
 Route::get('/im', function () {

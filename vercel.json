@@ -11,9 +11,9 @@
         { "source": "/im", "destination": "/media#memorandum", "permanent": false },
         { "source": "/memorandum", "destination": "/media#memorandum", "permanent": false },
         { "source": "/investment-memorandum", "destination": "/media#memorandum", "permanent": false },
-        { "source": "/pitch", "destination": "/media#pitchdeck", "permanent": false },
-        { "source": "/pitchdeck", "destination": "/media#pitchdeck", "permanent": false },
-        { "source": "/deck", "destination": "/media#pitchdeck", "permanent": false }
+        { "source": "/pitchdeck", "destination": "/pitch", "permanent": false },
+        { "source": "/deck", "destination": "/pitch", "permanent": false },
+        { "source": "/presentation", "destination": "/pitch", "permanent": false }
     ],
     "rewrites": [
         {
