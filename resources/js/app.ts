@@ -45,6 +45,10 @@ const ZiggyConfig = {
         },
         'sales.index': { uri: 'sales', methods: ['GET', 'HEAD'] },
         'pitch.index': { uri: 'pitch', methods: ['GET', 'HEAD'] },
+        'pitch.hackathon': {
+            uri: 'pitch-hackathon',
+            methods: ['GET', 'HEAD'],
+        },
         'collaboration.index': {
             uri: 'collaboration',
             methods: ['GET', 'HEAD'],
@@ -97,6 +101,7 @@ const staticRoutes: Record<string, string | ((param?: any) => string)> = {
         id ? `/configurator?product=${id}` : '/configurator',
     'sales.index': '/sales',
     'pitch.index': '/pitch',
+    'pitch.hackathon': '/pitch-hackathon',
     'collaboration.index': '/collaboration',
     'media.index': '/media',
     'web3.index': '/web3',
@@ -182,6 +187,10 @@ function getComponentForPath(path: string): string {
         p === '/partners'
     ) {
         return 'Sales/Index';
+    }
+
+    if (p === '/pitch-hackathon' || p === '/hackathon-pitch') {
+        return 'PitchHackathon/Index';
     }
 
     if (

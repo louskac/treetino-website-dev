@@ -1,0 +1,324 @@
+/* Shared presentation system for /pitch and /pitch-hackathon (global on purpose: PitchHeadline relies on it). */
+/* ---------- Type system (shared with PitchHeadline, so not scoped) ---------- */
+.pitch-deck {
+    -webkit-font-smoothing: antialiased;
+    color: #fff;
+}
+.pitch-deck .h-display {
+    font-size: 128px;
+    line-height: 1.04;
+    letter-spacing: -0.045em;
+    font-weight: 500;
+}
+.pitch-deck .h-slide {
+    font-size: 96px;
+    line-height: 1.06;
+    letter-spacing: -0.04em;
+    font-weight: 500;
+}
+.pitch-deck .pitch-word {
+    display: inline-block;
+}
+.pitch-deck .tone-accent {
+    color: #8ec5ff;
+    text-shadow: 0 0 40px rgba(77, 141, 255, 0.45);
+}
+.pitch-deck .tone-green,
+.pitch-deck .tone-solana {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-repeat: no-repeat;
+    background-size: calc(100% - 2px) 100%;
+}
+.pitch-deck .tone-green {
+    background-image: linear-gradient(90deg, #8ec5ff, #34d399);
+}
+.pitch-deck .tone-solana {
+    background-image: linear-gradient(90deg, #b47bff, #14f195);
+}
+
+/* ---------- Deck shell ---------- */
+html.pitch-mode,
+html.pitch-mode body {
+    background: #09090b;
+}
+html.pitch-mode #cc-main {
+    display: none !important;
+}
+.deck-viewport {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    background: #09090b;
+    user-select: none;
+}
+.deck-stage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1920px;
+    height: 1080px;
+    transform-origin: center center;
+}
+.slide {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: #09090b;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+        opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+        visibility 0s linear 0.6s;
+}
+.slide.is-active {
+    z-index: 1;
+    opacity: 1;
+    visibility: visible;
+    transition:
+        opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+        visibility 0s;
+}
+
+/* Same ambient light as the /web3 map scenes */
+.slide .glow {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 55% 65% at 92% 0%, rgba(24, 61, 137, 0.42), transparent 70%),
+        radial-gradient(ellipse 45% 50% at 0% 100%, rgba(24, 61, 137, 0.16), transparent 70%);
+}
+/* Product renders melt into the page from the right */
+.slide .product-fade {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(90deg, #09090b 30%, rgba(9, 9, 11, 0.7) 44%, rgba(9, 9, 11, 0) 62%),
+        linear-gradient(0deg, #09090b 0%, rgba(9, 9, 11, 0) 22%),
+        linear-gradient(180deg, #09090b 0%, rgba(9, 9, 11, 0) 18%),
+        linear-gradient(270deg, #09090b 0%, rgba(9, 9, 11, 0) 10%);
+}
+.slide .chrome {
+    position: absolute;
+    top: 72px;
+    left: 128px;
+    right: 128px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.4);
+    font-variant-numeric: tabular-nums;
+}
+.slide .eyebrow {
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: rgba(255, 255, 255, 0.45);
+}
+.slide .sub {
+    font-size: 32px;
+    line-height: 1.45;
+    letter-spacing: -0.01em;
+    color: rgba(255, 255, 255, 0.6);
+}
+.slide .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+}
+.slide .stats > div,
+.slide .stats-4 > div {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 28px;
+}
+.slide .stats-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 48px;
+}
+.slide .stat-value {
+    font-size: 72px;
+    line-height: 1;
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    white-space: nowrap;
+}
+.slide .stat-value-xl {
+    font-size: 112px;
+    line-height: 1;
+    font-weight: 500;
+    letter-spacing: -0.045em;
+    white-space: nowrap;
+}
+.slide .stat-label {
+    margin-top: 16px;
+    font-size: 22px;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.45);
+}
+.slide .caption-value {
+    font-size: 34px;
+    line-height: 1.1;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+}
+.slide figcaption {
+    margin-top: 28px;
+}
+.slide .photo {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: 24px;
+    background: #18181b;
+}
+.slide .photo img,
+.slide .portrait img,
+.slide .screen img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.slide .portrait {
+    width: 260px;
+    height: 330px;
+    flex-shrink: 0;
+    overflow: hidden;
+    border-radius: 24px;
+    background: #18181b;
+}
+.slide .screen {
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-right: 0;
+    border-radius: 24px 0 0 24px;
+    box-shadow: 0 40px 120px -20px rgba(0, 0, 0, 0.9);
+}
+
+/* Presenter UI */
+.nav-zone {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    z-index: 20;
+    width: 18vw;
+    cursor: default;
+}
+.ui-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 2rem;
+    min-width: 2rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s;
+}
+.ui-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+}
+
+/* ---------- Reveal (screen only; print gets the finished state) ---------- */
+@media screen {
+    .slide.is-active .pitch-word {
+        animation: pitch-word-in 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+        animation-delay: var(--d, 0ms);
+    }
+    .slide.is-active .rise {
+        animation: pitch-rise-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+        animation-delay: var(--d, 0ms);
+    }
+    .slide.is-active .img-in {
+        animation: pitch-img-in 1.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+        animation-delay: var(--d, 0ms);
+    }
+}
+@keyframes pitch-word-in {
+    from {
+        opacity: 0;
+        transform: translateY(0.38em);
+        filter: blur(12px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+        filter: blur(0);
+    }
+}
+@keyframes pitch-rise-in {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+@keyframes pitch-img-in {
+    from {
+        opacity: 0;
+        transform: scale(1.035);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .slide.is-active .pitch-word,
+    .slide.is-active .rise,
+    .slide.is-active .img-in {
+        animation: none;
+    }
+}
+
+/* ---------- PDF: one slide per 1920×1080 page ---------- */
+@media print {
+    @page {
+        size: 1920px 1080px;
+        margin: 0;
+    }
+    html.pitch-mode,
+    html.pitch-mode body {
+        width: 1920px;
+        margin: 0;
+        background: #09090b !important;
+    }
+    .pitch-deck,
+    .pitch-deck * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    .deck-viewport {
+        position: static;
+        overflow: visible;
+    }
+    .deck-stage {
+        position: static;
+        height: auto;
+        transform: none !important;
+    }
+    .slide {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transition: none !important;
+        break-after: page;
+        break-inside: avoid;
+    }
+    .slide:last-child {
+        break-after: auto;
+    }
+    .deck-ui {
+        display: none !important;
+    }
+    .pitch-deck .tone-accent {
+        text-shadow: none !important;
+    }
+}

@@ -73,8 +73,83 @@ indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 
 index.form = indexForm
 
+/**
+* @see routes/web.php:36
+* @route '/pitch-hackathon'
+*/
+export const hackathon = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: hackathon.url(options),
+    method: 'get',
+})
+
+hackathon.definition = {
+    methods: ["get","head"],
+    url: '/pitch-hackathon',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see routes/web.php:36
+* @route '/pitch-hackathon'
+*/
+hackathon.url = (options?: RouteQueryOptions) => {
+    return hackathon.definition.url + queryParams(options)
+}
+
+/**
+* @see routes/web.php:36
+* @route '/pitch-hackathon'
+*/
+hackathon.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: hackathon.url(options),
+    method: 'get',
+})
+
+/**
+* @see routes/web.php:36
+* @route '/pitch-hackathon'
+*/
+hackathon.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: hackathon.url(options),
+    method: 'head',
+})
+
+/**
+* @see routes/web.php:36
+* @route '/pitch-hackathon'
+*/
+const hackathonForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: hackathon.url(options),
+    method: 'get',
+})
+
+/**
+* @see routes/web.php:36
+* @route '/pitch-hackathon'
+*/
+hackathonForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: hackathon.url(options),
+    method: 'get',
+})
+
+/**
+* @see routes/web.php:36
+* @route '/pitch-hackathon'
+*/
+hackathonForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: hackathon.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+hackathon.form = hackathonForm
+
 const pitch = {
     index: Object.assign(index, index),
+    hackathon: Object.assign(hackathon, hackathon),
 }
 
 export default pitch

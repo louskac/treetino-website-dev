@@ -33,6 +33,9 @@ Route::get('/cmr', [SalesController::class, 'index']);
 Route::get('/pitch', function () {
     return \Inertia\Inertia::render('Pitch/Index');
 })->name('pitch.index');
+Route::get('/pitch-hackathon', function () {
+    return \Inertia\Inertia::render('PitchHackathon/Index');
+})->name('pitch.hackathon');
 Route::get('/pitchdeck', function () {
     return redirect()->route('pitch.index');
 });
