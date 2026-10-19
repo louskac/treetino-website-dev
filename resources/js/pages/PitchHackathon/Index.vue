@@ -178,11 +178,11 @@ const notes = [
     },
     {
         time: '2:20–2:45',
-        script: 'Here’s the whole loop. Energy flows in amber from the tree through the battery to the charger. When the driver pays by card, green fiat pours into our on-ramp gate, converts 1:1 into blue EURTree stablecoins, and streams straight into the tree’s vault.',
+        script: 'Here’s the whole loop. Energy flows in amber from the tree through the battery to the charger. When the driver pays by card, green fiat pours into our on-ramp gate, converts into blue USDC stablecoins, and streams straight into the tree’s vault.',
     },
     {
         time: '2:45–3:10',
-        script: 'Why it matters: in traditional RWA — solar farms, real estate, bonds — investors wait a month or a year for off-chain accounting. Here, the second a driver taps their card, we convert the fiat into EURTree and settle on Solana. Investors can claim yield while the car is still charging.',
+        script: 'Why it matters: in traditional RWA — solar farms, real estate, bonds — investors wait a month or a year for off-chain accounting. Here, the second a driver taps their card, we convert the fiat into USDC and settle on Solana. Investors can claim yield while the car is still charging.',
     },
     {
         time: '3:10–3:35',
@@ -190,7 +190,7 @@ const notes = [
     },
     {
         time: '3:35–3:50',
-        script: 'Under the hood: a fiat on-ramp for retail and institutions, live hardware and POS data feeding the settlement engine, and a 1:1 reserve proof for every EURTree minted.',
+        script: 'Under the hood: a fiat on-ramp for retail and institutions, live hardware and POS data feeding the settlement engine, and a 1:1 reserve proof for every USDC settled.',
     },
     {
         time: '3:50–4:00',
@@ -472,7 +472,7 @@ const notes = [
                                 Solana protocol + live hardware oracle
                             </p>
                             <ul class="spec mt-[40px] text-white/45">
-                                <li>Fractional tree shares, EURTree mint and reward vaults</li>
+                                <li>Fractional tree shares and USDC reward vaults</li>
                                 <li>Live kWh from Victron inverters and batteries</li>
                                 <li>But: needed a crypto wallet and manual invoicing</li>
                             </ul>
@@ -485,7 +485,7 @@ const notes = [
                             <ul class="spec mt-[40px] text-white/75">
                                 <li>On-ramp in CZK and EUR: card, Apple Pay, SEPA Instant</li>
                                 <li>Card tap at the charger settles on Solana in under 2 s</li>
-                                <li>1:1 reserve proof: bank balance vs. EURTree supply</li>
+                                <li>1:1 reserve proof: bank balance vs. USDC vault</li>
                             </ul>
                         </div>
                     </div>
@@ -509,7 +509,7 @@ const notes = [
                 <div class="pointer-events-none relative flex h-full flex-col justify-between px-[128px] pt-[200px] pb-[112px]">
                     <PitchHeadline
                         class="h-slide"
-                        :segments="[{ text: 'One loop,' }, { text: 'settled in EURTree.', tone: 'accent' }]"
+                        :segments="[{ text: 'One loop,' }, { text: 'settled in USDC.', tone: 'accent' }]"
                     />
 
                     <div class="stats">
@@ -522,8 +522,8 @@ const notes = [
                             <p class="stat-label">Card payment in CZK or EUR → on-ramp</p>
                         </div>
                         <div class="rise !border-[#4d8dff]/60" style="--d: 850ms">
-                            <p class="stat-value tone-accent">EURTree</p>
-                            <p class="stat-label">Minted 1:1 → streamed to investors</p>
+                            <p class="stat-value tone-accent">USDC</p>
+                            <p class="stat-label">Converted → streamed to investors</p>
                         </div>
                     </div>
                 </div>
@@ -560,12 +560,12 @@ const notes = [
                         <div class="rise" style="--d: 700ms">
                             <p class="stat-value">0.6 s</p>
                             <p class="caption-value mt-[28px]">Meter meets payment</p>
-                            <p class="stat-label">Meter reading matched, CZK → EURTree</p>
+                            <p class="stat-label">Meter reading matched, CZK → USDC</p>
                         </div>
                         <div class="rise" style="--d: 800ms">
                             <p class="stat-value">1.4 s</p>
                             <p class="caption-value mt-[28px]">Settled on Solana</p>
-                            <p class="stat-label">18 EURTree into the tree’s vault</p>
+                            <p class="stat-label">20 USDC into the tree’s vault</p>
                         </div>
                         <div class="rise !border-[#4d8dff]/60" style="--d: 900ms">
                             <p class="stat-value tone-accent">1.8 s</p>
@@ -655,7 +655,7 @@ const notes = [
                             <p class="text-[22px] text-white/30 tabular-nums">03</p>
                             <p class="mt-[20px] text-[56px] leading-none font-medium tracking-[-0.035em]">Audit</p>
                             <p class="tone-accent mt-[24px] text-[32px] font-medium tracking-[-0.02em]">1:1 reserve proof</p>
-                            <p class="stat-label">Each EURTree traced to fiat, kWh, receipt</p>
+                            <p class="stat-label">Each USDC traced to fiat, kWh, receipt</p>
                         </div>
                     </div>
                 </div>

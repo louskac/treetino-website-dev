@@ -385,7 +385,7 @@ function drawWallet(ctx: CanvasRenderingContext2D, p: number) {
         ctx.fillText('€500', 72, top + 290);
         ctx.fillStyle = '#34d399';
         ctx.font = `600 30px ${FONT}`;
-        ctx.fillText('Up to 35 % APY · paid in EURTree', 72, top + 372);
+        ctx.fillText('Up to 35 % APY · paid in USDC', 72, top + 372);
 
         const done = p > 0.9;
         const btn = ctx.createLinearGradient(72, 0, CW - 72, 0);
