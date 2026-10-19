@@ -355,7 +355,7 @@ const partners = [
                                 />
                             </div>
                             <figcaption>
-                                <p class="caption-value">$85M in signed LOIs</p>
+                                <p class="caption-value">€3.4M in signed LOIs</p>
                                 <p class="stat-label !mt-[8px]">Walked away from our last event</p>
                             </figcaption>
                         </figure>
@@ -388,7 +388,7 @@ const partners = [
                             <p class="stat-label">Signed contracts</p>
                         </div>
                         <div class="rise" style="--d: 700ms">
-                            <p class="stat-value-xl">$85M</p>
+                            <p class="stat-value-xl">€3.4M</p>
                             <p class="stat-label">Pipeline from signed LOIs</p>
                         </div>
                         <div class="rise" style="--d: 800ms">
