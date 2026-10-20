@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Head } from '@inertiajs/vue3';
 import { ChevronLeft, ChevronRight, Download, Maximize, NotebookText } from 'lucide-vue-next';
-import { computed, onMounted, onUnmounted, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import LogoType from '@/custom/LogoType.vue';
 import PitchEuropeMap from '@/custom/pitch/PitchEuropeMap.vue';
 import PitchHeadline from '@/custom/pitch/PitchHeadline.vue';
@@ -15,13 +15,25 @@ import '@/custom/pitch/deck.css';
  * Presenter-only extras (never printed): speaker notes + 4-minute timer, toggle with N / T.
  */
 
-const TOTAL = 11;
+const TOTAL = 12;
 const TALK_SECONDS = 240;
 
 const current = ref(0);
 const scale = ref(1);
 const uiVisible = ref(false);
 const showNotes = ref(false);
+const demoVideo = ref<HTMLVideoElement | null>(null);
+
+watch(current, (val) => {
+    const v = demoVideo.value;
+    if (!v) return;
+    if (val === 7) {
+        v.currentTime = 0;
+        v.play().catch(() => {});
+    } else {
+        v.pause();
+    }
+});
 
 const pad = (n: number) => String(n).padStart(2, '0');
 
@@ -127,8 +139,11 @@ onMounted(() => {
     const fromHash = parseInt(location.hash.replace('#', ''), 10);
 
     if (fromHash >= 1 && fromHash <= TOTAL) {
-current.value = fromHash - 1;
-}
+        current.value = fromHash - 1;
+        if (current.value === 7) {
+            setTimeout(() => demoVideo.value?.play().catch(() => {}), 100);
+        }
+    }
 
     document.documentElement.classList.add('pitch-mode');
     fit();
@@ -181,20 +196,24 @@ const notes = [
         script: 'Here’s the whole loop. Energy flows in amber from the tree through the battery to the charger. When the driver pays by card, green fiat pours into our on-ramp gate, converts into blue USDC stablecoins, and streams straight into the tree’s vault.',
     },
     {
-        time: '2:45–3:10',
+        time: '2:45–3:40',
+        script: 'Let’s watch it live in the real app: first the Kickstarter for clean energy, then the MoonPay card on-ramp, and finally side-by-side — a driver taps a card in EUR or CZK at the charger and the yield lands in the investor’s portfolio in seconds.',
+    },
+    {
+        time: '3:40–3:55',
         script: 'Why it matters: in traditional RWA — solar farms, real estate, bonds — investors wait a month or a year for off-chain accounting. Here, the second a driver taps their card, we convert the fiat into USDC and settle on Solana. Investors can claim yield while the car is still charging.',
     },
     {
-        time: '3:10–3:35',
+        time: '3:55–4:10',
         script: 'And at 3 AM with no car plugged in? The capital doesn’t sleep. The battery shaves 35 kW of peak demand for the SIC building and trades the 15-minute OTE spot market. Three fiat revenue streams, one vault.',
     },
     {
-        time: '3:35–3:50',
+        time: '4:10–4:20',
         script: 'Under the hood: a fiat on-ramp for retail and institutions, live hardware and POS data feeding the settlement engine, and a 1:1 reserve proof for every USDC settled.',
     },
     {
-        time: '3:50–4:00',
-        script: 'Let’s switch to the live app: we’ll on-ramp fiat, buy a share of the Prague tree, simulate a driver paying by card, and watch the yield land in the wallet.',
+        time: '4:20–4:30',
+        script: 'Tap a card. Charge a car. Watch the yield land. Thank you — happy to take your questions.',
     },
 ];
 </script>
@@ -530,13 +549,29 @@ const notes = [
             </section>
 
             <!-- ============================================================ -->
-            <!-- 08 · STREAMING YIELD                                         -->
+            <!-- 08 · LIVE PRODUCT DEMO VIDEO                                 -->
             <!-- ============================================================ -->
             <section class="slide" :class="state(7)">
+                <video
+                    ref="demoVideo"
+                    src="/video/treetino-demo.mp4"
+                    class="h-full w-full object-cover"
+                    muted
+                    playsinline
+                    loop
+                    preload="auto"
+                    @click="demoVideo?.paused ? demoVideo?.play() : demoVideo?.pause()"
+                ></video>
+            </section>
+
+            <!-- ============================================================ -->
+            <!-- 09 · STREAMING YIELD                                         -->
+            <!-- ============================================================ -->
+            <section class="slide" :class="state(8)">
                 <div class="glow"></div>
                 <div class="chrome">
                     <LogoType className="!h-[28px] w-auto fill-current text-white/40" />
-                    <span>{{ pad(8) }}<span class="text-white/20"> / {{ TOTAL }}</span></span>
+                    <span>{{ pad(9) }}<span class="text-white/20"> / {{ TOTAL }}</span></span>
                 </div>
 
                 <div class="relative flex h-full flex-col justify-between px-[128px] pt-[200px] pb-[112px]">
@@ -577,13 +612,13 @@ const notes = [
             </section>
 
             <!-- ============================================================ -->
-            <!-- 09 · REVENUE, 24/7                                           -->
+            <!-- 10 · REVENUE, 24/7                                           -->
             <!-- ============================================================ -->
-            <section class="slide" :class="state(8)">
+            <section class="slide" :class="state(9)">
                 <div class="glow"></div>
                 <div class="chrome">
                     <LogoType className="!h-[28px] w-auto fill-current text-white/40" />
-                    <span>{{ pad(9) }}<span class="text-white/20"> / {{ TOTAL }}</span></span>
+                    <span>{{ pad(10) }}<span class="text-white/20"> / {{ TOTAL }}</span></span>
                 </div>
 
                 <div class="relative flex h-full flex-col justify-between px-[128px] pt-[200px] pb-[112px]">
@@ -619,13 +654,13 @@ const notes = [
             </section>
 
             <!-- ============================================================ -->
-            <!-- 10 · ARCHITECTURE                                            -->
+            <!-- 11 · ARCHITECTURE                                            -->
             <!-- ============================================================ -->
-            <section class="slide" :class="state(9)">
+            <section class="slide" :class="state(10)">
                 <div class="glow"></div>
                 <div class="chrome">
                     <LogoType className="!h-[28px] w-auto fill-current text-white/40" />
-                    <span>{{ pad(10) }}<span class="text-white/20"> / {{ TOTAL }}</span></span>
+                    <span>{{ pad(11) }}<span class="text-white/20"> / {{ TOTAL }}</span></span>
                 </div>
 
                 <div class="relative flex h-full flex-col justify-between px-[128px] pt-[200px] pb-[112px]">
@@ -662,9 +697,9 @@ const notes = [
             </section>
 
             <!-- ============================================================ -->
-            <!-- 11 · CLOSE                                                   -->
+            <!-- 12 · CLOSE                                                   -->
             <!-- ============================================================ -->
-            <section class="slide" :class="state(10)">
+            <section class="slide" :class="state(11)">
                 <div class="img-in absolute inset-0" style="--d: 0ms">
                     <PitchEuropeMap :cx="345" :cy="318" :w="300" :strength="0.7" />
                 </div>
