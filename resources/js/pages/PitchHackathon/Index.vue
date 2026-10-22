@@ -58,7 +58,14 @@ const toggleFullscreen = () => {
     }
 };
 
-const printDeck = () => window.print();
+const downloadPdf = () => {
+    const a = document.createElement('a');
+    a.href = `/treetino-hackathon-pitchdeck.pdf?v=${Date.now()}`;
+    a.download = 'Treetino-Hackathon-Pitch-Deck.pdf';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+};
 
 // ---------- Rehearsal timer ----------
 const timerSeconds = ref(TALK_SECONDS);
@@ -110,7 +117,7 @@ const onKey = (e: KeyboardEvent) => {
     } else if (e.key === 't' || e.key === 'T') {
         toggleTimer();
     } else if ((e.key === 'p' || e.key === 'P') && !e.metaKey && !e.ctrlKey) {
-        printDeck();
+        downloadPdf();
     }
 };
 
@@ -552,10 +559,16 @@ const notes = [
             <!-- 08 · LIVE PRODUCT DEMO VIDEO                                 -->
             <!-- ============================================================ -->
             <section class="slide" :class="state(7)">
+                <img
+                    src="/img/pitch/demo-poster.jpg"
+                    alt="Treetino Live Product Demo"
+                    class="absolute inset-0 h-full w-full object-cover"
+                />
                 <video
                     ref="demoVideo"
                     src="/video/treetino-demo.mp4"
-                    class="h-full w-full object-cover"
+                    poster="/img/pitch/demo-poster.jpg"
+                    class="demo-video relative h-full w-full object-cover"
                     muted
                     playsinline
                     loop
@@ -787,7 +800,7 @@ const notes = [
             <button type="button" class="ui-btn" aria-label="Fullscreen (F)" @click="toggleFullscreen">
                 <Maximize class="h-4 w-4" />
             </button>
-            <button type="button" class="ui-btn gap-1.5 px-2.5 text-xs" aria-label="Save as PDF (P)" @click="printDeck">
+            <button type="button" class="ui-btn gap-1.5 px-2.5 text-xs" aria-label="Download PDF (P)" @click="downloadPdf">
                 <Download class="h-4 w-4" />
                 PDF
             </button>
@@ -805,5 +818,10 @@ const notes = [
 .slide .spec li {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding: 20px 0;
+}
+@media print {
+    .slide .demo-video {
+        display: none !important;
+    }
 }
 </style>
