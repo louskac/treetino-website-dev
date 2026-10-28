@@ -55,6 +55,7 @@ const ZiggyConfig = {
         },
         'media.index': { uri: 'media', methods: ['GET', 'HEAD'] },
         'web3.index': { uri: 'web3', methods: ['GET', 'HEAD'] },
+        'investors.index': { uri: 'investors', methods: ['GET', 'HEAD'] },
         'contact.index': { uri: 'contact', methods: ['GET', 'HEAD'] },
         'contact.store': { uri: 'api/contact', methods: ['POST'] },
         'legal.tos': {
@@ -105,6 +106,7 @@ const staticRoutes: Record<string, string | ((param?: any) => string)> = {
     'collaboration.index': '/collaboration',
     'media.index': '/media',
     'web3.index': '/web3',
+    'investors.index': '/investors',
     'contact.index': '/contact',
     'contact.store': '/api/contact',
     'legal.tos': '/legal/terms-and-conditions',
@@ -240,6 +242,16 @@ function getComponentForPath(path: string): string {
 
     if (p === '/web3') {
         return 'Web3/Index';
+    }
+
+    if (
+        p === '/investors' ||
+        p === '/investor' ||
+        p === '/vc' ||
+        p === '/technology' ||
+        p === '/architecture'
+    ) {
+        return 'Investors/Index';
     }
 
     return 'Home/Index';

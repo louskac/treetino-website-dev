@@ -30,6 +30,34 @@ Route::get('/sales', [SalesController::class, 'index'])->name('sales.index');
 Route::get('/crm', [SalesController::class, 'index']);
 Route::get('/cmr', [SalesController::class, 'index']);
 
+Route::get('/investors', function () {
+    return \Inertia\Inertia::render('Investors/Index');
+})->name('investors.index');
+Route::get('/investor', function () {
+    return redirect()->route('investors.index');
+});
+Route::get('/vc', function () {
+    return redirect()->route('investors.index');
+});
+Route::get('/technology', function () {
+    return redirect()->route('investors.index');
+});
+Route::get('/architecture', function () {
+    return redirect()->route('investors.index');
+});
+Route::get('/databook', function () {
+    $path = public_path('docs/Treetino_Technical_Databook_2026_EN.pdf');
+    return file_exists($path) ? response()->file($path, ['Content-Type' => 'application/pdf']) : abort(404);
+})->name('databook.index');
+Route::get('/docs/Treetino_Technical_Databook_2026_EN.pdf', function () {
+    $path = public_path('docs/Treetino_Technical_Databook_2026_EN.pdf');
+    return file_exists($path) ? response()->file($path, ['Content-Type' => 'application/pdf']) : abort(404);
+});
+Route::get('/docs/Treetino_Technical_Databook_2026_CS.pdf', function () {
+    $path = public_path('docs/Treetino_Technical_Databook_2026_CS.pdf');
+    return file_exists($path) ? response()->file($path, ['Content-Type' => 'application/pdf']) : abort(404);
+});
+
 Route::get('/pitch', function () {
     return \Inertia\Inertia::render('Pitch/Index');
 })->name('pitch.index');

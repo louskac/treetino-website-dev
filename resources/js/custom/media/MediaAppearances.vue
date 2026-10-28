@@ -56,6 +56,197 @@ export interface AppearanceItem {
 
 const appearances: AppearanceItem[] = [
     {
+        id: 'smart-energy-forum-oct-2026',
+        date: { cs: 'Říjen 2026', en: 'October 2026' },
+        year: '2026',
+        outlet: 'Smart Energy Forum Prague',
+        category: 'conference',
+        title: {
+            cs: 'Smart Energy Forum Praha: Veletržní expozice Treetino a 85+ mil. Kč v podepsaných LOI',
+            en: 'Smart Energy Forum Prague: Treetino Exhibition & Over 85M CZK in Signed LOIs',
+        },
+        description: {
+            cs: 'Na největším středoevropském veletrhu moderní energetiky a bateriových systémů v Praze představil tým Treetino modely generací V1 a V2, funkční solární list a hybridní architekturu. Během veletrhu jsme navázali klíčová průmyslová i komunální partnerství a přivezli přes 85 milionů Kč (více než 3,4 mil. EUR) v 16 podepsaných memorandech o předběžném zájmu (LOI).',
+            en: 'At Central Europe’s premier modern energy and battery storage exhibition in Prague, Treetino showcased its V1 and V2 physical models, solar leaf hardware, and hybrid power architecture. Across the forum, the team secured key industrial, commercial, and municipal partnerships—bringing back over 85M CZK (€3.4M+) across 16 signed Letters of Intent (LOIs).',
+        },
+        photos: [
+            {
+                src: '/img/media/smart-energy-forum-2026-1.jpg',
+                caption: {
+                    cs: 'Expozice Treetino na veletrhu Smart Energy Forum 2026 v Praze — stovky návštěvníků a jednání se zástupci průmyslu i samospráv',
+                    en: 'Treetino booth at Smart Energy Forum 2026 in Prague — hundreds of visitors and B2B meetings with industrial and municipal leaders',
+                },
+                alt: {
+                    cs: 'Stánek Treetino na Smart Energy Forum 2026 v Praze',
+                    en: 'Treetino exhibition booth at Smart Energy Forum 2026 in Prague',
+                },
+            },
+            {
+                src: '/img/media/smart-energy-forum-2026-2.jpg',
+                caption: {
+                    cs: 'Prezentace fyzických modelů Treetino V1 a V2 a solárního listu na stánku Treetino během Smart Energy Forum',
+                    en: 'Showcasing the physical Treetino V1 and V2 models and solar leaf hardware at the Smart Energy Forum booth',
+                },
+                alt: {
+                    cs: 'Tým Treetino u modelů V1 a V2 na veletrhu Smart Energy Forum',
+                    en: 'Treetino team with V1 and V2 models at Smart Energy Forum',
+                },
+            },
+            {
+                src: '/img/media/smart-energy-forum-2026-3.jpg',
+                caption: {
+                    cs: 'Obchodní jednání s energetickými a komerčními partnery, ze kterých vzešlo přes 85 mil. Kč v podepsaných LOI',
+                    en: 'B2B discussions with energy and commercial partners resulting in over 85M CZK in signed LOIs',
+                },
+                alt: {
+                    cs: 'Jednání se zájemci na stánku Treetino na Smart Energy Forum 2026',
+                    en: 'Partner meetings at the Treetino booth during Smart Energy Forum 2026',
+                },
+            },
+        ],
+        links: [
+            {
+                url: 'https://www.smartenergyforum.cz',
+                label: { cs: 'Web Smart Energy Forum', en: 'Smart Energy Forum Website' },
+                type: 'web',
+            },
+        ],
+    },
+    {
+        id: 'czechinvest-demo-day-prusa-oct-2026',
+        date: { cs: 'Říjen 2026', en: 'October 2026' },
+        year: '2026',
+        outlet: 'CzechInvest & Prusa Research',
+        category: 'conference',
+        title: {
+            cs: 'Vítězství na CzechInvest Demo Day: Prusa Research Tech Award pro nejlepší hardwarový startup',
+            en: 'CzechInvest Demo Day Winner: Prusa Research Tech Award for Best Hardware Startup',
+        },
+        description: {
+            cs: 'Treetino bylo vybráno mezi TOP 12 z více než 200 startupů v programu Technologická inkubace agentury CzechInvest a na slavnostním Demo Day zvítězilo v kategorii Prusa Research Tech Award pro nejlepší hardwarový startup. Ocenění přináší novou 3D tiskárnu Prusa, přímé R&D partnerství s Prusa Research při vývoji aerodynamické turbíny Treetino Aero a chystané video se světovým 3D tiskovým kanálem Proper Printing.',
+            en: 'Selected into the Top 12 out of 200+ startups in CzechInvest’s Technological Incubation program, Treetino won the Prusa Research Tech Award for Best Hardware Startup at Demo Day. The award includes a new Prusa 3D printer, a direct R&D partnership with Prusa Research for the 3D-printed Treetino Aero turbine, and an upcoming feature with global 3D-printing YouTube channel Proper Printing.',
+        },
+        photos: [
+            {
+                src: '/img/pitch/aero-updated-blue.jpg',
+                caption: {
+                    cs: 'Prototyp 3D tištěné vertikální turbíny Treetino Aero vyvíjený v rámci technologického partnerství s Prusa Research',
+                    en: '3D-printed Treetino Aero vertical turbine prototype developed through the R&D partnership with Prusa Research',
+                },
+                alt: {
+                    cs: '3D tištěná turbína Treetino Aero — vítěz Prusa Research Tech Award na CzechInvest Demo Day',
+                    en: '3D-printed Treetino Aero turbine — Prusa Research Tech Award winner at CzechInvest Demo Day',
+                },
+            },
+        ],
+        links: [
+            {
+                url: 'https://czechinvest.gov.cz',
+                label: { cs: 'CzechInvest Technologická inkubace', en: 'CzechInvest Incubation' },
+                type: 'web',
+            },
+            {
+                url: 'https://www.prusa3d.com',
+                label: { cs: 'Prusa Research', en: 'Prusa Research' },
+                type: 'external',
+            },
+            {
+                url: 'https://www.youtube.com/@ProperPrinting',
+                label: { cs: 'Proper Printing (YouTube)', en: 'Proper Printing (YouTube)' },
+                type: 'youtube',
+            },
+        ],
+    },
+    {
+        id: 'solana-cze-hackathon-oct-2026',
+        date: { cs: 'Říjen 2026', en: 'October 2026' },
+        year: '2026',
+        outlet: 'Solana CZE | Colosseum Hackathon',
+        category: 'conference',
+        title: {
+            cs: 'Dvojnásobné vítězství na Solana CZE Hackathonu: 2. místo celkově a 1. místo v Marinade Tracku',
+            en: 'Double Win at Solana CZE Hackathon: 2nd Place Overall & 1st Place in Marinade Track',
+        },
+        description: {
+            cs: 'V rámci globálního Colosseum Crypto World’s Fair (Solana CZE Track) získalo Treetino 2. místo v hlavní soutěži ($2,500 USDG) a zároveň 1. místo v Marinade Finance Tracku. Porotu zaujal náš RWA a DePIN protokol pro frakční tokenizaci čisté městské energie, okamžité on-chain vypořádání dobíjení elektromobilů a transparentní rozdělování výnosů z energetických stromů.',
+            en: 'Competing in the Colosseum Crypto World’s Fair (Solana CZE Track), Treetino won 2nd Place Overall ($2,500 USDG) and 1st Place in the Marinade Finance Track. Judges recognized Treetino’s RWA & DePIN protocol for fractional clean-energy tokenization, instant on-chain EV charging settlement, and automated yield distribution from urban energy trees.',
+        },
+        video: {
+            src: '/video/pitch-web.mp4',
+            poster: '/video/pitch-poster.jpg',
+            type: 'mp4',
+            duration: '03:00',
+            tag: 'HACKATHON PITCH',
+            title: {
+                cs: 'Treetino Pitch — Colosseum Crypto World’s Fair & Solana CZE Hackathon',
+                en: 'Treetino Pitch — Colosseum Crypto World’s Fair & Solana CZE Hackathon',
+            },
+            description: {
+                cs: 'Vítězná tříminutová prezentace hardwarového ekosystému Treetino a RWA protokolu pro tokenizaci solární a větrné energie.',
+                en: 'Winning 3-minute pitch showcasing the Treetino hardware ecosystem and RWA clean-energy tokenization protocol.',
+            },
+        },
+        photos: [
+            {
+                src: '/img/media/solana-cze-colosseum-winner.jpg',
+                caption: {
+                    cs: 'Oficiální vyhlášení vítězů Colosseum Crypto World’s Fair | Solana CZE Track — Treetino na 2. místě celkově a 1. místě v Marinade Tracku',
+                    en: 'Official Colosseum Crypto World’s Fair | Solana CZE Track winners announcement — Treetino winning 2nd Place Overall & 1st in Marinade Track',
+                },
+                alt: {
+                    cs: 'Vyhlášení vítězů Solana CZE Colosseum Hackathonu — 2. místo pro Treetino',
+                    en: 'Solana CZE Colosseum Hackathon winners announcement — 2nd Place for Treetino',
+                },
+            },
+            {
+                src: '/img/pitch/demo-poster.jpg',
+                caption: {
+                    cs: 'Ukázka živého RWA protokolu Treetino pro tokenizaci čisté energie, správu výnosů a okamžité on-chain platby za dobíjení',
+                    en: 'Live demo of the Treetino RWA protocol for clean-energy tokenization, yield management, and instant on-chain EV charging settlement',
+                },
+                alt: {
+                    cs: 'Rozhraní Web3 RWA protokolu Treetino představené na Solana Hackathonu',
+                    en: 'Treetino Web3 RWA protocol interface showcased at the Solana Hackathon',
+                },
+            },
+        ],
+    },
+    {
+        id: 'forbes-event-sep-2026',
+        date: { cs: 'Září 2026', en: 'September 2026' },
+        year: '2026',
+        outlet: 'Forbes Česko',
+        category: 'conference',
+        title: {
+            cs: 'Treetino na akci Forbes Česko: Budoucnost čisté městské energetiky a českých inovací',
+            en: 'Treetino at Forbes Czechia Event: The Future of Urban Clean Energy & Czech Innovation',
+        },
+        description: {
+            cs: 'Bezprostředně po zářijové televizní reportáži reprezentoval CEO Dominik Mašek projekt Treetino na setkání osobností českého byznysu a inovátorů pod záštitou Forbes Česko. Diskuse s investory a lídry trhu se zaměřila na komercializaci energetického stromu Treetino, udržitelnou městskou infrastrukturu a škálování české čisté energetiky.',
+            en: 'Right after the September TV feature, CEO Dominik Mašek represented Treetino at the Forbes Czechia gathering of business leaders, founders, and investors—discussing the commercialization of the Treetino energy tree, sustainable urban infrastructure, and scaling Czech clean-tech hardware.',
+        },
+        photos: [
+            {
+                src: '/img/team/founders-leaf.jpg',
+                caption: {
+                    cs: 'CEO Dominik Mašek s technologií solárního listu Treetino — prezentace české clean-tech inovace mezi lídry byznysu',
+                    en: 'CEO Dominik Mašek with the Treetino solar leaf technology — presenting Czech clean-tech innovation to business leaders',
+                },
+                alt: {
+                    cs: 'CEO Dominik Mašek a spoluzakladatel Jakub Lustyk s technologií Treetino',
+                    en: 'CEO Dominik Mašek and co-founder Jakub Lustyk with Treetino solar leaf technology',
+                },
+            },
+        ],
+        links: [
+            {
+                url: 'https://forbes.cz',
+                label: { cs: 'Forbes Česko', en: 'Forbes Czechia' },
+                type: 'web',
+            },
+        ],
+    },
+    {
         id: 'praha-tv-sep-2026',
         date: { cs: 'Září 2026', en: 'September 2026' },
         year: '2026',

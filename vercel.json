@@ -13,7 +13,12 @@
         { "source": "/investment-memorandum", "destination": "/media#memorandum", "permanent": false },
         { "source": "/pitchdeck", "destination": "/pitch", "permanent": false },
         { "source": "/deck", "destination": "/pitch", "permanent": false },
-        { "source": "/presentation", "destination": "/pitch", "permanent": false }
+        { "source": "/presentation", "destination": "/pitch", "permanent": false },
+        { "source": "/investor", "destination": "/investors", "permanent": false },
+        { "source": "/vc", "destination": "/investors", "permanent": false },
+        { "source": "/technology", "destination": "/investors", "permanent": false },
+        { "source": "/architecture", "destination": "/investors", "permanent": false },
+        { "source": "/databook", "destination": "/docs/Treetino_Technical_Databook_2026_EN.pdf", "permanent": false }
     ],
     "rewrites": [
         {

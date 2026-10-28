@@ -6,17 +6,22 @@
 
 <script setup lang="ts">
 /**
- * Final scene: Treetino V1 next to a battery container and an EV charger, drawn purely from lines.
+ * Final scene: Treetino Energy Tree (V1, V2 Solar Disc, or V2 Hybrid) next to a battery container and an EV charger, drawn purely from lines.
  * Energy (amber) flows tree → battery → charger → car along the ground; EURTree (blue) flows back
  * through the air car → charger → battery → tree.
  * - `draw` (0..1) builds the scene in order
  * - `flow` (0..1) fades the flows in
  * - `orbit` (0..1) slowly turns the camera
+ * - `treeVariant` ('v1' | 'v2-solar' | 'v2-hybrid') selects between Treetino V1 (12× VTE), V2 Solar Disc (without-turbines), and V2 Hybrid (6× VTE)
+ *
+ * AI / DEVELOPER NOTE:
+ * The 3D wireframe tree builders (`treetinoV1`, `treetinoV2`, `treetinoV2Solar`, `treetinoV2Hybrid`, `treetinoTree`, `podLines`)
+ * are defined and exported in `./wireKit.ts` so they can be imported and rendered in any component across the app.
  */
 import * as THREE from 'three';
 import { onMounted, onUnmounted, ref, watch } from 'vue';
-import type { V3 } from './wireKit';
-import { batteryContainer, fadingGrid, LineBuilder, lineMaterial, WIRE } from './wireKit';
+import type { TreeVariant, V3 } from './wireKit';
+import { batteryContainer, fadingGrid, LineBuilder, lineMaterial, podLines, treetinoTree, WIRE } from './wireKit';
 
 const props = withDefaults(
     defineProps<{
@@ -24,185 +29,20 @@ const props = withDefaults(
         flow?: number;
         orbit?: number;
         active?: boolean;
+        /** Tree model variant: `'v1'` (default, 12× VTE candelabra), `'v2-solar'` (tilted solar leaf disc), or `'v2-hybrid'` (tilted solar disc + 6× VTE) */
+        treeVariant?: TreeVariant;
     }>(),
-    { draw: 1, flow: 1, orbit: 0.5, active: true },
+    { draw: 1, flow: 1, orbit: 0.5, active: true, treeVariant: 'v1' },
 );
 
 const hostRef = ref<HTMLElement | null>(null);
 const canvasRef = ref<HTMLCanvasElement | null>(null);
 
 // Layout (metres)
-const TREE_X = -7.4;
+const TREE_X = -6.85;
 const BATT_X = 0;
 const CHARGER: V3 = [5.3, 0, -0.6];
 const CAR_X = 7.6;
-
-// ---------------------------------------------------------------------------------------------
-// Treetino V1: white trunk → two leaders → lateral branches with pinnate solar leaves,
-// plus ribbed egg-shaped vertical-axis wind turbines ("pods") that spin.
-// ---------------------------------------------------------------------------------------------
-interface Pod {
-    base: V3;
-    height: number;
-}
-
-function curve(a: V3, b: V3, lift: number, n = 8): V3[] {
-    const pts: V3[] = [];
-
-    for (let i = 0; i <= n; i++) {
-        const t = i / n;
-        pts.push([a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t + Math.sin(t * Math.PI) * lift, a[2] + (b[2] - a[2]) * t]);
-    }
-
-    return pts;
-}
-
-function leaf(b: LineBuilder, at: V3, dir: [number, number, number], len: number, wid: number) {
-    // dir: unit vector of the leaf axis; width goes in the horizontal plane perpendicular to it
-    const side: V3 = [-dir[2], 0, dir[0]];
-    const sl = Math.hypot(side[0], side[2]) || 1;
-    side[0] /= sl;
-    side[2] /= sl;
-    const pt = (u: number, v: number): V3 => [
-        at[0] + dir[0] * len * u + side[0] * wid * v,
-        at[1] + dir[1] * len * u,
-        at[2] + dir[2] * len * u + side[2] * wid * v,
-    ];
-    b.poly([pt(0, 0), pt(0.2, 0.42), pt(0.6, 0.5), pt(0.95, 0.22), pt(1, 0), pt(0.95, -0.22), pt(0.6, -0.5), pt(0.2, -0.42)], WIRE.green, true);
-    b.seg(pt(0, 0), pt(0.95, 0), WIRE.green);
-}
-
-function lateral(b: LineBuilder, from: V3, angle: number, length: number, rise: number, pods: Pod[], withPod: boolean) {
-    const to: V3 = [from[0] + Math.cos(angle) * length, from[1] + rise, from[2] + Math.sin(angle) * length];
-    const pts = curve(from, to, length * 0.08, 10);
-    b.poly(pts, WIRE.white);
-
-    // pinnate leaflets along the outer two thirds
-    const steps = Math.floor((length * 0.7) / 0.17);
-
-    for (let i = 0; i <= steps; i++) {
-        const t = 0.3 + (i / Math.max(1, steps)) * 0.7;
-        const idx = Math.min(pts.length - 1, Math.round(t * (pts.length - 1)));
-        const p = pts[idx];
-
-        for (const s of [-1, 1]) {
-            const a = angle + s * 1.05;
-            leaf(b, p, [Math.cos(a) * 0.93, 0.36, Math.sin(a) * 0.93], 0.32, 0.1);
-        }
-    }
-
-    leaf(b, to, [Math.cos(angle) * 0.95, 0.3, Math.sin(angle) * 0.95], 0.34, 0.1);
-
-    if (withPod) {
-        const mid = pts[Math.round(pts.length * 0.35)];
-        const top: V3 = [mid[0], mid[1] + 0.25, mid[2]];
-        b.seg(mid, top, WIRE.white);
-        pods.push({ base: top, height: 0.78 });
-    }
-}
-
-function treetinoV1(): { body: LineBuilder; pods: Pod[] } {
-    const b = new LineBuilder();
-    const pods: Pod[] = [];
-
-    // foundation
-    b.circle([0, 0, 0], 0.75, 'y', WIRE.ground, 24);
-
-    // trunk (flared base, 8 longitudinal lines + rings)
-    const radius = (y: number) => 0.15 + 0.22 * Math.exp(-y * 3.2);
-    const heights = [0, 0.1, 0.25, 0.5, 0.9, 1.4, 2.0];
-
-    for (let i = 0; i < 8; i++) {
-        const a = (i / 8) * Math.PI * 2;
-        b.poly(
-            heights.map((y) => [Math.cos(a) * radius(y), y, Math.sin(a) * radius(y)] as V3),
-            WIRE.white,
-        );
-    }
-
-    for (const y of [0, 0.6, 1.3, 2.0]) {
-        b.circle([0, y, 0], radius(y), 'y', WIRE.frame, 12);
-    }
-
-    // two leaders
-    const split: V3 = [0, 2.0, 0];
-    const leaders: { tip: V3; tiers: number[] }[] = [
-        { tip: [-0.75, 4.3, 0.25], tiers: [0.45, 0.78] },
-        { tip: [0.8, 5.0, -0.2], tiers: [0.4, 0.7] },
-    ];
-
-    // wide low tier right at the split, radiating out
-    for (let i = 0; i < 6; i++) {
-        const a = (i / 6) * Math.PI * 2 + 0.3;
-        lateral(b, [split[0], split[1] + 0.1 + (i % 2) * 0.15, split[2]], a, 2.1 + (i % 3) * 0.25, 0.25, pods, i % 2 === 0);
-    }
-
-    leaders.forEach((leader, li) => {
-        const pts = curve(split, leader.tip, 0.15, 10);
-        b.poly(pts, WIRE.white);
-        // second line for a bit of thickness
-        b.poly(
-            pts.map(([x, y, z]) => [x + 0.06, y, z + 0.04] as V3),
-            WIRE.frame,
-        );
-
-        leader.tiers.forEach((t, ti) => {
-            const p = pts[Math.round(t * (pts.length - 1))];
-
-            for (let k = 0; k < 3; k++) {
-                const a = (k / 3) * Math.PI * 2 + li * 1.1 + ti * 0.6;
-                lateral(b, p, a, 1.25 + ti * 0.15 - k * 0.1, 0.35, pods, k === 0);
-            }
-        });
-
-        // pod on top of each leader
-        const tip = pts[pts.length - 1];
-        const top: V3 = [tip[0], tip[1] + 0.2, tip[2]];
-        b.seg(tip, top, WIRE.white);
-        pods.push({ base: top, height: 0.9 });
-    });
-
-    // pod cups (static)
-    for (const pod of pods) {
-        const [x, y, z] = pod.base;
-        b.circle([x, y, z], 0.07, 'y', WIRE.white, 10);
-        b.circle([x, y + 0.12, z], 0.13, 'y', WIRE.white, 12);
-
-        for (let i = 0; i < 4; i++) {
-            const a = (i / 4) * Math.PI * 2;
-            b.seg([x + Math.cos(a) * 0.07, y, z + Math.sin(a) * 0.07], [x + Math.cos(a) * 0.13, y + 0.12, z + Math.sin(a) * 0.13], WIRE.white);
-        }
-    }
-
-    return { body: b, pods };
-}
-
-/** Ribbed egg-shaped turbine, origin at its bottom */
-function podLines(height: number): LineBuilder {
-    const b = new LineBuilder();
-    const rMax = height * 0.31;
-    const ribs = 10;
-    const n = 14;
-    const r = (s: number) => rMax * Math.sin(Math.PI * s) ** 0.75 * (1 - 0.18 * s);
-
-    for (let i = 0; i < ribs; i++) {
-        const a = (i / ribs) * Math.PI * 2;
-        const pts: V3[] = [];
-
-        for (let k = 0; k <= n; k++) {
-            const s = k / n;
-            pts.push([Math.cos(a) * r(s), 0.12 + s * height, Math.sin(a) * r(s)]);
-        }
-
-        b.poly(pts, i % 2 ? WIRE.frame : WIRE.white);
-    }
-
-    for (const s of [0.3, 0.55]) {
-        b.circle([0, 0.12 + s * height, 0], r(s), 'y', WIRE.skin, 20);
-    }
-
-    return b;
-}
 
 // ---------------------------------------------------------------------------------------------
 function chargerAndCar(b: LineBuilder) {
@@ -641,8 +481,8 @@ onMounted(() => {
     }
 
     b.colors.push(...batt.colors);
-    // tree
-    const tree = treetinoV1();
+    // tree ('v1' | 'v2-solar' | 'v2-hybrid' via props.treeVariant; see ./wireKit.ts)
+    const tree = treetinoTree(props.treeVariant);
 
     for (let i = 0; i < tree.body.positions.length; i += 3) {
         b.positions.push(tree.body.positions[i] + TREE_X, tree.body.positions[i + 1], tree.body.positions[i + 2]);

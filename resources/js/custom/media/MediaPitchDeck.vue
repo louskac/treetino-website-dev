@@ -224,6 +224,14 @@ const progressPercent = computed(() => {
                 </button>
 
                 <a
+                    href="/pitch"
+                    class="inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-t-blue/30 bg-t-blue/10 px-4 py-2.5 text-xs font-semibold whitespace-nowrap text-t-blue shadow-xs transition hover:bg-t-blue hover:text-white"
+                >
+                    <Maximize2 class="h-3.5 w-3.5" />
+                    <span>Interactive 12-Slide Deck</span>
+                </a>
+
+                <a
                     :href="pdfUrl"
                     download="treetino-pitchdeck.pdf"
                     target="_blank"
