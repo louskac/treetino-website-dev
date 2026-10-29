@@ -636,54 +636,6 @@ function foliageBoughV1(
     foliageTwigV1(b, tipStart, azimuth, length * 0.26, rise * 0.2, 2, 0.32 * leafScale, 0.138 * leafScale, pitch);
 }
 
-function roundedSquareXZ(cx: number, y: number, cz: number, halfW: number, cornerR: number, nCorner = 3): V3[] {
-    const pts: V3[] = [];
-    const inner = halfW - cornerR;
-    const corners: [number, number, number][] = [
-        [inner, inner, 0],
-        [-inner, inner, Math.PI * 0.5],
-        [-inner, -inner, Math.PI],
-        [inner, -inner, Math.PI * 1.5],
-    ];
-
-    for (const [ox, oz, a0] of corners) {
-        for (let k = 0; k <= nCorner; k++) {
-            const a = a0 + (k / nCorner) * (Math.PI * 0.5);
-            pts.push([cx + ox + Math.cos(a) * cornerR, y, cz + oz + Math.sin(a) * cornerR]);
-        }
-    }
-
-    return pts;
-}
-
-/**
- * Stationary white flared rounded-square motor pedestal housing beneath each Savonius rotor
- * (matches the white motor base in the physical Treetino Aero / V1 / V2 turbine photos).
- */
-function mountPodPedestal(b: LineBuilder, pedBottom: V3, podHeight: number): V3 {
-    const [cx, cy, cz] = pedBottom;
-    const rMax = podHeight * 0.272;
-    const pedH = podHeight * 0.145;
-    const sqBot = roundedSquareXZ(cx, cy, cz, rMax * 0.56, rMax * 0.14, 2);
-    const sqMid = roundedSquareXZ(cx, cy + pedH * 0.42, cz, rMax * 0.53, rMax * 0.16, 2);
-    const neckY = cy + pedH * 0.94;
-    const neckR = rMax * 0.41;
-
-    b.poly(sqBot, TREE_BOUGH_MAIN, true);
-    b.poly(sqMid, TREE_BOUGH_SUB, true);
-    b.circle([cx, neckY, cz], neckR, 'y', TREE_BOUGH_MAIN, 14);
-
-    for (let idx = 0; idx < sqBot.length; idx += 3) {
-        const p0 = sqBot[idx];
-        const p1 = sqMid[idx];
-        const ang = Math.atan2(p0[2] - cz, p0[0] - cx);
-        const p2: V3 = [cx + Math.cos(ang) * neckR, neckY, cz + Math.sin(ang) * neckR];
-        b.poly([p0, p1, p2], TREE_BOUGH_MAIN);
-    }
-
-    return [cx, cy + pedH, cz];
-}
-
 function mountPodArmV1(
     b: LineBuilder,
     pods: TreePod[],
@@ -699,23 +651,22 @@ function mountPodArmV1(
         attachPt[1] + 0.025,
         attachPt[2] + sa * (armLen * 0.58),
     ];
-    const cupBottom: V3 = [attachPt[0] + ca * armLen, attachPt[1] + 0.055, attachPt[2] + sa * armLen];
-    const armPts = catmullRomCurve([attachPt, elbow, cupBottom], 3);
+    const armTip: V3 = [attachPt[0] + ca * armLen, attachPt[1] + 0.055, attachPt[2] + sa * armLen];
+    const armPts = catmullRomCurve([attachPt, elbow, armTip], 3);
     b.poly(armPts, TREE_BOUGH_MAIN);
     b.poly(
         armPts.map(([x, y, z]) => [x, y - 0.032, z] as V3),
         TREE_BOUGH_SUB,
     );
 
-    const podBase = mountPodPedestal(b, cupBottom, podHeight);
-    pods.push({ base: podBase, height: podHeight });
+    pods.push({ base: armTip, height: podHeight });
 }
 
 /**
  * Treetino V1 (49.8 kW commercial hybrid tree):
  * - Short, sturdy flared white trunk (`y = 0..1.05`, ~21% of total height)
  * - 3 thick tubular candelabra boughs sweeping horizontally outward then curving upward to vertical tips with lightning arresters
- * - 12 vertical-axis wind turbine pods (4 per bough) on horizontal cantilever brackets with rounded motor cups
+ * - 12 vertical-axis wind turbine pods (4 per bough) on horizontal cantilever brackets
  * - Multi-tiered horizontal and upward-sweeping bipinnate solar leaf canopy
  */
 export function treetinoV1(): TreeModel {
@@ -1077,8 +1028,7 @@ export function treetinoV2(options: { withTurbines?: boolean } = {}): TreeModel 
             b.seg(attach, [cxP, cupY, czP], TREE_BOUGH_MAIN);
 
             const podHeight = 0.96;
-            const podBase = mountPodPedestal(b, [cxP, cupY, czP], podHeight);
-            pods.push({ base: podBase, height: podHeight });
+            pods.push({ base: [cxP, cupY, czP], height: podHeight });
         }
     }
 
