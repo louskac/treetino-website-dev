@@ -64,6 +64,9 @@ Route::get('/pitch', function () {
 Route::get('/pitch-hackathon', function () {
     return \Inertia\Inertia::render('PitchHackathon/Index');
 })->name('pitch.hackathon');
+Route::get('/pitch-fintech', function () {
+    return \Inertia\Inertia::render('PitchFintech/Index');
+})->name('pitch.fintech');
 Route::get('/pitchdeck', function () {
     return redirect()->route('pitch.index');
 });

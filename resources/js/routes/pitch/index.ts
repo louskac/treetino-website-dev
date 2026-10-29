@@ -147,9 +147,84 @@ hackathonForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> =
 
 hackathon.form = hackathonForm
 
+/**
+* @see routes/web.php:67
+* @route '/pitch-fintech'
+*/
+export const fintech = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: fintech.url(options),
+    method: 'get',
+})
+
+fintech.definition = {
+    methods: ["get","head"],
+    url: '/pitch-fintech',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see routes/web.php:67
+* @route '/pitch-fintech'
+*/
+fintech.url = (options?: RouteQueryOptions) => {
+    return fintech.definition.url + queryParams(options)
+}
+
+/**
+* @see routes/web.php:67
+* @route '/pitch-fintech'
+*/
+fintech.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: fintech.url(options),
+    method: 'get',
+})
+
+/**
+* @see routes/web.php:67
+* @route '/pitch-fintech'
+*/
+fintech.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: fintech.url(options),
+    method: 'head',
+})
+
+/**
+* @see routes/web.php:67
+* @route '/pitch-fintech'
+*/
+const fintechForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: fintech.url(options),
+    method: 'get',
+})
+
+/**
+* @see routes/web.php:67
+* @route '/pitch-fintech'
+*/
+fintechForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: fintech.url(options),
+    method: 'get',
+})
+
+/**
+* @see routes/web.php:67
+* @route '/pitch-fintech'
+*/
+fintechForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: fintech.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+fintech.form = fintechForm
+
 const pitch = {
     index: Object.assign(index, index),
     hackathon: Object.assign(hackathon, hackathon),
+    fintech: Object.assign(fintech, fintech),
 }
 
 export default pitch
