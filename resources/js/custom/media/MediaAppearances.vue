@@ -128,18 +128,45 @@ const appearances: AppearanceItem[] = [
         },
         photos: [
             {
-                src: '/img/pitch/aero-updated-blue.jpg',
+                src: '/img/media/demo-day-prusa-printer-office.jpg',
                 caption: {
-                    cs: 'Prototyp 3D tištěné vertikální turbíny Treetino Aero vyvíjený v rámci technologického partnerství s Prusa Research',
-                    en: '3D-printed Treetino Aero vertical turbine prototype developed through the R&D partnership with Prusa Research',
+                    cs: 'Zakladatelé Dominik Mašek a Jakub Lustyk v kanceláři Treetino s novou 3D tiskárnou Prusa CORE One+ vyhranou na CzechInvest Demo Day',
+                    en: 'Founders Dominik Mašek and Jakub Lustyk in the Treetino office with the new Prusa CORE One+ 3D printer won at CzechInvest Demo Day',
                 },
                 alt: {
-                    cs: '3D tištěná turbína Treetino Aero — vítěz Prusa Research Tech Award na CzechInvest Demo Day',
-                    en: '3D-printed Treetino Aero turbine — Prusa Research Tech Award winner at CzechInvest Demo Day',
+                    cs: 'Tým Treetino s vyhranou 3D tiskárnou Prusa CORE One+ z CzechInvest Demo Day',
+                    en: 'Treetino founders with the Prusa CORE One+ 3D printer won at CzechInvest Demo Day',
+                },
+            },
+            {
+                src: '/img/media/demo-day-turbine-parts-office.jpg',
+                caption: {
+                    cs: 'CEO Dominik Mašek s 3D tištěnými segmenty vertikální větrné turbíny Treetino Aero (1 kW)',
+                    en: 'CEO Dominik Mašek holding the 3D-printed segments of the 1 kW Treetino Aero vertical wind turbine',
+                },
+                alt: {
+                    cs: 'Dominik Mašek s 3D tištěnými díly turbíny Treetino Aero',
+                    en: 'Dominik Mašek holding 3D-printed Treetino Aero turbine parts',
+                },
+            },
+            {
+                src: '/img/media/demo-day-turbine-final-office.jpg',
+                caption: {
+                    cs: 'Finální sestavený prototyp 3D tištěné vertikální turbíny Treetino Aero v naší kanceláři',
+                    en: 'Final assembled 3D-printed Treetino Aero vertical turbine prototype in our office',
+                },
+                alt: {
+                    cs: 'Finální 3D tištěná turbína Treetino Aero v kanceláři',
+                    en: 'Final 3D-printed Treetino Aero turbine in the office',
                 },
             },
         ],
         links: [
+            {
+                url: 'https://x.com/treetino_corp/status/2113653930484007241',
+                label: { cs: 'Příspěvek na X (@treetino_corp)', en: 'Post on X (@treetino_corp)' },
+                type: 'external',
+            },
             {
                 url: 'https://czechinvest.gov.cz',
                 label: { cs: 'CzechInvest Technologická inkubace', en: 'CzechInvest Incubation' },
@@ -149,11 +176,6 @@ const appearances: AppearanceItem[] = [
                 url: 'https://www.prusa3d.com',
                 label: { cs: 'Prusa Research', en: 'Prusa Research' },
                 type: 'external',
-            },
-            {
-                url: 'https://www.youtube.com/@ProperPrinting',
-                label: { cs: 'Proper Printing (YouTube)', en: 'Proper Printing (YouTube)' },
-                type: 'youtube',
             },
         ],
     },
@@ -168,8 +190,8 @@ const appearances: AppearanceItem[] = [
             en: 'Double Win at Solana CZE Hackathon: 2nd Place Overall & 1st Place in Marinade Track',
         },
         description: {
-            cs: 'V rámci globálního Colosseum Crypto World’s Fair (Solana CZE Track) získalo Treetino 2. místo v hlavní soutěži ($2,500 USDG) a zároveň 1. místo v Marinade Finance Tracku. Porotu zaujal náš RWA a DePIN protokol pro frakční tokenizaci čisté městské energie, okamžité on-chain vypořádání dobíjení elektromobilů a transparentní rozdělování výnosů z energetických stromů.',
-            en: 'Competing in the Colosseum Crypto World’s Fair (Solana CZE Track), Treetino won 2nd Place Overall ($2,500 USDG) and 1st Place in the Marinade Finance Track. Judges recognized Treetino’s RWA & DePIN protocol for fractional clean-energy tokenization, instant on-chain EV charging settlement, and automated yield distribution from urban energy trees.',
+            cs: 'Na pražském Solana CZE Build Station v rámci globálního Colosseum Crypto World’s Fair získalo Treetino 2. místo v hlavní soutěži a zároveň 1. místo v Marinade Finance Tracku. Porotu zaujal náš RWA a DePIN protokol pro frakční tokenizaci čisté městské energie, okamžité on-chain vypořádání dobíjení elektromobilů a transparentní rozdělování výnosů z energetických stromů.',
+            en: 'At the Solana CZE Build Station in Prague during the global Colosseum Crypto World’s Fair, Treetino won 2nd Place Overall and 1st Place in the Marinade Finance Track. Judges recognized Treetino’s RWA & DePIN protocol for fractional clean-energy tokenization, instant on-chain EV charging settlement, and automated yield distribution from urban energy trees.',
         },
         video: {
             src: '/video/pitch-web.mp4',
@@ -188,26 +210,49 @@ const appearances: AppearanceItem[] = [
         },
         photos: [
             {
-                src: '/img/media/solana-cze-colosseum-winner.jpg',
+                src: '/img/media/solana-cze-hackathon-venue.jpg',
                 caption: {
-                    cs: 'Oficiální vyhlášení vítězů Colosseum Crypto World’s Fair | Solana CZE Track — Treetino na 2. místě celkově a 1. místě v Marinade Tracku',
-                    en: 'Official Colosseum Crypto World’s Fair | Solana CZE Track winners announcement — Treetino winning 2nd Place Overall & 1st in Marinade Track',
+                    cs: 'Atmosféra na Solana CZE Build Station v Praze — v pozadí na obrazovce prezentace projektu Treetino',
+                    en: 'Atmosphere at the Solana CZE Build Station in Prague — with Treetino’s presentation featured on the venue screen in the background',
                 },
                 alt: {
-                    cs: 'Vyhlášení vítězů Solana CZE Colosseum Hackathonu — 2. místo pro Treetino',
-                    en: 'Solana CZE Colosseum Hackathon winners announcement — 2nd Place for Treetino',
+                    cs: 'Solana CZE Build Station Prague s prezentací Treetino v pozadí',
+                    en: 'Solana CZE Build Station Prague with Treetino presentation in the background',
                 },
             },
             {
-                src: '/img/pitch/demo-poster.jpg',
+                src: '/img/media/solana-cze-hackathon-pitch.jpg',
                 caption: {
-                    cs: 'Ukázka živého RWA protokolu Treetino pro tokenizaci čisté energie, správu výnosů a okamžité on-chain platby za dobíjení',
-                    en: 'Live demo of the Treetino RWA protocol for clean-energy tokenization, yield management, and instant on-chain EV charging settlement',
+                    cs: 'Živý pitch projektu Treetino před porotou a komunitou na Solana CZE Hackathonu v Praze',
+                    en: 'Live Treetino pitch in front of the jury and builders at the Solana CZE Hackathon in Prague',
                 },
                 alt: {
-                    cs: 'Rozhraní Web3 RWA protokolu Treetino představené na Solana Hackathonu',
-                    en: 'Treetino Web3 RWA protocol interface showcased at the Solana Hackathon',
+                    cs: 'Prezentace Treetino na pódiu Solana CZE Hackathonu',
+                    en: 'Treetino stage pitch at the Solana CZE Hackathon',
                 },
+            },
+            {
+                src: '/img/media/solana-cze-hackathon-building.jpg',
+                caption: {
+                    cs: 'Příprava vítězného RWA & DePIN protokolu a finální prezentace Treetino přímo během pražského hackathonu',
+                    en: 'Building the winning Treetino RWA & DePIN protocol and final pitch deck on-site during the Prague hackathon',
+                },
+                alt: {
+                    cs: 'Vývoj a příprava prezentace Treetino na Solana CZE Hackathonu',
+                    en: 'Building Treetino at the Solana CZE Hackathon',
+                },
+            },
+        ],
+        links: [
+            {
+                url: 'https://x.com/SolanaCZE/status/2115040621966585952',
+                label: { cs: 'Solana CZE Build Station na X', en: 'Solana CZE Build Station on X' },
+                type: 'external',
+            },
+            {
+                url: 'https://x.com/treetino_corp/status/2112094467511468209',
+                label: { cs: 'Treetino na X (@treetino_corp)', en: 'Treetino on X (@treetino_corp)' },
+                type: 'external',
             },
         ],
     },
