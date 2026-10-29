@@ -49,6 +49,10 @@ const ZiggyConfig = {
             uri: 'pitch-hackathon',
             methods: ['GET', 'HEAD'],
         },
+        'pitch.fintech': {
+            uri: 'pitch-fintech',
+            methods: ['GET', 'HEAD'],
+        },
         'collaboration.index': {
             uri: 'collaboration',
             methods: ['GET', 'HEAD'],
@@ -103,6 +107,7 @@ const staticRoutes: Record<string, string | ((param?: any) => string)> = {
     'sales.index': '/sales',
     'pitch.index': '/pitch',
     'pitch.hackathon': '/pitch-hackathon',
+    'pitch.fintech': '/pitch-fintech',
     'collaboration.index': '/collaboration',
     'media.index': '/media',
     'web3.index': '/web3',
@@ -193,6 +198,10 @@ function getComponentForPath(path: string): string {
 
     if (p === '/pitch-hackathon' || p === '/hackathon-pitch') {
         return 'PitchHackathon/Index';
+    }
+
+    if (p === '/pitch-fintech' || p === '/fintech-pitch') {
+        return 'PitchFintech/Index';
     }
 
     if (
@@ -371,7 +380,12 @@ if (!initialPage) {
 
 createInertiaApp({
     page: initialPage,
-    title: (title) => (title ? `${title} | ${appName}` : appName),
+    title: (title) => {
+        if (!title || title === 'home.meta.title') {
+            return `${appName} — Chytrý energetický strom | Smart Solar & Wind Energy Tree`;
+        }
+        return title.includes(appName) ? title : `${title} | ${appName}`;
+    },
     resolve: (name) =>
         resolvePageComponent(
             `./pages/${name}.vue`,
@@ -385,10 +399,6 @@ createInertiaApp({
                 ? localStorage.getItem('app_locale')
                 : null;
         const activeLang = savedLang || shared.value?.locale || 'cs';
-        const activeMsgs =
-            (i18nMessages as any)[activeLang] ||
-            shared.value?.messages ||
-            (i18nMessages as any)['cs'];
 
         const i18n = createI18n({
             legacy: false,
@@ -415,7 +425,6 @@ createInertiaApp({
                     path.startsWith('/') &&
                     path !== window.location.pathname
                 ) {
-                    trackPageView(path);
                     event.preventDefault();
                     window.location.href = path;
                 }
@@ -447,10 +456,12 @@ createInertiaApp({
                 }
 
                 window.scrollTo({ top: 0, behavior: 'smooth' });
-                trackPageView(
-                    window.location.pathname + window.location.search,
-                    document.title,
-                );
+                setTimeout(() => {
+                    trackPageView(
+                        window.location.pathname + window.location.search,
+                        document.title,
+                    );
+                }, 0);
             });
         }
 
@@ -472,11 +483,13 @@ createInertiaApp({
 
         app.mount(el);
 
-        // Initial SPA page view tracking
-        trackPageView(
-            window.location.pathname + window.location.search,
-            document.title,
-        );
+        // Initial SPA page view tracking (deferred so Inertia <Head> updates document.title first)
+        setTimeout(() => {
+            trackPageView(
+                window.location.pathname + window.location.search,
+                document.title,
+            );
+        }, 0);
     },
     progress: { color: '#4B5563' },
 });
