@@ -51,7 +51,7 @@ const documents: { title: string; meta: string; links: DocLink[] }[] = [
 </script>
 
 <template>
-    <section id="data-room" data-chapter="06" class="relative overflow-hidden bg-zinc-950 pt-24 pb-24 text-white sm:pt-32 sm:pb-28">
+    <section id="data-room" data-chapter="06" class="relative overflow-hidden bg-zinc-950 pt-16 pb-24 text-white sm:pt-20 sm:pb-28">
         <!-- Subtle blueprint grid & ambient glow so the dark canvas feels architectural rather than blank -->
         <div class="dataroom-glow pointer-events-none absolute inset-0"></div>
         <div class="dataroom-grid pointer-events-none absolute inset-0"></div>
@@ -88,7 +88,7 @@ const documents: { title: string; meta: string; links: DocLink[] }[] = [
                     <span class="w-6 shrink-0 text-xs text-white/30 tabular-nums sm:text-sm">{{ String(i + 1).padStart(2, '0') }}</span>
                     <div class="min-w-0 flex-1">
                         <p class="text-base font-medium tracking-[-0.01em] text-white sm:text-xl">{{ doc.title }}</p>
-                        <p class="mt-1 truncate text-xs text-white/40 sm:text-sm">{{ doc.meta }}</p>
+                        <p class="mt-1 text-xs text-white/40 sm:text-sm">{{ doc.meta }}</p>
                     </div>
                     <div class="flex shrink-0 gap-2">
                         <a

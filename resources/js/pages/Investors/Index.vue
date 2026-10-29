@@ -45,3 +45,23 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue';
         <InvestorChapterRail />
     </DefaultLayout>
 </template>
+
+<style>
+/* Pinned chapters fade out as they release, so photos and stats never slide under the floating navbar */
+@supports (animation-timeline: view()) {
+    section[data-chapter] > .sticky {
+        animation: investor-stage-exit linear both;
+        animation-timeline: view();
+        animation-range: exit 0% exit 55%;
+    }
+}
+
+@keyframes investor-stage-exit {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+</style>

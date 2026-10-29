@@ -636,6 +636,54 @@ function foliageBoughV1(
     foliageTwigV1(b, tipStart, azimuth, length * 0.26, rise * 0.2, 2, 0.32 * leafScale, 0.138 * leafScale, pitch);
 }
 
+function roundedSquareXZ(cx: number, y: number, cz: number, halfW: number, cornerR: number, nCorner = 3): V3[] {
+    const pts: V3[] = [];
+    const inner = halfW - cornerR;
+    const corners: [number, number, number][] = [
+        [inner, inner, 0],
+        [-inner, inner, Math.PI * 0.5],
+        [-inner, -inner, Math.PI],
+        [inner, -inner, Math.PI * 1.5],
+    ];
+
+    for (const [ox, oz, a0] of corners) {
+        for (let k = 0; k <= nCorner; k++) {
+            const a = a0 + (k / nCorner) * (Math.PI * 0.5);
+            pts.push([cx + ox + Math.cos(a) * cornerR, y, cz + oz + Math.sin(a) * cornerR]);
+        }
+    }
+
+    return pts;
+}
+
+/**
+ * Stationary white flared rounded-square motor pedestal housing beneath each Savonius rotor
+ * (matches the white motor base in the physical Treetino Aero / V1 / V2 turbine photos).
+ */
+function mountPodPedestal(b: LineBuilder, pedBottom: V3, podHeight: number): V3 {
+    const [cx, cy, cz] = pedBottom;
+    const rMax = podHeight * 0.272;
+    const pedH = podHeight * 0.145;
+    const sqBot = roundedSquareXZ(cx, cy, cz, rMax * 0.56, rMax * 0.14, 2);
+    const sqMid = roundedSquareXZ(cx, cy + pedH * 0.42, cz, rMax * 0.53, rMax * 0.16, 2);
+    const neckY = cy + pedH * 0.94;
+    const neckR = rMax * 0.41;
+
+    b.poly(sqBot, TREE_BOUGH_MAIN, true);
+    b.poly(sqMid, TREE_BOUGH_SUB, true);
+    b.circle([cx, neckY, cz], neckR, 'y', TREE_BOUGH_MAIN, 14);
+
+    for (let idx = 0; idx < sqBot.length; idx += 3) {
+        const p0 = sqBot[idx];
+        const p1 = sqMid[idx];
+        const ang = Math.atan2(p0[2] - cz, p0[0] - cx);
+        const p2: V3 = [cx + Math.cos(ang) * neckR, neckY, cz + Math.sin(ang) * neckR];
+        b.poly([p0, p1, p2], TREE_BOUGH_MAIN);
+    }
+
+    return [cx, cy + pedH, cz];
+}
+
 function mountPodArmV1(
     b: LineBuilder,
     pods: TreePod[],
@@ -659,27 +707,8 @@ function mountPodArmV1(
         TREE_BOUGH_SUB,
     );
 
-    const [cx, cy, cz] = cupBottom;
-    const cupRings: [number, number, THREE.Color][] = [
-        [0.0, 0.045, TREE_BOUGH_SUB],
-        [0.045, 0.092, TREE_BOUGH_MAIN],
-        [0.115, 0.098, TREE_BOUGH_MAIN],
-        [0.155, 0.086, TREE_BOUGH_MAIN],
-    ];
-
-    for (const [dy, r, col] of cupRings) {
-        b.circle([cx, cy + dy, cz], r, 'y', col, 10);
-    }
-
-    for (let k = 0; k < 4; k++) {
-        const a = (k / 4) * Math.PI * 2;
-        b.poly(
-            cupRings.map(([dy, r]) => [cx + Math.cos(a) * r, cy + dy, cz + Math.sin(a) * r] as V3),
-            TREE_BOUGH_MAIN,
-        );
-    }
-
-    pods.push({ base: [cx, cy + 0.155, cz], height: podHeight });
+    const podBase = mountPodPedestal(b, cupBottom, podHeight);
+    pods.push({ base: podBase, height: podHeight });
 }
 
 /**
@@ -765,7 +794,12 @@ export function treetinoV1(): TreeModel {
     const foliage = (anchor: V3, az: number, length: number, rise: number, leafScale: number, pitch: number) => {
         const start = b.vertexCount;
         foliageBoughV1(b, anchor, az, length, rise, 2, leafScale, pitch);
-        parts.push({ start, end: b.vertexCount, pivot: anchor, axis: [Math.cos(az), 0, Math.sin(az)] });
+        parts.push({
+            start,
+            end: b.vertexCount,
+            pivot: anchor,
+            axis: v3Norm([Math.cos(az) * length, rise, Math.sin(az) * length]),
+        });
     };
 
     boughSpecs.forEach((spec, bi) => {
@@ -773,17 +807,20 @@ export function treetinoV1(): TreeModel {
         const az = spec.az;
 
         const lowAnchor = spineAt(spine, 0.24);
+
         for (const side of [-1, 1]) {
             foliage(lowAnchor, az + side * 0.52, bi < 2 ? 1.68 : 1.38, 0.18, 0.98, 0.18);
         }
 
         const midAnchor = spineAt(spine, 0.64);
         foliage(midAnchor, az, bi < 2 ? 1.65 : 1.28, 0.34, 1.02, 0.22);
+
         for (const side of [-1, 1]) {
             foliage(spineAt(spine, 0.61), az + side * 0.58, 1.28, 0.3, 0.94, 0.2);
         }
 
         const upperAnchor = spineAt(spine, 0.77);
+
         for (const side of [-1, 1]) {
             foliage(upperAnchor, az + side * 0.34, 1.15, 0.5, 0.92, 0.26);
         }
@@ -964,6 +1001,7 @@ export function treetinoV2(options: { withTurbines?: boolean } = {}): TreeModel 
 
         // Rounded cap ring at tip of primary white tube
         const capPts: V3[] = [];
+
         for (let k = 0; k < 8; k++) {
             const ka = (k / 8) * Math.PI * 2;
             const cka = Math.cos(ka);
@@ -974,9 +1012,11 @@ export function treetinoV2(options: { withTurbines?: boolean } = {}): TreeModel 
                 pTip[2] + r1 * (cka * nVec[2] + ska * perpVec[2]),
             ]);
         }
+
         b.poly(capPts, TREE_BOUGH_MAIN, true);
 
         const nSpine = 7;
+
         for (let si = 0; si < nSpine; si++) {
             const frac = 0.12 + (si / (nSpine - 1)) * 0.78;
             const lu = ca * (length * frac);
@@ -1036,26 +1076,9 @@ export function treetinoV2(options: { withTurbines?: boolean } = {}): TreeModel 
 
             b.seg(attach, [cxP, cupY, czP], TREE_BOUGH_MAIN);
 
-            const cupRings: [number, number, THREE.Color][] = [
-                [0.0, 0.045, TREE_BOUGH_SUB],
-                [0.045, 0.088, TREE_BOUGH_MAIN],
-                [0.11, 0.092, TREE_BOUGH_MAIN],
-                [0.15, 0.082, TREE_BOUGH_MAIN],
-            ];
-
-            for (const [dy, r, col] of cupRings) {
-                b.circle([cxP, cupY + dy, czP], r, 'y', col, 10);
-            }
-
-            for (let k = 0; k < 4; k++) {
-                const a = (k / 4) * Math.PI * 2;
-                b.poly(
-                    cupRings.map(([dy, r]) => [cxP + Math.cos(a) * r, cupY + dy, czP + Math.sin(a) * r] as V3),
-                    TREE_BOUGH_MAIN,
-                );
-            }
-
-            pods.push({ base: [cxP, cupY + 0.15, czP], height: 0.96 });
+            const podHeight = 0.96;
+            const podBase = mountPodPedestal(b, [cxP, cupY, czP], podHeight);
+            pods.push({ base: podBase, height: podHeight });
         }
     }
 
@@ -1085,49 +1108,168 @@ export function treetinoTree(variant: TreeVariant = 'v1'): TreeModel {
     return treetinoV1();
 }
 
-/** Ribbed egg-shaped vertical-axis turbine pod with inner Savonius core spindle, origin at its bottom */
+/**
+ * Treetino Savonius Vertical-Axis Wind Turbine Rotor (`podLines`), origin at its bottom (`y = 0`):
+ * Modeled directly from the 3D-printed Treetino Savonius rotor prototype (front/side/top/assembled views)
+ * and Treetino Aero studio renders (`aero-updated-blue.jpg` / `aero-updated-glass.jpg`):
+ * 1. Bottom beveled circular saucer collar (`y = 0 .. 0.068 * height`)
+ * 2. Two 180°-symmetric pairs of curved Savonius scoops (2 primary S-connected deep scoops + 2 nested
+ *    secondary splitter scoops) with straight vertical inner edges and barrel-flared outer edges (`0.068 .. 0.924 * height`)
+ * 3. Prominent mid-height (`y = 0.50 * height`) horizontal crescent baffle shelf and internal stiffener struts
+ * 4. Top rounded mushroom/dome cap (`y = 0.924 .. 1.00 * height`)
+ */
 export function podLines(height: number): LineBuilder {
     const b = new LineBuilder();
-    const rMax = height * 0.255;
-    const blades = 10;
-    const n = 14;
-    const radiusAt = (s: number) => rMax * Math.pow(Math.sin(Math.PI * s), 0.76) * (1 - 0.06 * s);
+    const rMax = height * 0.272;
+    const sBot = 0.068 * height;
+    const sTop = 0.924 * height;
+    const span = sTop - sBot;
+    const rEnd = rMax * 0.43;
 
-    for (let i = 0; i < blades; i++) {
-        const a = (i / blades) * Math.PI * 2;
+    // 1. Bottom Beveled Saucer Collar (y = 0 .. sBot)
+    const saucerRings: [number, number, THREE.Color][] = [
+        [0.0, rMax * 0.39, TREE_POD_CORE],
+        [0.028 * height, rMax * 0.51, TREE_POD_MAIN],
+        [0.044 * height, rMax * 0.51, TREE_POD_SUB],
+        [sBot, rMax * 0.44, TREE_POD_MAIN],
+    ];
+
+    for (const [y, r, col] of saucerRings) {
+        b.circle([0, y, 0], r, 'y', col, 20);
+    }
+
+    for (let k = 0; k < 8; k++) {
+        const a = (k / 8) * Math.PI * 2;
         const ca = Math.cos(a);
         const sa = Math.sin(a);
-        const pts: V3[] = [];
+        b.poly(
+            saucerRings.map(([y, r]) => [ca * r, y, sa * r] as V3),
+            k % 2 === 0 ? TREE_POD_SUB : TREE_POD_CORE,
+        );
+    }
 
-        for (let k = 0; k <= n; k++) {
-            const s = k / n;
-            const r = radiusAt(s);
-            pts.push([ca * r, 0.015 + s * height, sa * r]);
+    // 2. Dual-Scoop Savonius Blades (2 symmetric pairs at sign = +1, -1)
+    const radialScale = (t: number, u: number) => {
+        const bulge = (rMax - rEnd) * Math.pow(Math.sin(Math.PI * u), 0.84);
+
+        return rEnd + bulge * Math.pow(t, 0.72);
+    };
+
+    const primaryScoop2D = (t: number, sign: number): [number, number] => {
+        const mt = 1 - t;
+        const mt2 = mt * mt;
+        const t2 = t * t;
+        const x = mt2 * mt * 0.0 + 3 * mt2 * t * 0.68 + 3 * mt * t2 * 0.86 + t2 * t * 0.22;
+        const z = mt2 * mt * 0.0 + 3 * mt2 * t * 0.04 + 3 * mt * t2 * 0.56 + t2 * t * 0.9755;
+
+        return [sign * x, sign * z];
+    };
+
+    const secondaryScoop2D = (t: number, sign: number): [number, number] => {
+        const mt = 1 - t;
+        const mt2 = mt * mt;
+        const t2 = t * t;
+        const x = mt2 * mt * 0.06 + 3 * mt2 * t * 0.34 + 3 * mt * t2 * 0.24 + t2 * t * -0.24;
+        const z = mt2 * mt * 0.15 + 3 * mt2 * t * 0.3 + 3 * mt * t2 * 0.62 + t2 * t * 0.91;
+
+        return [sign * x, sign * z];
+    };
+
+    const pt3D = (fn2D: (t: number, s: number) => [number, number], t: number, u: number, sign: number): V3 => {
+        const [xn, zn] = fn2D(t, sign);
+        const r = radialScale(t, u);
+
+        return [xn * r, sBot + u * span, zn * r];
+    };
+
+    const nU = 16;
+    const uVals = Array.from({ length: nU + 1 }, (_, i) => i / nU);
+    const tSamples = Array.from({ length: 11 }, (_, i) => i / 10);
+    const crossU = [0.0, 0.18, 0.34, 0.5, 0.66, 0.82, 1.0];
+
+    for (const sign of [1, -1]) {
+        // A. Longitudinal ribs along Primary Scoop
+        for (const [ti, t] of [0.0, 0.28, 0.55, 0.8, 1.0].entries()) {
+            const isOuterEdge = t === 1.0;
+            const isCenter = t === 0.0;
+
+            if (isCenter && sign === -1) {
+                continue;
+            }
+
+            const pts = uVals.map((u) => pt3D(primaryScoop2D, t, u, sign));
+            const col = isOuterEdge || isCenter ? TREE_POD_MAIN : ti === 3 ? TREE_POD_SUB : TREE_POD_CORE;
+            b.poly(pts, col);
         }
 
-        b.poly(pts, i % 2 === 0 ? TREE_POD_MAIN : TREE_POD_SUB);
-    }
-
-    for (let i = 0; i < 3; i++) {
-        const a0 = (i / 3) * Math.PI * 2;
-        const pts: V3[] = [];
-
-        for (let k = 0; k <= 10; k++) {
-            const s = k / 10;
-            const r = radiusAt(s) * 0.42;
-            const a = a0 + s * 1.1;
-            pts.push([Math.cos(a) * r, 0.03 + s * (height * 0.94), Math.sin(a) * r]);
+        // B. Longitudinal ribs along Secondary Splitter Scoop
+        for (const [ti, t] of [0.0, 0.38, 0.72, 1.0].entries()) {
+            const isOuterEdge = t === 1.0;
+            const isInnerEdge = t === 0.0;
+            const pts = uVals.map((u) => pt3D(secondaryScoop2D, t, u, sign));
+            const col = isOuterEdge ? TREE_POD_MAIN : isInnerEdge || ti === 2 ? TREE_POD_SUB : TREE_POD_CORE;
+            b.poly(pts, col);
         }
 
-        b.poly(pts, TREE_POD_CORE);
+        // C. Horizontal cross-sectional scoop curves & equatorial crescent baffle shelf
+        for (const u of crossU) {
+            const isEquator = Math.abs(u - 0.5) < 0.01;
+            const isEnd = u === 0.0 || u === 1.0;
+            const col = isEquator ? TREE_POD_MAIN : isEnd ? TREE_POD_RING : TREE_POD_CORE;
+
+            b.poly(
+                tSamples.map((t) => pt3D(primaryScoop2D, t, u, sign)),
+                col,
+            );
+            b.poly(
+                tSamples.map((t) => pt3D(secondaryScoop2D, t, u, sign)),
+                col,
+            );
+
+            if (isEquator) {
+                const tipP = pt3D(primaryScoop2D, 1.0, u, sign);
+                const tipS = pt3D(secondaryScoop2D, 1.0, u, sign);
+                const innerS = pt3D(secondaryScoop2D, 0.0, u, sign);
+                const lipMid: V3 = [
+                    (tipP[0] + tipS[0]) * 0.5 - sign * 0.05 * rMax,
+                    tipS[1],
+                    (tipP[2] + tipS[2]) * 0.5 + sign * 0.04 * rMax,
+                ];
+                b.poly([tipP, lipMid, tipS, innerS], TREE_POD_MAIN);
+
+                for (const tb of [0.35, 0.68]) {
+                    b.seg(pt3D(primaryScoop2D, tb, u, sign), pt3D(secondaryScoop2D, tb, u, sign), TREE_POD_SUB);
+                }
+            }
+        }
     }
 
-    for (const t of [0.16, 0.38, 0.62, 0.84]) {
-        b.circle([0, 0.015 + t * height, 0], radiusAt(t), 'y', TREE_POD_RING, 14);
+    // 3. Top Rounded Mushroom / Dome Cap (y = sTop .. height)
+    const domeRings: [number, number, THREE.Color][] = [
+        [sTop, rMax * 0.44, TREE_POD_SUB],
+        [0.934 * height, rMax * 0.52, TREE_POD_MAIN],
+        [0.958 * height, rMax * 0.46, TREE_POD_RING],
+        [0.98 * height, rMax * 0.33, TREE_POD_SUB],
+        [0.995 * height, rMax * 0.15, TREE_POD_CORE],
+    ];
+
+    for (const [y, r, col] of domeRings) {
+        b.circle([0, y, 0], r, 'y', col, 20);
     }
 
-    b.seg([0, 0, 0], [0, height + 0.03, 0], TREE_POD_MAIN);
+    const apex: V3 = [0, height, 0];
+
+    for (let k = 0; k < 8; k++) {
+        const a = (k / 8) * Math.PI * 2;
+        const ca = Math.cos(a);
+        const sa = Math.sin(a);
+        b.poly(
+            [...domeRings.map(([y, r]) => [ca * r, y, sa * r] as V3), apex],
+            k % 2 === 0 ? TREE_POD_SUB : TREE_POD_CORE,
+        );
+    }
 
     return b;
 }
+
 

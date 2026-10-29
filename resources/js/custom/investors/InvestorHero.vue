@@ -5,6 +5,9 @@
             <Web3EuropeMap :zoom="s.zoom" :dim="s.dim" />
             <Web3MapAssets :zoom="s.zoom" :fade="s.assets" />
             <div class="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-b from-transparent to-zinc-950"></div>
+            <div
+                class="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(9,9,11,0.85)_0%,rgba(9,9,11,0.78)_46%,transparent_85%)] max-sm:bg-[linear-gradient(to_bottom,rgba(9,9,11,0.7)_0%,rgba(9,9,11,0.35)_45%,transparent_70%)]"
+            ></div>
 
             <div class="pointer-events-none absolute inset-0 z-10">
                 <div :class="CONTAINER" class="relative h-full">

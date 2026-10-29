@@ -67,10 +67,10 @@ const beats: Beat[] = [
         ],
     },
     {
-        segments: [{ text: 'Storm coming?', break: true }, { text: 'It folds away.', tone: 'accent' }],
-        sub: 'Sensors read the wind and stow every branch automatically.',
+        segments: [{ text: 'Hail or storm?', break: true }, { text: 'Leaves flip 180°.', tone: 'accent' }],
+        sub: 'Every branch rotates upside-down so the armored leaf backs shield the solar panels.',
         stats: [
-            { value: '25 m/s', label: 'Auto-stow' },
+            { value: '180°', label: 'Dorsal hail shield' },
             { value: '144 km/h', label: 'Gale resistance' },
             { value: '<35 dB', label: 'Turbine noise' },
         ],

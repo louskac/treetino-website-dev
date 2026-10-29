@@ -62,10 +62,10 @@ const beats: Beat[] = [
         ],
     },
     {
-        segments: [{ text: 'New to Europe.', break: true }, { text: 'Built with a licensed partner.', tone: 'accent' }],
-        sub: 'Award-winning hackathon prototype, now in hardware development with a licensed payment partner.',
+        segments: [{ text: 'New to Europe.', break: true }, { text: 'Licensed partner.', tone: 'accent' }],
+        sub: 'Hackathon-winning prototype, now in hardware development with a licensed payment partner.',
         stats: [
-            { value: '1st in EU', label: 'Hardware EV payment gate' },
+            { value: '1st in EU', label: 'EV payment gate' },
             { value: '2 ×', label: 'Hackathon awards' },
             { value: 'ČSOB', label: 'Start it accelerator' },
         ],
