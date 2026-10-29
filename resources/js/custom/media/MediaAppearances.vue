@@ -128,6 +128,28 @@ const appearances: AppearanceItem[] = [
         },
         photos: [
             {
+                src: '/img/media/demo-day-stage-pitch.jpg',
+                caption: {
+                    cs: 'CEO Dominik Mašek prezentuje Treetino na hlavním pódiu CzechInvest Demo Day 2026 před investory a technologickými partnery',
+                    en: 'CEO Dominik Mašek pitching Treetino on the main stage at CzechInvest Demo Day 2026 in front of investors and industry partners',
+                },
+                alt: {
+                    cs: 'Prezentace Treetino na pódiu CzechInvest Demo Day 2026',
+                    en: 'Treetino main stage pitch at CzechInvest Demo Day 2026',
+                },
+            },
+            {
+                src: '/img/media/demo-day-prusa-award.jpg',
+                caption: {
+                    cs: 'Dominik Mašek přebírá na pódiu CzechInvest Demo Day ocenění Prusa Research Tech Award a šek na 3D tiskárnu Prusa CORE One',
+                    en: 'Dominik Mašek on stage at CzechInvest Demo Day holding the Prusa Research Tech Award plaque for a new Prusa CORE One 3D printer',
+                },
+                alt: {
+                    cs: 'Vítězství Treetino v kategorii Prusa Research Tech Award na CzechInvest Demo Day',
+                    en: 'Treetino winning the Prusa Research Tech Award at CzechInvest Demo Day',
+                },
+            },
+            {
                 src: '/img/media/demo-day-prusa-printer-office.jpg',
                 caption: {
                     cs: 'Zakladatelé Dominik Mašek a Jakub Lustyk v kanceláři Treetino s novou 3D tiskárnou Prusa CORE One+ vyhranou na CzechInvest Demo Day',
@@ -136,28 +158,6 @@ const appearances: AppearanceItem[] = [
                 alt: {
                     cs: 'Tým Treetino s vyhranou 3D tiskárnou Prusa CORE One+ z CzechInvest Demo Day',
                     en: 'Treetino founders with the Prusa CORE One+ 3D printer won at CzechInvest Demo Day',
-                },
-            },
-            {
-                src: '/img/media/demo-day-turbine-parts-office.jpg',
-                caption: {
-                    cs: 'CEO Dominik Mašek s 3D tištěnými segmenty vertikální větrné turbíny Treetino Aero (1 kW)',
-                    en: 'CEO Dominik Mašek holding the 3D-printed segments of the 1 kW Treetino Aero vertical wind turbine',
-                },
-                alt: {
-                    cs: 'Dominik Mašek s 3D tištěnými díly turbíny Treetino Aero',
-                    en: 'Dominik Mašek holding 3D-printed Treetino Aero turbine parts',
-                },
-            },
-            {
-                src: '/img/media/demo-day-turbine-final-office.jpg',
-                caption: {
-                    cs: 'Finální sestavený prototyp 3D tištěné vertikální turbíny Treetino Aero v naší kanceláři',
-                    en: 'Final assembled 3D-printed Treetino Aero vertical turbine prototype in our office',
-                },
-                alt: {
-                    cs: 'Finální 3D tištěná turbína Treetino Aero v kanceláři',
-                    en: 'Final 3D-printed Treetino Aero turbine in the office',
                 },
             },
         ],
@@ -231,17 +231,6 @@ const appearances: AppearanceItem[] = [
                     en: 'Treetino stage pitch at the Solana CZE Hackathon',
                 },
             },
-            {
-                src: '/img/media/solana-cze-hackathon-building.jpg',
-                caption: {
-                    cs: 'Příprava vítězného RWA & DePIN protokolu a finální prezentace Treetino přímo během pražského hackathonu',
-                    en: 'Building the winning Treetino RWA & DePIN protocol and final pitch deck on-site during the Prague hackathon',
-                },
-                alt: {
-                    cs: 'Vývoj a příprava prezentace Treetino na Solana CZE Hackathonu',
-                    en: 'Building Treetino at the Solana CZE Hackathon',
-                },
-            },
         ],
         links: [
             {
@@ -260,34 +249,65 @@ const appearances: AppearanceItem[] = [
         id: 'forbes-event-sep-2026',
         date: { cs: 'Září 2026', en: 'September 2026' },
         year: '2026',
-        outlet: 'Forbes Česko',
+        outlet: 'Forbes Česko | Next Big Thing',
         category: 'conference',
         title: {
-            cs: 'Treetino na akci Forbes Česko: Budoucnost čisté městské energetiky a českých inovací',
-            en: 'Treetino at Forbes Czechia Event: The Future of Urban Clean Energy & Czech Innovation',
+            cs: 'Forbes Next Big Thing: Expozice energetického stromu Treetino a představení čisté městské energetiky',
+            en: 'Forbes Next Big Thing: Treetino Energy Tree Showcase & Future of Urban Clean Energy',
         },
         description: {
-            cs: 'Bezprostředně po zářijové televizní reportáži reprezentoval CEO Dominik Mašek projekt Treetino na setkání osobností českého byznysu a inovátorů pod záštitou Forbes Česko. Diskuse s investory a lídry trhu se zaměřila na komercializaci energetického stromu Treetino, udržitelnou městskou infrastrukturu a škálování české čisté energetiky.',
-            en: 'Right after the September TV feature, CEO Dominik Mašek represented Treetino at the Forbes Czechia gathering of business leaders, founders, and investors—discussing the commercialization of the Treetino energy tree, sustainable urban infrastructure, and scaling Czech clean-tech hardware.',
+            cs: 'Bezprostředně po zářijové televizní reportáži představil CEO Dominik Mašek projekt Treetino a fyzický model energetického stromu na inovační konferenci Forbes Next Big Thing. Setkání s osobnostmi českého byznysu, technologickými lídry a investory přineslo přímou odezvu na komercializaci energetického stromu Treetino a záběry přímo na oficiálním Instagramu Forbes Česko.',
+            en: 'Right after the September TV feature, CEO Dominik Mašek presented Treetino and its physical energy tree model at the Forbes Next Big Thing innovation summit. Featured on Forbes Czechia’s official social channels, the showcase connected Treetino with leading Czech founders, executives, and clean-tech investors.',
+        },
+        video: {
+            src: '/video/media/forbes-next-big-thing-2026.mp4',
+            poster: '/img/media/forbes-next-big-thing-poster.jpg',
+            type: 'mp4',
+            duration: '0:20',
+            tag: 'FORBES NEXT BIG THING',
+            title: {
+                cs: 'Forbes Česko — Next Big Thing: Treetino v oficiálním výběru inovací',
+                en: 'Forbes Czechia — Next Big Thing: Treetino Official Event Feature',
+            },
+            description: {
+                cs: 'Záběry z prezentace CEO Dominika Maška a modelu energetického stromu Treetino na konferenci Forbes Next Big Thing.',
+                en: 'Highlights from CEO Dominik Mašek presenting the Treetino energy tree at Forbes Czechia’s Next Big Thing conference.',
+            },
         },
         photos: [
             {
-                src: '/img/team/founders-leaf.jpg',
+                src: '/img/media/forbes-dominik.jpg',
                 caption: {
-                    cs: 'CEO Dominik Mašek s technologií solárního listu Treetino — prezentace české clean-tech inovace mezi lídry byznysu',
-                    en: 'CEO Dominik Mašek with the Treetino solar leaf technology — presenting Czech clean-tech innovation to business leaders',
+                    cs: 'CEO Dominik Mašek na inovační konferenci Forbes Next Big Thing v Praze',
+                    en: 'CEO Dominik Mašek at the Forbes Next Big Thing innovation conference in Prague',
                 },
                 alt: {
-                    cs: 'CEO Dominik Mašek a spoluzakladatel Jakub Lustyk s technologií Treetino',
-                    en: 'CEO Dominik Mašek and co-founder Jakub Lustyk with Treetino solar leaf technology',
+                    cs: 'Dominik Mašek u banneru Forbes na akci Forbes Next Big Thing',
+                    en: 'Dominik Mašek by the Forbes banner at Forbes Next Big Thing',
+                },
+            },
+            {
+                src: '/img/media/forbes-tree-model.jpg',
+                caption: {
+                    cs: 'Detail modelu energetického stromu Treetino s vertikálními mikroturbínami a solárními listy v expozici na Forbes Next Big Thing',
+                    en: 'Close-up of the Treetino energy tree model with vertical micro-turbines and solar leaves exhibited at Forbes Next Big Thing',
+                },
+                alt: {
+                    cs: 'Model energetického stromu Treetino na konferenci Forbes Next Big Thing',
+                    en: 'Treetino energy tree model exhibited at Forbes Next Big Thing',
                 },
             },
         ],
         links: [
             {
+                url: 'https://nextbigthing.forbes.cz',
+                label: { cs: 'Forbes Next Big Thing', en: 'Forbes Next Big Thing' },
+                type: 'web',
+            },
+            {
                 url: 'https://forbes.cz',
                 label: { cs: 'Forbes Česko', en: 'Forbes Czechia' },
-                type: 'web',
+                type: 'external',
             },
         ],
     },
@@ -707,6 +727,41 @@ const appearances: AppearanceItem[] = [
                     cs: 'Web Maker Institute',
                     en: 'Maker Institute Web',
                 },
+                type: 'web',
+            },
+        ],
+    },
+    {
+        id: 'red-bull-basement-2024',
+        date: { cs: 'Říjen 2024', en: 'October 2024' },
+        year: '2024',
+        outlet: 'Red Bull Basement',
+        category: 'conference',
+        title: {
+            cs: 'Kde to všechno začalo: Národní finále Red Bull Basement 2024 (TOP 12 projektů)',
+            en: 'Where Our Story Began: Red Bull Basement 2024 National Finals (Top 12 Projects)',
+        },
+        description: {
+            cs: 'Úplný začátek veřejné cesty projektu Treetino. S prvním prototypem fotovoltaického listu jsme postoupili mezi 12 nejlepších inovačních projektů v českém národním finále Red Bull Basement. Ačkoliv jsme tehdy hlavní cenu pro celkového vítěze neodnesli, právě tady odstartoval vývoj energetického stromu Treetino.',
+            en: 'The very beginning of Treetino’s public journey. Armed with our first photovoltaic solar leaf prototype, founders Dominik Mašek and Jakub Lustyk advanced among the Top 12 best innovation projects in the Red Bull Basement Czech National Finals—marking the spark that launched Treetino.',
+        },
+        photos: [
+            {
+                src: '/img/team/founders-leaf.jpg',
+                caption: {
+                    cs: 'Zakladatelé Dominik Mašek a Jakub Lustyk s prvním prototypem solárního listu Treetino na národním finále Red Bull Basement 2024',
+                    en: 'Founders Dominik Mašek and Jakub Lustyk with the first Treetino solar leaf prototype at the Red Bull Basement 2024 National Finals',
+                },
+                alt: {
+                    cs: 'Dominik Mašek a Jakub Lustyk na Red Bull Basement 2024',
+                    en: 'Dominik Mašek and Jakub Lustyk at Red Bull Basement 2024',
+                },
+            },
+        ],
+        links: [
+            {
+                url: 'https://www.redbull.com/cz-cs/events/red-bull-basement',
+                label: { cs: 'Red Bull Basement', en: 'Red Bull Basement' },
                 type: 'web',
             },
         ],
