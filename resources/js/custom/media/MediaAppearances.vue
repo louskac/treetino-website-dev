@@ -56,63 +56,6 @@ export interface AppearanceItem {
 
 const appearances: AppearanceItem[] = [
     {
-        id: 'smart-energy-forum-oct-2026',
-        date: { cs: 'Říjen 2026', en: 'October 2026' },
-        year: '2026',
-        outlet: 'Smart Energy Forum Prague',
-        category: 'conference',
-        title: {
-            cs: 'Smart Energy Forum Praha: Veletržní expozice Treetino a 85+ mil. Kč v podepsaných LOI',
-            en: 'Smart Energy Forum Prague: Treetino Exhibition & Over 85M CZK in Signed LOIs',
-        },
-        description: {
-            cs: 'Na největším středoevropském veletrhu moderní energetiky a bateriových systémů v Praze představil tým Treetino modely generací V1 a V2, funkční solární list a hybridní architekturu. Během veletrhu jsme navázali klíčová průmyslová i komunální partnerství a přivezli přes 85 milionů Kč (více než 3,4 mil. EUR) v 16 podepsaných memorandech o předběžném zájmu (LOI).',
-            en: 'At Central Europe’s premier modern energy and battery storage exhibition in Prague, Treetino showcased its V1 and V2 physical models, solar leaf hardware, and hybrid power architecture. Across the forum, the team secured key industrial, commercial, and municipal partnerships—bringing back over 85M CZK (€3.4M+) across 16 signed Letters of Intent (LOIs).',
-        },
-        photos: [
-            {
-                src: '/img/media/smart-energy-forum-2026-1.jpg',
-                caption: {
-                    cs: 'Expozice Treetino na veletrhu Smart Energy Forum 2026 v Praze — stovky návštěvníků a jednání se zástupci průmyslu i samospráv',
-                    en: 'Treetino booth at Smart Energy Forum 2026 in Prague — hundreds of visitors and B2B meetings with industrial and municipal leaders',
-                },
-                alt: {
-                    cs: 'Stánek Treetino na Smart Energy Forum 2026 v Praze',
-                    en: 'Treetino exhibition booth at Smart Energy Forum 2026 in Prague',
-                },
-            },
-            {
-                src: '/img/media/smart-energy-forum-2026-2.jpg',
-                caption: {
-                    cs: 'Prezentace fyzických modelů Treetino V1 a V2 a solárního listu na stánku Treetino během Smart Energy Forum',
-                    en: 'Showcasing the physical Treetino V1 and V2 models and solar leaf hardware at the Smart Energy Forum booth',
-                },
-                alt: {
-                    cs: 'Tým Treetino u modelů V1 a V2 na veletrhu Smart Energy Forum',
-                    en: 'Treetino team with V1 and V2 models at Smart Energy Forum',
-                },
-            },
-            {
-                src: '/img/media/smart-energy-forum-2026-3.jpg',
-                caption: {
-                    cs: 'Obchodní jednání s energetickými a komerčními partnery, ze kterých vzešlo přes 85 mil. Kč v podepsaných LOI',
-                    en: 'B2B discussions with energy and commercial partners resulting in over 85M CZK in signed LOIs',
-                },
-                alt: {
-                    cs: 'Jednání se zájemci na stánku Treetino na Smart Energy Forum 2026',
-                    en: 'Partner meetings at the Treetino booth during Smart Energy Forum 2026',
-                },
-            },
-        ],
-        links: [
-            {
-                url: 'https://www.smartenergyforum.cz',
-                label: { cs: 'Web Smart Energy Forum', en: 'Smart Energy Forum Website' },
-                type: 'web',
-            },
-        ],
-    },
-    {
         id: 'czechinvest-demo-day-prusa-oct-2026',
         date: { cs: 'Říjen 2026', en: 'October 2026' },
         year: '2026',
@@ -176,6 +119,63 @@ const appearances: AppearanceItem[] = [
                 url: 'https://www.prusa3d.com',
                 label: { cs: 'Prusa Research', en: 'Prusa Research' },
                 type: 'external',
+            },
+        ],
+    },
+    {
+        id: 'smart-energy-forum-oct-2026',
+        date: { cs: 'Říjen 2026', en: 'October 2026' },
+        year: '2026',
+        outlet: 'Smart Energy Forum Prague',
+        category: 'conference',
+        title: {
+            cs: 'Smart Energy Forum Praha: Veletržní expozice Treetino a 85+ mil. Kč v podepsaných LOI',
+            en: 'Smart Energy Forum Prague: Treetino Exhibition & Over 85M CZK in Signed LOIs',
+        },
+        description: {
+            cs: 'Na největším středoevropském veletrhu moderní energetiky a bateriových systémů v Praze představil tým Treetino modely generací V1 a V2, funkční solární list a hybridní architekturu. Během veletrhu jsme navázali klíčová průmyslová i komunální partnerství a přivezli přes 85 milionů Kč (více než 3,4 mil. EUR) v 16 podepsaných memorandech o předběžném zájmu (LOI).',
+            en: 'At Central Europe’s premier modern energy and battery storage exhibition in Prague, Treetino showcased its V1 and V2 physical models, solar leaf hardware, and hybrid power architecture. Across the forum, the team secured key industrial, commercial, and municipal partnerships—bringing back over 85M CZK (€3.4M+) across 16 signed Letters of Intent (LOIs).',
+        },
+        photos: [
+            {
+                src: '/img/media/smart-energy-forum-2026-1.jpg',
+                caption: {
+                    cs: 'Expozice Treetino na veletrhu Smart Energy Forum 2026 v Praze — stovky návštěvníků a jednání se zástupci průmyslu i samospráv',
+                    en: 'Treetino booth at Smart Energy Forum 2026 in Prague — hundreds of visitors and B2B meetings with industrial and municipal leaders',
+                },
+                alt: {
+                    cs: 'Stánek Treetino na Smart Energy Forum 2026 v Praze',
+                    en: 'Treetino exhibition booth at Smart Energy Forum 2026 in Prague',
+                },
+            },
+            {
+                src: '/img/media/smart-energy-forum-2026-2.jpg',
+                caption: {
+                    cs: 'Prezentace fyzických modelů Treetino V1 a V2 a solárního listu na stánku Treetino během Smart Energy Forum',
+                    en: 'Showcasing the physical Treetino V1 and V2 models and solar leaf hardware at the Smart Energy Forum booth',
+                },
+                alt: {
+                    cs: 'Tým Treetino u modelů V1 a V2 na veletrhu Smart Energy Forum',
+                    en: 'Treetino team with V1 and V2 models at Smart Energy Forum',
+                },
+            },
+            {
+                src: '/img/media/smart-energy-forum-2026-3.jpg',
+                caption: {
+                    cs: 'Obchodní jednání s energetickými a komerčními partnery, ze kterých vzešlo přes 85 mil. Kč v podepsaných LOI',
+                    en: 'B2B discussions with energy and commercial partners resulting in over 85M CZK in signed LOIs',
+                },
+                alt: {
+                    cs: 'Jednání se zájemci na stánku Treetino na Smart Energy Forum 2026',
+                    en: 'Partner meetings at the Treetino booth during Smart Energy Forum 2026',
+                },
+            },
+        ],
+        links: [
+            {
+                url: 'https://www.smartenergyforum.cz',
+                label: { cs: 'Web Smart Energy Forum', en: 'Smart Energy Forum Website' },
+                type: 'web',
             },
         ],
     },
@@ -256,8 +256,8 @@ const appearances: AppearanceItem[] = [
             en: 'Forbes Next Big Thing: Treetino Energy Tree Showcase & Future of Urban Clean Energy',
         },
         description: {
-            cs: 'Bezprostředně po zářijové televizní reportáži představil CEO Dominik Mašek projekt Treetino a fyzický model energetického stromu na inovační konferenci Forbes Next Big Thing. Setkání s osobnostmi českého byznysu, technologickými lídry a investory přineslo přímou odezvu na komercializaci energetického stromu Treetino a záběry přímo na oficiálním Instagramu Forbes Česko.',
-            en: 'Right after the September TV feature, CEO Dominik Mašek presented Treetino and its physical energy tree model at the Forbes Next Big Thing innovation summit. Featured on Forbes Czechia’s official social channels, the showcase connected Treetino with leading Czech founders, executives, and clean-tech investors.',
+            cs: 'Bezprostředně po srpnovém představení na Úřadu vlády ČR uvedl CEO Dominik Mašek projekt Treetino a fyzický model energetického stromu na inovační konferenci Forbes Next Big Thing. Setkání s osobnostmi českého byznysu, technologickými lídry a investory přineslo přímou odezvu na komercializaci energetického stromu Treetino a záběry přímo na oficiálním Instagramu Forbes Česko.',
+            en: 'Right after the August showcase at the Office of the Czech Government, CEO Dominik Mašek presented Treetino and its physical energy tree model at the Forbes Next Big Thing innovation summit. Featured on Forbes Czechia’s official social channels, the showcase connected Treetino with leading Czech founders, executives, and clean-tech investors.',
         },
         video: {
             src: '/video/media/forbes-next-big-thing-2026.mp4',
@@ -308,60 +308,6 @@ const appearances: AppearanceItem[] = [
                 url: 'https://forbes.cz',
                 label: { cs: 'Forbes Česko', en: 'Forbes Czechia' },
                 type: 'external',
-            },
-        ],
-    },
-    {
-        id: 'praha-tv-sep-2026',
-        date: { cs: 'Září 2026', en: 'September 2026' },
-        year: '2026',
-        outlet: 'Praha TV',
-        category: 'tv',
-        title: {
-            cs: 'Praha TV: Reportáž o vývoji a budoucnosti energetického stromu Treetino',
-            en: 'Praha TV: Feature on Treetino Smart Energy Tree & Urban Clean Tech',
-        },
-        description: {
-            cs: 'Televizní štáb Praha TV navštívil vývojové centrum Treetino. Exkluzivní reportáž o funkčním prototypu, patentovaném systému natáčení větví a plánech na pilotní instalace.',
-            en: 'The Praha TV crew visited Treetino R&D for an exclusive feature covering the working prototype, patented multi-axis branch articulation, and upcoming pilot installations.',
-        },
-        video: {
-            src: '/video/media/praha-tv-september-2026.mp4',
-            poster: '/img/media/praha-tv-poster.jpg',
-            type: 'mp4',
-            tag: 'TV REPORTÁŽ',
-            duration: '3:00',
-            title: {
-                cs: 'Praha TV: Oficiální televizní reportáž Treetino',
-                en: 'Praha TV: Official Treetino Television Feature',
-            },
-            description: {
-                cs: 'Návštěva televizního štábu ve vývojovém centru Treetino, představení prototypu a plánu pilotních instalací.',
-                en: 'Praha TV feature covering the working prototype, branch articulation mechanism, and pilot installations.',
-            },
-        },
-        photos: [
-            {
-                src: '/img/media/praha-tv-bts-1.jpg',
-                caption: {
-                    cs: 'Rozhovor zakladatele před funkčním modelem energetického stromu Treetino v R&D centru',
-                    en: 'Founder interview in front of the functional Treetino prototype in R&D',
-                },
-                alt: {
-                    cs: 'Rozhovor pro Praha TV před prototypem Treetino',
-                    en: 'Praha TV shoot in front of Treetino prototype',
-                },
-            },
-            {
-                src: '/img/media/praha-tv-bts-2.jpg',
-                caption: {
-                    cs: 'Příprava televizního štábu Praha TV a moderátorky na natáčení ve vývojovém centru',
-                    en: 'Behind the scenes: Praha TV crew and anchor preparing on set',
-                },
-                alt: {
-                    cs: 'Zákulisí natáčení Praha TV v R&D centru Treetino',
-                    en: 'Behind the scenes at Treetino R&D during TV filming',
-                },
             },
         ],
     },
@@ -433,6 +379,60 @@ const appearances: AppearanceItem[] = [
             },
             type: 'instagram',
         },
+    },
+    {
+        id: 'praha-tv-sep-2026',
+        date: { cs: 'Srpen 2026', en: 'August 2026' },
+        year: '2026',
+        outlet: 'Praha TV',
+        category: 'tv',
+        title: {
+            cs: 'Praha TV: Reportáž o vývoji a budoucnosti energetického stromu Treetino',
+            en: 'Praha TV: Feature on Treetino Smart Energy Tree & Urban Clean Tech',
+        },
+        description: {
+            cs: 'Televizní štáb Praha TV navštívil vývojové centrum Treetino. Exkluzivní reportáž o funkčním prototypu, patentovaném systému natáčení větví a plánech na pilotní instalace.',
+            en: 'The Praha TV crew visited Treetino R&D for an exclusive feature covering the working prototype, patented multi-axis branch articulation, and upcoming pilot installations.',
+        },
+        video: {
+            src: '/video/media/praha-tv-september-2026.mp4',
+            poster: '/img/media/praha-tv-poster.jpg',
+            type: 'mp4',
+            tag: 'TV REPORTÁŽ',
+            duration: '3:00',
+            title: {
+                cs: 'Praha TV: Oficiální televizní reportáž Treetino',
+                en: 'Praha TV: Official Treetino Television Feature',
+            },
+            description: {
+                cs: 'Návštěva televizního štábu ve vývojovém centru Treetino, představení prototypu a plánu pilotních instalací.',
+                en: 'Praha TV feature covering the working prototype, branch articulation mechanism, and pilot installations.',
+            },
+        },
+        photos: [
+            {
+                src: '/img/media/praha-tv-bts-1.jpg',
+                caption: {
+                    cs: 'Rozhovor zakladatele před funkčním modelem energetického stromu Treetino v R&D centru',
+                    en: 'Founder interview in front of the functional Treetino prototype in R&D',
+                },
+                alt: {
+                    cs: 'Rozhovor pro Praha TV před prototypem Treetino',
+                    en: 'Praha TV shoot in front of Treetino prototype',
+                },
+            },
+            {
+                src: '/img/media/praha-tv-bts-2.jpg',
+                caption: {
+                    cs: 'Příprava televizního štábu Praha TV a moderátorky na natáčení ve vývojovém centru',
+                    en: 'Behind the scenes: Praha TV crew and anchor preparing on set',
+                },
+                alt: {
+                    cs: 'Zákulisí natáčení Praha TV v R&D centru Treetino',
+                    en: 'Behind the scenes at Treetino R&D during TV filming',
+                },
+            },
+        ],
     },
     {
         id: 'urbis-brno-jun-2026',
