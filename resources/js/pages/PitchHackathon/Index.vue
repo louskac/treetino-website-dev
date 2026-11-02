@@ -188,7 +188,7 @@ const notes = [
     },
     {
         time: '1:00–1:25',
-        script: 'To scale across Europe we built an RWA protocol on Solana. At Solana CZE we won 2nd place overall and 1st in the Marinade track — great to see Marinade judging today. Since then we signed an MoU with peaq and their Ironyard liquidity pools. peaq tokenizes real-world assets for futuristic machine economies — they loved our product, and we’re in deep talks with RockawayX along the same vertical.',
+        script: 'To scale across Europe we built an RWA protocol on Solana. At Solana CZE we won 2nd place overall and 1st in the Marinade track — great to see Marinade judging today. Since then we signed an MoU with peaq and their Ironyard liquidity pools. peaq tokenizes real-world assets for futuristic machine economies — and they loved our product.',
     },
     {
         time: '1:25–1:55',
@@ -398,7 +398,7 @@ const notes = [
                             ]"
                         />
                         <p class="sub rise mt-[36px] max-w-[34ch]" style="--d: 600ms">
-                            Our hackathon wins turned into an MoU with peaq’s Ironyard pools. RockawayX is in talks.
+                            Our hackathon wins turned into an MoU with peaq’s Ironyard pools.
                         </p>
                     </div>
 
