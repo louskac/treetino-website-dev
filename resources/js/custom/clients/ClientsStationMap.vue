@@ -281,9 +281,17 @@ function resetView() {
 const stationPins = computed(() =>
     props.stations.map((s) => {
         const pos = toScreen(s.x, s.y);
-        const rightLimit = props.selectedId ? size.value.w - props.insets.right + 12 : size.value.w;
-        const effectiveChipSide: 'left' | 'right' =
-            s.chipSide === 'left' || (pos.left + 195 > rightLimit && pos.left > 210) ? 'left' : 'right';
+        const isMobileMap = size.value.w < 640;
+        const rightLimit = props.selectedId && !isMobileMap ? size.value.w - props.insets.right + 12 : size.value.w;
+        const chipW = isMobileMap ? 120 : 195;
+        const minLeft = isMobileMap ? 82 : 155;
+        let effectiveChipSide: 'left' | 'right' = s.chipSide === 'left' ? 'left' : 'right';
+
+        if (effectiveChipSide === 'right' && pos.left + chipW > rightLimit && pos.left > minLeft) {
+            effectiveChipSide = 'left';
+        } else if (effectiveChipSide === 'left' && pos.left < minLeft) {
+            effectiveChipSide = 'right';
+        }
 
         return { ...s, ...pos, effectiveChipSide };
     }),
@@ -291,6 +299,10 @@ const stationPins = computed(() =>
 
 /* Cities in view, minus any that would collide with a station pin, its label chip, or the open drawer */
 const cityLabels = computed(() => {
+    if (size.value.w < 640) {
+        return [];
+    }
+
     const maxRight = props.selectedId ? size.value.w - props.insets.right - 55 : size.value.w + 40;
 
     return MAP_CITIES.map((c) => ({ ...c, displayName: isEn.value ? c.nameEn : c.name, ...toScreen(c.x, c.y) })).filter(
@@ -569,7 +581,7 @@ defineExpose({ resetView });
                 ></span>
             </span>
             <span
-                class="absolute top-1/2 flex -translate-y-1/2 items-center gap-2 rounded-full border px-3 py-1.5 text-xs whitespace-nowrap backdrop-blur-md transition-colors duration-300"
+                class="absolute top-1/2 flex -translate-y-1/2 items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] whitespace-nowrap backdrop-blur-md transition-colors duration-300 sm:gap-2 sm:px-3 sm:py-1.5 sm:text-xs"
                 :class="[
                     s.effectiveChipSide === 'left' ? 'right-full mr-1' : 'left-full ml-1',
                     s.id === selectedId
@@ -578,9 +590,9 @@ defineExpose({ resetView });
                 ]"
             >
                 <span class="font-medium">{{ s.title }}</span>
-                <span class="text-white/35">·</span>
-                <span v-if="s.live" class="text-[#8ec5ff] tabular-nums">{{ num(s.windMs, 1, locale) }} m/s</span>
-                <span v-else class="text-white/45">{{ isEn ? 'historic' : 'historie' }}</span>
+                <span class="hidden text-white/35 sm:inline">·</span>
+                <span v-if="s.live" class="hidden text-[#8ec5ff] tabular-nums sm:inline">{{ num(s.windMs, 1, locale) }} m/s</span>
+                <span v-else class="hidden text-white/45 sm:inline">{{ isEn ? 'historic' : 'historie' }}</span>
             </span>
         </button>
 

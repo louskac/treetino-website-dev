@@ -342,6 +342,27 @@ const getInitialProduct = (): ProductIdType => {
         return props.initialProduct as ProductIdType;
     }
 
+    if (typeof window !== 'undefined') {
+        const params = new URLSearchParams(window.location.search);
+        const queryProduct = params.get('product');
+        if (
+            queryProduct &&
+            Object.values(ProductId).includes(queryProduct as ProductIdType)
+        ) {
+            return queryProduct as ProductIdType;
+        }
+
+        const pathMatch = window.location.pathname.match(
+            /^\/configurator\/([^/?#]+)/,
+        );
+        if (
+            pathMatch?.[1] &&
+            Object.values(ProductId).includes(pathMatch[1] as ProductIdType)
+        ) {
+            return pathMatch[1] as ProductIdType;
+        }
+    }
+
     return ProductId.StromV1;
 };
 

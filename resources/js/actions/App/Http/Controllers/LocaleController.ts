@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\LocaleController::__invoke
-* @see app/Http/Controllers/LocaleController.php:11
+* @see app/Http/Controllers/LocaleController.php:12
 * @route '/locale'
 */
 const LocaleController = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -16,7 +16,7 @@ LocaleController.definition = {
 
 /**
 * @see \App\Http\Controllers\LocaleController::__invoke
-* @see app/Http/Controllers/LocaleController.php:11
+* @see app/Http/Controllers/LocaleController.php:12
 * @route '/locale'
 */
 LocaleController.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ LocaleController.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\LocaleController::__invoke
-* @see app/Http/Controllers/LocaleController.php:11
+* @see app/Http/Controllers/LocaleController.php:12
 * @route '/locale'
 */
 LocaleController.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -35,7 +35,7 @@ LocaleController.post = (options?: RouteQueryOptions): RouteDefinition<'post'> =
 
 /**
 * @see \App\Http\Controllers\LocaleController::__invoke
-* @see app/Http/Controllers/LocaleController.php:11
+* @see app/Http/Controllers/LocaleController.php:12
 * @route '/locale'
 */
 const LocaleControllerForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -45,7 +45,7 @@ const LocaleControllerForm = (options?: RouteQueryOptions): RouteFormDefinition<
 
 /**
 * @see \App\Http\Controllers\LocaleController::__invoke
-* @see app/Http/Controllers/LocaleController.php:11
+* @see app/Http/Controllers/LocaleController.php:12
 * @route '/locale'
 */
 LocaleControllerForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

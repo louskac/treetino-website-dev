@@ -18,10 +18,9 @@
             <!-- Top HUD: one compact line so the sky stays free for the sun -->
             <div class="pointer-events-none absolute inset-x-0 top-0 flex items-center gap-2 p-3.5">
                 <span
-                    class="inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 font-mono text-[9px] tracking-[0.18em] uppercase backdrop-blur-sm"
-                    :class="mode === 'now' && isLive ? 'border-emerald-400/30 text-emerald-300' : 'border-[#8ec5ff]/30 text-[#8ec5ff]'"
+                    class="inline-flex items-center gap-1.5 rounded-full border border-[#8ec5ff]/30 bg-zinc-950/60 px-2 py-0.5 font-mono text-[9px] tracking-[0.18em] text-[#8ec5ff] uppercase backdrop-blur-sm"
                 >
-                    <span class="h-1 w-1 rounded-full" :class="mode === 'now' && isLive ? 'animate-pulse bg-emerald-300' : 'bg-[#8ec5ff]'"></span>
+                    <span class="h-1 w-1 rounded-full bg-[#8ec5ff]" :class="{ 'animate-pulse': mode === 'now' && isLive }"></span>
                     {{ modeLabel }}
                 </span>
                 <span class="text-[11px] text-white/45 tabular-nums">{{ stamp }}</span>
@@ -32,7 +31,7 @@
                 <p class="font-mono text-[9px] tracking-[0.22em] text-white/40 uppercase">
                     {{ isEn ? 'Digital twin · output' : 'Digitální dvojče · výkon' }}
                 </p>
-                <p class="mt-1.5 text-[2rem] leading-none font-medium tracking-[-0.04em] text-white tabular-nums">
+                <p class="mt-1.5 text-[1.85rem] leading-none font-medium tracking-[-0.04em] text-white tabular-nums sm:text-[2rem]">
                     {{ num(out.totalKw, out.totalKw < 10 ? 2 : 1, locale) }}<span class="ml-1 text-sm tracking-normal text-white/45">kW</span>
                 </p>
                 <p class="mt-1 text-[11px] text-white/45">
@@ -42,7 +41,9 @@
             </div>
             <div class="pointer-events-none absolute right-3.5 bottom-3 text-right">
                 <p class="text-[13px] font-medium text-white">{{ tr(variant.title, locale) }}</p>
-                <p class="text-[11px] text-white/40">{{ isEn ? 'hub' : 'osa' }} {{ num(variant.hubHeightM, 1, locale) }} m · {{ out.storm ? (isEn ? 'storm stow' : 'bouřková poloha') : nightOrTrack }}</p>
+                <p class="text-[11px] text-white/40">
+                    <span class="hidden sm:inline">{{ isEn ? 'hub' : 'osa' }} {{ num(variant.hubHeightM, 1, locale) }} m · </span>{{ out.storm ? (isEn ? 'storm stow' : 'bouřková poloha') : nightOrTrack }}
+                </p>
             </div>
         </div>
 
@@ -266,14 +267,14 @@ const nightOrTrack = computed(() => {
 });
 
 const metrics = computed(() => [
-    { label: isEn.value ? `Wind @ ${num(props.variant.hubHeightM, 1, 'en')} m` : `Vítr v ${num(props.variant.hubHeightM, 1, 'cs')} m`, value: num(out.value.hubWindMs, 1, locale.value), unit: 'm/s' },
-    { label: isEn.value ? 'Rotor speed' : 'Otáčky rotoru', value: num(out.value.rpm, 0, locale.value), unit: isEn.value ? 'rpm' : 'ot/min' },
+    { label: isEn.value ? 'Wind (hub)' : 'Vítr v ose', value: num(out.value.hubWindMs, 1, locale.value), unit: 'm/s' },
+    { label: isEn.value ? 'Rotor speed' : 'Otáčky', value: num(out.value.rpm, 0, locale.value), unit: isEn.value ? 'rpm' : 'ot/min' },
     {
-        label: isEn.value ? 'Sun elevation' : 'Výška slunce',
+        label: isEn.value ? 'Sun height' : 'Slunce',
         value: num(Math.max(0, out.value.sun.elevationDeg), 0, locale.value),
         unit: `° ${cardinalCs(degToCardinal16(out.value.sun.azimuthDeg), locale.value)}`,
     },
-    { label: isEn.value ? 'Wind from' : 'Vítr od', value: cardinalCs(degToCardinal16(sample.value.windFromDeg), locale.value), unit: '' },
+    { label: isEn.value ? 'Wind from' : 'Směr větru', value: cardinalCs(degToCardinal16(sample.value.windFromDeg), locale.value), unit: '' },
 ]);
 
 /* ------------------------------------------------------------------ */

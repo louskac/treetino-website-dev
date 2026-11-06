@@ -349,36 +349,39 @@ function stepMedia(delta: number) {
 </script>
 
 <template>
-    <aside class="flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-zinc-950/80 shadow-2xl backdrop-blur-2xl">
+    <aside class="flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-zinc-950/85 shadow-2xl backdrop-blur-2xl">
+        <!-- Mobile sheet grab handle -->
+        <div class="mx-auto mt-2 h-1 w-9 shrink-0 rounded-full bg-white/15 lg:hidden" aria-hidden="true"></div>
+
         <!-- Header -->
-        <header class="flex items-start justify-between gap-4 px-6 pt-6 pb-5">
+        <header class="flex items-start justify-between gap-3 px-4 pt-2.5 pb-3.5 sm:gap-4 sm:px-6 sm:pt-6 sm:pb-5">
             <div class="min-w-0">
-                <p class="flex items-center gap-3 text-[11px] font-medium tracking-[0.2em] uppercase">
+                <p class="flex items-center gap-2.5 text-[10px] font-medium tracking-[0.2em] uppercase sm:gap-3 sm:text-[11px]">
                     <span
                         class="flex items-center gap-1.5"
-                        :class="status === 'live' ? 'text-emerald-400' : 'text-[#8ec5ff]'"
+                        :class="status === 'live' ? 'text-[#8ec5ff]' : 'text-white/60'"
                     >
                         <span
                             class="h-1.5 w-1.5 rounded-full"
                             :class="
                                 status === 'live'
-                                    ? 'bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.9)]'
-                                    : 'bg-[#8ec5ff]'
+                                    ? 'bg-[#8ec5ff] shadow-[0_0_8px_rgba(142,197,255,0.9)]'
+                                    : 'bg-white/40'
                             "
                         ></span>
                         {{ status === 'live' ? (isEn ? 'Live' : 'Živě') : isEn ? 'Historic' : 'Historie' }}
                     </span>
-                    <span class="h-px w-6 bg-white/20"></span>
+                    <span class="h-px w-5 bg-white/20 sm:w-6"></span>
                     <span class="text-white/45 tabular-nums">{{ id.stationId }}</span>
                 </p>
-                <h2 class="mt-3 text-2xl leading-tight font-medium tracking-[-0.03em] text-white">{{ title }}</h2>
-                <p class="mt-1 text-sm text-white/45">
+                <h2 class="mt-1.5 text-xl leading-tight font-medium tracking-[-0.03em] text-white sm:mt-3 sm:text-2xl">{{ title }}</h2>
+                <p class="mt-0.5 truncate text-xs text-white/45 sm:mt-1 sm:text-sm">
                     {{ city }} · {{ id.elevationM }} {{ isEn ? 'm ASL' : 'm n. m.' }} · {{ statusNote }}
                 </p>
             </div>
             <button
                 type="button"
-                class="-mt-1 -mr-2 flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white/50 transition-colors hover:bg-white/[0.06] hover:text-white"
+                class="-mt-0.5 -mr-1.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-white/50 transition-colors hover:bg-white/[0.06] hover:text-white sm:-mt-1 sm:-mr-2 sm:h-9 sm:w-9"
                 :aria-label="isEn ? 'Close detail' : 'Zavřít detail'"
                 @click="emit('close')"
             >
@@ -386,7 +389,7 @@ function stepMedia(delta: number) {
             </button>
         </header>
 
-        <div data-panel-scroll class="panel-scroll flex-1 overflow-y-auto px-6 pb-6">
+        <div data-panel-scroll class="panel-scroll flex-1 overflow-y-auto px-4 pb-5 sm:px-6 sm:pb-6">
             <!-- Digital twin: the offered tree, driven by this station's wind and sun -->
             <section class="pb-5">
                 <ClientsLiveTree
@@ -486,7 +489,8 @@ function stepMedia(delta: number) {
             <section class="mt-6 border-t border-white/10 pt-5">
                 <div class="flex items-center justify-between gap-2">
                     <h3 class="text-[11px] font-medium tracking-[0.2em] text-white/45 uppercase">
-                        {{ isEn ? `Production · ${tr(activeVariant.shortModel, locale)}` : `Výroba · ${tr(activeVariant.shortModel, locale)}` }}
+                        <span>{{ isEn ? 'Production' : 'Výroba' }}</span>
+                        <span class="hidden sm:inline"> · {{ tr(activeVariant.shortModel, locale) }}</span>
                     </h3>
                     <div
                         class="flex rounded-lg border border-white/10 p-0.5 text-xs"
@@ -682,41 +686,41 @@ function stepMedia(delta: number) {
         </div>
 
         <!-- Export -->
-        <footer class="border-t border-white/10 bg-zinc-950/60 px-4 py-4 sm:px-6 sm:py-5">
-            <div class="grid grid-cols-2 gap-2.5">
+        <footer class="border-t border-white/10 bg-zinc-950/75 px-3.5 py-3 sm:px-6 sm:py-5">
+            <div class="grid grid-cols-2 gap-2 sm:gap-2.5">
                 <component
                     :is="docs && !isEn ? 'a' : 'button'"
                     :href="!isEn ? docs?.offer : undefined"
                     :download="docs && !isEn ? '' : undefined"
                     type="button"
-                    class="group flex items-center justify-between gap-2 rounded-xl bg-t-blue px-3.5 py-3 text-left text-white shadow-[0_0_32px_rgba(77,141,255,0.35)] transition-shadow duration-200 hover:shadow-[0_0_44px_rgba(77,141,255,0.6)] sm:px-4"
+                    class="group flex items-center justify-between gap-2 rounded-xl bg-t-blue px-3 py-2.5 text-left text-white shadow-[0_0_32px_rgba(77,141,255,0.35)] transition-shadow duration-200 hover:shadow-[0_0_44px_rgba(77,141,255,0.6)] sm:px-4 sm:py-3"
                     @click="(!docs || isEn) && emit('print', 'offer')"
                 >
-                    <span>
-                        <span class="block text-[13px] font-medium whitespace-nowrap sm:text-sm">
+                    <span class="min-w-0">
+                        <span class="block truncate text-[13px] font-medium sm:text-sm">
                             {{ isEn ? 'Price Offer' : 'Cenová nabídka' }}
                         </span>
-                        <span class="block text-[11px] whitespace-nowrap text-white/60">{{ offerSubLabel }}</span>
+                        <span class="block truncate text-[10px] text-white/60 sm:text-[11px]">{{ offerSubLabel }}</span>
                     </span>
-                    <ArrowDownToLine class="h-4 w-4 text-white/70 transition-transform group-hover:translate-y-0.5" />
+                    <ArrowDownToLine class="h-4 w-4 shrink-0 text-white/70 transition-transform group-hover:translate-y-0.5" />
                 </component>
                 <component
                     :is="docs && !isEn ? 'a' : 'button'"
                     :href="!isEn ? docs?.study : undefined"
                     :download="docs && !isEn ? '' : undefined"
                     type="button"
-                    class="group flex items-center justify-between gap-2 rounded-xl border border-white/20 bg-white/[0.03] px-3.5 py-3 text-left text-white transition-colors duration-200 hover:border-white/45 hover:bg-white/[0.07] sm:px-4"
+                    class="group flex items-center justify-between gap-2 rounded-xl border border-white/20 bg-white/[0.03] px-3 py-2.5 text-left text-white transition-colors duration-200 hover:border-white/45 hover:bg-white/[0.07] sm:px-4 sm:py-3"
                     @click="(!docs || isEn) && emit('print', 'study')"
                 >
-                    <span>
-                        <span class="block text-[13px] font-medium whitespace-nowrap sm:text-sm">
+                    <span class="min-w-0">
+                        <span class="block truncate text-[13px] font-medium sm:text-sm">
                             {{ isEn ? 'Technical Study' : 'Technická studie' }}
                         </span>
-                        <span class="block text-[11px] whitespace-nowrap text-white/50">
+                        <span class="block truncate text-[10px] text-white/50 sm:text-[11px]">
                             PDF · {{ tr(activeVariant.title, locale) }}
                         </span>
                     </span>
-                    <ArrowDownToLine class="h-4 w-4 text-white/50 transition-transform group-hover:translate-y-0.5" />
+                    <ArrowDownToLine class="h-4 w-4 shrink-0 text-white/50 transition-transform group-hover:translate-y-0.5" />
                 </component>
             </div>
         </footer>

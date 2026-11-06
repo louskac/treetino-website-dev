@@ -21,7 +21,7 @@ class ConfiguratorController extends Controller
     public function index(Request $request, $product = null)
     {
         return ($this->renderPublic)('Configurator/Index', [
-            'initialProduct' => $product,
+            'initialProduct' => $product ?? $request->query('product'),
         ]);
     }
 }

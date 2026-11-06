@@ -22,7 +22,8 @@ function getCookie(name: string): string | null {
 }
 
 /**
- * Persists the chosen locale across localStorage, cookies, and the pricing app's key.
+ * Persists the chosen locale across localStorage, cookies, and the pricing app's key,
+ * and strips any stale ?lang= / ?locale= override from the current URL so manual switches stick.
  */
 export function persistLocale(locale: AppLocale): void {
     if (typeof window === 'undefined') {
@@ -42,6 +43,17 @@ export function persistLocale(locale: AppLocale): void {
     } catch {
         // Ignore cookie errors
     }
+
+    try {
+        const url = new URL(window.location.href);
+        if (url.searchParams.has('lang') || url.searchParams.has('locale')) {
+            url.searchParams.delete('lang');
+            url.searchParams.delete('locale');
+            window.history.replaceState(window.history.state, '', url);
+        }
+    } catch {
+        // Ignore URL history errors
+    }
 }
 
 /**
@@ -58,12 +70,10 @@ export function getExplicitLocale(): AppLocale | null {
         const queryLang = (params.get('lang') || params.get('locale'))?.toLowerCase();
 
         if (queryLang === 'cz') {
-            persistLocale('cs');
             return 'cs';
         }
 
         if (isSupportedLocale(queryLang)) {
-            persistLocale(queryLang);
             return queryLang;
         }
     } catch {

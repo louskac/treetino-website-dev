@@ -259,8 +259,8 @@ const insets = computed<MapInsets>(() => {
 
     if (!isDesktop.value) {
         return selectedId.value
-            ? { left: 16, top: 100, right: Math.min(200, w * 0.45), bottom: Math.round(h * 0.62) }
-            : { left: 16, top: Math.round(h * 0.34), right: 16, bottom: 170 };
+            ? { left: 20, top: 88, right: 20, bottom: Math.round(h * 0.72) }
+            : { left: 20, top: Math.round(h * 0.27), right: 20, bottom: 250 };
     }
 
     if (selectedId.value) {
@@ -411,7 +411,7 @@ onBeforeUnmount(() => {
 
                     <!-- Station list: unified, minimal architectural list -->
                     <div
-                        class="rise pointer-events-auto mt-auto overflow-hidden rounded-2xl border border-white/10 bg-zinc-950/75 shadow-[0_20px_50px_rgba(0,0,0,0.55)] backdrop-blur-2xl lg:mt-4"
+                        class="rise pointer-events-auto mt-auto overflow-hidden rounded-2xl border border-white/10 bg-zinc-950/80 shadow-[0_20px_50px_rgba(0,0,0,0.55)] backdrop-blur-2xl lg:mt-4"
                         style="--d: 0.8s"
                     >
                         <div class="divide-y divide-white/[0.07]">
@@ -419,7 +419,7 @@ onBeforeUnmount(() => {
                                 v-for="st in [...liveStations, ...historicStations]"
                                 :key="st.id"
                                 type="button"
-                                class="station-row group flex w-full items-center gap-3.5 px-4 py-3.5 text-left transition-colors hover:bg-white/[0.04]"
+                                class="station-row group flex w-full items-center gap-2.5 px-3.5 py-3 text-left transition-colors hover:bg-white/[0.04] sm:gap-3.5 sm:px-4 sm:py-3.5"
                                 @click="select(st.id)"
                             >
                                 <span class="relative flex h-2 w-2 shrink-0">
@@ -467,8 +467,21 @@ onBeforeUnmount(() => {
                             </button>
                         </div>
 
-                        <!-- Prepared stations footer -->
-                        <div class="hidden items-center justify-between border-t border-white/[0.07] bg-white/[0.015] px-4 py-2.5 text-xs sm:flex">
+                        <!-- Mobile science entry footer (replaces floating top-right badge that overlapped the eyebrow) -->
+                        <button
+                            type="button"
+                            class="group flex w-full items-center justify-between border-t border-white/[0.07] bg-[linear-gradient(135deg,rgba(77,141,255,0.12),rgba(255,255,255,0.02))] px-3.5 py-2.5 text-left text-xs font-medium text-white transition-colors hover:bg-white/[0.05] lg:hidden"
+                            @click="openScience"
+                        >
+                            <span class="flex items-center gap-2">
+                                <FlaskConical class="h-3.5 w-3.5 text-[#8ec5ff]" />
+                                <span>{{ isEn ? 'The science behind the numbers · ČVUT' : 'Věda za čísly · ČVUT' }}</span>
+                            </span>
+                            <ArrowUpRight class="h-3.5 w-3.5 text-white/45 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-white" />
+                        </button>
+
+                        <!-- Prepared stations footer (desktop / tablet) -->
+                        <div class="hidden items-center justify-between border-t border-white/[0.07] bg-white/[0.015] px-4 py-2.5 text-xs lg:flex">
                             <span class="text-white/40">
                                 {{ isEn ? 'Ready for deployment on new sites' : 'Připraveno k instalaci na dalších lokalitách' }}
                             </span>
@@ -581,7 +594,7 @@ onBeforeUnmount(() => {
             <Transition :name="isDesktop ? 'drawer' : 'sheet'">
                 <div
                     v-if="selectedId"
-                    class="pointer-events-auto fixed inset-x-3 top-[38%] bottom-3 lg:absolute lg:inset-x-auto lg:top-36 lg:right-0 lg:bottom-6 lg:w-[440px] xl:w-[460px]"
+                    class="pointer-events-auto fixed inset-x-2.5 top-28 bottom-2.5 sm:inset-x-3 sm:top-[30%] lg:absolute lg:inset-x-auto lg:top-36 lg:right-0 lg:bottom-6 lg:w-[440px] xl:w-[460px]"
                 >
                     <ClientsStationPanel
                         :key="activeEntry.id"
@@ -607,16 +620,6 @@ onBeforeUnmount(() => {
                 </div>
             </Transition>
         </div>
-
-        <!-- Mobile science entry (desktop has it in the overview column and the panel) -->
-        <button
-            v-if="!selectedId && !isDesktop"
-            type="button"
-            class="pointer-events-auto absolute top-24 right-4 z-20 flex items-center gap-1.5 rounded-full border border-white/15 bg-zinc-950/70 px-3 py-1.5 text-xs text-white/85 backdrop-blur-md"
-            @click="openScience"
-        >
-            <FlaskConical class="h-3.5 w-3.5 text-emerald-300" />{{ isEn ? 'Science' : 'Věda' }}
-        </button>
 
         <ClientsScience
             :open="scienceOpen"

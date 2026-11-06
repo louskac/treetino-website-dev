@@ -18,6 +18,7 @@ import i18nMessages from './i18n_messages.json';
 import {
     detectGeoLocale,
     detectInitialLocale,
+    getExplicitLocale,
     type AppLocale,
 } from './lib/locale';
 
@@ -299,9 +300,19 @@ function makePageObject(url: string) {
         (i18nMessages as Record<string, any>)[lang] ||
         (i18nMessages as Record<string, any>)['en'];
 
+    let initialProduct: string | null = null;
+    if (typeof window !== 'undefined' && comp === 'Configurator/Index') {
+        const params = new URLSearchParams(window.location.search);
+        const pathMatch = window.location.pathname.match(
+            /^\/configurator\/([^/?#]+)/,
+        );
+        initialProduct = params.get('product') || pathMatch?.[1] || null;
+    }
+
     return {
         component: comp,
         props: {
+            initialProduct,
             i18n: {
                 locale: lang,
                 fallbackLocale: 'en',
@@ -453,45 +464,68 @@ createInertiaApp({
 
         if (isStaticMode) {
             router.on('before', (event) => {
+                const method = (
+                    event.detail.visit.method || 'get'
+                ).toLowerCase();
                 const targetUrl = event.detail.visit.url;
                 const path =
                     typeof targetUrl === 'string'
                         ? targetUrl
                         : targetUrl?.pathname;
 
+                // Never perform Inertia network requests in static mode for background POSTs (e.g. /locale)
+                if (method !== 'get' || path === '/locale') {
+                    event.preventDefault();
+                    return;
+                }
+
+                const fullHref =
+                    typeof targetUrl === 'string'
+                        ? targetUrl
+                        : targetUrl
+                          ? targetUrl.pathname +
+                            targetUrl.search +
+                            targetUrl.hash
+                          : '';
+
                 if (
                     path &&
                     path.startsWith('/') &&
-                    path !== window.location.pathname
+                    fullHref !==
+                        window.location.pathname +
+                            window.location.search +
+                            window.location.hash
                 ) {
                     event.preventDefault();
-                    window.location.href = path;
+                    window.location.href = fullHref;
                 }
             });
 
             router.on('invalid', (event) => {
                 event.preventDefault();
-                const detailUrl =
-                    (event.detail as any)?.response?.config?.url ||
-                    (event.detail as any)?.url;
-                const targetUrl = detailUrl
-                    ? new URL(detailUrl, window.location.origin).pathname
-                    : window.location.pathname;
-
-                if (targetUrl !== window.location.pathname) {
-                    window.location.href = targetUrl;
-                }
             });
         } else {
             router.on('navigate', (event) => {
                 const next = event.detail.page.props
                     .i18n as typeof shared.value;
+                const explicit = getExplicitLocale();
+                const resolvedLocale = explicit || next?.locale;
 
-                if (next && next.locale) {
-                    i18n.global.setLocaleMessage(next.locale, next.messages);
-                    i18n.global.fallbackLocale.value = next.fallbackLocale;
-                    i18n.global.locale.value = next.locale;
-                    document.documentElement.lang = next.locale;
+                if (resolvedLocale) {
+                    const msgs =
+                        (i18nMessages as Record<string, any>)[resolvedLocale] ||
+                        next?.messages ||
+                        (i18nMessages as Record<string, any>)['en'];
+                    i18n.global.setLocaleMessage(resolvedLocale, msgs);
+                    if (next?.fallbackLocale) {
+                        i18n.global.fallbackLocale.value = next.fallbackLocale;
+                    }
+                    i18n.global.locale.value = resolvedLocale;
+                    document.documentElement.lang = resolvedLocale;
+                    if (next) {
+                        next.locale = resolvedLocale;
+                        next.messages = msgs;
+                    }
                 }
 
                 window.scrollTo({ top: 0, behavior: 'smooth' });

@@ -1132,9 +1132,12 @@ onBeforeUnmount(() => {
 
         <!-- Top-left caption -->
         <div
-            class="pointer-events-none absolute top-3.5 left-4 flex items-center gap-2 font-mono text-[10px] tracking-[0.18em] text-white/45 uppercase sm:text-[11px]"
+            class="pointer-events-none absolute top-3 left-3.5 flex items-center gap-2 font-mono text-[10px] tracking-[0.16em] text-white/45 uppercase sm:top-3.5 sm:left-4 sm:text-[11px] sm:tracking-[0.18em]"
         >
-            <span>
+            <span class="sm:hidden">
+                {{ viewMode === '2d' ? (isEn ? '2D cross-section' : '2D průřez') : isEn ? '3D rotor · drag' : '3D rotor · otočte' }}
+            </span>
+            <span class="hidden sm:inline">
                 {{
                     viewMode === '2d'
                         ? isEn
@@ -1149,23 +1152,23 @@ onBeforeUnmount(() => {
 
         <!-- Top-right wind speed & direction indicator -->
         <div
-            class="pointer-events-none absolute top-3.5 right-4 flex items-center gap-2 font-mono text-[10px] tracking-[0.18em] text-[#8ec5ff]/85 uppercase sm:text-[11px]"
+            class="pointer-events-none absolute top-3 right-3.5 flex items-center gap-1.5 font-mono text-[10px] tracking-[0.16em] text-[#8ec5ff]/85 uppercase sm:top-3.5 sm:right-4 sm:gap-2 sm:text-[11px] sm:tracking-[0.18em]"
         >
             <span>{{ isEn ? 'wind' : 'vítr' }} {{ f(windSpeed, 1) }} m/s</span>
             <span aria-hidden="true">→</span>
         </div>
 
         <!-- Bottom-left live operating point -->
-        <div class="pointer-events-none absolute bottom-3.5 left-4">
-            <div class="flex items-baseline gap-2.5">
-                <p class="font-mono text-xl font-medium tracking-tight text-white tabular-nums sm:text-2xl">
+        <div class="pointer-events-none absolute bottom-3 left-3.5 sm:bottom-3.5 sm:left-4">
+            <div class="flex items-baseline gap-2 sm:gap-2.5">
+                <p class="font-mono text-lg font-medium tracking-tight text-white tabular-nums sm:text-2xl">
                     λ {{ f(tsr, 2) }}
                 </p>
-                <span class="font-mono text-xs text-[#34d399] tabular-nums">
+                <span class="font-mono text-[11px] text-[#8ec5ff] tabular-nums sm:text-xs">
                     v<sub>max</sub> {{ f(peakSlotVelocityMs, 1) }} m/s
                 </span>
             </div>
-            <p class="text-[11px] text-white/45">
+            <p class="hidden text-[11px] text-white/45 sm:block">
                 {{
                     viewMode === '2d'
                         ? isEn
@@ -1179,7 +1182,7 @@ onBeforeUnmount(() => {
         </div>
 
         <!-- Bottom-right velocity scale -->
-        <div class="pointer-events-none absolute right-4 bottom-3.5 flex flex-col items-end gap-1">
+        <div class="pointer-events-none absolute right-3.5 bottom-3 flex flex-col items-end gap-1 sm:right-4 sm:bottom-3.5">
             <div
                 class="h-1.5 w-24 rounded-full sm:w-28"
                 style="background: linear-gradient(90deg, rgb(30, 58, 138), #3b82f6, #8ec5ff, #ffffff, #34d399)"

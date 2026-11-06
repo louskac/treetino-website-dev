@@ -32,6 +32,7 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
 
         $middleware->preventRequestForgery(except: [
+            'locale',
             'webhook',
             'checkout',
             'preorders/invoice',

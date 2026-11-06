@@ -11,8 +11,16 @@ class LocaleTest extends TestCase
 
     public function test_locale_can_be_changed(): void
     {
-        $this->from('/')->post('/locale', ['locale' => 'en'])
-            ->assertRedirect('/')
+        $this->from('/products/treetino-v2')->post('/locale', ['locale' => 'en'])
+            ->assertRedirect('/products/treetino-v2')
+            ->assertPlainCookie('locale', 'en');
+    }
+
+    public function test_locale_can_be_changed_via_ajax_without_redirect(): void
+    {
+        $this->postJson('/locale', ['locale' => 'en'])
+            ->assertOk()
+            ->assertJson(['locale' => 'en'])
             ->assertPlainCookie('locale', 'en');
     }
 

@@ -98,7 +98,7 @@ function setupObservers() {
                 }
             }
         },
-        { root, rootMargin: '0px 0px -12% 0px', threshold: [0, 0.12] },
+        { root, rootMargin: '120px 0px 40px 0px', threshold: 0 },
     );
 
     navObserver = new IntersectionObserver(
@@ -219,13 +219,14 @@ onBeforeUnmount(() => {
 /** Reveal-on-scroll classes for text blocks */
 function reveal(id: ChapterId | 'hero', delayMs = 0) {
     const on = reducedMotion.value || (id === 'hero' ? heroSeen.value : seen[id]);
+    const effectiveDelay = narrow.value ? Math.min(delayMs, 80) : delayMs;
 
     return {
         class: [
-            'transition-[opacity,transform] duration-[1100ms] ease-[cubic-bezier(.2,.7,.2,1)]',
-            on ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6',
+            'transition-[opacity,transform] duration-500 ease-[cubic-bezier(.2,.7,.2,1)]',
+            on ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4',
         ],
-        style: { transitionDelay: on && !reducedMotion.value ? `${delayMs}ms` : '0ms' },
+        style: { transitionDelay: on && !reducedMotion.value ? `${effectiveDelay}ms` : '0ms' },
     };
 }
 
@@ -617,6 +618,12 @@ const hasTrackingSlot = computed(() => Boolean(slots.tracking));
                     <div class="absolute -bottom-[30vh] -left-[10vw] h-[60vh] w-[60vw] rounded-full bg-[#34d399]/[0.05] blur-[120px]"></div>
                 </div>
 
+                <!-- Top vignette so scrolled text fades cleanly before reaching the floating Header -->
+                <div
+                    class="pointer-events-none fixed inset-x-0 top-0 z-30 h-24 bg-gradient-to-b from-zinc-950 via-zinc-950/90 to-transparent sm:h-28"
+                    aria-hidden="true"
+                ></div>
+
                 <!-- Normal site header with Logo, navigation, and CS/EN LocaleSwitcher -->
                 <Header :scroll="false" :dark="true" />
 
@@ -781,9 +788,9 @@ const hasTrackingSlot = computed(() => Boolean(slots.tracking));
                                             :reduced-motion="reducedMotion"
                                         />
                                         <!-- Sleek unified control bar: 2D / 3D segmented switch + single-line interaction hint -->
-                                        <div class="mt-3 flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/[0.02] p-1.5 pr-4">
+                                        <div class="mt-3 flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/[0.02] p-1.5 sm:pr-4">
                                             <div
-                                                class="inline-flex rounded-xl bg-zinc-950/80 p-0.5 text-xs ring-1 ring-white/[0.08]"
+                                                class="grid w-full grid-cols-2 rounded-xl bg-zinc-950/80 p-0.5 text-xs ring-1 ring-white/[0.08] sm:inline-flex sm:w-auto"
                                                 role="radiogroup"
                                                 :aria-label="isEn ? 'Visualization view' : 'Zobrazení simulace'"
                                             >

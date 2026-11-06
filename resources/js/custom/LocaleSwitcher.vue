@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Globe } from '@iconoir/vue';
-import { router, usePage } from '@inertiajs/vue3';
+import { usePage } from '@inertiajs/vue3';
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import i18nMessages from '../i18n_messages.json';
@@ -70,19 +70,30 @@ const changeLocale = (targetLocale: string) => {
         );
     }
 
-    // 4. Try POST request if backend is present, ignoring errors on static hosts
-    try {
-        router.post(
-            '/locale',
-            { locale: targetLocale },
-            {
-                preserveScroll: true,
-                onError: () => {},
-                onFinish: () => {},
+    // 4. Sync with backend session silently without triggering Inertia page navigation/redirects
+    const appEl =
+        typeof document !== 'undefined' ? document.getElementById('app') : null;
+    if (appEl?.dataset.page) {
+        const csrfToken = document
+            .querySelector('meta[name="csrf-token"]')
+            ?.getAttribute('content');
+        const xsrfMatch = document.cookie.match(/(?:^|;\s*)XSRF-TOKEN=([^;]*)/);
+        const xsrfToken = xsrfMatch ? decodeURIComponent(xsrfMatch[1]) : null;
+
+        void fetch('/locale', {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
+                ...(csrfToken ? { 'X-CSRF-TOKEN': csrfToken } : {}),
+                ...(xsrfToken ? { 'X-XSRF-TOKEN': xsrfToken } : {}),
             },
-        );
-    } catch (e) {
-        // static deployment fallback
+            body: JSON.stringify({ locale: targetLocale }),
+        }).catch(() => {
+            // Static or serverless fallback: cookies & localStorage are already persisted above
+        });
     }
 };
 
