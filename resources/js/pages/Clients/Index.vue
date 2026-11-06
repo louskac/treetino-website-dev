@@ -239,16 +239,37 @@ function onIntroDone() {
 /* ------------------------------------------------------------------ */
 
 const containerRef = ref<HTMLElement | null>(null);
+const heroTextRef = ref<HTMLElement | null>(null);
+const stationCardRef = ref<HTMLElement | null>(null);
 const viewport = ref({ w: 1440, h: 900, left: 200, right: 1240 });
+const mobileMapBounds = ref({ top: 245, bottom: 245 });
 
 function measure() {
     const r = containerRef.value?.getBoundingClientRect();
+    const h = window.innerHeight;
     viewport.value = {
         w: window.innerWidth,
-        h: window.innerHeight,
+        h,
         left: r?.left ?? 24,
         right: r?.right ?? window.innerWidth - 24,
     };
+
+    const heroEl = heroTextRef.value;
+    const cardEl = stationCardRef.value;
+    const secEl = heroEl?.offsetParent as HTMLElement | null;
+
+    if (heroEl && cardEl && secEl) {
+        const secTop = secEl.offsetTop;
+        const heroBottom = secTop + heroEl.offsetTop + heroEl.offsetHeight;
+        const cardTop = secTop + cardEl.offsetTop;
+
+        if (heroBottom > 0 && cardTop > heroBottom) {
+            mobileMapBounds.value = {
+                top: Math.round(heroBottom + 6),
+                bottom: Math.round(h - cardTop + 6),
+            };
+        }
+    }
 }
 
 const isDesktop = computed(() => viewport.value.w >= 1024);
@@ -259,8 +280,8 @@ const insets = computed<MapInsets>(() => {
 
     if (!isDesktop.value) {
         return selectedId.value
-            ? { left: 20, top: 88, right: 20, bottom: Math.round(h * 0.72) }
-            : { left: 20, top: Math.round(h * 0.27), right: 20, bottom: 250 };
+            ? { left: 10, top: 88, right: 10, bottom: Math.round(h * 0.72) }
+            : { left: 16, top: mobileMapBounds.value.top, right: 16, bottom: mobileMapBounds.value.bottom };
     }
 
     if (selectedId.value) {
@@ -294,6 +315,7 @@ onMounted(async () => {
     }
 
     measure();
+    requestAnimationFrame(measure);
     window.addEventListener('resize', measure);
     window.addEventListener('keydown', onKey);
     document.documentElement.classList.add('clients-app-mode');
@@ -391,17 +413,17 @@ onBeforeUnmount(() => {
             <Transition name="column">
                 <section
                     v-if="!selectedId"
-                    class="absolute inset-x-0 top-28 bottom-4 flex flex-col sm:top-36 lg:top-36 lg:bottom-7 lg:w-[380px]"
+                    class="absolute inset-x-0 top-24 bottom-3 flex flex-col sm:top-36 sm:bottom-4 lg:top-36 lg:bottom-7 lg:w-[380px]"
                     :class="{ 'intro-stagger': playIntro }"
                 >
                     <div class="rise" style="--d: 0.35s">
                         <InvestorChapterMark :index="isEn ? 'CZ' : 'ČR'" :label="isEn ? 'Treetino Field Network' : 'Síť měřicích stanic Treetino'" />
                     </div>
-                    <h1 :class="HEADLINE" class="rise mt-3.5 lg:mt-4" style="--d: 0.5s">
+                    <h1 :class="HEADLINE" class="rise mt-2.5 sm:mt-3.5 lg:mt-4" style="--d: 0.5s">
                         {{ isEn ? 'Real wind.' : 'Skutečný vítr.' }}<br />
                         <span class="headline-shine">{{ isEn ? 'Real numbers.' : 'Skutečná čísla.' }}</span>
                     </h1>
-                    <p class="rise mt-2.5 max-w-[34ch] text-[15px] leading-relaxed text-white/55 lg:mt-3 [@media(max-height:840px)]:lg:hidden" style="--d: 0.65s">
+                    <p ref="heroTextRef" class="rise mt-2 max-w-[34ch] text-[13.5px] leading-snug text-white/55 sm:mt-2.5 sm:text-[15px] sm:leading-relaxed lg:mt-3 [@media(max-height:840px)]:lg:hidden" style="--d: 0.65s">
                         {{
                             isEn
                                 ? 'Every client site measured on location. Pick one to watch its Treetino tree run on that site’s real wind and sun.'
@@ -411,6 +433,7 @@ onBeforeUnmount(() => {
 
                     <!-- Station list: unified, minimal architectural list -->
                     <div
+                        ref="stationCardRef"
                         class="rise pointer-events-auto mt-auto overflow-hidden rounded-2xl border border-white/10 bg-zinc-950/80 shadow-[0_20px_50px_rgba(0,0,0,0.55)] backdrop-blur-2xl lg:mt-4"
                         style="--d: 0.8s"
                     >
@@ -613,6 +636,7 @@ onBeforeUnmount(() => {
                         :active="!scienceOpen"
                         :live-intraday="liveIntradayById[activeEntry.id]"
                         @close="clear"
+                        @select-station="select"
                         @update:qty="qty = $event"
                         @print="openPrint"
                         @science="openScience"

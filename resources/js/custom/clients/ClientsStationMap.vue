@@ -99,9 +99,11 @@ function targetBox(): Box {
     } else {
         const bw = CZ_BBOX.x1 - CZ_BBOX.x0;
         const bh = CZ_BBOX.y1 - CZ_BBOX.y0;
+        const padX = W < 640 ? 1.03 : 1.12;
+        const padY = W < 640 ? 1.08 : 1.2;
         cx = (CZ_BBOX.x0 + CZ_BBOX.x1) / 2;
         cy = (CZ_BBOX.y0 + CZ_BBOX.y1) / 2;
-        s = Math.min(freeW / (bw * 1.12), freeH / (bh * 1.2));
+        s = Math.min(freeW / (bw * padX), freeH / (bh * padY));
     }
 
     return { x: cx - freeCx / s, y: cy - freeCy / s, w: W / s, h: H / s };
@@ -549,20 +551,27 @@ defineExpose({ resetView });
             :key="s.id"
             type="button"
             data-map-ui
-            class="group absolute z-10 -translate-x-1/2 -translate-y-1/2 outline-none"
-            :class="ignited ? 'pin-on' : 'pointer-events-none opacity-0'"
+            class="group absolute z-10 -translate-x-1/2 -translate-y-1/2 touch-manipulation outline-none"
+            :class="[
+                ignited ? 'pin-on' : 'pointer-events-none opacity-0',
+                s.id === selectedId ? 'z-20' : s.live ? 'z-15' : 'z-10',
+            ]"
             :style="{ left: `${s.left}px`, top: `${s.top}px`, animationDelay: `${i * 0.18}s` }"
             :aria-label="`${isEn ? 'Station' : 'Stanice'} ${s.title}`"
-            @click="emit('select', s.id)"
+            @click.stop="emit('select', s.id)"
         >
-            <span class="relative flex h-10 w-10 items-center justify-center">
-                <!-- ignition shockwave -->
-                <span v-if="ignited" class="shockwave absolute inset-0 rounded-full border border-[#8ec5ff]/70" :style="{ animationDelay: `${i * 0.18}s` }"></span>
-                <!-- radar sweep on live sites -->
-                <span v-if="s.live" class="radar pointer-events-none absolute -inset-7 rounded-full"></span>
-                <span v-if="s.live" class="absolute inset-0 animate-ping rounded-full bg-[#4d8dff]/25 [animation-duration:2.4s]"></span>
+            <span class="relative flex h-5 w-5 items-center justify-center sm:h-10 sm:w-10">
+                <!-- ignition shockwave (pointer-events-none so scale(4.5) never blocks neighbouring pins!) -->
                 <span
-                    class="absolute inset-1.5 rounded-full border transition-colors duration-300"
+                    v-if="ignited"
+                    class="shockwave pointer-events-none absolute inset-0 rounded-full border border-[#8ec5ff]/70"
+                    :style="{ animationDelay: `${i * 0.18}s` }"
+                ></span>
+                <!-- radar sweep on live sites -->
+                <span v-if="s.live" class="radar pointer-events-none absolute -inset-5 rounded-full sm:-inset-7"></span>
+                <span v-if="s.live" class="pointer-events-none absolute inset-0 animate-ping rounded-full bg-[#4d8dff]/25 [animation-duration:2.4s]"></span>
+                <span
+                    class="pointer-events-none absolute inset-[2px] rounded-full border transition-colors duration-300 sm:inset-1.5"
                     :class="
                         s.id === selectedId
                             ? 'border-[#8ec5ff] bg-[#4d8dff]/20'
@@ -572,7 +581,7 @@ defineExpose({ resetView });
                     "
                 ></span>
                 <span
-                    class="relative h-2.5 w-2.5 rounded-full transition-colors"
+                    class="pointer-events-none relative h-2 w-2 rounded-full transition-colors sm:h-2.5 sm:w-2.5"
                     :class="
                         s.live || s.id === selectedId
                             ? 'bg-[#8ec5ff] shadow-[0_0_14px_rgba(142,197,255,0.9)]'
@@ -581,12 +590,19 @@ defineExpose({ resetView });
                 ></span>
             </span>
             <span
-                class="absolute top-1/2 flex -translate-y-1/2 items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] whitespace-nowrap backdrop-blur-md transition-colors duration-300 sm:gap-2 sm:px-3 sm:py-1.5 sm:text-xs"
+                class="absolute top-1/2 flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] whitespace-nowrap shadow-[0_6px_20px_rgba(0,0,0,0.65)] transition-colors duration-300 sm:-translate-y-1/2 sm:gap-2 sm:px-3 sm:py-1.5 sm:text-xs"
                 :class="[
-                    s.effectiveChipSide === 'left' ? 'right-full mr-1' : 'left-full ml-1',
+                    s.effectiveChipSide === 'left' ? 'right-full mr-1.5' : 'left-full ml-1.5',
+                    s.id === 'ISTOCH13'
+                        ? '-translate-y-[65%]'
+                        : s.id === 'IPRAGU1761'
+                          ? '-translate-y-[72%]'
+                          : '-translate-y-[28%]',
                     s.id === selectedId
-                        ? 'border-[#8ec5ff]/40 bg-zinc-950/85 text-white'
-                        : 'border-white/12 bg-zinc-950/70 text-white/80 group-hover:border-white/30 group-hover:text-white',
+                        ? 'border-[#8ec5ff]/50 bg-zinc-950/95 text-white'
+                        : s.live
+                          ? 'border-[#8ec5ff]/35 bg-zinc-950/95 text-white group-hover:border-[#8ec5ff]/55'
+                          : 'border-white/20 bg-zinc-950/90 text-white/85 group-hover:border-white/35 group-hover:text-white',
                 ]"
             >
                 <span class="font-medium">{{ s.title }}</span>
@@ -667,11 +683,9 @@ defineExpose({ resetView });
 @keyframes pin-in {
     from {
         opacity: 0;
-        scale: 0.4;
     }
     to {
         opacity: 1;
-        scale: 1;
     }
 }
 

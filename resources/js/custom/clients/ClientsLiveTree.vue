@@ -1,49 +1,53 @@
 <template>
     <div class="relative overflow-hidden rounded-2xl border border-white/10 bg-[radial-gradient(ellipse_80%_70%_at_50%_35%,rgba(77,141,255,0.14),rgba(9,9,11,0)_70%)]">
         <!-- 3D stage -->
-        <div class="relative h-[250px] sm:h-[270px]">
-            <ClientsTreeScene
-                :variant="variant.systemId === 'strom-v1' ? 'v1' : 'v2'"
-                :rpm="out.rpm"
-                :sun-azimuth-deg="out.sun.azimuthDeg"
-                :sun-elevation-deg="out.sun.elevationDeg"
-                :sun-path="sunPath"
-                :wind-from-deg="sample.windFromDeg"
-                :wind-ms="out.hubWindMs"
-                :storm="out.storm"
-                :active="active"
-                :view-azimuth="-1.45"
-            />
+        <div class="relative">
+            <div class="relative h-[205px] sm:h-[270px]">
+                <ClientsTreeScene
+                    :variant="variant.systemId === 'strom-v1' ? 'v1' : 'v2'"
+                    :rpm="out.rpm"
+                    :sun-azimuth-deg="out.sun.azimuthDeg"
+                    :sun-elevation-deg="out.sun.elevationDeg"
+                    :sun-path="sunPath"
+                    :wind-from-deg="sample.windFromDeg"
+                    :wind-ms="out.hubWindMs"
+                    :storm="out.storm"
+                    :active="active"
+                    :view-azimuth="-1.45"
+                />
 
-            <!-- Top HUD: one compact line so the sky stays free for the sun -->
-            <div class="pointer-events-none absolute inset-x-0 top-0 flex items-center gap-2 p-3.5">
-                <span
-                    class="inline-flex items-center gap-1.5 rounded-full border border-[#8ec5ff]/30 bg-zinc-950/60 px-2 py-0.5 font-mono text-[9px] tracking-[0.18em] text-[#8ec5ff] uppercase backdrop-blur-sm"
-                >
-                    <span class="h-1 w-1 rounded-full bg-[#8ec5ff]" :class="{ 'animate-pulse': mode === 'now' && isLive }"></span>
-                    {{ modeLabel }}
-                </span>
-                <span class="text-[11px] text-white/45 tabular-nums">{{ stamp }}</span>
+                <!-- Top HUD: one compact line so the sky stays free for the sun -->
+                <div class="pointer-events-none absolute inset-x-0 top-0 flex items-center gap-2 p-3.5">
+                    <span
+                        class="inline-flex items-center gap-1.5 rounded-full border border-[#8ec5ff]/30 bg-zinc-950/60 px-2 py-0.5 font-mono text-[9px] tracking-[0.18em] text-[#8ec5ff] uppercase backdrop-blur-sm"
+                    >
+                        <span class="h-1 w-1 rounded-full bg-[#8ec5ff]" :class="{ 'animate-pulse': mode === 'now' && isLive }"></span>
+                        {{ modeLabel }}
+                    </span>
+                    <span class="text-[11px] text-white/45 tabular-nums">{{ stamp }}</span>
+                </div>
             </div>
 
-            <!-- Big live power number -->
-            <div class="pointer-events-none absolute bottom-3 left-3.5">
-                <p class="font-mono text-[9px] tracking-[0.22em] text-white/40 uppercase">
-                    {{ isEn ? 'Digital twin · output' : 'Digitální dvojče · výkon' }}
-                </p>
-                <p class="mt-1.5 text-[1.85rem] leading-none font-medium tracking-[-0.04em] text-white tabular-nums sm:text-[2rem]">
-                    {{ num(out.totalKw, out.totalKw < 10 ? 2 : 1, locale) }}<span class="ml-1 text-sm tracking-normal text-white/45">kW</span>
-                </p>
-                <p class="mt-1 text-[11px] text-white/45">
-                    <span class="text-[#8ec5ff]">{{ num(out.windKw, 2, locale) }}</span> {{ isEn ? 'wind' : 'vítr' }} ·
-                    <span class="text-amber-300/90">{{ num(out.solarKw, 2, locale) }}</span> {{ isEn ? 'sun' : 'slunce' }}
-                </p>
-            </div>
-            <div class="pointer-events-none absolute right-3.5 bottom-3 text-right">
-                <p class="text-[13px] font-medium text-white">{{ tr(variant.title, locale) }}</p>
-                <p class="text-[11px] text-white/40">
-                    <span class="hidden sm:inline">{{ isEn ? 'hub' : 'osa' }} {{ num(variant.hubHeightM, 1, locale) }} m · </span>{{ out.storm ? (isEn ? 'storm stow' : 'bouřková poloha') : nightOrTrack }}
-                </p>
+            <!-- Live power & configuration readout: sits cleanly below 3D compass on mobile, overlays bottom corners on sm+ -->
+            <div class="pointer-events-none flex items-end justify-between gap-2 px-3.5 pt-0.5 pb-3 sm:absolute sm:inset-x-3.5 sm:bottom-3 sm:p-0">
+                <div>
+                    <p class="font-mono text-[9px] tracking-[0.22em] text-white/40 uppercase">
+                        {{ isEn ? 'Digital twin · output' : 'Digitální dvojče · výkon' }}
+                    </p>
+                    <p class="mt-1 text-[1.75rem] leading-none font-medium tracking-[-0.04em] text-white tabular-nums sm:mt-1.5 sm:text-[2rem]">
+                        {{ num(out.totalKw, out.totalKw < 10 ? 2 : 1, locale) }}<span class="ml-1 text-sm tracking-normal text-white/45">kW</span>
+                    </p>
+                    <p class="mt-1 text-[11px] text-white/45">
+                        <span class="text-[#8ec5ff]">{{ num(out.windKw, 2, locale) }}</span> {{ isEn ? 'wind' : 'vítr' }} ·
+                        <span class="text-amber-300/90">{{ num(out.solarKw, 2, locale) }}</span> {{ isEn ? 'sun' : 'slunce' }}
+                    </p>
+                </div>
+                <div class="text-right">
+                    <p class="text-[13px] font-medium text-white">{{ tr(variant.title, locale) }}</p>
+                    <p class="text-[11px] text-white/40">
+                        <span class="hidden sm:inline">{{ isEn ? 'hub' : 'osa' }} {{ num(variant.hubHeightM, 1, locale) }} m · </span>{{ out.storm ? (isEn ? 'storm stow' : 'bouřková poloha') : nightOrTrack }}
+                    </p>
+                </div>
             </div>
         </div>
 

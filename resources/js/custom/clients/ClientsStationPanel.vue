@@ -14,12 +14,10 @@ import {
     millions,
     num,
     shortDate,
+    STATION_ENTRIES,
     SUBSIDY_PCT,
     TARIFF_CZK_PER_KWH,
-    tr
-    
-    
-    
+    tr,
 } from './stationApp';
 import type { StationMediaItem, StationVariantOption, VariantQty } from './stationApp';
 import { useTween } from './useTween';
@@ -45,6 +43,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
     close: [];
+    selectStation: [id: string];
     'update:qty': [qty: VariantQty];
     print: [kind: 'offer' | 'study'];
     science: [];
@@ -350,11 +349,47 @@ function stepMedia(delta: number) {
 
 <template>
     <aside class="flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-zinc-950/85 shadow-2xl backdrop-blur-2xl">
-        <!-- Mobile sheet grab handle -->
+        <!-- Mobile sheet grab handle + quick station switcher -->
         <div class="mx-auto mt-2 h-1 w-9 shrink-0 rounded-full bg-white/15 lg:hidden" aria-hidden="true"></div>
+        <div class="flex items-center gap-1.5 border-b border-white/[0.07] px-3 pt-2 pb-2.5 lg:hidden">
+            <div class="grid min-w-0 flex-1 grid-cols-3 gap-1">
+                <button
+                    v-for="st in STATION_ENTRIES"
+                    :key="st.id"
+                    type="button"
+                    class="flex min-w-0 items-center justify-center gap-1.5 rounded-lg border px-2 py-1.5 text-[11px] font-medium transition-colors"
+                    :class="
+                        st.id === id.stationId
+                            ? 'border-[#8ec5ff]/40 bg-[#4d8dff]/15 text-white'
+                            : 'border-white/10 bg-white/[0.03] text-white/55 hover:text-white/85'
+                    "
+                    @click="emit('selectStation', st.id)"
+                >
+                    <span
+                        class="h-1.5 w-1.5 shrink-0 rounded-full"
+                        :class="
+                            st.status === 'live'
+                                ? 'bg-[#8ec5ff] shadow-[0_0_6px_rgba(142,197,255,0.9)]'
+                                : st.id === id.stationId
+                                  ? 'bg-white/75'
+                                  : 'bg-white/30'
+                        "
+                    ></span>
+                    <span class="truncate">{{ st.id === 'IPRAGU1761' ? (isEn ? 'Prague' : 'Praha') : st.id === 'D3882832837' ? 'M-Kovo' : tr(st.title, locale) }}</span>
+                </button>
+            </div>
+            <button
+                type="button"
+                class="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.03] text-white/60 transition-colors hover:bg-white/[0.08] hover:text-white"
+                :aria-label="isEn ? 'Close detail' : 'Zavřít detail'"
+                @click="emit('close')"
+            >
+                <X class="h-3.5 w-3.5" />
+            </button>
+        </div>
 
         <!-- Header -->
-        <header class="flex items-start justify-between gap-3 px-4 pt-2.5 pb-3.5 sm:gap-4 sm:px-6 sm:pt-6 sm:pb-5">
+        <header class="flex items-start justify-between gap-3 px-4 pt-2.5 pb-3 sm:gap-4 sm:px-6 sm:pt-6 sm:pb-5">
             <div class="min-w-0">
                 <p class="flex items-center gap-2.5 text-[10px] font-medium tracking-[0.2em] uppercase sm:gap-3 sm:text-[11px]">
                     <span
@@ -374,14 +409,14 @@ function stepMedia(delta: number) {
                     <span class="h-px w-5 bg-white/20 sm:w-6"></span>
                     <span class="text-white/45 tabular-nums">{{ id.stationId }}</span>
                 </p>
-                <h2 class="mt-1.5 text-xl leading-tight font-medium tracking-[-0.03em] text-white sm:mt-3 sm:text-2xl">{{ title }}</h2>
+                <h2 class="mt-1 text-xl leading-tight font-medium tracking-[-0.03em] text-white sm:mt-3 sm:text-2xl">{{ title }}</h2>
                 <p class="mt-0.5 truncate text-xs text-white/45 sm:mt-1 sm:text-sm">
                     {{ city }} · {{ id.elevationM }} {{ isEn ? 'm ASL' : 'm n. m.' }} · {{ statusNote }}
                 </p>
             </div>
             <button
                 type="button"
-                class="-mt-0.5 -mr-1.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-white/50 transition-colors hover:bg-white/[0.06] hover:text-white sm:-mt-1 sm:-mr-2 sm:h-9 sm:w-9"
+                class="-mt-0.5 -mr-1.5 hidden h-8 w-8 shrink-0 items-center justify-center rounded-full text-white/50 transition-colors hover:bg-white/[0.06] hover:text-white sm:-mt-1 sm:-mr-2 sm:h-9 sm:w-9 lg:flex"
                 :aria-label="isEn ? 'Close detail' : 'Zavřít detail'"
                 @click="emit('close')"
             >
