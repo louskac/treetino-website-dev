@@ -518,14 +518,25 @@ function azimuthName(az: number): string {
 const trackingFacts = computed(() => {
     const s = props.sim.system;
     const leaves = s.solarLeafCount * props.sim.quantity;
+    const isV2 = s.id === 'strom-v2';
 
     return [
         {
-            k: isEn.value ? '2-axis' : '2 osy',
-            title: isEn.value ? 'Tracking per branch' : 'Natáčení každé větve',
-            body: isEn.value
-                ? `Every branch follows the sun on two axes${leaves ? ` · ${f(leaves)} leaves in this configuration` : ''}.`
-                : `Každá větev sleduje slunce ve dvou osách${leaves ? ` · ${f(leaves)} listů v této konfiguraci` : ''}.`,
+            k: isV2 ? (isEn.value ? 'Whole tree' : 'Celý strom') : isEn.value ? '2-axis' : '2 osy',
+            title: isV2
+                ? isEn.value
+                    ? 'Whole-tree sun tracking (Tree V2)'
+                    : 'Natáčení celé konstrukce stromu (Strom V2)'
+                : isEn.value
+                  ? 'Tracking per branch (Tree V1)'
+                  : 'Natáčení každé větve (Strom V1)',
+            body: isV2
+                ? isEn.value
+                    ? `In Tree V2 the entire tree construction rotates and tilts to follow the sun across the sky${leaves ? ` · ${f(leaves)} leaves in this configuration` : ''}.`
+                    : `U Stromu V2 sleduje pohyb slunce po obloze celá konstrukce stromu${leaves ? ` · ${f(leaves)} listů v této konfiguraci` : ''}.`
+                : isEn.value
+                  ? `Every branch follows the sun on two axes${leaves ? ` · ${f(leaves)} leaves in this configuration` : ''}.`
+                  : `Každá větev sleduje slunce ve dvou osách${leaves ? ` · ${f(leaves)} listů v této konfiguraci` : ''}.`,
         },
         {
             k: '180°',

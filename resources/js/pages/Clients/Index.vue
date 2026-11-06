@@ -659,6 +659,7 @@ onBeforeUnmount(() => {
                     :lat="activeEntry.bundle.identity.lat"
                     :lon="activeEntry.bundle.identity.lon"
                     :place-label="tr(activeEntry.city, locale)"
+                    :variant="activeVariant.systemId === 'strom-v1' ? 'v1' : 'v2'"
                 />
             </template>
         </ClientsScience>

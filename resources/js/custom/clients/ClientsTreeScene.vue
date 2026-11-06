@@ -107,6 +107,7 @@ const sceneDisposables: { dispose: () => void }[] = [];
 let treeDisposables: { dispose: () => void }[] = [];
 let podMeshes: THREE.LineSegments[] = [];
 let clusters: { pivot: THREE.Object3D; axis: THREE.Vector3; axisHoriz: THREE.Vector3; perp: THREE.Vector3 }[] = [];
+let v2Turntable: THREE.Group | null = null;
 
 const center = new THREE.Vector3(0, TREE_HEIGHT * 0.48, 0);
 let raf = 0;
@@ -155,6 +156,7 @@ function buildTree() {
         treeDisposables = [];
         podMeshes = [];
         clusters = [];
+        v2Turntable = null;
     }
 
     const model: TreeModel = props.variant === 'v1' ? treetinoV1() : treetinoV2({ withTurbines: true });
@@ -178,6 +180,41 @@ function buildTree() {
     scene.add(treeRoot);
 
     const parts = model.parts ?? [];
+
+    if (props.variant === 'v2' && !parts.length) {
+        // V2 tracks the movement of the sun with the entire tree construction:
+        // - vertices 0..48: stationary ground foundation ring
+        // - vertices 48..end + pods: entire V2 tree construction rotating together on v2Turntable
+        const RING_VERTS = 48;
+
+        const baseGeo = new THREE.BufferGeometry();
+        baseGeo.setAttribute('position', new THREE.Float32BufferAttribute(pos.slice(0, RING_VERTS * 3), 3));
+        baseGeo.setAttribute('color', new THREE.Float32BufferAttribute(col.slice(0, RING_VERTS * 3), 3));
+        treeDisposables.push(baseGeo);
+        treeRoot.add(new THREE.LineSegments(baseGeo, structMat));
+
+        v2Turntable = new THREE.Group();
+        treeRoot.add(v2Turntable);
+
+        const constructGeo = new THREE.BufferGeometry();
+        constructGeo.setAttribute('position', new THREE.Float32BufferAttribute(pos.slice(RING_VERTS * 3), 3));
+        constructGeo.setAttribute('color', new THREE.Float32BufferAttribute(col.slice(RING_VERTS * 3), 3));
+        treeDisposables.push(constructGeo);
+        v2Turntable.add(new THREE.LineSegments(constructGeo, leafMat));
+
+        for (const pod of model.pods) {
+            const pg = podLines(pod.height).geometry();
+            treeDisposables.push(pg);
+            const m = new THREE.LineSegments(pg, podMat);
+            m.position.set(...pod.base);
+            m.rotation.y = Math.random() * Math.PI;
+            v2Turntable.add(m);
+            podMeshes.push(m);
+        }
+
+        return;
+    }
+
     const foliageStart = parts.length ? (model.foliageStart ?? model.body.vertexCount) : model.body.vertexCount;
 
     const sg = new THREE.BufferGeometry();
@@ -325,20 +362,29 @@ function frame(time: number) {
     const omega = (sm.rpm * 2 * Math.PI) / 60;
     podMeshes.forEach((m, i) => (m.rotation.y += omega * dt * (i % 2 ? 1 : -1)));
 
-    // 2 · sun + branch tracking
+    // 2 · sun + tracking (V1 tracks per branch cluster; V2 rotates the entire tree construction)
     const sunOn = Math.min(1, Math.max(0, (sm.sunEl + 2) / 8));
     dirFromAzEl(sm.sunAz, Math.max(-4, sm.sunEl), sunDir);
     const storm = sm.storm;
 
-    clusters.forEach((c, i) => {
-        const rollTrack = 0.72 * sunDir.dot(c.perp) * sunOn;
-        const pitchTrack = -0.28 * sunDir.dot(c.axisHoriz) * sunOn;
-        const flip = (rollTrack >= 0 ? 1 : -1) * Math.PI;
-        const roll = rollTrack + (flip - rollTrack) * storm + Math.sin(time * 0.0018 + i) * 0.015 * storm;
-        qRoll.setFromAxisAngle(c.axis, roll);
-        qPitch.setFromAxisAngle(c.perp, pitchTrack * (1 - storm));
-        c.pivot.quaternion.copy(qPitch).multiply(qRoll);
-    });
+    if (v2Turntable) {
+        // V2: the entire tree construction rotates around its vertical axis to face the sun (+Z is South = 180°).
+        // In storm/hail mode, it turns 180° away so the sloped back of the canopy shields the solar leaves.
+        const dAzDeg = ((180 - sm.sunAz + 540) % 360) - 180;
+        const sunYaw = THREE.MathUtils.clamp(dAzDeg * RAD, -1.65, 1.65) * (0.25 + 0.75 * sunOn);
+        const stormYaw = sunYaw + (sunYaw >= 0 ? -Math.PI : Math.PI);
+        v2Turntable.rotation.y = sunYaw + (stormYaw - sunYaw) * storm + Math.sin(time * 0.0018) * 0.015 * storm;
+    } else {
+        clusters.forEach((c, i) => {
+            const rollTrack = 0.72 * sunDir.dot(c.perp) * sunOn;
+            const pitchTrack = -0.28 * sunDir.dot(c.axisHoriz) * sunOn;
+            const flip = (rollTrack >= 0 ? 1 : -1) * Math.PI;
+            const roll = rollTrack + (flip - rollTrack) * storm + Math.sin(time * 0.0018 + i) * 0.015 * storm;
+            qRoll.setFromAxisAngle(c.axis, roll);
+            qPitch.setFromAxisAngle(c.perp, pitchTrack * (1 - storm));
+            c.pivot.quaternion.copy(qPitch).multiply(qRoll);
+        });
+    }
 
     sunPoint.position.copy(sunDir).multiplyScalar(SUN_R).add(center);
     sunMat.opacity = sunOn;

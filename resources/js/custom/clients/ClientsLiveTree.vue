@@ -267,6 +267,10 @@ const nightOrTrack = computed(() => {
         return isEn.value ? 'Night · leaves at rest' : 'Noc · listy v klidu';
     }
 
+    if (props.variant.systemId === 'strom-v2') {
+        return isEn.value ? 'Entire tree tracks the sun' : 'Celá konstrukce sleduje slunce';
+    }
+
     return isEn.value ? 'Leaves tracking the sun' : 'Listy sledují slunce';
 });
 
@@ -298,17 +302,35 @@ function step(ts: number) {
         replayT.value = 1;
         playing.value = false;
 
+        if (props.isLive) {
+            mode.value = 'now';
+        }
+
         return;
     }
 
     raf = requestAnimationFrame(step);
 }
 
+function firstSunriseT(): number {
+    const pts = replayPoints.value;
+
+    if (pts.length < 2) {
+        return 0;
+    }
+
+    const lat = props.bundle.identity.lat;
+    const lon = props.bundle.identity.lon;
+    const idx = pts.findIndex((p) => sunPosition(new Date(p.epoch * 1000), lat, lon).elevationDeg > 1);
+
+    return idx > 0 ? Math.max(0, (idx - 1) / (pts.length - 1)) : 0;
+}
+
 function play() {
     mode.value = 'replay';
 
-    if (replayT.value >= 0.999) {
-        replayT.value = 0;
+    if (replayT.value >= 0.999 || out.value.sun.elevationDeg <= 0) {
+        replayT.value = firstSunriseT();
     }
 
     playing.value = true;
@@ -347,10 +369,10 @@ watch(
 );
 
 onMounted(() => {
-    // Historic sites open on a replay of their most dramatic recorded day
-    if (!props.isLive && replayPoints.value.length > 1 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        replayT.value = 0.42;
-        setTimeout(() => props.active && play(), 900);
+    // Open with a daylight replay so the sun-tracking animation (V2 whole-tree / V1 branches) is immediately visible
+    if (replayPoints.value.length > 1 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        replayT.value = Math.min(0.45, firstSunriseT() + 0.04);
+        setTimeout(() => props.active && play(), 700);
     }
 });
 
