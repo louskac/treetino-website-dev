@@ -26,7 +26,7 @@
             "destination": "/video/$1"
         },
         {
-            "source": "/api/((?!checkout|contact).*)",
+            "source": "/api/((?!checkout|contact|pws).*)",
             "destination": "https://treetino-pricing.vercel.app/api/$1"
         },
         {

@@ -32,9 +32,9 @@
                             class="absolute inset-x-0 top-36 px-4 sm:px-0 sm:top-36 md:top-44 lg:top-48 xl:top-[23vh] max-w-4xl"
                             lead-class="text-2xl leading-[1.12] font-medium tracking-[-0.035em] sm:text-4xl md:text-5xl lg:text-[clamp(2.75rem,4.2vw,4rem)]"
                             :segments="[
-                                { text: 'We have' },
-                                { text: 'government connections,', tone: 'accent' },
-                                { text: 'licences and teams of technicians that can build these projects.' },
+                                { text: t('web3.drone.s1.seg1') },
+                                { text: t('web3.drone.s1.seg2'), tone: 'accent' },
+                                { text: t('web3.drone.s1.seg3') },
                             ]"
                             :progress="s.t1"
                             :out="s.t1out"
@@ -45,8 +45,8 @@
                             class="absolute inset-x-0 top-36 px-4 sm:px-0 sm:top-36 md:top-44 lg:top-48 xl:top-[23vh] max-w-4xl"
                             lead-class="text-2xl leading-[1.12] font-medium tracking-[-0.035em] sm:text-4xl md:text-5xl lg:text-[clamp(2.75rem,4.2vw,4rem)]"
                             :segments="[
-                                { text: 'With enough liquidity we can tokenize our trees, grid balancing batteries' },
-                                { text: 'or even these wind turbines.', tone: 'accent' },
+                                { text: t('web3.drone.s2.seg1') },
+                                { text: t('web3.drone.s2.seg2'), tone: 'accent' },
                             ]"
                             :progress="s.t2"
                             :out="s.t2out"
@@ -67,11 +67,11 @@
                                     <h3
                                         class="text-2xl font-medium tracking-tight text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)] sm:text-4xl lg:text-[3.25rem] lg:leading-[1.08]"
                                     >
-                                        Don't just watch us <span class="text-[#8ec5ff]">build it.</span>
+                                        {{ t('web3.drone.s3.h_part1') }} <span class="text-[#8ec5ff]">{{ t('web3.drone.s3.h_part2') }}</span>
                                     </h3>
 
                                     <p class="mt-1.5 text-xs font-light leading-relaxed text-white/75 sm:mt-4 sm:text-base">
-                                        Explore the live deployed dApp on Solana devnet or watch the full founder pitch video.
+                                        {{ t('web3.drone.s3.sub') }}
                                     </p>
 
                                     <!-- Action Buttons -->
@@ -82,7 +82,7 @@
                                             rel="noopener noreferrer"
                                             class="pointer-events-auto group inline-flex items-center gap-2 rounded-xl bg-t-blue px-4 py-2.5 text-xs font-semibold text-white shadow-[0_0_32px_rgba(77,141,255,0.45)] transition-all duration-300 hover:scale-[1.02] hover:bg-t-blue/90 hover:shadow-[0_0_48px_rgba(77,141,255,0.7)] sm:px-6 sm:py-3.5 sm:text-base"
                                         >
-                                            <span>Try Demo</span>
+                                            <span>{{ t('web3.drone.s3.cta_demo') }}</span>
                                             <ExternalLink class="h-3.5 w-3.5 sm:h-4 sm:w-4 text-white/90 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                                         </a>
 
@@ -92,7 +92,7 @@
                                             rel="noopener noreferrer"
                                             class="pointer-events-auto group inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/5 px-4 py-2.5 text-xs font-medium text-white backdrop-blur-md transition-all duration-300 hover:scale-[1.02] hover:border-white/40 hover:bg-white/10 sm:px-6 sm:py-3.5 sm:text-base"
                                         >
-                                            <span>Solana Contract</span>
+                                            <span>{{ t('web3.drone.s3.cta_contract') }}</span>
                                             <ExternalLink class="h-3.5 w-3.5 sm:h-4 sm:w-4 text-white/70 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                                         </a>
                                     </div>
@@ -127,7 +127,7 @@
                                             @click="unmuteVideo"
                                         >
                                             <VolumeX class="h-4 w-4 text-t-blue animate-pulse" />
-                                            <span>Click to Unmute</span>
+                                            <span>{{ t('web3.drone.s3.unmute') }}</span>
                                         </button>
                                     </div>
                                 </div>
@@ -145,9 +145,12 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ExternalLink, VolumeX } from 'lucide-vue-next';
 import { onMounted, onUnmounted, reactive, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import Web3ScrollHeading from './Web3ScrollHeading.vue';
 
 gsap.registerPlugin(ScrollTrigger);
+
+const { t } = useI18n();
 
 /** Same content width as the navbar and the rest of the site */
 const container =

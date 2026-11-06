@@ -15,6 +15,11 @@ import {
     trackEvent,
 } from './analytics';
 import i18nMessages from './i18n_messages.json';
+import {
+    detectGeoLocale,
+    detectInitialLocale,
+    type AppLocale,
+} from './lib/locale';
 
 const appName = 'Treetino';
 
@@ -53,6 +58,10 @@ const ZiggyConfig = {
             uri: 'pitch-fintech',
             methods: ['GET', 'HEAD'],
         },
+        'pitch.refract': {
+            uri: 'pitch-refract',
+            methods: ['GET', 'HEAD'],
+        },
         'collaboration.index': {
             uri: 'collaboration',
             methods: ['GET', 'HEAD'],
@@ -60,6 +69,7 @@ const ZiggyConfig = {
         'media.index': { uri: 'media', methods: ['GET', 'HEAD'] },
         'web3.index': { uri: 'web3', methods: ['GET', 'HEAD'] },
         'investors.index': { uri: 'investors', methods: ['GET', 'HEAD'] },
+        'clients.index': { uri: 'clients', methods: ['GET', 'HEAD'] },
         'contact.index': { uri: 'contact', methods: ['GET', 'HEAD'] },
         'contact.store': { uri: 'api/contact', methods: ['POST'] },
         'legal.tos': {
@@ -108,10 +118,12 @@ const staticRoutes: Record<string, string | ((param?: any) => string)> = {
     'pitch.index': '/pitch',
     'pitch.hackathon': '/pitch-hackathon',
     'pitch.fintech': '/pitch-fintech',
+    'pitch.refract': '/pitch-refract',
     'collaboration.index': '/collaboration',
     'media.index': '/media',
     'web3.index': '/web3',
     'investors.index': '/investors',
+    'clients.index': '/clients',
     'contact.index': '/contact',
     'contact.store': '/api/contact',
     'legal.tos': '/legal/terms-and-conditions',
@@ -204,6 +216,10 @@ function getComponentForPath(path: string): string {
         return 'PitchFintech/Index';
     }
 
+    if (p === '/pitch-refract' || p === '/refract-pitch') {
+        return 'PitchRefract/Index';
+    }
+
     if (
         p === '/pitch' ||
         p === '/pitchdeck' ||
@@ -263,19 +279,25 @@ function getComponentForPath(path: string): string {
         return 'Investors/Index';
     }
 
+    if (
+        p === '/clients' ||
+        p === '/client' ||
+        p === '/klienti' ||
+        p === '/telemetry' ||
+        p === '/stations'
+    ) {
+        return 'Clients/Index';
+    }
+
     return 'Home/Index';
 }
 
 function makePageObject(url: string) {
     const comp = getComponentForPath(url);
-    const savedLang =
-        typeof window !== 'undefined'
-            ? localStorage.getItem('app_locale')
-            : null;
-    const lang = savedLang || document.documentElement.lang || 'cs';
+    const lang = detectInitialLocale();
     const msgs =
         (i18nMessages as Record<string, any>)[lang] ||
-        (i18nMessages as Record<string, any>)['cs'];
+        (i18nMessages as Record<string, any>)['en'];
 
     return {
         component: comp,
@@ -394,11 +416,7 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
         const shared = computed(() => (props.initialPage.props as any)?.i18n);
 
-        const savedLang =
-            typeof window !== 'undefined'
-                ? localStorage.getItem('app_locale')
-                : null;
-        const activeLang = savedLang || shared.value?.locale || 'cs';
+        const activeLang = detectInitialLocale(shared.value?.locale);
 
         const i18n = createI18n({
             legacy: false,
@@ -411,6 +429,27 @@ createInertiaApp({
         });
 
         document.documentElement.lang = activeLang;
+
+        const applyDetectedLocale = (targetLocale: AppLocale) => {
+            if (i18n.global.locale.value === targetLocale) {
+                return;
+            }
+            const msgs =
+                (i18nMessages as Record<string, any>)[targetLocale] ||
+                (i18nMessages as Record<string, any>)['en'];
+            i18n.global.setLocaleMessage(targetLocale, msgs);
+            i18n.global.locale.value = targetLocale;
+            document.documentElement.lang = targetLocale;
+            if ((props.initialPage.props as any)?.i18n) {
+                (props.initialPage.props as any).i18n.locale = targetLocale;
+                (props.initialPage.props as any).i18n.messages = msgs;
+            }
+            window.dispatchEvent(
+                new CustomEvent('locale-changed', { detail: targetLocale }),
+            );
+        };
+
+        void detectGeoLocale(applyDetectedLocale);
 
         if (isStaticMode) {
             router.on('before', (event) => {

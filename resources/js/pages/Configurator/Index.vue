@@ -258,6 +258,7 @@ import { Check } from 'lucide-vue-next';
 import type { ComponentPublicInstance } from 'vue';
 import { ref, computed, onMounted, onUnmounted, nextTick, watch } from 'vue';
 import { route } from 'ziggy-js';
+import { trackEvent } from '@/analytics';
 import ConfiguratorAddonsStep from '@/custom/configurator/ConfiguratorAddonsStep.vue';
 import ConfiguratorBatteryStep from '@/custom/configurator/ConfiguratorBatteryStep.vue';
 import ConfiguratorCheckout from '@/custom/configurator/ConfiguratorCheckout.vue';
@@ -305,6 +306,12 @@ const selectedPaymentMode = ref('cash');
 
 function modalCheckoutOpen(paymentMode: string) {
     selectedPaymentMode.value = paymentMode;
+    trackEvent('begin_checkout', {
+        item_id: selectedProductId.value,
+        payment_mode: paymentMode,
+        value: basePrice.value,
+        currency: 'CZK',
+    });
     modalCheckout.value = true;
 }
 
@@ -313,6 +320,11 @@ function modalCheckoutClose() {
 }
 
 function modalInfoOpen() {
+    trackEvent('configurator_inquiry_open', {
+        item_id: selectedProductId.value,
+        value: basePrice.value,
+        currency: 'CZK',
+    });
     modalInfo.value = true;
 }
 
@@ -554,6 +566,10 @@ async function selectProduct(productId: string) {
     }
 
     selectedProductId.value = productId as ProductIdType;
+    trackEvent('select_item', {
+        item_id: productId,
+        item_category: 'configurator',
+    });
     clearForcedFocus();
     sectionElements.clear();
     currentSectionId.value = getFirstSectionId();

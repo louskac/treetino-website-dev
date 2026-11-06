@@ -1167,22 +1167,68 @@ const I18nContext = createContext<I18nContextType>({
   t: (key: string) => key,
 });
 
-export const I18nProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [locale, setLocaleState] = useState<Locale>(() => {
-    try {
-      const saved = localStorage.getItem('treetino_locale') as Locale;
-      if (saved === 'cs' || saved === 'en') return saved;
-      const browserLang = navigator.language.slice(0, 2);
-      return browserLang === 'cs' ? 'cs' : 'en';
-    } catch {
-      return 'cs';
+const CZECH_SLOVAK_COUNTRIES = new Set(['CZ', 'SK']);
+const CZECH_SLOVAK_TIMEZONES = new Set(['Europe/Prague', 'Europe/Bratislava']);
+const CZECH_SLOVAK_LANG_PREFIXES = ['cs', 'sk', 'cz'];
+
+function hasExplicitPreference(): Locale | null {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const queryLang = (params.get('lang') || params.get('locale'))?.toLowerCase();
+    if (queryLang === 'cz' || queryLang === 'cs') return 'cs';
+    if (queryLang === 'en') return 'en';
+
+    const saved = (localStorage.getItem('treetino_locale') || localStorage.getItem('app_locale')) as Locale | null;
+    if (saved === 'cs' || saved === 'en') return saved;
+  } catch {
+    // ignore
+  }
+  return null;
+}
+
+function detectInitialLocale(): Locale {
+  const explicit = hasExplicitPreference();
+  if (explicit) return explicit;
+
+  try {
+    const host = window.location.hostname.toLowerCase();
+    if (host.endsWith('.cz') || host.endsWith('.sk')) return 'cs';
+
+    const navLanguages = navigator.languages?.length
+      ? navigator.languages
+      : navigator.language
+        ? [navigator.language]
+        : [];
+
+    for (const rawLang of navLanguages) {
+      const code = rawLang.toLowerCase().trim();
+      if (CZECH_SLOVAK_LANG_PREFIXES.some((p) => code === p || code.startsWith(`${p}-`) || code.startsWith(`${p}_`))) {
+        return 'cs';
+      }
+      if (code === 'en' || code.startsWith('en-') || code.startsWith('en_')) {
+        return 'en';
+      }
     }
-  });
+
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    if (tz && CZECH_SLOVAK_TIMEZONES.has(tz)) return 'cs';
+  } catch {
+    // ignore
+  }
+
+  return 'en';
+}
+
+export const I18nProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [locale, setLocaleState] = useState<Locale>(detectInitialLocale);
 
   const setLocale = useCallback((newLocale: Locale) => {
     setLocaleState(newLocale);
     try {
       localStorage.setItem('treetino_locale', newLocale);
+      localStorage.setItem('app_locale', newLocale);
+      document.cookie = `app_locale=${newLocale};path=/;max-age=31536000;SameSite=Lax`;
+      document.cookie = `locale=${newLocale};path=/;max-age=31536000;SameSite=Lax`;
       document.documentElement.lang = newLocale;
     } catch {
       // ignore
@@ -1196,6 +1242,53 @@ export const I18nProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       // ignore
     }
   }, [locale]);
+
+  useEffect(() => {
+    if (hasExplicitPreference() !== null) return;
+
+    let cancelled = false;
+    try {
+      const cachedCountry = sessionStorage.getItem('treetino_geo_country');
+      if (cachedCountry) {
+        const geoLocale: Locale = CZECH_SLOVAK_COUNTRIES.has(cachedCountry.toUpperCase()) ? 'cs' : 'en';
+        setLocaleState(geoLocale);
+        return;
+      }
+    } catch {
+      // ignore
+    }
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 2500);
+
+    fetch('https://get.geojs.io/v1/ip/country.json', {
+      signal: controller.signal,
+      headers: { Accept: 'application/json' },
+    })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        clearTimeout(timeout);
+        if (cancelled || !data || typeof data.country !== 'string') return;
+        const country = data.country.toUpperCase();
+        try {
+          sessionStorage.setItem('treetino_geo_country', country);
+        } catch {
+          // ignore
+        }
+        if (hasExplicitPreference() === null) {
+          setLocaleState(CZECH_SLOVAK_COUNTRIES.has(country) ? 'cs' : 'en');
+        }
+      })
+      .catch(() => {
+        clearTimeout(timeout);
+      });
+
+    return () => {
+      cancelled = true;
+      clearTimeout(timeout);
+      controller.abort();
+    };
+  }, []);
 
   const t = useCallback((key: string, params?: Record<string, string | number>): string => {
     const keys = key.split('.');

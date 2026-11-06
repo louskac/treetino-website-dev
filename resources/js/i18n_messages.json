@@ -489,7 +489,7 @@
             "im_tag": "Investiční Diligence & Kapitál",
             "im_title": "Investiční Memorandum 2026",
             "im_desc": "Kompletní institucionální memorandum projektu Treetino: technické specifikace všech modelů, výrobní kapacity, ověřená jednotková ekonomika s marží 40,4 % a katalog 10 ověřovacích dokumentů v Data Roomu.",
-            "im_download_btn": "Stáhnout Memorandum (PDF • 11 MB)",
+            "im_download_btn": "Stáhnout Memorandum (PDF)",
             "im_badge_pages": "16 Stran • Oficiální Edice",
             "im_badge_confidential": "Institucionální edice",
             "im_stat1_val": "€705 000",
@@ -508,7 +508,7 @@
             "im_feature5": "Index 10 primárních auditů a smluv přístupných v Data Roomu pod NDA",
             "im_preview_caption": "Oficiální investorské vydání • Formát A4 • 11,3 MB PDF",
             "im_nda_note": "Plné znění dotačních rozhodnutí, smluv o dílo, technické zadávací dokumentace a bankovních modelů je k dispozici v našem Data Roomu po podpisu dohody o mlčenlivosti (NDA).",
-            "im_nda_btn": "Požádat o přístup do Data Roomu",
+            "im_nda_btn": "Přístup do Data Roomu",
             "direct_contact_tag": "Přímý tiskový kontakt",
             "press_tag": "Tisk & Zprávy",
             "press_title": "Dotazy médií & Kontakt",
@@ -1183,6 +1183,522 @@
             "product": "Produkt",
             "configuration": "Konfigurace",
             "no_configuration": "Žádná konfigurace"
+        },
+        "investors": {
+            "meta": {
+                "title": "Pro investory | Treetino",
+                "description": "Investiční přehled Treetino: 49,8 kW hybridní solárně-větrné stromy s dvouosým sledováním slunce a bouřkovou ochranou, energetické jádro Victron, baterie LiFePO4, platební brána pro EV nabíjení a řízení TreeApp."
+            },
+            "rail": {
+                "aria": "Kapitoly",
+                "c01": "Strom",
+                "c02": "Systém",
+                "c03": "Produkty",
+                "c04": "Platební brána",
+                "c05": "Trakce",
+                "c06": "Data room"
+            },
+            "hero": {
+                "mark": "Pro investory",
+                "b1": {
+                    "line1": "49,8 kW slunce a větru",
+                    "line2": "na jediném m²."
+                },
+                "cta": {
+                    "pitch": "Pitch deck",
+                    "databook": "Technický databook"
+                },
+                "b2": {
+                    "line1": "Patentováno v Evropě.",
+                    "line2": "Vyrobeno v Česku."
+                },
+                "scroll": "Posunout"
+            },
+            "c01": {
+                "label": "Strom",
+                "callout": {
+                    "wind": "Větrné turbíny",
+                    "solar": "Solární listy"
+                },
+                "b0": {
+                    "line1": "Vítr nahoře.",
+                    "line2": "Slunce dole.",
+                    "sub": "Turbíny zachytávají silnější vítr ve výšce. Solární listy se rozprostírají pod nimi.",
+                    "s0": {
+                        "val": "36 kW",
+                        "label": "Vítr"
+                    },
+                    "s1": {
+                        "val": "13,8 kWp",
+                        "label": "Slunce"
+                    },
+                    "s2": {
+                        "val": "1 m²",
+                        "label": "Základna"
+                    }
+                },
+                "b1": {
+                    "line1": "Každá větev",
+                    "line2": "sleduje slunce.",
+                    "sub": "AI natáčí každou větev ve dvou osách po celý den.",
+                    "s0": {
+                        "val": "+29 %",
+                        "label": "Výnos ze sledování"
+                    },
+                    "s1": {
+                        "val": "2 osy",
+                        "label": "Servo pohon"
+                    },
+                    "s2": {
+                        "val": "Patent",
+                        "label": "EP 4 664 750"
+                    }
+                },
+                "b2": {
+                    "line1": "Kroupy či bouře?",
+                    "line2": "Listy se otočí o 180°.",
+                    "sub": "Každá větev se přetočí vzhůru nohama, aby odolná záda listů chránila solární články.",
+                    "s0": {
+                        "val": "180°",
+                        "label": "Štít proti kroupám"
+                    },
+                    "s1": {
+                        "val": "144 km/h",
+                        "label": "Odolnost větru"
+                    },
+                    "s2": {
+                        "val": "<35 dB",
+                        "label": "Hlučnost turbín"
+                    }
+                }
+            },
+            "c02": {
+                "label": "Systém",
+                "callout": {
+                    "solar_wind": "Slunce + vítr",
+                    "core": "Jádro a LiFePO4",
+                    "ev": "EV nabíjení",
+                    "bldgValue": "Lokálně",
+                    "bldgTitle": "Spotřeba budovy",
+                    "gridValue": "Přebytky",
+                    "gridTitle": "Prodej do sítě",
+                    "brainTitle": "Řízení zátěže a slunce"
+                },
+                "b0": {
+                    "line1": "Slunce a vítr.",
+                    "line2": "Jedno jádro.",
+                    "sub": "Oba zdroje napájejí společnou DC sběrnici s elektronikou Victron.",
+                    "s0": {
+                        "val": "49,8 kW",
+                        "label": "Špičkový výkon"
+                    },
+                    "s1": {
+                        "val": "1",
+                        "label": "DC sběrnice"
+                    },
+                    "s2": {
+                        "val": "Victron",
+                        "label": "Výkonová elektronika"
+                    }
+                },
+                "b1": {
+                    "line1": "Uložit, spotřebovat",
+                    "line2": "nebo prodat.",
+                    "sub": "Nabíjejte baterii a elektromobily, napájejte areál a přebytky prodávejte.",
+                    "s0": {
+                        "val": "100 kWh",
+                        "label": "Volitelná LiFePO4"
+                    },
+                    "s1": {
+                        "val": "22 kW",
+                        "label": "EV hub"
+                    },
+                    "s2": {
+                        "val": "15 min",
+                        "label": "Vykrývání špiček"
+                    }
+                },
+                "b2": {
+                    "line1": "Jedna aplikace",
+                    "line2": "řídí vše.",
+                    "sub": "TreeApp sleduje slunce, chrání strom při bouři a vyvažuje nabíjení v reálném čase.",
+                    "s0": {
+                        "val": "AI",
+                        "label": "Optimalizace výkonu"
+                    },
+                    "s1": {
+                        "val": "Živě",
+                        "label": "Telemetrie"
+                    },
+                    "s2": {
+                        "val": "Vzdálená",
+                        "label": "Diagnostika"
+                    }
+                }
+            },
+            "c03": {
+                "label": "Produkty",
+                "b0": {
+                    "line1": "Treetino V1.",
+                    "line2": "Vlajková loď.",
+                    "sub": "11,5m hybridní elektrárna pro průmyslové parky, logistická centra a náměstí.",
+                    "s0": {
+                        "val": "49,8 kW",
+                        "label": "Špičkový výkon"
+                    },
+                    "s1": {
+                        "val": "22 kW",
+                        "label": "EV hub"
+                    },
+                    "s2": {
+                        "val": "3 měsíce",
+                        "label": "Dodání na klíč"
+                    }
+                },
+                "b1": {
+                    "line1": "Treetino V2.",
+                    "line2": "Kompaktní verze.",
+                    "sub": "Výška 5 m pro vily, resorty a firemní sídla. Volitelně s turbínami.",
+                    "s0": {
+                        "val": "6–12 kW",
+                        "label": "Výkon"
+                    },
+                    "s1": {
+                        "val": "5,61 kWp",
+                        "label": "Slunce"
+                    },
+                    "s2": {
+                        "val": "0,5 m²",
+                        "label": "Základna"
+                    }
+                },
+                "b2": {
+                    "line1": "Treetino Aero.",
+                    "line2": "Vítr na každou střechu.",
+                    "sub": "Bezpečná vertikální turbína pro střechy, atiky a průmyslové haly.",
+                    "s0": {
+                        "val": "1–3 kW",
+                        "label": "Tři velikosti"
+                    },
+                    "s1": {
+                        "val": "1,8 m/s",
+                        "label": "Náběhový vítr"
+                    },
+                    "s2": {
+                        "val": "<35 dB",
+                        "label": "Hlučnost"
+                    }
+                }
+            },
+            "c04": {
+                "label": "Platební brána",
+                "callout": {
+                    "tap": "Karta či Apple Pay",
+                    "settle": "Okamžitá výplata majiteli",
+                    "v2": "Solární disk + 6× turbína",
+                    "scaleVal": "Více stání",
+                    "scaleTitle": "Certifikovaný EU hardware"
+                },
+                "b0": {
+                    "line1": "Přiložte kartu.",
+                    "line2": "Nabíjejte vůz.",
+                    "sub": "Řidiči zaplatí běžnou kartou nebo Apple Pay přímo na stojanu — bez aplikace a registrace.",
+                    "s0": {
+                        "val": "CZK · EUR",
+                        "label": "Karta a Apple Pay"
+                    },
+                    "s1": {
+                        "val": "0",
+                        "label": "Nutných aplikací"
+                    },
+                    "s2": {
+                        "val": "22 kW",
+                        "label": "Na nabíječku"
+                    }
+                },
+                "b1": {
+                    "line1": "Majitel dostane platbu",
+                    "line2": "během vteřin.",
+                    "sub": "Ve spojení s 5m stromem Treetino V2 — každá kilowatthodina je změřena v zásuvce a ihned vyplacena majiteli.",
+                    "s0": {
+                        "val": "<2 s",
+                        "label": "Vypořádání"
+                    },
+                    "s1": {
+                        "val": "1:1",
+                        "label": "Účtováno po kWh"
+                    },
+                    "s2": {
+                        "val": "V1 & V2",
+                        "label": "Kompatibilní stromy"
+                    }
+                },
+                "b2": {
+                    "line1": "První v Evropě.",
+                    "line2": "Licencovaný partner.",
+                    "sub": "Vítězný prototyp z hackathonů, nyní ve vývoji hardwaru s licencovaným platebním partnerem.",
+                    "s0": {
+                        "val": "1. v EU",
+                        "label": "EV platební brána"
+                    },
+                    "s1": {
+                        "val": "2 ×",
+                        "label": "Ocenění z hackathonů"
+                    },
+                    "s2": {
+                        "val": "ČSOB",
+                        "label": "Start it akcelerátor"
+                    }
+                }
+            },
+            "c05": {
+                "label": "Trakce",
+                "photo0": {
+                    "p_cap": "Mašek & Lustyk",
+                    "s_cap": "List a rotor Aero",
+                    "s_place": "EP 4 664 750"
+                },
+                "photo1": {
+                    "p_cap": "Smart Energy Forum",
+                    "s_cap": "Areál MKovo",
+                    "s_place": "Dodání Q1"
+                },
+                "photo2": {
+                    "p_cap": "Pražský hrad · Top 5",
+                    "s_cap": "Strakova akademie",
+                    "s_place": "Premiér ČR"
+                },
+                "b0": {
+                    "line1": "Vlastní patenty.",
+                    "line2": "Zkušení tvůrci.",
+                    "sub": "Vyvinuto s FZU AV ČR a ČVUT zakladateli, kteří již postavili 8,6 MW bateriových úložišť.",
+                    "s0": {
+                        "val": "2 patenty",
+                        "label": "Ochrana EP a PCT"
+                    },
+                    "s1": {
+                        "val": "8,6 MW",
+                        "label": "Realizovaná BESS"
+                    },
+                    "s2": {
+                        "val": "€200k",
+                        "label": "Grant CzechInvest"
+                    }
+                },
+                "b1": {
+                    "line1": "€705k zasmluvněno.",
+                    "line2": "€3,4M v LOI.",
+                    "sub": "Tři stromy V1 zasmluvněné pro MKovo (dodání Q1) a dva stromy V2 ve výstavbě v Praze.",
+                    "s0": {
+                        "val": "3 × V1",
+                        "label": "Smlouva s MKovo"
+                    },
+                    "s1": {
+                        "val": "2 × V2",
+                        "label": "Výstavba v Praze"
+                    },
+                    "s2": {
+                        "val": "€10M",
+                        "label": "Dluhopisový rámec"
+                    }
+                },
+                "b2": {
+                    "line1": "Podpora doma.",
+                    "line2": "Prezentace ve světě.",
+                    "sub": "Představeno na Úřadu vlády ČR, na vládní misi v USA na SXSW a na Pražském hradě.",
+                    "s0": {
+                        "val": "Top 5",
+                        "label": "Pitch Pražský hrad"
+                    },
+                    "s1": {
+                        "val": "SXSW",
+                        "label": "Czech House Austin"
+                    },
+                    "s2": {
+                        "val": "ČSOB",
+                        "label": "Start it akcelerátor"
+                    }
+                }
+            },
+            "c06": {
+                "label": "Data room",
+                "line1": "Vše ostatní,",
+                "line2": "černé na bílém.",
+                "questions": "Máte dotazy?",
+                "doc0": {
+                    "title": "Pitch deck",
+                    "meta": "Společnost, trh, trakce, investiční kolo",
+                    "link0": "Interaktivní"
+                },
+                "doc1": {
+                    "title": "Technický databook",
+                    "meta": "Technické listy pro V1, V2, Aero a TreeApp"
+                },
+                "doc2": {
+                    "title": "Investiční memorandum",
+                    "meta": "Ekonomika provozu, obchodní pipeline, expanze"
+                },
+                "doc3": {
+                    "title": "Patenty",
+                    "meta": "EP 4 664 750 A1 · WO 2025/256678"
+                },
+                "doc4": {
+                    "title": "Měření větru v lokalitě",
+                    "meta": "Data z měřicího stožáru v areálu MKovo",
+                    "link0": "Zpráva",
+                    "link1": "Archiv"
+                }
+            }
+        },
+        "web3": {
+            "meta": {
+                "title": "Web3 & RWA Tokenizace na Solana | Treetino Colosseum",
+                "description": "Oficiální pitch pro Colosseum Hackathon: Tokenizace fyzické energetické infrastruktury na Solana. Od kinetických stromů Treetino V1 přes bateriová úložiště (35 % APY) až po průmyslové větrné parky."
+            },
+            "hero": {
+                "act1": {
+                    "seg1": "V srdci Evropy dnes čistá energetika otevírá",
+                    "seg2": "investiční příležitost této dekády."
+                },
+                "cta": {
+                    "demo": "Vyzkoušet demo",
+                    "pitch": "Přehrát pitch"
+                },
+                "act2": {
+                    "seg1": "A běžní investoři jako my?",
+                    "seg2": "Zůstávají zcela mimo hru."
+                },
+                "act3": {
+                    "seg1": "Rodí se nová,",
+                    "seg2": "zelenější ekonomika",
+                    "seg3": "budoucnosti.",
+                    "sub": "Nebuďte jen diváky — vlastněte její podíl přímo ze svého telefonu."
+                },
+                "act4": {
+                    "seg1": "Každá kWh neměnně na síti",
+                    "seg2": "Solana.",
+                    "sub": "Jediný blockchain dostatečně rychlý na to, aby držel krok s obchodováním s energií."
+                },
+                "act5": {
+                    "seg1": "Vše propojeno skrze",
+                    "seg2": "EURTree.",
+                    "sub": "Stablecoin, který pokládá základy zcela nové, zelenější ekonomiky budoucnosti."
+                }
+            },
+            "wallet": {
+                "title": "Treetino Peněženka",
+                "portfolio_value": "Hodnota portfolia",
+                "today": "dnes",
+                "action": {
+                    "invest": "Investovat",
+                    "send": "Poslat",
+                    "receive": "Přijmout"
+                },
+                "energy_assets": "Energetická aktiva",
+                "see_all": "Zobrazit vše",
+                "asset": {
+                    "wind_title": "Větrný park Kryry",
+                    "ev_sub": "10 stání · 350 kW",
+                    "tree_sub": "Slunce + vítr"
+                },
+                "sheet": {
+                    "invest_in": "Investice do",
+                    "apy": "Až 35 % APY · výplata v USDC",
+                    "confirmed": "✓  Potvrzeno za 0,4 s",
+                    "confirm": "Potvrdit na Solana"
+                }
+            },
+            "topology": {
+                "c11": {
+                    "tag": "Přípojka",
+                    "sub": "Rozvodna Přeštice",
+                    "foot": "Arbitráž:",
+                    "foot_m": "Arbitráž:"
+                },
+                "c12": {
+                    "tag": "Stabilizace sítě",
+                    "tag_m": "Stabilizace",
+                    "sub": "Rychlá primární odezva",
+                    "sub_m": "Primární odezva",
+                    "foot": "Regulace:"
+                },
+                "c13": {
+                    "tag": "Chlazení",
+                    "badge": "Pasivní",
+                    "sub": "Optimální kapalinové chlazení",
+                    "sub_m": "Kapalinové chlazení",
+                    "foot": "Úspora:",
+                    "val": "8–12 %"
+                },
+                "c21": {
+                    "tag": "Transformátor",
+                    "badge": "Rezervováno",
+                    "sub": "Smlouva #4122602318",
+                    "foot": "Přípojka:",
+                    "val": "22 kV vedení"
+                },
+                "c22": {
+                    "badge": "50 racků",
+                    "sub": "Špičkové vybíjení aktivní",
+                    "foot": "IRR projektu:",
+                    "val_m": "21,8 % p.a. • Ověřeno"
+                },
+                "c23": {
+                    "tag": "Požární systém",
+                    "tag_m": "Chlazení a bezpečí",
+                    "title": "Třída A1",
+                    "sub": "100 mm minerální bariéra",
+                    "foot": "Hašení:",
+                    "val": "Automatický aerosol",
+                    "foot_m": "Bariéra:",
+                    "val_m": "Třída A1 100mm"
+                },
+                "c32": {
+                    "tag": "Úložiště",
+                    "tag_m": "Baterie Samsung SDI",
+                    "sub_m": "Aktivní úložiště",
+                    "foot": "Záruka:",
+                    "val": "10+10 let EU"
+                },
+                "c33": {
+                    "tag": "SCADA brána",
+                    "tag_m": "Brána",
+                    "val": "Certifikace ČEPS"
+                }
+            },
+            "showcase": {
+                "s0": {
+                    "lead": "1) Vyberte si infrastrukturní projekt,",
+                    "sub": "do kterého chcete investovat — jednoduše jako na Kickstarteru."
+                },
+                "s1": {
+                    "lead": "2) Nastavte si investiční plán",
+                    "sub": "přesně podle svých představ."
+                },
+                "s2": {
+                    "lead": "3) Spravujte aktiva a čerpejte výnos",
+                    "sub": "zcela předvídatelným způsobem."
+                }
+            },
+            "drone": {
+                "s1": {
+                    "seg1": "Máme",
+                    "seg2": "vazby na státní správu,",
+                    "seg3": "licence i týmy techniků, kteří tyto projekty dokážou postavit."
+                },
+                "s2": {
+                    "seg1": "S dostatečnou likviditou dokážeme tokenizovat naše stromy, bateriová úložiště",
+                    "seg2": "nebo i tyto větrné elektrárny."
+                },
+                "s3": {
+                    "h_part1": "Nebuďte jen diváky,",
+                    "h_part2": "budujte s námi.",
+                    "sub": "Vyzkoušejte živou dApp na síti Solana devnet nebo si pusťte celé pitch video zakladatelů.",
+                    "cta_demo": "Vyzkoušet demo",
+                    "cta_contract": "Solana kontrakt",
+                    "unmute": "Zapnout zvuk"
+                }
+            }
         }
     },
     "en": {
@@ -1675,7 +2191,7 @@
             "im_tag": "Investment Diligence & Capital",
             "im_title": "Investment Memorandum 2026",
             "im_desc": "Comprehensive institutional memorandum for the Treetino project: technical specifications across all models, production capacity, validated unit economics with 40.4% gross margin, and catalog of 10 verification diligence documents in the Data Room.",
-            "im_download_btn": "Download Memorandum (PDF • 11 MB)",
+            "im_download_btn": "Download Memorandum (PDF)",
             "im_badge_pages": "16 Pages • Official Edition",
             "im_badge_confidential": "Institutional Grade",
             "im_stat1_val": "€705,000",
@@ -2369,6 +2885,522 @@
             "product": "Product",
             "configuration": "Configuration",
             "no_configuration": "No configuration"
+        },
+        "investors": {
+            "meta": {
+                "title": "Investors | Treetino",
+                "description": "Treetino investor brief: 49.8 kW hybrid solar-wind trees with dual-axis sun tracking and automatic storm stow, Victron power core, optional LiFePO4 storage, hardware EV charger payment gate and TreeApp control."
+            },
+            "rail": {
+                "aria": "Chapters",
+                "c01": "The tree",
+                "c02": "The system",
+                "c03": "The products",
+                "c04": "Payment gate",
+                "c05": "Traction",
+                "c06": "Data room"
+            },
+            "hero": {
+                "mark": "Investor brief",
+                "b1": {
+                    "line1": "49.8 kW of sun and wind",
+                    "line2": "on one square metre."
+                },
+                "cta": {
+                    "pitch": "Pitch deck",
+                    "databook": "Technical databook"
+                },
+                "b2": {
+                    "line1": "Patented in Europe.",
+                    "line2": "Built in the Czech Republic."
+                },
+                "scroll": "Scroll"
+            },
+            "c01": {
+                "label": "The tree",
+                "callout": {
+                    "wind": "Wind turbines",
+                    "solar": "Solar leaves"
+                },
+                "b0": {
+                    "line1": "Wind above.",
+                    "line2": "Sun below.",
+                    "sub": "Turbines catch the stronger wind up high. Solar leaves fan out underneath.",
+                    "s0": {
+                        "val": "36 kW",
+                        "label": "Wind"
+                    },
+                    "s1": {
+                        "val": "13.8 kWp",
+                        "label": "Solar"
+                    },
+                    "s2": {
+                        "val": "1 m²",
+                        "label": "Footprint"
+                    }
+                },
+                "b1": {
+                    "line1": "Every branch",
+                    "line2": "follows the sun.",
+                    "sub": "AI steers each branch on two axes, all day long.",
+                    "s0": {
+                        "val": "+29%",
+                        "label": "Yield from tracking"
+                    },
+                    "s1": {
+                        "val": "2-axis",
+                        "label": "Servo control"
+                    },
+                    "s2": {
+                        "val": "Patented",
+                        "label": "EP 4 664 750"
+                    }
+                },
+                "b2": {
+                    "line1": "Hail or storm?",
+                    "line2": "Leaves flip 180°.",
+                    "sub": "Every branch rotates upside-down so the armored leaf backs shield the solar panels.",
+                    "s0": {
+                        "val": "180°",
+                        "label": "Dorsal hail shield"
+                    },
+                    "s1": {
+                        "val": "144 km/h",
+                        "label": "Gale resistance"
+                    },
+                    "s2": {
+                        "val": "<35 dB",
+                        "label": "Turbine noise"
+                    }
+                }
+            },
+            "c02": {
+                "label": "The system",
+                "callout": {
+                    "solar_wind": "Solar + wind",
+                    "core": "Power core & LiFePO4",
+                    "ev": "EV hub",
+                    "bldgValue": "On-site",
+                    "bldgTitle": "Building load",
+                    "gridValue": "Surplus",
+                    "gridTitle": "Grid export",
+                    "brainTitle": "Live load & sun control"
+                },
+                "b0": {
+                    "line1": "Sun and wind.",
+                    "line2": "One power core.",
+                    "sub": "Both sources feed a single DC bus with Victron electronics.",
+                    "s0": {
+                        "val": "49.8 kW",
+                        "label": "Combined peak"
+                    },
+                    "s1": {
+                        "val": "1",
+                        "label": "DC bus"
+                    },
+                    "s2": {
+                        "val": "Victron",
+                        "label": "Power electronics"
+                    }
+                },
+                "b1": {
+                    "line1": "Stored, used",
+                    "line2": "or sold.",
+                    "sub": "Charge the battery and EVs, power the site, sell the surplus.",
+                    "s0": {
+                        "val": "100 kWh",
+                        "label": "Optional LiFePO4"
+                    },
+                    "s1": {
+                        "val": "22 kW",
+                        "label": "EV hub"
+                    },
+                    "s2": {
+                        "val": "15 min",
+                        "label": "Peak shaving"
+                    }
+                },
+                "b2": {
+                    "line1": "One app",
+                    "line2": "runs it all.",
+                    "sub": "TreeApp tracks the sun, stows for storms and balances EV load in real time.",
+                    "s0": {
+                        "val": "AI",
+                        "label": "Power optimisation"
+                    },
+                    "s1": {
+                        "val": "Live",
+                        "label": "Telemetry"
+                    },
+                    "s2": {
+                        "val": "Remote",
+                        "label": "Diagnostics"
+                    }
+                }
+            },
+            "c03": {
+                "label": "The products",
+                "b0": {
+                    "line1": "Treetino V1.",
+                    "line2": "The flagship.",
+                    "sub": "An 11.5 m hybrid power plant for business parks, logistics hubs and squares.",
+                    "s0": {
+                        "val": "49.8 kW",
+                        "label": "Peak output"
+                    },
+                    "s1": {
+                        "val": "22 kW",
+                        "label": "EV hub"
+                    },
+                    "s2": {
+                        "val": "3 months",
+                        "label": "Turnkey"
+                    }
+                },
+                "b1": {
+                    "line1": "Treetino V2.",
+                    "line2": "The compact one.",
+                    "sub": "5 m tall, for villas, resorts and company HQs. Turbines optional.",
+                    "s0": {
+                        "val": "6–12 kW",
+                        "label": "Output"
+                    },
+                    "s1": {
+                        "val": "5.61 kWp",
+                        "label": "Solar"
+                    },
+                    "s2": {
+                        "val": "0.5 m²",
+                        "label": "Footprint"
+                    }
+                },
+                "b2": {
+                    "line1": "Treetino Aero.",
+                    "line2": "Wind for any roof.",
+                    "sub": "A bird-safe vertical turbine for rooftops, parapets and halls.",
+                    "s0": {
+                        "val": "1–3 kW",
+                        "label": "Three sizes"
+                    },
+                    "s1": {
+                        "val": "1.8 m/s",
+                        "label": "Cut-in wind"
+                    },
+                    "s2": {
+                        "val": "<35 dB",
+                        "label": "Noise"
+                    }
+                }
+            },
+            "c04": {
+                "label": "Payment gate",
+                "callout": {
+                    "tap": "Tap card or Apple Pay",
+                    "settle": "Instant payout to owner",
+                    "v2": "Compact solar disc + 6× turbines",
+                    "scaleVal": "Multi-bay",
+                    "scaleTitle": "Licensed EU hardware"
+                },
+                "b0": {
+                    "line1": "Tap a card.",
+                    "line2": "Charge the car.",
+                    "sub": "Drivers pay with any bank card or Apple Pay right on the charger — no app, no account.",
+                    "s0": {
+                        "val": "CZK · EUR",
+                        "label": "Card & Apple Pay"
+                    },
+                    "s1": {
+                        "val": "0",
+                        "label": "Apps to install"
+                    },
+                    "s2": {
+                        "val": "22 kW",
+                        "label": "Per charger"
+                    }
+                },
+                "b1": {
+                    "line1": "The owner is paid",
+                    "line2": "in seconds.",
+                    "sub": "Paired here with the compact 5 m Treetino V2 — every kilowatt-hour is metered at the socket and settled straight to the owner.",
+                    "s0": {
+                        "val": "<2 s",
+                        "label": "Settlement"
+                    },
+                    "s1": {
+                        "val": "1:1",
+                        "label": "Metered to kWh"
+                    },
+                    "s2": {
+                        "val": "V1 & V2",
+                        "label": "Compatible trees"
+                    }
+                },
+                "b2": {
+                    "line1": "New to Europe.",
+                    "line2": "Licensed partner.",
+                    "sub": "Hackathon-winning prototype, now in hardware development with a licensed payment partner.",
+                    "s0": {
+                        "val": "1st in EU",
+                        "label": "EV payment gate"
+                    },
+                    "s1": {
+                        "val": "2 ×",
+                        "label": "Hackathon awards"
+                    },
+                    "s2": {
+                        "val": "ČSOB",
+                        "label": "Start it accelerator"
+                    }
+                }
+            },
+            "c05": {
+                "label": "Traction",
+                "photo0": {
+                    "p_cap": "Mašek & Lustyk",
+                    "s_cap": "Leaf & Aero rotor",
+                    "s_place": "EP 4 664 750"
+                },
+                "photo1": {
+                    "p_cap": "Smart Energy Forum",
+                    "s_cap": "MKovo site",
+                    "s_place": "Q1 delivery"
+                },
+                "photo2": {
+                    "p_cap": "Prague Castle · Top 5",
+                    "s_cap": "Straka Academy",
+                    "s_place": "Prime Minister"
+                },
+                "b0": {
+                    "line1": "Patented hardware.",
+                    "line2": "Proven builders.",
+                    "sub": "Developed with FZU and CTU Prague by founders who already delivered 8.6 MW of grid storage.",
+                    "s0": {
+                        "val": "2 Patents",
+                        "label": "EP & PCT protection"
+                    },
+                    "s1": {
+                        "val": "8.6 MW",
+                        "label": "Founder BESS track record"
+                    },
+                    "s2": {
+                        "val": "€200k",
+                        "label": "EU CzechInvest grant"
+                    }
+                },
+                "b1": {
+                    "line1": "€705k signed.",
+                    "line2": "€3.4M in LOIs.",
+                    "sub": "Three flagship V1 trees contracted for MKovo (Q1 delivery) and two V2 trees building in Prague.",
+                    "s0": {
+                        "val": "3 × V1",
+                        "label": "Signed MKovo contract"
+                    },
+                    "s1": {
+                        "val": "2 × V2",
+                        "label": "Prague site in build"
+                    },
+                    "s2": {
+                        "val": "€10M",
+                        "label": "Bond underwriting"
+                    }
+                },
+                "b2": {
+                    "line1": "Backed at home.",
+                    "line2": "Shown abroad.",
+                    "sub": "Presented at the Office of the Czech Government, on the U.S. mission at SXSW, and at Prague Castle.",
+                    "s0": {
+                        "val": "Top 5",
+                        "label": "Prague Castle pitch"
+                    },
+                    "s1": {
+                        "val": "SXSW",
+                        "label": "Czech House Austin"
+                    },
+                    "s2": {
+                        "val": "ČSOB",
+                        "label": "Start it accelerator"
+                    }
+                }
+            },
+            "c06": {
+                "label": "Data room",
+                "line1": "Everything else,",
+                "line2": "in writing.",
+                "questions": "Questions?",
+                "doc0": {
+                    "title": "Pitch deck",
+                    "meta": "Company, market, traction, round",
+                    "link0": "Interactive"
+                },
+                "doc1": {
+                    "title": "Technical databook",
+                    "meta": "Datasheets for V1, V2, Aero and TreeApp"
+                },
+                "doc2": {
+                    "title": "Investment memorandum",
+                    "meta": "Unit economics, pipeline, rollout"
+                },
+                "doc3": {
+                    "title": "Patents",
+                    "meta": "EP 4 664 750 A1 · WO 2025/256678"
+                },
+                "doc4": {
+                    "title": "Site wind data",
+                    "meta": "Measurements from the MKovo V1 site",
+                    "link0": "Report",
+                    "link1": "Archive"
+                }
+            }
+        },
+        "web3": {
+            "meta": {
+                "title": "Web3 & RWA Tokenization on Solana | Treetino Colosseum",
+                "description": "Official Colosseum Hackathon pitch: Tokenizing physical energy infrastructure on Solana. From kinetic Treetino V1 solar-wind trees and grid-scale battery storage (35% APY) to utility wind farms."
+            },
+            "hero": {
+                "act1": {
+                    "seg1": "In the heart of Europe, the energy transition is creating",
+                    "seg2": "an investment opportunity unlike any other."
+                },
+                "cta": {
+                    "demo": "Try Demo",
+                    "pitch": "Watch Pitch"
+                },
+                "act2": {
+                    "seg1": "And ordinary investors like us?",
+                    "seg2": "Left completely on the sidelines."
+                },
+                "act3": {
+                    "seg1": "A new,",
+                    "seg2": "greener economy",
+                    "seg3": "is being born.",
+                    "sub": "Don't just watch us build it — own a piece of it, straight from your phone."
+                },
+                "act4": {
+                    "seg1": "Every kWh, immutably on",
+                    "seg2": "Solana.",
+                    "sub": "The only blockchain fast enough to keep up with the speed at which energy is traded."
+                },
+                "act5": {
+                    "seg1": "All connected through",
+                    "seg2": "EURTree.",
+                    "sub": "The stablecoin laying the foundation for a completely new, greener economy of the future."
+                }
+            },
+            "wallet": {
+                "title": "Treetino Wallet",
+                "portfolio_value": "Portfolio value",
+                "today": "today",
+                "action": {
+                    "invest": "Invest",
+                    "send": "Send",
+                    "receive": "Receive"
+                },
+                "energy_assets": "Energy assets",
+                "see_all": "See all",
+                "asset": {
+                    "wind_title": "Kryry wind farm",
+                    "ev_sub": "10 bays · 350 kW",
+                    "tree_sub": "Sun + wind"
+                },
+                "sheet": {
+                    "invest_in": "Invest in",
+                    "apy": "Up to 35 % APY · paid in USDC",
+                    "confirmed": "✓  Confirmed in 0.4 s",
+                    "confirm": "Confirm on Solana"
+                }
+            },
+            "topology": {
+                "c11": {
+                    "tag": "Grid Interconnect",
+                    "sub": "Přeštice Substation",
+                    "foot": "Arbitrage Spread:",
+                    "foot_m": "Arbitrage:"
+                },
+                "c12": {
+                    "tag": "Grid Balancing",
+                    "tag_m": "Balancing",
+                    "sub": "Fast Primary Response",
+                    "sub_m": "Fast Primary",
+                    "foot": "Regulation:"
+                },
+                "c13": {
+                    "tag": "Thermal Buffer",
+                    "badge": "Passive",
+                    "sub": "Optimal Liquid Cooling",
+                    "sub_m": "Liquid Cooling Buffer",
+                    "foot": "Parasitic Savings:",
+                    "val": "8–12% Energy"
+                },
+                "c21": {
+                    "tag": "Substation Trafo",
+                    "badge": "Reserved",
+                    "sub": "Agreement #4122602318",
+                    "foot": "Interconnect:",
+                    "val": "22 kV Cabling"
+                },
+                "c22": {
+                    "badge": "50 Racks",
+                    "sub": "Peak Discharge Active",
+                    "foot": "Project IRR:",
+                    "val_m": "21.8% p.a. • SolScan Verified"
+                },
+                "c23": {
+                    "tag": "Safety System",
+                    "tag_m": "Cooling & Safety",
+                    "title": "Class A1",
+                    "sub": "100 mm Mineral Barrier",
+                    "foot": "Extinguish:",
+                    "val": "Automated Aerosol",
+                    "foot_m": "Barrier:",
+                    "val_m": "Class A1 100mm"
+                },
+                "c32": {
+                    "tag": "Battery Storage",
+                    "tag_m": "Samsung SDI Battery",
+                    "sub_m": "Active Storage",
+                    "foot": "Warranty:",
+                    "val": "10+10 Years EU"
+                },
+                "c33": {
+                    "tag": "SCADA Gateway",
+                    "tag_m": "Gateway",
+                    "val": "ČEPS Certified"
+                }
+            },
+            "showcase": {
+                "s0": {
+                    "lead": "1) Choose infrastructure project",
+                    "sub": "you want to invest in like on Kickstarter."
+                },
+                "s1": {
+                    "lead": "2) Prepare investment plans",
+                    "sub": "for yourself."
+                },
+                "s2": {
+                    "lead": "3) Manage assets and earn yield",
+                    "sub": "in predictable way."
+                }
+            },
+            "drone": {
+                "s1": {
+                    "seg1": "We have",
+                    "seg2": "government connections,",
+                    "seg3": "licences and teams of technicians that can build these projects."
+                },
+                "s2": {
+                    "seg1": "With enough liquidity we can tokenize our trees, grid balancing batteries",
+                    "seg2": "or even these wind turbines."
+                },
+                "s3": {
+                    "h_part1": "Don't just watch us",
+                    "h_part2": "build it.",
+                    "sub": "Explore the live deployed dApp on Solana devnet or watch the full founder pitch video.",
+                    "cta_demo": "Try Demo",
+                    "cta_contract": "Solana Contract",
+                    "unmute": "Click to Unmute"
+                }
+            }
         }
     }
 }

@@ -636,6 +636,48 @@ function foliageBoughV1(
     foliageTwigV1(b, tipStart, azimuth, length * 0.26, rise * 0.2, 2, 0.32 * leafScale, 0.138 * leafScale, pitch);
 }
 
+/**
+ * Stationary white flared rounded-square motor housing / pedestal (`mountPodPedestal`):
+ * Matches the white pedestal base shown in the assembled Savonius prototype photo (`media_1793264776124_be183502.jpg`)
+ * and `aero-updated-glass.jpg`, supporting the spinning Savonius rotor at its top ring.
+ */
+function mountPodPedestal(b: LineBuilder, pedBottom: V3, podHeight: number): V3 {
+    const [cx, y0, cz] = pedBottom;
+    const pedH = podHeight * 0.145;
+    const rMax = podHeight * 0.272;
+
+    const superellipseRing = (y: number, halfW: number, nPts = 16): V3[] => {
+        const ring: V3[] = [];
+        for (let i = 0; i < nPts; i++) {
+            const a = (i / nPts) * Math.PI * 2 + Math.PI * 0.25;
+            const ca = Math.cos(a);
+            const sa = Math.sin(a);
+            const exp = 0.58; // rounded square (superellipse n ≈ 3.4)
+            const x = cx + Math.sign(ca) * Math.pow(Math.abs(ca), exp) * halfW;
+            const z = cz + Math.sign(sa) * Math.pow(Math.abs(sa), exp) * halfW;
+            ring.push([x, y, z]);
+        }
+        return ring;
+    };
+
+    const ringBot = superellipseRing(y0, rMax * 0.44);
+    const ringMid = superellipseRing(y0 + pedH * 0.36, rMax * 0.46);
+    const ringShoulder = superellipseRing(y0 + pedH * 0.82, rMax * 0.36);
+
+    b.poly(ringBot, TREE_BOUGH_SUB, true);
+    b.poly(ringMid, TREE_BOUGH_MAIN, true);
+    b.poly(ringShoulder, TREE_BOUGH_MAIN, true);
+
+    for (let i = 0; i < 16; i += 2) {
+        b.poly([ringBot[i], ringMid[i], ringShoulder[i]], i % 4 === 0 ? TREE_BOUGH_MAIN : TREE_BOUGH_SUB);
+    }
+
+    const yCollar = y0 + pedH;
+    b.circle([cx, yCollar, cz], rMax * 0.35, 'y', TREE_BOUGH_MAIN, 16);
+
+    return [cx, yCollar, cz];
+}
+
 function mountPodArmV1(
     b: LineBuilder,
     pods: TreePod[],
@@ -659,7 +701,8 @@ function mountPodArmV1(
         TREE_BOUGH_SUB,
     );
 
-    pods.push({ base: armTip, height: podHeight });
+    const podBase = mountPodPedestal(b, armTip, podHeight);
+    pods.push({ base: podBase, height: podHeight });
 }
 
 /**
@@ -693,12 +736,12 @@ export function treetinoV1(): TreeModel {
         b.circle([0, y, 0], trunkR(y), 'y', TREE_BOUGH_SUB, 14);
     }
 
-    // 3. Three Primary Candelabra Boughs
+    // 3. Three Primary Candelabra Boughs (spaced symmetrically at 1/3 of a full circle = 120° apart)
     const deg = (d: number) => (d * Math.PI) / 180;
     const boughSpecs = [
-        { az: deg(174), reach: 1.56, hScale: 1.02, bracketAz: deg(174) },
-        { az: deg(-6), reach: 1.54, hScale: 0.98, bracketAz: deg(-6) },
-        { az: deg(-98), reach: 0.95, hScale: 0.9, bracketAz: deg(-32) },
+        { az: deg(150), reach: 1.56, hScale: 1.0, bracketAz: deg(150) },
+        { az: deg(30), reach: 1.56, hScale: 1.0, bracketAz: deg(30) },
+        { az: deg(-90), reach: 1.56, hScale: 1.0, bracketAz: deg(-90) },
     ];
 
     const boughSpines: V3[][] = [];
@@ -727,12 +770,12 @@ export function treetinoV1(): TreeModel {
     const spineAt = (spine: V3[], u: number): V3 =>
         spine[Math.min(spine.length - 1, Math.max(0, Math.round(u * (spine.length - 1))))];
 
-    // 4. 12 Cantilever Pod Brackets & Motor Cups (4 per bough)
+    // 4. 12 Cantilever Pod Brackets & Motor Cups (4 per bough, symmetric across all 3 boughs)
     boughSpecs.forEach((spec, bi) => {
         const spine = boughSpines[bi];
         const baz = spec.bracketAz;
-        const loArm = bi < 2 ? 0.56 : 0.34;
-        const upArm = bi < 2 ? 0.54 : 0.48;
+        const loArm = 0.56;
+        const upArm = 0.54;
         mountPodArmV1(b, pods, spineAt(spine, 0.42), baz, loArm, 0.96);
         mountPodArmV1(b, pods, spineAt(spine, 0.5), baz + Math.PI, loArm, 0.96);
         mountPodArmV1(b, pods, spineAt(spine, 0.82), baz + Math.PI, upArm, 0.98);
@@ -760,11 +803,11 @@ export function treetinoV1(): TreeModel {
         const lowAnchor = spineAt(spine, 0.24);
 
         for (const side of [-1, 1]) {
-            foliage(lowAnchor, az + side * 0.52, bi < 2 ? 1.68 : 1.38, 0.18, 0.98, 0.18);
+            foliage(lowAnchor, az + side * 0.52, 1.68, 0.18, 0.98, 0.18);
         }
 
         const midAnchor = spineAt(spine, 0.64);
-        foliage(midAnchor, az, bi < 2 ? 1.65 : 1.28, 0.34, 1.02, 0.22);
+        foliage(midAnchor, az, 1.65, 0.34, 1.02, 0.22);
 
         for (const side of [-1, 1]) {
             foliage(spineAt(spine, 0.61), az + side * 0.58, 1.28, 0.3, 0.94, 0.2);
@@ -904,14 +947,13 @@ export function treetinoV2(options: { withTurbines?: boolean } = {}): TreeModel 
         length: number;
         trunkY: number;
         subRibs: [number, number, number][];
-        podFrac: number;
     }[] = [
-        { ang: deg(10), length: 2.1, trunkY: 1.36, subRibs: [[0.24, 0.96, 3], [0.48, 0.78, 3], [0.72, 0.52, 2]], podFrac: 0.78 },
-        { ang: deg(66), length: 1.98, trunkY: 1.42, subRibs: [[0.26, 0.9, 3], [0.5, 0.72, 3], [0.74, 0.48, 2]], podFrac: 0.46 },
-        { ang: deg(122), length: 1.98, trunkY: 1.42, subRibs: [[0.26, 0.9, 3], [0.5, 0.72, 3], [0.74, 0.48, 2]], podFrac: 0.46 },
-        { ang: deg(174), length: 2.12, trunkY: 1.36, subRibs: [[0.24, 0.96, 3], [0.48, 0.78, 3], [0.72, 0.52, 2]], podFrac: 0.78 },
-        { ang: deg(226), length: 1.74, trunkY: 1.22, subRibs: [[0.3, 0.76, 3], [0.58, 0.52, 2]], podFrac: 0.74 },
-        { ang: deg(312), length: 1.74, trunkY: 1.22, subRibs: [[0.3, 0.76, 3], [0.58, 0.52, 2]], podFrac: 0.74 },
+        { ang: deg(10), length: 2.1, trunkY: 1.36, subRibs: [[0.24, 0.96, 3], [0.48, 0.78, 3], [0.72, 0.52, 2]] },
+        { ang: deg(66), length: 1.98, trunkY: 1.42, subRibs: [[0.26, 0.9, 3], [0.5, 0.72, 3], [0.74, 0.48, 2]] },
+        { ang: deg(122), length: 1.98, trunkY: 1.42, subRibs: [[0.26, 0.9, 3], [0.5, 0.72, 3], [0.74, 0.48, 2]] },
+        { ang: deg(174), length: 2.12, trunkY: 1.36, subRibs: [[0.24, 0.96, 3], [0.48, 0.78, 3], [0.72, 0.52, 2]] },
+        { ang: deg(226), length: 1.74, trunkY: 1.22, subRibs: [[0.3, 0.76, 3], [0.58, 0.52, 2]] },
+        { ang: deg(312), length: 1.74, trunkY: 1.22, subRibs: [[0.3, 0.76, 3], [0.58, 0.52, 2]] },
     ];
 
     // Pass 1: Primary tubular white boughs + direct herringbone chevron leaves along each primary spine
@@ -983,9 +1025,9 @@ export function treetinoV2(options: { withTurbines?: boolean } = {}): TreeModel 
         addV2Leaf(ca * (length * 0.94), sa * (length * 0.94), ang, 0.38, 0.15, 0.085);
     }
 
-    // Pass 2: Secondary lateral herringbone ribs & interlocking shingled leaf rows + optional 6× VTE turbine pods
+    // Pass 2: Secondary lateral herringbone ribs & interlocking shingled leaf rows
     for (const spec of boughSpecs) {
-        const { ang, length, subRibs, podFrac } = spec;
+        const { ang, length, subRibs } = spec;
         const ca = Math.cos(ang);
         const sa = Math.sin(ang);
 
@@ -1016,10 +1058,22 @@ export function treetinoV2(options: { withTurbines?: boolean } = {}): TreeModel 
                 addV2Leaf(uEnd, vEnd, ribAng, 0.37, 0.146, 0.076);
             }
         }
+    }
 
-        if (withTurbines) {
-            const pu = ca * (length * podFrac);
-            const pv = sa * (length * podFrac);
+    // 5. Optional 6× VTE Savonius Turbine Pods:
+    //    5 along the bottom/front half of the disc (left rim, lower-left, bottom-center, lower-right, right rim)
+    //    + 1 in the dead center of the tree (matching the official V2 Hybrid layout sketch).
+    if (withTurbines) {
+        const podDiscCoords: [number, number][] = [
+            [0.0, 0.0], // 1 in dead center
+            [Math.cos(deg(176)) * 1.72, Math.sin(deg(176)) * 1.72], // far-left rim
+            [Math.cos(deg(224)) * 1.54, Math.sin(deg(224)) * 1.54], // lower-left rim
+            [Math.cos(deg(270)) * 1.48, Math.sin(deg(270)) * 1.48], // bottom-center rim
+            [Math.cos(deg(316)) * 1.54, Math.sin(deg(316)) * 1.54], // lower-right rim
+            [Math.cos(deg(8)) * 1.72, Math.sin(deg(8)) * 1.72], // far-right rim
+        ];
+
+        for (const [pu, pv] of podDiscCoords) {
             const attach = discPt(pu, pv, 0.02);
             const cupY = attach[1] + 0.14;
             const cxP = attach[0];
@@ -1028,7 +1082,8 @@ export function treetinoV2(options: { withTurbines?: boolean } = {}): TreeModel 
             b.seg(attach, [cxP, cupY, czP], TREE_BOUGH_MAIN);
 
             const podHeight = 0.96;
-            pods.push({ base: [cxP, cupY, czP], height: podHeight });
+            const podBase = mountPodPedestal(b, [cxP, cupY, czP], podHeight);
+            pods.push({ base: podBase, height: podHeight });
         }
     }
 

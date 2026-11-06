@@ -7,10 +7,10 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue';
 </script>
 
 <template>
-    <Head title="Web3 &amp; RWA Tokenizace na Solana | Treetino Colosseum">
+    <Head :title="$t('web3.meta.title')">
         <meta
             name="description"
-            content="Oficiální pitch pro Colosseum Hackathon: Tokenizace fyzické energetické infrastruktury na Solana. Od kinetických stromů Treetino V1 přes bateriová úložiště (35 % APY) až po průmyslové větrné parky."
+            :content="$t('web3.meta.description')"
         />
         <meta name="robots" content="noindex, nofollow" />
     </Head>

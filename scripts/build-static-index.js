@@ -12,10 +12,34 @@ if (fs.existsSync(manifestPath)) {
         const cssFiles = (appEntry.css || []).map(c => `<link rel="stylesheet" href="/build/${c}">`).join('\n    ');
 
         const html = `<!DOCTYPE html>
-<html lang="cs">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        (function () {
+            try {
+                var p = new URLSearchParams(window.location.search);
+                var q = (p.get('lang') || p.get('locale') || '').toLowerCase();
+                var saved = localStorage.getItem('app_locale') || localStorage.getItem('treetino_locale');
+                var lang = null;
+                if (q === 'cs' || q === 'cz') lang = 'cs';
+                else if (q === 'en') lang = 'en';
+                else if (saved === 'cs' || saved === 'en') lang = saved;
+                else if (/\\.(cz|sk)$/i.test(window.location.hostname)) lang = 'cs';
+                else {
+                    var nav = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || '']).join(',').toLowerCase();
+                    if (/\\b(cs|sk|cz)\\b/.test(nav)) lang = 'cs';
+                    else if (/\\ben\\b/.test(nav)) lang = 'en';
+                    else {
+                        var tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+                        lang = (tz === 'Europe/Prague' || tz === 'Europe/Bratislava') ? 'cs' : 'en';
+                    }
+                }
+                document.documentElement.lang = lang || 'en';
+            } catch (e) {}
+        })();
+    </script>
     <title>Treetino — Chytrý energetický strom | Smart Solar &amp; Wind Energy Tree</title>
     <meta name="description" content="Treetino je patentovaný chytrý energetický strom kombinující solární listy, vertikální větrné mikroturbíny, bateriové úložiště a dobíjení elektromobilů na půdorysu pouhého 1 m².">
     <meta name="application-name" content="Treetino">

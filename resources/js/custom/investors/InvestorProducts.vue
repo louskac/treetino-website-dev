@@ -37,7 +37,7 @@
 
             <InvestorChapterText
                 index="03"
-                label="The products"
+                :label="t('investors.c03.label')"
                 :beats="beats"
                 :state="[
                     { in: s.b0, out: s.b0out },
@@ -54,11 +54,14 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { computed, onMounted, onUnmounted, reactive, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import type { Beat } from './InvestorChapterText.vue';
 import InvestorChapterText from './InvestorChapterText.vue';
 import { clamp01, CONTAINER, VISUAL_AREA } from './tokens';
 
 gsap.registerPlugin(ScrollTrigger);
+
+const { t } = useI18n();
 
 const products = [
     {
@@ -81,35 +84,35 @@ const products = [
     },
 ];
 
-const beats: Beat[] = [
+const beats = computed<Beat[]>(() => [
     {
-        segments: [{ text: 'Treetino V1.', break: true }, { text: 'The flagship.', tone: 'accent' }],
-        sub: 'An 11.5 m hybrid power plant for business parks, logistics hubs and squares.',
+        segments: [{ text: t('investors.c03.b0.line1'), break: true }, { text: t('investors.c03.b0.line2'), tone: 'accent' }],
+        sub: t('investors.c03.b0.sub'),
         stats: [
-            { value: '49.8 kW', label: 'Peak output' },
-            { value: '22 kW', label: 'EV hub' },
-            { value: '3 months', label: 'Turnkey' },
+            { value: t('investors.c03.b0.s0.val'), label: t('investors.c03.b0.s0.label') },
+            { value: t('investors.c03.b0.s1.val'), label: t('investors.c03.b0.s1.label') },
+            { value: t('investors.c03.b0.s2.val'), label: t('investors.c03.b0.s2.label') },
         ],
     },
     {
-        segments: [{ text: 'Treetino V2.', break: true }, { text: 'The compact one.', tone: 'accent' }],
-        sub: '5 m tall, for villas, resorts and company HQs. Turbines optional.',
+        segments: [{ text: t('investors.c03.b1.line1'), break: true }, { text: t('investors.c03.b1.line2'), tone: 'accent' }],
+        sub: t('investors.c03.b1.sub'),
         stats: [
-            { value: '6–12 kW', label: 'Output' },
-            { value: '5.61 kWp', label: 'Solar' },
-            { value: '0.5 m²', label: 'Footprint' },
+            { value: t('investors.c03.b1.s0.val'), label: t('investors.c03.b1.s0.label') },
+            { value: t('investors.c03.b1.s1.val'), label: t('investors.c03.b1.s1.label') },
+            { value: t('investors.c03.b1.s2.val'), label: t('investors.c03.b1.s2.label') },
         ],
     },
     {
-        segments: [{ text: 'Treetino Aero.', break: true }, { text: 'Wind for any roof.', tone: 'accent' }],
-        sub: 'A bird-safe vertical turbine for rooftops, parapets and halls.',
+        segments: [{ text: t('investors.c03.b2.line1'), break: true }, { text: t('investors.c03.b2.line2'), tone: 'accent' }],
+        sub: t('investors.c03.b2.sub'),
         stats: [
-            { value: '1–3 kW', label: 'Three sizes' },
-            { value: '1.8 m/s', label: 'Cut-in wind' },
-            { value: '<35 dB', label: 'Noise' },
+            { value: t('investors.c03.b2.s0.val'), label: t('investors.c03.b2.s0.label') },
+            { value: t('investors.c03.b2.s1.val'), label: t('investors.c03.b2.s1.label') },
+            { value: t('investors.c03.b2.s2.val'), label: t('investors.c03.b2.s2.label') },
         ],
     },
-];
+]);
 
 const sectionRef = ref<HTMLElement | null>(null);
 

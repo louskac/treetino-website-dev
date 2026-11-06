@@ -66,7 +66,7 @@
 
             <InvestorChapterText
                 index="05"
-                label="Traction"
+                :label="t('investors.c05.label')"
                 :beats="beats"
                 :state="[
                     { in: s.b0, out: s.b0out },
@@ -82,12 +82,15 @@
 <script setup lang="ts">
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { onMounted, onUnmounted, reactive, ref } from 'vue';
+import { computed, onMounted, onUnmounted, reactive, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import type { Beat } from './InvestorChapterText.vue';
 import InvestorChapterText from './InvestorChapterText.vue';
 import { clamp01, CONTAINER, VISUAL_AREA } from './tokens';
 
 gsap.registerPlugin(ScrollTrigger);
+
+const { t } = useI18n();
 
 interface PhotoFrame {
     src: string;
@@ -99,23 +102,23 @@ interface PhotoFrame {
     imgClass?: string;
 }
 
-const photoBeats: {
+const photoBeats = computed<{
     primary: PhotoFrame;
     secondary: PhotoFrame;
-}[] = [
+}[]>(() => [
     {
         primary: {
             src: '/img/team/founders-leaf.jpg',
             alt: 'Founders Dominik Mašek and Jakub Lustyk with a full-scale Treetino TopCon solar leaf',
-            caption: 'Mašek & Lustyk',
+            caption: t('investors.c05.photo0.p_cap'),
             w: 1280,
             h: 853,
         },
         secondary: {
             src: '/img/info/night-detail-w.jpg',
             alt: 'Bionic TopCon solar leaves and vertical Treetino Aero turbine rotor detail',
-            caption: 'Leaf & Aero rotor',
-            place: 'EP 4 664 750',
+            caption: t('investors.c05.photo0.s_cap'),
+            place: t('investors.c05.photo0.s_place'),
             w: 1920,
             h: 820,
         },
@@ -124,15 +127,15 @@ const photoBeats: {
         primary: {
             src: '/img/media/smart-energy-forum-2026-2.jpg',
             alt: 'Treetino commercial exhibition booth and physical prototype at Smart Energy Forum',
-            caption: 'Smart Energy Forum',
+            caption: t('investors.c05.photo1.p_cap'),
             w: 1600,
             h: 1066,
         },
         secondary: {
             src: '/img/im/mkovo-site-measurement.jpg',
             alt: 'Wind mast measurement at the MKovo site for the first three V1 trees',
-            caption: 'MKovo site',
-            place: 'Q1 delivery',
+            caption: t('investors.c05.photo1.s_cap'),
+            place: t('investors.c05.photo1.s_place'),
             w: 768,
             h: 1024,
             imgClass: 'object-[center_65%]',
@@ -142,7 +145,7 @@ const photoBeats: {
         primary: {
             src: '/img/media/innovations-united-prague-castle-2026.jpg',
             alt: 'Treetino keynote on stage at Prague Castle Innovations United',
-            caption: 'Prague Castle · Top 5',
+            caption: t('investors.c05.photo2.p_cap'),
             w: 1024,
             h: 768,
             imgClass: 'scale-[1.16] origin-top-right',
@@ -150,43 +153,43 @@ const photoBeats: {
         secondary: {
             src: '/img/media/strakova-akademie-vlada-premier-2.jpg',
             alt: 'Presenting the Treetino prototype to the Czech Prime Minister at Straka Academy',
-            caption: 'Straka Academy',
-            place: 'Prime Minister',
+            caption: t('investors.c05.photo2.s_cap'),
+            place: t('investors.c05.photo2.s_place'),
             w: 1024,
             h: 768,
         },
     },
-];
+]);
 
-const beats: Beat[] = [
+const beats = computed<Beat[]>(() => [
     {
-        segments: [{ text: 'Patented hardware.', break: true }, { text: 'Proven builders.', tone: 'accent' }],
-        sub: 'Developed with FZU and CTU Prague by founders who already delivered 8.6 MW of grid storage.',
+        segments: [{ text: t('investors.c05.b0.line1'), break: true }, { text: t('investors.c05.b0.line2'), tone: 'accent' }],
+        sub: t('investors.c05.b0.sub'),
         stats: [
-            { value: '2 Patents', label: 'EP & PCT protection' },
-            { value: '8.6 MW', label: 'Founder BESS track record' },
-            { value: '€200k', label: 'EU CzechInvest grant' },
+            { value: t('investors.c05.b0.s0.val'), label: t('investors.c05.b0.s0.label') },
+            { value: t('investors.c05.b0.s1.val'), label: t('investors.c05.b0.s1.label') },
+            { value: t('investors.c05.b0.s2.val'), label: t('investors.c05.b0.s2.label') },
         ],
     },
     {
-        segments: [{ text: '€705k signed.', break: true }, { text: '€3.4M in LOIs.', tone: 'accent' }],
-        sub: 'Three flagship V1 trees contracted for MKovo (Q1 delivery) and two V2 trees building in Prague.',
+        segments: [{ text: t('investors.c05.b1.line1'), break: true }, { text: t('investors.c05.b1.line2'), tone: 'accent' }],
+        sub: t('investors.c05.b1.sub'),
         stats: [
-            { value: '3 × V1', label: 'Signed MKovo contract' },
-            { value: '2 × V2', label: 'Prague site in build' },
-            { value: '€10M', label: 'Bond underwriting' },
+            { value: t('investors.c05.b1.s0.val'), label: t('investors.c05.b1.s0.label') },
+            { value: t('investors.c05.b1.s1.val'), label: t('investors.c05.b1.s1.label') },
+            { value: t('investors.c05.b1.s2.val'), label: t('investors.c05.b1.s2.label') },
         ],
     },
     {
-        segments: [{ text: 'Backed at home.', break: true }, { text: 'Shown abroad.', tone: 'accent' }],
-        sub: 'Presented at the Office of the Czech Government, on the U.S. mission at SXSW, and at Prague Castle.',
+        segments: [{ text: t('investors.c05.b2.line1'), break: true }, { text: t('investors.c05.b2.line2'), tone: 'accent' }],
+        sub: t('investors.c05.b2.sub'),
         stats: [
-            { value: 'Top 5', label: 'Prague Castle pitch' },
-            { value: 'SXSW', label: 'Czech House Austin' },
-            { value: 'ČSOB', label: 'Start it accelerator' },
+            { value: t('investors.c05.b2.s0.val'), label: t('investors.c05.b2.s0.label') },
+            { value: t('investors.c05.b2.s1.val'), label: t('investors.c05.b2.s1.label') },
+            { value: t('investors.c05.b2.s2.val'), label: t('investors.c05.b2.s2.label') },
         ],
     },
-];
+]);
 
 const sectionRef = ref<HTMLElement | null>(null);
 

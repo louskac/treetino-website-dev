@@ -1,6 +1,6 @@
 <template>
     <nav
-        aria-label="Chapters"
+        :aria-label="t('investors.rail.aria')"
         class="pointer-events-none fixed top-1/2 right-6 z-30 hidden -translate-y-1/2 transition-opacity duration-500 lg:block xl:right-10"
         :class="current ? 'opacity-100' : 'opacity-0'"
     >
@@ -29,16 +29,19 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 
-const chapters = [
-    { id: '01', label: 'The tree' },
-    { id: '02', label: 'The system' },
-    { id: '03', label: 'The products' },
-    { id: '04', label: 'Payment gate' },
-    { id: '05', label: 'Traction' },
-    { id: '06', label: 'Data room' },
-];
+const { t } = useI18n();
+
+const chapters = computed(() => [
+    { id: '01', label: t('investors.rail.c01') },
+    { id: '02', label: t('investors.rail.c02') },
+    { id: '03', label: t('investors.rail.c03') },
+    { id: '04', label: t('investors.rail.c04') },
+    { id: '05', label: t('investors.rail.c05') },
+    { id: '06', label: t('investors.rail.c06') },
+]);
 
 const current = ref<string | null>(null);
 let io: IntersectionObserver | null = null;

@@ -11,6 +11,7 @@ import {
 } from 'lucide-vue-next';
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { trackEvent } from '@/analytics';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 
 const { t } = useI18n();
@@ -143,6 +144,15 @@ async function handleSendInquiry() {
         });
 
         if (response.data?.status === 'success' || response.status === 200) {
+            trackEvent('generate_lead', {
+                lead_source: 'configurator_modal',
+                product_id: props.productId,
+                product_label: props.productLabel,
+            });
+            trackEvent('qualify_lead', {
+                lead_source: 'configurator_modal',
+                product_id: props.productId,
+            });
             isSent.value = true;
             name.value = '';
             email.value = '';

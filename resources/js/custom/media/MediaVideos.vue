@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { Play, X, ExternalLink, Youtube } from 'lucide-vue-next';
-import { ref } from 'vue';
+import { Play, ArrowUpRight } from 'lucide-vue-next';
+import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 const { locale } = useI18n();
 
 interface VideoItem {
     id: string;
-    tag: string;
+    duration: string;
     title: { cs: string; en: string };
     description: { cs: string; en: string };
     thumbnail: string;
@@ -15,79 +15,102 @@ interface VideoItem {
 
 const videos: VideoItem[] = [
     {
+        id: 'MZepKKBw56E',
+        duration: '3:11',
+        title: {
+            cs: 'Treetino Overview Demo — YC W27',
+            en: 'Treetino Overview Demo — YC W27',
+        },
+        description: {
+            cs: 'Přehledová ukázka funkčního prototypu, telemetrie a škálování sítě Treetino pro Y Combinator W27.',
+            en: 'Overview demo of the working prototype, telemetry, and network scaling for Y Combinator W27.',
+        },
+        thumbnail: 'https://i.ytimg.com/vi/MZepKKBw56E/maxresdefault.jpg',
+    },
+    {
+        id: 'INPvpfISPP0',
+        duration: '0:45',
+        title: {
+            cs: 'Představení zakladatelů — YC W27',
+            en: 'Founder Video — YC W27',
+        },
+        description: {
+            cs: 'Krátké představení zakladatelů Treetino připravené pro zimní kohortu Y Combinator W27.',
+            en: 'Updated founder introduction recorded for the Y Combinator Winter 2027 batch.',
+        },
+        thumbnail: 'https://i.ytimg.com/vi/INPvpfISPP0/maxresdefault.jpg',
+    },
+    {
         id: 'U7MgxSLgZIs',
-        tag: 'Overview',
+        duration: '2:18',
         title: {
             cs: 'Představení projektu Treetino',
             en: 'Treetino — Project Intro',
         },
         description: {
-            cs: 'Kompletní seznámení s konceptem energetického stromu Treetino, architekturou a technickými specifikacemi.',
-            en: 'Complete introduction to the Treetino energy tree concept, architecture, and technical specifications.',
+            cs: 'Seznámení s konceptem energetického stromu, architekturou a technickými parametry.',
+            en: 'Introduction to the energy tree concept, system architecture, and technical specifications.',
         },
-        thumbnail: 'https://i.ytimg.com/vi/U7MgxSLgZIs/hqdefault.jpg',
+        thumbnail: 'https://i.ytimg.com/vi/U7MgxSLgZIs/maxresdefault.jpg',
     },
     {
         id: 'op-x_kbH-WI',
-        tag: 'Pitch',
+        duration: '3:31',
         title: {
             cs: 'Treetino Pitch & Vize',
             en: 'Treetino Pitch & Vision',
         },
         description: {
-            cs: 'Oficiální investorský pitch a vize čisté decentralizované energie budoucnosti.',
-            en: 'Official investor pitch and the vision of clean decentralized energy for the future.',
+            cs: 'Investorský pitch a vize čisté decentralizované energetiky.',
+            en: 'Investor pitch and vision for clean decentralized energy.',
         },
-        thumbnail: 'https://i.ytimg.com/vi/op-x_kbH-WI/hqdefault.jpg',
+        thumbnail: 'https://i.ytimg.com/vi/op-x_kbH-WI/maxresdefault.jpg',
     },
     {
         id: 'cDNJvIpPDak',
-        tag: 'Story',
+        duration: '1:05',
         title: {
-            cs: 'Příběh zakladatelů Treetino',
-            en: "Treetino Founders' Story",
+            cs: 'Příběh zakladatelů',
+            en: "Founders' Story",
         },
         description: {
-            cs: 'Nahlédnutí do zákulisí vzniku projektu Treetino, výzvy při vývoji a technologická cesta.',
-            en: 'Behind the scenes of Treetino creation, R&D challenges, and the technological journey.',
+            cs: 'Zákulisí vzniku projektu, vývoj hardwaru a cesta od prvního návrhu k prototypu.',
+            en: 'Behind the scenes of hardware R&D and the journey from first sketch to prototype.',
         },
-        thumbnail: 'https://i.ytimg.com/vi/cDNJvIpPDak/hqdefault.jpg',
+        thumbnail: 'https://i.ytimg.com/vi/cDNJvIpPDak/sddefault.jpg',
     },
     {
         id: '1At_hR_c3d8',
-        tag: 'Hackathon',
+        duration: '2:26',
         title: {
-            cs: 'Mantle Hackathon Submission (RWA)',
-            en: 'RWA Mantle Hackathon Submission',
+            cs: 'Mantle Hackathon — RWA',
+            en: 'RWA Mantle Hackathon',
         },
         description: {
-            cs: 'Prezentace tokenizace a reálných aktiv (RWA) v kontextu distribuované energetické infrastruktury.',
-            en: 'Presentation of real-world asset (RWA) tokenization in the context of distributed energy infrastructure.',
+            cs: 'Tokenizace reálné energetické infrastruktury a on-chain atestace výroby.',
+            en: 'Real-world energy infrastructure tokenization and on-chain production attestation.',
         },
-        thumbnail: 'https://i.ytimg.com/vi/1At_hR_c3d8/hqdefault.jpg',
+        thumbnail: 'https://i.ytimg.com/vi/1At_hR_c3d8/sddefault.jpg',
     },
 ];
 
-const activeVideo = ref<VideoItem | null>(null);
+const activeIndex = ref(0);
+const isPlaying = ref(false);
 
-const getVideoTitle = (video: VideoItem) => {
-    const l = (locale.value || 'cs') as 'cs' | 'en';
+const activeVideo = computed(() => videos[activeIndex.value] || videos[0]);
+const currentLocale = computed(() => (locale.value || 'cs') as 'cs' | 'en');
 
-    return video.title[l] || video.title.cs;
-};
+const pad = (n: number) => String(n).padStart(2, '0');
 
-const getVideoDesc = (video: VideoItem) => {
-    const l = (locale.value || 'cs') as 'cs' | 'en';
+const getTitle = (video: VideoItem) =>
+    video.title[currentLocale.value] || video.title.cs;
 
-    return video.description[l] || video.description.cs;
-};
+const getDesc = (video: VideoItem) =>
+    video.description[currentLocale.value] || video.description.cs;
 
-const openVideo = (video: VideoItem) => {
-    activeVideo.value = video;
-};
-
-const closeVideo = () => {
-    activeVideo.value = null;
+const selectVideo = (index: number, autoplay = true) => {
+    activeIndex.value = index;
+    isPlaying.value = autoplay;
 };
 </script>
 
@@ -96,197 +119,234 @@ const closeVideo = () => {
         id="videos"
         class="scroll-mt-32 border-b border-black/10 py-16 lg:py-24"
     >
-        <!-- Section Header -->
+        <!-- Header -->
         <div
-            class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between"
+            class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between"
         >
             <div class="max-w-2xl">
-                <span
-                    class="text-xs font-semibold tracking-[0.2em] text-t-blue uppercase"
-                >
-                    {{ $t('media.videos_tag') }}
-                </span>
                 <h2
-                    class="mt-3 text-3xl font-medium tracking-tight text-black sm:text-4xl lg:text-5xl"
+                    class="text-3xl font-medium tracking-[-0.03em] text-black sm:text-4xl lg:text-5xl"
                 >
                     {{ $t('media.videos_title') }}
                 </h2>
                 <p
-                    class="mt-4 text-base leading-relaxed text-black/70 sm:text-lg"
+                    class="mt-3 text-base leading-relaxed text-black/60 sm:text-lg"
                 >
                     {{ $t('media.videos_desc') }}
                 </p>
             </div>
 
-            <!-- YouTube Channel Link (Clean neutral style) -->
-            <div>
-                <a
-                    href="https://www.youtube.com/@treetino_corp"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="inline-flex items-center gap-2 rounded-full border border-black/15 bg-white px-5 py-2.5 text-xs font-semibold text-black/80 shadow-xs transition hover:border-black/30 hover:bg-black/5"
-                >
-                    <Youtube class="h-4 w-4 text-black/70" />
-                    <span>{{ $t('media.youtube_channel_btn') }}</span>
-                    <ExternalLink class="h-3.5 w-3.5 opacity-50" />
-                </a>
-            </div>
+            <a
+                href="https://www.youtube.com/@treetino_corp"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex shrink-0 items-center gap-1.5 text-sm font-medium text-black/70 transition-colors hover:text-black"
+            >
+                <span>@treetino_corp</span>
+                <ArrowUpRight
+                    class="h-4 w-4 text-black/40"
+                    aria-hidden="true"
+                />
+            </a>
         </div>
 
-        <!-- 4 Video Grid (Clean Minimalist Cards) -->
-        <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            <div
-                v-for="video in videos"
-                :key="video.id"
-                @click="openVideo(video)"
-                class="group relative flex cursor-pointer flex-col justify-between overflow-hidden rounded-3xl border border-black/10 bg-white transition-all duration-300 hover:border-black/30 hover:shadow-xl"
-            >
-                <div>
-                    <!-- Thumbnail Container with Play Overlay -->
-                    <div
-                        class="relative aspect-16/9 w-full overflow-hidden bg-zinc-950"
+        <!-- Stage (Left 7 Cols) + Scalable Queue List (Right 5 Cols) -->
+        <div
+            class="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-start lg:gap-10"
+        >
+            <!-- Active Video Stage -->
+            <div class="lg:col-span-7">
+                <div
+                    class="video-frame relative w-full overflow-clip rounded-2xl border border-black/10 bg-zinc-950"
+                >
+                    <iframe
+                        v-if="isPlaying"
+                        :key="activeVideo.id"
+                        :src="`https://www.youtube.com/embed/${activeVideo.id}?autoplay=1&rel=0&modestbranding=1&cc_load_policy=0&iv_load_policy=3`"
+                        :title="getTitle(activeVideo)"
+                        class="absolute inset-0 block h-full w-full border-0"
+                        allow="
+                            accelerometer;
+                            autoplay;
+                            clipboard-write;
+                            encrypted-media;
+                            gyroscope;
+                            picture-in-picture;
+                            web-share;
+                        "
+                        allowfullscreen
+                    ></iframe>
+
+                    <button
+                        v-else
+                        type="button"
+                        @click="isPlaying = true"
+                        class="group absolute inset-0 block h-full w-full cursor-pointer text-left focus:outline-none"
+                        :aria-label="`${$t('media.watch_video')}: ${getTitle(activeVideo)}`"
                     >
                         <img
-                            :src="video.thumbnail"
-                            :alt="getVideoTitle(video)"
-                            class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                            :src="activeVideo.thumbnail"
+                            :alt="getTitle(activeVideo)"
+                            width="1280"
+                            height="720"
+                            fetchpriority="high"
+                            class="absolute inset-0 block h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
                         />
                         <div
-                            class="absolute inset-0 bg-black/25 transition-opacity group-hover:bg-black/15"
+                            class="absolute inset-0 bg-black/15 transition-colors duration-300 group-hover:bg-black/25"
                         ></div>
 
-                        <!-- Tag Badge Top Left -->
-                        <span
-                            class="absolute top-3 left-3 rounded-full border border-white/10 bg-black/70 px-2.5 py-0.5 text-[10px] font-semibold tracking-wider text-white uppercase backdrop-blur-md"
-                        >
-                            {{ video.tag }}
-                        </span>
-
-                        <!-- Play Button Center -->
                         <div
                             class="absolute inset-0 flex items-center justify-center"
                         >
                             <div
-                                class="flex h-11 w-11 items-center justify-center rounded-full bg-white/95 text-black shadow-lg backdrop-blur transition-all duration-300 group-hover:scale-115 group-hover:bg-t-blue group-hover:text-white"
+                                class="flex h-14 w-14 items-center justify-center rounded-full bg-white/95 text-black shadow-lg transition-transform duration-300 group-hover:scale-105"
                             >
-                                <Play class="ml-0.5 h-4 w-4 fill-current" />
+                                <Play
+                                    class="ml-0.5 h-5 w-5 fill-current"
+                                    aria-hidden="true"
+                                />
                             </div>
                         </div>
-                    </div>
+                    </button>
+                </div>
 
-                    <!-- Content -->
-                    <div class="p-6">
+                <!-- Active Video Caption -->
+                <div
+                    class="mt-5 flex flex-col justify-between gap-4 sm:flex-row sm:items-start"
+                >
+                    <div class="max-w-xl">
+                        <div
+                            class="flex items-center gap-3 text-xs text-black/40 tabular-nums"
+                        >
+                            <span>{{ pad(activeIndex + 1) }}</span>
+                            <span class="h-px w-6 bg-black/15"></span>
+                            <span>{{ activeVideo.duration }}</span>
+                        </div>
+
                         <h3
-                            class="text-base leading-snug font-semibold text-black transition-colors group-hover:text-t-blue"
+                            class="mt-2 text-xl leading-snug font-medium tracking-[-0.02em] text-black sm:text-2xl"
                         >
-                            {{ getVideoTitle(video) }}
+                            {{ getTitle(activeVideo) }}
                         </h3>
-                        <p
-                            class="mt-2 line-clamp-2 text-xs leading-relaxed text-black/65 sm:text-sm"
-                        >
-                            {{ getVideoDesc(video) }}
+
+                        <p class="mt-1.5 text-sm leading-relaxed text-black/60">
+                            {{ getDesc(activeVideo) }}
                         </p>
                     </div>
-                </div>
 
-                <!-- Footer Action -->
-                <div
-                    class="flex items-center justify-between border-t border-black/5 px-6 py-3 text-xs font-semibold text-t-blue"
-                >
-                    <span>{{ $t('media.watch_video') }}</span>
-                    <Play
-                        class="h-3 w-3 fill-current transition-transform group-hover:translate-x-0.5"
-                    />
+                    <a
+                        :href="`https://www.youtube.com/watch?v=${activeVideo.id}`"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex shrink-0 items-center gap-1 text-xs font-medium text-black/50 transition-colors hover:text-black sm:mt-1"
+                    >
+                        <span>YouTube</span>
+                        <ArrowUpRight class="h-3.5 w-3.5" aria-hidden="true" />
+                    </a>
                 </div>
             </div>
-        </div>
 
-        <!-- Video Player Modal (Clean Light Mode) -->
-        <Transition name="modal-fade">
-            <div
-                v-if="activeVideo"
-                class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm sm:p-6"
-                @click.self="closeVideo"
-            >
-                <div
-                    class="relative w-full max-w-4xl overflow-hidden rounded-3xl border border-black/10 bg-white text-black shadow-2xl"
-                >
-                    <!-- Modal Top Bar -->
-                    <div
-                        class="flex items-center justify-between border-b border-black/10 bg-white px-6 py-4"
+            <!-- Scalable Hairline Video List (Works for 5, 6, 10+ Videos) -->
+            <div class="lg:col-span-5">
+                <ul class="video-list border-t border-black/10">
+                    <li
+                        v-for="(video, idx) in videos"
+                        :key="video.id"
+                        class="border-b border-black/10"
                     >
-                        <div class="flex items-center gap-3">
-                            <span
-                                class="rounded-full bg-t-blue/10 px-2.5 py-0.5 text-[11px] font-bold tracking-wider text-t-blue uppercase"
-                            >
-                                {{ activeVideo.tag }}
-                            </span>
-                            <h4
-                                class="max-w-[280px] truncate text-sm font-semibold text-black sm:max-w-md sm:text-base"
-                            >
-                                {{ getVideoTitle(activeVideo) }}
-                            </h4>
-                        </div>
                         <button
                             type="button"
-                            @click="closeVideo"
-                            class="cursor-pointer rounded-full bg-black/5 p-2 text-black/60 transition hover:bg-black/10 hover:text-black"
-                            :title="$t('media.close_video')"
+                            @click="selectVideo(idx, true)"
+                            class="group flex w-full cursor-pointer items-center gap-3.5 py-3 text-left transition-colors focus:outline-none sm:gap-4"
                         >
-                            <X class="h-4 w-4" />
+                            <span
+                                class="w-5 shrink-0 text-xs tabular-nums transition-colors"
+                                :class="
+                                    idx === activeIndex
+                                        ? 'font-semibold text-black'
+                                        : 'text-black/35 group-hover:text-black/60'
+                                "
+                            >
+                                {{ pad(idx + 1) }}
+                            </span>
+
+                            <!-- Locked 16:9 Mini Thumbnail -->
+                            <div
+                                class="video-frame relative w-24 shrink-0 overflow-clip rounded-lg border bg-zinc-950 transition-all sm:w-28"
+                                :class="
+                                    idx === activeIndex
+                                        ? 'border-black/40 ring-1 ring-black/20'
+                                        : 'border-black/10'
+                                "
+                            >
+                                <img
+                                    :src="video.thumbnail"
+                                    :alt="getTitle(video)"
+                                    width="320"
+                                    height="180"
+                                    loading="lazy"
+                                    class="absolute inset-0 block h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                                />
+                                <div
+                                    class="absolute inset-0 flex items-center justify-center transition-colors"
+                                    :class="
+                                        idx === activeIndex
+                                            ? 'bg-black/30'
+                                            : 'bg-black/10 group-hover:bg-black/25'
+                                    "
+                                >
+                                    <div
+                                        class="flex h-6 w-6 items-center justify-center rounded-full bg-white/95 text-black shadow-xs transition-transform duration-200 group-hover:scale-105"
+                                    >
+                                        <Play
+                                            class="ml-0.5 h-2.5 w-2.5 fill-current"
+                                            aria-hidden="true"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="min-w-0 flex-1">
+                                <p
+                                    class="truncate text-sm font-medium tracking-[-0.01em] transition-colors"
+                                    :class="
+                                        idx === activeIndex
+                                            ? 'text-black'
+                                            : 'text-black/75 group-hover:text-black'
+                                    "
+                                >
+                                    {{ getTitle(video) }}
+                                </p>
+                                <p
+                                    class="mt-0.5 truncate text-xs text-black/45"
+                                >
+                                    {{ getDesc(video) }}
+                                </p>
+                            </div>
+
+                            <span
+                                class="shrink-0 text-xs text-black/40 tabular-nums"
+                            >
+                                {{ video.duration }}
+                            </span>
                         </button>
-                    </div>
-
-                    <!-- Video Iframe (Subtitles disabled) -->
-                    <div class="relative aspect-16/9 w-full bg-black">
-                        <iframe
-                            :src="`https://www.youtube.com/embed/${activeVideo.id}?autoplay=1&rel=0&modestbranding=1&cc_load_policy=0&iv_load_policy=3`"
-                            :title="getVideoTitle(activeVideo)"
-                            class="absolute inset-0 h-full w-full border-0"
-                            allow="
-                                accelerometer;
-                                autoplay;
-                                clipboard-write;
-                                encrypted-media;
-                                gyroscope;
-                                picture-in-picture;
-                                web-share;
-                            "
-                            allowfullscreen
-                        ></iframe>
-                    </div>
-
-                    <!-- Modal Description Bar -->
-                    <div
-                        class="flex flex-col items-start justify-between gap-4 border-t border-black/5 bg-zinc-50 px-6 py-4 text-xs text-black/75 sm:flex-row sm:items-center sm:text-sm"
-                    >
-                        <p class="max-w-2xl leading-relaxed">
-                            {{ getVideoDesc(activeVideo) }}
-                        </p>
-                        <a
-                            :href="`https://www.youtube.com/watch?v=${activeVideo.id}`"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="inline-flex shrink-0 items-center gap-1.5 text-xs font-semibold text-t-blue transition-colors hover:text-t-blue/80"
-                        >
-                            <span>{{ $t('media.open_on_youtube') }}</span>
-                            <ExternalLink class="h-3.5 w-3.5" />
-                        </a>
-                    </div>
-                </div>
+                    </li>
+                </ul>
             </div>
-        </Transition>
+        </div>
     </section>
 </template>
 
 <style scoped>
-.modal-fade-enter-active,
-.modal-fade-leave-active {
-    transition: opacity 0.25s ease;
+.video-frame {
+    aspect-ratio: 16 / 9;
 }
 
-.modal-fade-enter-from,
-.modal-fade-leave-to {
-    opacity: 0;
+.video-list {
+    max-block-size: 30rem;
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+    overscroll-behavior: contain;
 }
 </style>

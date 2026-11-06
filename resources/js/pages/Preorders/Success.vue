@@ -4,6 +4,7 @@ import { router } from '@inertiajs/vue3';
 import axios from 'axios';
 import { onMounted, onUnmounted, computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { trackEvent } from '@/analytics';
 import PreviewImage from '@/custom/preorders/PreviewImage.vue';
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
 import { PRODUCTS } from '@/types/products';
@@ -260,6 +261,16 @@ const refreshPreorder = () => {
 };
 
 onMounted(() => {
+    trackEvent('purchase', {
+        transaction_id: props.preorder?.uuid,
+        item_id: props.preorder?.product_type,
+        value:
+            props.preorder?.amount_total != null
+                ? props.preorder.amount_total / 100
+                : undefined,
+        currency: 'CZK',
+    });
+
     // 1. Wait 3 seconds before starting the process
     setTimeout(() => {
         // If it's already paid, don't even start polling

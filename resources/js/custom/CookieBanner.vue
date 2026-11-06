@@ -5,14 +5,25 @@ import {
     validCookie,
     showPreferences,
 } from 'vanilla-cookieconsent';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 
 const isVisible = ref(false);
+
+const hideOnConsent = () => {
+    isVisible.value = false;
+};
 
 onMounted(() => {
     if (!validCookie('cc_cookie')) {
         isVisible.value = true;
     }
+    window.addEventListener('cc:onConsent', hideOnConsent);
+    window.addEventListener('cc:onChange', hideOnConsent);
+});
+
+onUnmounted(() => {
+    window.removeEventListener('cc:onConsent', hideOnConsent);
+    window.removeEventListener('cc:onChange', hideOnConsent);
 });
 
 const handleAcceptAll = () => {

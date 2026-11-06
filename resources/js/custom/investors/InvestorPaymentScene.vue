@@ -5,7 +5,7 @@
         <!-- Callouts pinned to 3D anchors -->
         <div
             v-for="(c, i) in callouts"
-            :key="c.title"
+            :key="i"
             :ref="(el) => (calloutEls[i] = el as HTMLElement | null)"
             class="pointer-events-none absolute top-0 left-0 will-change-transform"
             style="opacity: 0"
@@ -48,11 +48,14 @@
  * - `scale`  reveals flanking payment-gate bays to show commercial multi-bay rollout
  */
 import * as THREE from 'three';
-import { onMounted, onUnmounted, ref, watch } from 'vue';
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 import type { V3 } from '@/custom/web3/wireKit';
 import { fadingGrid, LineBuilder, lineMaterial, podLines, treetinoV2Hybrid, WIRE } from '@/custom/web3/wireKit';
 import { arcPoints, cardLines, carLines, chargerPillar, contactless, dim, glowMaterial, glowTexture, mergeInto, Path } from './sceneKit';
 import { clamp01 } from './tokens';
+
+const { t } = useI18n();
 
 const props = withDefaults(
     defineProps<{
@@ -115,7 +118,7 @@ interface CalloutDef {
     tone?: 'blue' | 'green';
 }
 
-const callouts: CalloutDef[] = [
+const calloutDefs: CalloutDef[] = [
     {
         value: 'CZK · EUR',
         title: 'Tap card or Apple Pay',
@@ -144,6 +147,13 @@ const callouts: CalloutDef[] = [
         tone: 'green',
     },
 ];
+
+const callouts = computed<CalloutDef[]>(() => [
+    { ...calloutDefs[0], title: t('investors.c04.callout.tap') },
+    { ...calloutDefs[1], title: t('investors.c04.callout.settle') },
+    { ...calloutDefs[2], title: t('investors.c04.callout.v2') },
+    { ...calloutDefs[3], value: t('investors.c04.callout.scaleVal'), title: t('investors.c04.callout.scaleTitle') },
+]);
 
 const hostRef = ref<HTMLElement | null>(null);
 const canvasRef = ref<HTMLCanvasElement | null>(null);
@@ -353,15 +363,15 @@ function frame(time: number) {
     renderer.render(scene, camera);
 
     // 6 · HTML callouts (each beat shows its own callouts; V2 label stays visible once the tree is revealed)
-    const tapOp = clamp01((tap - 0.55) / 0.35) * (1 - clamp01(settle * 2.2));
+    const tapOp = clamp01((tap - 0.55) / 0.35) * (1 - clamp01(settle * 2.2)) * (1 - clamp01(scl * 2.2));
     const settleOp = clamp01((settle - 0.45) / 0.4) * (1 - clamp01(scl * 2.2));
     const v2Op = clamp01((settle - 0.45) / 0.4);
     const scaleOp = clamp01((scl - 0.45) / 0.45);
 
-    placeCallout(calloutEls[0], callouts[0].anchor, tapOp, callouts[0].dir === 'up');
-    placeCallout(calloutEls[1], callouts[1].anchor, settleOp, callouts[1].dir === 'up');
-    placeCallout(calloutEls[2], callouts[2].anchor, v2Op, callouts[2].dir === 'up');
-    placeCallout(calloutEls[3], callouts[3].anchor, scaleOp, callouts[3].dir === 'up');
+    placeCallout(calloutEls[0], calloutDefs[0].anchor, tapOp, calloutDefs[0].dir === 'up');
+    placeCallout(calloutEls[1], calloutDefs[1].anchor, settleOp, calloutDefs[1].dir === 'up');
+    placeCallout(calloutEls[2], calloutDefs[2].anchor, v2Op, calloutDefs[2].dir === 'up');
+    placeCallout(calloutEls[3], calloutDefs[3].anchor, scaleOp, calloutDefs[3].dir === 'up');
 }
 
 onMounted(() => {

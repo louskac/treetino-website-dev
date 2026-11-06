@@ -7,6 +7,7 @@ import { Mail, MapPin, Clock, Send } from 'lucide-vue-next';
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { route } from 'ziggy-js';
+import { trackEvent } from '@/analytics';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import FoundersSection from '@/custom/FoundersSection.vue';
 import HomeCtaGeneric from '@/custom/home/HomeCtaGeneric.vue';
@@ -70,6 +71,8 @@ async function formProcess() {
         });
 
         if (response.data?.status === 'success' || response.status === 200) {
+            trackEvent('generate_lead', { lead_source: 'contact_page' });
+            trackEvent('qualify_lead', { lead_source: 'contact_page' });
             formSent.value = true;
             name.value = '';
             mail.value = '';

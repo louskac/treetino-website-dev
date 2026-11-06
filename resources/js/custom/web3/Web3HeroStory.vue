@@ -83,8 +83,8 @@
                             tag="h1"
                             lead-class="text-[1.75rem] leading-[1.14] font-medium tracking-[-0.035em] sm:text-4xl md:text-5xl lg:text-[clamp(2.75rem,4.2vw,4.25rem)]"
                             :segments="[
-                                { text: 'In the heart of Europe, the energy transition is creating' },
-                                { text: 'an investment opportunity unlike any other.', tone: 'accent' },
+                                { text: t('web3.hero.act1.seg1') },
+                                { text: t('web3.hero.act1.seg2'), tone: 'accent' },
                             ]"
                             :progress="s.h1"
                             :out="s.h1out"
@@ -101,7 +101,7 @@
                                 rel="noopener noreferrer"
                                 class="pointer-events-auto group inline-flex items-center justify-center gap-2 rounded-xl bg-t-blue px-5 py-3 text-center text-xs font-semibold text-white shadow-[0_0_32px_rgba(77,141,255,0.45)] transition-all duration-300 hover:scale-[1.02] hover:bg-t-blue/90 hover:shadow-[0_0_48px_rgba(77,141,255,0.7)] sm:px-6 sm:py-3.5 sm:text-base"
                             >
-                                <span>Try Demo</span>
+                                <span>{{ t('web3.hero.cta.demo') }}</span>
                                 <ExternalLink class="h-3.5 w-3.5 sm:h-4 sm:w-4 text-white/90 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                             </a>
                             <a
@@ -110,7 +110,7 @@
                                 @click="scrollToPitch"
                             >
                                 <Play class="h-3.5 w-3.5 sm:h-4 sm:w-4 fill-white text-white" />
-                                <span>Watch Pitch</span>
+                                <span>{{ t('web3.hero.cta.pitch') }}</span>
                             </a>
                         </div>
                     </div>
@@ -120,8 +120,8 @@
                         class="absolute inset-x-0 top-36 px-4 sm:px-0 sm:top-36 lg:top-48 xl:top-[22vh]"
                         lead-class="text-[1.65rem] leading-[1.14] font-medium tracking-[-0.035em] sm:text-4xl md:text-5xl lg:text-[clamp(3rem,4.4vw,4.25rem)]"
                         :segments="[
-                            { text: 'And ordinary investors like us?', break: true },
-                            { text: 'Left completely on the sidelines.', tone: 'muted' },
+                            { text: t('web3.hero.act2.seg1'), break: true },
+                            { text: t('web3.hero.act2.seg2'), tone: 'muted' },
                         ]"
                         :progress="s.h2"
                         :out="s.h2out"
@@ -132,11 +132,11 @@
                         class="absolute inset-x-0 top-36 px-4 sm:px-0 sm:top-36 lg:top-1/2 lg:w-[46%] lg:-translate-y-1/2"
                         lead-class="text-[1.65rem] leading-[1.14] font-medium tracking-[-0.035em] sm:text-4xl lg:text-[clamp(3rem,4.2vw,4rem)]"
                         :segments="[
-                            { text: 'A new,' },
-                            { text: 'greener economy', tone: 'green' },
-                            { text: 'is being born.' },
+                            { text: t('web3.hero.act3.seg1') },
+                            { text: t('web3.hero.act3.seg2'), tone: 'green' },
+                            { text: t('web3.hero.act3.seg3') },
                         ]"
-                        sub="Don't just watch us build it — own a piece of it, straight from your phone."
+                        :sub="t('web3.hero.act3.sub')"
                         :progress="s.h3"
                         :out="s.h3out"
                     />
@@ -146,10 +146,10 @@
                         class="absolute inset-x-0 top-36 px-4 sm:px-0 sm:top-36 lg:top-48 xl:top-[22vh]"
                         lead-class="text-[1.65rem] leading-[1.14] font-medium tracking-[-0.035em] sm:text-4xl lg:text-[clamp(2.75rem,3.9vw,3.75rem)]"
                         :segments="[
-                            { text: 'Every kWh, immutably on' },
-                            { text: 'Solana.', tone: 'solana' },
+                            { text: t('web3.hero.act4.seg1') },
+                            { text: t('web3.hero.act4.seg2'), tone: 'solana' },
                         ]"
-                        sub="The only blockchain fast enough to keep up with the speed at which energy is traded."
+                        :sub="t('web3.hero.act4.sub')"
                         :progress="s.h4"
                         :out="s.h4out"
                     />
@@ -159,10 +159,10 @@
                         class="absolute inset-x-0 top-36 px-4 sm:px-0 sm:top-36 lg:top-48 xl:top-[22vh]"
                         lead-class="text-[1.65rem] leading-[1.14] font-medium tracking-[-0.035em] sm:text-4xl lg:text-[clamp(2.75rem,3.9vw,3.75rem)]"
                         :segments="[
-                            { text: 'All connected through' },
-                            { text: 'EURTree.', tone: 'green' },
+                            { text: t('web3.hero.act5.seg1') },
+                            { text: t('web3.hero.act5.seg2'), tone: 'green' },
                         ]"
-                        sub="The stablecoin laying the foundation for a completely new, greener economy of the future."
+                        :sub="t('web3.hero.act5.sub')"
                         :progress="s.h5"
                     />
                 </div>
@@ -176,6 +176,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ExternalLink, Play } from 'lucide-vue-next';
 import { computed, onMounted, onUnmounted, reactive, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import Web3BessWireframe from './Web3BessWireframe.vue';
 import Web3Ecosystem from './Web3Ecosystem.vue';
 import Web3EuropeMap from './Web3EuropeMap.vue';
@@ -185,6 +186,8 @@ import Web3ScrollHeading from './Web3ScrollHeading.vue';
 import Web3VictronTopology from './Web3VictronTopology.vue';
 
 gsap.registerPlugin(ScrollTrigger);
+
+const { t } = useI18n();
 
 /** Same content width as the navbar and the rest of the site */
 const container =

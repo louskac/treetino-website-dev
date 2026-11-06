@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { ArrowUpRight } from 'lucide-vue-next';
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 import InvestorChapterMark from './InvestorChapterMark.vue';
 import { CONTAINER, DATABOOK_CS, DATABOOK_EN, HEADLINE } from './tokens';
+
+const { t } = useI18n();
 
 interface DocLink {
     label: string;
@@ -9,45 +13,45 @@ interface DocLink {
     external?: boolean;
 }
 
-const documents: { title: string; meta: string; links: DocLink[] }[] = [
+const documents = computed<{ title: string; meta: string; links: DocLink[] }[]>(() => [
     {
-        title: 'Pitch deck',
-        meta: 'Company, market, traction, round',
+        title: t('investors.c06.doc0.title'),
+        meta: t('investors.c06.doc0.meta'),
         links: [
-            { label: 'Interactive', href: '/pitch' },
+            { label: t('investors.c06.doc0.link0'), href: '/pitch' },
             { label: 'PDF', href: '/treetino-pitchdeck.pdf', external: true },
         ],
     },
     {
-        title: 'Technical databook',
-        meta: 'Datasheets for V1, V2, Aero and TreeApp',
+        title: t('investors.c06.doc1.title'),
+        meta: t('investors.c06.doc1.meta'),
         links: [
             { label: 'EN', href: DATABOOK_EN, external: true },
             { label: 'CZ', href: DATABOOK_CS, external: true },
         ],
     },
     {
-        title: 'Investment memorandum',
-        meta: 'Unit economics, pipeline, rollout',
+        title: t('investors.c06.doc2.title'),
+        meta: t('investors.c06.doc2.meta'),
         links: [{ label: 'PDF', href: '/docs/Treetino_Investment_Memorandum_2026.pdf', external: true }],
     },
     {
-        title: 'Patents',
-        meta: 'EP 4 664 750 A1 · WO 2025/256678',
+        title: t('investors.c06.doc3.title'),
+        meta: t('investors.c06.doc3.meta'),
         links: [
             { label: 'EP', href: '/docs/patent-ep-4664750.pdf', external: true },
             { label: 'WO', href: '/docs/patent-wo-2025256678.pdf', external: true },
         ],
     },
     {
-        title: 'Site wind data',
-        meta: 'Measurements from the MKovo V1 site',
+        title: t('investors.c06.doc4.title'),
+        meta: t('investors.c06.doc4.meta'),
         links: [
-            { label: 'Report', href: '/docs/treetino_mkovo_wind_measurement_report.pdf', external: true },
-            { label: 'Archive', href: '/docs/treetino_mkovo_complete_data_archive.pdf', external: true },
+            { label: t('investors.c06.doc4.link0'), href: '/docs/treetino_mkovo_wind_measurement_report.pdf', external: true },
+            { label: t('investors.c06.doc4.link1'), href: '/docs/treetino_mkovo_complete_data_archive.pdf', external: true },
         ],
     },
-];
+]);
 </script>
 
 <template>
@@ -59,16 +63,16 @@ const documents: { title: string; meta: string; links: DocLink[] }[] = [
         <div :class="CONTAINER" class="relative grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-10">
             <div class="flex flex-col justify-between lg:col-span-5">
                 <div>
-                    <InvestorChapterMark index="06" label="Data room" />
+                    <InvestorChapterMark index="06" :label="t('investors.c06.label')" />
                     <h2 class="mt-6" :class="HEADLINE">
-                        Everything else,<br />
-                        <span class="text-[#8ec5ff] [text-shadow:0_0_40px_rgba(77,141,255,0.45)]">in writing.</span>
+                        {{ t('investors.c06.line1') }}<br />
+                        <span class="text-[#8ec5ff] [text-shadow:0_0_40px_rgba(77,141,255,0.45)]">{{ t('investors.c06.line2') }}</span>
                     </h2>
                 </div>
 
                 <div class="mt-10 border-t border-white/10 pt-5 lg:mt-0">
                     <p class="text-sm text-white/50 sm:text-base">
-                        Questions?
+                        {{ t('investors.c06.questions') }}
                         <a
                             href="mailto:info@treetino.eu"
                             class="text-white underline decoration-white/30 underline-offset-4 transition-colors hover:decoration-[#8ec5ff]"
@@ -82,7 +86,7 @@ const documents: { title: string; meta: string; links: DocLink[] }[] = [
             <ul class="border-t border-white/12 lg:col-span-7 lg:mt-1">
                 <li
                     v-for="(doc, i) in documents"
-                    :key="doc.title"
+                    :key="i"
                     class="group flex items-center gap-4 border-b border-white/12 py-5 sm:gap-6 sm:py-6"
                 >
                     <span class="w-6 shrink-0 text-xs text-white/30 tabular-nums sm:text-sm">{{ String(i + 1).padStart(2, '0') }}</span>

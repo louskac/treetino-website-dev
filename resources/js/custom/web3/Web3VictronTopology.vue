@@ -61,7 +61,7 @@
                 <div
                     class="flex items-center justify-between font-mono text-[10px] tracking-wider text-zinc-500 uppercase"
                 >
-                    <span>Grid Interconnect</span>
+                    <span>{{ t('web3.topology.c11.tag') }}</span>
                     <span class="font-bold text-blue-600">ČEZ 22 kV</span>
                 </div>
                 <div>
@@ -71,13 +71,13 @@
                         6,200 kW
                     </div>
                     <p class="text-[11px] font-semibold text-zinc-600">
-                        Přeštice Substation
+                        {{ t('web3.topology.c11.sub') }}
                     </p>
                 </div>
                 <div
                     class="flex items-center justify-between border-t border-zinc-100 pt-1 font-mono text-[10px] text-zinc-500"
                 >
-                    <span>Arbitrage Spread:</span>
+                    <span>{{ t('web3.topology.c11.foot') }}</span>
                     <span class="font-bold text-zinc-900">€95–€98 / MWh</span>
                 </div>
             </div>
@@ -92,7 +92,7 @@
                 <div
                     class="flex items-center justify-between font-mono text-[10px] font-bold tracking-wider text-emerald-800 uppercase"
                 >
-                    <span>Grid Balancing</span>
+                    <span>{{ t('web3.topology.c12.tag') }}</span>
                     <span class="font-black text-emerald-700">ČEPS aFRR+</span>
                 </div>
                 <div>
@@ -102,13 +102,13 @@
                         &lt; 10 ms
                     </div>
                     <p class="text-[11px] font-bold text-emerald-900">
-                        Fast Primary Response
+                        {{ t('web3.topology.c12.sub') }}
                     </p>
                 </div>
                 <div
                     class="flex items-center justify-between border-t border-emerald-200/60 pt-1 font-mono text-[10px] text-emerald-800"
                 >
-                    <span>Regulation:</span>
+                    <span>{{ t('web3.topology.c12.foot') }}</span>
                     <span class="font-bold text-emerald-950">FCR ±200mHz</span>
                 </div>
             </div>
@@ -123,8 +123,8 @@
                 <div
                     class="flex items-center justify-between font-mono text-[10px] tracking-wider text-zinc-500 uppercase"
                 >
-                    <span>Thermal Buffer</span>
-                    <span class="font-bold text-rose-600">Passive</span>
+                    <span>{{ t('web3.topology.c13.tag') }}</span>
+                    <span class="font-bold text-rose-600">{{ t('web3.topology.c13.badge') }}</span>
                 </div>
                 <div>
                     <div
@@ -133,14 +133,14 @@
                         31.8 °C
                     </div>
                     <p class="text-[11px] font-semibold text-zinc-600">
-                        Optimal Liquid Cooling
+                        {{ t('web3.topology.c13.sub') }}
                     </p>
                 </div>
                 <div
                     class="flex items-center justify-between border-t border-zinc-100 pt-1 font-mono text-[10px] text-zinc-500"
                 >
-                    <span>Parasitic Savings:</span>
-                    <span class="font-bold text-zinc-900">8–12% Energy</span>
+                    <span>{{ t('web3.topology.c13.foot') }}</span>
+                    <span class="font-bold text-zinc-900">{{ t('web3.topology.c13.val') }}</span>
                 </div>
             </div>
         </foreignObject>
@@ -154,8 +154,8 @@
                 <div
                     class="flex items-center justify-between font-mono text-[10px] tracking-wider text-zinc-500 uppercase"
                 >
-                    <span>Substation Trafo</span>
-                    <span class="font-bold text-amber-600">Reserved</span>
+                    <span>{{ t('web3.topology.c21.tag') }}</span>
+                    <span class="font-bold text-amber-600">{{ t('web3.topology.c21.badge') }}</span>
                 </div>
                 <div>
                     <div
@@ -164,14 +164,14 @@
                         8,600 kVA
                     </div>
                     <p class="text-[11px] font-semibold text-zinc-600">
-                        Agreement #4122602318
+                        {{ t('web3.topology.c21.sub') }}
                     </p>
                 </div>
                 <div
                     class="flex items-center justify-between border-t border-zinc-100 pt-1 font-mono text-[10px] text-zinc-500"
                 >
-                    <span>Interconnect:</span>
-                    <span class="font-bold text-zinc-900">22 kV Cabling</span>
+                    <span>{{ t('web3.topology.c21.foot') }}</span>
+                    <span class="font-bold text-zinc-900">{{ t('web3.topology.c21.val') }}</span>
                 </div>
             </div>
         </foreignObject>
@@ -189,7 +189,7 @@
                     <span
                         class="border border-white/40 px-1.5 py-0.5 text-[9px] font-bold text-white"
                     >
-                        50 Racks
+                        {{ t('web3.topology.c22.badge') }}
                     </span>
                 </div>
                 <div>
@@ -197,13 +197,13 @@
                         PCS 200 kW
                     </div>
                     <p class="text-[11px] font-bold text-blue-100">
-                        Peak Discharge Active
+                        {{ t('web3.topology.c22.sub') }}
                     </p>
                 </div>
                 <div
                     class="flex items-center justify-between border-t border-white/20 pt-1 font-mono text-[10px] text-white"
                 >
-                    <span>Project IRR:</span>
+                    <span>{{ t('web3.topology.c22.foot') }}</span>
                     <strong class="font-black text-white">21.8% p.a.</strong>
                 </div>
             </div>
@@ -218,24 +218,24 @@
                 <div
                     class="flex items-center justify-between font-mono text-[10px] tracking-wider text-zinc-500 uppercase"
                 >
-                    <span>Safety System</span>
+                    <span>{{ t('web3.topology.c23.tag') }}</span>
                     <span class="font-bold text-emerald-700">IP54</span>
                 </div>
                 <div>
                     <div
                         class="font-mono text-xl font-black tracking-tight text-zinc-950"
                     >
-                        Class A1
+                        {{ t('web3.topology.c23.title') }}
                     </div>
                     <p class="text-[11px] font-semibold text-zinc-600">
-                        100 mm Mineral Barrier
+                        {{ t('web3.topology.c23.sub') }}
                     </p>
                 </div>
                 <div
                     class="flex items-center justify-between border-t border-zinc-100 pt-1 font-mono text-[10px] text-zinc-500"
                 >
-                    <span>Extinguish:</span>
-                    <span class="font-bold text-zinc-900">Automated Aerosol</span>
+                    <span>{{ t('web3.topology.c23.foot') }}</span>
+                    <span class="font-bold text-zinc-900">{{ t('web3.topology.c23.val') }}</span>
                 </div>
             </div>
         </foreignObject>
@@ -249,7 +249,7 @@
                 <div
                     class="flex items-center justify-between font-mono text-[10px] font-bold tracking-wider text-emerald-700 uppercase"
                 >
-                    <span>Battery Storage</span>
+                    <span>{{ t('web3.topology.c32.tag') }}</span>
                     <span class="text-zinc-500">Samsung SDI EU</span>
                 </div>
                 <div>
@@ -273,8 +273,8 @@
                 <div
                     class="flex items-center justify-between border-t border-zinc-100 pt-1 font-mono text-[10px] text-zinc-500"
                 >
-                    <span>Warranty:</span>
-                    <span class="font-bold text-zinc-900">10+10 Years EU</span>
+                    <span>{{ t('web3.topology.c32.foot') }}</span>
+                    <span class="font-bold text-zinc-900">{{ t('web3.topology.c32.val') }}</span>
                 </div>
             </div>
         </foreignObject>
@@ -288,7 +288,7 @@
                 <div
                     class="flex items-center justify-between font-mono text-[10px] font-bold tracking-wider text-amber-800 uppercase"
                 >
-                    <span>SCADA Gateway</span>
+                    <span>{{ t('web3.topology.c33.tag') }}</span>
                     <span class="font-bold text-amber-700">Venus OS</span>
                 </div>
                 <div>
@@ -305,7 +305,7 @@
                     class="flex items-center justify-between border-t border-amber-200/60 pt-1 font-mono text-[10px] text-amber-900"
                 >
                     <span>Oracle Dispatch:</span>
-                    <span class="font-bold text-emerald-700">ČEPS Certified</span>
+                    <span class="font-bold text-emerald-700">{{ t('web3.topology.c33.val') }}</span>
                 </div>
             </div>
         </foreignObject>
@@ -356,15 +356,15 @@
                 :style="cardStyle(0.46, 0.66)"
             >
                 <div class="flex items-center justify-between font-mono text-[9px] tracking-wider text-zinc-400 uppercase">
-                    <span>Grid Interconnect</span>
+                    <span>{{ t('web3.topology.c11.tag') }}</span>
                     <span class="font-bold text-blue-400">ČEZ 22 kV</span>
                 </div>
                 <div>
                     <div class="font-mono text-base font-black text-white">6,200 kW</div>
-                    <p class="text-[9px] font-medium text-zinc-400">Přeštice Substation</p>
+                    <p class="text-[9px] font-medium text-zinc-400">{{ t('web3.topology.c11.sub') }}</p>
                 </div>
                 <div class="flex items-center justify-between border-t border-zinc-800 pt-1 font-mono text-[8.5px] text-zinc-400">
-                    <span>Arbitrage:</span>
+                    <span>{{ t('web3.topology.c11.foot_m') }}</span>
                     <span class="font-bold text-emerald-400">€95–€98/MWh</span>
                 </div>
             </div>
@@ -377,15 +377,15 @@
                 :style="cardStyle(0.36, 0.56)"
             >
                 <div class="flex items-center justify-between font-mono text-[9px] font-bold tracking-wider text-emerald-400 uppercase">
-                    <span>Balancing</span>
+                    <span>{{ t('web3.topology.c12.tag_m') }}</span>
                     <span class="font-black text-emerald-300">ČEPS aFRR+</span>
                 </div>
                 <div>
                     <div class="font-mono text-base font-black text-emerald-400">&lt; 10 ms</div>
-                    <p class="text-[9px] font-bold text-emerald-300">Fast Primary</p>
+                    <p class="text-[9px] font-bold text-emerald-300">{{ t('web3.topology.c12.sub_m') }}</p>
                 </div>
                 <div class="flex items-center justify-between border-t border-emerald-900/60 pt-1 font-mono text-[8.5px] text-emerald-400">
-                    <span>Regulation:</span>
+                    <span>{{ t('web3.topology.c12.foot') }}</span>
                     <span class="font-bold text-emerald-200">FCR ±200mHz</span>
                 </div>
             </div>
@@ -405,15 +405,15 @@
                         </span>
                         <span>WATTINO hBESS</span>
                     </div>
-                    <span class="border border-white/40 px-1.5 py-0.5 text-[9px] font-bold text-white rounded bg-white/10">50 Racks</span>
+                    <span class="border border-white/40 px-1.5 py-0.5 text-[9px] font-bold text-white rounded bg-white/10">{{ t('web3.topology.c22.badge') }}</span>
                 </div>
                 <div>
                     <div class="font-mono text-xl font-black text-white">PCS 200 kW</div>
-                    <p class="text-[10px] font-semibold text-blue-100">Peak Discharge Active</p>
+                    <p class="text-[10px] font-semibold text-blue-100">{{ t('web3.topology.c22.sub') }}</p>
                 </div>
                 <div class="flex items-center justify-between border-t border-white/20 pt-1 font-mono text-[9.5px] text-white">
-                    <span>Project IRR:</span>
-                    <strong class="font-black text-white">21.8% p.a. • SolScan Verified</strong>
+                    <span>{{ t('web3.topology.c22.foot') }}</span>
+                    <strong class="font-black text-white">{{ t('web3.topology.c22.val_m') }}</strong>
                 </div>
             </div>
         </foreignObject>
@@ -425,7 +425,7 @@
                 :style="cardStyle(0.3, 0.5)"
             >
                 <div class="flex items-center justify-between font-mono text-[9px] font-bold tracking-wider text-amber-400 uppercase">
-                    <span>Gateway</span>
+                    <span>{{ t('web3.topology.c33.tag_m') }}</span>
                     <span class="text-amber-300">Venus OS</span>
                 </div>
                 <div>
@@ -446,16 +446,16 @@
                 :style="cardStyle(0.5, 0.7)"
             >
                 <div class="flex items-center justify-between font-mono text-[9px] tracking-wider text-zinc-400 uppercase">
-                    <span>Cooling & Safety</span>
+                    <span>{{ t('web3.topology.c23.tag_m') }}</span>
                     <span class="font-bold text-rose-400">IP54</span>
                 </div>
                 <div>
                     <div class="font-mono text-base font-black text-rose-400">31.8 °C</div>
-                    <p class="text-[8.5px] text-zinc-400">Liquid Cooling Buffer</p>
+                    <p class="text-[8.5px] text-zinc-400">{{ t('web3.topology.c13.sub_m') }}</p>
                 </div>
                 <div class="flex items-center justify-between border-t border-zinc-800 pt-0.5 font-mono text-[8.5px] text-zinc-400">
-                    <span>Barrier:</span>
-                    <span class="font-bold text-zinc-200">Class A1 100mm</span>
+                    <span>{{ t('web3.topology.c23.foot_m') }}</span>
+                    <span class="font-bold text-zinc-200">{{ t('web3.topology.c23.val_m') }}</span>
                 </div>
             </div>
         </foreignObject>
@@ -467,13 +467,13 @@
                 :style="cardStyle(0.0, 0.16, false)"
             >
                 <div class="flex items-center justify-between font-mono text-[9.5px] font-bold tracking-wider text-emerald-400 uppercase">
-                    <span>Samsung SDI Battery</span>
+                    <span>{{ t('web3.topology.c32.tag_m') }}</span>
                     <span class="text-zinc-400 font-mono">666 VDC</span>
                 </div>
                 <div>
                     <div class="flex items-baseline justify-between font-mono text-lg font-black text-emerald-400">
                         <span>68.4% SoC</span>
-                        <span class="text-[9px] font-normal text-zinc-400">Active Storage</span>
+                        <span class="text-[9px] font-normal text-zinc-400">{{ t('web3.topology.c32.sub_m') }}</span>
                     </div>
                     <div class="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-zinc-800">
                         <div
@@ -483,8 +483,8 @@
                     </div>
                 </div>
                 <div class="flex items-center justify-between border-t border-zinc-800 pt-1 font-mono text-[9px] text-zinc-400">
-                    <span>Warranty:</span>
-                    <span class="font-bold text-zinc-200">10+10 Years EU</span>
+                    <span>{{ t('web3.topology.c32.foot') }}</span>
+                    <span class="font-bold text-zinc-200">{{ t('web3.topology.c32.val') }}</span>
                 </div>
             </div>
         </foreignObject>
@@ -494,6 +494,9 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const props = withDefaults(defineProps<{ assemble?: number }>(), {
     assemble: 1,

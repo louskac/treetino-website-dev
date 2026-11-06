@@ -24,6 +24,10 @@ const DECKS = [
         url: `${BASE_URL}/pitch-fintech`,
         targets: [path.join(rootDir, 'public/treetino-fintech-pitchdeck.pdf')],
     },
+    {
+        url: `${BASE_URL}/pitch-refract`,
+        targets: [path.join(rootDir, 'public/treetino-refract-pitchdeck.pdf')],
+    },
 ];
 
 async function generate() {

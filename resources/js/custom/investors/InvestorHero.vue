@@ -13,7 +13,7 @@
                 <div :class="CONTAINER" class="relative h-full">
                     <div :class="TEXT_COLUMN" class="max-w-[44rem]!">
                         <div :style="fadeStyle(s.mark, 0, 8)">
-                            <InvestorChapterMark index="00" label="Investor brief" />
+                            <InvestorChapterMark index="00" :label="t('investors.hero.mark')" />
                         </div>
                         <div class="mt-6 grid">
                             <!-- Beat 1 -->
@@ -22,19 +22,19 @@
                                     tag="h1"
                                     :lead-class="HEADLINE"
                                     :segments="[
-                                        { text: '49.8 kW of sun and wind', break: true },
-                                        { text: 'on one square metre.', tone: 'accent' },
+                                        { text: t('investors.hero.b1.line1'), break: true },
+                                        { text: t('investors.hero.b1.line2'), tone: 'accent' },
                                     ]"
                                     :progress="s.h1"
                                     :out="s.h1out"
                                 />
                                 <div class="mt-8 flex flex-wrap gap-3" :style="fadeStyle(s.cta, s.h1out, 12)">
                                     <a href="/pitch" :class="BTN_PRIMARY">
-                                        Pitch deck
+                                        {{ t('investors.hero.cta.pitch') }}
                                         <ArrowUpRight class="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                                     </a>
-                                    <a :href="DATABOOK_EN" target="_blank" rel="noopener" :class="BTN_SECONDARY">
-                                        Technical databook
+                                    <a :href="databookHref" target="_blank" rel="noopener" :class="BTN_SECONDARY">
+                                        {{ t('investors.hero.cta.databook') }}
                                         <ArrowDown class="h-4 w-4 text-white/60" />
                                     </a>
                                 </div>
@@ -44,8 +44,8 @@
                                 class="col-start-1 row-start-1"
                                 :lead-class="HEADLINE"
                                 :segments="[
-                                    { text: 'Patented in Europe.', break: true },
-                                    { text: 'Built in the Czech Republic.', tone: 'accent' },
+                                    { text: t('investors.hero.b2.line1'), break: true },
+                                    { text: t('investors.hero.b2.line2'), tone: 'accent' },
                                 ]"
                                 :progress="s.h2"
                             />
@@ -60,7 +60,7 @@
                         <span class="relative block h-8 w-px overflow-hidden bg-white/15">
                             <span class="scroll-cue absolute inset-x-0 top-0 h-3 bg-[#8ec5ff]"></span>
                         </span>
-                        Scroll
+                        {{ t('investors.hero.scroll') }}
                     </div>
                 </div>
             </div>
@@ -72,14 +72,18 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowDown, ArrowUpRight } from 'lucide-vue-next';
-import { onMounted, onUnmounted, reactive, ref } from 'vue';
+import { computed, onMounted, onUnmounted, reactive, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import Web3EuropeMap from '@/custom/web3/Web3EuropeMap.vue';
 import Web3MapAssets from '@/custom/web3/Web3MapAssets.vue';
 import Web3ScrollHeading from '@/custom/web3/Web3ScrollHeading.vue';
 import InvestorChapterMark from './InvestorChapterMark.vue';
-import { BTN_PRIMARY, BTN_SECONDARY, CONTAINER, DATABOOK_EN, fadeStyle, HEADLINE, TEXT_COLUMN } from './tokens';
+import { BTN_PRIMARY, BTN_SECONDARY, CONTAINER, DATABOOK_CS, DATABOOK_EN, fadeStyle, HEADLINE, TEXT_COLUMN } from './tokens';
 
 gsap.registerPlugin(ScrollTrigger);
+
+const { t, locale } = useI18n();
+const databookHref = computed(() => (locale.value === 'cs' ? DATABOOK_CS : DATABOOK_EN));
 
 const sectionRef = ref<HTMLElement | null>(null);
 

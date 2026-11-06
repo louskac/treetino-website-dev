@@ -18,7 +18,7 @@
 
             <InvestorChapterText
                 index="02"
-                label="The system"
+                :label="t('investors.c02.label')"
                 :beats="beats"
                 :state="[
                     { in: s.b0, out: s.b0out },
@@ -34,7 +34,8 @@
 <script setup lang="ts">
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { onMounted, onUnmounted, reactive, ref } from 'vue';
+import { computed, onMounted, onUnmounted, reactive, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import type { Beat } from './InvestorChapterText.vue';
 import InvestorChapterText from './InvestorChapterText.vue';
 import InvestorSystemScene from './InvestorSystemScene.vue';
@@ -42,35 +43,37 @@ import { CONTAINER, VISUAL_AREA } from './tokens';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const beats: Beat[] = [
+const { t } = useI18n();
+
+const beats = computed<Beat[]>(() => [
     {
-        segments: [{ text: 'Sun and wind.', break: true }, { text: 'One power core.', tone: 'accent' }],
-        sub: 'Both sources feed a single DC bus with Victron electronics.',
+        segments: [{ text: t('investors.c02.b0.line1'), break: true }, { text: t('investors.c02.b0.line2'), tone: 'accent' }],
+        sub: t('investors.c02.b0.sub'),
         stats: [
-            { value: '49.8 kW', label: 'Combined peak' },
-            { value: '1', label: 'DC bus' },
-            { value: 'Victron', label: 'Power electronics' },
+            { value: t('investors.c02.b0.s0.val'), label: t('investors.c02.b0.s0.label') },
+            { value: t('investors.c02.b0.s1.val'), label: t('investors.c02.b0.s1.label') },
+            { value: t('investors.c02.b0.s2.val'), label: t('investors.c02.b0.s2.label') },
         ],
     },
     {
-        segments: [{ text: 'Stored, used', break: true }, { text: 'or sold.', tone: 'accent' }],
-        sub: 'Charge the battery and EVs, power the site, sell the surplus.',
+        segments: [{ text: t('investors.c02.b1.line1'), break: true }, { text: t('investors.c02.b1.line2'), tone: 'accent' }],
+        sub: t('investors.c02.b1.sub'),
         stats: [
-            { value: '100 kWh', label: 'Optional LiFePO4' },
-            { value: '22 kW', label: 'EV hub' },
-            { value: '15 min', label: 'Peak shaving' },
+            { value: t('investors.c02.b1.s0.val'), label: t('investors.c02.b1.s0.label') },
+            { value: t('investors.c02.b1.s1.val'), label: t('investors.c02.b1.s1.label') },
+            { value: t('investors.c02.b1.s2.val'), label: t('investors.c02.b1.s2.label') },
         ],
     },
     {
-        segments: [{ text: 'One app', break: true }, { text: 'runs it all.', tone: 'accent' }],
-        sub: 'TreeApp tracks the sun, stows for storms and balances EV load in real time.',
+        segments: [{ text: t('investors.c02.b2.line1'), break: true }, { text: t('investors.c02.b2.line2'), tone: 'accent' }],
+        sub: t('investors.c02.b2.sub'),
         stats: [
-            { value: 'AI', label: 'Power optimisation' },
-            { value: 'Live', label: 'Telemetry' },
-            { value: 'Remote', label: 'Diagnostics' },
+            { value: t('investors.c02.b2.s0.val'), label: t('investors.c02.b2.s0.label') },
+            { value: t('investors.c02.b2.s1.val'), label: t('investors.c02.b2.s1.label') },
+            { value: t('investors.c02.b2.s2.val'), label: t('investors.c02.b2.s2.label') },
         ],
     },
-];
+]);
 
 const sectionRef = ref<HTMLElement | null>(null);
 const active = ref(false);

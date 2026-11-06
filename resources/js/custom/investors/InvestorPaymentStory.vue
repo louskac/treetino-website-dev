@@ -18,7 +18,7 @@
 
             <InvestorChapterText
                 index="04"
-                label="Payment gate"
+                :label="t('investors.c04.label')"
                 :beats="beats"
                 :state="[
                     { in: s.b0, out: s.b0out },
@@ -34,7 +34,8 @@
 <script setup lang="ts">
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { onMounted, onUnmounted, reactive, ref } from 'vue';
+import { computed, onMounted, onUnmounted, reactive, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import type { Beat } from './InvestorChapterText.vue';
 import InvestorChapterText from './InvestorChapterText.vue';
 import InvestorPaymentScene from './InvestorPaymentScene.vue';
@@ -42,35 +43,37 @@ import { CONTAINER, VISUAL_AREA } from './tokens';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const beats: Beat[] = [
+const { t } = useI18n();
+
+const beats = computed<Beat[]>(() => [
     {
-        segments: [{ text: 'Tap a card.', break: true }, { text: 'Charge the car.', tone: 'accent' }],
-        sub: 'Drivers pay with any bank card or Apple Pay right on the charger — no app, no account.',
+        segments: [{ text: t('investors.c04.b0.line1'), break: true }, { text: t('investors.c04.b0.line2'), tone: 'accent' }],
+        sub: t('investors.c04.b0.sub'),
         stats: [
-            { value: 'CZK · EUR', label: 'Card & Apple Pay' },
-            { value: '0', label: 'Apps to install' },
-            { value: '22 kW', label: 'Per charger' },
+            { value: t('investors.c04.b0.s0.val'), label: t('investors.c04.b0.s0.label') },
+            { value: t('investors.c04.b0.s1.val'), label: t('investors.c04.b0.s1.label') },
+            { value: t('investors.c04.b0.s2.val'), label: t('investors.c04.b0.s2.label') },
         ],
     },
     {
-        segments: [{ text: 'The owner is paid', break: true }, { text: 'in seconds.', tone: 'accent' }],
-        sub: 'Paired here with the compact 5 m Treetino V2 — every kilowatt-hour is metered at the socket and settled straight to the owner.',
+        segments: [{ text: t('investors.c04.b1.line1'), break: true }, { text: t('investors.c04.b1.line2'), tone: 'accent' }],
+        sub: t('investors.c04.b1.sub'),
         stats: [
-            { value: '<2 s', label: 'Settlement' },
-            { value: '1:1', label: 'Metered to kWh' },
-            { value: 'V1 & V2', label: 'Compatible trees' },
+            { value: t('investors.c04.b1.s0.val'), label: t('investors.c04.b1.s0.label') },
+            { value: t('investors.c04.b1.s1.val'), label: t('investors.c04.b1.s1.label') },
+            { value: t('investors.c04.b1.s2.val'), label: t('investors.c04.b1.s2.label') },
         ],
     },
     {
-        segments: [{ text: 'New to Europe.', break: true }, { text: 'Licensed partner.', tone: 'accent' }],
-        sub: 'Hackathon-winning prototype, now in hardware development with a licensed payment partner.',
+        segments: [{ text: t('investors.c04.b2.line1'), break: true }, { text: t('investors.c04.b2.line2'), tone: 'accent' }],
+        sub: t('investors.c04.b2.sub'),
         stats: [
-            { value: '1st in EU', label: 'EV payment gate' },
-            { value: '2 ×', label: 'Hackathon awards' },
-            { value: 'ČSOB', label: 'Start it accelerator' },
+            { value: t('investors.c04.b2.s0.val'), label: t('investors.c04.b2.s0.label') },
+            { value: t('investors.c04.b2.s1.val'), label: t('investors.c04.b2.s1.label') },
+            { value: t('investors.c04.b2.s2.val'), label: t('investors.c04.b2.s2.label') },
         ],
     },
-];
+]);
 
 const sectionRef = ref<HTMLElement | null>(null);
 const active = ref(false);

@@ -13,7 +13,10 @@
  */
 import * as THREE from 'three';
 import { onMounted, onUnmounted, ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { LineBuilder, lineMaterial, roundRectPoints, WIRE } from './wireKit';
+
+const { t, locale } = useI18n();
 
 const props = withDefaults(
     defineProps<{
@@ -96,13 +99,15 @@ const CW = 860;
 const CH = Math.round((CW * SH) / SW);
 const FONT = "'DM Sans', ui-sans-serif, system-ui, sans-serif";
 
-const ASSETS = [
-    { icon: 'battery', title: 'BESS Přeštice', sub: '8.6 MW · 17.2 MWh', value: 12400, extra: '35 % APY', green: true },
-    { icon: 'wind', title: 'Kryry wind farm', sub: '2× Vestas V80 · 4 MW', value: 6150, extra: '+1.2 %', green: false },
-    { icon: 'plug', title: 'EV hub Paris-Nord', sub: '10 bays · 350 kW', value: 3900, extra: '+0.8 %', green: false },
-    { icon: 'tree', title: 'Treetino V1', sub: 'Sun + wind', value: 2410, extra: '+0.5 %', green: false },
-];
-const TOTAL = ASSETS.reduce((s, a) => s + a.value, 0);
+function getAssets() {
+    return [
+        { icon: 'battery', title: 'BESS Přeštice', sub: '8.6 MW · 17.2 MWh', value: 12400, extra: '35 % APY', green: true },
+        { icon: 'wind', title: t('web3.wallet.asset.wind_title', 'Kryry wind farm'), sub: '2× Vestas V80 · 4 MW', value: 6150, extra: '+1.2 %', green: false },
+        { icon: 'plug', title: 'EV hub Paris-Nord', sub: t('web3.wallet.asset.ev_sub', '10 bays · 350 kW'), value: 3900, extra: '+0.8 %', green: false },
+        { icon: 'tree', title: 'Treetino V1', sub: t('web3.wallet.asset.tree_sub', 'Sun + wind'), value: 2410, extra: '+0.5 %', green: false },
+    ];
+}
+const TOTAL = 12400 + 6150 + 3900 + 2410;
 
 function clamp01(v: number) {
     return Math.min(1, Math.max(0, v));
@@ -219,7 +224,7 @@ function drawWallet(ctx: CanvasRenderingContext2D, p: number) {
     // header
     ctx.fillStyle = '#e6f2ff';
     ctx.font = `600 42px ${FONT}`;
-    ctx.fillText('Treetino Wallet', 72, 190);
+    ctx.fillText(t('web3.wallet.title', 'Treetino Wallet'), 72, 190);
     const sol = ctx.createLinearGradient(CW - 250, 0, CW - 72, 0);
     sol.addColorStop(0, '#9945FF');
     sol.addColorStop(1, '#14F195');
@@ -239,13 +244,13 @@ function drawWallet(ctx: CanvasRenderingContext2D, p: number) {
     const count = ease(p / 0.35);
     ctx.fillStyle = 'rgba(230,242,255,0.55)';
     ctx.font = `500 30px ${FONT}`;
-    ctx.fillText('Portfolio value', 72, 300);
+    ctx.fillText(t('web3.wallet.portfolio_value', 'Portfolio value'), 72, 300);
     ctx.fillStyle = '#ffffff';
     ctx.font = `600 104px ${FONT}`;
     ctx.fillText(euro(Math.round(TOTAL * count)), 66, 392);
     ctx.fillStyle = '#34d399';
     ctx.font = `600 30px ${FONT}`;
-    ctx.fillText(`+${euro(412.18 * count, 2)}  today`, 72, 470);
+    ctx.fillText(`+${euro(412.18 * count, 2)}  ${t('web3.wallet.today', 'today')}`, 72, 470);
 
     // sparkline
     const sp = ease((p - 0.08) / 0.35);
@@ -280,7 +285,11 @@ function drawWallet(ctx: CanvasRenderingContext2D, p: number) {
     }
 
     // actions
-    const actions = ['Invest', 'Send', 'Receive'];
+    const actions = [
+        t('web3.wallet.action.invest', 'Invest'),
+        t('web3.wallet.action.send', 'Send'),
+        t('web3.wallet.action.receive', 'Receive'),
+    ];
     actions.forEach((label, i) => {
         const x = 72 + 120 + i * ((CW - 144 - 240) / 2);
         ctx.strokeStyle = i === 0 ? '#4d8dff' : 'rgba(159,211,255,0.55)';
@@ -318,14 +327,14 @@ function drawWallet(ctx: CanvasRenderingContext2D, p: number) {
     // assets list (energy infrastructure instead of coins)
     ctx.fillStyle = '#e6f2ff';
     ctx.font = `600 34px ${FONT}`;
-    ctx.fillText('Energy assets', 72, 950);
+    ctx.fillText(t('web3.wallet.energy_assets', 'Energy assets'), 72, 950);
     ctx.fillStyle = 'rgba(159,211,255,0.7)';
     ctx.font = `500 26px ${FONT}`;
     ctx.textAlign = 'right';
-    ctx.fillText('See all', CW - 72, 950);
+    ctx.fillText(t('web3.wallet.see_all', 'See all'), CW - 72, 950);
     ctx.textAlign = 'left';
 
-    ASSETS.forEach((a, i) => {
+    getAssets().forEach((a, i) => {
         const k = ease((p - 0.25 - i * 0.08) / 0.12);
 
         if (k <= 0) {
@@ -377,7 +386,7 @@ function drawWallet(ctx: CanvasRenderingContext2D, p: number) {
         ctx.fill();
         ctx.fillStyle = 'rgba(230,242,255,0.6)';
         ctx.font = `500 30px ${FONT}`;
-        ctx.fillText('Invest in', 72, top + 100);
+        ctx.fillText(t('web3.wallet.sheet.invest_in', 'Invest in'), 72, top + 100);
         ctx.fillStyle = '#ffffff';
         ctx.font = `600 44px ${FONT}`;
         ctx.fillText('BESS Přeštice', 72, top + 156);
@@ -385,7 +394,7 @@ function drawWallet(ctx: CanvasRenderingContext2D, p: number) {
         ctx.fillText('€500', 72, top + 290);
         ctx.fillStyle = '#34d399';
         ctx.font = `600 30px ${FONT}`;
-        ctx.fillText('Up to 35 % APY · paid in USDC', 72, top + 372);
+        ctx.fillText(t('web3.wallet.sheet.apy', 'Up to 35 % APY · paid in USDC'), 72, top + 372);
 
         const done = p > 0.9;
         const btn = ctx.createLinearGradient(72, 0, CW - 72, 0);
@@ -397,7 +406,13 @@ function drawWallet(ctx: CanvasRenderingContext2D, p: number) {
         ctx.fillStyle = '#ffffff';
         ctx.font = `600 36px ${FONT}`;
         ctx.textAlign = 'center';
-        ctx.fillText(done ? '✓  Confirmed in 0.4 s' : 'Confirm on Solana', CW / 2, top + 490);
+        ctx.fillText(
+            done
+                ? t('web3.wallet.sheet.confirmed', '✓  Confirmed in 0.4 s')
+                : t('web3.wallet.sheet.confirm', 'Confirm on Solana'),
+            CW / 2,
+            top + 490,
+        );
         ctx.textAlign = 'left';
     }
 
@@ -524,6 +539,11 @@ watch(
     () => props.active,
     (on) => on && resize(),
 );
+
+watch(locale, () => {
+    lastUi = -1;
+    redrawScreen();
+});
 
 onUnmounted(() => {
     cancelAnimationFrame(raf);

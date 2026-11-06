@@ -5,7 +5,7 @@
         <!-- Callouts pinned to 3D anchors (positions updated directly in the render loop) -->
         <div
             v-for="(c, i) in callouts"
-            :key="c.title"
+            :key="i"
             :ref="(el) => (calloutEls[i] = el as HTMLElement | null)"
             class="pointer-events-none absolute top-0 left-0 will-change-transform"
             style="opacity: 0"
@@ -47,11 +47,14 @@
  * - `orbit`   slowly turns the camera across the microgrid
  */
 import * as THREE from 'three';
-import { onMounted, onUnmounted, ref, watch } from 'vue';
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 import type { V3 } from '@/custom/web3/wireKit';
 import { batteryContainer, fadingGrid, LineBuilder, lineMaterial, podLines, treetinoV1, WIRE } from '@/custom/web3/wireKit';
 import { arcPoints, buildingLines, carLines, chargerPillar, dim, glowMaterial, glowTexture, mergeInto, Path, pylonLines } from './sceneKit';
 import { clamp01 } from './tokens';
+
+const { t } = useI18n();
 
 const props = withDefaults(
     defineProps<{
@@ -86,7 +89,7 @@ interface CalloutDef {
     tone?: 'blue' | 'green';
 }
 
-const callouts: CalloutDef[] = [
+const calloutDefs: CalloutDef[] = [
     { value: '49.8 kW', title: 'Solar + wind', anchor: new THREE.Vector3(TREE_X, 4.55, 0), dir: 'up', group: 'sources' },
     { value: 'Victron · 100 kWh', title: 'Power core & LiFePO4', anchor: new THREE.Vector3(CORE_X, 2.35, 0), dir: 'up', group: 'sources' },
     { value: '22 kW', title: 'EV hub', anchor: new THREE.Vector3(CAR_POS[0] - 0.4, 0.02, CAR_POS[2] + 1.05), dir: 'down', group: 'loads' },
@@ -94,6 +97,15 @@ const callouts: CalloutDef[] = [
     { value: 'Surplus', title: 'Grid export', anchor: new THREE.Vector3(PYLON_POS[0] + 0.2, 3.65, PYLON_POS[2]), dir: 'up', group: 'loads' },
     { value: 'TreeApp AI', title: 'Live load & sun control', anchor: new THREE.Vector3(CORE_X, 3.95, 0), dir: 'up', group: 'brain', tone: 'green' },
 ];
+
+const callouts = computed<CalloutDef[]>(() => [
+    { ...calloutDefs[0], value: t('investors.c02.b0.s0.val'), title: t('investors.c02.callout.solar_wind') },
+    { ...calloutDefs[1], title: t('investors.c02.callout.core') },
+    { ...calloutDefs[2], title: t('investors.c02.callout.ev') },
+    { ...calloutDefs[3], value: t('investors.c02.callout.bldgValue'), title: t('investors.c02.callout.bldgTitle') },
+    { ...calloutDefs[4], value: t('investors.c02.callout.gridValue'), title: t('investors.c02.callout.gridTitle') },
+    { ...calloutDefs[5], title: t('investors.c02.callout.brainTitle') },
+]);
 
 const SOURCE_PATH = new Path([
     [TREE_X + 0.25, 0.05, 0.2],
@@ -324,7 +336,7 @@ function frame(time: number) {
     const loadCalloutOp = clamp01((lds - 0.5) / 0.4) * (1 - clamp01(brn * 2.2));
     const brainCalloutOp = clamp01((brn - 0.45) / 0.45);
 
-    callouts.forEach((c, i) => {
+    calloutDefs.forEach((c, i) => {
         const op = c.group === 'sources' ? srcCalloutOp : c.group === 'loads' ? loadCalloutOp : brainCalloutOp;
         placeCallout(calloutEls[i], c.anchor, op, c.dir === 'up');
     });

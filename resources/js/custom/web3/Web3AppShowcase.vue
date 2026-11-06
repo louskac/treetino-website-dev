@@ -115,9 +115,12 @@
 <script setup lang="ts">
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { onMounted, onUnmounted, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 gsap.registerPlugin(ScrollTrigger);
+
+const { t } = useI18n();
 
 /** Same content width as the navbar and the rest of the site */
 const container =
@@ -130,20 +133,20 @@ const canvasRef = ref<HTMLCanvasElement | null>(null);
 const appProgress = ref(0);
 const activeStep = ref(0);
 
-const steps = [
+const steps = computed(() => [
     {
-        lead: '1) Choose infrastructure project',
-        sub: 'you want to invest in like on Kickstarter.',
+        lead: t('web3.showcase.s0.lead'),
+        sub: t('web3.showcase.s0.sub'),
     },
     {
-        lead: '2) Prepare investment plans',
-        sub: 'for yourself.',
+        lead: t('web3.showcase.s1.lead'),
+        sub: t('web3.showcase.s1.sub'),
     },
     {
-        lead: '3) Manage assets and earn yield',
-        sub: 'in predictable way.',
+        lead: t('web3.showcase.s2.lead'),
+        sub: t('web3.showcase.s2.sub'),
     },
-];
+]);
 
 const TOTAL_FRAMES = 121;
 const frames: HTMLImageElement[] = [];

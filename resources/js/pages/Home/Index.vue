@@ -1,5 +1,5 @@
 <template>
-    <Head :title="$t('home.meta.title')" />
+    <Head :title="$t('home.meta.title', 'Chytrý energetický strom | Treetino')" />
 
     <DefaultLayout>
         <HomeHero />

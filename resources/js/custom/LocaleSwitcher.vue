@@ -1,9 +1,14 @@
 <script setup lang="ts">
 import { Globe } from '@iconoir/vue';
 import { router, usePage } from '@inertiajs/vue3';
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import i18nMessages from '../i18n_messages.json';
+import {
+    detectInitialLocale,
+    persistLocale,
+    type AppLocale,
+} from '../lib/locale';
 
 defineProps<{
     inverted?: boolean;
@@ -16,12 +21,15 @@ const isOpen = ref(false);
 const dropdownRef = ref<HTMLElement | null>(null);
 
 const activeLocale = ref<string>(
-    (typeof window !== 'undefined'
-        ? localStorage.getItem('app_locale')
-        : null) ||
-        (page.props.i18n?.locale as string) ||
-        'cs',
+    (vueI18nLocale.value as string) ||
+        detectInitialLocale(page.props.i18n?.locale as string | undefined),
 );
+
+watch(vueI18nLocale, (newVal) => {
+    if (newVal && newVal !== activeLocale.value) {
+        activeLocale.value = newVal as string;
+    }
+});
 
 const locale = computed(() => activeLocale.value);
 const locales = computed(
@@ -38,11 +46,7 @@ const changeLocale = (targetLocale: string) => {
     }
 
     // 1. Update localStorage & cookie
-    if (typeof window !== 'undefined') {
-        localStorage.setItem('app_locale', targetLocale);
-        document.cookie = `app_locale=${targetLocale};path=/;max-age=31536000`;
-        document.cookie = `locale=${targetLocale};path=/;max-age=31536000`;
-    }
+    persistLocale(targetLocale as AppLocale);
 
     // 2. Instantly update reactive i18n state on client
     activeLocale.value = targetLocale;
@@ -88,17 +92,21 @@ const handleClickOutside = (event: MouseEvent) => {
     }
 };
 
+const handleExternalLocaleChange = (event: Event) => {
+    const customEvent = event as CustomEvent<string>;
+    if (customEvent.detail && customEvent.detail !== activeLocale.value) {
+        activeLocale.value = customEvent.detail;
+    }
+};
+
 onMounted(() => {
     document.addEventListener('click', handleClickOutside);
-    const saved = localStorage.getItem('app_locale');
-
-    if (saved && saved !== activeLocale.value) {
-        changeLocale(saved);
-    }
+    window.addEventListener('locale-changed', handleExternalLocaleChange);
 });
 
 onBeforeUnmount(() => {
     document.removeEventListener('click', handleClickOutside);
+    window.removeEventListener('locale-changed', handleExternalLocaleChange);
 });
 </script>
 

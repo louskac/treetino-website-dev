@@ -5,7 +5,7 @@
         <!-- Callouts pinned to 3D anchors (positions are written directly in the render loop) -->
         <div
             v-for="(c, i) in callouts"
-            :key="c.title"
+            :key="i"
             :ref="(el) => (calloutEls[i] = el as HTMLElement | null)"
             class="pointer-events-none absolute top-0 left-0 will-change-transform"
             style="opacity: 0"
@@ -41,9 +41,12 @@
  * - `orbit`       turns the camera slowly
  */
 import * as THREE from 'three';
-import { onMounted, onUnmounted, ref, watch } from 'vue';
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 import type { V3 } from '@/custom/web3/wireKit';
 import { fadingGrid, lineMaterial, podLines, treetinoV1, WIRE } from '@/custom/web3/wireKit';
+
+const { t } = useI18n();
 
 const props = withDefaults(
     defineProps<{
@@ -72,10 +75,10 @@ const props = withDefaults(
     },
 );
 
-const callouts = [
-    { title: 'Wind turbines', value: '12 ×', dir: 'up' },
-    { title: 'Solar leaves', value: '300 ×', dir: 'down' },
-] as const;
+const callouts = computed(() => [
+    { title: t('investors.c01.callout.wind'), value: '12 ×', dir: 'up' as const },
+    { title: t('investors.c01.callout.solar'), value: '300 ×', dir: 'down' as const },
+]);
 
 const hostRef = ref<HTMLElement | null>(null);
 const canvasRef = ref<HTMLCanvasElement | null>(null);

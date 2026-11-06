@@ -12,10 +12,10 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue';
 </script>
 
 <template>
-    <Head title="Investors | Treetino">
+    <Head :title="$t('investors.meta.title')">
         <meta
             name="description"
-            content="Treetino investor brief: 49.8 kW hybrid solar-wind trees with dual-axis sun tracking and automatic storm stow, Victron power core, optional LiFePO4 storage, hardware EV charger payment gate and TreeApp control."
+            :content="$t('investors.meta.description')"
         />
         <meta name="robots" content="noindex, nofollow" />
     </Head>

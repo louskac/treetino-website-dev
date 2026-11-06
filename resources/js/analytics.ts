@@ -8,11 +8,68 @@ declare global {
 export const GA_MEASUREMENT_ID =
     (import.meta.env.VITE_GA_MEASUREMENT_ID as string) || 'G-97K6933LVC';
 
+let lastTrackedPath = '';
+let lastTrackedAt = 0;
+
+/**
+ * Determine whether analytics tracking should run in the current browser context.
+ * Excludes local development hosts and automated headless browsers (Playwright/WebDriver).
+ */
+export function isAnalyticsEnabledEnvironment(): boolean {
+    if (typeof window === 'undefined') {
+        return false;
+    }
+
+    if (typeof navigator !== 'undefined' && navigator.webdriver) {
+        return false;
+    }
+
+    const host = window.location.hostname;
+
+    if (
+        !host ||
+        host === 'localhost' ||
+        host === '127.0.0.1' ||
+        host === '[::1]' ||
+        host.endsWith('.local') ||
+        host.endsWith('.test')
+    ) {
+        return false;
+    }
+
+    return true;
+}
+
+/**
+ * Normalize document/page title so GA4 never records raw translation keys,
+ * 'Laravel' fallbacks, or duplicated '| Treetino | Treetino' suffixes.
+ */
+export function normalizePageTitle(rawTitle?: string): string {
+    const fallback =
+        'Treetino — Chytrý energetický strom | Smart Solar & Wind Energy Tree';
+
+    if (!rawTitle) {
+        return fallback;
+    }
+
+    let cleaned = rawTitle
+        .replace(/\bLaravel\b/gi, 'Treetino')
+        .replace(/\bhome\.meta\.title\b/g, 'Treetino')
+        .replace(/(?:\s*\|\s*Treetino)+/gi, ' | Treetino')
+        .trim();
+
+    if (!cleaned || cleaned === '| Treetino') {
+        return fallback;
+    }
+
+    return cleaned;
+}
+
 /**
  * Initialize Google Analytics with Google Consent Mode v2.
  */
 export function initGA(measurementId: string = GA_MEASUREMENT_ID): void {
-    if (typeof window === 'undefined' || !measurementId) {
+    if (!isAnalyticsEnabledEnvironment() || !measurementId) {
         return;
     }
 
@@ -55,7 +112,7 @@ export function initGA(measurementId: string = GA_MEASUREMENT_ID): void {
  * Update Google Analytics consent based on cookie preferences.
  */
 export function updateGAConsent(granted: boolean): void {
-    if (typeof window === 'undefined' || !window.gtag) {
+    if (!isAnalyticsEnabledEnvironment() || !window.gtag) {
         return;
     }
 
@@ -68,16 +125,28 @@ export function updateGAConsent(granted: boolean): void {
  * Track page view in GA4 SPA.
  */
 export function trackPageView(url?: string, title?: string): void {
-    if (typeof window === 'undefined' || !window.gtag) {
+    if (!isAnalyticsEnabledEnvironment() || !window.gtag) {
         return;
     }
 
     const pagePath = url || window.location.pathname + window.location.search;
-    const pageTitle = title || document.title;
+    const now = Date.now();
+
+    if (pagePath === lastTrackedPath && now - lastTrackedAt < 500) {
+        return;
+    }
+
+    lastTrackedPath = pagePath;
+    lastTrackedAt = now;
+
+    const pageTitle = normalizePageTitle(title || document.title);
+    const pageLocation = pagePath.startsWith('http')
+        ? pagePath
+        : `${window.location.origin}${pagePath.startsWith('/') ? '' : '/'}${pagePath}`;
 
     window.gtag('event', 'page_view', {
         page_path: pagePath,
-        page_location: window.location.href,
+        page_location: pageLocation,
         page_title: pageTitle,
     });
 }
@@ -89,7 +158,7 @@ export function trackEvent(
     eventName: string,
     params: Record<string, any> = {},
 ): void {
-    if (typeof window === 'undefined' || !window.gtag) {
+    if (!isAnalyticsEnabledEnvironment() || !window.gtag) {
         return;
     }
 

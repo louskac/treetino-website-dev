@@ -23,7 +23,7 @@
 
             <InvestorChapterText
                 index="01"
-                label="The tree"
+                :label="t('investors.c01.label')"
                 :beats="beats"
                 :state="[
                     { in: s.b0, out: s.b0out },
@@ -39,7 +39,8 @@
 <script setup lang="ts">
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { onMounted, onUnmounted, reactive, ref } from 'vue';
+import { computed, onMounted, onUnmounted, reactive, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import type { Beat } from './InvestorChapterText.vue';
 import InvestorChapterText from './InvestorChapterText.vue';
 import InvestorTreeScene from './InvestorTreeScene.vue';
@@ -47,35 +48,37 @@ import { CONTAINER, VISUAL_AREA } from './tokens';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const beats: Beat[] = [
+const { t } = useI18n();
+
+const beats = computed<Beat[]>(() => [
     {
-        segments: [{ text: 'Wind above.', break: true }, { text: 'Sun below.', tone: 'accent' }],
-        sub: 'Turbines catch the stronger wind up high. Solar leaves fan out underneath.',
+        segments: [{ text: t('investors.c01.b0.line1'), break: true }, { text: t('investors.c01.b0.line2'), tone: 'accent' }],
+        sub: t('investors.c01.b0.sub'),
         stats: [
-            { value: '36 kW', label: 'Wind' },
-            { value: '13.8 kWp', label: 'Solar' },
-            { value: '1 m²', label: 'Footprint' },
+            { value: t('investors.c01.b0.s0.val'), label: t('investors.c01.b0.s0.label') },
+            { value: t('investors.c01.b0.s1.val'), label: t('investors.c01.b0.s1.label') },
+            { value: t('investors.c01.b0.s2.val'), label: t('investors.c01.b0.s2.label') },
         ],
     },
     {
-        segments: [{ text: 'Every branch', break: true }, { text: 'follows the sun.', tone: 'accent' }],
-        sub: 'AI steers each branch on two axes, all day long.',
+        segments: [{ text: t('investors.c01.b1.line1'), break: true }, { text: t('investors.c01.b1.line2'), tone: 'accent' }],
+        sub: t('investors.c01.b1.sub'),
         stats: [
-            { value: '+29%', label: 'Yield from tracking' },
-            { value: '2-axis', label: 'Servo control' },
-            { value: 'Patented', label: 'EP 4 664 750' },
+            { value: t('investors.c01.b1.s0.val'), label: t('investors.c01.b1.s0.label') },
+            { value: t('investors.c01.b1.s1.val'), label: t('investors.c01.b1.s1.label') },
+            { value: t('investors.c01.b1.s2.val'), label: t('investors.c01.b1.s2.label') },
         ],
     },
     {
-        segments: [{ text: 'Hail or storm?', break: true }, { text: 'Leaves flip 180°.', tone: 'accent' }],
-        sub: 'Every branch rotates upside-down so the armored leaf backs shield the solar panels.',
+        segments: [{ text: t('investors.c01.b2.line1'), break: true }, { text: t('investors.c01.b2.line2'), tone: 'accent' }],
+        sub: t('investors.c01.b2.sub'),
         stats: [
-            { value: '180°', label: 'Dorsal hail shield' },
-            { value: '144 km/h', label: 'Gale resistance' },
-            { value: '<35 dB', label: 'Turbine noise' },
+            { value: t('investors.c01.b2.s0.val'), label: t('investors.c01.b2.s0.label') },
+            { value: t('investors.c01.b2.s1.val'), label: t('investors.c01.b2.s1.label') },
+            { value: t('investors.c01.b2.s2.val'), label: t('investors.c01.b2.s2.label') },
         ],
     },
-];
+]);
 
 const sectionRef = ref<HTMLElement | null>(null);
 const active = ref(false);

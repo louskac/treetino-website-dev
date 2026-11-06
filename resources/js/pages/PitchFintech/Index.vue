@@ -229,31 +229,31 @@ const notes = [
     },
     {
         time: 'Story',
-        script: 'Europe decided this has to end. Under AFIR, new public fast chargers must accept card payments without an app or registration, and existing fast chargers on the main corridors must be retrofitted. It’s not a nice-to-have anymore.',
+        script: 'Europe decided this has to end. Under AFIR, new public fast chargers (50 kW and up) must accept card payments without an app or registration, and existing fast chargers on the main corridors must be retrofitted by 2027. Slower AC chargers can still use QR codes — which drivers hate.',
     },
     {
         time: 'Story',
-        script: 'Online payments are easy — a QR code and a web page. A terminal standing outside, alone, in the rain, is a different world. Visa and Mastercard call it unattended: certified outdoor hardware, special scheme approval, and an amount nobody knows until the car is full.',
+        script: 'Why is this hard? Online payments are easy — a QR code and a web page, which fails in the rain and isn’t allowed on fast chargers. And unlike a self-service car wash or vending machine where you tap a fixed 100 Kč to trigger a relay pulse, an EV charger needs outdoor-certified hardware, variable pre-auth holds, and live kWh metering until the car unplugs.',
     },
     {
         time: 'Story',
-        script: 'That’s why the market is empty. Charger makers build power electronics and don’t want to touch card schemes. Payment companies build terminals for shops and don’t understand kilowatt-hours. Nobody owns the gap.',
+        script: 'Today, charger makers bolt on legacy car-wash and vending bricks like Nayax, Payter or CCV. Those readers cost €400 to €600 per bay, have tiny or no screens, charge fixed monthly telemetry fees, and can’t do white-label charger HMI or instant multi-party revenue splits. Meanwhile, modern SoftPOS terminals have great screens and APIs, but are built for indoor shops. The opportunity is replacing a dumb €500 brick and a separate charger display with one smart, metered terminal.',
     },
     {
         time: 'Proposal',
-        script: 'So here is the proposal: close that gap together. Tapaya’s regulated payment rails inside Treetino’s tree-shaped charger. One product, launched together, starting at one school in Prague within weeks.',
+        script: 'So here is the proposal: close that gap together. Tapaya’s regulated payment rails inside Treetino’s tree-shaped charger. One screen for both the charger UI and the payment tap — launched together, starting at one school in Prague within weeks.',
     },
     {
         time: 'Product',
-        script: 'For the driver it’s three moments. Tap any card or phone — a small hold. Charge — every kWh read live from the charger. Unplug — exact capture, the rest released. Tapaya’s API already supports pre-auth, incremental auth and partial capture, which is exactly what EV needs.',
+        script: 'For the driver it’s three moments. Tap any card or phone — a small hold. Charge — every kWh read live from the charger. Unplug — exact capture, the rest released. Unlike a fixed-price car wash reader, Tapaya’s API supports pre-auth, incremental auth and partial capture, which is exactly what metered EV charging needs.',
     },
     {
         time: 'Product',
-        script: 'And it’s not a slide. We built the flow at The FinTechers Hackathon in 30 hours: the charger screen, live metering, and settlement to the site owner the moment the car unplugs.',
+        script: 'And it’s not a slide. We built the flow at The FinTechers Hackathon in 30 hours: the charger screen, live metering, and instant settlement to the site owner the moment the car unplugs.',
     },
     {
         time: 'Hardware',
-        script: 'The hardware is deliberately boring where it should be: a SUNMI Android device — SUNMI is the Xiaomi-backed POS maker Tapaya distributes — with Tapaya’s Accept SDK preinstalled and the NFC reader at hand height. Around it, our sealed trunk enclosure, and an OCPP / Victron link so the terminal knows every kWh. The exact outdoor-certified model is Tapaya’s call.',
+        script: 'Instead of a separate charger display plus a €500 Nayax or Payter brick, we use one SUNMI Android device — SUNMI is the Xiaomi-backed POS maker Tapaya distributes — with Tapaya’s Accept SDK preinstalled and the NFC reader at hand height. Standard SoftPOS is attended-only, so we pair a scheme-approved EV pilot path with Tapaya confirming the outdoor-certified PCI PTS model for rollout.',
     },
     {
         time: 'Treetino',
@@ -269,11 +269,11 @@ const notes = [
     },
     {
         time: 'Visa',
-        script: 'And this is the picture Visa gets: a tree that takes Visa. Visually impossible to scroll past, technically a first for unattended payments. Visa gets a contactless story at the charger, Tapaya a flagship unattended reference, Treetino a brand every host wants.',
+        script: 'And this is the picture Visa gets: a tree that takes Visa. Visually impossible to scroll past, and a flagship showcase for single-screen unattended EV payments. Visa gets a contactless story at the charger, Tapaya a flagship unattended reference, Treetino a brand every host wants.',
     },
     {
         time: 'Market',
-        script: 'The market: 7,574 public charging points across 3,738 stations in Czechia — ČEZ runs 1,000+ stations and PRE nearly 930 — and 1.15 million points across the EU. In 2025, ČEZ and PRE averaged 1.7 sessions per station per day (over 600k sessions on ČEZ, 565k on PRE), and 23.2 to 24 kWh per session. At ad-hoc card tariffs, an average session is around 330 Kč — roughly €9.4 billion a year across Europe and €62 million in Czechia.',
+        script: 'The market: 7,574 public charging points across 3,738 stations in Czechia — ČEZ runs 1,000+ stations and PRE nearly 930 — and 1.15 million points across the EU. In 2025, ČEZ and PRE averaged 1.7 sessions per station per day (over 600k sessions on ČEZ, 565k on PRE), and 23.2 to 24 kWh per session. At ad-hoc card tariffs (~330 Kč per session), that is roughly €31 million a year in Czechia today — growing to €62 million at 1.7 sessions per point — and €4.7B to €9.4B across Europe.',
     },
     {
         time: 'Numbers',
@@ -396,10 +396,10 @@ const notes = [
                     <div class="stats">
                         <div class="rise" style="--d: 650ms">
                             <p class="stat-value">Apr 2024</p>
-                            <p class="stat-label">New public fast chargers must accept cards</p>
+                            <p class="stat-label">New fast chargers (≥50 kW) must accept cards</p>
                         </div>
                         <div class="rise" style="--d: 750ms">
-                            <p class="stat-value">2027</p>
+                            <p class="stat-value">Jan 2027</p>
                             <p class="stat-label">Existing fast chargers on main corridors must retrofit</p>
                         </div>
                         <div class="rise" style="--d: 850ms">
@@ -423,31 +423,31 @@ const notes = [
                         class="h-slide"
                         :segments="[
                             { text: 'Online payments are easy.', break: true },
-                            { text: 'Outdoor ones aren’t.', tone: 'accent' },
+                            { text: 'Outdoor EV ones aren’t.', tone: 'accent' },
                         ]"
                     />
 
                     <div class="grid grid-cols-2 gap-[96px]">
                         <div class="rise" style="--d: 450ms">
-                            <p class="eyebrow">A QR code needs</p>
+                            <p class="eyebrow">QR codes &amp; car-wash readers</p>
                             <p class="mt-[16px] text-[44px] leading-[1.1] font-medium tracking-[-0.03em] text-white/45">
-                                A web page.
+                                Built for the wrong job.
                             </p>
                             <ul class="spec mt-[40px] text-white/40">
-                                <li>Easy to build</li>
-                                <li>Painful in the rain, without signal</li>
-                                <li>Not enough for AFIR fast chargers</li>
+                                <li>QR codes fail in the rain and aren’t allowed ≥50 kW</li>
+                                <li>Car-wash bricks (Nayax, Payter) do fixed-price pulses</li>
+                                <li>€400–600 extra hardware brick + monthly telemetry fees</li>
                             </ul>
                         </div>
                         <div class="rise" style="--d: 600ms">
-                            <p class="eyebrow !text-[#8ec5ff]">An unattended terminal needs</p>
+                            <p class="eyebrow !text-[#8ec5ff]">What an EV charger actually needs</p>
                             <p class="mt-[16px] text-[44px] leading-[1.1] font-medium tracking-[-0.03em]">
-                                Much more.
+                                Metered, single-screen pay.
                             </p>
                             <ul class="spec mt-[40px] text-white/75">
-                                <li>Certified outdoor, vandal-proof hardware</li>
-                                <li>Special Visa &amp; Mastercard approval</li>
-                                <li>An amount nobody knows until the car is full</li>
+                                <li>Pre-auth hold, live kWh metering, exact capture on unplug</li>
+                                <li>One display for both the charger UI and the card tap</li>
+                                <li>Instant multi-party split (site host, CPO, investor)</li>
                             </ul>
                         </div>
                     </div>
@@ -467,13 +467,14 @@ const notes = [
                         class="h-slide"
                         :stagger="80"
                         :segments="[
-                            { text: 'Charger makers do hardware.', break: true },
-                            { text: 'Payment firms do shops.', break: true },
-                            { text: 'Nobody owns the gap.', tone: 'accent' },
+                            { text: 'Car-wash bricks do pulses.', break: true },
+                            { text: 'Shop terminals need a clerk.', break: true },
+                            { text: 'EV charging needs both worlds.', tone: 'accent' },
                         ]"
                     />
-                    <p class="sub rise mt-[64px] max-w-[46ch]" style="--d: 1000ms">
-                        Unattended EV payments sit exactly in between. Today, no one is building them.
+                    <p class="sub rise mt-[64px] max-w-[50ch]" style="--d: 1000ms">
+                        Today, charger makers bolt a dumb €500 payment brick next to a separate screen. One smart
+                        Android terminal replaces both.
                     </p>
                 </div>
             </section>
@@ -631,9 +632,10 @@ const notes = [
                                 ]"
                             />
                         </div>
-                        <p class="rise max-w-[36ch] text-[26px] leading-[1.5] text-white/55" style="--d: 700ms">
+                        <p class="rise max-w-[38ch] text-[26px] leading-[1.5] text-white/55" style="--d: 700ms">
                             SUNMI — the Xiaomi-backed Android POS maker — ships through Tapaya with the payment app
-                            preinstalled. Tapaya confirms the outdoor-certified model.
+                            preinstalled. One screen replaces both the charger HMI and a separate payment brick; Tapaya
+                            confirms the PCI PTS outdoor model.
                         </p>
                     </div>
 
@@ -859,8 +861,9 @@ const notes = [
                             </div>
                         </div>
                         <p class="rise mt-[48px] text-[24px] text-white/45" style="--d: 950ms">
-                            At 1.7 sessions a day and 330 Kč per session, ≈ <span class="text-white">€9.4B a year</span> flows through
-                            Europe’s public points — and ≈ <span class="text-white">€62M</span> through Czechia’s.
+                            At 330 Kč per session, ≈ <span class="text-white">€31M–€62M a year</span> flows through
+                            Czechia’s public network (from 1.7/station today to 1.7/point) — and ≈
+                            <span class="text-white">€4.7B–€9.4B</span> across Europe’s.
                         </p>
                     </div>
                 </div>

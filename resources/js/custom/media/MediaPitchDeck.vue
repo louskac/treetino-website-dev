@@ -6,6 +6,7 @@ import {
     ChevronLeft,
     ChevronRight,
     Check,
+    ArrowUpRight,
 } from 'lucide-vue-next';
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
@@ -175,37 +176,62 @@ const progressPercent = computed(() => {
         class="scroll-mt-32 border-b border-black/10 py-16 lg:py-24"
     >
         <!-- Section Header -->
-        <div
-            class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between"
-        >
+        <div class="flex flex-col gap-6">
             <div class="max-w-2xl">
-                <span
-                    class="text-xs font-semibold tracking-[0.2em] text-t-blue uppercase"
-                >
-                    {{ $t('media.pitch_tag') }}
-                </span>
                 <h2
-                    class="mt-3 text-3xl font-medium tracking-tight text-black sm:text-4xl lg:text-5xl"
+                    class="text-3xl font-medium tracking-[-0.03em] text-black sm:text-4xl lg:text-5xl"
                 >
                     {{ $t('media.pitch_title') }}
                 </h2>
                 <p
-                    class="mt-4 text-base leading-relaxed text-black/70 sm:text-lg"
+                    class="mt-3 text-base leading-relaxed text-black/60 sm:text-lg"
                 >
                     {{ $t('media.pitch_desc') }}
                 </p>
             </div>
 
             <!-- Header Action Controls -->
-            <div class="flex shrink-0 flex-wrap items-center gap-3">
+            <div
+                class="pitch-actions-bar flex flex-wrap items-center gap-2"
+            >
+                <a
+                    href="/pitch"
+                    class="inline-flex items-center gap-1.5 rounded-full border border-black/15 px-3.5 py-2 text-xs font-medium whitespace-nowrap text-black/75 transition-colors hover:border-black/40 hover:text-black"
+                >
+                    <span>12-Slide Deck</span>
+                    <ArrowUpRight
+                        class="h-3.5 w-3.5 text-black/40"
+                        aria-hidden="true"
+                    />
+                </a>
+
+                <a
+                    href="/pitch-fintech"
+                    class="inline-flex items-center gap-1.5 rounded-full border border-black/15 px-3.5 py-2 text-xs font-medium whitespace-nowrap text-black/75 transition-colors hover:border-black/40 hover:text-black"
+                >
+                    <span>Fintech × Tapaya</span>
+                    <ArrowUpRight
+                        class="h-3.5 w-3.5 text-black/40"
+                        aria-hidden="true"
+                    />
+                </a>
+
                 <button
                     type="button"
                     @click="copyShareLink"
-                    class="inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-black/15 bg-white px-4 py-2.5 text-xs font-medium whitespace-nowrap text-black/80 shadow-xs transition hover:border-black/30 hover:bg-black/5"
+                    class="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-black/15 px-3.5 py-2 text-xs font-medium whitespace-nowrap text-black/75 transition-colors hover:border-black/40 hover:text-black"
                     :title="$t('media.pitch_share')"
                 >
-                    <Check v-if="copied" class="h-3.5 w-3.5 text-green-600" />
-                    <Share2 v-else class="h-3.5 w-3.5 text-black/70" />
+                    <Check
+                        v-if="copied"
+                        class="h-3.5 w-3.5 text-black"
+                        aria-hidden="true"
+                    />
+                    <Share2
+                        v-else
+                        class="h-3.5 w-3.5 text-black/45"
+                        aria-hidden="true"
+                    />
                     <span>{{
                         copied
                             ? $t('media.pitch_copied')
@@ -216,37 +242,24 @@ const progressPercent = computed(() => {
                 <button
                     type="button"
                     @click="toggleFullscreen"
-                    class="hidden cursor-pointer items-center justify-center gap-2 rounded-xl border border-black/15 bg-white px-4 py-2.5 text-xs font-medium whitespace-nowrap text-black/80 shadow-xs transition hover:border-black/30 hover:bg-black/5 sm:inline-flex"
+                    class="hidden cursor-pointer items-center gap-1.5 rounded-full border border-black/15 px-3.5 py-2 text-xs font-medium whitespace-nowrap text-black/75 transition-colors hover:border-black/40 hover:text-black sm:inline-flex"
                     :title="$t('media.pitch_fullscreen')"
                 >
-                    <Maximize2 class="h-3.5 w-3.5 text-black/70" />
+                    <Maximize2
+                        class="h-3.5 w-3.5 text-black/45"
+                        aria-hidden="true"
+                    />
                     <span>{{ $t('media.pitch_fullscreen') }}</span>
                 </button>
-
-                <a
-                    href="/pitch-fintech"
-                    class="inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-2.5 text-xs font-semibold whitespace-nowrap text-emerald-700 shadow-xs transition hover:bg-emerald-600 hover:text-white"
-                >
-                    <Maximize2 class="h-3.5 w-3.5" />
-                    <span>EV Fintech × Tapaya Deck</span>
-                </a>
-
-                <a
-                    href="/pitch"
-                    class="inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-t-blue/30 bg-t-blue/10 px-4 py-2.5 text-xs font-semibold whitespace-nowrap text-t-blue shadow-xs transition hover:bg-t-blue hover:text-white"
-                >
-                    <Maximize2 class="h-3.5 w-3.5" />
-                    <span>Interactive 12-Slide Deck</span>
-                </a>
 
                 <a
                     :href="pdfUrl"
                     download="treetino-pitchdeck.pdf"
                     target="_blank"
-                    class="inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-t-blue px-4 py-2.5 text-xs font-medium whitespace-nowrap text-white shadow-sm transition hover:bg-t-blue/90"
+                    class="inline-flex cursor-pointer items-center gap-1.5 rounded-full bg-black px-4 py-2 text-xs font-medium whitespace-nowrap text-white transition-opacity hover:opacity-85"
                 >
-                    <Download class="h-3.5 w-3.5" />
-                    <span>{{ $t('media.pitch_download') }}</span>
+                    <Download class="h-3.5 w-3.5" aria-hidden="true" />
+                    <span>PDF</span>
                 </a>
             </div>
         </div>
@@ -362,6 +375,11 @@ const progressPercent = computed(() => {
 </template>
 
 <style scoped>
+.pitch-actions-bar {
+    flex-wrap: wrap;
+    flex-wrap: balance;
+}
+
 .slide-fade-enter-active,
 .slide-fade-leave-active {
     transition:

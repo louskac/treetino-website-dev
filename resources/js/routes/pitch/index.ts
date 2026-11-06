@@ -1,6 +1,6 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../wayfinder'
 /**
-* @see routes/web.php:61
+* @see routes/web.php:95
 * @route '/pitch'
 */
 export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -14,7 +14,7 @@ index.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see routes/web.php:61
+* @see routes/web.php:95
 * @route '/pitch'
 */
 index.url = (options?: RouteQueryOptions) => {
@@ -22,7 +22,7 @@ index.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see routes/web.php:61
+* @see routes/web.php:95
 * @route '/pitch'
 */
 index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -31,7 +31,7 @@ index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see routes/web.php:61
+* @see routes/web.php:95
 * @route '/pitch'
 */
 index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -40,7 +40,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see routes/web.php:61
+* @see routes/web.php:95
 * @route '/pitch'
 */
 const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -49,7 +49,7 @@ const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => (
 })
 
 /**
-* @see routes/web.php:61
+* @see routes/web.php:95
 * @route '/pitch'
 */
 indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -58,7 +58,7 @@ indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 })
 
 /**
-* @see routes/web.php:61
+* @see routes/web.php:95
 * @route '/pitch'
 */
 indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -74,7 +74,7 @@ indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 index.form = indexForm
 
 /**
-* @see routes/web.php:64
+* @see routes/web.php:98
 * @route '/pitch-hackathon'
 */
 export const hackathon = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -88,7 +88,7 @@ hackathon.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see routes/web.php:64
+* @see routes/web.php:98
 * @route '/pitch-hackathon'
 */
 hackathon.url = (options?: RouteQueryOptions) => {
@@ -96,7 +96,7 @@ hackathon.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see routes/web.php:64
+* @see routes/web.php:98
 * @route '/pitch-hackathon'
 */
 hackathon.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -105,7 +105,7 @@ hackathon.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see routes/web.php:64
+* @see routes/web.php:98
 * @route '/pitch-hackathon'
 */
 hackathon.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -114,7 +114,7 @@ hackathon.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see routes/web.php:64
+* @see routes/web.php:98
 * @route '/pitch-hackathon'
 */
 const hackathonForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -123,7 +123,7 @@ const hackathonForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> 
 })
 
 /**
-* @see routes/web.php:64
+* @see routes/web.php:98
 * @route '/pitch-hackathon'
 */
 hackathonForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -132,7 +132,7 @@ hackathonForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> =>
 })
 
 /**
-* @see routes/web.php:64
+* @see routes/web.php:98
 * @route '/pitch-hackathon'
 */
 hackathonForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -148,7 +148,7 @@ hackathonForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> =
 hackathon.form = hackathonForm
 
 /**
-* @see routes/web.php:67
+* @see routes/web.php:101
 * @route '/pitch-fintech'
 */
 export const fintech = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -162,7 +162,7 @@ fintech.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see routes/web.php:67
+* @see routes/web.php:101
 * @route '/pitch-fintech'
 */
 fintech.url = (options?: RouteQueryOptions) => {
@@ -170,7 +170,7 @@ fintech.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see routes/web.php:67
+* @see routes/web.php:101
 * @route '/pitch-fintech'
 */
 fintech.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -179,7 +179,7 @@ fintech.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see routes/web.php:67
+* @see routes/web.php:101
 * @route '/pitch-fintech'
 */
 fintech.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -188,7 +188,7 @@ fintech.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see routes/web.php:67
+* @see routes/web.php:101
 * @route '/pitch-fintech'
 */
 const fintechForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -197,7 +197,7 @@ const fintechForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> =>
 })
 
 /**
-* @see routes/web.php:67
+* @see routes/web.php:101
 * @route '/pitch-fintech'
 */
 fintechForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -206,7 +206,7 @@ fintechForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => (
 })
 
 /**
-* @see routes/web.php:67
+* @see routes/web.php:101
 * @route '/pitch-fintech'
 */
 fintechForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -221,10 +221,85 @@ fintechForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => 
 
 fintech.form = fintechForm
 
+/**
+* @see routes/web.php:104
+* @route '/pitch-refract'
+*/
+export const refract = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: refract.url(options),
+    method: 'get',
+})
+
+refract.definition = {
+    methods: ["get","head"],
+    url: '/pitch-refract',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see routes/web.php:104
+* @route '/pitch-refract'
+*/
+refract.url = (options?: RouteQueryOptions) => {
+    return refract.definition.url + queryParams(options)
+}
+
+/**
+* @see routes/web.php:104
+* @route '/pitch-refract'
+*/
+refract.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: refract.url(options),
+    method: 'get',
+})
+
+/**
+* @see routes/web.php:104
+* @route '/pitch-refract'
+*/
+refract.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: refract.url(options),
+    method: 'head',
+})
+
+/**
+* @see routes/web.php:104
+* @route '/pitch-refract'
+*/
+const refractForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: refract.url(options),
+    method: 'get',
+})
+
+/**
+* @see routes/web.php:104
+* @route '/pitch-refract'
+*/
+refractForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: refract.url(options),
+    method: 'get',
+})
+
+/**
+* @see routes/web.php:104
+* @route '/pitch-refract'
+*/
+refractForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: refract.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+refract.form = refractForm
+
 const pitch = {
     index: Object.assign(index, index),
     hackathon: Object.assign(hackathon, hackathon),
     fintech: Object.assign(fintech, fintech),
+    refract: Object.assign(refract, refract),
 }
 
 export default pitch
