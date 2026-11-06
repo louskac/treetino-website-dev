@@ -264,8 +264,10 @@
                 >
                     <div class="relative h-[500px] w-full overflow-hidden">
                         <img
-                            src="/img/stills/Still_Strom-v1.png"
+                            src="/img/stills/Still_Strom-v1.webp"
                             :alt="`${$t('products.v1.title')} Showcase`"
+                            loading="lazy"
+                            decoding="async"
                             class="h-full w-full object-cover object-center transition-transform duration-1000 ease-out hover:scale-105"
                         />
                         <div

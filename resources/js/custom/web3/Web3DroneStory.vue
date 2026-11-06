@@ -112,9 +112,12 @@
                                             ref="pitchVideoRef"
                                             src="/web3/video/pitch-web.mp4"
                                             poster="/video/pitch-poster.jpg"
+                                            width="1280"
+                                            height="720"
                                             controls
                                             playsinline
-                                            preload="auto"
+                                            preload="metadata"
+                                            loading="lazy"
                                             class="h-full w-full object-cover"
                                             @volumechange="checkMutedState"
                                         ></video>

@@ -681,7 +681,27 @@ function setupScrollTrigger(): void {
     });
 }
 
+let hasStartedFramePreload = false;
+let preloadObserver: IntersectionObserver | null = null;
+
+function startFramePreload(): void {
+    if (hasStartedFramePreload) {
+        return;
+    }
+    hasStartedFramePreload = true;
+
+    imageElements.forEach((img, index) => {
+        if (!img.src) {
+            img.src = imagePaths[index];
+        }
+    });
+
+    warmUpFeatureFrames();
+}
+
 onMounted(() => {
+    const initialFrame = sectionFrames[0];
+
     imageElements = imagePaths.map((src, imageIndex) => {
         const img = new Image();
 
@@ -691,17 +711,34 @@ onMounted(() => {
                 drawFrame(currentFrameIndex);
             }
         };
-        img.src = src;
+        if (imageIndex === initialFrame) {
+            img.src = src;
+        }
 
         return img;
     });
 
-    frameState.frame = sectionFrames[0];
-    currentFrameIndex = sectionFrames[0];
+    frameState.frame = initialFrame;
+    currentFrameIndex = initialFrame;
     currentSectionIndex.value = 0;
 
     drawFrame(frameState.frame);
-    warmUpFeatureFrames();
+
+    if (typeof IntersectionObserver !== 'undefined' && sectionRef.value) {
+        preloadObserver = new IntersectionObserver(
+            (entries) => {
+                if (entries.some((entry) => entry.isIntersecting)) {
+                    startFramePreload();
+                    preloadObserver?.disconnect();
+                    preloadObserver = null;
+                }
+            },
+            { rootMargin: '800px 0px' },
+        );
+        preloadObserver.observe(sectionRef.value);
+    } else {
+        startFramePreload();
+    }
 
     nextTick(() => {
         setupInputObserver();
@@ -714,6 +751,9 @@ onMounted(() => {
 
 onUnmounted(() => {
     window.removeEventListener('resize', handleResize);
+    preloadObserver?.disconnect();
+    preloadObserver = null;
+    hasStartedFramePreload = false;
 
     scrollTriggerInstance?.kill();
     entrySnapTriggerInstance?.kill();

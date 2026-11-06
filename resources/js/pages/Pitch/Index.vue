@@ -189,7 +189,7 @@ const partners = [
             <!-- ============================================================ -->
             <section class="slide" :class="state(2)">
                 <div class="img-in absolute inset-y-0 right-[-120px] w-[1340px]" style="--d: 0ms">
-                    <img src="/img/hero-v1-cinematic.png" alt="Treetino V1" class="h-full w-full object-cover" />
+                    <img src="/img/hero-v1-cinematic.webp" alt="Treetino V1" class="h-full w-full object-cover" decoding="async" />
                 </div>
                 <div class="product-fade"></div>
                 <div class="chrome">

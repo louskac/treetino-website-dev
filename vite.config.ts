@@ -27,4 +27,32 @@ export default defineConfig({
         }),
         ...(process.env.VERCEL ? [] : [wayfinder({ formVariants: true })]),
     ],
+    build: {
+        rollupOptions: {
+            output: {
+                manualChunks(id) {
+                    if (id.includes('i18n_messages.json')) {
+                        return 'i18n-messages';
+                    }
+                    if (id.includes('node_modules/three')) {
+                        return 'vendor-three';
+                    }
+                    if (id.includes('node_modules/gsap')) {
+                        return 'vendor-gsap';
+                    }
+                    if (id.includes('node_modules/swiper')) {
+                        return 'vendor-swiper';
+                    }
+                    if (
+                        id.includes('node_modules/vue') ||
+                        id.includes('node_modules/@vue') ||
+                        id.includes('node_modules/@inertiajs') ||
+                        id.includes('node_modules/vue-i18n')
+                    ) {
+                        return 'vendor-vue';
+                    }
+                },
+            },
+        },
+    },
 });

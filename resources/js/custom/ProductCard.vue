@@ -9,6 +9,9 @@
                 class="h-full w-full rounded-2xl object-cover transition-all duration-600 group-hover:scale-110"
                 :src="product.image"
                 :alt="$t(product.labelKey, product.label)"
+                loading="lazy"
+                decoding="async"
+                fetchpriority="low"
             />
         </div>
 

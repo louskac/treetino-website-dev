@@ -262,8 +262,10 @@
                 >
                     <div class="relative h-[500px] w-full overflow-hidden">
                         <img
-                            src="/img/stills/Still_Turbina.png"
+                            src="/img/stills/Still_Turbina.webp"
                             :alt="`Treetino ${$t('products.turbine.title')}`"
+                            loading="lazy"
+                            decoding="async"
                             class="h-full w-full object-cover object-center transition-transform duration-1000 ease-out hover:scale-105"
                         />
                         <div
@@ -558,7 +560,7 @@
             :title="$t('products.turbine.cta_title')"
             :buttonText="$t('products.turbine.configure_label')"
             :buttonHref="route('configurator.product', 'turbina')"
-            image1="/img/stills/Still_Turbina.png"
+            image1="/img/stills/Still_Turbina.webp"
             image2="/img/info/info-turbine-w.webp"
         />
 

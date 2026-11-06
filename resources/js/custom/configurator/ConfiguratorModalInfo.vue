@@ -49,7 +49,7 @@ const productRoute = computed(() => {
 const productVisual = computed(() => {
     if (props.productId === 'strom-v2') {
         return {
-            render: '/img/stills/Still_Strom-v2.png',
+            render: '/img/stills/Still_Strom-v2.webp',
             badge: '124 TopCon FVE + 6× VTE',
             power: '6 – 12 kW',
             specsKey: 'products.v2.numbers_description',
@@ -59,7 +59,7 @@ const productVisual = computed(() => {
     }
     if (props.productId === 'turbina') {
         return {
-            render: '/img/stills/Still_Turbina.png',
+            render: '/img/stills/Still_Turbina.webp',
             badge: 'Tichá vertikální VTE',
             power: '1 – 3 kW',
             specsKey: 'products.turbine.numbers_description',
@@ -68,7 +68,7 @@ const productVisual = computed(() => {
         };
     }
     return {
-        render: '/img/stills/Still_Strom-v1.png',
+        render: '/img/stills/Still_Strom-v1.webp',
         badge: '300 TopCon FVE + 12× VTE',
         power: '49,8 kW',
         specsKey: 'products.v1.numbers_description',

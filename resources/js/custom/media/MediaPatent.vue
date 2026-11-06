@@ -10,25 +10,52 @@ const canvasRef = ref<HTMLCanvasElement | null>(null);
 const currentFrame = ref(0);
 const isLoaded = ref(false);
 let animationTimer: number | null = null;
+let visibilityObserver: IntersectionObserver | null = null;
+let hasStartedPreloading = false;
 
 const frames: HTMLImageElement[] = [];
 
-// Preload frames
-const loadFrames = () => {
-    let loadedCount = 0;
+const getFrameSrc = (indexOneBased: number) =>
+    `/img/features-frames/features_frame_${String(indexOneBased).padStart(4, '0')}.webp`;
 
+// Load initial frame immediately, defer remaining 227 frames until near viewport
+const initFirstFrame = () => {
     for (let i = 1; i <= TOTAL_FRAMES; i++) {
         const img = new Image();
-        img.src = `/img/features-frames/features_frame_${String(i).padStart(4, '0')}.webp`;
+        img.decoding = 'async';
+        if (i === 1) {
+            img.src = getFrameSrc(1);
+            img.onload = () => {
+                if (!isLoaded.value) {
+                    isLoaded.value = true;
+                    drawFrame(0);
+                }
+            };
+        }
+        frames.push(img);
+    }
+};
+
+const preloadRemainingFrames = () => {
+    if (hasStartedPreloading) {
+        return;
+    }
+    hasStartedPreloading = true;
+
+    let loadedCount = 1;
+    for (let i = 2; i <= TOTAL_FRAMES; i++) {
+        const img = frames[i - 1];
+        if (!img) {
+            continue;
+        }
         img.onload = () => {
             loadedCount++;
-
             if (loadedCount >= 10 && !isLoaded.value) {
                 isLoaded.value = true;
                 drawFrame(currentFrame.value);
             }
         };
-        frames.push(img);
+        img.src = getFrameSrc(i);
     }
 };
 
@@ -86,7 +113,7 @@ const drawFrame = (frameIndex: number) => {
 
 const startPlay = () => {
     if (animationTimer) {
-        clearInterval(animationTimer);
+        return;
     }
 
     animationTimer = window.setInterval(() => {
@@ -95,18 +122,47 @@ const startPlay = () => {
     }, 45);
 };
 
+const stopPlay = () => {
+    if (animationTimer) {
+        clearInterval(animationTimer);
+        animationTimer = null;
+    }
+};
+
+const handleResize = () => {
+    drawFrame(currentFrame.value);
+};
+
 onMounted(() => {
-    loadFrames();
-    startPlay();
-    window.addEventListener('resize', () => drawFrame(currentFrame.value));
+    initFirstFrame();
+    window.addEventListener('resize', handleResize, { passive: true });
+
+    if (typeof IntersectionObserver !== 'undefined' && canvasRef.value) {
+        visibilityObserver = new IntersectionObserver(
+            (entries) => {
+                for (const entry of entries) {
+                    if (entry.isIntersecting) {
+                        preloadRemainingFrames();
+                        startPlay();
+                    } else {
+                        stopPlay();
+                    }
+                }
+            },
+            { rootMargin: '400px 0px' },
+        );
+        visibilityObserver.observe(canvasRef.value);
+    } else {
+        preloadRemainingFrames();
+        startPlay();
+    }
 });
 
 onUnmounted(() => {
-    if (animationTimer) {
-        clearInterval(animationTimer);
-    }
-
-    window.removeEventListener('resize', () => drawFrame(currentFrame.value));
+    stopPlay();
+    visibilityObserver?.disconnect();
+    visibilityObserver = null;
+    window.removeEventListener('resize', handleResize);
 });
 
 const patentFeatures = [

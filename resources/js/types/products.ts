@@ -276,7 +276,7 @@ export const PRODUCTS: Product[] = [
         label: 'Větrná turbína',
         labelKey: 'products.turbine.title',
         detail: 'turbine',
-        image: '/img/stills/Still_Turbina.png',
+        image: '/img/stills/T-still.webp',
         numbersTitle: 'Větrná Turbína v číslech',
         numbersTitleKey: 'products.turbine.numbers_title',
         numbersDescription:

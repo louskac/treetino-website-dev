@@ -227,11 +227,17 @@ function renderFrame(targetIndex: number) {
     ctx.restore();
 }
 
-function preloadFrames() {
+let hasPreloadedAllFrames = false;
+let preloadObserver: IntersectionObserver | null = null;
+
+function getAppFrameSrc(i: number) {
+    return `/video/app_frames_webp/f_${String(i).padStart(3, '0')}.webp`;
+}
+
+function initFirstFrame() {
     for (let i = 0; i < TOTAL_FRAMES; i++) {
         const img = new Image();
-        const numStr = String(i).padStart(3, '0');
-        img.src = `/video/app_frames_webp/f_${numStr}.webp`;
+        img.decoding = 'async';
         img.onload = () => {
             const currentIdx = Math.min(
                 TOTAL_FRAMES - 1,
@@ -243,7 +249,23 @@ function preloadFrames() {
                 renderFrame(currentIdx);
             }
         };
+        if (i === 0) {
+            img.src = getAppFrameSrc(0);
+        }
         frames.push(img);
+    }
+}
+
+function preloadRemainingFrames() {
+    if (hasPreloadedAllFrames) {
+        return;
+    }
+    hasPreloadedAllFrames = true;
+    for (let i = 1; i < TOTAL_FRAMES; i++) {
+        const img = frames[i];
+        if (img && !img.src) {
+            img.src = getAppFrameSrc(i);
+        }
     }
 }
 
@@ -269,8 +291,24 @@ function scrollToStep(stepIndex: number) {
 }
 
 onMounted(() => {
-    preloadFrames();
+    initFirstFrame();
     window.addEventListener('resize', handleResize);
+
+    if (typeof IntersectionObserver !== 'undefined' && trackRef.value) {
+        preloadObserver = new IntersectionObserver(
+            (entries) => {
+                if (entries.some((entry) => entry.isIntersecting)) {
+                    preloadRemainingFrames();
+                    preloadObserver?.disconnect();
+                    preloadObserver = null;
+                }
+            },
+            { rootMargin: '800px 0px' },
+        );
+        preloadObserver.observe(trackRef.value);
+    } else {
+        preloadRemainingFrames();
+    }
 
     timeline = gsap.timeline({
         defaults: { ease: 'none' },
@@ -313,6 +351,9 @@ onMounted(() => {
 
 onUnmounted(() => {
     window.removeEventListener('resize', handleResize);
+    preloadObserver?.disconnect();
+    preloadObserver = null;
+    hasPreloadedAllFrames = false;
     timeline?.scrollTrigger?.kill();
     timeline?.kill();
     timeline = null;

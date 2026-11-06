@@ -793,7 +793,7 @@ const notes = [
             <!-- 13 · VISA -->
             <section class="slide" :class="state(12)">
                 <div class="img-in absolute inset-y-0 right-[-160px] w-[1340px]" style="--d: 0ms">
-                    <img src="/img/hero-v1-cinematic.png" alt="Treetino tree" class="h-full w-full object-cover" />
+                    <img src="/img/hero-v1-cinematic.webp" alt="Treetino tree" class="h-full w-full object-cover" decoding="async" />
                 </div>
                 <div class="product-fade"></div>
                 <div class="chrome">

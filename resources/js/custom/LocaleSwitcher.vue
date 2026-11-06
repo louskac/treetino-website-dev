@@ -83,6 +83,7 @@ const changeLocale = (targetLocale: string) => {
         void fetch('/locale', {
             method: 'POST',
             credentials: 'same-origin',
+            priority: 'low',
             headers: {
                 'Content-Type': 'application/json',
                 Accept: 'application/json',

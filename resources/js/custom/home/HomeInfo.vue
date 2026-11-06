@@ -12,8 +12,10 @@
                     class="relative col-span-2 aspect-square overflow-hidden rounded-3xl border border-black/5 bg-white shadow-xl dark:border-white/10 dark:bg-zinc-900"
                 >
                     <img
-                        src="/img/treetino-v1-isometric.png"
+                        src="/img/treetino-v1-isometric.webp"
                         class="absolute bottom-0 h-full w-full object-cover"
+                        loading="lazy"
+                        decoding="async"
                         alt=""
                     />
                 </div>
@@ -104,8 +106,10 @@
                         class="relative aspect-square overflow-hidden rounded-3xl border border-black/5 bg-white shadow-xl dark:border-white/10 dark:bg-zinc-900"
                     >
                         <img
-                            src="/img/treetino-v1-isometric.png"
+                            src="/img/treetino-v1-isometric.webp"
                             class="absolute bottom-0 h-full w-full object-cover"
+                            loading="lazy"
+                            decoding="async"
                             alt=""
                         />
                     </div>

@@ -20,6 +20,8 @@
                                 <img
                                     class="h-full w-full scale-[.99] object-cover"
                                     src="/img/treetino-app.png"
+                                    loading="lazy"
+                                    decoding="async"
                                     alt=""
                                 />
                             </div>
@@ -27,6 +29,8 @@
                             <img
                                 src="/img/iphone-17-frame.png"
                                 class="relative z-2 w-full"
+                                loading="lazy"
+                                decoding="async"
                                 alt=""
                             />
                         </div>

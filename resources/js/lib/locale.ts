@@ -192,6 +192,7 @@ export async function detectGeoLocale(onDetected: (locale: AppLocale) => void): 
 
         const res = await fetch('https://get.geojs.io/v1/ip/country.json', {
             signal: controller.signal,
+            priority: 'low',
             headers: { Accept: 'application/json' },
         });
         clearTimeout(timeout);

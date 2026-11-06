@@ -195,7 +195,7 @@ export const STATION_ENTRIES: StationEntry[] = [
             {
                 id: 'praha-3',
                 kind: 'image',
-                src: '/img/clients/treetino-v2-studio.png',
+                src: '/img/clients/treetino-v2-studio.webp',
                 caption: {
                     cs: 'Treetino Strom V2 · 6× 1 kW Aero + 122× solární list TopCon (5,61 kWp)',
                     en: 'Treetino Tree V2 · 6× 1 kW Aero + 122× TopCon solar leaves (5.61 kWp)',

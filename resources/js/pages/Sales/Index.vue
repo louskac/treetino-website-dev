@@ -262,8 +262,10 @@
                     >
                         <div class="relative aspect-4/3 overflow-hidden">
                             <img
-                                src="/img/stills/Still_Strom-v1.png"
+                                src="/img/stills/Still_Strom-v1.webp"
                                 alt="Treetino Partnerská Síť"
+                                loading="lazy"
+                                decoding="async"
                                 class="h-full w-full object-cover transition-transform duration-700 ease-out hover:scale-105"
                             />
                             <!-- 2-Line Stacked Typography Overlay -->
@@ -716,14 +718,14 @@ const previewImage = computed(() => {
     const p = hoveredProduct.value || 'v1';
 
     if (p === 'v2') {
-        return '/img/stills/Still_Strom-v2.png';
+        return '/img/stills/Still_Strom-v2.webp';
     }
 
     if (p === 'turbine') {
-        return '/img/stills/Still_Turbina.png';
+        return '/img/stills/Still_Turbina.webp';
     }
 
-    return '/img/stills/Still_Strom-v1.png';
+    return '/img/stills/Still_Strom-v1.webp';
 });
 
 const partnerStats = computed(() => [

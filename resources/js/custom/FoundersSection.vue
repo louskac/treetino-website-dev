@@ -381,8 +381,10 @@ const jakubMilestones = [
                                 class="relative aspect-16/10 overflow-hidden rounded-xl border border-black/10 bg-zinc-100 dark:border-white/10 dark:bg-zinc-800"
                             >
                                 <img
-                                    src="/img/founders/futureenergy-dominik.png"
+                                    src="/img/founders/futureenergy-dominik.webp"
                                     :alt="$t('contact.team_dominik_v2_title')"
+                                    loading="lazy"
+                                    decoding="async"
                                     class="h-full w-full object-cover object-[center_20%] transition-transform duration-700 ease-out group-hover:scale-105"
                                 />
                                 <div

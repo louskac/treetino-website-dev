@@ -573,7 +573,7 @@ const warranties = computed(() => [
 
             <div class="scope">
                 <div class="scope-visual">
-                    <img src="/img/clients/treetino-v2-studio.png" alt="" class="pdf-img" />
+                    <img src="/img/clients/treetino-v2-studio.webp" alt="" class="pdf-img" loading="lazy" decoding="async" />
                 </div>
 
                 <!-- Mixed-model scope table (Stochov: 2x V2 vs 2x V1) -->

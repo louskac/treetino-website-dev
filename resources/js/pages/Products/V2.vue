@@ -277,8 +277,10 @@
                 >
                     <div class="relative h-[500px] w-full overflow-hidden">
                         <img
-                            src="/img/stills/Still_Strom-v2.png"
+                            src="/img/stills/Still_Strom-v2.webp"
                             :alt="`Treetino ${$t('products.v2.title')}`"
+                            loading="lazy"
+                            decoding="async"
                             class="h-full w-full object-cover object-center transition-transform duration-1000 ease-out hover:scale-105"
                         />
                         <div
@@ -971,7 +973,7 @@
             :title="$t('products.v2.cta_title')"
             :buttonText="$t('products.v2.configure_label')"
             :buttonHref="route('configurator.product', 'strom-v2')"
-            image1="/img/stills/Still_Strom-v2.png"
+            image1="/img/stills/Still_Strom-v2.webp"
             image2="/img/stills/SM-still.webp"
         />
 
