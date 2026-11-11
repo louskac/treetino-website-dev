@@ -597,7 +597,9 @@ defineExpose({ resetView });
                         ? '-translate-y-[65%]'
                         : s.id === 'IPRAGU1761'
                           ? '-translate-y-[72%]'
-                          : '-translate-y-[28%]',
+                          : s.id === 'ITEBIH6'
+                            ? '-translate-y-[50%]'
+                            : '-translate-y-[28%]',
                     s.id === selectedId
                         ? 'border-[#8ec5ff]/50 bg-zinc-950/95 text-white'
                         : s.live

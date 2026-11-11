@@ -324,19 +324,26 @@ onMounted(async () => {
         kpiStart.value = true;
     }
 
-    try {
-        const bundle = await fetchLiveStationTelemetry('ISTOCH13');
-
-        if (bundle.isLiveApi) {
-            liveTelemetryById.value = {
-                ...liveTelemetryById.value,
-                ISTOCH13: bundle.current,
-            };
-            liveIntradayById.value = { ...liveIntradayById.value, ISTOCH13: bundle.intradayToday };
-        }
-    } catch {
-        // Offline: falls back to the last recorded observation
-    }
+    const liveStationsList = STATION_ENTRIES.filter((s) => s.status === 'live');
+    await Promise.all(
+        liveStationsList.map(async (st) => {
+            try {
+                const bundle = await fetchLiveStationTelemetry(st.id);
+                if (bundle.isLiveApi) {
+                    liveTelemetryById.value = {
+                        ...liveTelemetryById.value,
+                        [st.id]: bundle.current,
+                    };
+                    liveIntradayById.value = {
+                        ...liveIntradayById.value,
+                        [st.id]: bundle.intradayToday,
+                    };
+                }
+            } catch {
+                // Offline: falls back to the last recorded observation
+            }
+        }),
+    );
 });
 
 onBeforeUnmount(() => {

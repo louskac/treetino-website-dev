@@ -8,7 +8,7 @@
 import type { AppLocale } from '@/lib/locale';
 import { evaluateSiteOfferPerformance } from './cvutPhysics';
 import type { SiteOfferSimulationResult, TreetinoSystemId } from './cvutPhysics';
-import { buildIpragu1761Bundle, buildIstoch13Bundle, buildMkovoBundle, latLonToCzMap } from './pwsData';
+import { buildIpragu1761Bundle, buildIstoch13Bundle, buildItebih6Bundle, buildMkovoBundle, latLonToCzMap } from './pwsData';
 import type { StationTelemetryBundle } from './pwsData';
 
 export type VariantQty = 1 | 2;
@@ -157,6 +157,72 @@ export const STATION_ENTRIES: StationEntry[] = [
         ],
         portfolioVariant: 1,
         bundle: buildIstoch13Bundle(),
+    },
+    {
+        id: 'ITEBIH6',
+        title: { cs: 'Horní Dehtov', en: 'Horní Dehtov' },
+        clientName: { cs: 'Horní Dehtov', en: 'Horní Dehtov' },
+        city: { cs: 'Horní Dehtov', en: 'Horní Dehtov' },
+        status: 'live',
+        statusNote: { cs: 'Živé měření', en: 'Live telemetry' },
+        listStatusSub: { cs: 'Živě', en: 'Live' },
+        chipSide: 'right',
+        sitePhoto: '/img/clients/site-after-v2-5m.jpg',
+        offerCoverPhoto: '/img/clients/site-after-v2-5m.jpg',
+        offerCoverCaption: {
+            cs: 'Vizualizace · Treetino Strom V2 (5 m) pro Horní Dehtov',
+            en: 'Visualization · Treetino Tree V2 (5 m) for Horní Dehtov',
+        },
+        media: [
+            {
+                id: 'dehtov-1',
+                kind: 'image',
+                src: '/img/clients/site-after-v2-5m.jpg',
+                caption: {
+                    cs: 'Horní Dehtov · Měřicí stanice na stožáru 5,0 m (zahájeno 10. 11. 2026)',
+                    en: 'Horní Dehtov · Weather station on 5.0 m mast (started Nov 10, 2026)',
+                },
+            },
+            {
+                id: 'dehtov-2',
+                kind: 'image',
+                src: '/img/clients/treetino-v2-studio.webp',
+                caption: {
+                    cs: 'Treetino Strom V2 · 6× 1 kW Aero + 122× solární list TopCon (5,61 kWp)',
+                    en: 'Treetino Tree V2 · 6× 1 kW Aero + 122× TopCon solar leaves (5.61 kWp)',
+                },
+            },
+        ],
+        variants: [
+            {
+                key: 1,
+                systemId: 'strom-v2',
+                quantity: 1,
+                hubHeightM: 5.0,
+                buttonLabel: { cs: '1× Strom V2', en: '1× Tree V2' },
+                title: { cs: '1× Strom V2', en: '1× Tree V2' },
+                shortModel: { cs: 'Strom V2', en: 'Tree V2' },
+                assembly: { cs: '6 turbín · 122 listů', en: '6 turbines · 122 leaves' },
+                capacity: { cs: '6,0 kW + 5,61 kWp', en: '6.0 kW + 5.61 kWp' },
+                heightPermit: { cs: '5,0 m · bez povolení', en: '5.0 m · no permit needed' },
+                studySlug: '1x_Strom_V2',
+            },
+            {
+                key: 2,
+                systemId: 'strom-v2',
+                quantity: 2,
+                hubHeightM: 5.0,
+                buttonLabel: { cs: '2× Strom V2', en: '2× Tree V2' },
+                title: { cs: '2× Strom V2', en: '2× Tree V2' },
+                shortModel: { cs: 'Strom V2', en: 'Tree V2' },
+                assembly: { cs: '12 turbín · 244 listů', en: '12 turbines · 244 leaves' },
+                capacity: { cs: '12,0 kW + 11,22 kWp', en: '12.0 kW + 11.22 kWp' },
+                heightPermit: { cs: '5,0 m · bez povolení', en: '5.0 m · no permit needed' },
+                studySlug: '2x_Strom_V2',
+            },
+        ],
+        portfolioVariant: 1,
+        bundle: buildItebih6Bundle(),
     },
     {
         id: 'IPRAGU1761',
@@ -399,10 +465,11 @@ export function computePortfolio(entries: StationEntry[] = STATION_ENTRIES): Por
 export const STATION_LINKS: { from: string; to: string; label?: LocalizedText }[] = [
     { from: 'D3882832837', to: 'IPRAGU1761' },
     { from: 'IPRAGU1761', to: 'ISTOCH13', label: { cs: 'přesunuto 1. 11.', en: 'relocated Nov 1' } },
+    { from: 'ISTOCH13', to: 'ITEBIH6', label: { cs: 'instalováno 10. 11.', en: 'installed Nov 10' } },
 ];
 
 /** Physically purchased units ready for deployment — listed, never pinned on the map */
-export const PENDING_STATIONS: PendingStation[] = [2, 3, 4, 5].map((slot) => ({
+export const PENDING_STATIONS: PendingStation[] = [3, 4, 5].map((slot) => ({
     slot,
     label: {
         cs: `Stanice ${String(slot).padStart(2, '0')}`,
@@ -414,7 +481,7 @@ export const PENDING_STATIONS: PendingStation[] = [2, 3, 4, 5].map((slot) => ({
 export function documentUrls(entry: StationEntry, variantKey: VariantQty): { offer: string; study: string } | null {
     const id = entry.id.toUpperCase();
 
-    if (id !== 'IPRAGU1761' && id !== 'ISTOCH13' && id !== 'D3882832837') {
+    if (id !== 'IPRAGU1761' && id !== 'ISTOCH13' && id !== 'D3882832837' && id !== 'ITEBIH6') {
         return null;
     }
 

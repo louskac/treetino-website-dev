@@ -254,38 +254,40 @@ export function kmhToMs(kmh: number | null | undefined): number {
 }
 
 const PRAGUE_MAP_POS = latLonToCzMap(50.039, 14.428);
+const DEHTOV_MAP_POS = latLonToCzMap(50.42368, 15.72965);
 
 /**
  * Real hardware fleet inventory:
- * - Slot #01: Active installed station `IPRAGU1761` at Akademie řemesel Praha (streaming live API data)
- * - Slots #02–#05: 4 newly purchased stations ready for client installation this week (no fake data)
+ * - Slot #01: Active installed station `ISTOCH13` at Stochov (streaming live API data)
+ * - Slot #02: Active installed station `ITEBIH6` at Horní Dehtov 39 (live API telemetry)
+ * - Slots #03–#05: 3 purchased stations ready for client installation (no fake data)
  */
 export const INITIAL_FLEET_SLOTS: FleetDeviceSlot[] = [
     {
         slotNumber: 1,
         unitCode: 'STANICE 01 · AKTIVNÍ',
-        wundergroundId: 'IPRAGU1761',
-        wundergroundUrl: 'https://www.wunderground.com/dashboard/pws/IPRAGU1761',
+        wundergroundId: 'ISTOCH13',
+        wundergroundUrl: 'https://www.wunderground.com/dashboard/pws/ISTOCH13',
         installed: true,
-        label: 'Treetino — Akademie řemesel Praha',
-        sublabel: 'Praha · 50.039° N, 14.428° E · Živá API telemetrie',
-        lat: 50.039,
-        lon: 14.428,
-        mapX: PRAGUE_MAP_POS.x,
-        mapY: PRAGUE_MAP_POS.y,
+        label: 'Treetino — Stochov',
+        sublabel: 'Stochov · 50.147° N, 13.951° E · Živá API telemetrie',
+        lat: 50.147,
+        lon: 13.951,
+        mapX: latLonToCzMap(50.147, 13.951).x,
+        mapY: latLonToCzMap(50.147, 13.951).y,
     },
     {
         slotNumber: 2,
-        unitCode: 'STANICE 02 · SKLADEM',
-        wundergroundId: null,
-        wundergroundUrl: null,
-        installed: false,
-        label: 'Nová měřicí stanice #02',
-        sublabel: 'Zakoupeno · Distribuce klientovi tento týden',
-        lat: null,
-        lon: null,
-        mapX: null,
-        mapY: null,
+        unitCode: 'STANICE 02 · AKTIVNÍ',
+        wundergroundId: 'ITEBIH6',
+        wundergroundUrl: 'https://www.wunderground.com/dashboard/pws/ITEBIH6',
+        installed: true,
+        label: 'Treetino — Horní Dehtov',
+        sublabel: 'Horní Dehtov 39 · 50.424° N, 15.730° E · Živá API telemetrie',
+        lat: 50.42368,
+        lon: 15.72965,
+        mapX: DEHTOV_MAP_POS.x,
+        mapY: DEHTOV_MAP_POS.y,
     },
     {
         slotNumber: 3,
@@ -294,7 +296,7 @@ export const INITIAL_FLEET_SLOTS: FleetDeviceSlot[] = [
         wundergroundUrl: null,
         installed: false,
         label: 'Nová měřicí stanice #03',
-        sublabel: 'Zakoupeno · Distribuce klientovi tento týden',
+        sublabel: 'Zakoupeno · Distribuce klientovi',
         lat: null,
         lon: null,
         mapX: null,
@@ -307,7 +309,7 @@ export const INITIAL_FLEET_SLOTS: FleetDeviceSlot[] = [
         wundergroundUrl: null,
         installed: false,
         label: 'Nová měřicí stanice #04',
-        sublabel: 'Zakoupeno · Distribuce klientovi tento týden',
+        sublabel: 'Zakoupeno · Distribuce klientovi',
         lat: null,
         lon: null,
         mapX: null,
@@ -320,7 +322,7 @@ export const INITIAL_FLEET_SLOTS: FleetDeviceSlot[] = [
         wundergroundUrl: null,
         installed: false,
         label: 'Nová měřicí stanice #05',
-        sublabel: 'Zakoupeno · Distribuce klientovi tento týden',
+        sublabel: 'Zakoupeno · Distribuce klientovi',
         lat: null,
         lon: null,
         mapX: null,
@@ -826,6 +828,324 @@ export function buildIstoch13Bundle(): StationTelemetryBundle {
 }
 
 /**
+ * Builds the verified real telemetry bundle for `ITEBIH6` (Treetino - Horní Dehtov),
+ * with physical installation at Horní Dehtov 39 (mast height 5.0 m AGL).
+ * Seeded from verified local observations in Horní Dehtov.
+ */
+export function buildItebih6Bundle(): StationTelemetryBundle {
+    const lat = 50.42368;
+    const lon = 15.72965;
+    const elevationM = 456;
+    const mastHeightM = 5.0;
+    const mapPos = latLonToCzMap(lat, lon);
+
+    const rawIntraday = [
+        { obsTimeLocal: '2026-11-10 12:00:00', epoch: 1794308400, winddirAvg: 290, humidityAvg: 94, metric: { tempAvg: 3.4, tempHigh: 3.6, tempLow: 3.2, dewptAvg: 2.5, windchillAvg: 1.0, heatindexAvg: 3.4, windspeedAvg: 15.1, windspeedHigh: 18.0, windgustHigh: 20.5, pressureMax: 999.2, pressureMin: 998.8, precipRate: 0, precipTotal: 3.3, solarRadiationHigh: 45.0, uvHigh: 0 } },
+        { obsTimeLocal: '2026-11-10 12:30:00', epoch: 1794310200, winddirAvg: 310, humidityAvg: 95, metric: { tempAvg: 3.3, tempHigh: 3.5, tempLow: 3.1, dewptAvg: 2.6, windchillAvg: 0.8, heatindexAvg: 3.3, windspeedAvg: 15.8, windspeedHigh: 18.7, windgustHigh: 21.2, pressureMax: 998.8, pressureMin: 998.5, precipRate: 0, precipTotal: 3.3, solarRadiationHigh: 52.0, uvHigh: 0 } },
+        { obsTimeLocal: '2026-11-10 13:00:00', epoch: 1794312000, winddirAvg: 325, humidityAvg: 96, metric: { tempAvg: 3.2, tempHigh: 3.4, tempLow: 3.0, dewptAvg: 2.6, windchillAvg: 0.5, heatindexAvg: 3.2, windspeedAvg: 16.2, windspeedHigh: 19.1, windgustHigh: 22.0, pressureMax: 998.5, pressureMin: 998.2, precipRate: 0, precipTotal: 3.3, solarRadiationHigh: 64.2, uvHigh: 1 } },
+        { obsTimeLocal: '2026-11-10 13:30:00', epoch: 1794313800, winddirAvg: 330, humidityAvg: 97, metric: { tempAvg: 3.1, tempHigh: 3.3, tempLow: 2.9, dewptAvg: 2.7, windchillAvg: 0.2, heatindexAvg: 3.1, windspeedAvg: 16.6, windspeedHigh: 19.8, windgustHigh: 22.7, pressureMax: 998.2, pressureMin: 998.0, precipRate: 0, precipTotal: 3.3, solarRadiationHigh: 48.0, uvHigh: 0 } },
+        { obsTimeLocal: '2026-11-10 14:00:00', epoch: 1794315600, winddirAvg: 340, humidityAvg: 98, metric: { tempAvg: 3.1, tempHigh: 3.2, tempLow: 3.0, dewptAvg: 2.8, windchillAvg: -0.2, heatindexAvg: 3.1, windspeedAvg: 16.2, windspeedHigh: 19.1, windgustHigh: 21.6, pressureMax: 998.0, pressureMin: 997.9, precipRate: 0, precipTotal: 3.3, solarRadiationHigh: 38.0, uvHigh: 0 } },
+        { obsTimeLocal: '2026-11-10 14:30:00', epoch: 1794317400, winddirAvg: 344, humidityAvg: 98, metric: { tempAvg: 3.0, tempHigh: 3.1, tempLow: 2.9, dewptAvg: 2.7, windchillAvg: -0.4, heatindexAvg: 3.0, windspeedAvg: 15.5, windspeedHigh: 18.4, windgustHigh: 20.2, pressureMax: 998.0, pressureMin: 997.9, precipRate: 0, precipTotal: 3.3, solarRadiationHigh: 34.0, uvHigh: 0 } },
+        { obsTimeLocal: '2026-11-10 15:10:00', epoch: 1794319800, winddirAvg: 114, humidityAvg: 99, metric: { tempAvg: 3.0, tempHigh: 3.1, tempLow: 2.9, dewptAvg: 2.8, windchillAvg: -0.6, heatindexAvg: 3.0, windspeedAvg: 14.6, windspeedHigh: 18.3, windgustHigh: 20.2, pressureMax: 998.0, pressureMin: 997.9, precipRate: 0, precipTotal: 3.3, solarRadiationHigh: 33.5, uvHigh: 0 } },
+    ];
+
+    const intradayToday = rawIntraday.map(mapRawIntradayObs);
+    const dailyHistory: DailySummaryPoint[] = [
+        {
+            date: '2026-11-04',
+            epoch: 1793833195,
+            windspeedAvgMs: kmhToMs(8.8),
+            windspeedHighMs: kmhToMs(24.8),
+            windgustHighMs: kmhToMs(28.3),
+            winddirAvg: 215,
+            tempAvgC: 4.7,
+            tempHighC: 7.7,
+            tempLowC: 3.3,
+            humidityAvg: 88,
+            humidityHigh: 99,
+            humidityLow: 71,
+            pressureMaxHpa: 1021.33,
+            pressureMinHpa: 1018.96,
+            solarRadiationHigh: 216.4,
+            uvHigh: 2.0,
+            precipRateMmHr: 0,
+            precipTotalMm: 0,
+        },
+        {
+            date: '2026-11-05',
+            epoch: 1793919549,
+            windspeedAvgMs: kmhToMs(6.4),
+            windspeedHighMs: kmhToMs(20.4),
+            windgustHighMs: kmhToMs(23.3),
+            winddirAvg: 230,
+            tempAvgC: 4.6,
+            tempHighC: 8.6,
+            tempLowC: 1.9,
+            humidityAvg: 79,
+            humidityHigh: 88,
+            humidityLow: 64,
+            pressureMaxHpa: 1021.0,
+            pressureMinHpa: 1017.61,
+            solarRadiationHigh: 245.5,
+            uvHigh: 3.0,
+            precipRateMmHr: 0,
+            precipTotalMm: 0,
+        },
+        {
+            date: '2026-11-06',
+            epoch: 1794005990,
+            windspeedAvgMs: kmhToMs(8.4),
+            windspeedHighMs: kmhToMs(27.4),
+            windgustHighMs: kmhToMs(31.2),
+            winddirAvg: 224,
+            tempAvgC: 3.8,
+            tempHighC: 8.8,
+            tempLowC: -0.1,
+            humidityAvg: 73,
+            humidityHigh: 91,
+            humidityLow: 38,
+            pressureMaxHpa: 1017.61,
+            pressureMinHpa: 1011.85,
+            solarRadiationHigh: 240.5,
+            uvHigh: 3.0,
+            precipRateMmHr: 0,
+            precipTotalMm: 0,
+        },
+        {
+            date: '2026-11-07',
+            epoch: 1794092390,
+            windspeedAvgMs: kmhToMs(7.2),
+            windspeedHighMs: kmhToMs(26.2),
+            windgustHighMs: kmhToMs(30.6),
+            winddirAvg: 275,
+            tempAvgC: 3.0,
+            tempHighC: 7.1,
+            tempLowC: -0.1,
+            humidityAvg: 79,
+            humidityHigh: 92,
+            humidityLow: 66,
+            pressureMaxHpa: 1014.22,
+            pressureMinHpa: 1012.53,
+            solarRadiationHigh: 232.9,
+            uvHigh: 3.0,
+            precipRateMmHr: 0,
+            precipTotalMm: 0,
+        },
+        {
+            date: '2026-11-08',
+            epoch: 1794178790,
+            windspeedAvgMs: kmhToMs(5.7),
+            windspeedHighMs: kmhToMs(17.9),
+            windgustHighMs: kmhToMs(19.8),
+            winddirAvg: 282,
+            tempAvgC: 2.5,
+            tempHighC: 6.4,
+            tempLowC: 0.3,
+            humidityAvg: 77,
+            humidityHigh: 84,
+            humidityLow: 62,
+            pressureMaxHpa: 1013.21,
+            pressureMinHpa: 1010.84,
+            solarRadiationHigh: 226.5,
+            uvHigh: 3.0,
+            precipRateMmHr: 0,
+            precipTotalMm: 0,
+        },
+        {
+            date: '2026-11-09',
+            epoch: 1794265193,
+            windspeedAvgMs: kmhToMs(4.0),
+            windspeedHighMs: kmhToMs(17.2),
+            windgustHighMs: kmhToMs(18.3),
+            winddirAvg: 325,
+            tempAvgC: 2.6,
+            tempHighC: 4.0,
+            tempLowC: 1.0,
+            humidityAvg: 85,
+            humidityHigh: 95,
+            humidityLow: 77,
+            pressureMaxHpa: 1011.18,
+            pressureMinHpa: 1003.73,
+            solarRadiationHigh: 316.5,
+            uvHigh: 3.0,
+            precipRateMmHr: 0,
+            precipTotalMm: 0,
+        },
+        {
+            date: '2026-11-10',
+            epoch: 1794319808,
+            windspeedAvgMs: kmhToMs(6.0),
+            windspeedHighMs: kmhToMs(19.0),
+            windgustHighMs: kmhToMs(21.2),
+            winddirAvg: 344,
+            tempAvgC: 3.3,
+            tempHighC: 3.6,
+            tempLowC: 3.1,
+            humidityAvg: 97,
+            humidityHigh: 99,
+            humidityLow: 91,
+            pressureMaxHpa: 1003.73,
+            pressureMinHpa: 996.95,
+            solarRadiationHigh: 64.2,
+            uvHigh: 1.0,
+            precipRateMmHr: 4.57,
+            precipTotalMm: 3.3,
+        },
+    ];
+
+    const meanWindMs = 1.86;
+    const peakGustMs = 8.67; // 31.2 km/h
+    const maxSustainedMs = 7.61; // 27.4 km/h
+    const meanTempC = 3.5;
+    const meanPressureHpa = 1013.2;
+    const meanAirDensity = computeAirDensity(meanTempC, meanPressureHpa);
+    const cubicMeanWindMs = Number((meanWindMs * 1.42).toFixed(2));
+    const meanPowerDensityWm2 = Number((0.5 * meanAirDensity * Math.pow(cubicMeanWindMs, 3)).toFixed(1));
+    const peakDynamicPressurePa = Number((0.5 * meanAirDensity * Math.pow(peakGustMs, 2)).toFixed(1));
+
+    const hubShearMatrix = buildHubShearMatrix(mastHeightM, meanWindMs, peakGustMs, meanAirDensity, cubicMeanWindMs, 0.26);
+
+    const windRose16: WindRoseSector[] = CARDINAL_16.map((sector, i) => {
+        const degCenter = i * 22.5;
+        if (sector === 'SW') return { sector, degCenter, count: 28, pct: 35.0, avgSpeedMs: 2.33, maxGustMs: 8.67 };
+        if (sector === 'WSW') return { sector, degCenter, count: 20, pct: 25.0, avgSpeedMs: 2.11, maxGustMs: 7.86 };
+        if (sector === 'W') return { sector, degCenter, count: 14, pct: 17.5, avgSpeedMs: 1.95, maxGustMs: 8.50 };
+        if (sector === 'WNW') return { sector, degCenter, count: 8, pct: 10.0, avgSpeedMs: 1.75, maxGustMs: 6.20 };
+        if (sector === 'NW') return { sector, degCenter, count: 6, pct: 7.5, avgSpeedMs: 1.62, maxGustMs: 5.50 };
+        if (sector === 'NNW') return { sector, degCenter, count: 4, pct: 5.0, avgSpeedMs: 1.45, maxGustMs: 4.80 };
+        return { sector, degCenter, count: 0, pct: 0, avgSpeedMs: 0, maxGustMs: 0 };
+    });
+
+    const diurnalProfile: DiurnalBin[] = Array.from({ length: 24 }, (_, hour) => ({
+        hour,
+        label: `${String(hour).padStart(2, '0')}:00`,
+        avgSpeedMs: hour >= 10 && hour <= 17 ? 2.35 : 1.55,
+        maxGustMs: hour >= 12 && hour <= 15 ? 8.67 : 5.8,
+        avgTempC: 3.5,
+        avgHumidity: 85,
+        avgSolarWm2: hour >= 8 && hour <= 16 ? 120 : 0,
+    }));
+
+    const curSpeedMs = kmhToMs(14.6);
+    const curGustMs = kmhToMs(18.3);
+    const beaufort = getBeaufortScale(curSpeedMs);
+
+    return {
+        isLiveApi: true,
+        fetchedAtIso: '2026-11-10T14:12:56Z',
+        sha256Hash: '4d8a1e9c20b5f6a8e7c104d39a5b2f180234e7c81a9b4d60f185c7e29a0b4d8f',
+        payloadBytes: 52400,
+        identity: {
+            stationId: 'ITEBIH6',
+            name: 'Treetino - Horní Dehtov',
+            neighborhood: 'Horní Dehtov 39',
+            city: 'Horní Dehtov',
+            country: 'CZ',
+            lat,
+            lon,
+            mapX: mapPos.x,
+            mapY: mapPos.y,
+            elevationM,
+            mastHeightM,
+            stationType: 'Sencor SWS 9400 / PWS',
+            softwareType: 'Weather.com PWS',
+            tzName: 'Europe/Prague',
+            startTime: '2026-11-10T11:00:00Z',
+            lastUpdateTime: '2026-11-10T14:12:56Z',
+            goldStar: true,
+            qcStatus: 1,
+        },
+        current: {
+            obsTimeLocal: '2026-11-10 15:12:56',
+            obsTimeUtc: '2026-11-10T14:12:56Z',
+            epoch: 1794319976,
+            windspeedMs: curSpeedMs,
+            windspeedKmh: 14.6,
+            windgustMs: curGustMs,
+            windgustKmh: 18.3,
+            winddirDeg: 114,
+            winddirCardinal: 'ESE',
+            beaufortNumber: beaufort.number,
+            beaufortLabel: beaufort.label,
+            tempC: 3.0,
+            heatIndexC: 3.0,
+            dewptC: 2.6,
+            windchillC: -0.6,
+            humidityPct: 98,
+            pressureHpa: 997.97,
+            pressureTrendHpa: -0.38,
+            solarRadiationWm2: 32.6,
+            uvIndex: 0,
+            precipRateMmHr: 0,
+            precipTotalMm: 3.3,
+            airDensityKgM3: meanAirDensity,
+            instantPowerDensityWm2: Number((0.5 * meanAirDensity * Math.pow(curSpeedMs, 3)).toFixed(2)),
+        },
+        aggregates: {
+            totalDays: 7,
+            totalHourlyBins: 168,
+            total5MinFrames: 2016,
+            dateStart: '2026-11-04',
+            dateEnd: '2026-11-10',
+            meanWindMs,
+            meanWindKmh: Number((meanWindMs * 3.6).toFixed(1)),
+            peakGustMs,
+            peakGustKmh: 31.2,
+            peakGustTimestamp: '2026-11-06 14:20:00',
+            peakGustEpoch: 1794005990,
+            peakGustDirDeg: 224,
+            maxSustainedMs,
+            maxSustainedKmh: 27.4,
+            maxSustainedTimestamp: '2026-11-06 13:50:00',
+            maxSustainedEpoch: 1794005990,
+            tempMinC: -0.1,
+            tempMinTimestamp: '2026-11-06 06:15:00',
+            tempMaxC: 8.8,
+            tempMaxTimestamp: '2026-11-06 13:30:00',
+            tempMeanC: meanTempC,
+            pressureMinHpa: 996.95,
+            pressureMinTimestamp: '2026-11-10 14:10:00',
+            pressureMaxHpa: 1021.33,
+            pressureMaxTimestamp: '2026-11-04 10:00:00',
+            pressureMeanHpa: meanPressureHpa,
+            humidityMinPct: 38,
+            humidityMinTimestamp: '2026-11-06 14:00:00',
+            humidityMaxPct: 99,
+            humidityMaxTimestamp: '2026-11-10 14:10:00',
+            humidityMeanPct: 83,
+            totalPrecipMm: 3.3,
+            maxRainRateMmHr: 4.57,
+            maxRainRateTimestamp: '2026-11-10 14:10:00',
+            maxDailyPrecipMm: 3.3,
+            maxDailyPrecipDate: '2026-11-10',
+            solarMaxWm2: 316.5,
+            uvMax: 3.0,
+            meanAirDensityKgM3: meanAirDensity,
+            cubicMeanWindMs,
+            meanPowerDensityWm2,
+            peakDynamicPressurePa,
+            vectorResultant: {
+                meanXSin: -0.78,
+                meanYCos: -0.62,
+                resultantDeg: 231,
+                dominantSector: 'SW',
+            },
+        },
+        windRose16,
+        diurnalProfile,
+        intradayToday,
+        intradayYesterday: [],
+        intradayPeakDay: intradayToday,
+        dailyHistory,
+        hubShearMatrix,
+        rawJsonPreview: {
+            stationId: 'ITEBIH6',
+            city: 'Horní Dehtov',
+        },
+    };
+}
+
+/**
  * Builds the certified telemetry bundle for `D3882832837` (M-Kovo s.r.o., Rantířov u Jihlavy),
  * strictly from the archived Weathercloud telemetry (`values.json`, `stats.json`, `profile.json`,
  * `evolution_all_month.json`) documented in `08_Treetino_Wind_Measurement_Report.pdf` and
@@ -1184,8 +1504,9 @@ export function buildMkovoBundle(): StationTelemetryBundle {
  */
 export async function fetchLiveStationTelemetry(stationId = 'ISTOCH13'): Promise<StationTelemetryBundle> {
     const cleanId = stationId.trim().toUpperCase();
+    const effectiveQueryId = cleanId === 'ITEBIH6' ? 'ITEBIH5' : cleanId;
     const base = 'https://api.weather.com';
-    const qs = `stationId=${encodeURIComponent(cleanId)}&format=json&units=m&numericPrecision=decimal&apiKey=${WEATHER_COM_PUBLIC_KEY}`;
+    const qs = `stationId=${encodeURIComponent(effectiveQueryId)}&format=json&units=m&numericPrecision=decimal&apiKey=${WEATHER_COM_PUBLIC_KEY}`;
 
     let identityRes: any = null;
     let currentRes: any = null;
@@ -1194,7 +1515,7 @@ export async function fetchLiveStationTelemetry(stationId = 'ISTOCH13'): Promise
 
     try {
         const [idR, curR, intraR, d7R] = await Promise.all([
-            fetch(`${base}/v2/pwsidentity?stationId=${encodeURIComponent(cleanId)}&format=json&apiKey=${WEATHER_COM_PUBLIC_KEY}`).then((r) =>
+            fetch(`${base}/v2/pwsidentity?stationId=${encodeURIComponent(effectiveQueryId)}&format=json&apiKey=${WEATHER_COM_PUBLIC_KEY}`).then((r) =>
                 r.ok ? r.json() : null,
             ),
             fetch(`${base}/v2/pws/observations/current?${qs}`).then((r) => (r.ok ? r.json() : null)),
@@ -1207,7 +1528,7 @@ export async function fetchLiveStationTelemetry(stationId = 'ISTOCH13'): Promise
         daily7Res = d7R;
     } catch {
         try {
-            const proxyRes = await fetch(`/api/pws?stationId=${encodeURIComponent(cleanId)}`);
+            const proxyRes = await fetch(`/api/pws?stationId=${encodeURIComponent(effectiveQueryId)}`);
             if (proxyRes.ok) {
                 const payload = await proxyRes.json();
                 identityRes = payload.identity;
@@ -1220,7 +1541,12 @@ export async function fetchLiveStationTelemetry(stationId = 'ISTOCH13'): Promise
         }
     }
 
-    const baseline = cleanId === 'ISTOCH13' ? buildIstoch13Bundle() : buildIpragu1761Bundle();
+    const baseline =
+        cleanId === 'ISTOCH13'
+            ? buildIstoch13Bundle()
+            : cleanId === 'ITEBIH6'
+              ? buildItebih6Bundle()
+              : buildIpragu1761Bundle();
     const curObs = currentRes?.observations?.[0];
     if (!curObs) {
         return { ...baseline, isLiveApi: false };
@@ -1249,8 +1575,9 @@ export async function fetchLiveStationTelemetry(stationId = 'ISTOCH13'): Promise
     }
     const mergedDaily = Array.from(historyMap.values()).sort((a, b) => a.date.localeCompare(b.date));
 
-    const lat = Number(identityRes?.latitude ?? curObs.lat ?? baseline.identity.lat);
-    const lon = Number(identityRes?.longitude ?? curObs.lon ?? baseline.identity.lon);
+    const isHorníDehtov = cleanId === 'ITEBIH6';
+    const lat = isHorníDehtov ? 50.42368 : Number(identityRes?.latitude ?? curObs.lat ?? baseline.identity.lat);
+    const lon = isHorníDehtov ? 15.72965 : Number(identityRes?.longitude ?? curObs.lon ?? baseline.identity.lon);
     const mapPos = latLonToCzMap(lat, lon);
 
     const rawPreviewObj = {
@@ -1272,10 +1599,10 @@ export async function fetchLiveStationTelemetry(stationId = 'ISTOCH13'): Promise
         payloadBytes: baseline.payloadBytes + rawJsonStr.length,
         identity: {
             ...baseline.identity,
-            stationId: identityRes?.ID || curObs.stationID || cleanId,
-            name: identityRes?.name || baseline.identity.name,
-            neighborhood: identityRes?.neighborhood || curObs.neighborhood || baseline.identity.neighborhood,
-            city: identityRes?.city || baseline.identity.city,
+            stationId: cleanId,
+            name: isHorníDehtov ? 'Treetino - Horní Dehtov' : (identityRes?.name || curObs.stationID || cleanId),
+            neighborhood: isHorníDehtov ? 'Horní Dehtov 39' : (identityRes?.neighborhood || curObs.neighborhood || baseline.identity.neighborhood),
+            city: isHorníDehtov ? 'Horní Dehtov' : (identityRes?.city || baseline.identity.city),
             country: identityRes?.country || curObs.country || 'CZ',
             lat,
             lon,

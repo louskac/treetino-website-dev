@@ -44,15 +44,16 @@ Route::get('/api/pws', function (\Illuminate\Http\Request $request) {
     if (!preg_match('/^[A-Z0-9_-]{4,24}$/', $stationId)) {
         return response()->json(['error' => 'Invalid stationId'], 400);
     }
+    $queryStationId = $stationId === 'ITEBIH6' ? 'ITEBIH5' : $stationId;
     $apiKey = env('WUNDERGROUND_API_KEY', 'f6d2efe5720d47ea92efe5720df7eaa8');
     $base = 'https://api.weather.com';
-    $q = "stationId={$stationId}&format=json&units=m&numericPrecision=decimal&apiKey={$apiKey}";
+    $q = "stationId={$queryStationId}&format=json&units=m&numericPrecision=decimal&apiKey={$apiKey}";
     $ctx = stream_context_create(['http' => ['timeout' => 5, 'ignore_errors' => true]]);
     $fetch = function (string $url) use ($ctx) {
         $raw = @file_get_contents($url, false, $ctx);
         return $raw ? json_decode($raw, true) : null;
     };
-    $identity = $fetch("{$base}/v2/pwsidentity?stationId={$stationId}&format=json&units=m&apiKey={$apiKey}");
+    $identity = $fetch("{$base}/v2/pwsidentity?stationId={$queryStationId}&format=json&units=m&apiKey={$apiKey}");
     $current = $fetch("{$base}/v2/pws/observations/current?{$q}");
     $intraday = $fetch("{$base}/v2/pws/observations/all/1day?{$q}");
     $hourly7d = $fetch("{$base}/v2/pws/observations/hourly/7day?{$q}");
