@@ -167,29 +167,57 @@ export const STATION_ENTRIES: StationEntry[] = [
         statusNote: { cs: 'Živé měření', en: 'Live telemetry' },
         listStatusSub: { cs: 'Živě', en: 'Live' },
         chipSide: 'right',
-        sitePhoto: '/img/clients/site-after-v2-5m.jpg',
-        offerCoverPhoto: '/img/clients/site-after-v2-5m.jpg',
+        sitePhoto: '/img/clients/dehtov/dehtov-site-1.jpg',
+        offerCoverPhoto: '/img/clients/dehtov/dehtov-site-1.jpg',
         offerCoverCaption: {
-            cs: 'Vizualizace · Treetino Strom V2 (5 m) pro Horní Dehtov',
-            en: 'Visualization · Treetino Tree V2 (5 m) for Horní Dehtov',
+            cs: 'Horní Dehtov · Měřicí stanice na stožáru 5,0 m',
+            en: 'Horní Dehtov · Weather station on 5.0 m mast',
         },
         media: [
             {
                 id: 'dehtov-1',
                 kind: 'image',
-                src: '/img/clients/site-after-v2-5m.jpg',
+                src: '/img/clients/dehtov/dehtov-site-1.jpg',
                 caption: {
-                    cs: 'Horní Dehtov · Měřicí stanice na stožáru 5,0 m (zahájeno 10. 11. 2026)',
-                    en: 'Horní Dehtov · Weather station on 5.0 m mast (started Nov 10, 2026)',
+                    cs: 'Horní Dehtov · Měřicí stanice na stožáru 5,0 m',
+                    en: 'Horní Dehtov · Weather station on 5.0 m mast',
                 },
             },
             {
                 id: 'dehtov-2',
                 kind: 'image',
-                src: '/img/clients/treetino-v2-studio.webp',
+                src: '/img/clients/dehtov/dehtov-site-2.jpg',
                 caption: {
-                    cs: 'Treetino Strom V2 · 6× 1 kW Aero + 122× solární list TopCon (5,61 kWp)',
-                    en: 'Treetino Tree V2 · 6× 1 kW Aero + 122× TopCon solar leaves (5.61 kWp)',
+                    cs: 'Horní Dehtov · Pohled na měřicí místo a terén',
+                    en: 'Horní Dehtov · View of measurement site and terrain',
+                },
+            },
+            {
+                id: 'dehtov-3',
+                kind: 'image',
+                src: '/img/clients/dehtov/dehtov-mast-detail.jpg',
+                caption: {
+                    cs: 'Horní Dehtov · Detail kotvení stožáru a měřicí jednotky',
+                    en: 'Horní Dehtov · Detail of mast anchoring and sensor unit',
+                },
+            },
+            {
+                id: 'dehtov-4',
+                kind: 'image',
+                src: '/img/clients/dehtov/dehtov-sensor.jpg',
+                caption: {
+                    cs: 'Horní Dehtov · Senzorová jednotka PWS na stožáru',
+                    en: 'Horní Dehtov · PWS sensor unit on mast',
+                },
+            },
+            {
+                id: 'dehtov-video',
+                kind: 'video',
+                src: '/img/clients/dehtov/dehtov-site-video.mp4',
+                poster: '/img/clients/dehtov/dehtov-site-1.jpg',
+                caption: {
+                    cs: 'Horní Dehtov · Videozáznam měřicí stanice na lokalitě',
+                    en: 'Horní Dehtov · Site video recording of the weather station',
                 },
             },
         ],
@@ -233,29 +261,48 @@ export const STATION_ENTRIES: StationEntry[] = [
         statusNote: { cs: 'Živé měření', en: 'Live telemetry' },
         listStatusSub: { cs: 'Živě', en: 'Live' },
         chipSide: 'left',
-        sitePhoto: '/img/clients/treetino-v1-site-render.jpg',
-        offerCoverPhoto: '/img/clients/treetino-v1-site-render.jpg',
+        sitePhoto: '/img/clients/morava/veseli-site-1.jpg',
+        offerCoverPhoto: '/img/clients/morava/veseli-site-1.jpg',
         offerCoverCaption: {
-            cs: 'Vizualizace · Treetino Strom V1 (11,5 m) pro Veselí nad Moravou',
-            en: 'Visualization · Treetino Tree V1 (11.5 m) for Veselí nad Moravou',
+            cs: 'Veselí nad Moravou · Měřicí stanice na stožáru 5,0 m',
+            en: 'Veselí nad Moravou · Weather station on 5.0 m mast',
         },
         media: [
             {
                 id: 'veseli-1',
                 kind: 'image',
-                src: '/img/clients/treetino-v1-site-render.jpg',
+                src: '/img/clients/morava/veseli-site-1.jpg',
                 caption: {
-                    cs: 'Veselí nad Moravou · Měřicí stanice na stožáru 5,0 m (zahájeno 13. 11. 2026)',
-                    en: 'Veselí nad Moravou · Weather station on 5.0 m mast (started Nov 13, 2026)',
+                    cs: 'Veselí nad Moravou · Měřicí stanice na stožáru 5,0 m',
+                    en: 'Veselí nad Moravou · Weather station on 5.0 m mast',
                 },
             },
             {
                 id: 'veseli-2',
                 kind: 'image',
-                src: '/img/clients/ansys-cfd-vawt.png',
+                src: '/img/clients/morava/veseli-site-2.jpg',
                 caption: {
-                    cs: 'Treetino Strom V1 · 12× 3 kW Aero + 300 solárních listů (36,0 kW + 13,80 kWp)',
-                    en: 'Treetino Tree V1 · 12× 3 kW Aero + 300 solar leaves (36.0 kW + 13.80 kWp)',
+                    cs: 'Veselí nad Moravou · Pohled na měřicí místo a terén',
+                    en: 'Veselí nad Moravou · View of measurement site and terrain',
+                },
+            },
+            {
+                id: 'veseli-3',
+                kind: 'image',
+                src: '/img/clients/morava/veseli-site-3.jpg',
+                caption: {
+                    cs: 'Veselí nad Moravou · Detail instalace stožáru na lokalitě',
+                    en: 'Veselí nad Moravou · Detail of mast installation on site',
+                },
+            },
+            {
+                id: 'veseli-video',
+                kind: 'video',
+                src: '/img/clients/morava/veseli-site-video.mp4',
+                poster: '/img/clients/morava/veseli-site-1.jpg',
+                caption: {
+                    cs: 'Veselí nad Moravou · Videozáznam měřicí stanice v provozu',
+                    en: 'Veselí nad Moravou · Site video recording of operating station',
                 },
             },
         ],
@@ -311,8 +358,8 @@ export const STATION_ENTRIES: StationEntry[] = [
                 kind: 'image',
                 src: '/img/clients/site-before-ipragu1761.jpg',
                 caption: {
-                    cs: 'Praha · Meteostanice IPRAGU1761 v areálu Akademie řemesel (25. 9. – 1. 11. 2026)',
-                    en: 'Prague · Weather station IPRAGU1761 at the Academy of Crafts campus (Sep 25 – Nov 1, 2026)',
+                    cs: 'Praha · Meteostanice IPRAGU1761 v areálu Akademie řemesel',
+                    en: 'Prague · Weather station IPRAGU1761 at the Academy of Crafts campus',
                 },
             },
             {
@@ -528,12 +575,7 @@ export function computePortfolio(entries: StationEntry[] = STATION_ENTRIES): Por
 }
 
 /** Chronological campaign links drawn on the map (the Prague station was physically moved to Stochov) */
-export const STATION_LINKS: { from: string; to: string; label?: LocalizedText }[] = [
-    { from: 'D3882832837', to: 'IPRAGU1761' },
-    { from: 'IPRAGU1761', to: 'ISTOCH13', label: { cs: 'přesunuto 1. 11.', en: 'relocated Nov 1' } },
-    { from: 'ISTOCH13', to: 'ITEBIH6', label: { cs: 'instalováno 10. 11.', en: 'installed Nov 10' } },
-    { from: 'ITEBIH6', to: 'IVESEL85', label: { cs: 'instalováno 13. 11.', en: 'installed Nov 13' } },
-];
+export const STATION_LINKS: { from: string; to: string; label?: LocalizedText }[] = [];
 
 /** Physically purchased units ready for deployment — listed, never pinned on the map */
 export const PENDING_STATIONS: PendingStation[] = [4, 5].map((slot) => ({
