@@ -83,16 +83,17 @@
             <div class="mb-12 pt-6">
                 <div class="grid gap-12">
                     <div
-                        class="grid grid-cols-2 gap-6 sm:grid-cols-2 md:grid-cols-3"
+                        class="grid grid-cols-2 gap-8 sm:grid-cols-2 lg:grid-cols-4"
                     >
-                        <div class="">
+                        <!-- 01 · Products & Solutions -->
+                        <div>
                             <div
                                 class="flex flex-col gap-4 sm:flex-row md:flex-col lg:flex-row"
                             >
                                 <div
                                     class="flex aspect-square h-12 w-12 rounded-xl bg-t-blue/10 text-t-blue"
                                 >
-                                    <LinkIcon
+                                    <Package
                                         stroke-width="1.5"
                                         class="mx-auto my-auto h-6 w-6"
                                     />
@@ -104,7 +105,99 @@
                                         props.dark ? 'text-white' : 'text-black'
                                     "
                                 >
-                                    {{ $t('common.footer.links') }}
+                                    {{ $t('common.footer.products_solutions') }}
+                                </h2>
+                            </div>
+
+                            <div class="mt-6 flex flex-col gap-2">
+                                <FooterLink :href="route('products.treeV1')">
+                                    {{ $t('common.footer.tree_v1') }}
+                                </FooterLink>
+                                <FooterLink :href="route('products.treeV2')">
+                                    {{ $t('common.footer.tree_v2') }}
+                                </FooterLink>
+                                <FooterLink :href="route('products.turbine')">
+                                    {{ $t('common.footer.turbine') }}
+                                </FooterLink>
+                                <FooterLink :href="route('configurator')">
+                                    {{ $t('configurator.title') }}
+                                </FooterLink>
+                                <FooterLink :href="route('clients.index')">
+                                    {{ $t('common.footer.clients_stations') }}
+                                </FooterLink>
+                                <FooterLink :href="route('databook.index')">
+                                    {{ $t('common.footer.databook') }}
+                                </FooterLink>
+                            </div>
+                        </div>
+
+                        <!-- 02 · Investors & Ecosystem -->
+                        <div>
+                            <div
+                                class="flex flex-col gap-4 sm:flex-row md:flex-col lg:flex-row"
+                            >
+                                <div
+                                    class="flex aspect-square h-12 w-12 rounded-xl bg-t-blue/10 text-t-blue"
+                                >
+                                    <Coins
+                                        stroke-width="1.5"
+                                        class="mx-auto my-auto h-6 w-6"
+                                    />
+                                </div>
+
+                                <h2
+                                    class="my-auto text-xl font-medium"
+                                    :class="
+                                        props.dark ? 'text-white' : 'text-black'
+                                    "
+                                >
+                                    {{ $t('common.footer.investors_ecosystem') }}
+                                </h2>
+                            </div>
+
+                            <div class="mt-6 flex flex-col gap-2">
+                                <FooterLink :href="route('investors.index')">
+                                    {{ $t('common.footer.investors') }}
+                                </FooterLink>
+                                <FooterLink :href="route('pitch.index')">
+                                    {{ $t('common.footer.pitch_deck') }}
+                                </FooterLink>
+                                <FooterLink :href="route('token.index')">
+                                    {{ $t('common.footer.tokenomics') }}
+                                </FooterLink>
+                                <FooterLink :href="route('web3.index')">
+                                    {{ $t('common.footer.web3') }}
+                                </FooterLink>
+                                <FooterLink :href="route('sales.index')">
+                                    {{ $t('common.nav.sales') }}
+                                </FooterLink>
+                                <FooterLink href="/docs/Treetino_Investment_Memorandum_2026.pdf">
+                                    {{ $t('common.footer.memorandum') }}
+                                </FooterLink>
+                            </div>
+                        </div>
+
+                        <!-- 03 · Company & Media -->
+                        <div>
+                            <div
+                                class="flex flex-col gap-4 sm:flex-row md:flex-col lg:flex-row"
+                            >
+                                <div
+                                    class="flex aspect-square h-12 w-12 rounded-xl bg-t-blue/10 text-t-blue"
+                                >
+                                    <Building
+                                        stroke-width="1.5"
+                                        class="mx-auto my-auto h-6 w-6"
+                                    />
+                                </div>
+
+                                <h2
+                                    class="my-auto text-xl font-medium"
+                                    :class="
+                                        props.dark ? 'text-white' : 'text-black'
+                                    "
+                                >
+                                    {{ $t('common.footer.company_media') }}
                                 </h2>
                             </div>
 
@@ -112,74 +205,26 @@
                                 <FooterLink :href="route('home')">
                                     {{ $t('common.nav.home') }}
                                 </FooterLink>
-                                <FooterLink :href="route('configurator')">{{
-                                    $t('configurator.title')
-                                }}</FooterLink>
-                                <FooterLink
-                                    :href="route('collaboration.index')"
-                                    >{{
-                                        $t('common.footer.grants')
-                                    }}</FooterLink
-                                >
-                                <FooterLink
-                                    :href="route('collaboration.index')"
-                                    >{{
-                                        $t('common.nav.collaboration')
-                                    }}</FooterLink
-                                >
-                                <FooterLink :href="route('sales.index')">{{
-                                    $t('common.nav.sales')
-                                }}</FooterLink>
-                                <FooterLink :href="route('media.index')">{{
-                                    $t('common.nav.media')
-                                }}</FooterLink>
-                                <FooterLink :href="route('contact.index')">{{
-                                    $t('common.nav.contact')
-                                }}</FooterLink>
-                                <FooterLink href="/media#pitchdeck">
-                                    Pitch Deck
+                                <FooterLink :href="route('collaboration.index')">
+                                    {{ $t('common.nav.collaboration') }}
+                                </FooterLink>
+                                <FooterLink :href="route('media.index')">
+                                    {{ $t('common.nav.media') }}
+                                </FooterLink>
+                                <FooterLink :href="route('contact.index')">
+                                    {{ $t('common.nav.contact') }}
+                                </FooterLink>
+                                <FooterLink href="/docs/patent-ep-4664750.pdf">
+                                    {{ $t('common.footer.patent_ep') }}
+                                </FooterLink>
+                                <FooterLink href="/docs/patent-wo-2025256678.pdf">
+                                    {{ $t('common.footer.patent_wo') }}
                                 </FooterLink>
                             </div>
                         </div>
 
-                        <div class="">
-                            <div
-                                class="flex flex-col gap-4 sm:flex-row md:flex-col lg:flex-row"
-                            >
-                                <div
-                                    class="flex aspect-square h-12 w-12 rounded-xl bg-t-blue/10 text-t-blue"
-                                >
-                                    <PeopleTag
-                                        stroke-width="1.5"
-                                        class="mx-auto my-auto h-6 w-6"
-                                    />
-                                </div>
-
-                                <h2
-                                    class="my-auto text-xl font-medium"
-                                    :class="
-                                        props.dark ? 'text-white' : 'text-black'
-                                    "
-                                >
-                                    {{ $t('common.footer.community') }}
-                                </h2>
-                            </div>
-
-                            <div class="mt-6 flex flex-col gap-2">
-                                <div
-                                    class="w-fit cursor-not-allowed"
-                                    :class="
-                                        props.dark
-                                            ? 'text-white/40'
-                                            : 'text-black/50'
-                                    "
-                                >
-                                    {{ $t('common.status.coming_soon') }}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="">
+                        <!-- 04 · Legal -->
+                        <div>
                             <div
                                 class="flex flex-col gap-4 sm:flex-row md:flex-col lg:flex-row"
                             >
@@ -453,12 +498,12 @@
 import {
     Instagram,
     Linkedin,
-    Link as LinkIcon,
+    Package,
+    Coins,
+    Building,
     GraduationCap,
-    PeopleTag,
     X,
     Mail,
-    Building,
 } from '@iconoir/vue';
 import { Link } from '@inertiajs/vue3';
 import { ArrowRight } from 'lucide-vue-next';
