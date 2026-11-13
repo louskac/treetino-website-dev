@@ -230,6 +230,10 @@ function fmt1(v: number) {
 }
 
 const offerSubLabel = computed(() => {
+    if (props.variants[0].buttonLabel.cs === props.variants[1].buttonLabel.cs) {
+        return `PDF · ${tr(props.variants[0].buttonLabel, locale.value)}`;
+    }
+
     const isMixed = props.variants[0].systemId !== props.variants[1].systemId;
 
     if (isMixed) {
@@ -528,6 +532,7 @@ function stepMedia(delta: number) {
                         <span class="hidden sm:inline"> · {{ tr(activeVariant.shortModel, locale) }}</span>
                     </h3>
                     <div
+                        v-if="variants[0].buttonLabel.cs !== variants[1].buttonLabel.cs"
                         class="flex rounded-lg border border-white/10 p-0.5 text-xs"
                         role="radiogroup"
                         :aria-label="isEn ? 'Configuration option' : 'Varianta stromů'"
@@ -544,6 +549,12 @@ function stepMedia(delta: number) {
                         >
                             {{ tr(v.buttonLabel, locale) }}
                         </button>
+                    </div>
+                    <div
+                        v-else
+                        class="rounded-md border border-white/10 bg-white/5 px-2.5 py-1 text-xs font-medium text-white/85"
+                    >
+                        {{ tr(variants[0].buttonLabel, locale) }}
                     </div>
                 </div>
 

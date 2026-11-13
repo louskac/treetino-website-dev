@@ -40,8 +40,9 @@ const v2 = computed(() => props.variants[1]);
 const s1 = computed(() => props.sims[1]);
 const s2 = computed(() => props.sims[2]);
 
-const isMixedModels = computed(() => v1.value.systemId !== v2.value.systemId);
-const isAllV1 = computed(() => v1.value.systemId === 'strom-v1' && v2.value.systemId === 'strom-v1');
+const isSingleOffer = computed(() => v1.value.quantity === v2.value.quantity && v1.value.systemId === v2.value.systemId);
+const isMixedModels = computed(() => !isSingleOffer.value && v1.value.systemId !== v2.value.systemId);
+const isAllV1 = computed(() => !isSingleOffer.value && v1.value.systemId === 'strom-v1' && v2.value.systemId === 'strom-v1');
 
 const validUntil = computed(() => {
     const d = new Date(props.issuedIso);
@@ -53,6 +54,9 @@ const validUntil = computed(() => {
 const samePayback = computed(() => s1.value.paybackYears === s2.value.paybackYears);
 
 const page1TitleLine1 = computed(() => {
+    if (isSingleOffer.value) {
+        return isEn.value ? `${v1.value.quantity}× Treetino ${tr(v1.value.shortModel, locale.value)}` : `${v1.value.quantity}× Treetino ${tr(v1.value.shortModel, locale.value)}`;
+    }
     if (isMixedModels.value) {
         return isEn.value ? '2× Treetino Tree V2 / V1' : '2× Treetino Strom V2 / V1';
     }
@@ -64,6 +68,9 @@ const page1TitleLine1 = computed(() => {
 });
 
 const page2HeadlineLine1 = computed(() => {
+    if (isSingleOffer.value) {
+        return isEn.value ? `${v1.value.quantity}× Treetino ${tr(v1.value.shortModel, locale.value)}.` : `${v1.value.quantity}× Treetino ${tr(v1.value.shortModel, locale.value)}.`;
+    }
     if (isMixedModels.value) {
         return isEn.value ? 'Two V2 trees, or two V1s.' : 'Dva stromy V2, nebo dva V1.';
     }
@@ -76,6 +83,11 @@ const page2HeadlineLine1 = computed(() => {
 
 const page2HeadlineLine2 = computed(() => {
     const loc = locale.value;
+    if (isSingleOffer.value) {
+        return isEn.value
+            ? `Payback ${num(s1.value.paybackYears, 1, loc)} yrs. Net profit +${millions(s1.value.netProfit25YrCzk, 2, loc)}.`
+            : `Návratnost ${num(s1.value.paybackYears, 1, loc)} let. Čistý zisk +${millions(s1.value.netProfit25YrCzk, 2, loc)}.`;
+    }
     if (samePayback.value) {
         return isEn.value
             ? `Payback ${num(s1.value.paybackYears, 1, loc)} years.`
@@ -556,24 +568,28 @@ const warranties = computed(() => [
                 {{ isEn ? 'Turnkey delivery.' : 'Na klíč.' }}<br />
                 <span class="pdf-accent">
                     {{
-                        isMixedModels
+                        isSingleOffer
                             ? isEn
-                                ? 'Complete 2-tree installation.'
-                                : 'Kompletní dodávka 2 stromů.'
-                            : isAllV1
+                                ? `Single ${tr(v1.shortModel, locale)} tree installation.`
+                                : `Instalace 1 stromu ${tr(v1.shortModel, locale)}.`
+                            : isMixedModels
                               ? isEn
-                                  ? 'Industrial 3-tree installation.'
-                                  : 'Průmyslová instalace 3 stromů.'
-                              : isEn
-                                ? 'Installed in one week.'
-                                : 'Montáž za jeden týden.'
+                                  ? 'Complete 2-tree installation.'
+                                  : 'Kompletní dodávka 2 stromů.'
+                              : isAllV1
+                                ? isEn
+                                    ? 'Industrial 3-tree installation.'
+                                    : 'Průmyslová instalace 3 stromů.'
+                                : isEn
+                                  ? 'Installed in one week.'
+                                  : 'Montáž za jeden týden.'
                     }}
                 </span>
             </h1>
 
             <div class="scope">
                 <div class="scope-visual">
-                    <img src="/img/clients/treetino-v2-studio.webp" alt="" class="pdf-img" loading="lazy" decoding="async" />
+                    <img :src="v1.systemId === 'strom-v1' ? '/img/clients/treetino-v1-site-render.jpg' : '/img/clients/treetino-v2-studio.webp'" alt="" class="pdf-img" loading="lazy" decoding="async" />
                 </div>
 
                 <!-- Mixed-model scope table (Stochov: 2x V2 vs 2x V1) -->

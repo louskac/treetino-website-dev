@@ -8,7 +8,7 @@
 import type { AppLocale } from '@/lib/locale';
 import { evaluateSiteOfferPerformance } from './cvutPhysics';
 import type { SiteOfferSimulationResult, TreetinoSystemId } from './cvutPhysics';
-import { buildIpragu1761Bundle, buildIstoch13Bundle, buildItebih6Bundle, buildMkovoBundle, latLonToCzMap } from './pwsData';
+import { buildIpragu1761Bundle, buildIstoch13Bundle, buildItebih6Bundle, buildIvesel85Bundle, buildMkovoBundle, latLonToCzMap } from './pwsData';
 import type { StationTelemetryBundle } from './pwsData';
 
 export type VariantQty = 1 | 2;
@@ -223,6 +223,72 @@ export const STATION_ENTRIES: StationEntry[] = [
         ],
         portfolioVariant: 1,
         bundle: buildItebih6Bundle(),
+    },
+    {
+        id: 'IVESEL85',
+        title: { cs: 'Veselí nad Moravou', en: 'Veselí nad Moravou' },
+        clientName: { cs: 'Veselí nad Moravou', en: 'Veselí nad Moravou' },
+        city: { cs: 'Veselí nad Moravou', en: 'Veselí nad Moravou' },
+        status: 'live',
+        statusNote: { cs: 'Živé měření', en: 'Live telemetry' },
+        listStatusSub: { cs: 'Živě', en: 'Live' },
+        chipSide: 'left',
+        sitePhoto: '/img/clients/treetino-v1-site-render.jpg',
+        offerCoverPhoto: '/img/clients/treetino-v1-site-render.jpg',
+        offerCoverCaption: {
+            cs: 'Vizualizace · Treetino Strom V1 (11,5 m) pro Veselí nad Moravou',
+            en: 'Visualization · Treetino Tree V1 (11.5 m) for Veselí nad Moravou',
+        },
+        media: [
+            {
+                id: 'veseli-1',
+                kind: 'image',
+                src: '/img/clients/treetino-v1-site-render.jpg',
+                caption: {
+                    cs: 'Veselí nad Moravou · Měřicí stanice na stožáru 5,0 m (zahájeno 13. 11. 2026)',
+                    en: 'Veselí nad Moravou · Weather station on 5.0 m mast (started Nov 13, 2026)',
+                },
+            },
+            {
+                id: 'veseli-2',
+                kind: 'image',
+                src: '/img/clients/ansys-cfd-vawt.png',
+                caption: {
+                    cs: 'Treetino Strom V1 · 12× 3 kW Aero + 300 solárních listů (36,0 kW + 13,80 kWp)',
+                    en: 'Treetino Tree V1 · 12× 3 kW Aero + 300 solar leaves (36.0 kW + 13.80 kWp)',
+                },
+            },
+        ],
+        variants: [
+            {
+                key: 1,
+                systemId: 'strom-v1',
+                quantity: 1,
+                hubHeightM: 11.5,
+                buttonLabel: { cs: '1× Strom V1', en: '1× Tree V1' },
+                title: { cs: '1× Strom V1', en: '1× Tree V1' },
+                shortModel: { cs: 'Strom V1', en: 'Tree V1' },
+                assembly: { cs: '12× 3 kW Aero · 300 listů', en: '12× 3 kW Aero · 300 leaves' },
+                capacity: { cs: '36,0 kW + 13,80 kWp', en: '36.0 kW + 13.80 kWp' },
+                heightPermit: { cs: '11,5 m · vč. 2× 22 kW EV + BESS', en: '11.5 m · incl. 2× 22 kW EV + BESS' },
+                studySlug: '1x_Strom_V1',
+            },
+            {
+                key: 2,
+                systemId: 'strom-v1',
+                quantity: 1,
+                hubHeightM: 11.5,
+                buttonLabel: { cs: '1× Strom V1', en: '1× Tree V1' },
+                title: { cs: '1× Strom V1', en: '1× Tree V1' },
+                shortModel: { cs: 'Strom V1', en: 'Tree V1' },
+                assembly: { cs: '12× 3 kW Aero · 300 listů', en: '12× 3 kW Aero · 300 leaves' },
+                capacity: { cs: '36,0 kW + 13,80 kWp', en: '36.0 kW + 13.80 kWp' },
+                heightPermit: { cs: '11,5 m · vč. 2× 22 kW EV + BESS', en: '11.5 m · incl. 2× 22 kW EV + BESS' },
+                studySlug: '1x_Strom_V1',
+            },
+        ],
+        portfolioVariant: 1,
+        bundle: buildIvesel85Bundle(),
     },
     {
         id: 'IPRAGU1761',
@@ -466,10 +532,11 @@ export const STATION_LINKS: { from: string; to: string; label?: LocalizedText }[
     { from: 'D3882832837', to: 'IPRAGU1761' },
     { from: 'IPRAGU1761', to: 'ISTOCH13', label: { cs: 'přesunuto 1. 11.', en: 'relocated Nov 1' } },
     { from: 'ISTOCH13', to: 'ITEBIH6', label: { cs: 'instalováno 10. 11.', en: 'installed Nov 10' } },
+    { from: 'ITEBIH6', to: 'IVESEL85', label: { cs: 'instalováno 13. 11.', en: 'installed Nov 13' } },
 ];
 
 /** Physically purchased units ready for deployment — listed, never pinned on the map */
-export const PENDING_STATIONS: PendingStation[] = [3, 4, 5].map((slot) => ({
+export const PENDING_STATIONS: PendingStation[] = [4, 5].map((slot) => ({
     slot,
     label: {
         cs: `Stanice ${String(slot).padStart(2, '0')}`,
@@ -481,7 +548,7 @@ export const PENDING_STATIONS: PendingStation[] = [3, 4, 5].map((slot) => ({
 export function documentUrls(entry: StationEntry, variantKey: VariantQty): { offer: string; study: string } | null {
     const id = entry.id.toUpperCase();
 
-    if (id !== 'IPRAGU1761' && id !== 'ISTOCH13' && id !== 'D3882832837' && id !== 'ITEBIH6') {
+    if (id !== 'IPRAGU1761' && id !== 'ISTOCH13' && id !== 'D3882832837' && id !== 'ITEBIH6' && id !== 'IVESEL85') {
         return null;
     }
 
@@ -491,7 +558,9 @@ export function documentUrls(entry: StationEntry, variantKey: VariantQty): { off
             ? `Treetino_${id}_Cenova_nabidka_2x_V2_V1.pdf`
             : id === 'D3882832837'
               ? `Treetino_${id}_Cenova_nabidka_3x_Strom_V1.pdf`
-              : `Treetino_${id}_Cenova_nabidka_Strom_V2.pdf`;
+              : id === 'IVESEL85'
+                ? `Treetino_${id}_Cenova_nabidka_Strom_V1.pdf`
+                : `Treetino_${id}_Cenova_nabidka_Strom_V2.pdf`;
 
     return {
         offer: `/docs/${offerName}`,
