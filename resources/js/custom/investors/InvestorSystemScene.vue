@@ -194,10 +194,10 @@ function resize() {
 
     if (isPortrait) {
         center.set(0.0, 1.35, 0);
-        camera.userData.distance = Math.max(8.6 / (tanV * camera.aspect), 4.5 / tanV);
+        camera.userData.distance = Math.max(12.5 / (tanV * camera.aspect), 5.5 / tanV);
     } else {
-        center.set(0.15, 1.65, 0);
-        camera.userData.distance = Math.max(8.8 / (tanV * camera.aspect), 4.3 / tanV);
+        center.set(0.0, 1.5, 0);
+        camera.userData.distance = Math.max(13.2 / (tanV * camera.aspect), 5.2 / tanV);
     }
 
     camera.updateProjectionMatrix();

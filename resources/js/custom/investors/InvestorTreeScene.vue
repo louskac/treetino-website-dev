@@ -153,8 +153,8 @@ function resize() {
     renderer.setSize(hostW, hostH, false);
     camera.aspect = hostW / hostH;
     const tanV = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
-    // fit ~7 units of height and ~7.8 units of width, leaving room above and below for the callouts
-    camera.userData.distance = Math.max(3.5 / tanV, 3.9 / (tanV * camera.aspect));
+    // fit ~7 units of height and ~7.8 units of width, leaving room above and below for callouts & margins
+    camera.userData.distance = Math.max(4.2 / tanV, 4.8 / (tanV * camera.aspect));
     camera.updateProjectionMatrix();
 }
 

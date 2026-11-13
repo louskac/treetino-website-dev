@@ -4,8 +4,7 @@
         class="pointer-events-none"
         :style="{
             opacity: 1 - out,
-            transform: `translateY(${-out * 36}px)`,
-            filter: out > 0 ? `blur(${out * 6}px)` : undefined,
+            transform: `translateY(${-out * 28}px)`,
         }"
     >
         <span class="block" :class="leadClass">
@@ -89,8 +88,7 @@ function wordStyle(i: number) {
 
     return {
         opacity: a,
-        transform: `translateY(${(1 - a) * 0.38}em)`,
-        filter: a < 1 ? `blur(${(1 - a) * 12}px)` : undefined,
+        transform: `translateY(${(1 - a) * 0.32}em)`,
     };
 }
 

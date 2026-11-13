@@ -33,6 +33,22 @@ Route::get('/cmr', [SalesController::class, 'index']);
 Route::get('/investors', function () {
     return \Inertia\Inertia::render('Investors/Index');
 })->name('investors.index');
+Route::get('/token', function (\Illuminate\Http\Request $request) {
+    return \Inertia\Inertia::render('Token/Index', [
+        'partner' => $request->query('partner'),
+    ]);
+})->name('token.index');
+Route::get('/tokenomics', function () {
+    return redirect()->route('token.index');
+});
+Route::get('/nimbus', function () {
+    return \Inertia\Inertia::render('Token/Index', [
+        'partner' => 'Nimbus Capital',
+    ]);
+})->name('token.nimbus');
+Route::get('/accelerator', function () {
+    return redirect()->route('token.index');
+});
 Route::get('/clients', function () {
     return \Inertia\Inertia::render('Clients/Index');
 })->name('clients.index');

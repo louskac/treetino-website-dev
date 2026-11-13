@@ -46,6 +46,10 @@ export const ZiggyConfig = {
         },
         'media.index': { uri: 'media', methods: ['GET', 'HEAD'] },
         'web3.index': { uri: 'web3', methods: ['GET', 'HEAD'] },
+        'token.index': { uri: 'token', methods: ['GET', 'HEAD'] },
+        'token.nimbus': { uri: 'nimbus', methods: ['GET', 'HEAD'] },
+        'databook.index': { uri: 'databook', methods: ['GET', 'HEAD'] },
+        'memorandum.index': { uri: 'im', methods: ['GET', 'HEAD'] },
         'investors.index': { uri: 'investors', methods: ['GET', 'HEAD'] },
         'clients.index': { uri: 'clients', methods: ['GET', 'HEAD'] },
         'contact.index': { uri: 'contact', methods: ['GET', 'HEAD'] },
@@ -96,6 +100,10 @@ export const staticRoutes: Record<string, string | ((param?: any) => string)> = 
     'collaboration.index': '/collaboration',
     'media.index': '/media',
     'web3.index': '/web3',
+    'token.index': '/token',
+    'token.nimbus': '/nimbus',
+    'databook.index': '/databook',
+    'memorandum.index': '/im',
     'investors.index': '/investors',
     'clients.index': '/clients',
     'contact.index': '/contact',
@@ -186,6 +194,10 @@ const PATH_TO_COMPONENT_MAP: Record<string, string> = {
     '/klienti': 'Clients/Index',
     '/telemetry': 'Clients/Index',
     '/stations': 'Clients/Index',
+    '/token': 'Token/Index',
+    '/tokenomics': 'Token/Index',
+    '/nimbus': 'Token/Index',
+    '/accelerator': 'Token/Index',
 };
 
 export function getComponentForPath(path: string): string {

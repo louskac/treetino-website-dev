@@ -110,22 +110,22 @@
                             </div>
 
                             <div class="mt-6 flex flex-col gap-2">
-                                <FooterLink :href="route('products.treeV1')">
+                                <FooterLink :href="safeUrl('products.treeV1')">
                                     {{ $t('common.footer.tree_v1') }}
                                 </FooterLink>
-                                <FooterLink :href="route('products.treeV2')">
+                                <FooterLink :href="safeUrl('products.treeV2')">
                                     {{ $t('common.footer.tree_v2') }}
                                 </FooterLink>
-                                <FooterLink :href="route('products.turbine')">
+                                <FooterLink :href="safeUrl('products.turbine')">
                                     {{ $t('common.footer.turbine') }}
                                 </FooterLink>
-                                <FooterLink :href="route('configurator')">
+                                <FooterLink :href="safeUrl('configurator')">
                                     {{ $t('configurator.title') }}
                                 </FooterLink>
-                                <FooterLink :href="route('clients.index')">
+                                <FooterLink :href="safeUrl('clients.index')">
                                     {{ $t('common.footer.clients_stations') }}
                                 </FooterLink>
-                                <FooterLink :href="route('databook.index')">
+                                <FooterLink href="/docs/Treetino_Technical_Databook_2026_EN.pdf">
                                     {{ $t('common.footer.databook') }}
                                 </FooterLink>
                             </div>
@@ -156,19 +156,19 @@
                             </div>
 
                             <div class="mt-6 flex flex-col gap-2">
-                                <FooterLink :href="route('investors.index')">
+                                <FooterLink :href="safeUrl('investors.index')">
                                     {{ $t('common.footer.investors') }}
                                 </FooterLink>
-                                <FooterLink :href="route('pitch.index')">
+                                <FooterLink :href="safeUrl('pitch.index')">
                                     {{ $t('common.footer.pitch_deck') }}
                                 </FooterLink>
-                                <FooterLink :href="route('token.index')">
+                                <FooterLink :href="safeUrl('token.index')">
                                     {{ $t('common.footer.tokenomics') }}
                                 </FooterLink>
-                                <FooterLink :href="route('web3.index')">
+                                <FooterLink :href="safeUrl('web3.index')">
                                     {{ $t('common.footer.web3') }}
                                 </FooterLink>
-                                <FooterLink :href="route('sales.index')">
+                                <FooterLink :href="safeUrl('sales.index')">
                                     {{ $t('common.nav.sales') }}
                                 </FooterLink>
                                 <FooterLink href="/docs/Treetino_Investment_Memorandum_2026.pdf">
@@ -202,16 +202,16 @@
                             </div>
 
                             <div class="mt-6 flex flex-col gap-2">
-                                <FooterLink :href="route('home')">
+                                <FooterLink :href="safeUrl('home')">
                                     {{ $t('common.nav.home') }}
                                 </FooterLink>
-                                <FooterLink :href="route('collaboration.index')">
+                                <FooterLink :href="safeUrl('collaboration.index')">
                                     {{ $t('common.nav.collaboration') }}
                                 </FooterLink>
-                                <FooterLink :href="route('media.index')">
+                                <FooterLink :href="safeUrl('media.index')">
                                     {{ $t('common.nav.media') }}
                                 </FooterLink>
-                                <FooterLink :href="route('contact.index')">
+                                <FooterLink :href="safeUrl('contact.index')">
                                     {{ $t('common.nav.contact') }}
                                 </FooterLink>
                                 <FooterLink href="/docs/patent-ep-4664750.pdf">
@@ -248,19 +248,19 @@
                             </div>
 
                             <div class="mt-6 flex flex-col gap-2">
-                                <FooterLink :href="route('legal.tos')">
+                                <FooterLink :href="safeUrl('legal.tos')">
                                     {{ $t('common.footer.terms') }}
                                 </FooterLink>
 
-                                <FooterLink :href="route('legal.pp')">
+                                <FooterLink :href="safeUrl('legal.pp')">
                                     {{ $t('common.footer.privacy') }}
                                 </FooterLink>
 
-                                <FooterLink :href="route('legal.nda')">
+                                <FooterLink :href="safeUrl('legal.nda')">
                                     {{ $t('common.footer.nda') }}
                                 </FooterLink>
 
-                                <FooterLink :href="route('legal.mediation')">
+                                <FooterLink :href="safeUrl('legal.mediation')">
                                     {{ $t('common.footer.mediation') }}
                                 </FooterLink>
 
@@ -291,7 +291,7 @@
 
                     <!-- Clean Official CzechInvest Grant Acknowledgment Banner (Clean Link to Collaboration Page) -->
                     <Link
-                        :href="route('collaboration.index')"
+                        :href="safeUrl('collaboration.index')"
                         class="group block border-y py-6 transition-colors"
                         :class="
                             props.dark
@@ -482,7 +482,7 @@
                                             ? 'hover:text-white'
                                             : 'hover:text-black'
                                     "
-                                    :href="route('legal.pp')"
+                                    :href="safeUrl('legal.pp')"
                                     >{{ $t('common.footer.privacy') }}</Link
                                 >
                             </div>
@@ -512,6 +512,7 @@ import { route } from 'ziggy-js';
 import ButtonPrimary from '@/custom/ButtonPrimary.vue';
 import FooterLink from '@/custom/footer/FooterLink.vue';
 import LogoType from '@/custom/LogoType.vue';
+import { safeRoute } from '@/lib/routes';
 
 const props = withDefaults(
     defineProps<{
@@ -521,6 +522,14 @@ const props = withDefaults(
         dark: false,
     },
 );
+
+const safeUrl = (name: string, params?: any): string => {
+    try {
+        return (route as any)(name, params);
+    } catch {
+        return safeRoute(name, params);
+    }
+};
 
 const openSettings = () => {
     // This function will automatically find the active instance

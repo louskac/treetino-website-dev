@@ -329,8 +329,8 @@ function resize() {
     const isPortrait = w < 640 || w < h;
 
     if (isPortrait) {
-        center.set(-0.75, 1.25, 0);
-        camera.userData.distance = Math.max(7.7 / (tanV * camera.aspect), 4.2 / tanV);
+        center.set(-0.2, 1.8, 0);
+        camera.userData.distance = Math.max(11.5 / (tanV * camera.aspect), 5.2 / tanV);
         if (fiatMat) fiatMat.size = 16;
         if (moneyMat) moneyMat.size = 14;
         if (energyMat) energyMat.size = 8;
@@ -338,8 +338,8 @@ function resize() {
         currentMoneyCount = 7;
         currentEnergyCount = 14;
     } else {
-        camera.userData.distance = Math.max(10.6 / (tanV * camera.aspect), 3.8 / tanV);
-        center.set(-0.6, 1.9, 0);
+        camera.userData.distance = Math.max(13.2 / (tanV * camera.aspect), 4.9 / tanV);
+        center.set(-0.2, 1.9, 0);
         if (fiatMat) fiatMat.size = 26;
         if (moneyMat) moneyMat.size = 24;
         if (energyMat) energyMat.size = 16;

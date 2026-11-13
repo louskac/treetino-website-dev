@@ -216,6 +216,28 @@ const progressPercent = computed(() => {
                     />
                 </a>
 
+                <a
+                    href="/pitch-hackathon"
+                    class="inline-flex items-center gap-1.5 rounded-full border border-black/15 px-3.5 py-2 text-xs font-medium whitespace-nowrap text-black/75 transition-colors hover:border-black/40 hover:text-black"
+                >
+                    <span>Hackathon Deck</span>
+                    <ArrowUpRight
+                        class="h-3.5 w-3.5 text-black/40"
+                        aria-hidden="true"
+                    />
+                </a>
+
+                <a
+                    href="/pitch-refract"
+                    class="inline-flex items-center gap-1.5 rounded-full border border-black/15 px-3.5 py-2 text-xs font-medium whitespace-nowrap text-black/75 transition-colors hover:border-black/40 hover:text-black"
+                >
+                    <span>Refract Deck</span>
+                    <ArrowUpRight
+                        class="h-3.5 w-3.5 text-black/40"
+                        aria-hidden="true"
+                    />
+                </a>
+
                 <button
                     type="button"
                     @click="copyShareLink"

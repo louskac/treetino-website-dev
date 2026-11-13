@@ -13,15 +13,15 @@ export const HEADLINE =
 
 /** Text column position inside every pinned stage (clears the floating navbar) */
 export const TEXT_COLUMN =
-    'absolute inset-x-0 top-32 max-w-[30rem] sm:top-36 lg:top-44 lg:max-w-[min(30rem,44%)] xl:top-[21vh] xl:max-w-[min(30rem,46%)] 2xl:max-w-[min(36rem,46%)]';
+    'absolute left-0 top-32 w-full max-w-[32rem] sm:top-36 lg:top-40 lg:max-w-[min(34rem,46%)] xl:top-[20vh] xl:max-w-[min(38rem,46%)] 2xl:max-w-[min(44rem,46%)]';
 
 /** Stats row position inside every pinned stage */
 export const STATS_ROW =
-    'absolute inset-x-0 bottom-8 max-w-[30rem] sm:bottom-10 lg:bottom-[9vh] lg:max-w-[min(30rem,44%)] xl:max-w-[min(30rem,46%)] 2xl:max-w-[min(36rem,46%)]';
+    'absolute left-0 bottom-8 w-full max-w-[34rem] sm:bottom-10 lg:bottom-[8vh] lg:max-w-[min(38rem,48%)] xl:max-w-[min(42rem,48%)] 2xl:max-w-[min(46rem,48%)]';
 
 /** Visual area inside every pinned stage: right ~54% on desktop, lower half on mobile */
 export const VISUAL_AREA =
-    'absolute inset-x-0 top-[40%] bottom-28 sm:bottom-32 lg:top-[10vh] lg:bottom-[6vh] lg:left-auto lg:w-[52%]';
+    'absolute inset-x-0 top-[40%] bottom-28 sm:bottom-32 lg:top-[8vh] lg:bottom-[5vh] lg:left-auto lg:w-[54%] xl:w-[54%]';
 
 export const PAGE_BG = 'bg-zinc-950';
 

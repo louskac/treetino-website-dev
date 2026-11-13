@@ -290,8 +290,8 @@ function resize() {
     // projected height to the canvas height — whichever needs the camera further away wins.
     const tanV = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
     const tanH = tanV * camera.aspect;
-    const fitLength = (radius * 0.95) / tanH / 0.82;
-    const fitHeight = (radius * 0.55) / tanV;
+    const fitLength = (radius * 0.95) / tanH / 0.72;
+    const fitHeight = (radius * 0.62) / tanV;
     camera.userData.distance = Math.max(fitLength, fitHeight);
     camera.updateProjectionMatrix();
 }
