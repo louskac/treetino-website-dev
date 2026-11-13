@@ -42,9 +42,7 @@ Route::get('/tokenomics', function () {
     return redirect()->route('token.index');
 });
 Route::get('/nimbus', function () {
-    return \Inertia\Inertia::render('Token/Index', [
-        'partner' => 'Nimbus Capital',
-    ]);
+    return redirect()->route('token.index');
 })->name('token.nimbus');
 Route::get('/accelerator', function () {
     return redirect()->route('token.index');

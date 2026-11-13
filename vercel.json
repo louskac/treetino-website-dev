@@ -1,6 +1,17 @@
 {
     "buildCommand": "npm run build",
     "outputDirectory": "public",
+    "headers": [
+        {
+            "source": "/(.*)",
+            "headers": [
+                {
+                    "key": "Content-Disposition",
+                    "value": "inline"
+                }
+            ]
+        }
+    ],
     "redirects": [
         { "source": "/products", "destination": "/products/treetino-v1", "permanent": false },
         { "source": "/products/v1", "destination": "/products/treetino-v1", "permanent": false },

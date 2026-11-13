@@ -15,7 +15,7 @@
         <div
             class="relative mx-auto w-[calc(100%-72px)] max-w-[1400px] justify-between px-4 sm:w-[500px] sm:px-6 md:w-[calc(100%-140px)] md:max-w-[700px] lg:w-[calc(100%-200px)] lg:max-w-[1400px] xl:w-[calc(100%-400px)]"
         >
-            <div class="flex flex-col pt-10 sm:pt-12">
+            <div class="flex flex-col pt-16">
                 <div class="w-full pb-6">
                     <div class="flex justify-between">
                         <div class="logo flex">
@@ -80,35 +80,36 @@
                 </div>
             </div>
 
-            <div class="mb-8 pt-4 sm:pt-6">
-                <div class="grid gap-8">
+            <div class="mb-12 pt-6">
+                <div class="grid gap-12">
                     <div
-                        class="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8"
+                        class="grid grid-cols-2 gap-8 sm:grid-cols-2 lg:grid-cols-4"
                     >
                         <!-- 01 · Products -->
                         <div>
-                            <div class="flex items-center gap-2">
-                                <span
-                                    class="flex h-6 w-6 items-center justify-center rounded-md bg-t-blue/10 text-t-blue"
+                            <div
+                                class="flex flex-col gap-4 sm:flex-row md:flex-col lg:flex-row"
+                            >
+                                <div
+                                    class="flex aspect-square h-12 w-12 rounded-xl bg-t-blue/10 text-t-blue"
                                 >
                                     <Package
-                                        stroke-width="1.75"
-                                        class="h-3.5 w-3.5"
+                                        stroke-width="1.5"
+                                        class="mx-auto my-auto h-6 w-6"
                                     />
-                                </span>
-                                <h3
-                                    class="text-xs font-semibold tracking-wider uppercase"
+                                </div>
+
+                                <h2
+                                    class="my-auto text-xl font-medium"
                                     :class="
-                                        props.dark
-                                            ? 'text-white/80'
-                                            : 'text-black/80'
+                                        props.dark ? 'text-white' : 'text-black'
                                     "
                                 >
                                     {{ $t('common.footer.products') }}
-                                </h3>
+                                </h2>
                             </div>
 
-                            <div class="mt-3.5 flex flex-col gap-1.5 text-sm">
+                            <div class="mt-6 flex flex-col gap-2">
                                 <FooterLink :href="safeUrl('products.treeV1')">
                                     {{ $t('common.footer.tree_v1') }}
                                 </FooterLink>
@@ -129,28 +130,29 @@
 
                         <!-- 02 · Investors -->
                         <div>
-                            <div class="flex items-center gap-2">
-                                <span
-                                    class="flex h-6 w-6 items-center justify-center rounded-md bg-t-blue/10 text-t-blue"
+                            <div
+                                class="flex flex-col gap-4 sm:flex-row md:flex-col lg:flex-row"
+                            >
+                                <div
+                                    class="flex aspect-square h-12 w-12 rounded-xl bg-t-blue/10 text-t-blue"
                                 >
                                     <Coins
-                                        stroke-width="1.75"
-                                        class="h-3.5 w-3.5"
+                                        stroke-width="1.5"
+                                        class="mx-auto my-auto h-6 w-6"
                                     />
-                                </span>
-                                <h3
-                                    class="text-xs font-semibold tracking-wider uppercase"
+                                </div>
+
+                                <h2
+                                    class="my-auto text-xl font-medium"
                                     :class="
-                                        props.dark
-                                            ? 'text-white/80'
-                                            : 'text-black/80'
+                                        props.dark ? 'text-white' : 'text-black'
                                     "
                                 >
                                     {{ $t('common.footer.investors') }}
-                                </h3>
+                                </h2>
                             </div>
 
-                            <div class="mt-3.5 flex flex-col gap-1.5 text-sm">
+                            <div class="mt-6 flex flex-col gap-2">
                                 <FooterLink :href="safeUrl('investors.index')">
                                     {{ $t('common.footer.investors') }}
                                 </FooterLink>
@@ -171,28 +173,29 @@
 
                         <!-- 03 · Company -->
                         <div>
-                            <div class="flex items-center gap-2">
-                                <span
-                                    class="flex h-6 w-6 items-center justify-center rounded-md bg-t-blue/10 text-t-blue"
+                            <div
+                                class="flex flex-col gap-4 sm:flex-row md:flex-col lg:flex-row"
+                            >
+                                <div
+                                    class="flex aspect-square h-12 w-12 rounded-xl bg-t-blue/10 text-t-blue"
                                 >
                                     <Building
-                                        stroke-width="1.75"
-                                        class="h-3.5 w-3.5"
+                                        stroke-width="1.5"
+                                        class="mx-auto my-auto h-6 w-6"
                                     />
-                                </span>
-                                <h3
-                                    class="text-xs font-semibold tracking-wider uppercase"
+                                </div>
+
+                                <h2
+                                    class="my-auto text-xl font-medium"
                                     :class="
-                                        props.dark
-                                            ? 'text-white/80'
-                                            : 'text-black/80'
+                                        props.dark ? 'text-white' : 'text-black'
                                     "
                                 >
                                     {{ $t('common.footer.company') }}
-                                </h3>
+                                </h2>
                             </div>
 
-                            <div class="mt-3.5 flex flex-col gap-1.5 text-sm">
+                            <div class="mt-6 flex flex-col gap-2">
                                 <FooterLink :href="safeUrl('home')">
                                     {{ $t('common.footer.home') }}
                                 </FooterLink>
@@ -210,49 +213,64 @@
 
                         <!-- 04 · Legal -->
                         <div>
-                            <div class="flex items-center gap-2">
-                                <span
-                                    class="flex h-6 w-6 items-center justify-center rounded-md bg-t-blue/10 text-t-blue"
+                            <div
+                                class="flex flex-col gap-4 sm:flex-row md:flex-col lg:flex-row"
+                            >
+                                <div
+                                    class="flex aspect-square h-12 w-12 rounded-xl bg-t-blue/10 text-t-blue"
                                 >
                                     <GraduationCap
-                                        stroke-width="1.75"
-                                        class="h-3.5 w-3.5"
+                                        stroke-width="1.5"
+                                        class="mx-auto my-auto h-6 w-6"
                                     />
-                                </span>
-                                <h3
-                                    class="text-xs font-semibold tracking-wider uppercase"
+                                </div>
+
+                                <h2
+                                    class="my-auto text-xl font-medium"
                                     :class="
-                                        props.dark
-                                            ? 'text-white/80'
-                                            : 'text-black/80'
+                                        props.dark ? 'text-white' : 'text-black'
                                     "
                                 >
                                     {{ $t('common.footer.legal') }}
-                                </h3>
+                                </h2>
                             </div>
 
-                            <div class="mt-3.5 flex flex-col gap-1.5 text-sm">
+                            <div class="mt-6 flex flex-col gap-2">
                                 <FooterLink :href="safeUrl('legal.tos')">
                                     {{ $t('common.footer.terms') }}
                                 </FooterLink>
+
                                 <FooterLink :href="safeUrl('legal.pp')">
                                     {{ $t('common.footer.privacy') }}
                                 </FooterLink>
+
                                 <FooterLink :href="safeUrl('legal.nda')">
                                     {{ $t('common.footer.nda') }}
                                 </FooterLink>
+
                                 <FooterLink :href="safeUrl('legal.mediation')">
                                     {{ $t('common.footer.mediation') }}
                                 </FooterLink>
+
                                 <div
                                     @click="openSettings"
-                                    class="group relative w-fit cursor-pointer text-inherit opacity-75 transition-opacity duration-300 hover:opacity-100"
+                                    class="group relative w-fit cursor-pointer transition-colors duration-300"
+                                    :class="
+                                        props.dark
+                                            ? 'text-white/70 hover:text-white'
+                                            : 'text-black/70 hover:text-black'
+                                    "
                                 >
                                     <div class="relative">
-                                        {{ $t('common.footer.cookie_settings') }}
+                                        {{
+                                            $t('common.footer.cookie_settings')
+                                        }}
                                     </div>
                                     <div
-                                        class="absolute bottom-0 left-0 h-[1px] w-0 bg-current transition-all duration-300 group-hover:w-full"
+                                        class="absolute bottom-0 left-0 h-[1px] w-0 transition-all duration-300 group-hover:w-full"
+                                        :class="
+                                            props.dark ? 'bg-white' : 'bg-black'
+                                        "
                                     ></div>
                                 </div>
                             </div>
@@ -262,7 +280,7 @@
                     <!-- Clean Official CzechInvest Grant Acknowledgment Banner (Clean Link to Collaboration Page) -->
                     <Link
                         :href="safeUrl('collaboration.index')"
-                        class="group block border-y py-4 transition-colors"
+                        class="group block border-y py-6 transition-colors"
                         :class="
                             props.dark
                                 ? 'border-white/10 hover:bg-white/[0.02]'

@@ -133,7 +133,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
 const allocations = [
     { name: 'Community & DePIN rewards', pct: 35, cliff: 0, vest: 96, tge: false, terms: 'Emitted over 8 yrs on kWh proofs' },
     { name: 'Liquidity & market making', pct: 25, cliff: 0, vest: 12, tge: true, terms: '40% at TGE · rest protocol-owned' },
-    { name: 'Nimbus & strategic round', pct: 15, cliff: 6, vest: 18, tge: true, terms: '10% TGE · 6 mo cliff · 18 mo', accent: true },
+    { name: 'Strategic & accelerator round', pct: 15, cliff: 6, vest: 18, tge: true, terms: '10% TGE · 6 mo cliff · 18 mo', accent: true },
     { name: 'Core team & founders', pct: 15, cliff: 12, vest: 36, tge: false, terms: '12 mo cliff · 36 mo linear' },
     { name: 'Ecosystem treasury', pct: 10, cliff: 3, vest: 24, tge: true, terms: '5% TGE · 3 mo cliff · 24 mo' },
 ];
