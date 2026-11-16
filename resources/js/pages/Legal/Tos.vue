@@ -227,11 +227,17 @@ const finalProvisions = [
                         </p>
                         <address class="not-italic">
                             <strong>Kontakt:</strong><br />
-                            Tel.:
+                            Tel. (CZ – Dominik Mašek, CEO, pouze dotazy v českém jazyce):
                             <a
                                 class="underline underline-offset-2"
                                 href="tel:+420730587857"
-                                >730 587 857</a
+                                >+420 730 587 857</a
+                            ><br />
+                            Tel. (EN – Jakub Lustyk, CTO, dotazy v anglickém jazyce):
+                            <a
+                                class="underline underline-offset-2"
+                                href="tel:+420778273427"
+                                >+420 778 273 427</a
                             ><br />
                             E-mail:
                             <a

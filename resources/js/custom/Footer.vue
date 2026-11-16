@@ -359,6 +359,35 @@
                                     Bílá - Vlčetín 62, <br />
                                     463 43 &mdash; Bílá - Vlčetín
                                 </p>
+
+                                <div
+                                    class="mt-4 space-y-1.5 border-t border-white/15 pt-4 text-xs text-white/85"
+                                >
+                                    <div>
+                                        <a
+                                            href="tel:+420730587857"
+                                            class="font-semibold text-white hover:underline"
+                                            >+420 730 587 857</a
+                                        >
+                                        <span class="text-white/75">
+                                            &mdash;
+                                            {{ $t('contact.phone_cz_name') }} ·
+                                            {{ $t('contact.phone_cz_note') }}
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <a
+                                            href="tel:+420778273427"
+                                            class="font-semibold text-white hover:underline"
+                                            >+420 778 273 427</a
+                                        >
+                                        <span class="text-white/75">
+                                            &mdash;
+                                            {{ $t('contact.phone_en_name') }} ·
+                                            {{ $t('contact.phone_en_note') }}
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="mt-auto pt-6 text-xs text-white/70">

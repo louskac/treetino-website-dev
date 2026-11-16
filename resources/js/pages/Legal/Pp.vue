@@ -35,7 +35,7 @@ const sections = [
         number: 1,
         title: 'SPRÁVCE OSOBNÍCH ÚDAJŮ',
         paragraphs: [
-            'Správcem osobních údajů je společnost Treetino corp s.r.o., IČO: 10800107, se sídlem Český Šternberk 9, 257 26 (dále jen „Správce“). Kontakt: e-mail info@treetino.cz, tel. 730 587 857.',
+            'Správcem osobních údajů je společnost Treetino corp s.r.o., IČO: 10800107, se sídlem Český Šternberk 9, 257 26 (dále jen „Správce“). Kontakt: e-mail info@treetino.cz, tel. +420 730 587 857 (Dominik Mašek, CEO – pouze dotazy v českém jazyce), +420 778 273 427 (Jakub Lustyk, CTO – dotazy v anglickém jazyce).',
             'Správce nejmenoval pověřence pro ochranu osobních údajů; povinnost jmenování se na něj nevztahuje.',
         ],
     },

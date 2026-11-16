@@ -520,22 +520,40 @@ async function handleSendInquiry() {
 
                 <!-- Direct Contact Info Footer -->
                 <div
-                    class="flex flex-wrap items-center justify-between gap-2 border-t border-black/10 pt-4 text-xs text-black/60 dark:border-white/10 dark:text-white/50"
+                    class="space-y-2 border-t border-black/10 pt-4 text-xs text-black/60 dark:border-white/10 dark:text-white/50"
                 >
-                    <a
-                        href="mailto:info@treetino.com"
-                        class="flex items-center gap-1.5 hover:text-t-blue dark:hover:text-white"
-                    >
-                        <Mail class="h-3.5 w-3.5" />
-                        <span>info@treetino.com</span>
-                    </a>
-                    <Link
-                        href="/contact"
-                        class="flex items-center gap-1.5 hover:text-t-blue dark:hover:text-white"
-                    >
-                        <span>{{ $t('common.nav.contact', 'Kontakt') }}</span>
-                        <ArrowRight class="h-3.5 w-3.5" />
-                    </Link>
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <a
+                            href="mailto:info@treetino.com"
+                            class="flex items-center gap-1.5 hover:text-t-blue dark:hover:text-white"
+                        >
+                            <Mail class="h-3.5 w-3.5" />
+                            <span>info@treetino.com</span>
+                        </a>
+                        <Link
+                            href="/contact"
+                            class="flex items-center gap-1.5 hover:text-t-blue dark:hover:text-white"
+                        >
+                            <span>{{ $t('common.nav.contact', 'Kontakt') }}</span>
+                            <ArrowRight class="h-3.5 w-3.5" />
+                        </Link>
+                    </div>
+                    <div class="flex flex-col gap-1 text-[11px] sm:flex-row sm:flex-wrap sm:gap-x-4">
+                        <a
+                            href="tel:+420730587857"
+                            class="hover:text-t-blue dark:hover:text-white"
+                        >
+                            <span class="font-medium">+420 730 587 857</span>
+                            ({{ $t('contact.phone_cz_name') }} · {{ $t('contact.phone_cz_note') }})
+                        </a>
+                        <a
+                            href="tel:+420778273427"
+                            class="hover:text-t-blue dark:hover:text-white"
+                        >
+                            <span class="font-medium">+420 778 273 427</span>
+                            ({{ $t('contact.phone_en_name') }} · {{ $t('contact.phone_en_note') }})
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

@@ -210,6 +210,34 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue';
                                     >
                                         info@treetino.com
                                     </a>
+                                    <div
+                                        class="space-y-2 border-t border-black/10 pt-3 text-sm"
+                                    >
+                                        <div>
+                                            <a
+                                                href="tel:+420730587857"
+                                                class="font-medium text-black transition-colors hover:text-t-blue"
+                                            >
+                                                +420 730 587 857
+                                            </a>
+                                            <span class="text-black/60">
+                                                — {{ $t('contact.phone_cz_name') }}
+                                                ({{ $t('contact.phone_cz_note') }})
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <a
+                                                href="tel:+420778273427"
+                                                class="font-medium text-black transition-colors hover:text-t-blue"
+                                            >
+                                                +420 778 273 427
+                                            </a>
+                                            <span class="text-black/60">
+                                                — {{ $t('contact.phone_en_name') }}
+                                                ({{ $t('contact.phone_en_note') }})
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 

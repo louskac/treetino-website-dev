@@ -3,7 +3,7 @@ import { CheckCircle, Refresh } from '@iconoir/vue';
 import { Head, Link } from '@inertiajs/vue3';
 import axios from 'axios';
 import type { AxiosError } from 'axios';
-import { Mail, MapPin, Clock, Send } from 'lucide-vue-next';
+import { Mail, MapPin, Clock, Phone, Send } from 'lucide-vue-next';
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { route } from 'ziggy-js';
@@ -193,6 +193,48 @@ async function formProcess() {
                                     <p class="mt-1 text-sm text-black/70">
                                         {{ $t('contact.email_desc') }}
                                     </p>
+                                </div>
+
+                                <div class="border-l-2 border-black/10 pl-6">
+                                    <div
+                                        class="mb-3 flex items-center gap-3 text-t-blue"
+                                    >
+                                        <Phone class="h-5 w-5" />
+                                        <span
+                                            class="text-xs font-semibold tracking-wider uppercase"
+                                            >{{ $t('contact.phone_tag') }}</span
+                                        >
+                                    </div>
+                                    <div class="space-y-4">
+                                        <div>
+                                            <a
+                                                href="tel:+420730587857"
+                                                class="text-lg font-medium text-black transition-colors hover:text-t-blue"
+                                            >
+                                                +420 730 587 857
+                                            </a>
+                                            <p class="mt-0.5 text-sm font-medium text-black/80">
+                                                {{ $t('contact.phone_cz_name') }}
+                                            </p>
+                                            <p class="text-xs text-black/60">
+                                                {{ $t('contact.phone_cz_note') }}
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <a
+                                                href="tel:+420778273427"
+                                                class="text-lg font-medium text-black transition-colors hover:text-t-blue"
+                                            >
+                                                +420 778 273 427
+                                            </a>
+                                            <p class="mt-0.5 text-sm font-medium text-black/80">
+                                                {{ $t('contact.phone_en_name') }}
+                                            </p>
+                                            <p class="text-xs text-black/60">
+                                                {{ $t('contact.phone_en_note') }}
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="border-l-2 border-black/10 pl-6">
