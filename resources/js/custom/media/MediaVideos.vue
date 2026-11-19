@@ -41,6 +41,19 @@ const videos: VideoItem[] = [
         thumbnail: 'https://i.ytimg.com/vi/INPvpfISPP0/maxresdefault.jpg',
     },
     {
+        id: 'MN5L3RaFcgY',
+        duration: '1:49',
+        title: {
+            cs: 'Treetino Protocol — Colosseum Pitch',
+            en: 'Treetino Protocol — Colosseum Pitch',
+        },
+        description: {
+            cs: 'Přihláška do Colosseum a představení Web3 vrstev protokolu Treetino.',
+            en: 'Colosseum application pitch covering the Web3 architecture and protocol layers of Treetino.',
+        },
+        thumbnail: 'https://i.ytimg.com/vi/MN5L3RaFcgY/maxresdefault.jpg',
+    },
+    {
         id: 'U7MgxSLgZIs',
         duration: '2:18',
         title: {
