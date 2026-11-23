@@ -1,10 +1,9 @@
 import { useCallback, useState, useEffect, useRef } from 'react';
 import React from 'react';
-import { APIProvider, Map3D, Marker3D, MapMode, AltitudeMode, Pin, useMap3D, Popover } from '@vis.gl/react-google-maps';
+import { Map3D, Marker3D, MapMode, AltitudeMode, Pin, useMap3D, Popover } from '@vis.gl/react-google-maps';
 import { Globe } from 'lucide-react';
 import { v4 as uuidv4 } from 'uuid';
 import type { SelectedLocation, PinLocation, SpotPotential, Deal } from '../types';
-import AddressSearch from './AddressSearch';
 import { useI18n } from '../i18n';
 
 const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string || '';
@@ -122,12 +121,9 @@ export default function MapCanvas({
 
     return (
         <div className="absolute inset-0 map-container">
-            <APIProvider apiKey={GOOGLE_MAPS_API_KEY} libraries={['marker', 'maps3d', 'places']} version="alpha">
-                <MapCameraController selectedLocation={selectedLocation} />
-                
+            <MapCameraController selectedLocation={selectedLocation} />
 
-
-                <Map3D
+            <Map3D
                     defaultCenter={{ ...INITIAL_VIEW, altitude: 500 }}
                     defaultRange={1000}
                     defaultHeading={45}
@@ -188,7 +184,6 @@ export default function MapCanvas({
                         </Marker3D>
                     )}
                 </Map3D>
-            </APIProvider>
         </div>
     );
 }
@@ -403,13 +398,23 @@ function FallbackMap({ onClick }: { onClick?: () => void }) {
 
 function MapCameraController({ selectedLocation }: { selectedLocation: SelectedLocation | null }) {
     const map3D = useMap3D();
+    const lastCoordsRef = useRef<{ lat: number; lon: number } | null>(null);
 
     useEffect(() => {
-        if (!map3D || !selectedLocation) return;
-        
+        if (!selectedLocation) {
+            lastCoordsRef.current = null;
+            return;
+        }
+        if (!map3D) return;
+
         const lat = selectedLocation.lat;
         const lng = selectedLocation.lon;
-        
+
+        if (lastCoordsRef.current?.lat === lat && lastCoordsRef.current?.lon === lng) {
+            return;
+        }
+        lastCoordsRef.current = { lat, lon: lng };
+
         if (typeof map3D.flyCameraTo === 'function') {
             map3D.flyCameraTo({
                 endCamera: {

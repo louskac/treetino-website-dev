@@ -11,6 +11,9 @@ interface AddressSearchProps {
 export default function AddressSearch({ onPlaceSelect, className }: AddressSearchProps) {
     const { t } = useI18n();
     const inputRef = useRef<HTMLInputElement>(null);
+    const onPlaceSelectRef = useRef(onPlaceSelect);
+    onPlaceSelectRef.current = onPlaceSelect;
+
     const [autocomplete, setAutocomplete] = useState<google.maps.places.Autocomplete | null>(null);
     const placesLib = useMapsLibrary('places');
     const map3D = useMap3D();
@@ -27,7 +30,7 @@ export default function AddressSearch({ onPlaceSelect, className }: AddressSearc
     }, [placesLib]);
 
     useEffect(() => {
-        if (!autocomplete || !map3D) return;
+        if (!autocomplete) return;
 
         const listener = autocomplete.addListener('place_changed', () => {
             const place = autocomplete.getPlace();
@@ -36,20 +39,22 @@ export default function AddressSearch({ onPlaceSelect, className }: AddressSearc
             const lat = place.geometry.location.lat();
             const lng = place.geometry.location.lng();
             
-            onPlaceSelect?.(lat, lng);
+            onPlaceSelectRef.current?.(lat, lng);
 
-            if (typeof map3D.flyCameraTo === 'function') {
-                map3D.flyCameraTo({
-                    endCamera: {
-                        center: { lat, lng, altitude: 500 },
-                        tilt: 65,
-                        heading: 45,
-                        range: 1000
-                    },
-                    durationMillis: 2000
-                });
-            } else {
-                map3D.center = { lat, lng, altitude: 500 };
+            if (map3D) {
+                if (typeof map3D.flyCameraTo === 'function') {
+                    map3D.flyCameraTo({
+                        endCamera: {
+                            center: { lat, lng, altitude: 500 },
+                            tilt: 65,
+                            heading: 45,
+                            range: 1000
+                        },
+                        durationMillis: 2000
+                    });
+                } else {
+                    map3D.center = { lat, lng, altitude: 500 };
+                }
             }
         });
 

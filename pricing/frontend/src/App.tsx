@@ -368,29 +368,29 @@ export default function App() {
   return (
     <div className="relative h-screen w-screen overflow-hidden bg-slate-100 font-sans text-slate-900 select-none">
       
-      {/* 1. MAP CANVAS (Background) */}
-      <MapCanvas
-        onLocationSelect={handleLocationSelect}
-        selectedLocation={crmActive ? (crmPreviewLocation || location) : location}
-        onPinsChange={(pins) => {
-          setUnitCount(pins.length);
-          setLocation(prev => prev ? { ...prev, pins } : null);
-        }}
-        product={product}
-        allDeals={allDeals}
-        activeDeal={activeDeal}
-        onMapClick={() => {
-          setCrmActive(false);
-          setCrmPreviewLocation(null);
-        }}
-        crmActive={crmActive}
-      />
+      <APIProvider apiKey={GOOGLE_MAPS_API_KEY} libraries={['marker', 'maps3d', 'places']} version="alpha">
+        {/* 1. MAP CANVAS (Background) */}
+        <MapCanvas
+          onLocationSelect={handleLocationSelect}
+          selectedLocation={crmActive ? (crmPreviewLocation || location) : location}
+          onPinsChange={(pins) => {
+            setUnitCount(pins.length);
+            setLocation(prev => prev ? { ...prev, pins } : null);
+          }}
+          product={product}
+          allDeals={allDeals}
+          activeDeal={activeDeal}
+          onMapClick={() => {
+            setCrmActive(false);
+            setCrmPreviewLocation(null);
+          }}
+          crmActive={crmActive}
+        />
 
-      {/* 2. FLOATING WEBSITE HEADER (Matching Header.vue from treetino-website-dev) */}
-      <div className={`absolute top-6 left-6 z-30 pointer-events-none transition-all duration-500 ease-in-out ${
-        crmActive ? 'right-[670px] xl:right-[730px]' : 'right-[480px]'
-      }`}>
-        <APIProvider apiKey={GOOGLE_MAPS_API_KEY} libraries={['places']}>
+        {/* 2. FLOATING WEBSITE HEADER (Matching Header.vue from treetino-website-dev) */}
+        <div className={`absolute top-6 left-6 z-30 pointer-events-none transition-all duration-500 ease-in-out ${
+          crmActive ? 'right-[670px] xl:right-[730px]' : 'right-[480px]'
+        }`}>
           <div className="w-full flex items-center justify-between bg-white border border-black/10 rounded-2xl px-6 py-3.5 shadow-lg text-slate-900 pointer-events-auto">
             
             {/* Left: Clean Black Logo & CRM Tag */}
@@ -406,7 +406,8 @@ export default function App() {
             <div className="w-64 mx-4">
               <AddressSearch 
                 onPlaceSelect={(lat, lng) => {
-                  setLocation({
+                  setCrmPreviewLocation(null);
+                  handleLocationSelect({
                     lat,
                     lon: lng,
                     pins: [],
@@ -451,8 +452,8 @@ export default function App() {
             </div>
 
           </div>
-        </APIProvider>
-      </div>
+        </div>
+      </APIProvider>
 
       {/* 3. CONFIGURATOR RIGHT SIDEBAR (Clean White Surface + Royal Blue Accents) */}
       <motion.aside
