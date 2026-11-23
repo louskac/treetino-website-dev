@@ -602,7 +602,7 @@ defineExpose({ resetView });
                             : s.id === 'IVESEL85'
                               ? '-translate-y-[50%]'
                               : s.id === 'ILHOTA41'
-                                ? '-translate-y-[50%]'
+                                ? '-translate-y-[26%]'
                                 : '-translate-y-[28%]',
                     s.id === selectedId
                         ? 'border-[#8ec5ff]/50 bg-zinc-950/95 text-white'

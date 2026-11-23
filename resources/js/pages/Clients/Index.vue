@@ -420,17 +420,17 @@ onBeforeUnmount(() => {
             <Transition name="column">
                 <section
                     v-if="!selectedId"
-                    class="absolute inset-x-0 top-24 bottom-3 flex flex-col sm:top-36 sm:bottom-4 lg:top-36 lg:bottom-7 lg:w-[380px]"
+                    class="absolute inset-x-0 top-24 bottom-3 flex flex-col sm:top-32 sm:bottom-4 lg:top-28 lg:bottom-5 xl:top-32 xl:bottom-6 lg:w-[380px]"
                     :class="{ 'intro-stagger': playIntro }"
                 >
                     <div class="rise" style="--d: 0.35s">
                         <InvestorChapterMark :index="isEn ? 'CZ' : 'ČR'" :label="isEn ? 'Treetino Field Network' : 'Síť měřicích stanic Treetino'" />
                     </div>
-                    <h1 :class="HEADLINE" class="rise mt-2.5 sm:mt-3.5 lg:mt-4" style="--d: 0.5s">
+                    <h1 class="rise mt-2 text-[1.85rem] leading-[1.08] font-medium tracking-[-0.035em] sm:mt-2.5 sm:text-4xl lg:mt-3 lg:text-[2.35rem] xl:text-[2.65rem]" style="--d: 0.5s">
                         {{ isEn ? 'Real wind.' : 'Skutečný vítr.' }}<br />
                         <span class="headline-shine">{{ isEn ? 'Real numbers.' : 'Skutečná čísla.' }}</span>
                     </h1>
-                    <p ref="heroTextRef" class="rise mt-2 max-w-[34ch] text-[13.5px] leading-snug text-white/55 sm:mt-2.5 sm:text-[15px] sm:leading-relaxed lg:mt-3 [@media(max-height:840px)]:lg:hidden" style="--d: 0.65s">
+                    <p ref="heroTextRef" class="rise mt-1.5 max-w-[34ch] text-[13px] leading-snug text-white/55 sm:mt-2 sm:text-[14px] sm:leading-relaxed lg:mt-2 [@media(max-height:860px)]:lg:hidden" style="--d: 0.65s">
                         {{
                             isEn
                                 ? 'Every client site measured on location. Pick one to watch its Treetino tree run on that site’s real wind and sun.'
@@ -441,7 +441,7 @@ onBeforeUnmount(() => {
                     <!-- Station list: unified, minimal architectural list -->
                     <div
                         ref="stationCardRef"
-                        class="rise pointer-events-auto mt-auto overflow-hidden rounded-2xl border border-white/10 bg-zinc-950/80 shadow-[0_20px_50px_rgba(0,0,0,0.55)] backdrop-blur-2xl lg:mt-4"
+                        class="rise pointer-events-auto mt-auto shrink-0 overflow-hidden rounded-2xl border border-white/10 bg-zinc-950/80 shadow-[0_20px_50px_rgba(0,0,0,0.55)] backdrop-blur-2xl lg:mt-3"
                         style="--d: 0.8s"
                     >
                         <div class="divide-y divide-white/[0.07]">
@@ -449,7 +449,7 @@ onBeforeUnmount(() => {
                                 v-for="st in [...liveStations, ...historicStations]"
                                 :key="st.id"
                                 type="button"
-                                class="station-row group flex w-full items-center gap-2.5 px-3.5 py-3 text-left transition-colors hover:bg-white/[0.04] sm:gap-3.5 sm:px-4 sm:py-3.5"
+                                class="station-row group flex w-full items-center gap-2.5 px-3.5 py-2 text-left transition-colors hover:bg-white/[0.04] sm:gap-3 sm:px-4 sm:py-2.5"
                                 @click="select(st.id)"
                             >
                                 <span class="relative flex h-2 w-2 shrink-0">
@@ -464,10 +464,10 @@ onBeforeUnmount(() => {
                                 </span>
 
                                 <span class="min-w-0 flex-1">
-                                    <span class="block truncate text-[15px] leading-tight font-medium tracking-[-0.015em] text-white">
+                                    <span class="block truncate text-[14px] sm:text-[14.5px] leading-tight font-medium tracking-[-0.015em] text-white">
                                         {{ tr(st.title, locale) }}
                                     </span>
-                                    <span class="mt-1 block truncate text-xs text-white/45">
+                                    <span class="mt-0.5 block truncate text-[11px] sm:text-xs text-white/45">
                                         <template v-if="st.status === 'live'">
                                             <span class="text-[#8ec5ff]/90">{{ isEn ? 'Live' : 'Měří živě' }}</span> ·
                                         </template>
@@ -479,16 +479,16 @@ onBeforeUnmount(() => {
                                 <span class="shrink-0 text-right tabular-nums">
                                     <span
                                         v-if="st.status === 'live'"
-                                        class="block text-[13px] leading-tight font-medium text-[#8ec5ff]"
+                                        class="block text-[12.5px] sm:text-[13px] leading-tight font-medium text-[#8ec5ff]"
                                     >
                                         {{ num((liveTelemetryById[st.id] ?? st.bundle.current).windspeedMs, 1, locale) }}
-                                        <span class="text-[11px] font-normal text-[#8ec5ff]/70">m/s</span>
+                                        <span class="text-[10.5px] sm:text-[11px] font-normal text-[#8ec5ff]/70">m/s</span>
                                     </span>
-                                    <span v-else class="block text-[13px] leading-tight font-medium text-white/80">
+                                    <span v-else class="block text-[12.5px] sm:text-[13px] leading-tight font-medium text-white/80">
                                         {{ st.bundle.aggregates.totalDays || st.bundle.dailyHistory.length }}
-                                        <span class="text-[11px] font-normal text-white/45">{{ isEn ? 'days' : 'dní' }}</span>
+                                        <span class="text-[10.5px] sm:text-[11px] font-normal text-white/45">{{ isEn ? 'days' : 'dní' }}</span>
                                     </span>
-                                    <span class="mt-0.5 block text-[11px] text-white/40">
+                                    <span class="mt-0.5 block text-[10.5px] sm:text-[11px] text-white/40">
                                         {{ num(portfolioById[st.id].sim.annualTotalKwh, 0, locale) }} {{ isEn ? 'kWh/yr' : 'kWh/rok' }}
                                     </span>
                                 </span>
@@ -500,7 +500,7 @@ onBeforeUnmount(() => {
                         <!-- Mobile science entry footer (replaces floating top-right badge that overlapped the eyebrow) -->
                         <button
                             type="button"
-                            class="group flex w-full items-center justify-between border-t border-white/[0.07] bg-[linear-gradient(135deg,rgba(77,141,255,0.12),rgba(255,255,255,0.02))] px-3.5 py-2.5 text-left text-xs font-medium text-white transition-colors hover:bg-white/[0.05] lg:hidden"
+                            class="group flex w-full items-center justify-between border-t border-white/[0.07] bg-[linear-gradient(135deg,rgba(77,141,255,0.12),rgba(255,255,255,0.02))] px-3.5 py-2 text-left text-xs font-medium text-white transition-colors hover:bg-white/[0.05] lg:hidden"
                             @click="openScience"
                         >
                             <span class="flex items-center gap-2">
@@ -511,7 +511,7 @@ onBeforeUnmount(() => {
                         </button>
 
                         <!-- Prepared stations footer (desktop / tablet) -->
-                        <div class="hidden items-center justify-between border-t border-white/[0.07] bg-white/[0.015] px-4 py-2.5 text-xs lg:flex">
+                        <div class="hidden items-center justify-between border-t border-white/[0.07] bg-white/[0.015] px-4 py-2 text-[11px] sm:text-xs lg:flex">
                             <span class="text-white/40">
                                 {{ isEn ? 'Ready for deployment on new sites' : 'Připraveno k instalaci na dalších lokalitách' }}
                             </span>
@@ -522,21 +522,21 @@ onBeforeUnmount(() => {
                     </div>
 
                     <!-- Portfolio KPIs: computed live from the same engine as the PDFs -->
-                    <div class="rise mt-3.5 hidden lg:block" style="--d: 0.95s">
-                        <div class="grid grid-cols-3 gap-x-5 gap-y-3 border-t border-white/12 pt-3.5">
+                    <div class="rise mt-2.5 hidden lg:block" style="--d: 0.95s">
+                        <div class="grid grid-cols-3 gap-x-4 gap-y-2 border-t border-white/12 pt-2.5">
                             <div v-for="k in kpis" :key="k.label">
-                                <p class="text-[1.45rem] leading-none font-medium tracking-[-0.035em] whitespace-nowrap text-white tabular-nums">
+                                <p class="text-[1.35rem] leading-none font-medium tracking-[-0.035em] whitespace-nowrap text-white tabular-nums">
                                     {{ k.value }}<span v-if="k.unit" class="ml-1 text-[11px] font-normal tracking-normal text-white/40">{{ k.unit }}</span>
                                 </p>
-                                <p class="mt-1.5 text-[11px] leading-snug text-white/45">{{ k.label }}</p>
+                                <p class="mt-1 text-[10.5px] leading-snug text-white/45">{{ k.label }}</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="rise pointer-events-auto mt-3.5 hidden gap-2.5 lg:flex" style="--d: 1.1s">
+                    <div class="rise pointer-events-auto mt-2.5 hidden gap-2.5 lg:flex" style="--d: 1.1s">
                         <button
                             type="button"
-                            class="group inline-flex flex-1 items-center justify-between gap-2 rounded-xl border border-white/12 bg-[linear-gradient(135deg,rgba(77,141,255,0.12),rgba(255,255,255,0.02))] px-4 py-3 text-left text-sm font-medium text-white backdrop-blur-md transition-colors hover:border-white/30 hover:bg-white/[0.05]"
+                            class="group inline-flex flex-1 items-center justify-between gap-2 rounded-xl border border-white/12 bg-[linear-gradient(135deg,rgba(77,141,255,0.12),rgba(255,255,255,0.02))] px-3.5 py-2.5 text-left text-xs font-medium text-white backdrop-blur-md transition-colors hover:border-white/30 hover:bg-white/[0.05]"
                             @click="openScience"
                         >
                             <span class="flex items-center gap-2.5">
