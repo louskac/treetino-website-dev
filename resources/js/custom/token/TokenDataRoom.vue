@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { ArrowUpRight } from 'lucide-vue-next';
 import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 import InvestorChapterMark from '@/custom/investors/InvestorChapterMark.vue';
 import { CONTAINER, DATABOOK_CS, DATABOOK_EN, HEADLINE } from '@/custom/investors/tokens';
 
 const props = defineProps<{
     partner?: string | null;
 }>();
+
+const { t } = useI18n();
 
 interface DocLink {
     label: string;
@@ -16,59 +19,59 @@ interface DocLink {
 
 const documents = computed<{ title: string; meta: string; links: DocLink[] }[]>(() => [
     {
-        title: '$TREE Strategic Tokenomics & Buyback Framework',
-        meta: 'Mechanics of 10% hardware sales, 0.1% EV volume skim, 1% RWA fee, and veTREE staking.',
+        title: t('token.c09.d_token_title'),
+        meta: t('token.c09.d_token_meta'),
         links: [
-            { label: 'Pitch Deck', href: '/pitch' },
-            { label: 'PDF Deck', href: '/treetino-pitchdeck.pdf', external: true },
+            { label: t('token.c09.d_token_l0'), href: '/pitch' },
+            { label: t('token.c09.d_token_l1'), href: '/treetino-pitchdeck.pdf', external: true },
         ],
     },
     {
-        title: 'Official Moldovan Government Invitation & Endorsement',
-        meta: 'Formal state invitation (AVIZ_ATAS_NORD.pdf) designating Treetino for national microgrid resilience.',
+        title: t('token.c09.d_moldova_title'),
+        meta: t('token.c09.d_moldova_meta'),
         links: [
-            { label: 'Investment Memo', href: '/docs/Treetino_Investment_Memorandum_2026.pdf', external: true },
+            { label: t('token.c09.d_moldova_l0'), href: '/docs/Treetino_Investment_Memorandum_2026.pdf', external: true },
         ],
     },
     {
-        title: '€200,000 CzechInvest EU Technology Incubation Grant',
-        meta: 'Sovereign grant award from CzechInvest under the Ministry of Industry and Trade.',
+        title: t('token.c09.d1_title'),
+        meta: t('token.c09.d1_meta'),
         links: [
-            { label: 'Grant PDF', href: '/treetino-grant-technologicka-inkubace.pdf', external: true },
+            { label: t('token.c09.d1_l0'), href: '/treetino-grant-technologicka-inkubace.pdf', external: true },
         ],
     },
     {
-        title: 'Treetino Technical Databook 2026',
-        meta: 'Full electrical schematics, TopCon solar leaf specs, vertical-axis wind turbines, and Victron microgrid core.',
+        title: t('token.c09.d2_title'),
+        meta: t('token.c09.d2_meta'),
         links: [
             { label: 'EN', href: DATABOOK_EN, external: true },
             { label: 'CZ', href: DATABOOK_CS, external: true },
         ],
     },
     {
-        title: 'European Patent EP 4664750 A1 & PCT WO 2025256678',
-        meta: 'Granted IP protection for actuated bionic solar leaves, helical wind integration, and storm stowage.',
+        title: t('token.c09.d3_title'),
+        meta: t('token.c09.d3_meta'),
         links: [
             { label: 'EP', href: '/docs/patent-ep-4664750.pdf', external: true },
             { label: 'WO', href: '/docs/patent-wo-2025256678.pdf', external: true },
         ],
     },
     {
-        title: 'M-Kovo Commercial Delivery & Wind Measurement Report',
-        meta: 'Production contract for 5 units (€705k) and 12-month anemometer wind data.',
+        title: t('token.c09.d4_title'),
+        meta: t('token.c09.d4_meta'),
         links: [
-            { label: 'Report', href: '/docs/treetino_mkovo_wind_measurement_report.pdf', external: true },
-            { label: 'Archive', href: '/docs/treetino_mkovo_complete_data_archive.pdf', external: true },
+            { label: t('token.c09.d4_l0'), href: '/docs/treetino_mkovo_wind_measurement_report.pdf', external: true },
+            { label: t('token.c09.d4_l1'), href: '/docs/treetino_mkovo_complete_data_archive.pdf', external: true },
         ],
     },
     {
-        title: 'Strategic Accelerator & Founder Channels',
+        title: t('token.c09.d5_title'),
         meta: props.partner
-            ? `Dedicated co-investment, advisory & launch channel for ${props.partner}.`
-            : 'Direct access to founders Dominik Mašek & Jakub Lustyk for accelerator and lead allocation.',
+            ? t('token.c09.d5_meta_partner', { partner: props.partner })
+            : t('token.c09.d5_meta'),
         links: [
-            { label: 'Calendly', href: 'https://calendly.com', external: true },
-            { label: 'Email Founders', href: 'mailto:info@treetino.eu', external: true },
+            { label: t('token.c09.d5_l0'), href: 'https://x.com/treetino_corp', external: true },
+            { label: t('token.c09.d5_l1'), href: 'mailto:info@treetino.eu', external: true },
         ],
     },
 ]);
@@ -85,17 +88,17 @@ const documents = computed<{ title: string; meta: string; links: DocLink[] }[]>(
                 <div>
                     <InvestorChapterMark
                         index="09"
-                        :label="partner ? `${partner.toUpperCase()} · STRATEGIC ALLOCATION` : '$TREE DATA ROOM & DOCUMENTS'"
+                        :label="partner ? t('token.c09.partner_label', { partner: partner.toUpperCase() }) : t('token.c09.label')"
                     />
                     <h2 class="mt-6" :class="HEADLINE">
-                        Institutional data room &<br />
-                        <span class="text-[#8ec5ff] [text-shadow:0_0_40px_rgba(77,141,255,0.45)]">verified execution proofs.</span>
+                        {{ t('token.c09.title_1') }}<br />
+                        <span class="text-[#8ec5ff] [text-shadow:0_0_40px_rgba(77,141,255,0.45)]">{{ t('token.c09.title_2') }}</span>
                     </h2>
                 </div>
 
                 <div class="mt-10 border-t border-white/10 pt-5 lg:mt-0">
                     <p class="text-sm text-white/50 sm:text-base">
-                        Questions on tokenomics, accelerator terms, or lead investment?
+                        {{ t('token.c09.contact_prompt') }}
                         <a
                             href="mailto:info@treetino.eu"
                             class="text-white underline decoration-white/30 underline-offset-4 transition-colors hover:decoration-[#8ec5ff]"

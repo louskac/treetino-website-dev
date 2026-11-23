@@ -18,7 +18,7 @@
 
             <InvestorChapterText
                 index="02"
-                label="02 · 0.1% EV CHARGING NETWORK SKIM"
+                :label="t('token.c02.label')"
                 :beats="beats"
                 :state="[
                     { in: s.b0, out: s.b0out },
@@ -35,6 +35,7 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { computed, onMounted, onUnmounted, reactive, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import type { Beat } from '@/custom/investors/InvestorChapterText.vue';
 import InvestorChapterText from '@/custom/investors/InvestorChapterText.vue';
 import InvestorPaymentScene from '@/custom/investors/InvestorPaymentScene.vue';
@@ -42,41 +43,43 @@ import { CONTAINER, VISUAL_AREA } from '@/custom/investors/tokens';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const { t } = useI18n();
+
 const beats = computed<Beat[]>(() => [
     {
         segments: [
-            { text: '0.1% skimmed on every EV charge ', break: true },
-            { text: 'processed across our commercial network.', tone: 'accent' },
+            { text: t('token.c02.b0_s1'), break: true },
+            { text: t('token.c02.b0_s2'), tone: 'accent' },
         ],
-        sub: 'EV drivers tap Mastercard, Visa, Apple Pay or Solana Pay. 0.1% of every gross euro processed flows automatically into $TREE market buyback and burn contracts.',
+        sub: t('token.c02.b0_sub'),
         stats: [
-            { value: '0.1%', label: 'Gross Volume Skim' },
-            { value: '<2 sec', label: 'Contactless Settlement' },
-            { value: '€0.45–€0.85', label: 'Average kWh Tariff' },
+            { value: t('token.c02.b0_st0_val'), label: t('token.c02.b0_st0_lbl') },
+            { value: t('token.c02.b0_st1_val'), label: t('token.c02.b0_st1_lbl') },
+            { value: t('token.c02.b0_st2_val'), label: t('token.c02.b0_st2_lbl') },
         ],
     },
     {
         segments: [
-            { text: 'Contactless hardware terminal ', break: true },
-            { text: 'with instant sub-2-second settlement.', tone: 'accent' },
+            { text: t('token.c02.b1_s1'), break: true },
+            { text: t('token.c02.b1_s2'), tone: 'accent' },
         ],
-        sub: 'Powered by our custom Tapaya NFC payment gate, eliminating 3–5% predatory banking acquirer fees and routing real interchange savings directly into buyback pressure.',
+        sub: t('token.c02.b1_sub'),
         stats: [
-            { value: '99.8%', label: 'Hardware Uptime' },
-            { value: 'Zero', label: 'Intermediary Banks' },
-            { value: 'Instant', label: 'Fiat-to-$TREE Conversion' },
+            { value: t('token.c02.b1_st0_val'), label: t('token.c02.b1_st0_lbl') },
+            { value: t('token.c02.b1_st1_val'), label: t('token.c02.b1_st1_lbl') },
+            { value: t('token.c02.b1_st2_val'), label: t('token.c02.b1_st2_lbl') },
         ],
     },
     {
         segments: [
-            { text: '50% permanently burned, ', break: true },
-            { text: '50% distributed to veTREE protocol stakers.', tone: 'accent' },
+            { text: t('token.c02.b2_s1'), break: true },
+            { text: t('token.c02.b2_s2'), tone: 'accent' },
         ],
-        sub: 'Half of all repurchased tokens are irreversibly burned via verifiable Solana SPL token instructions; the other half boosts physical real yield for long-term holders.',
+        sub: t('token.c02.b2_sub'),
         stats: [
-            { value: '50%', label: 'Permanent Burn' },
-            { value: '50%', label: 'veTREE Staking Pool' },
-            { value: 'Deflationary', label: 'Circulating Supply' },
+            { value: t('token.c02.b2_st0_val'), label: t('token.c02.b2_st0_lbl') },
+            { value: t('token.c02.b2_st1_val'), label: t('token.c02.b2_st1_lbl') },
+            { value: t('token.c02.b2_st2_val'), label: t('token.c02.b2_st2_lbl') },
         ],
     },
 ]);

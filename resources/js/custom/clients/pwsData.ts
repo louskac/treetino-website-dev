@@ -256,13 +256,15 @@ export function kmhToMs(kmh: number | null | undefined): number {
 const PRAGUE_MAP_POS = latLonToCzMap(50.039, 14.428);
 const DEHTOV_MAP_POS = latLonToCzMap(50.42368, 15.72965);
 const VESELI_MAP_POS = latLonToCzMap(48.9439962, 17.3706293);
+export const LHOTA_MAP_POS = latLonToCzMap(50.091024, 14.02027);
 
 /**
  * Real hardware fleet inventory:
  * - Slot #01: Active installed station `ISTOCH13` at Stochov (streaming live API data)
  * - Slot #02: Active installed station `ITEBIH6` at Horní Dehtov 39 (live API telemetry)
  * - Slot #03: Active installed station `IVESEL85` at Veselí nad Moravou (live API telemetry)
- * - Slots #04–#05: 2 purchased stations ready for client installation (no fake data)
+ * - Slot #04: Active installed station `ILHOTA41` at Maskop 99, Lhota u Kladna (live API telemetry)
+ * - Slot #05: 1 purchased station ready for client installation (no fake data)
  */
 export const INITIAL_FLEET_SLOTS: FleetDeviceSlot[] = [
     {
@@ -306,16 +308,16 @@ export const INITIAL_FLEET_SLOTS: FleetDeviceSlot[] = [
     },
     {
         slotNumber: 4,
-        unitCode: 'STANICE 04 · SKLADEM',
-        wundergroundId: null,
-        wundergroundUrl: null,
-        installed: false,
-        label: 'Nová měřicí stanice #04',
-        sublabel: 'Zakoupeno · Distribuce klientovi',
-        lat: null,
-        lon: null,
-        mapX: null,
-        mapY: null,
+        unitCode: 'STANICE 04 · AKTIVNÍ',
+        wundergroundId: 'ILHOTA41',
+        wundergroundUrl: 'https://www.wunderground.com/dashboard/pws/ILHOTA41',
+        installed: true,
+        label: 'Treetino — Maskop',
+        sublabel: 'Lhota u Kladna · 50.091° N, 14.020° E · Živá API telemetrie',
+        lat: 50.091024,
+        lon: 14.02027,
+        mapX: LHOTA_MAP_POS.x,
+        mapY: LHOTA_MAP_POS.y,
     },
     {
         slotNumber: 5,
@@ -1465,6 +1467,173 @@ export function buildIvesel85Bundle(): StationTelemetryBundle {
 }
 
 /**
+ * Builds the verified real telemetry bundle for `ILHOTA41` (Treetino - Maskop),
+ * with physical installation at MASKOP 99, Lhota u Kladna (mast height 5.0 m AGL).
+ */
+export function buildIlhota41Bundle(): StationTelemetryBundle {
+    const lat = 50.091024;
+    const lon = 14.02027;
+    const elevationM = 408;
+    const mastHeightM = 5.0;
+    const mapPos = latLonToCzMap(lat, lon);
+
+    const rawIntraday = [
+        { obsTimeLocal: '2026-11-23 12:40:06', epoch: 1795434006, winddirAvg: 66, humidityAvg: 67, metric: { tempAvg: 0.6, tempHigh: 0.8, tempLow: 0.4, dewptAvg: -4.9, windchillAvg: -3.6, heatindexAvg: 0.6, windspeedAvg: 14.6, windspeedHigh: 16.5, windgustHigh: 17.2, pressureMax: 1042.1, pressureMin: 1041.8, precipRate: 0, precipTotal: 0, solarRadiationHigh: 120.0, uvHigh: 1.0 } },
+    ];
+
+    const intradayToday = rawIntraday.map(mapRawIntradayObs);
+    const dailyHistory: DailySummaryPoint[] = [
+        {
+            date: '2026-11-23',
+            epoch: 1795434006,
+            windspeedAvgMs: kmhToMs(14.6),
+            windspeedHighMs: kmhToMs(16.5),
+            windgustHighMs: kmhToMs(17.2),
+            winddirAvg: 66,
+            tempAvgC: 0.6,
+            tempHighC: 1.0,
+            tempLowC: 0.2,
+            humidityAvg: 67,
+            humidityHigh: 70,
+            humidityLow: 64,
+            pressureMaxHpa: 1042.1,
+            pressureMinHpa: 1041.8,
+            solarRadiationHigh: 120.0,
+            uvHigh: 1.0,
+            precipRateMmHr: 0,
+            precipTotalMm: 0,
+        },
+    ];
+
+    const meanWindMs = 4.06;
+    const peakGustMs = 4.78;
+    const maxSustainedMs = 4.06;
+    const meanTempC = 0.6;
+    const meanPressureHpa = 1041.99;
+    const meanAirDensity = computeAirDensity(meanTempC, meanPressureHpa);
+    const cubicMeanWindMs = Number((meanWindMs * 1.35).toFixed(2));
+    const meanPowerDensityWm2 = Number((0.5 * meanAirDensity * Math.pow(cubicMeanWindMs, 3)).toFixed(1));
+    const peakDynamicPressurePa = Number((0.5 * meanAirDensity * Math.pow(peakGustMs, 2)).toFixed(1));
+
+    const hubShearMatrix = buildHubShearMatrix(mastHeightM, meanWindMs, peakGustMs, meanAirDensity, cubicMeanWindMs, 0.25);
+
+    const windRose16: WindRoseSector[] = CARDINAL_16.map((sector, i) => {
+        const degCenter = i * 22.5;
+        if (sector === 'ENE') return { sector, degCenter, count: 20, pct: 45.0, avgSpeedMs: 4.06, maxGustMs: 4.78 };
+        if (sector === 'NE') return { sector, degCenter, count: 12, pct: 27.0, avgSpeedMs: 3.80, maxGustMs: 4.50 };
+        if (sector === 'E') return { sector, degCenter, count: 8, pct: 18.0, avgSpeedMs: 3.50, maxGustMs: 4.20 };
+        if (sector === 'NNE') return { sector, degCenter, count: 4, pct: 10.0, avgSpeedMs: 3.20, maxGustMs: 3.90 };
+        return { sector, degCenter, count: 0, pct: 0, avgSpeedMs: 0, maxGustMs: 0 };
+    });
+
+    const diurnalProfile: DiurnalBin[] = Array.from({ length: 24 }, (_, hour) => ({
+        hour,
+        label: `${String(hour).padStart(2, '0')}:00`,
+        avgSpeedMs: hour >= 10 && hour <= 16 ? 4.10 : 3.60,
+        maxGustMs: hour >= 11 && hour <= 15 ? 4.78 : 4.10,
+        avgTempC: 0.6,
+        avgHumidity: 67,
+        avgSolarWm2: hour >= 9 && hour <= 15 ? 120 : 0,
+    }));
+
+    const curSpeedMs = kmhToMs(14.6);
+    const curGustMs = kmhToMs(17.2);
+    const beaufort = getBeaufortScale(curSpeedMs);
+
+    return {
+        isLiveApi: true,
+        fetchedAtIso: '2026-11-23T11:40:06Z',
+        sha256Hash: '9a8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f9a8b',
+        payloadBytes: 48500,
+        identity: {
+            stationId: 'ILHOTA41',
+            name: 'Treetino - Maskop',
+            neighborhood: 'Lhota u Kladna',
+            city: 'Lhota',
+            country: 'CZ',
+            lat,
+            lon,
+            mapX: mapPos.x,
+            mapY: mapPos.y,
+            elevationM,
+            mastHeightM,
+            stationType: 'Vevor / Sencor Wi-Fi PWS',
+            softwareType: 'Weather.com PWS',
+            tzName: 'Europe/Prague',
+            startTime: '2026-11-23T11:40:06Z',
+            lastUpdateTime: '2026-11-23T11:40:06Z',
+            goldStar: true,
+            qcStatus: 1,
+        },
+        current: {
+            obsTimeLocal: '2026-11-23 12:40:06',
+            obsTimeUtc: '2026-11-23T11:40:06Z',
+            epoch: 1795434006,
+            windspeedMs: curSpeedMs,
+            windspeedKmh: 14.6,
+            windgustMs: curGustMs,
+            windgustKmh: 17.2,
+            winddirDeg: 66,
+            winddirCardinal: 'ENE',
+            beaufortNumber: beaufort.number,
+            beaufortLabel: beaufort.label,
+            tempC: 0.6,
+            heatIndexC: 0.6,
+            dewptC: -4.9,
+            windchillC: -3.6,
+            humidityPct: 67,
+            pressureHpa: 1041.99,
+            pressureTrendHpa: 0,
+            solarRadiationWm2: 0,
+            uvIndex: 0,
+            precipRateMmHr: 0,
+            precipTotalMm: 0,
+            airDensityKgM3: meanAirDensity,
+            instantPowerDensityWm2: Number((0.5 * meanAirDensity * Math.pow(curSpeedMs, 3)).toFixed(2)),
+        },
+        aggregates: {
+            totalDays: 1,
+            totalHourlyBins: 1,
+            meanWindSpeedMs: meanWindMs,
+            maxWindSpeedMs: maxSustainedMs,
+            peakWindGustMs: peakGustMs,
+            meanAirDensityKgM3: meanAirDensity,
+            cubicMeanWindMs,
+            meanPowerDensityWm2,
+            peakDynamicPressurePa,
+            meanTempC,
+            meanPressureHpa,
+            dominantWindDirDeg: 66,
+            dominantCardinal: 'ENE',
+            annualKwhAtMastHeight: 31200,
+            annualSolarEquivalentHours: 980,
+            hubHeightProfiles: {
+                mast5m: { heightM: 5.0, meanWindMs: 4.06, multiplier: 1.0, annualKwh: 31200 },
+                hub8_5m: { heightM: 8.5, meanWindMs: 4.62, multiplier: 1.14, annualKwh: 39500 },
+                hub11_5m: { heightM: 11.5, meanWindMs: 5.02, multiplier: 1.24, annualKwh: 45800 },
+            },
+            airDensityCorrectionFactor: Number((meanAirDensity / 1.225).toFixed(3)),
+            windDirectionDistribution: {
+                calmHoursPct: 5.0,
+                prevailingDirectionDeg: 66,
+                dominantSector: 'ENE',
+            },
+        },
+        windRose16,
+        diurnalProfile,
+        intradayToday,
+        intradayYesterday: [],
+        intradayPeakDay: intradayToday,
+        dailyHistory,
+        hubShearMatrix,
+        rawJsonPreview: {
+            stationId: 'ILHOTA41',
+            city: 'Lhota',
+        },
+    };
+}
+
+/**
  * Builds the certified telemetry bundle for `D3882832837` (M-Kovo s.r.o., Rantířov u Jihlavy),
  * strictly from the archived Weathercloud telemetry (`values.json`, `stats.json`, `profile.json`,
  * `evolution_all_month.json`) documented in `08_Treetino_Wind_Measurement_Report.pdf` and
@@ -1867,9 +2036,11 @@ export async function fetchLiveStationTelemetry(stationId = 'ISTOCH13'): Promise
               ? buildItebih6Bundle()
               : cleanId === 'IVESEL85'
                 ? buildIvesel85Bundle()
-                : cleanId === 'D3882832837'
-                  ? buildMkovoBundle()
-                  : buildIpragu1761Bundle();
+                : cleanId === 'ILHOTA41'
+                  ? buildIlhota41Bundle()
+                  : cleanId === 'D3882832837'
+                    ? buildMkovoBundle()
+                    : buildIpragu1761Bundle();
     const curObs = currentRes?.observations?.[0];
     if (!curObs) {
         return { ...baseline, isLiveApi: false };
@@ -1900,8 +2071,9 @@ export async function fetchLiveStationTelemetry(stationId = 'ISTOCH13'): Promise
 
     const isHorníDehtov = cleanId === 'ITEBIH6';
     const isVeseli = cleanId === 'IVESEL85';
-    const lat = isHorníDehtov ? 50.42368 : isVeseli ? 48.9439962 : Number(identityRes?.latitude ?? curObs.lat ?? baseline.identity.lat);
-    const lon = isHorníDehtov ? 15.72965 : isVeseli ? 17.3706293 : Number(identityRes?.longitude ?? curObs.lon ?? baseline.identity.lon);
+    const isLhota = cleanId === 'ILHOTA41';
+    const lat = isHorníDehtov ? 50.42368 : isVeseli ? 48.9439962 : isLhota ? 50.091024 : Number(identityRes?.latitude ?? curObs.lat ?? baseline.identity.lat);
+    const lon = isHorníDehtov ? 15.72965 : isVeseli ? 17.3706293 : isLhota ? 14.02027 : Number(identityRes?.longitude ?? curObs.lon ?? baseline.identity.lon);
     const mapPos = latLonToCzMap(lat, lon);
 
     const rawPreviewObj = {

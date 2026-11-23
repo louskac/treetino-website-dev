@@ -1,6 +1,6 @@
 <template>
     <nav
-        aria-label="Tokenomics chapters navigation"
+        :aria-label="t('token.rail.aria')"
         class="pointer-events-none fixed top-1/2 right-6 z-30 hidden -translate-y-1/2 transition-opacity duration-500 lg:block xl:right-10"
         :class="current ? 'opacity-100' : 'opacity-0'"
     >
@@ -34,17 +34,20 @@
 
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const chapters = computed(() => [
-    { id: '01', label: '01 · HARDWARE (10%)' },
-    { id: '02', label: '02 · EV CHARGE (0.1%)' },
-    { id: '03', label: '03 · RWA & ARBITRAGE (1%)' },
-    { id: '04', label: '04 · DEPIN & veTREE' },
-    { id: '05', label: '05 · FLYWHEEL' },
-    { id: '06', label: '06 · TOKENOMICS' },
-    { id: '07', label: '07 · BUYBACK MODEL' },
-    { id: '08', label: '08 · WHY TRUST US' },
-    { id: '09', label: '09 · DATA ROOM' },
+    { id: '01', label: t('token.rail.c01') },
+    { id: '02', label: t('token.rail.c02') },
+    { id: '03', label: t('token.rail.c03') },
+    { id: '04', label: t('token.rail.c04') },
+    { id: '05', label: t('token.rail.c05') },
+    { id: '06', label: t('token.rail.c06') },
+    { id: '07', label: t('token.rail.c07') },
+    { id: '08', label: t('token.rail.c08') },
+    { id: '09', label: t('token.rail.c09') },
 ]);
 
 const current = ref<string | null>(null);

@@ -23,7 +23,7 @@
 
             <InvestorChapterText
                 index="01"
-                label="01 · 10% HARDWARE SALES BUYBACK"
+                :label="t('token.c01.label')"
                 :beats="beats"
                 :state="[
                     { in: s.b0, out: s.b0out },
@@ -40,6 +40,7 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { computed, onMounted, onUnmounted, reactive, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import type { Beat } from '@/custom/investors/InvestorChapterText.vue';
 import InvestorChapterText from '@/custom/investors/InvestorChapterText.vue';
 import InvestorTreeScene from '@/custom/investors/InvestorTreeScene.vue';
@@ -47,41 +48,43 @@ import { CONTAINER, VISUAL_AREA } from '@/custom/investors/tokens';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const { t } = useI18n();
+
 const beats = computed<Beat[]>(() => [
     {
         segments: [
-            { text: '10% of every hardware sale ', break: true },
-            { text: 'routed into open-market $TREE buybacks.', tone: 'accent' },
+            { text: t('token.c01.b0_s1'), break: true },
+            { text: t('token.c01.b0_s2'), tone: 'accent' },
         ],
-        sub: 'Every Treetino unit sells between €120,000 and €250,000. 10% of gross invoice value is systematically escrowed and executed via decentralized liquidity pools upon factory dispatch.',
+        sub: t('token.c01.b0_sub'),
         stats: [
-            { value: '€120k–250k', label: 'Unit Sales Price' },
-            { value: '10%', label: 'Gross Sale Buyback' },
-            { value: '€70,500', label: 'M-Kovo Initial Batch' },
+            { value: t('token.c01.b0_st0_val'), label: t('token.c01.b0_st0_lbl') },
+            { value: t('token.c01.b0_st1_val'), label: t('token.c01.b0_st1_lbl') },
+            { value: t('token.c01.b0_st2_val'), label: t('token.c01.b0_st2_lbl') },
         ],
     },
     {
         segments: [
-            { text: '300 dual-axis solar leaves ', break: true },
-            { text: 'track the sun for +40% real energy yield.', tone: 'accent' },
+            { text: t('token.c01.b1_s1'), break: true },
+            { text: t('token.c01.b1_s2'), tone: 'accent' },
         ],
-        sub: 'Patented kinematic actuation (EP 4664750 A1) keeps solar leaves perpendicular to incident light throughout the day, generating outsized energy revenues and higher buyback power.',
+        sub: t('token.c01.b1_sub'),
         stats: [
-            { value: '+40%', label: 'Active Solar Yield' },
-            { value: '12 kWp', label: 'Leaf Array Capacity' },
-            { value: '15 min', label: 'Grid Settlement Cycle' },
+            { value: t('token.c01.b1_st0_val'), label: t('token.c01.b1_st0_lbl') },
+            { value: t('token.c01.b1_st1_val'), label: t('token.c01.b1_st1_lbl') },
+            { value: t('token.c01.b1_st2_val'), label: t('token.c01.b1_st2_lbl') },
         ],
     },
     {
         segments: [
-            { text: '12 vertical wind turbines ', break: true },
-            { text: 'generate 24/7 baseline cashflow.', tone: 'accent' },
+            { text: t('token.c01.b2_s1'), break: true },
+            { text: t('token.c01.b2_s2'), tone: 'accent' },
         ],
-        sub: 'Omnidirectional helical turbines capture low-altitude turbulent gusts day and night. Hardware telemetry signs generation proofs directly to Solana via Certino DePIN oracles.',
+        sub: t('token.c01.b2_sub'),
         stats: [
-            { value: '12', label: 'Helical Turbines' },
-            { value: '24/7', label: 'Continuous Generation' },
-            { value: '100%', label: 'Hardware-Verifiable' },
+            { value: t('token.c01.b2_st0_val'), label: t('token.c01.b2_st0_lbl') },
+            { value: t('token.c01.b2_st1_val'), label: t('token.c01.b2_st1_lbl') },
+            { value: t('token.c01.b2_st2_val'), label: t('token.c01.b2_st2_lbl') },
         ],
     },
 ]);

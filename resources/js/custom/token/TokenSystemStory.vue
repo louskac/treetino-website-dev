@@ -18,7 +18,7 @@
 
             <InvestorChapterText
                 index="03"
-                label="03 · 1% RWA PROTOCOL & 20% ARBITRAGE"
+                :label="t('token.c03.label')"
                 :beats="beats"
                 :state="[
                     { in: s.b0, out: s.b0out },
@@ -35,6 +35,7 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { computed, onMounted, onUnmounted, reactive, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import type { Beat } from '@/custom/investors/InvestorChapterText.vue';
 import InvestorChapterText from '@/custom/investors/InvestorChapterText.vue';
 import InvestorSystemScene from '@/custom/investors/InvestorSystemScene.vue';
@@ -42,41 +43,43 @@ import { CONTAINER, VISUAL_AREA } from '@/custom/investors/tokens';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const { t } = useI18n();
+
 const beats = computed<Beat[]>(() => [
     {
         segments: [
-            { text: '1% of all revenue generated ', break: true },
-            { text: 'by the RWA tokenization protocol.', tone: 'accent' },
+            { text: t('token.c03.b0_s1'), break: true },
+            { text: t('token.c03.b0_s2'), tone: 'accent' },
         ],
-        sub: 'Institutional funds and private investors tokenize utility-scale battery energy storage systems (BESS). 1% of all asset issuance and management volume is dedicated to open-market $TREE purchases.',
+        sub: t('token.c03.b0_sub'),
         stats: [
-            { value: '1%', label: 'RWA Protocol Fee' },
-            { value: '8.6 MW', label: 'Přeštice BESS Facility' },
-            { value: '22 kV', label: 'ČEZ Grid Interconnect' },
+            { value: t('token.c03.b0_st0_val'), label: t('token.c03.b0_st0_lbl') },
+            { value: t('token.c03.b0_st1_val'), label: t('token.c03.b0_st1_lbl') },
+            { value: t('token.c03.b0_st2_val'), label: t('token.c03.b0_st2_lbl') },
         ],
     },
     {
         segments: [
-            { text: '20% of algorithmic spot arbitrage ', break: true },
-            { text: 'captured across 15-minute OTE cycles.', tone: 'accent' },
+            { text: t('token.c03.b1_s1'), break: true },
+            { text: t('token.c03.b1_s2'), tone: 'accent' },
         ],
-        sub: 'Our WATTINO AI brain charges batteries when wholesale electricity prices turn zero or negative, discharging at peak evening spreads. 20% of net arbitrage profit buys and locks $TREE.',
+        sub: t('token.c03.b1_sub'),
         stats: [
-            { value: '20%', label: 'Arbitrage Profit Share' },
-            { value: '15 min', label: 'OTE Spot Energy Bidding' },
-            { value: '€180/MWh', label: 'Peak Spread Arbitrage' },
+            { value: t('token.c03.b1_st0_val'), label: t('token.c03.b1_st0_lbl') },
+            { value: t('token.c03.b1_st1_val'), label: t('token.c03.b1_st1_lbl') },
+            { value: t('token.c03.b1_st2_val'), label: t('token.c03.b1_st2_lbl') },
         ],
     },
     {
         segments: [
-            { text: 'Institutional cashflow ', break: true },
-            { text: 'ring-fenced from crypto market volatility.', tone: 'accent' },
+            { text: t('token.c03.b2_s1'), break: true },
+            { text: t('token.c03.b2_s2'), tone: 'accent' },
         ],
-        sub: 'Physical kilowatt-hours are settled in Euros with Czech national transmission and distribution operators (ČEZ, PRE, E.ON), creating non-cyclical, tangible real-world backing.',
+        sub: t('token.c03.b2_sub'),
         stats: [
-            { value: 'AAA', label: 'Utility Off-Takers' },
-            { value: 'Regulated', label: 'EU Energy Framework' },
-            { value: 'MiCA', label: 'Compliant Structure' },
+            { value: t('token.c03.b2_st0_val'), label: t('token.c03.b2_st0_lbl') },
+            { value: t('token.c03.b2_st1_val'), label: t('token.c03.b2_st1_lbl') },
+            { value: t('token.c03.b2_st2_val'), label: t('token.c03.b2_st2_lbl') },
         ],
     },
 ]);

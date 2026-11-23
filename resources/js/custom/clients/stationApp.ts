@@ -8,7 +8,7 @@
 import type { AppLocale } from '@/lib/locale';
 import { evaluateSiteOfferPerformance } from './cvutPhysics';
 import type { SiteOfferSimulationResult, TreetinoSystemId } from './cvutPhysics';
-import { buildIpragu1761Bundle, buildIstoch13Bundle, buildItebih6Bundle, buildIvesel85Bundle, buildMkovoBundle, latLonToCzMap } from './pwsData';
+import { buildIlhota41Bundle, buildIpragu1761Bundle, buildIstoch13Bundle, buildItebih6Bundle, buildIvesel85Bundle, buildMkovoBundle, latLonToCzMap } from './pwsData';
 import type { StationTelemetryBundle } from './pwsData';
 
 export type VariantQty = 1 | 2;
@@ -338,6 +338,63 @@ export const STATION_ENTRIES: StationEntry[] = [
         bundle: buildIvesel85Bundle(),
     },
     {
+        id: 'ILHOTA41',
+        title: { cs: 'Maskop', en: 'Maskop' },
+        clientName: { cs: 'MASKOP 99, spol. s r.o.', en: 'MASKOP 99, spol. s r.o.' },
+        city: { cs: 'Lhota u Kladna', en: 'Lhota' },
+        status: 'live',
+        statusNote: { cs: 'Živé měření', en: 'Live telemetry' },
+        listStatusSub: { cs: 'Živě', en: 'Live' },
+        chipSide: 'right',
+        sitePhoto: '/img/clients/treetino-v1-site-render.jpg',
+        offerCoverPhoto: '/img/clients/treetino-v1-site-render.jpg',
+        offerCoverCaption: {
+            cs: 'Maskop Lhota · Měřicí stanice na stožáru 5,0 m',
+            en: 'Maskop Lhota · Weather station on 5.0 m mast',
+        },
+        media: [
+            {
+                id: 'maskop-1',
+                kind: 'image',
+                src: '/img/clients/treetino-v1-site-render.jpg',
+                caption: {
+                    cs: 'Maskop Lhota · Příprava instalace 1× Strom V1',
+                    en: 'Maskop Lhota · 1× Tree V1 deployment setup',
+                },
+            },
+        ],
+        variants: [
+            {
+                key: 1,
+                systemId: 'strom-v1',
+                quantity: 1,
+                hubHeightM: 11.5,
+                buttonLabel: { cs: '1× Strom V1', en: '1× Tree V1' },
+                title: { cs: '1× Strom V1', en: '1× Tree V1' },
+                shortModel: { cs: 'Strom V1', en: 'Tree V1' },
+                assembly: { cs: '12× 3 kW Aero · 300 listů', en: '12× 3 kW Aero · 300 leaves' },
+                capacity: { cs: '36,0 kW + 13,80 kWp', en: '36.0 kW + 13.80 kWp' },
+                heightPermit: { cs: '11,5 m · vč. 2× 22 kW EV + BESS', en: '11.5 m · incl. 2× 22 kW EV + BESS' },
+                studySlug: '1x_Strom_V1',
+            },
+            {
+                key: 2,
+                systemId: 'strom-v1',
+                quantity: 1,
+                hubHeightM: 11.5,
+                buttonLabel: { cs: '1× Strom V1', en: '1× Tree V1' },
+                title: { cs: '1× Strom V1', en: '1× Tree V1' },
+                shortModel: { cs: 'Strom V1', en: 'Tree V1' },
+                assembly: { cs: '12× 3 kW Aero · 300 listů', en: '12× 3 kW Aero · 300 leaves' },
+                capacity: { cs: '36,0 kW + 13,80 kWp', en: '36.0 kW + 13.80 kWp' },
+                heightPermit: { cs: '11,5 m · vč. 2× 22 kW EV + BESS', en: '11.5 m · incl. 2× 22 kW EV + BESS' },
+                studySlug: '1x_Strom_V1',
+            },
+        ],
+        portfolioVariant: 1,
+        bundle: buildIlhota41Bundle(),
+    },
+    {
         id: 'IPRAGU1761',
         title: { cs: 'Akademie řemesel', en: 'Academy of Crafts' },
         clientName: { cs: 'Akademie řemesel Praha', en: 'Academy of Crafts Prague' },
@@ -578,7 +635,7 @@ export function computePortfolio(entries: StationEntry[] = STATION_ENTRIES): Por
 export const STATION_LINKS: { from: string; to: string; label?: LocalizedText }[] = [];
 
 /** Physically purchased units ready for deployment — listed, never pinned on the map */
-export const PENDING_STATIONS: PendingStation[] = [4, 5].map((slot) => ({
+export const PENDING_STATIONS: PendingStation[] = [5].map((slot) => ({
     slot,
     label: {
         cs: `Stanice ${String(slot).padStart(2, '0')}`,
@@ -590,7 +647,7 @@ export const PENDING_STATIONS: PendingStation[] = [4, 5].map((slot) => ({
 export function documentUrls(entry: StationEntry, variantKey: VariantQty): { offer: string; study: string } | null {
     const id = entry.id.toUpperCase();
 
-    if (id !== 'IPRAGU1761' && id !== 'ISTOCH13' && id !== 'D3882832837' && id !== 'ITEBIH6' && id !== 'IVESEL85') {
+    if (id !== 'IPRAGU1761' && id !== 'ISTOCH13' && id !== 'D3882832837' && id !== 'ITEBIH6' && id !== 'IVESEL85' && id !== 'ILHOTA41') {
         return null;
     }
 
@@ -600,7 +657,7 @@ export function documentUrls(entry: StationEntry, variantKey: VariantQty): { off
             ? `Treetino_${id}_Cenova_nabidka_2x_V2_V1.pdf`
             : id === 'D3882832837'
               ? `Treetino_${id}_Cenova_nabidka_3x_Strom_V1.pdf`
-              : id === 'IVESEL85'
+              : id === 'IVESEL85' || id === 'ILHOTA41'
                 ? `Treetino_${id}_Cenova_nabidka_Strom_V1.pdf`
                 : `Treetino_${id}_Cenova_nabidka_Strom_V2.pdf`;
 

@@ -63,11 +63,11 @@
                                     </li>
                                 </ul>
                                 <div class="mt-3 flex justify-between text-[11px] text-white/35 tabular-nums">
-                                    <span>TGE</span>
-                                    <span>12 mo</span>
-                                    <span>24 mo</span>
-                                    <span>36 mo</span>
-                                    <span>48 mo</span>
+                                    <span>{{ t('token.c06.tge') }}</span>
+                                    <span>{{ t('token.c06.mo12') }}</span>
+                                    <span>{{ t('token.c06.mo24') }}</span>
+                                    <span>{{ t('token.c06.mo36') }}</span>
+                                    <span>{{ t('token.c06.mo48') }}</span>
                                 </div>
                             </div>
                         </div>
@@ -88,14 +88,14 @@
                                     </li>
                                 </ul>
 
-                                <p class="mt-8 text-xs text-white/45 sm:text-sm">Every repurchased $TREE</p>
+                                <p class="mt-8 text-xs text-white/45 sm:text-sm">{{ t('token.c06.split_label') }}</p>
                                 <div class="split mt-3 h-3">
                                     <div class="bg-[#4d8dff]" :style="{ width: `${50 * s.split}%` }"></div>
                                     <div class="bg-white/70" :style="{ width: `${50 * s.split}%` }"></div>
                                 </div>
                                 <div class="mt-3 flex justify-between text-sm">
-                                    <span><span class="text-[#8ec5ff]">50%</span> <span class="text-white/50">burned forever</span></span>
-                                    <span><span class="text-white">50%</span> <span class="text-white/50">to veTREE stakers</span></span>
+                                    <span><span class="text-[#8ec5ff]">50%</span> <span class="text-white/50">{{ t('token.c06.split_burn') }}</span></span>
+                                    <span><span class="text-white">50%</span> <span class="text-white/50">{{ t('token.c06.split_yield') }}</span></span>
                                 </div>
                             </div>
                         </div>
@@ -105,7 +105,7 @@
 
             <InvestorChapterText
                 index="06"
-                label="06 · TOKENOMICS"
+                :label="t('token.c06.label')"
                 :beats="beats"
                 :state="[
                     { in: s.b0, out: s.b0out },
@@ -121,68 +121,70 @@
 <script setup lang="ts">
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { onMounted, onUnmounted, reactive, ref } from 'vue';
+import { computed, onMounted, onUnmounted, reactive, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import type { Beat } from '@/custom/investors/InvestorChapterText.vue';
 import InvestorChapterText from '@/custom/investors/InvestorChapterText.vue';
 import { clamp01, CONTAINER, VISUAL_AREA } from '@/custom/investors/tokens';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const { t } = useI18n();
 const pad = (n: number) => String(n).padStart(2, '0');
 
-const allocations = [
-    { name: 'Community & DePIN rewards', pct: 35, cliff: 0, vest: 96, tge: false, terms: 'Emitted over 8 yrs on kWh proofs' },
-    { name: 'Liquidity & market making', pct: 25, cliff: 0, vest: 12, tge: true, terms: '40% at TGE · rest protocol-owned' },
-    { name: 'Strategic & accelerator round', pct: 15, cliff: 6, vest: 18, tge: true, terms: '10% TGE · 6 mo cliff · 18 mo', accent: true },
-    { name: 'Core team & founders', pct: 15, cliff: 12, vest: 36, tge: false, terms: '12 mo cliff · 36 mo linear' },
-    { name: 'Ecosystem treasury', pct: 10, cliff: 3, vest: 24, tge: true, terms: '5% TGE · 3 mo cliff · 24 mo' },
-];
+const allocations = computed(() => [
+    { name: t('token.c06.alloc0_name'), pct: 35, cliff: 0, vest: 96, tge: false, terms: t('token.c06.alloc0_terms') },
+    { name: t('token.c06.alloc1_name'), pct: 25, cliff: 0, vest: 24, tge: true, terms: t('token.c06.alloc1_terms') },
+    { name: t('token.c06.alloc2_name'), pct: 15, cliff: 6, vest: 18, tge: true, terms: t('token.c06.alloc2_terms'), accent: true },
+    { name: t('token.c06.alloc3_name'), pct: 15, cliff: 12, vest: 36, tge: false, terms: t('token.c06.alloc3_terms') },
+    { name: t('token.c06.alloc4_name'), pct: 10, cliff: 3, vest: 24, tge: true, terms: t('token.c06.alloc4_terms') },
+]);
 
-const sources = [
-    { name: 'Every Treetino hardware sale', rate: '10%' },
-    { name: 'Every EV charging transaction', rate: '0.1%' },
-    { name: 'RWA tokenization protocol revenue', rate: '1%' },
-    { name: 'WATTINO grid arbitrage profit', rate: '20%' },
-];
+const sources = computed(() => [
+    { name: t('token.c06.src0'), rate: '10%' },
+    { name: t('token.c06.src1'), rate: '0.1%' },
+    { name: t('token.c06.src2'), rate: '1%' },
+    { name: t('token.c06.src3'), rate: '20%' },
+]);
 
-const beats: Beat[] = [
+const beats = computed<Beat[]>(() => [
     {
         segments: [
-            { text: 'One billion $TREE. ', break: true },
-            { text: 'Not one more, ever.', tone: 'accent' },
+            { text: t('token.c06.b0_s1'), break: true },
+            { text: t('token.c06.b0_s2'), tone: 'accent' },
         ],
-        sub: 'Fixed supply minted once at TGE. The largest share is earned only by hardware that proves real kilowatt-hours on-chain.',
+        sub: t('token.c06.b0_sub'),
         stats: [
-            { value: '1B', label: 'Fixed hard cap' },
-            { value: '0%', label: 'Inflation after TGE' },
-            { value: '11.85%', label: 'Circulating at TGE' },
+            { value: t('token.c06.b0_st0_val'), label: t('token.c06.b0_st0_lbl') },
+            { value: t('token.c06.b0_st1_val'), label: t('token.c06.b0_st1_lbl') },
+            { value: t('token.c06.b0_st2_val'), label: t('token.c06.b0_st2_lbl') },
         ],
     },
     {
         segments: [
-            { text: 'Long cliffs, linear unlocks. ', break: true },
-            { text: 'Team unlocks last.', tone: 'accent' },
+            { text: t('token.c06.b1_s1'), break: true },
+            { text: t('token.c06.b1_s2'), tone: 'accent' },
         ],
-        sub: 'Founders wait 12 months before a single token unlocks. Every schedule is enforced by Solana vesting contracts, not by promises.',
+        sub: t('token.c06.b1_sub'),
         stats: [
-            { value: '12 mo', label: 'Team cliff' },
-            { value: '6 mo', label: 'Strategic cliff' },
-            { value: '8 yrs', label: 'DePIN emission' },
+            { value: t('token.c06.b1_st0_val'), label: t('token.c06.b1_st0_lbl') },
+            { value: t('token.c06.b1_st1_val'), label: t('token.c06.b1_st1_lbl') },
+            { value: t('token.c06.b1_st2_val'), label: t('token.c06.b1_st2_lbl') },
         ],
     },
     {
         segments: [
-            { text: 'Real revenue buys $TREE. ', break: true },
-            { text: 'Half of it is burned.', tone: 'accent' },
+            { text: t('token.c06.b2_s1'), break: true },
+            { text: t('token.c06.b2_s2'), tone: 'accent' },
         ],
-        sub: 'Four cash-flow streams from physical infrastructure buy $TREE on the open market. 50% is burned, 50% rewards veTREE stakers.',
+        sub: t('token.c06.b2_sub'),
         stats: [
-            { value: '4', label: 'Revenue streams' },
-            { value: '50%', label: 'Permanent burn' },
-            { value: '50%', label: 'veTREE yield' },
+            { value: t('token.c06.b2_st0_val'), label: t('token.c06.b2_st0_lbl') },
+            { value: t('token.c06.b2_st1_val'), label: t('token.c06.b2_st1_lbl') },
+            { value: t('token.c06.b2_st2_val'), label: t('token.c06.b2_st2_lbl') },
         ],
     },
-];
+]);
 
 const sectionRef = ref<HTMLElement | null>(null);
 

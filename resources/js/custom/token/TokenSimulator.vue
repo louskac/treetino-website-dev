@@ -8,23 +8,23 @@
             <!-- Left: mark, headline, presets, output -->
             <div class="flex flex-col justify-between lg:col-span-5">
                 <div>
-                    <InvestorChapterMark index="07" label="07 · BUYBACK MODEL" />
+                    <InvestorChapterMark index="07" :label="t('token.c07.label')" />
                     <h2 class="mt-6" :class="HEADLINE">
-                        Move the sliders.<br />
-                        <span class="text-[#8ec5ff] [text-shadow:0_0_40px_rgba(77,141,255,0.45)]">Watch the buy pressure.</span>
+                        {{ t('token.c07.title_1') }}<br />
+                        <span class="text-[#8ec5ff] [text-shadow:0_0_40px_rgba(77,141,255,0.45)]">{{ t('token.c07.title_2') }}</span>
                     </h2>
                     <p class="mt-5 max-w-[34ch] text-sm leading-relaxed text-white/60 sm:text-lg">
-                        Every number on the right is a real business line of Treetino. Each one routes a fixed share of revenue into $TREE.
+                        {{ t('token.c07.sub') }}
                     </p>
 
                     <div class="mt-8 flex flex-wrap gap-2">
                         <button
                             v-for="p in presets"
-                            :key="p.label"
+                            :key="p.id"
                             type="button"
                             class="cursor-pointer rounded-full border px-3 py-1.5 text-xs font-medium transition-colors sm:px-4 sm:py-2 sm:text-sm"
                             :class="
-                                active === p.label
+                                active === p.id
                                     ? 'border-[#8ec5ff]/60 bg-white/[0.06] text-white'
                                     : 'border-white/15 text-white/60 hover:border-white/35 hover:text-white'
                             "
@@ -36,7 +36,7 @@
                 </div>
 
                 <div class="mt-12 lg:mt-16">
-                    <p class="text-xs text-white/45 sm:text-sm">$TREE bought on the open market, per year</p>
+                    <p class="text-xs text-white/45 sm:text-sm">{{ t('token.c07.out_label') }}</p>
                     <p class="mt-2 text-5xl leading-none font-medium tracking-[-0.045em] tabular-nums sm:text-6xl lg:text-[clamp(3.5rem,5vw,5rem)]">
                         {{ eur(total) }}
                     </p>
@@ -52,9 +52,9 @@
                     <InvestorStats
                         class="mt-8"
                         :stats="[
-                            { value: eur(total / 12), label: 'Per month' },
-                            { value: `${((total / 2 / FDV) * 100).toFixed(1)}%`, label: 'Supply burned / yr' },
-                            { value: eur(total / 2), label: 'To veTREE stakers' },
+                            { value: eur(total / 12), label: t('token.c07.st0_lbl') },
+                            { value: `${((total / 2 / FDV) * 100).toFixed(1)}%`, label: t('token.c07.st1_lbl') },
+                            { value: eur(total / 2), label: t('token.c07.st2_lbl') },
                         ]"
                     />
                 </div>
@@ -85,12 +85,12 @@
                             :aria-label="r.title"
                             :class="i === 0 && 'is-accent'"
                             :style="{ '--p': `${((state[r.key] - r.min) / (r.max - r.min)) * 100}%` }"
+                            @input="active = ''"
                         />
                     </div>
                 </li>
                 <li class="pt-5 text-xs leading-relaxed text-white/30 sm:text-sm">
-                    Assumptions for discussion: €185k average tree, €18 average charging session at 2.4 sessions per charger per day,
-                    1% annual protocol fee on tokenized assets. Supply burned is shown at a €{{ FDV / 1e6 }}M fully diluted valuation.
+                    {{ t('token.c07.footnote', { fdv: FDV / 1e6 }) }}
                 </li>
             </ul>
         </div>
@@ -99,9 +99,12 @@
 
 <script setup lang="ts">
 import { computed, reactive, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import InvestorChapterMark from '@/custom/investors/InvestorChapterMark.vue';
 import InvestorStats from '@/custom/investors/InvestorStats.vue';
 import { CONTAINER, HEADLINE } from '@/custom/investors/tokens';
+
+const { t, locale } = useI18n();
 
 const FDV = 30_000_000;
 const TREE_PRICE = 185_000;
@@ -110,32 +113,32 @@ const TICKET = 18;
 
 type Key = 'trees' | 'chargers' | 'rwa' | 'arb';
 
-const state = reactive<Record<Key, number>>({ trees: 25, chargers: 200, rwa: 6, arb: 1.2 });
+const state = reactive<Record<Key, number>>({ trees: 25, chargers: 15000, rwa: 6, arb: 1.2 });
 
-const presets = [
-    { label: 'First batch', v: { trees: 5, chargers: 20, rwa: 1, arb: 0.2 } },
-    { label: 'Year one', v: { trees: 25, chargers: 200, rwa: 6, arb: 1.2 } },
-    { label: 'Czechia', v: { trees: 100, chargers: 1000, rwa: 30, arb: 5 } },
-    { label: 'Europe', v: { trees: 300, chargers: 5000, rwa: 100, arb: 15 } },
-];
-const active = ref('Year one');
+const presets = computed(() => [
+    { id: 'p0', label: t('token.c07.p0'), v: { trees: 5, chargers: 1000, rwa: 1, arb: 0.2 } },
+    { id: 'p1', label: t('token.c07.p1'), v: { trees: 25, chargers: 15000, rwa: 6, arb: 1.2 } },
+    { id: 'p2', label: t('token.c07.p2'), v: { trees: 100, chargers: 60000, rwa: 30, arb: 5 } },
+    { id: 'p3', label: t('token.c07.p3'), v: { trees: 300, chargers: 200000, rwa: 100, arb: 15 } },
+]);
+const active = ref('p1');
 
-function apply(p: (typeof presets)[number]) {
-    active.value = p.label;
+function apply(p: (typeof presets.value)[number]) {
+    active.value = p.id;
     Object.assign(state, p.v);
 }
 
-const compact = new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 });
-const plain = new Intl.NumberFormat('en');
-const eur = (n: number) => `€${compact.format(n)}`;
+const compact = computed(() => new Intl.NumberFormat(locale.value, { notation: 'compact', maximumFractionDigits: 1 }));
+const plain = computed(() => new Intl.NumberFormat(locale.value));
+const eur = (n: number) => `€${compact.value.format(n)}`;
 
 const rows = computed(() => [
     {
         key: 'trees' as Key,
-        title: 'Hardware sales',
+        title: t('token.c07.r0_title'),
         rate: '10%',
-        meta: 'Treetino trees delivered per year',
-        display: `${plain.format(state.trees)} trees`,
+        meta: t('token.c07.r0_meta'),
+        display: `${plain.value.format(state.trees)} ${t('token.c07.r0_unit')}`,
         min: 1,
         max: 300,
         step: 1,
@@ -144,21 +147,21 @@ const rows = computed(() => [
     },
     {
         key: 'chargers' as Key,
-        title: 'EV charging',
+        title: t('token.c07.r1_title'),
         rate: '0.1%',
-        meta: 'Chargers with Tapaya card payments',
-        display: `${plain.format(state.chargers)} chargers`,
-        min: 10,
-        max: 5000,
-        step: 10,
+        meta: t('token.c07.r1_meta'),
+        display: `${plain.value.format(state.chargers)} ${t('token.c07.r1_unit')}`,
+        min: 1000,
+        max: 200000,
+        step: 1000,
         buyback: state.chargers * SESSIONS * TICKET * 365 * 0.001,
         color: 'rgba(255,255,255,0.72)',
     },
     {
         key: 'rwa' as Key,
-        title: 'RWA protocol',
+        title: t('token.c07.r2_title'),
         rate: '1%',
-        meta: 'Energy assets tokenized on Solana',
+        meta: t('token.c07.r2_meta'),
         display: `€${state.rwa}M`,
         min: 1,
         max: 100,
@@ -168,9 +171,9 @@ const rows = computed(() => [
     },
     {
         key: 'arb' as Key,
-        title: 'Grid arbitrage',
+        title: t('token.c07.r3_title'),
         rate: '20%',
-        meta: 'WATTINO battery trading profit',
+        meta: t('token.c07.r3_meta'),
         display: `€${state.arb.toFixed(1)}M`,
         min: 0.1,
         max: 15,

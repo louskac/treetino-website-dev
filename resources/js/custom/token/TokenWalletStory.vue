@@ -17,7 +17,7 @@
 
             <InvestorChapterText
                 index="04"
-                label="04 · DEPIN ORACLE & veTREE STAKING"
+                :label="t('token.c04.label')"
                 :beats="beats"
                 :state="[
                     { in: s.b0, out: s.b0out },
@@ -34,6 +34,7 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { computed, onMounted, onUnmounted, reactive, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import type { Beat } from '@/custom/investors/InvestorChapterText.vue';
 import InvestorChapterText from '@/custom/investors/InvestorChapterText.vue';
 import { CONTAINER, VISUAL_AREA } from '@/custom/investors/tokens';
@@ -41,41 +42,43 @@ import Web3PhoneWallet from '@/custom/web3/Web3PhoneWallet.vue';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const { t } = useI18n();
+
 const beats = computed<Beat[]>(() => [
     {
         segments: [
-            { text: 'Certino DePIN telemetry: ', break: true },
-            { text: 'hardware-signed oracle proof of generation.', tone: 'accent' },
+            { text: t('token.c04.b0_s1'), break: true },
+            { text: t('token.c04.b0_s2'), tone: 'accent' },
         ],
-        sub: 'Every Treetino unit embeds an on-board hardware security module (HSM) signing generation telemetry every 60 seconds. External protocols burn $TREE to query certified clean energy data.',
+        sub: t('token.c04.b0_sub'),
         stats: [
-            { value: '60 sec', label: 'Cryptographic Proofs' },
-            { value: 'ISTOCH13', label: 'Hardware Station ID' },
-            { value: '100%', label: 'Tamper-Proof HSM' },
+            { value: t('token.c04.b0_st0_val'), label: t('token.c04.b0_st0_lbl') },
+            { value: t('token.c04.b0_st1_val'), label: t('token.c04.b0_st1_lbl') },
+            { value: t('token.c04.b0_st2_val'), label: t('token.c04.b0_st2_lbl') },
         ],
     },
     {
         segments: [
-            { text: 'veTREE staking multiplier: ', break: true },
-            { text: 'boosted real yield from physical grid revenue.', tone: 'accent' },
+            { text: t('token.c04.b1_s1'), break: true },
+            { text: t('token.c04.b1_s2'), tone: 'accent' },
         ],
-        sub: 'Holders lock $TREE for up to 4 years to receive veTREE, voting power over buyback distribution pools, and priority access to new tokenized energy tranches.',
+        sub: t('token.c04.b1_sub'),
         stats: [
-            { value: '4 Years', label: 'Max Lock Duration' },
-            { value: '2.5x', label: 'Yield Multiplier' },
-            { value: '18.3%–25%+', label: 'Real Cashflow APY' },
+            { value: t('token.c04.b1_st0_val'), label: t('token.c04.b1_st0_lbl') },
+            { value: t('token.c04.b1_st1_val'), label: t('token.c04.b1_st1_lbl') },
+            { value: t('token.c04.b1_st2_val'), label: t('token.c04.b1_st2_lbl') },
         ],
     },
     {
         segments: [
-            { text: 'Hardware validator bonding: ', break: true },
-            { text: '50,000 $TREE locked per deployed station.', tone: 'accent' },
+            { text: t('token.c04.b2_s1'), break: true },
+            { text: t('token.c04.b2_s2'), tone: 'accent' },
         ],
-        sub: 'Franchise operators and municipal hosts bond $TREE as slashable collateral to run charging and telemetry nodes, taking circulating tokens off the open market.',
+        sub: t('token.c04.b2_sub'),
         stats: [
-            { value: '50,000', label: '$TREE Bond / Node' },
-            { value: 'Slashable', label: 'Malicious Telemetry' },
-            { value: 'Supply Lock', label: 'Organic Illiquidity' },
+            { value: t('token.c04.b2_st0_val'), label: t('token.c04.b2_st0_lbl') },
+            { value: t('token.c04.b2_st1_val'), label: t('token.c04.b2_st1_lbl') },
+            { value: t('token.c04.b2_st2_val'), label: t('token.c04.b2_st2_lbl') },
         ],
     },
 ]);

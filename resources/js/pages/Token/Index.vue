@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Head } from '@inertiajs/vue3';
 import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 import TokenAllocation from '@/custom/token/TokenAllocation.vue';
 import TokenChapterRail from '@/custom/token/TokenChapterRail.vue';
 import TokenDataRoom from '@/custom/token/TokenDataRoom.vue';
@@ -14,14 +15,16 @@ import TokenTreeStory from '@/custom/token/TokenTreeStory.vue';
 import TokenWalletStory from '@/custom/token/TokenWalletStory.vue';
 import DefaultLayout from '@/layouts/DefaultLayout.vue';
 
+const { t } = useI18n();
+
 const props = defineProps<{
     partner?: string | null;
 }>();
 
 const pageTitle = computed(() => {
     return props.partner
-        ? `$TREE Tokenomics · ${props.partner} Strategic Brief | Treetino`
-        : '$TREE Tokenomics · Solana DePIN & Energy RWA Protocol | Treetino';
+        ? `$TREE Tokenomics · ${props.partner} | Treetino`
+        : t('token.meta.title');
 });
 </script>
 
@@ -29,7 +32,7 @@ const pageTitle = computed(() => {
     <Head :title="pageTitle">
         <meta
             name="description"
-            content="Treetino $TREE tokenomics and institutional launch overview: 10% hardware sales buybacks, 0.1% EV charging transaction skim, 1% RWA tokenization revenue, 20% grid arbitrage alpha, B2G partnerships, Czech banking rails, and EU grant backing."
+            :content="t('token.meta.description')"
         />
         <meta name="robots" content="noindex, nofollow" />
     </Head>

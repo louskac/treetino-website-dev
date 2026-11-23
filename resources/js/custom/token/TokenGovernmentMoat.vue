@@ -7,13 +7,13 @@
         <div :class="CONTAINER" class="relative grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-10">
             <!-- Left: one headline, then every trust point as a numbered hairline row -->
             <div class="lg:col-span-6">
-                <InvestorChapterMark index="08" label="08 · WHY TRUST US" />
+                <InvestorChapterMark index="08" :label="t('token.c08.label')" />
                 <h2 class="mt-6" :class="HEADLINE">
-                    Still a startup.<br />
-                    <span class="text-[#8ec5ff] [text-shadow:0_0_40px_rgba(77,141,255,0.45)]">Already backed by institutions.</span>
+                    {{ t('token.c08.title_1') }}<br />
+                    <span class="text-[#8ec5ff] [text-shadow:0_0_40px_rgba(77,141,255,0.45)]">{{ t('token.c08.title_2') }}</span>
                 </h2>
                 <p class="mt-5 max-w-[40ch] text-sm leading-relaxed text-white/60 sm:text-lg">
-                    We are a small team launching a token, but we work with governments, licensed banks and regulators, not around them.
+                    {{ t('token.c08.sub') }}
                 </p>
 
                 <ul class="mt-10 border-t border-white/12">
@@ -46,7 +46,7 @@
                         <div class="relative aspect-[16/10] w-full overflow-hidden">
                             <img
                                 src="/img/media/strakova-akademie-vlada-premier-2.jpg"
-                                alt="Presenting the Treetino prototype to Czech Prime Minister Petr Fiala"
+                                :alt="t('token.c08.img0_alt')"
                                 width="1024"
                                 height="768"
                                 loading="lazy"
@@ -56,8 +56,8 @@
                             <div class="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-zinc-950/90 to-transparent"></div>
                         </div>
                         <figcaption class="flex items-center justify-between gap-2 px-4 py-2.5 text-xs text-white/70">
-                            <span class="truncate font-medium text-white/90">Prime Minister Petr Fiala</span>
-                            <span class="hidden shrink-0 text-white/40 sm:inline">Czech Government</span>
+                            <span class="truncate font-medium text-white/90">{{ t('token.c08.img0_cap') }}</span>
+                            <span class="hidden shrink-0 text-white/40 sm:inline">{{ t('token.c08.img0_place') }}</span>
                         </figcaption>
                     </figure>
 
@@ -67,7 +67,7 @@
                         <div class="relative aspect-[4/3] w-full overflow-hidden">
                             <img
                                 src="/img/media/innovations-united-prague-castle-2026.jpg"
-                                alt="Treetino keynote at Prague Castle, Innovations United"
+                                :alt="t('token.c08.img1_alt')"
                                 width="1024"
                                 height="768"
                                 loading="lazy"
@@ -77,17 +77,17 @@
                             <div class="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-zinc-950/90 to-transparent"></div>
                         </div>
                         <figcaption class="flex items-center justify-between gap-2 px-3.5 py-2 text-[11px] text-white/70 sm:text-xs">
-                            <span class="truncate font-medium text-white/90">Keynote at Prague Castle</span>
-                            <span class="hidden shrink-0 text-white/40 sm:inline">Prague, CZ</span>
+                            <span class="truncate font-medium text-white/90">{{ t('token.c08.img1_cap') }}</span>
+                            <span class="hidden shrink-0 text-white/40 sm:inline">{{ t('token.c08.img1_place') }}</span>
                         </figcaption>
                     </figure>
                 </div>
 
                 <InvestorStats
                     :stats="[
-                        { value: '2', label: 'Governments engaged' },
-                        { value: '€200k', label: 'EU funding received' },
-                        { value: 'MiCA', label: 'Licensed partners' },
+                        { value: t('token.c08.st0_val'), label: t('token.c08.st0_lbl') },
+                        { value: t('token.c08.st1_val'), label: t('token.c08.st1_lbl') },
+                        { value: t('token.c08.st2_val'), label: t('token.c08.st2_lbl') },
                     ]"
                 />
             </div>
@@ -97,40 +97,44 @@
 
 <script setup lang="ts">
 import { ArrowUpRight } from 'lucide-vue-next';
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 import InvestorChapterMark from '@/custom/investors/InvestorChapterMark.vue';
 import InvestorStats from '@/custom/investors/InvestorStats.vue';
 import { CONTAINER, HEADLINE } from '@/custom/investors/tokens';
 
-const items = [
+const { t } = useI18n();
+
+const items = computed(() => [
     {
-        title: 'Strong ties to the Czech Government',
-        meta: 'Prototype presented to Prime Minister Petr Fiala, keynote at Prague Castle.',
+        title: t('token.c08.i0_title'),
+        meta: t('token.c08.i0_meta'),
     },
     {
-        title: 'EU funding',
-        meta: '€200,000 non-dilutive grant from CzechInvest, Ministry of Industry and Trade.',
+        title: t('token.c08.i1_title'),
+        meta: t('token.c08.i1_meta'),
         href: '/treetino-grant-technologicka-inkubace.pdf',
-        link: 'Grant',
+        link: t('token.c08.i1_link'),
     },
     {
-        title: 'Fintech partners with banking licences',
-        meta: 'Card payments on our chargers run through ČNB-regulated acquirers via Tapaya.',
+        title: t('token.c08.i2_title'),
+        meta: t('token.c08.i2_meta'),
     },
     {
-        title: 'Connected with MiCA licence holders in Europe',
-        meta: 'Token issuance and custody go through partners already licensed under MiCA.',
+        title: t('token.c08.i3_title'),
+        meta: t('token.c08.i3_meta'),
     },
     {
-        title: 'A clear path to our own licences',
-        meta: 'Hardware company and token protocol are kept separate, so we can license each one when needed.',
+        title: t('token.c08.i4_title'),
+        meta: t('token.c08.i4_meta'),
     },
     {
-        title: 'Invited by the Government of Moldova',
-        meta: 'Official invitation to deploy Treetino microgrids for national energy resilience.',
-        href: '/docs/Treetino_Investment_Memorandum_2026.pdf',
-        link: 'Memo',
+        title: t('token.c08.i5_title'),
+        meta: t('token.c08.i5_meta'),
+        href: '/docs/moldova-aviz-atas-nord.pdf',
+        link: t('token.c08.i5_link'),
     },
-];
+]);
 </script>
 
 <style scoped>

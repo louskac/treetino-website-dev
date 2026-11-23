@@ -15,7 +15,7 @@
                         <div :style="fadeStyle(s.mark, 0, 8)">
                             <InvestorChapterMark
                                 index="00"
-                                :label="partner ? `${partner.toUpperCase()} · STRATEGIC TOKEN BRIEF` : '$TREE TOKENOMICS · SOLANA DEPIN'"
+                                :label="partner ? `${partner.toUpperCase()} · TOKEN BRIEF` : t('token.hero.mark')"
                             />
                         </div>
                         <div class="mt-6 grid">
@@ -25,21 +25,21 @@
                                     tag="h1"
                                     :lead-class="HEADLINE"
                                     :segments="[
-                                        { text: 'Real Kilowatt-Hours. ', break: true },
-                                        { text: 'Programmatic Token Buybacks.', tone: 'accent' },
+                                        { text: t('token.hero.b1_s1'), break: true },
+                                        { text: t('token.hero.b1_s2'), tone: 'accent' },
                                     ]"
-                                    sub="Treetino converts physical European clean energy revenue and high-velocity EV charging volume into continuous open-market buy pressure for $TREE on Solana."
+                                    :sub="t('token.hero.b1_sub')"
                                     :progress="s.h1"
                                     :out="s.h1out"
                                 />
                                 <div class="mt-8 flex flex-wrap gap-3" :style="fadeStyle(s.cta, s.h1out, 12)">
                                     <a href="#chapter-01" class="cursor-pointer" :class="BTN_PRIMARY" @click.prevent="scrollToChapter('01')">
-                                        Explore Buybacks
+                                        {{ t('token.hero.cta_primary') }}
                                         <ArrowDown class="h-4 w-4" />
                                     </a>
-                                    <a href="/pitch" target="_blank" :class="BTN_SECONDARY">
-                                        Investor Pitch Deck
-                                        <ArrowUpRight class="h-4 w-4 text-white/60 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                                    <a href="#chapter-06" class="cursor-pointer" :class="BTN_SECONDARY" @click.prevent="scrollToChapter('06')">
+                                        {{ t('token.hero.cta_secondary') }}
+                                        <ArrowDown class="h-4 w-4 text-white/60" />
                                     </a>
                                 </div>
                             </div>
@@ -48,10 +48,10 @@
                                 class="col-start-1 row-start-1"
                                 :lead-class="HEADLINE"
                                 :segments="[
-                                    { text: '10% Hardware Sales. 0.1% EV Charging. ', break: true },
-                                    { text: '1% RWA Protocol Volume.', tone: 'accent' },
+                                    { text: t('token.hero.b2_s1'), break: true },
+                                    { text: t('token.hero.b2_s2'), tone: 'accent' },
                                 ]"
-                                sub="Every hardware tree sold, every kilowatt-hour charged, and every battery arbitrage spread captured automatically triggers programmatic token repurchases."
+                                :sub="t('token.hero.b2_sub')"
                                 :progress="s.h2"
                             />
                         </div>
@@ -65,7 +65,7 @@
                         <span class="relative block h-8 w-px overflow-hidden bg-white/15">
                             <span class="scroll-cue absolute inset-x-0 top-0 h-3 bg-[#8ec5ff]"></span>
                         </span>
-                        Scroll to explore tokenomics
+                        {{ t('token.hero.scroll') }}
                     </div>
                 </div>
             </div>
@@ -76,8 +76,9 @@
 <script setup lang="ts">
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowDown, ArrowUpRight } from 'lucide-vue-next';
+import { ArrowDown } from 'lucide-vue-next';
 import { onMounted, onUnmounted, reactive, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import InvestorChapterMark from '@/custom/investors/InvestorChapterMark.vue';
 import {
     BTN_PRIMARY,
@@ -92,6 +93,8 @@ import Web3MapAssets from '@/custom/web3/Web3MapAssets.vue';
 import Web3ScrollHeading from '@/custom/web3/Web3ScrollHeading.vue';
 
 gsap.registerPlugin(ScrollTrigger);
+
+const { t } = useI18n();
 
 defineProps<{
     partner?: string | null;
