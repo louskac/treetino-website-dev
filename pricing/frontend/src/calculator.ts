@@ -173,7 +173,7 @@ export function calculateROI(
     const finalPrice = totalBeforeDiscount - discountAmount;
     const vatPercent = 21.0;
     const finalPriceVat = finalPrice * (1 + vatPercent / 100);
-    const subsidyPrice = finalPrice * 0.70; // 30% dotace
+    const subsidyPrice = finalPrice * 0.35; // 65% dotace (OP TAK)
 
     const roi = (combinedAnnualRevenue / finalPrice) * 100;
     const paybackPeriod = finalPrice / (combinedAnnualRevenue || 1);

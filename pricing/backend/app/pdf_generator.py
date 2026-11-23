@@ -1189,8 +1189,8 @@ def draw_page_6(c: canvas.Canvas, data: dict, assets_path: str):
     vat_percent = 21.0
     vat_amount = final_price * (vat_percent / 100.0)
     final_price_vat = final_price + vat_amount
-    subsidy_amount = final_price * 0.30
-    subsidy_price = float(result.get("subsidyPrice") or (final_price * 0.70))
+    subsidy_amount = final_price * 0.65
+    subsidy_price = float(result.get("subsidyPrice") or (final_price * 0.35))
     unit_price = total_before_discount / max(1, units_qty)
     
     client_name = data.get("clientName") or data.get("client_name") or "M - KOVO s.r.o."
@@ -1402,17 +1402,17 @@ def draw_page_6(c: canvas.Canvas, data: dict, assets_path: str):
         text_lines = [
             "This offer is predictive. An on-site technical inspection is",
             "required for final project engineering.",
-            "Under the RES+ / Modernisation subsidy programs, we will",
-            "gladly secure grants covering up to approx. 30% of eligible",
-            "capital expenditures for your installation."
+            "Under the OP TAK subsidy program, we will gladly",
+            "secure grants covering up to 65% of eligible capital",
+            "expenditures for small enterprises (outside Prague)."
         ]
     else:
         text_lines = [
             "Cenová nabídka je prediktivní. Pro přesnou kalkulaci je",
             "nutná návštěva technika.",
-            "V rámci podpory RES+ pro Vás rádi obstaráme dotaci",
-            "v maximální možné výši, která se aktuálně pohybuje",
-            "okolo 30 % na způsobilé náklady."
+            "V rámci programu OP TAK pro Vás rádi obstaráme dotaci",
+            "až 65 % na způsobilé výdaje pro malé podniky",
+            "(mimo území hl. m. Prahy)."
         ]
     for i, line in enumerate(text_lines):
         c.drawString(60, bottom_y + 135 - (i * 12), line)
@@ -1452,7 +1452,7 @@ def draw_page_6(c: canvas.Canvas, data: dict, assets_path: str):
     
     c.setFont("Roboto-Bold", 9)
     c.setFillColor(colors.HexColor("#f43f5e"))
-    c.drawString(right_card_x + 20, bottom_y + 85, "Estimated Subsidy (-30%)" if lang == "en" else "Předpokládaná dotace (-30%)")
+    c.drawString(right_card_x + 20, bottom_y + 85, "Estimated Subsidy (-65%)" if lang == "en" else "Předpokládaná dotace (-65%)")
     c.drawRightString(right_card_x + card_w - 20, bottom_y + 85, f"- {format_czk(subsidy_amount)}")
     
     c.setFillColor(ACCENT_COLOR)
@@ -1557,7 +1557,7 @@ def draw_page_7(c: canvas.Canvas, data: dict, assets_path: str):
     import reportlab.lib.utils as utils
     from PIL import Image
     import io
-    main_tree_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "frontend", "public", "products", "Still_Turbina.png")
+    main_tree_path = os.path.join(assets_path, "products", "Still_Turbina.png")
     c.saveState()
     c.setFillColor(colors.HexColor("#0f172a"))
     c.rect(0, 0, W, H, fill=1, stroke=0)
@@ -1781,8 +1781,10 @@ def draw_page_8(c: canvas.Canvas, data: dict, assets_path: str):
     lang = data.get("lang", "cs")
 
     # 1. Background
-    main_tree_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "frontend", "public", "products", "Still_Strom-v1.png")
+    main_tree_path = os.path.join(assets_path, "products", "Still_Strom-v1.png")
     c.saveState()
+    c.setFillColor(colors.HexColor("#0f172a"))
+    c.rect(0, 0, W, H, fill=1, stroke=0)
     
     if os.path.exists(main_tree_path):
         c.drawImage(main_tree_path, 0, 0, width=W, height=H, preserveAspectRatio=False)
@@ -1793,7 +1795,7 @@ def draw_page_8(c: canvas.Canvas, data: dict, assets_path: str):
     c.restoreState()
     
     # 2. LOGO
-    logo_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "frontend", "public", "branding", "logo_horizontal.png")
+    logo_path = os.path.join(assets_path, "branding", "logo_horizontal.png")
     
     if os.path.exists(logo_path):
         c.drawImage(logo_path, W / 2 - 150, H / 2 + 50, width=300, preserveAspectRatio=True, mask='auto')
@@ -2215,8 +2217,7 @@ def generate_nda_pdf(user_data: dict, lang: str = "cs") -> bytes:
 
     # Dominik Masek Signature image handling
     masek_sig_flowable = ""
-    base_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
-    masek_sig_path = os.path.join(base_dir, "frontend", "public", "branding", "signature_masek_2.png")
+    masek_sig_path = os.path.join(os.path.dirname(__file__), "assets", "branding", "signature_masek_2.png")
     if os.path.exists(masek_sig_path):
         masek_sig_flowable = Image(masek_sig_path, width=110, height=40)
     
@@ -2557,8 +2558,7 @@ def generate_mediation_pdf(user_data: dict, lang: str = "cs") -> bytes:
 
     # Dominik Masek Signature image handling
     masek_sig_flowable = ""
-    base_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
-    masek_sig_path = os.path.join(base_dir, "frontend", "public", "branding", "signature_masek_2.png")
+    masek_sig_path = os.path.join(os.path.dirname(__file__), "assets", "branding", "signature_masek_2.png")
     if os.path.exists(masek_sig_path):
         masek_sig_flowable = Image(masek_sig_path, width=110, height=40)
     

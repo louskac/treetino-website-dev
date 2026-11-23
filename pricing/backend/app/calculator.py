@@ -157,7 +157,7 @@ def calculate_roi(params: CalculatorParams, solar_data: Dict, wind_data: Dict) -
     final_price = total_before_discount - discount_amount
     vat_percent = 21.0
     final_price_vat = final_price * (1 + vat_percent / 100.0)
-    subsidy_price = final_price * 0.70
+    subsidy_price = final_price * 0.35
 
     roi = (combined_annual_revenue / final_price) * 100 if final_price > 0 else 0
     payback_period = final_price / (combined_annual_revenue if combined_annual_revenue > 0 else 1)
